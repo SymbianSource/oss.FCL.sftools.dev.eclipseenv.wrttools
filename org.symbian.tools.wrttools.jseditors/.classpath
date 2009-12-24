@@ -3,9 +3,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/TasneemS/eclipse/workspace/JSEditor/net.sf.wdte.ui_0.0.9/net.sf.wdte.ui.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/TasneemS/eclipse/workspace/JSEditor/net.sf.wdte.core_0.0.9/net.sf.wdte.core.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/TasneemS/eclipse/workspace/JSEditor/net.sf.wdte.js.core_0.0.9/net.sf.wdte.js.core.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/TasneemS/eclipse/workspace/JSEditor/net.sf.wdte.js.ui_0.0.9/net.sf.wdte.js.ui.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
