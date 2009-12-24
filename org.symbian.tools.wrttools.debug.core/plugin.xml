@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.symbian.tools.wrttools.debug.internal.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.symbian.tools.wrttools.debug.ui.DebugPreferencePage"
+            id="org.symbian.tools.wrttools.debug"
+            name="WRT Debugger">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.symbian.tools.wrttools.debug.internal.launch.WidgetLaunchDelegate"
+            id="org.symbian.tools.wrttools.debug.widget"
+            modes="debug,run"
+            name="WRT Widget"
+            public="true">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchConfigurationTabGroup"
+            description="WRT Widget"
+            id="org.symbian.tools.wrttools.debug.wrtTabGroup"
+            type="org.symbian.tools.wrttools.debug.widget">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.symbian.tools.wrttools.debug.widget"
+            icon="icons/main16.gif"
+            id="org.symbian.tools.wrttools.debug.widget.image">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchShortcut"
+            icon="icons/main16.gif"
+            id="org.symbian.tools.wrttools.debug.wrtshortcut"
+            label="WRT Widget"
+            modes="run, debug">
+         <configurationType
+               id="org.symbian.tools.wrttools.debug.widget">
+         </configurationType>
+         <contextualLaunch>
+         <enablement>
+            <with
+                  variable="selection">
+               <count
+                     value="1"/>
+                     <iterate>
+            <adapt
+                  type="org.eclipse.core.resources.IResource">
+               <test
+                     forcePluginActivation="true"
+                     property="org.symbian.isWrtProject"
+                     >
+               </test>
+            </adapt>
+                     </iterate>
+            </with>
+         </enablement>
+            <contextLabel
+                  label="WRT Widget"
+                  mode="run">
+            </contextLabel>
+            <contextLabel
+                  label="WRT Widget"
+                  mode="debug">
+            </contextLabel></contextualLaunch>
+      </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.symbian.tools.wrttools.debug.internal.property.PropertyTester"
+            id="org.symbian.tools.wrttools.debug.projectTester"
+            namespace="org.symbian"
+            properties="isWrtProject"
+            type="org.eclipse.core.resources.IResource">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+            id="org.symbian.tools.wrttools.debug.core.js"
+            targetID="#JavaScriptRulerContext">
+         <action
+               class="org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+               id="org.chromium.debug.ui.actions.EnableDisableBreakpointRulerActionDelegate"
+               label="Toggle Enablement"
+               menubarPath="debug">
+         </action>
+         <action
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               id="org.chromium.debug.ui.actions.EnableDisableBreakpointAction"
+               label="Toggle Breakpoint"
+               menubarPath="debug">
+         </action>
+         <action
+               class="org.symbian.tools.wrttools.debug.ui.actions.JsBreakpointPropertiesRulerActionDelegate"
+               id="org.symbian.tools.wrttools.debug.core.js.JavaBreakpointPropertiesRulerActionDelegate"
+               label="Breakpoint Properties..."
+               menubarPath="group.properties">
+         </action>
+      </viewerContribution>
+      <viewerContribution
+            id="org.symbian.tools.wrttools.debug.core.ro"
+            targetID="#ReadOnlyJavaScriptRulerContext">
+         <action
+               class="org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+               id="org.chromium.debug.ui.actions.EnableDisableBreakpointRulerActionDelegate"
+               label="Toggle Enablement"
+               menubarPath="debug">
+         </action>
+         <action
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               id="org.chromium.debug.ui.actions.EnableDisableBreakpointAction"
+               label="Toggle Breakpoint"
+               menubarPath="debug">
+         </action>
+         <action
+               class="org.symbian.tools.wrttools.debug.ui.actions.JsBreakpointPropertiesRulerActionDelegate"
+               id="org.symbian.tools.wrttools.debug.core.ro.JavaBreakpointPropertiesRulerActionDelegate"
+               label="Breakpoint Properties..."
+               menubarPath="group.properties">
+         </action>
+      </viewerContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.wst.jsdt.internal.ui.javaeditor.JavaEditor"
+            class="org.symbian.tools.wrttools.debug.internal.BreakpointAdapterFactory">
+         <adapter
+               type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+         </adapter>
+      </factory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            id="org.symbian.tools.wrttools.debug.core.CompilationUnitEditor.BreakpointRulerActions"
+            targetID="org.eclipse.wst.jsdt.ui.CompilationUnitEditor">
+         <action
+               actionID="RulerDoubleClick"
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               id="org.eclipse.wst.jsdt.debug.ui.actions.ManageBreakpointRulerAction"
+               label="Toggle Breakpoint">
+         </action>
+      </editorContribution>
+      <editorContribution
+            id="org.symbian.tools.wrttools.debug.core.ClassFileEditor.BreakpointRulerActions"
+            targetID="org.eclipse.wst.jsdt.ui.ClassFileEditor">
+         <action
+               actionID="RulerDoubleClick"
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               id="org.eclipse.wst.jsdt.debug.ui.actions.ManageBreakpointRulerAction"
+               label="Toggle Breakpoint">
+         </action>
+      </editorContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.wst.jsdt.ui.JavaPerspective">
+         <actionSet
+               id="org.eclipse.debug.ui.breakpointActionSet">
+         </actionSet>
+         <actionSet
+               id="org.eclipse.debug.ui.debugActionSet">
+         </actionSet>
+      </perspectiveExtension>
+   </extension>
+</plugin>
