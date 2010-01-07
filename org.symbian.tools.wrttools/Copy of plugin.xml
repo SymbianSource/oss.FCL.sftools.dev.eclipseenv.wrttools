@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.eclipse.core.resources" name="Incremental Project Builders" schema="schema/org.eclipse.core.resources.exsd"/>
+   <extension-point id="org.eclipse.ui.javaScriptProjectNatureImage" name="JavaScript Nature Image" schema="schema/org.eclipse.ui.javaScriptProjectNatureImage.exsd"/>
+
+   <extension
+         id="PropertiesFileAuditor"
+         name="Properties File Auditor Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="PropertiesAuditorNature"
+         name="Properties Auditor Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.symbian.tools.wrttools.builder.PropertiesAuditorNature">
+         </run>
+      </runtime>
+      <requires-nature id="org.eclipse.wst.jsdt.core.jsNature"/>
+      <requires-nature id="org.eclipse.pde.PluginNature"/>
+      <builder
+            id="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
+      </builder>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Web Runtime (WRT)"
+            id="org.symbian.tools.wrttools.newWizards.widget">
+      </category>
+      <wizard
+            category="org.symbian.tools.wrttools.newWizards.widget"
+            class="org.symbian.tools.wrttools.wizards.WRTProjectWizard"
+            finalPerspective="org.eclipse.ui.resourcePerspective"
+            icon="icons/main16.gif"
+            id="org.symbian.tools.wrt.wizards.WRTProjectWizard"
+            name="New Web Runtime Widget"
+            project="true">
+         <description>
+            Creates a new widget based on existing project workspaces.
+         </description>
+      </wizard>
+   </extension>
+   
+   <extension
+         id="org.eclipse.wst.xml.ui.ExampleProjectCreationWizardExtension"
+         name="Example Project Creation Wizard"
+         point="org.eclipse.wst.common.ui.exampleProjectCreationWizard"> 
+      <wizard
+           id="org.eclipse.wst.xml.ui.ExampleProjectCreationWizard"
+           banner="icons/newSampleProject_wizbanner.gif">
+         <projectsetup
+               pagetitle="%XMLExampleProjectCreationWizard.pagetitle"
+               name="%XMLExampleProjectCreationWizard.projectname"
+               label="%XMLExampleProjectCreationWizard.label"
+               pagedescription="%XMLExampleProjectCreationWizard.pagedescription"
+               open="readme.html">
+            <import
+                  dest=""
+                  src="org.symbian.tools.wrttools.wizards.examples.FlickrApplication.zip">
+            </import>
+        </projectsetup>
+     </wizard>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="org.symbian.tools.wrt.contribution1">
+         <action
+               label="Add/Remove Sample Nature"
+               class="org.symbian.tools.wrt.builder.ToggleNatureAction"
+               menubarPath="additions"
+               enablesFor="+"
+               id="org.symbian.tools.wrt.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         id="org.symbian.tools.wrt.xmlProblem"
+         name="XML Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            class="org.symbian.tools.wrt.builder.Contribution1"
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions&quot;">
+      </menuContribution>
+   </extension>
+   <extension
+         id="org.symbian.tools.wrt.jsProblem"
+         name="JSProblem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+
+</plugin>

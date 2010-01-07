@@ -46,7 +46,6 @@ import org.eclipse.ui.ide.IDE;
 	 * be able to open it.
 	 */
 
-	@SuppressWarnings("restriction")
 	public class WRTProjectWizard extends Wizard implements INewWizard {
 		private WRTProjectWizardPage page;
 		private ISelection selection;
@@ -64,7 +63,7 @@ import org.eclipse.ui.ide.IDE;
 		 * Adding the page to the wizard.
 		 */
 
-		@SuppressWarnings("restriction")
+		
 		public void addPages() {
 			page = new WRTProjectWizardPage(selection);
 			addPage(page);

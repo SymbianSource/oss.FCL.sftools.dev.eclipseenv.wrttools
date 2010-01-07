@@ -30,26 +30,77 @@
             id="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
       </builder>
    </extension>
-   
+   <extension-point id="projectTemplates" name="WRT application project templates" schema="schema/projectTemplates.exsd"/>
+    <extension
+         id="org.symbian.tools.wrttools.core.cssvalidator"
+         name="CSS Validator"
+         point="org.eclipse.wst.validation.validatorV2">
+      <validator
+            build="true"
+            class="org.symbian.tools.wrttools.core.internal.validation.CssBuildValidator"
+            manual="true"
+            markerId="org.symbian.tools.wrttools.core.cssValidationMarker"
+            version="0.0.1">
+         <include>
+            <rules>
+               <contentType
+                     exactMatch="false"
+                     id="org.eclipse.wst.css.core.csssource">
+               </contentType>
+            </rules>
+         </include>
+      </validator>
+   </extension>
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            name="Web Runtime (WRT)"
-            id="org.symbian.tools.wrttools.newWizards.widget">
+            id="org.symbian.tools.wrttools.core.category"
+            name="Symbian WRT">
       </category>
       <wizard
-            category="org.symbian.tools.wrttools.newWizards.widget"
-            class="org.symbian.tools.wrttools.wizards.WRTProjectWizard"
-            finalPerspective="org.eclipse.ui.resourcePerspective"
+            category="org.symbian.tools.wrttools.core.category"
+            class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
+            finalPerspective="org.eclipse.wst.jsdt.ui.JavaPerspective"
+            hasPages="true"
             icon="icons/main16.gif"
-            id="org.symbian.tools.wrt.wizards.WRTProjectWizard"
-            name="New Web Runtime Widget"
+            id="org.symbian.tools.wrttools.core.wrtwidgetwizard"
+            name="WRT Widget"
             project="true">
          <description>
-            Creates a new widget based on existing project workspaces.
+            Creates a new Symbian WRT widget project using one of the provided templates
          </description>
       </wizard>
    </extension>
+   <extension
+         point="org.symbian.tools.wrttools.projectTemplates">
+      <projectTemplate
+            archive="projecttemplates/basic.zip"
+            default-css-name="basic"
+            default-html-name="index"
+            default-js-name="basic"
+            icon="icons/main16.gif"
+            id-pattern="com.{0}.basic.widget"
+            name="Basic Widget Project">
+         <description>
+            This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
+         </description>
+      </projectTemplate>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="org.symbian.tools.wrttools.import"
+            name="WRT Tools">
+      </category>
+      <wizard
+            category="org.symbian.tools.wrttools.import"
+            class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
+            icon="icons/main16.gif"
+            id="org.symbian.tools.wrttools.import.aptanaImport"
+            name="Aptana IDE WRT Project">
+      </wizard>
+   </extension>
+
    
    <extension
          id="org.eclipse.wst.xml.ui.ExampleProjectCreationWizardExtension"
