@@ -18,6 +18,8 @@
  */
 package org.symbian.tools.wrttools;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -63,6 +65,14 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+	
+	public static void log(Exception e) {
+		log(e.getLocalizedMessage(), e);
+	}
+
+	public static void log(String message, Exception e) {
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, message, e));
 	}
 
 }
