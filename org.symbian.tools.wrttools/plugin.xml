@@ -55,7 +55,7 @@
          point="org.eclipse.ui.newWizards">
       <category
             id="org.symbian.tools.wrttools.core.category"
-            name="Symbian WRT">
+            name="Web Runtime(WRT)">
       </category>
       <wizard
             category="org.symbian.tools.wrttools.core.category"
@@ -64,7 +64,7 @@
             hasPages="true"
             icon="icons/main16.gif"
             id="org.symbian.tools.wrttools.core.wrtwidgetwizard"
-            name="WRT Widget"
+            name="Web Runtime Widget"
             project="true">
          <description>
             Creates a new Symbian WRT widget project using one of the provided templates
@@ -90,7 +90,7 @@
          point="org.eclipse.ui.importWizards">
       <category
             id="org.symbian.tools.wrttools.import"
-            name="WRT Tools">
+            name="Web Runtime(WRT)">
       </category>
       <wizard
             category="org.symbian.tools.wrttools.import"
@@ -99,28 +99,6 @@
             id="org.symbian.tools.wrttools.import.aptanaImport"
             name="Aptana IDE WRT Project">
       </wizard>
-   </extension>
-
-   
-   <extension
-         id="org.eclipse.wst.xml.ui.ExampleProjectCreationWizardExtension"
-         name="Example Project Creation Wizard"
-         point="org.eclipse.wst.common.ui.exampleProjectCreationWizard"> 
-      <wizard
-           id="org.eclipse.wst.xml.ui.ExampleProjectCreationWizard"
-           banner="icons/newSampleProject_wizbanner.gif">
-         <projectsetup
-               pagetitle="%XMLExampleProjectCreationWizard.pagetitle"
-               name="%XMLExampleProjectCreationWizard.projectname"
-               label="%XMLExampleProjectCreationWizard.label"
-               pagedescription="%XMLExampleProjectCreationWizard.pagedescription"
-               open="readme.html">
-            <import
-                  dest=""
-                  src="org.symbian.tools.wrttools.wizards.examples.FlickrApplication.zip">
-            </import>
-        </projectsetup>
-     </wizard>
    </extension>
    
    <extension
@@ -149,13 +127,6 @@
       <persistent
             value="true">
       </persistent>
-   </extension>
-   <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            class="org.symbian.tools.wrt.builder.Contribution1"
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions&quot;">
-      </menuContribution>
    </extension>
    <extension
          id="org.symbian.tools.wrt.jsProblem"
