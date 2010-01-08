@@ -36,8 +36,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-import javax.swing.filechooser.FileSystemView;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
@@ -103,7 +101,7 @@ import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.symbian.tools.wrttools.Activator;
-import org.symbian.tools.wrttools.projects.ProjectUtils;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class AptanaProjectLocationWizardPage extends WizardPage implements
 		IOverwriteQuery {
@@ -805,7 +803,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 				.convertWidthInCharsToPixels(25);
 		directoryPathField.setLayoutData(directoryPathData);
 
-		directoryPathField.setText(getDefaultImportLocation());
+		directoryPathField.setText(ProjectUtils.getDefaultAptanaLocation());
 		
 		// browse button
 		browseDirectoriesButton = new Button(projectGroup, SWT.PUSH);
@@ -949,12 +947,6 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 				archiveRadioSelected();
 			}
 		});
-	}
-
-	private String getDefaultImportLocation() {
-		File myDocuments = FileSystemView.getFileSystemView().getDefaultDirectory();
-		File file = new File(myDocuments, "Aptana Studio Workspace");
-		return file.exists() ? file.getAbsolutePath() : "";
 	}
 
 	/**

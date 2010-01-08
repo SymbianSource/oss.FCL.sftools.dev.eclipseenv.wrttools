@@ -38,13 +38,13 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -54,11 +54,10 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
-import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
-import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
-import org.symbian.tools.wrttools.projects.ProjectUtils;
+import org.symbian.tools.wrttools.util.NonClosingStream;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WrtWidgetWizard extends Wizard implements INewWizard {
 	private WizardNewProjectCreationPage resourcePage;
@@ -150,11 +149,10 @@ public class WrtWidgetWizard extends Wizard implements INewWizard {
 					copyTemplate(project, name, stream, (int) entry.getSize(),
 							ctx, monitor);
 				} else {
-					copyFile(project, name, stream, entry.getSize(), monitor);
+					ProjectUtils.copyFile(project, name, stream, entry.getSize(), monitor);
 				}
 				stream.closeEntry();
 			}
-
 			monitor.done();
 		} catch (Exception e) {
 			throw new CoreException(new Status(IStatus.ERROR,
@@ -168,37 +166,16 @@ public class WrtWidgetWizard extends Wizard implements INewWizard {
 				}
 			}
 		}
-	}
-
-	private void copyFile(IProject project, String name, ZipInputStream stream,
-			long size, IProgressMonitor monitor) throws CoreException,
-			IOException {
-		byte[] contents = readBytes(stream, (int) size);
-		IFile file = project.getFile(name);
-		file.create(new ByteArrayInputStream(contents), true,
-				new SubProgressMonitor(monitor, 1));
-	}
-
-	private byte[] readBytes(ZipInputStream stream, int size)
-			throws IOException {
-		byte[] contents = new byte[size];
-		int len = 0;
-		do {
-			int read = stream.read(contents, len, size - len);
-			len += read;
-		} while (len < size);
-		return contents;
+		ProjectUtils.addPreviewer(project, new Path(context.getHtmlFile()));
 	}
 
 	private void copyTemplate(IProject project, String name,
 			ZipInputStream stream, int size, VelocityContext ctx,
 			IProgressMonitor monitor) throws IOException, CoreException {
 		// Templates will not be more then a few megs - we can afford the memory
-		final byte[] template = readBytes(stream, size);
 		ByteArrayOutputStream file = new ByteArrayOutputStream();
 
-		Reader reader = new InputStreamReader(
-				new ByteArrayInputStream(template));
+		Reader reader = new InputStreamReader(new NonClosingStream(stream));
 		Writer writer = new OutputStreamWriter(file);
 
 		Velocity.evaluate(ctx, writer, name, reader);

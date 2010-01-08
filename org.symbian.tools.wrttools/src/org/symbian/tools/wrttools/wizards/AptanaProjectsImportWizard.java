@@ -50,8 +50,7 @@ public class AptanaProjectsImportWizard extends Wizard implements IImportWizard 
 	
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		// TODO Auto-generated method stub
-
+		// Do nothing
 	}
 
 }

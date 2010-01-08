@@ -105,7 +105,7 @@ public class CssBuildValidator extends AbstractValidator {
 			String msg = cssError.getException().getLocalizedMessage();
 			if (msg != null && msg.trim().length() > 0) {
 				ValidatorMessage message = createMessage(resource, cssError
-						.getLine(), msg, IMarker.SEVERITY_ERROR);
+						.getLine(), msg, IMarker.SEVERITY_WARNING);
 				result.add(message);
 			}
 		}
