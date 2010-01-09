@@ -29,6 +29,7 @@ public class AptanaProjectsImportWizard extends Wizard implements IImportWizard 
 
 	public AptanaProjectsImportWizard() {
 		setWindowTitle("Import Aptana Project");
+		setNeedsProgressMonitor(true);
 	}
 
 	@Override

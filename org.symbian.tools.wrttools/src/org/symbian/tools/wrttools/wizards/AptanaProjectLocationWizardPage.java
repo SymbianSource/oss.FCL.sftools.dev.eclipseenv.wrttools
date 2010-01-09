@@ -414,14 +414,28 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 
 		// first look for project description files
 		final String dotProject = IProjectDescription.DESCRIPTION_FILE_NAME;
+		
+		File dotProjectFile = null;
+		boolean hasPreviewer = false;
+		boolean hasFrame = false;
+		
 		for (int i = 0; i < contents.length; i++) {
 			File file = contents[i];
 			if (file.isFile() && file.getName().equals(dotProject)) {
-				files.add(file);
-				// don't search sub-directories since we can't have nested
-				// projects
-				return true;
+				dotProjectFile = file;
 			}
+			if (file.isFile() && ProjectUtils.PREVIEW_FRAME_FILE.equalsIgnoreCase(file.getName())) {
+				hasFrame = true;
+			}
+			if (file.isDirectory() && ProjectUtils.PREVIEW_FOLDER.equalsIgnoreCase(file.getName())) {
+				hasPreviewer = true;
+			}
+		}
+		if (dotProjectFile != null && hasFrame && hasPreviewer) {
+			files.add(dotProjectFile);
+			// don't search sub-directories since we can't have nested
+			// projects
+			return true;
 		}
 		// no project description found, so recurse into sub-directories
 		for (int i = 0; i < contents.length; i++) {
@@ -469,16 +483,28 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 			children = new ArrayList(1);
 		}
 		Iterator childrenEnum = children.iterator();
+		boolean hasPreviewFolder = false;
+		boolean hasFrameHtml = false;
+		ProjectRecord projectRecord = null;
 		while (childrenEnum.hasNext()) {
 			Object child = childrenEnum.next();
+			String elementLabel = structureProvider.getLabel(child);
 			if (structureProvider.isFolder(child)) {
+				if (ProjectUtils.PREVIEW_FOLDER.equalsIgnoreCase(elementLabel)) {
+					hasPreviewFolder = true;
+				}
 				collectProjectFilesFromProvider(files, child, level + 1,
 						monitor);
 			}
-			String elementLabel = structureProvider.getLabel(child);
 			if (elementLabel.equals(IProjectDescription.DESCRIPTION_FILE_NAME)) {
-				files.add(new ProjectRecord(child, entry, level));
+				projectRecord = new ProjectRecord(child, entry, level);
 			}
+			if (ProjectUtils.PREVIEW_FRAME_FILE.equalsIgnoreCase(elementLabel)) {
+				hasFrameHtml = true;
+			}
+		}
+		if (projectRecord != null && hasPreviewFolder && hasFrameHtml) {
+			files.add(projectRecord);
 		}
 		return true;
 	}
@@ -506,7 +532,8 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		createWorkingSetGroup(workArea);
 		restoreWidgetValues();
 		Dialog.applyDialogFont(workArea);
-
+		
+		updateProjectsList(directoryPathField.getText().trim());
 	}
 
 	/**
@@ -555,7 +582,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 				operation.setCreateContainerStructure(false);
 				operation.run(monitor);
 			}
-
+			ProjectUtils.importPreviewer(record.description.getLocationURI());
 		} catch (CoreException e) {
 			Activator.log(e);
 			return false;
@@ -1084,7 +1111,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 	public ProjectRecord[] getProjectRecords() {
 		List projectRecords = new ArrayList();
 		for (int i = 0; i < selectedProjects.length; i++) {
-			if (isProjectInWorkspace(selectedProjects[i].getProjectName())) {
+			if (!ProjectUtils.isAptanaProject(selectedProjects[i].description.getLocationURI()) || isProjectInWorkspace(selectedProjects[i].getProjectName())) {
 				selectedProjects[i].hasConflicts = true;
 			}
 			projectRecords.add(selectedProjects[i]);

@@ -73,6 +73,12 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 	
 	@Override
 	public void createControl(Composite parent) {
+		ProjectTemplate[] allTemplates = ProjectTemplate.getAllTemplates();
+
+		if (allTemplates.length == 1) {
+			context.setTemplate(allTemplates[0]);
+		}
+		
 		Composite composite = new Composite(parent, SWT.NONE);
 		FormLayout layout = new FormLayout();
 		layout.marginWidth = 5;
@@ -119,7 +125,7 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		
 		templates.setContentProvider(new ArrayContentProvider());
 		templates.setLabelProvider(new ProjectTemplateLabelProvider());
-		templates.setInput(ProjectTemplate.getAllTemplates());
+		templates.setInput(allTemplates);
 		
 		setControl(composite);
 		setPageComplete(false);
@@ -128,6 +134,10 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		IObservableValue property = BeansObservables.observeValue(context, WizardContext.TEMPLATE);
 		
 		bindingContext.bindValue(selection, property);
+		if (context.getTemplate() != null) {
+			refreshSelection(context.getTemplate());
+		}
+		setErrorMessage(null);
 	}
 
 	protected void switchWizardPage() {

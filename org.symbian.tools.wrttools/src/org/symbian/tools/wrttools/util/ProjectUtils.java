@@ -43,7 +43,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.window.Window;
@@ -56,6 +55,9 @@ import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.dialogs.AptanaProjectSelectionDialog;
 
 public class ProjectUtils {
+	public static final String PREVIEW_FOLDER = "preview";
+	public static final String PREVIEW_FRAME_FILE = "wrt_preview_frame.html";
+
 	public static IProject createWrtProject(String name, URI uri,
 			IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Create project resources", 20);
@@ -130,7 +132,7 @@ public class ProjectUtils {
 				.append("previewer.zip").toFile();
 	}
 
-	protected static void importPreviewer() {
+	private static void importPreviewer() {
 		AptanaProjectSelectionDialog dialog = new AptanaProjectSelectionDialog(
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
 		int open = dialog.open();
@@ -155,9 +157,9 @@ public class ProjectUtils {
 		ZipOutputStream stream = new ZipOutputStream(new FileOutputStream(
 				getPreviewerZip()));
 		try {
-			zip(new File(project, "preview"), stream, "preview/");
-			zipFile(new File(project, "wrt_preview_frame.html"),
-					"wrt_preview_frame.html", stream);
+			zip(new File(project, PREVIEW_FOLDER), stream, PREVIEW_FOLDER + "/");
+			zipFile(new File(project, PREVIEW_FRAME_FILE),
+					PREVIEW_FRAME_FILE, stream);
 		} finally {
 			stream.close();
 		}
@@ -210,8 +212,8 @@ public class ProjectUtils {
 	}
 
 	public static boolean isAptanaProject(File f) {
-		return new File(f, "preview").isDirectory()
-				&& new File(f, "wrt_preview_frame.html").isFile();
+		return new File(f, PREVIEW_FOLDER).isDirectory()
+				&& new File(f, PREVIEW_FRAME_FILE).isFile();
 	}
 
 	public static void copyFile(IProject project, String name, ZipInputStream stream,
@@ -220,5 +222,20 @@ public class ProjectUtils {
 		IFile file = project.getFile(name);
 		file.create(new NonClosingStream(stream), true,
 				new SubProgressMonitor(monitor, 1));
+	}
+
+	public static void importPreviewer(URI locationURI) {
+		if (!getPreviewerZip().exists()) {
+			File file = new File(locationURI);
+			try {
+				zipPreviewer(file);
+			} catch (IOException e) {
+				Activator.log(e);
+			}
+		}
+	}
+
+	public static boolean isAptanaProject(URI locationURI) {
+		return isAptanaProject(new File(locationURI));
 	}
 }
