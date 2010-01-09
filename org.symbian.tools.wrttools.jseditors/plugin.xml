@@ -224,7 +224,7 @@
       </wizard>
             <wizard
             name="HTML File"
-            icon="icons/sample.gif"
+            icon="icons/newhtml_wiz.gif"
             category="org.symbian.tools.wrttools.jseditors.category"
             class="org.symbian.tools.wrttools.jseditors.wizards.NewHTMLWizard"
             id="org.symbian.tools.wrttools.jseditors.wizards.NewHTMLWizard">
