@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
-   <extension
-         point="org.eclipse.ui.commands">
-      <category
-            name="Sample Category"
-            id="org.symbian.tools.wrttools.jseditors.commands.category">
-      </category>
-   </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="org.symbian.tools.wrttools.jseditors.commands.sampleCommand"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+6"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
-      </key>
-   </extension>
-
-   <extension
+  <extension
          point="org.eclipse.ui.propertyPages">
       <page
             name="Sample Page"
