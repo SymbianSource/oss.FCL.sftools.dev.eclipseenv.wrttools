@@ -60,77 +60,7 @@
             id="net.sf.wdte.js.ui.editors.JSEditor">
       </editor>
    </extension>
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
-            id="org.symbian.tools.wrttools.jseditors.contribution1">
-         <menu
-               label="New Submenu"
-               path="additions"
-               id="org.symbian.tools.wrttools.jseditors.menu1">
-            <separator
-                  name="group1">
-            </separator>
-         </menu>
-         <action
-               label="New Action"
-               class="org.symbian.tools.wrttools.jseditors.popup.actions.NewAction"
-               menubarPath="org.symbian.tools.wrttools.jseditors.menu1/group1"
-               enablesFor="1"
-               id="org.symbian.tools.wrttools.jseditors.newAction">
-         </action>
-      </objectContribution>
-      <objectContribution
-            adaptable="true"
-            objectClass="org.eclipse.core.resources.IProject"
-            nameFilter="*"
-            id="org.symbian.tools.wrttools.jseditors.contribution1">
-         <action
-               label="Add/Remove Sample Nature"
-               class="org.symbian.tools.wrttools.jseditors.builder.ToggleNatureAction"
-               menubarPath="additions"
-               enablesFor="+"
-               id="org.symbian.tools.wrttools.jseditors.addRemoveNatureAction">
-         </action>
-      </objectContribution>
-   </extension>
 
-   <extension
-         point="org.eclipse.ui.navigator.viewer">
-      <viewerActionBinding
-            viewerId="com.example.test">
-         <includes>
-            <actionExtension
-                  pattern="org.eclipse.ui.navigator.resources.*">
-            </actionExtension>
-         </includes>
-      </viewerActionBinding>
-      <viewerContentBinding
-            viewerId="com.example.test">
-         <includes>
-            <contentExtension
-                  pattern="org.eclipse.ui.navigator.resourceContent">
-            </contentExtension>
-            <contentExtension
-                  pattern="org.eclipse.ui.navigator.resources.filters.*">
-            </contentExtension>
-            <contentExtension
-                  pattern="org.eclipse.ui.navigator.resources.linkHelper">
-            </contentExtension>
-            <contentExtension
-                  pattern="org.eclipse.ui.navigator.resources.workingSets">
-            </contentExtension>
-         </includes>
-      </viewerContentBinding>
-   </extension>
-
-   <extension
-         point="org.eclipse.help.contexts">
-      <contexts
-            file="contexts.xml">
-      </contexts>
-   </extension>
    <extension
          point="org.eclipse.ui.newWizards">
       <category
