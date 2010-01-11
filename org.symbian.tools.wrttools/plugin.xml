@@ -70,16 +70,6 @@
             Creates a new Symbian WRT widget project using one of the provided templates
          </description>
       </wizard>
-      <wizard
-            category="org.symbian.tools.wrttools.core.category"
-            class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
-            finalPerspective="org.eclipse.wst.jsdt.ui.JavaPerspective"
-            hasPages="true"
-            icon="icons/main16.gif"
-            id="org.symbian.tools.wrttools.newImportAptanaProject"
-            name="Import Aptana IDE WRT Project"
-            project="true">
-      </wizard>
    </extension>
    <extension
          point="org.symbian.tools.wrttools.projectTemplates">
@@ -110,24 +100,7 @@
             name="Aptana IDE WRT Project">
       </wizard>
    </extension>
-   
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            objectClass="org.eclipse.core.resources.IProject"
-            nameFilter="*"
-            id="org.symbian.tools.wrt.contribution1">
-         <action
-               label="Add/Remove Sample Nature"
-               class="org.symbian.tools.wrt.builder.ToggleNatureAction"
-               menubarPath="additions"
-               enablesFor="+"
-               id="org.symbian.tools.wrt.addRemoveNatureAction">
-         </action>
-      </objectContribution>
-   </extension>
-   <extension
+      <extension
          id="org.symbian.tools.wrt.xmlProblem"
          name="XML Problem"
          point="org.eclipse.core.resources.markers">
@@ -149,5 +122,4 @@
             value="true">
       </persistent>
    </extension>
-
 </plugin>
