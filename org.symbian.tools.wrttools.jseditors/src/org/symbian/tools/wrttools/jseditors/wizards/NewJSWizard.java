@@ -146,7 +146,7 @@ public class NewJSWizard extends Wizard implements INewWizard {
 	 */
 
 	private InputStream openContentStream() {
-		String contents = "// This is a sample JavaScript Class\rmain { \r}";
+		String contents = "// This is a sample JavaScript File\rfunction init()\r{\r// Add your code here\r}";
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 

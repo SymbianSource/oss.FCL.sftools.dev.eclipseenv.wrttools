@@ -122,23 +122,7 @@
          </enablement>
       </decorator>
    </extension>
-   <extension
-         point="org.eclipse.ui.importWizards">
-      <category
-            name="Sample File Import"
-            id="org.symbian.tools.wrttools.jseditors.importWizards.sampleCategory">
-      </category>
-      <wizard
-            name="Import File"
-            icon="icons/sample.gif"
-            category="org.symbian.tools.wrttools.jseditors.importWizards.sampleCategory"
-            class="org.symbian.tools.wrttools.jseditors.importWizards.ImportWizard"
-            id="org.symbian.tools.wrttools.jseditors.importWizards.ImportWizard">
-         <description>
-            Import a file from the local file system into the workspace.
-         </description>
-      </wizard>
-   </extension>
+
    <extension
          point="org.eclipse.ui.intro.configExtension">
       <configExtension

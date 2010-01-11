@@ -128,7 +128,7 @@ public class NewHTMLWizardPage extends WizardPage {
 				containerText.setText(container.getFullPath().toString());
 			}
 		}
-		fileText.setText("index.html");
+		fileText.setText("main.html");
 	}
 
 	/**
