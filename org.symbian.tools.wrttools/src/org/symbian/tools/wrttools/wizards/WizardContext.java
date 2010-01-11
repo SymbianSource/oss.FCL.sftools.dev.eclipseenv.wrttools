@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.symbian.tools.wrttools.core.ProjectTemplate;
+import org.symbian.tools.wrttools.util.Util;
 
 public class WizardContext {
 	public static final String PROJECT_URI = "projectUri";
@@ -71,7 +72,7 @@ public class WizardContext {
 	private String getDefaultWidgetId() {
 		if (template != null) {
 			return MessageFormat
-					.format(template.getIdFormat(), getWidgetName());
+					.format(template.getIdFormat(), Util.removeSpaces(getWidgetName()));
 		} else {
 			return null;
 		}
@@ -111,7 +112,7 @@ public class WizardContext {
 	}
 
 	public String getWidgetName() {
-		return widgetName != null ? widgetName : getProjectName();
+		return widgetName != null ? widgetName : Util.removeNonAlphaNum(getProjectName());
 	}
 
 	public void removePropertyChangeListener(PropertyChangeListener arg0) {
@@ -234,9 +235,9 @@ public class WizardContext {
 		
 		vars.put("widgetName", getWidgetName());
 		vars.put("widgetId", getWidgetId());
-		vars.put("mainHtml", getHtmlFile());
-		vars.put("mainCss", getCssFile());
-		vars.put("mainJs", getJsFile());
+		vars.put("mainHtml", getHtmlFileName());
+		vars.put("mainCss", getCssFileName());
+		vars.put("mainJs", getJsFileName());
 		vars.put("homeScreen", String.valueOf(isHomeScreen()));
 		vars.putAll(extensions);
 		
@@ -251,5 +252,27 @@ public class WizardContext {
 		boolean old = homeScreen;
 		this.homeScreen = homeScreen;
 		propertySupport.firePropertyChange(HOME_SCREEN, old, homeScreen);
+	}
+	
+	public String getHtmlFileName() {
+		return stripExtension(getHtmlFile(), "htm", "html");
+	}
+	
+	public String getJsFileName() {
+		return stripExtension(getJsFile(), "js");
+	}
+
+	public String getCssFileName() {
+		return stripExtension(getCssFile(), "css");
+	}
+	
+	private String stripExtension(String fileName, String... extensions) {
+		for (String extension : extensions) {
+			String extensionAndDot = "." + extension;
+			if (fileName.endsWith(extensionAndDot)) {
+				return fileName.substring(0, fileName.length() - extensionAndDot.length());
+			}
+		}
+		return fileName;
 	}
 }

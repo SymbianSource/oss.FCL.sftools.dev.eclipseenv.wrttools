@@ -166,7 +166,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard {
 				}
 			}
 		}
-		ProjectUtils.addPreviewer(project, new Path(context.getHtmlFile()));
+		ProjectUtils.addPreviewer(project, new Path(context.getHtmlFileName()));
 	}
 
 	private void copyTemplate(IProject project, String name,

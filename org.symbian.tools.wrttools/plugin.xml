@@ -70,6 +70,16 @@
             Creates a new Symbian WRT widget project using one of the provided templates
          </description>
       </wizard>
+      <wizard
+            category="org.symbian.tools.wrttools.core.category"
+            class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
+            finalPerspective="org.eclipse.wst.jsdt.ui.JavaPerspective"
+            hasPages="true"
+            icon="icons/main16.gif"
+            id="org.symbian.tools.wrttools.newImportAptanaProject"
+            name="Import Aptana IDE WRT Project"
+            project="true">
+      </wizard>
    </extension>
    <extension
          point="org.symbian.tools.wrttools.projectTemplates">

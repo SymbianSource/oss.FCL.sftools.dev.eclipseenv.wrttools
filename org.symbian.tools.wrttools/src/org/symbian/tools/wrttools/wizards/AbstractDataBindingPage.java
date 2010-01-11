@@ -39,6 +39,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.util.CompoundValidator;
 
 public abstract class AbstractDataBindingPage extends WizardPage {
 	public class NonEmptyStringValidator implements IValidator {
@@ -78,9 +79,9 @@ public abstract class AbstractDataBindingPage extends WizardPage {
 	}
 
 	protected Text createText(Composite root, String property,
-			String propertyName) {
+			String propertyName, IValidator... validators) {
 		return createText(root, BeansObservables
-				.observeValue(context, property), propertyName);
+				.observeValue(context, property), propertyName, validators);
 	}
 
 	protected Text createTextForExt(Composite root, String property,
@@ -92,14 +93,16 @@ public abstract class AbstractDataBindingPage extends WizardPage {
 	}
 
 	private Text createText(Composite root, IObservableValue model,
-			String propertyName) {
+			String propertyName, IValidator... validators) {
 		Text text = new Text(root, SWT.BORDER);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		ISWTObservableValue view = SWTObservables.observeText(text, SWT.Modify);
 		UpdateValueStrategy strategy = new UpdateValueStrategy(
 				UpdateValueStrategy.POLICY_UPDATE);
-		strategy
-				.setBeforeSetValidator(new NonEmptyStringValidator(propertyName));
+		NonEmptyStringValidator validator = new NonEmptyStringValidator(
+				propertyName);
+		strategy.setBeforeSetValidator(validators.length == 0 ? validator
+				: new CompoundValidator(validator, validators));
 		bindingContext.bindValue(view, model, strategy, null);
 		return text;
 	}

@@ -27,6 +27,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.symbian.tools.wrttools.util.RegexpValidator;
 
 public class WRTProjectDetailsWizardPage extends AbstractDataBindingPage {
 	private boolean isActive;
@@ -46,7 +47,7 @@ public class WRTProjectDetailsWizardPage extends AbstractDataBindingPage {
 		root.setLayout(new GridLayout(2, false));
 		createLabel(root, "Widget name:");
 		
-		createText(root, WizardContext.WIDGET_NAME, "widget name");
+		createText(root, WizardContext.WIDGET_NAME, "widget name", new RegexpValidator("[^\\w\\. ]", "Widget name cannot contain {0} character", false));
 		
 		createLabel(root, "");
 		createLabel(root, "This will be the widget's display name on the device");
@@ -54,7 +55,7 @@ public class WRTProjectDetailsWizardPage extends AbstractDataBindingPage {
 		createLabel(root, "");
 		createLabel(root, "Widget identifier:");
 
-		createText(root, WizardContext.WIDGET_ID, "widget identifier");
+		createText(root, WizardContext.WIDGET_ID, "widget identifier", new RegexpValidator("[\\w]*(\\.\\w[\\w]*)*", "{0} is not a valid widget ID", true));
 		createLabel(root, "");
 		createLabel(root, "This id should be unique for succesful installation of widget on the device");
 		createLabel(root, "");
@@ -69,7 +70,6 @@ public class WRTProjectDetailsWizardPage extends AbstractDataBindingPage {
 		IObservableValue view = SWTObservables.observeSelection(homeScreen);
 		IObservableValue model = BeansObservables.observeValue(context, WizardContext.HOME_SCREEN);
 		bindingContext.bindValue(view, model);
-		
 		
 		setControl(root);
 	}
