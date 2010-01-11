@@ -124,27 +124,7 @@
          </includes>
       </viewerContentBinding>
    </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="org.eclipse.ui.resourcePerspective">
-         <view
-               ratio="0.5"
-               relative="org.eclipse.ui.navigator.ProjectExplorer"
-               relationship="stack"
-               id="com.example.test">
-         </view>
-      </perspectiveExtension>
-      <perspectiveExtension
-            targetID="org.eclipse.jdt.ui.JavaPerspective">
-         <view
-               ratio="0.5"
-               relative="org.eclipse.ui.views.TaskList"
-               relationship="right"
-               id="org.symbian.tools.wrttools.jseditors.views.SampleView">
-         </view>
-      </perspectiveExtension>
-   </extension>
+
    <extension
          point="org.eclipse.help.contexts">
       <contexts
