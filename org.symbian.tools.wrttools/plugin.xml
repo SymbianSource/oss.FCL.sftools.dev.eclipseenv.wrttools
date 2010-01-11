@@ -122,4 +122,14 @@
             value="true">
       </persistent>
    </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="plist"
+            id="org.symbian.tools.wrttools.contenttype.plist"
+            name="WebRuntime Descriptor File"
+            priority="normal">
+      </content-type>
+   </extension>
 </plugin>

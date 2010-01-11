@@ -105,8 +105,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard {
 	protected void createAndInitProject(IProgressMonitor monitor)
 			throws CoreException {
 		monitor.beginTask("Creating project", 100);
-		IProject project = ProjectUtils.createWrtProject(context.getProjectName(), context
-		.getProjectUri(), new SubProgressMonitor(monitor, 30));
+		IProject project = ProjectUtils.createWrtProject(context.getProjectName(), context.getProjectUri(), new SubProgressMonitor(monitor, 30));
 		populateProject(project, new SubProgressMonitor(monitor, 70));
 		monitor.done();
 	}
