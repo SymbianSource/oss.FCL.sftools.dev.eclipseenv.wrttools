@@ -64,10 +64,10 @@
             hasPages="true"
             icon="icons/main16.gif"
             id="org.symbian.tools.wrttools.core.wrtwidgetwizard"
-            name="Web Runtime Widget"
+            name="Web Runtime Application"
             project="true">
          <description>
-            Creates a new Symbian WRT widget project using one of the provided templates
+            Creates a new Symbian WRT application project using one of the provided templates
          </description>
       </wizard>
       <wizard
