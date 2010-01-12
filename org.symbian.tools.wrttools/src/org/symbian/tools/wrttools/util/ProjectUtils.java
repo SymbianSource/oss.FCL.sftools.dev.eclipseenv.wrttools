@@ -50,14 +50,22 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.validation.ValidationFramework;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.dialogs.AptanaProjectSelectionDialog;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class ProjectUtils {
+	private static final String WRT_PREVIEW_MAIN_HTML = "wrt_preview_main.html";
 	public static final String PREVIEW_FOLDER = "preview";
 	public static final String PREVIEW_FRAME_FILE = "wrt_preview_frame.html";
 
+	@SuppressWarnings("restriction")
 	public static IProject createWrtProject(String name, URI uri,
 			IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Create project resources", 20);
@@ -97,15 +105,50 @@ public class ProjectUtils {
 					stream.closeEntry();
 				}
 			}
-			IFile file = project.getFile(mainHtml + ".html");
-			if (file.exists()) {
-				file.copy(project.getFullPath().append("wrt_preview_main.html"), false, new NullProgressMonitor());
-			}
-			
+			createPreviewerHomePage(project, mainHtml);
 		} catch (IOException e) {
 			StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Unable to add previewer to project"));
 		} catch (CoreException e) {
 			StatusManager.getManager().handle(e, Activator.PLUGIN_ID);
+		}
+	}
+
+	@SuppressWarnings("restriction")
+	private static void createPreviewerHomePage(IProject project, IPath mainHtml)
+			throws CoreException, IOException {
+		IFile file = project.getFile(mainHtml + ".html");
+		if (file.exists()) {
+			IFile newFile = project.getFile(WRT_PREVIEW_MAIN_HTML);
+			file.copy(newFile.getFullPath(), false, new NullProgressMonitor());
+			IModelManager modelManager = StructuredModelManager
+					.getModelManager();
+			IDOMModel model = (IDOMModel) modelManager
+					.getModelForEdit(newFile);
+			if (model != null) {
+				try {
+					addJS(model);
+				} finally {
+					model.releaseFromEdit();
+				}
+			}
+		}
+	}
+
+	@SuppressWarnings("restriction")
+	private static void addJS(IDOMModel model) throws IOException, CoreException {
+		IDOMDocument document = model.getDocument();
+		Element documentElement = document.getDocumentElement();
+		if (documentElement != null) {
+			NodeList elementsByTagName = documentElement.getElementsByTagName("head");
+			if (elementsByTagName.getLength() == 1) { // We do not want to handle malformed HTMLs
+				Element head = (Element) elementsByTagName.item(0);
+				Element script = document.createElement("script");
+				script.setAttribute("language", "JavaScript");
+				script.setAttribute("type", "text/javascript");
+				script.setAttribute("src", "preview/script/lib/loader.js");
+				head.insertBefore(script, head.getFirstChild());
+				model.save();
+			}
 		}
 	}
 
