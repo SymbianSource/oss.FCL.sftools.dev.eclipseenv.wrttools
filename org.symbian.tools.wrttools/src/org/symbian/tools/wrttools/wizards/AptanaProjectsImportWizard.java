@@ -18,14 +18,20 @@
  */
 package org.symbian.tools.wrttools.wizards;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
-public class AptanaProjectsImportWizard extends Wizard implements IImportWizard {
+public class AptanaProjectsImportWizard extends Wizard implements
+		IImportWizard, IExecutableExtension {
 
 	private AptanaProjectLocationWizardPage mainPage;
+	private IConfigurationElement config;
 
 	public AptanaProjectsImportWizard() {
 		setWindowTitle("Import Aptana Project");
@@ -40,7 +46,12 @@ public class AptanaProjectsImportWizard extends Wizard implements IImportWizard 
 
 	@Override
 	public boolean performFinish() {
-		return mainPage.createProjects();
+		if (mainPage.createProjects()) {
+			BasicNewProjectResourceWizard.updatePerspective(config);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -48,10 +59,15 @@ public class AptanaProjectsImportWizard extends Wizard implements IImportWizard 
 		mainPage = new AptanaProjectLocationWizardPage();
 		addPage(mainPage);
 	}
-	
+
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// Do nothing
 	}
 
+	@Override
+	public void setInitializationData(IConfigurationElement config,
+			String propertyName, Object data) throws CoreException {
+		this.config = config;
+	}
 }

@@ -41,6 +41,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -54,18 +56,20 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
 import org.symbian.tools.wrttools.util.NonClosingStream;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-public class WrtWidgetWizard extends Wizard implements INewWizard {
+public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableExtension {
 	private WizardNewProjectCreationPage resourcePage;
 	private WizardContext context;
 	private DataBindingContext bindingContext;
 	private Map<ProjectTemplate, WRTProjectDetailsWizardPage> templateDetails = new HashMap<ProjectTemplate, WRTProjectDetailsWizardPage>();
 	private WRTProjectTemplateWizardPage templatesPage;
 	private WRTProjectFilesWizardPage filesPage;
+	private IConfigurationElement config;
 
 	public WrtWidgetWizard() {
 		setWindowTitle("New WRT Widget");
@@ -86,6 +90,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard {
 		} catch (InterruptedException e) {
 			Activator.log(e);
 		}
+		BasicNewProjectResourceWizard.updatePerspective(config);
 		return true;
 	}
 
@@ -255,5 +260,11 @@ public class WrtWidgetWizard extends Wizard implements INewWizard {
 		IPath workspace = ResourcesPlugin.getWorkspace().getRoot()
 				.getLocation();
 		return workspace.isPrefixOf(project);
+	}
+	
+	@Override
+	public void setInitializationData(IConfigurationElement config,
+			String propertyName, Object data) throws CoreException {
+		this.config = config;
 	}
 }
