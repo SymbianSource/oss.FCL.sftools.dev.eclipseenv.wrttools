@@ -20,6 +20,7 @@ package org.symbian.tools.wrttools.debug.internal.launch;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.URI;
 import java.text.MessageFormat;
 
@@ -71,9 +72,8 @@ public class WidgetLaunchDelegate implements
 			launchManager.removeLaunch(launch);
 			throw createCoreException(MessageFormat.format("Project {0} is already running.", project.getName()), null);
 		}
-		
-		final int port = Activator.getDefault().getPreferenceStore().getInt(
-				IConstants.PREF_NAME_CHROME_PORT);
+
+		int port = findFreePort();
 		boolean debug = mode.equals(ILaunchManager.DEBUG_MODE);
 		final URI uri = prepareDebugger(project, debug, launch, port);
 		final String browserExecutable = ChromeDebugUtils.getChromeExecutible();
@@ -106,6 +106,19 @@ public class WidgetLaunchDelegate implements
 			launchManager.removeLaunch(launch);
 		}
 		monitor.done();
+	}
+
+
+	private int findFreePort() {
+		try {
+			final ServerSocket socket = new ServerSocket(0);
+			int port = socket.getLocalPort();
+			socket.close();
+			return port;
+		} catch (IOException e) {
+			Activator.log(e);
+			return 7222;
+		}
 	}
 
 

@@ -18,13 +18,13 @@
  */
 package org.symbian.tools.wrttools.previewer;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.osgi.framework.BundleContext;
 import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.symbian.tools.wrttools.previewer.utils.Logging;
-import org.osgi.util.tracker.ServiceTracker;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -61,6 +61,18 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 
+	@Override
+	protected void initializeImageRegistry(ImageRegistry reg) {
+		addImage(reg, Images.GREEN_SYNC);
+		addImage(reg, Images.RED_SYNC);
+		addImage(reg, Images.YELLOW_SYNC);
+	}
+	
+	private void addImage(ImageRegistry reg, String path) {
+		ImageDescriptor imageDescriptor = imageDescriptorFromPlugin(PLUGIN_ID, path);
+		reg.put(path, imageDescriptor);
+	}
+	
 	/**
 	 * Returns the shared instance
 	 *
@@ -70,15 +82,22 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 	
-	public static void log(int severity, String message, Throwable x) {
-		IStatus status = new Status(severity, PLUGIN_ID, 0, message, x);
-		Logging.log(getDefault(), status);
+	public static void log(Exception e) {
+		log(null, e);
 	}
-	
-	public static IProxyService getProxyService() {
-        ServiceTracker tracker = null;
-		return (IProxyService) tracker.getService();
-}
 
+	public static void log(String message, Exception e) {
+		IStatus status = new Status(IStatus.ERROR, PLUGIN_ID, message, e);
+		getDefault().getLog().log(status);
+	}
+
+	public static ImageDescriptor getImageDescriptor(String key) {
+		return getDefault().getImageRegistry().getDescriptor(key);
+	}
+
+	public static IProxyService getProxyService() {
+        IProxyService service = (IProxyService) getDefault().getBundle().getBundleContext().getServiceReference(IProxyService.class.getName());
+		return service;
+	}
 
 }

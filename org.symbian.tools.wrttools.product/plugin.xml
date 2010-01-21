@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.symbian.tools.wrttools.product.perspective.WRTPerspective"
+            icon="icons/main16.gif"
+            id="org.symbian.tools.wrttools.mainPerspective"
+            name="WebRuntime">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.symbian.tools.wrttools.product.creationActionSet"
+            label="WRT Element Creation">
+         <action
+               class="org.symbian.tools.wrttools.product.actions.NewCSSFileAction"
+               icon="icons/newcss_wiz.gif"
+               id="org.symbian.tools.wrttools.product.newCssFileAction"
+               label="New CSS File..."
+               style="push"
+               toolbarPath="wrtwizards">
+         </action>
+         <action
+               class="org.symbian.tools.wrttools.product.actions.NewHTMLFileAction"
+               icon="icons/newhtml_wiz.gif"
+               id="org.symbian.tools.wrttools.product.newHtmlAction"
+               label="New HTML File..."
+               style="push"
+               toolbarPath="wrtwizards">
+         </action>
+         <action
+               class="org.symbian.tools.wrttools.product.actions.NewJSFileAction"
+               icon="icons/newjscript_wiz.gif"
+               id="org.symbian.tools.wrttools.product.newJSAction"
+               label="New JavaScript File..."
+               style="push"
+               toolbarPath="wrtwizards">
+         </action>
+         <action
+               class="org.symbian.tools.wrttools.product.actions.NewWRTProjectAction"
+               icon="icons/main16.gif"
+               id="org.symbian.tools.wrttools.product.newWRTProjectAction"
+               label="New WRT Application..."
+               style="push"
+               toolbarPath="wrtwizards">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.wst.web.ui"
+            name="Web">
+      </category>
+      <primaryWizard
+            id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
+      </primaryWizard>
+      <primaryWizard
+            id="org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard">
+      </primaryWizard>
+      <primaryWizard
+            id="org.eclipse.wst.css.ui.internal.wizard.NewCSSWizard">
+      </primaryWizard>
+      <primaryWizard
+            id="org.eclipse.wst.jsdt.ui.NewJSWizard">
+      </primaryWizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.activities">
+      <activity
+            description="WTP functionality not used in WRT IDE"
+            id="org.symbian.tools.wrttools.product.wtp"
+            name="Web Tools Platform (WTP)">
+      </activity>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.wst\.xml\.ui/org\.eclipse\.wst\.xml\.ui\.XMLExampleProjectCreationWizard">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.wst\.xml\.ui/org\.eclipse\.wst\.xml\.ui\.perspective">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.wst\.jsdt\.ui/org\.eclipse\.wst\.jsdt\.ui\.wizards\.JavaProjectWizard">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.wst\.jsdt\.web\.ui/org\.eclipse\.wst\.jsdt\.internal\.web\.ui\.convertProjects">
+      </activityPatternBinding>
+      <category
+            description="WTP UI elements that are not compatible with WRT widget development"
+            id="org.symbian.tools.wrttools.product.wtp"
+            name="Web Tools Platform (WTP)">
+      </category>
+      <categoryActivityBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            categoryId="org.symbian.tools.wrttools.product.wtp">
+      </categoryActivityBinding>
+      <category
+            description="Chromium Developement Tools UI"
+            id="org.symbian.tools.wrttools.product.chdt"
+            name="Google Chrome Developer Tools">
+      </category>
+      <activity
+            description="Google Chrome Developer Tools UI elements"
+            id="org.symbian.tools.wrttools.product.chdtact"
+            name="Google Chrome Developer Tools">
+      </activity>
+      <categoryActivityBinding
+            activityId="org.symbian.tools.wrttools.product.chdtact"
+            categoryId="org.symbian.tools.wrttools.product.chdt">
+      </categoryActivityBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.chdtact"
+            pattern="org\.chromium\.debug\.ui/org\.chromium\.debug\.ui\.LaunchType.*">
+      </activityPatternBinding>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="WebRuntime Toolkit IDE">
+         <property
+               name="windowImages"
+               value="icons/main16.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png">
+         </property>
+         <property
+               name="aboutText"
+               value="%productBlurb">
+         </property>
+         <property
+               name="aboutImage"
+               value="eclipse_lg.gif">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="C8D5EA">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="0,280,455,15">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="7,220,441,20">
+         </property>
+         <property
+               name="appName"
+               value="WebRuntime Toolkit IDE">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page            
+            category="org.eclipse.ui.preferencePages.Workbench"
+            name="Capabilities"
+            id="org.eclipse.sdk.capabilities">
+            <class class="org.eclipse.ui.activities.ActivityCategoryPreferencePage">
+                <parameter name="allowAdvanced" value="true"/>
+                <parameter name="captionMessage" value="Capabilities allow you to enable or disable various product components.  These capabilities are grouped according to a set of predefined categories." />
+            	<parameter name="activityName" value="&amp;Capabilities" />
+                <parameter name="categoryName" value="&amp;Capabilities" />
+            	<parameter name="activityPromptButton" value="&amp;Prompt when enabling capabilities"/>
+            	<parameter name="activityPromptButtonTooltip" value="Prompt when a feature is first used that requires enablement of capabilities"/>
+            </class>
+      </page>
+   </extension>
+</plugin>

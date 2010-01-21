@@ -34,7 +34,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 			store.setDefault(IConstants.PREF_NAME_CHROME_LOCATION, folder
 					.getAbsolutePath());
 		}
-		store.setDefault(IConstants.PREF_NAME_CHROME_PORT, 19222);
 	}
 
 	private File getDefaultFolder() {
