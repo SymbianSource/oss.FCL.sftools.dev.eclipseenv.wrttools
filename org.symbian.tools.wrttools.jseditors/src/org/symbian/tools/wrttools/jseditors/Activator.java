@@ -17,7 +17,7 @@
  * Failures and causes:
  */
 package org.symbian.tools.wrttools.jseditors;
-
+// testing push - please remove this comment. -jk 1-21-10
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
