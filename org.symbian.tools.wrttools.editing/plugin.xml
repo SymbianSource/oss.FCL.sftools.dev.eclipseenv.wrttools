@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.symbian.tools.wrttools.editing.html.HTMLEditor"
+            contributorClass="org.eclipse.wst.html.ui.internal.edit.ui.ActionContributorHTML"
+            default="false"
+            icon="icons/obj16/html-editor.gif"
+            id="org.symbian.tools.wrttools.editing.editor2"
+            name="HTML Editor"
+            symbolicFontName="org.eclipse.wst.sse.ui.textfont">
+         <contentTypeBinding
+               contentTypeId="org.eclipse.wst.html.core.htmlsource">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="org.symbian.tools.wrttools.editing.preview.PreviewView"
+            icon="icons/obj16/html-editor.gif"
+            id="org.symbian.tools.wrttools.editing.wrtpreview"
+            name="WRT Preview"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

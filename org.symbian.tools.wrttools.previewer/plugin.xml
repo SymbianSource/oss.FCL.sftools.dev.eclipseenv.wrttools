@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.symbian.tools.wrttools.editing.html.HTMLEditor"
+            contributorClass="org.eclipse.wst.html.ui.internal.edit.ui.ActionContributorHTML"
+            default="false"
+            icon="icons/obj16/html-editor.gif"
+            id="org.symbian.tools.wrttools.editing.editor2"
+            name="HTML Editor"
+            symbolicFontName="org.eclipse.wst.sse.ui.textfont">
+         <contentTypeBinding
+               contentTypeId="org.eclipse.wst.html.core.htmlsource">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="org.symbian.tools.wrttools.editing.preview.PreviewView"
+            icon="icons/obj16/html-editor.gif"
+            id="org.symbian.tools.wrttools.editing.wrtpreview"
+            name="WRT Preview"
+            restorable="true">
+      </view>
+   </extension>
+ <extension
+       point="org.eclipse.ui.views">
+    <browser class="org.symbian.tools.wrttools.previewer.preview.WidgetPreviewBrowser">
+       <label
+             os="win32"
+             value="Nokia Web Runtime (WRT)"/>
+       <label
+             os="macosx"
+             value="Nokia Web Runtime (WRT)"/>
+       <label
+             os="linux"
+             value="Nokia Web Runtime (WRT)"/>
+
+    </browser>
+ </extension>
+ 
+<extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer class="org.symbian.tools.wrttools.previewer.preview.WidgetPreviewPreferenceInitializer"/>
+ </extension>
+ <extension
+       point="org.eclipse.ui.preferencePages">
+    <page
+          class="org.symbian.tools.wrttools.previewer.preview.WidgetPreviewPreferencePage"
+          id="org.symbian.tools.wrttools.previewer.preview.WidgetPreviewPreferencePage"
+          category="org.symbian.tools.wrttools.previewer.preview.WrtRootPreferences"
+          name="Preview"/>
+
+    <page
+          class="org.symbian.tools.wrttools.previewer.preview.WrtRootPreferences"
+          id="org.symbian.tools.wrtttools.previewer.preview.WrtRootPreferences"
+          name="Web Runtime">
+    </page>
+ </extension>
+ 
+  </plugin>

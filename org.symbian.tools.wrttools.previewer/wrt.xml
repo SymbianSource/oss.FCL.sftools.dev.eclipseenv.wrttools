@@ -1,0 +1,2847 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-infoPathSolution PIVersion="1.0.0.0" href="http://www.aptana.com/forms/types.xsn" language="en-us" name="urn:schemas-microsoft-com:office:infopath:types:" productVersion="11.0.6357" solutionVersion="1.0.0.46" ?><?mso-application progid="InfoPath.Document"?>
+<javascript xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xd="http://schemas.microsoft.com/office/infopath/2003">
+
+  <class type="widget" superclass="Object" visibility="basic">
+	<description>The widget engine provides a set of system information (SystemInfo) API services. The SystemInfo Service API allows a widget to access a device's properties and to control certain device features. The API is implemented in a plug-in module and it is integrated into the WRT environment.
+					To use the SystemInfo APIs, each widget must load the plug-in module explicitly by defining the following HTML code in its main HTML document</description>
+	<browsers>
+			<browser platform="Nokia WRT" version="1.0+"/>
+	</browsers>
+	<constructors>
+		<constructor scope="instance">
+			<description>The widget object is a built-in JavaScript object in the widget engine. 
+			</description>
+			<browsers>
+				<browser platform="Nokia WRT" version="1.0+"/>
+			</browsers>
+				<parameters/>
+				<return-types>
+	          <return-type type="widget"/>
+	        </return-types>
+			</constructor>
+		</constructors>
+		 
+			<properties>
+				<property name="identifier" type="String" scope="" access="read" visibility="basic">
+				<description>This is a read-only property that returns an integer indicating the current battery level.
+							 The returned value is in the range of 0 to 100 as a percentage of the maximum battery level.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			<property name="onshow" type="void" scope="" access="read-write" visibility="basic">
+				<description>The onshow property is an event handler for the event of when a widget is switching from the background to the foreground. In other words, when an opened widget gains focus, the assigned callback function will be called.
+              </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+				<availability>
+					<specification name="Nokia WRT" version="1.0+"/>
+				</availability>
+			</property>
+			<property name="onhide" type="void" scope="" access="read-write" visibility="basic">
+				<description>The onhide property is an event handler for the event of when a widget is switching from the foreground to the background. In other words, when a running widget loses focus, the assigned callback function will be called.
+			</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+				<availability>
+					<specification name="Nokia WRT" version="1.0+"/>
+				</availability>
+			</property>
+			
+			<property name="isrotationsupported" type="Boolean" scope="" access="read-write" visibility="basic">
+				<description>isrotationsupported is a read-only property that returns a Boolean value determining if the device supports landscape and portrait screen orientations.
+					If the value is true, the device supports both landscape and portrait screen orientations.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+				<availability>
+					<specification name="Nokia WRT" version="ert 1.0+"/>
+				</availability>
+			</property>
+		</properties>
+		
+		<methods>
+		
+		<method name="openURL" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The openURL method opens a specified link in the Web Browser for S60 in the stand-alone mode. The widget remains open but is sent to the background. </description>
+				<parameters>
+					<parameter name="url" type="String" usage="required">
+						<description>A compact string specifying a link to a resource to be opened. The URL string format is compliant with the RFC-1738 specification and must be encoded if it contains non-ASCII characters.</description>
+				</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT Webruntime" version="1.0+" />
+				</browsers>
+			</method>
+				<method name="setPreferenceForKey" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The setPreferenceForKey method allows a key to be stored along with its associated preference. The arguments are like name and value pairs. The preference value for the key is stored persistently, so if the widget or device is restarted, the value is retained. However, the values stored by a widget are removed when a widget is uninstalled from the device. This includes the case when a widget is reinstalled; where the old widget is uninstalled, the new widget is installed.
+							An existing preference can be overwritten with a new value by simply calling the method with the same key and new value.
+				 </description>
+				 		 <parameters>
+					<parameter name="preference" type="String" usage="required">
+						<description>A short text string defined as the name of the preference to be stored.</description>
+					</parameter>
+					<parameter name="key" type="String" usage="required">
+						<description>A compact string specifying a link to a resource to be opened. The URL string format is compliant with the RFC-1738 specification and must be encoded if it contains non-ASCII characters.</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT Webruntime" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="preferenceForKey" scope="" visibility="basic">
+			<return-types>
+					<return-type type="String"/>
+				</return-types>
+				<description>The preferenceForKey method allows a previously stored preference to be restored.
+				 </description>
+				<parameters>
+					<parameter name="key" type="String" usage="required">
+						<description>A text string specifying the name that represents the preference to be restored.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="prepareForTransition" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The widget's view is composed by HTML elements such as text display area, buttons, edit fields, and so on. The appearance of these HTML elements can be dynamically changed. For example, they can be shown or hidden dynamically using the HTML DOM style object to set the display property to "block" or "none" respectively. </description>
+				<parameters>
+					<parameter name="transitionMode" type="String" usage="required">
+						<description>A text string defining a desired transition mode. Currently the only supported transition mode is "fade", which causes the widget's view changing in fading mode.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+				<method name="performTransition" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The performTransition method operates as a screen update command, which tells the widget UI framework to update the widget screen. It performs the animation while the widget's view is being changed. Currently, only fading animation mode is supported. </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="setNavigationEnabled" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The navigation mode in a widget can be toggled between a cursor and a tabbed navigation mode. By default, the browsing mode of a widget is set to use a cursor (pointer). The setNavigationEnabled method is used for changing the widget's navigation mode.
+							The argument navigationType is of Boolean type and can be set to true or false to toggle the navigation mode between the cursor mode and the tab mode respectively.
+				 </description>
+				 <parameters>
+					<parameter name="navigationMode" type="Boolean" usage="required">
+						<description>Set to true to enable the cursor navigation mode, and set to false to enable the tabbed navigation mode.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="setDisplayLandscape" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The setDisplayLandscape method changes the orientation of a widget's screen to the landscape mode.
+				 </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="openApplication" scope="" visibility="basic">
+				<description>The openApplication method enables a widget to launch an S60 mobile application in the stand-alone mode.
+				 </description>
+				 <parameters>
+				 
+					<parameter name="Uid" type="Number" usage="required">
+						<description>A hexadecimal number that specifies the UID of the S60 application to be activated. See the table below for example application UIDs.</description>
+					</parameter> 
+				
+					<parameter name="param" type="String" usage="required">
+						<description>A text string defining a possible argument string that is accepted by the S60 application to be activated.</description>
+					</parameter>
+					
+				</parameters>
+
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+		
+			<method name="setDisplayPortrait" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The setDisplayPortrait method changes the orientation of a widget's screen to the portrait mode.
+				 </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+		</methods>
+	</class>
+	
+	<class type="menu" superclass="Object" visibility="basic">
+		<description>
+					The menu object is supported since WRT version 1.0.
+		</description>
+		
+		<browsers>
+				<browser platform="Nokia WRT" version="1.0+" />
+		</browsers>
+		
+	      <constructors>
+	      <constructor scope="instance">
+	       		 <description>The menu object is a built-in object in the widget engine. It is extended from the window object to 
+					provide widget-specific APIs for manipulating widget's options menu and softkeys.
+					The menu object can be accessed via the window object window.menu or just simply menu. Thus, in the 
+					WRT environment, the term menu is a reserved keyword and should not be used as a user-defined global 
+					variable name for other type of objects.
+					A widget's options menu can be constructed using the menu object. The options menu is automatically 
+					associated with the device's left softkey and it cannot be reassigned to associate with another 
+					softkey (for example, the right softkey). The label of the options menu (the left softkey) is the 
+					system-defined term in the current used system language (for example, Options for English). 
+					Thus, the left softkey label cannot be changed.</description>
+			<browsers>
+				<browser platform="Nokia WRT" version="1.0+"/>
+			</browsers>		
+	        <parameters/>
+	        <exceptions/>
+	      </constructor>
+	    </constructors>  
+	    
+	     <properties>
+			<property name="onShow" type="Void" scope="" access="read-write" visibility="basic">
+				<description> The onShow property of the menu object is an event handler for the event of when the options menu is open. In other words, when the end user presses the left softkey, the system will fire an event and a widget can catch the event by providing a callback function.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+				
+			</property>
+	    
+	    </properties>
+	    <methods>
+	       
+	    		<method name="append" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the append method to add a menu item to the top level of the options menu list.
+				Menu items are shown on the options menu list in the order in which they are appended.
+				For more general information on constructing an options menu.
+				 </description>
+				 <parameters>
+					<parameter name="MenuItem" type="menuItem" usage="required">
+						<description>This is an instance of the MenuItem object which is being added to the top level of the options menu
+						</description>
+					</parameter>
+				</parameters>
+			<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			
+				<method name="remove" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the remove method to remove a menu item from the top level of the options menu list. If the removed menu item has a cascading submenu in it, the submenu will also be removed.
+				 </description>
+				  <parameters>
+					<parameter name="MenuItem" type="menuItem" usage="required">
+						<description>This is an instance of the MenuItem object which is being removed from the top level of the options menu list.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="getMenuItemById" scope="" visibility="basic">
+				<return-types>
+					<return-type type="MenuItem"/>
+				</return-types>
+				<description>Call the getMenuItemById method with a specified menu item's identifier to retrieve the handle of the menu item instance.
+				 </description>
+				 <parameters>
+					<parameter name="id" type="Number" usage="required">
+						<description>This is the identifier of an existing menu item whose handle is being retrieved.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+				<method name="getMenuItemByName" scope="" visibility="basic">
+				<return-types>
+					<return-type type="MenuItem"/>
+				</return-types>
+				<description>Call the getMenuItemByName method with a specified menu item's label to retrieve the handle of the menu item instance.
+				 </description>
+				  <parameters>
+					<parameter name="menuItemLabel" type="String" usage="required">
+						<description>This is the identifier of an existing menu item whose handle is being retrieved.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+				<method name="setRightSoftkeyLabel" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the setRightSoftkeyLabel method to customize the label and the operation associated with the right softkey.
+					By default, the right softkey of a device is assigned to the "Exit" function, which terminates a running widget. The default label depends on the current used system language (Exit for English).
+				 </description>
+				 <parameters>
+					<parameter name="label" type="String" usage="required">
+						<description>A text string specifies the label to be shown on the right softkey.
+						</description>
+					</parameter>
+					<parameter name="callbackfunc" type="Function" usage="required">
+						<description>A reference to the callback function, which will be called by the system when the right softkey is pressed.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+		
+				<method name="showSoftkeys" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the showSoftkeys method to display the softkey pane at all times.
+				By default, the device's softkey pane is hidden. The softkey pane is shown either by programmatically calling the showSoftkeys method or when the end user presses one of the softkeys.
+				 </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+
+				<method name="hideSoftkeys" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the hideSoftkeys method to hide the softkey pane.
+						By default, the device's softkey pane is hidden. The softkey pane is shown automatically when the end user presses one of the softkeys.
+				 </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+				<method name="clear" scope="" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the clear method to delete all the menu items in the options menu pane. This operation will also clear all submenus if such exist
+				 </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+	    </methods>	
+	   </class>  
+	   
+  <!-- MenuItem Object -->
+  <class type="MenuItem" superclass="Object" visibility="basic">
+		<description>
+					The MenuItem object is supported since WRT version 1.0.
+		</description>
+		
+		<browsers>
+				<browser platform="Nokia WRT" version="1.0+" />
+		</browsers>
+		
+	  <constructors>
+		<constructor scope="instance">
+			<description>Creates a new instance of an Enumerator object.</description>
+			<browsers>
+				<browser platform="Nokia WRT" version="1.0+"/>
+			</browsers>
+			
+				<parameters>
+					<parameter name="label" type="String" usage="required">
+						<description>A text string that defines the label for the menu item.</description>
+					</parameter>
+					<parameter name="id" type="Integer" usage="required">
+						<description>A unique integer that identifies the menu item.</description>
+					</parameter>
+				</parameters>
+
+				<return-types>
+					<return-type type="MenuItem"/>
+				</return-types>
+			</constructor>
+		</constructors>
+	    
+	    <properties>
+			<property name="onSelect" type="void" scope="instance" access="read-write" visibility="basic">
+				<description> The onSelect property of the MenuItem object is an event handler for the event of when the menu item is selected. In other words, when the end user opens the options menu and selects a menu item either from the top-level menu list or from a submenu list, the system will fire an event and a widget can catch the event by providing a callback function.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+	    </properties>
+
+	     <methods>
+	       <method name="append" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the append method to add a child menu item to the parent menu item in the options menu list. This results in the creation of a submenu list in the menu tree. Use this method to create a cascading submenu when needed.
+							Menu items are shown on the options menu list in the order in which they are appended.
+				 </description>
+				 <parameters>
+					<parameter name="childMenuItem" type="MenuItem" usage="required">
+						<description>This is an instance of the MenuItem object which is being added to the parent menu item. See also the menu.append method description for instructions on how to append a menu item to the top level of the options menu list.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+				<method name="remove" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the remove method to remove a child menu item and its children (if any) from the parent menu item.
+				 </description>
+				  <parameters>
+					<parameter name="childMenuItem" type="MenuItem" usage="required">
+						<description>This is an instance of the MenuItem object which is being removed from the parent menu item. See also the menu.remove method description for instructions on how to remove a menu item from the top level of the options menu list.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+				<method name="setDimmed" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>Call the setDimmed method to show or hide an existing menu item. By default, a menu item is shown when it is appended to the options menu.
+				 </description>
+				 <parameters>
+					<parameter name="flag" type="Boolean" usage="required">
+						<description>true to show the menu item, and false to hide the menu item.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			<!-- End Menu  Item object functions -->
+	    </methods>	
+	   </class>  
+  <!-- end of MenuItem Object -->
+  
+  <!-- System API document.embeds[0]; -->
+	 	  
+  <!-- <class type="SystemInfo" superclass="Object" visibility="basic"> -->
+
+  <!--
+  
+<class type="systemInfo" superclass="Object" visibility="basic">
+	<description>The widget engine provides a set of system information (SystemInfo) API services. The SystemInfo Service API allows a widget to access a device's properties and to control certain device features. The API is implemented in a plug-in module and it is integrated into the WRT environment.
+					To use the SystemInfo APIs, each widget must load the plug-in module explicitly by defining the following HTML code in its main HTML document:
+	</description>
+	<browsers>
+		<browser platform="Nokia WRT" version="1.0+"/>
+	</browsers>
+	
+	<constructors>
+		<constructor scope="instance">
+			<description>Creates a new instance of an Enumerator object.</description>
+				<parameters>
+					<parameter name="group" type="Object" usage="required">
+						<description>Group of items to be iterated over.</description>
+					</parameter>
+				</parameters>
+				<return-types>
+					<return-type type="Enumerator"/>
+				</return-types>
+			</constructor>
+		</constructors>
+
+		<properties>
+			<property name="chargelevel" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns an integer indicating the current battery level.
+							 The returned value is in the range of 0 to 100 as a percentage of the maximum battery level.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+
+			<property name="onchargelevel" type="" scope="instance" access="read-write" visibility="basic">
+				<description>The onchargelevel property is an event handler for the event of when the battery level is changed. The callback function is assigned by providing the function's name wrapped in a string.</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			<property name="chargerconnected" type="Boolean" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a Boolean value indicating the status of the changer.
+							 If the charger is connected, the returned value is 1; otherwise it is 0. </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="onchargerconnected" type="void" scope="instance" access="read-write" visibility="basic">
+				<description>The onchargerconnected property is an event handler for the event of when the charger is plugged to or unplugged from the device.
+							Since the event is fired off much faster than the value is updated, it is recommended to read the value after a small delay.</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			
+			<property name="signalbars" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns an integer indicating the network signal strength.
+							 The returned value is in the range of 0 to 7, where 0 represents no signal and 7 represents the maximum signal strength.
+							 For more information on network connection related aspects that you should take into account in your widget.
+				</description>
+				
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="networkname" type="String" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a string containing the current registered mobile network name defined by the network provider.
+							 This information is only available on GSM/WCDMA networks.
+							For more information on network connection related aspects that you should take into account in your widget.</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="lightminintensity" type="void" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value determining the minimum light intensity (lowest brightness) supported by a device.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			
+			<property name="networkregistrationstatus" type="Integer" scope="" access="read-write" visibility="basic">
+				<description>The networkregistrationstatus property is an integer indicating the current network registration status.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="lightdefaultintensity" type="" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value determining the default light intensity (default brightness) preset for a device.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			<property name="lightinfiniteduration" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value determining the infinite time duration.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			<property name="lightmaxduration" type="Integer" scope="instance" access="read-write" visibility="basic">
+				<description>This is a read-only property that returns an integer value determining the maximum allowed time duration that a device supports. The time duration unit is measured in milliseconds.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			
+			<property name="lightdefaultcycletime" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value indicating the default cycle time of when the light is blinking.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			<property name="lighttargetprimarydisplayandkeyboard" type="Integer" scope="instance" access="read-write" visibility="basic">
+				<description>This is a read-only property that returns a constant value defining the target light to be both the primary display and the keyboard illuminator.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="lighttargetsystem" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value defining the target light to be all displays (primary and secondary if exists) and the keyboard illuminator.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			
+			<property name="vibraminintensity" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value determining the minimum vibration intensity (lowest vibration frequency).
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			<property name="vibramaxintensity" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value determining the maximum vibration intensity (highest vibration frequency).
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="vibramaxduration" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a constant value determining the maximum allowed time duration of vibration.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="vibrasettings" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns the current settings of the vibration mode set in the active user profile.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			
+			
+			<property name="totalram" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns an integer value indicating the total amount of RAM of a device, measured in bytes.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="freeram" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns an integer value indicating the amount of free RAM of a device, measured in bytes.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+			<property name="drivelist" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a text string containing all the user's existing drive names separated by a space.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+				<property name="language" type="Integer" scope="instance" access="read" visibility="basic">
+				<description>This is a read-only property that returns a text string containing the two-letter ISO 639-1 code that represents an international language. For a list of ISO 639-1 language codes, see the Language code table in the Symbian OS Library.
+				</description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+"/>
+				</browsers>
+			</property>
+		</properties>
+		
+		
+		<methods>
+		
+		<method name="lighton" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The lighton method switches the specified target light on for a specified duration with the brightness defined by a specified light intensity.
+				 </description>
+				  <parameters>
+					<parameter name="lighttarget" type="Integer" usage="required">
+						<description>Defines which target light should be turned on. Use one of the supported target light properties to specify a target light.
+						</description>
+					</parameter>
+					<parameter name="duration" type="Integer" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+					<parameter name="intensity" type="Integer" usage="required">
+						<description>Defines the intensity (brightness) of the light. If intensity is lightdefaultintensity, the device default intensity will be used. 
+						</description>
+					</parameter>
+					<parameter name="fadein" type="Boolean" usage="required">
+						<description>If true, target lights will not turn on instantly but fade-in smoothly instead. if false, target lights will be turned on without the fading effect.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+
+
+<method name="lightoff" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The lightoff method switches the specified target light off for the specified duration.
+				 </description>
+				  <parameters>
+					<parameter name="lighttarget" type="String" usage="required">
+						<description>Defines which target light should be turned on. Use one of the supported target light properties to specify a target light.
+						</description>
+					</parameter>
+					<parameter name="duration" type="Integer" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+					<parameter name="fadeout" type="Integer" usage="required">
+						<description>If true, target lights will not turn on instantly but fade-in smoothly instead. if false, target lights will be turned on without the fading effect.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>			
+		
+		
+		<method name="lightblink" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The lightblink method switches the specified target light on and off (blinking) for the specified duration with the brightness defined by a specified light intensity.
+
+				 </description>
+				  <parameters>
+					<parameter name="lighttarget" type="String" usage="required">
+						<description>Defines which target light should be turned on. Use one of the supported target light properties to specify a target light.
+						</description>
+					</parameter>
+					<parameter name="duration" type="Integer" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+						<parameter name="onduration" type="Integer" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+						<parameter name="offduration" type="Integer" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+					<parameter name="intensity" type="Integer" usage="required">
+						<description>If true, target lights will not turn on instantly but fade-in smoothly instead. if false, target lights will be turned on without the fading effect.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>			
+		
+		
+			<method name="startvibra" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The startvibra method turns the device vibration on for the specified duration with the specified intensity (frequency).
+				 </description>
+				  <parameters>
+					<parameter name="duration" type="Integer" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+					<parameter name="intensity" type="Integer" usage="required">
+						<description>Defines the intensity (brightness) of the light. If intensity is lightdefaultintensity, the device default intensity will be used. 
+						</description>
+					</parameter>
+					
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			
+			<method name="stopvibra" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The stopvibra method immediately interrupts the device vibration.
+				 </description>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="beep" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The beep method produces a beep tone in a specified frequency for a specified duration.
+				 </description>
+				  <parameters>
+					<parameter name="frequency" type="Integer" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+					<parameter name="duration" type="Integer" usage="required">
+						<description>Defines the intensity (brightness) of the light. If intensity is lightdefaultintensity, the device default intensity will be used. 
+						</description>
+					</parameter>
+					
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+		
+		<method name="drivesize" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The drivesize method can be used to detect the total size of an existing memory storage in a device.
+				 </description>
+				  <parameters>
+					<parameter name="drivename" type="String" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+			
+			<method name="drivefree" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="void"/>
+				</return-types>
+				<description>The drivesize method can be used to detect the total size of an existing memory storage in a device.
+				 </description>
+				  <parameters>
+					<parameter name="drivename" type="String" usage="required">
+						<description>Defines the period during which the target light is switched on. The period is measured in milliseconds.
+						</description>
+					</parameter>
+				</parameters>
+				<browsers>
+					<browser platform="Nokia WRT" version="1.0+" />
+				</browsers>
+			</method>
+	
+		
+		
+		</methods>
+
+
+	</class>
+-->
+
+
+  <!-- key -->
+  <class type="key" >
+    <description>
+      Each key represents one piece of contact information, such as first name, last name, home phone number, or email address. For each contact, GetList returns as many keys as has been defined for that contact.
+    </description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+<!--
+    <constructors>
+      <constructor scope="instance">
+        <description></description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+        <parameters/>
+        <return-types>
+          <return-type type="key"/>
+        </return-types>
+      </constructor>
+    </constructors>
+-->
+    <properties>
+
+      <property name="Label" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          Label
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="Value" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          Value
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="FirstName" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          FirstName
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="LastName" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          LastName
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+
+    </properties>
+
+  </class>
+  <!-- end of key -->
+  
+  <!-- Item -->
+  <class type="Item" >
+    <description>
+      Item
+    </description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+<!--
+    <constructors>
+      <constructor scope="instance">
+        <description></description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+        <parameters/>
+        <return-types>
+          <return-type type="Item"/>
+        </return-types>
+      </constructor>
+    </constructors>
+-->
+    <properties>
+      
+      <property name="CalendarName" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          CalendarName
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+      
+      <property name="LocalId" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          LocalId
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="InstanceStartTime" type="Date" scope="instance" access="read-write" visibility="basic">
+        <description>
+          InstanceStartTime
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <!-- Contacts specific -->
+
+      <property name="id" type="Staring" scope="instance" access="read-write" visibility="basic">
+        <description>
+          Unique identifier of the contact.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="key" type="key" scope="instance" access="read-write" visibility="basic">
+        <description>
+          Each key represents one piece of contact information, such as first name, last name, home phone number, or email address. For each contact, GetList returns as many keys as has been defined for that contact.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="GroupLabel" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          Name of the group.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="Contents" type="Array" scope="instance" access="read-write" visibility="basic">
+        <description>
+          Contains the IDs of the contacts that belong to the group.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="DBUri" type="String" scope="instance" access="read-write" visibility="basic">
+        <description>
+          URI of the database.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+	 <!-- AppManager specific -->
+		
+      <property name="Uid" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+        	AppManager:
+        	Contains a unique ID for the application binary (EXE or DLL).
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="Path" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+        	AppManager:
+          	Contains the path of the application. For example, c:\sys\bin\calculator.exe.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="Caption" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+          AppManager:
+          Contains the title of the application.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="ShortCaption" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+          AppManager:
+          Contains the short title of the application. For example, the short caption may be displayed beneath an icon on the mobile device.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="PackageName" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+          AppManager:
+          Contains the name of the application. For example, the package name may be displayed in a menu on the mobile device.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="Version" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+        	AppManager:
+			Contains the version of the application. The version consists of two parts: Major, Minor.
+			For example, 1.01, where 1 is the major part and .02 is the minor part.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="Vendor" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+          AppManager:
+          Contains the vendor of the application.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="Drive" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+        	AppManager:
+          Contains the drive where the application is installed.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+	  		
+    </properties>
+
+  </class>
+  <!-- end of Item -->
+  
+  <!-- Iterator -->
+  <class type="Iterator" >
+    <description>
+      Iterator
+    </description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+<!--
+    <constructors>
+      <constructor scope="instance">
+        <description></description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+        <parameters/>
+        <return-types>
+          <return-type type="Iterator"/>
+        </return-types>
+      </constructor>
+    </constructors>
+-->
+    <methods>
+
+      <method name="reset" scope="instance" visibility="basic">
+
+        <return-types>
+          <return-type type="void"/>
+        </return-types>
+
+        <description>
+          reset
+        </description>
+
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+
+      </method>
+
+      <method name="getNext" scope="instance" visibility="basic">
+
+        <return-types>
+          <return-type type="Item"/>
+        </return-types>
+
+        <description>
+          getNext
+        </description>
+
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+
+      </method>
+    </methods>
+
+  </class>
+  <!-- end of Iterator -->
+    
+  <!-- result -->
+  <class type="result" >
+    <description>
+      result
+    </description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+
+    <properties>
+      <!--
+		<property name="ReturnValue" type="Iterator" scope="instance" access="read" visibility="basic">
+			<description>
+        	AppManager
+			
+				GetList:
+					This is an iterator that contains the requested application information.
+					
+				LaunchApp/LaunchDoc:
+					This is a string that contains the name of the newly created document, if any.
+					This property is optional. 
+					
+					A new document is created only when both of the following are true:
+						criteria.MIMEType is specified as input.
+						The launched application creates a new document. 
+					A document name is never returned when criteria.Document is specified as input.
+					
+			Calendar
+				GetList:
+					This is an iterator that contains the requested calendar information.
+					
+				Add:
+					This is a text string that contains the id of the entry that was added or updated.
+					If a new calendar was created, this property is not included in the result object.
+
+				Import:
+					This is an iterator that contains an ordered list of objects. The objects contain the ids (strings) of the entries that were successfully imported to the calendar. The same id may be repeated multiple times in case of child entries.
+					
+				Export:
+					This is a text string that contains the exported entries in the specified format.
+					This property is only included if Data.FileName was not specified in the input. This property serves as a buffer that contains the same data as the target file would have had it been specified.
+
+			Contact:
+				GetList:
+					This is an iterator that contains the requested contact information
+			</description>
+			<browsers>
+				<browser platform="Nokia WRT" version="1.1+"/>
+			</browsers>
+		</property>
+		-->
+
+      <property name="ReturnValue" type="Object" scope="instance" access="read" visibility="basic">
+        <description>
+        	Return value
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+		
+      <property name="ErrorCode" type="Integer" scope="instance" access="read" visibility="basic">
+        <description>
+        	This is a number that specifies a predefined error code.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="ErrorMessage" type="String" scope="instance" access="read" visibility="basic">
+        <description>
+        	This is a text string that describes the error.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="TransactionID" type="Integer" scope="instance" access="read" visibility="basic">
+        <description>
+        	This is a number used as an identification to match transactions started with an asynchronous call to one or more calls it generates to callback. This is only valid for Asynchronous invocations.
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+    </properties>
+
+  </class>
+  <!-- end of result -->
+
+  <!-- IDataSource -->
+  <class type="IDataSource">
+
+    <description>
+    	This Service API allows widgets to:
+		&lt;p&gt;
+		&lt;ul&gt;
+		 	&lt;li&gt;access, create, and manage calendars/calendar entries,&lt;/li&gt;
+			&lt;li&gt;access and manage information about contacts,&lt;/li&gt;
+			&lt;li&gt;access and manage information about landmarks and landmark categories,&lt;/li&gt;
+			&lt;li&gt;add, read, and delete logging events such as call logs, messaging logs, and so forth,&lt;/li&gt;
+			&lt;li&gt;retrieve information (metadata) about the media files stored in the Media Gallery of a device.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/p&gt;
+		&lt;p&gt;
+		To use the &lt;code&gt;IDataSource&lt;/code&gt; Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.
+		&lt;/p&gt;
+		&lt;p&gt; 
+		Use &lt;code&gt;Service.Calendar&lt;/code&gt; or &lt;code&gt;Service.Contact&lt;/code&gt; or &lt;code&gt;Service.Landmarks&lt;/code&gt; or &lt;code&gt;Service.Logging&lt;/code&gt; or &lt;code&gt;Service.MediaManagement&lt;/code&gt; to identify the service provider and &lt;code&gt;IDataSource&lt;/code&gt; to identify the supported interface:
+		&lt;/p&gt;
+		
+		&lt;pre&gt;var so = device.getServiceObject("Service.Calendar", "IDataSource");&lt;/pre&gt;		
+	</description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+
+    <methods>
+      
+      <!-- GetList(criteria) -->
+      <method name="GetList" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+        
+        <description>
+        	&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+				The &lt;code&gt;GetList&lt;/code&gt; method retrieves a list of available calendars or calendar entries. Calendar entries are retrieved from the specified calendar or, if no calendar is specified, from the default one.
+				This is a synchronous method.&lt;/p&gt;
+				
+			&lt;p&gt;&lt;b&gt;Contacts:&lt;/b&gt;				
+				The &lt;code&gt;GetList&lt;/code&gt; method retrieves a list of contacts, contact groups, or contacts databases. Contacts and contact groups are retrieved from the specified contacts database or, if no database is specified, from the default one.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+
+				&lt;p&gt;Note: Calls that retrieve a list of databases must always be synchronous.&lt;/p&gt;
+				
+			&lt;p&gt;&lt;b&gt;Landmarks:&lt;/b&gt;				
+				The &lt;code&gt;GetList&lt;/code&gt; method retrieves information about landmarks, landmark categories, or landmark databases. Landmarks and landmark categories are retrieved from the specified landmark database or, if no database is specified, from the default one.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+
+				&lt;p&gt;Note: For retrieving information about databases, only synchronous GetList is supported.&lt;p/&gt;
+				
+			&lt;p&gt;&lt;b&gt;Logging:&lt;/b&gt;				
+				The &lt;code&gt;GetList&lt;/code&gt; method retrieves an iterable list of entries from the log event database. The database contains two types of entries, log entries (all entries) and recent log entries (a subset of all log entries).
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+				
+			&lt;p&gt;&lt;b&gt;Media Management:&lt;/b&gt;				
+				The &lt;code&gt;GetList&lt;/code&gt; method retrieves a list of media information objects from the Media Gallery of the S60 device. Each object contains information about a single media file.
+				This is an asynchronous method.&lt;/p&gt;
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="Object" usage="required">
+            <description>
+            	This is an object that specifies what type of calendar/location/landmark/log event information is returned and how the returned information is sorted.
+            </description>
+          </parameter>
+		  
+          <parameter name="callback" type="Function" usage="optional">
+            <description>
+            	The callback argument is the name of the method that is executed when an asynchronous GetList call has results or status information to return. You must define this method separately. 
+            </description>
+          </parameter>
+
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+      <!-- Add(criteria) -->
+      <method name="Add" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+        	&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+				The &lt;code&gt;Add&lt;/code&gt; method creates a new calendar on the device or adds an entry to a calendar. In the latter case, if an entry with the same LocalId already exists in the calendar, it is modified accordingly. You can thus use this method to both add and update calendar entries. The entry is added to the specified calendar or, if no calendar is specified, to the default one. If the default calendar does not exist, it is created.
+				This is a synchronous method.&lt;/p&gt;
+
+			&lt;p&gt;&lt;b&gt;Contact:&lt;/b&gt;
+				The &lt;code&gt;Add&lt;/code&gt; method adds a contact or contact group to a contacts database. If the contact or contact group already exists in the database, it is replaced with the new entry. You can thus use this method to both add and edit contacts and contact groups. The information is added to the specified database or, if no database is specified, to the default one. If the default database does not exist, it is created.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+
+			&lt;p&gt;&lt;b&gt;Landmarks:&lt;/b&gt;
+				The &lt;code&gt;Add&lt;/code&gt; method adds a new landmark or landmark category to a landmark database. You can also use this method to edit an existing landmark or landmark category.
+				This is a synchronous method.&lt;/p&gt;
+
+			&lt;p&gt;&lt;b&gt;Logging:&lt;/b&gt;
+				The &lt;code&gt;Add&lt;/code&gt; method adds an event (entry) to the event log database.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object that specifies the calendar/contact/landmark/log to create or to add or update.
+            </description>
+          </parameter>
+		  
+          <parameter name="callback" type="Function" usage="optional">
+            <description>
+            	The callback argument is the name of the method that is executed when an asynchronous Add call has results or status information to return. You must define this method separately. 
+            </description>
+          </parameter>
+		  
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+      <!-- Delete(criteria) -->
+      <method name="Delete" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+        	&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+				The &lt;code&gt;Delete&lt;/code&gt; method deletes a calendar from the device or one or more entries from a calendar. Entries are deleted from the specified calendar or, if no calendar is specified, from the default one.
+				For deleting a calendar, this method is called synchronously. For deleting calendar entries, this method can be called both synchronously and asynchronously.&lt;/p&gt;
+				
+        	&lt;p&gt;&lt;b&gt;Contacts:&lt;/b&gt;
+				The &lt;code&gt;Delete&lt;/code&gt; method deletes one or more contacts or contact groups from a contacts database. The information is deleted from the specified database or, if no database is specified, from the default one.
+				This method can be called both synchronously and asynchronously&lt;/p&gt;
+				
+        	&lt;p&gt;&lt;b&gt;Landmark:&lt;/b&gt;
+				The &lt;code&gt;Delete&lt;/code&gt; method deletes a landmark or landmark category from a landmark database.
+				Note: You cannot delete landmark databases.
+				This is a synchronous method.&lt;/p&gt;
+				
+        	&lt;p&gt;&lt;b&gt;Logging:&lt;/b&gt;
+				The &lt;code&gt;Delete&lt;/code&gt; method deletes an event (entry) from the event log database. 
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object that specifies which calendar/calendar entries/contacts/contact groups/landmark/landmark category/event to delete from the database.
+            </description>
+          </parameter>
+		  
+          <parameter name="callback" type="Function" usage="optional">
+            <description>
+            	The callback argument is the name of the method that is executed when an asynchronous Delete call has results or status information to return. You must define this method separately.
+            </description>
+          </parameter>
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+      <!-- Import(criteria) -->
+      <method name="Import" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+			&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+        		The &lt;code&gt;Import&lt;/code&gt; method imports entries into a calendar. The information must be imported from an iCal or vCal file. For more information about these two formats, see the Calendar Service overview page.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+				
+			&lt;p&gt;&lt;b&gt;Contact:&lt;/b&gt;
+				The &lt;code&gt;Import&lt;/code&gt; method imports a contact to a contacts database. The information must be imported from a vCard file.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+			
+			&lt;p&gt;&lt;b&gt;Landmark:&lt;/b&gt;
+				The &lt;code&gt;Import&lt;/code&gt; method imports a set of landmarks to a landmark database.
+				This is a synchronous method.&lt;/p&gt;
+
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+				This is an object that specifies the calendar entries/contacts/landmarks to import.			 
+            </description>
+          </parameter>
+		  
+          <parameter name="callback" type="Function" usage="optional">
+            <description>
+            	The callback argument is the name of the method that is executed when an asynchronous Import call has results or status information to return. You must define this method separately.
+            </description>
+          </parameter>
+		  
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+	    <!-- Export(criteria) -->
+      <method name="Export" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+        	&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+				The &lt;code&gt;Export&lt;/code&gt; method exports entries from a calendar. The information is exported to an iCal or vCal file. For more information about these two formats, see the Calendar Service overview page.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+
+			&lt;p&gt;&lt;b&gt;Contact:&lt;/b&gt;
+				The &lt;code&gt;Export&lt;/code&gt; method exports a contact from a contacts database. The information is exported to a vCard file.
+				This method can be called both synchronously and asynchronously&lt;/p&gt;
+			
+			&lt;p&gt;&lt;b&gt;Landmark:&lt;/b&gt;
+				The &lt;code&gt;Export&lt;/code&gt; method exports a set of landmarks from a landmark database.
+				This is a synchronous method.&lt;/p&gt;
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object that specifies the calendar/contacts/landmarks entries to export.
+            </description>
+          </parameter>
+		  
+          <parameter name="callback" type="Function" usage="optional">
+            <description>
+            	The callback argument is the name of the method that is executed when an asynchronous Export call has results or status information to return. You must define this method separately.
+            </description>
+          </parameter>
+		  
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+	    <!-- RequestNotification(criteria, callback); -->
+      <method name="RequestNotification" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+        	&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+				The &lt;code&gt;RequestNotification&lt;/code&gt; method notifies the client when entries are created, updated, or deleted in the specified calendar. If no calendar is specified, the default calendar is used.
+				This is an asynchronous method.&lt;/p&gt;
+
+			&lt;p&gt;&lt;b&gt;Logging:&lt;/b&gt;
+				The &lt;code&gt;RequestNotification&lt;/code&gt; method registers the widget to receive notifications of changes to the event log.
+				This is an asynchronous method.&lt;/p&gt;
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object that specifies which calendar, calendar entries and event log to monitor for changes and when.
+            </description>
+          </parameter>
+		  
+          <parameter name="Callback" type="Function" usage="required">
+            <description>
+				The callback argument is the name of the method that is executed when an asynchronous 'RequestNotification' call has results or status information to return. You must define this method separately.            	
+            </description>
+          </parameter>
+		  
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+	  
+	    <!-- Cancel(criteria); -->
+      <method name="Cancel" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+        	&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+				The &lt;code&gt;Cancel&lt;/code&gt; method cancels an ongoing asynchronous call made with a Calendar Service API method.
+				This is a synchronous method.&lt;/p&gt;
+				
+			&lt;p&gt;&lt;b&gt;Contact:&lt;/b&gt;
+				The &lt;code&gt;Cancel&lt;/code&gt; method cancels an outstanding asynchronous call made with a Contacts Service API method.
+				This is a synchronous method.&lt;/p&gt;
+				
+			&lt;p&gt;&lt;b&gt;LandMark:&lt;/b&gt;
+				The &lt;code&gt;Cancel&lt;/code&gt; method cancels an ongoing asynchronous call made with a Landmarks Service API method.
+				This is a synchronous method.&lt;/p&gt;
+	
+			&lt;p&gt;&lt;b&gt;Logging:&lt;/b&gt;
+				The &lt;code&gt;Cancel&lt;/code&gt; method cancels an ongoing asynchronous call made with a Landmarks Service API method.
+				This is a synchronous method.&lt;/p&gt;
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object with the TransactionID property (number). criteria.TransactionID specifies the transaction ID of the asynchronous call to cancel. The transaction ID is the result.TransactionID value that was returned as part of the result of the initial call.
+            </description>
+          </parameter>
+		  		  
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>		
+      
+      <!-- Organise(criteria); -->
+      <method name="Organise" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+        	&lt;p&gt;&lt;b&gt;Calendar:&lt;/b&gt;
+				The &lt;code&gt;Organise&lt;/code&gt; method adds contacts to a contact group (association) or removes contacts from a contact group (disassociation). The operation is performed on the specified database or, if no database is specified, on the default one.
+				This method can be called both synchronously and asynchronously.&lt;/p&gt;
+
+        	&lt;p&gt;&lt;b&gt;Landmark:&lt;/b&gt;
+				The &lt;code&gt;Organise&lt;/code&gt; method adds landmarks to a landmark category (association) or removes landmarks from a landmark category (disassociation). The same landmark can belong to multiple categories or to no category.
+				This is a synchronous method.&lt;/p&gt;
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object that specifies which contact group/landmarks to organize and how. 
+            </description>
+          </parameter>
+		  
+          <parameter name="Callback" type="Function" usage="optional">
+            <description>
+				The callback argument is the name of the method that is executed when an asynchronous Organise call has results or status information to return. You must define this method separately.            	
+            </description>
+          </parameter>
+		  
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+      <!-- New(criteria); -->
+      <method name="New" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+			The &lt;code&gt;New&lt;/code&gt; method creates an empty landmark or landmark category item. You can use the new item as a template.
+			This is a synchronous method.
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object that specifies the type of item to create
+            </description>
+          </parameter>
+        </parameters>
+        
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+        
+      </method>
+      
+    </methods>        
+
+  </class>  
+  <!-- end of IDataSoure -->
+
+  <!-- IAppManager -->
+  <class type="IAppManager">
+
+    <description>
+    	&lt;p&gt;The AppManager Service API allows widgets to access and launch applications on a mobile device.&lt;/p&gt;
+		&lt;p&gt;The API is integrated with WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+		&lt;p&gt;To use the AppManager Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+		&lt;p&gt;Use &lt;code&gt;Service.AppManager&lt;/code&gt; to identify the service provider and &lt;code&gt;IAppManager&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+
+		&lt;pre&gt;var so = device.getServiceObject("Service.AppManager", "IAppManager");&lt;/pre&gt;
+	</description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+
+    <methods>
+
+      <!-- GetList(criteria) -->
+      <method name="GetList" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+			The &lt;code&gt;GetList&lt;/code&gt; method retrieves an iterable list of either user-installed applications or all applications on the mobile device, regardless of whether they were preinstalled or installed by the user. 
+			This is a synchronous method.
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+				This is an object that specifies what information is returned about the applications on the device.
+            </description>
+          </parameter>
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+      <!-- Cancel(criteria); -->
+      <method name="Cancel" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+			The &lt;code&gt;Cancel&lt;/code&gt; method cancels an outstanding asynchronous call. 
+			If a cancel is sent, but the asynchronous call has already been completed, then &lt;code&gt;result.Errorcode&lt;/code&gt; is set to 0 (success).
+			This is a synchronous method.
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+				This is an object with the &lt;code&gt;TransactionID&lt;/code&gt; property (number). 
+				&lt;code&gt;criteria.TransactionID&lt;/code&gt; specifies the transaction ID of the asynchronous call to cancel. 
+				The transaction ID is the result.TransactionID value that was returned as part of the result of the initial call. 
+            </description>
+          </parameter>
+
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+      <!-- LaunchApp(criteria); -->
+      <method name="LaunchApp" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+			The &lt;code&gt;LaunchApp&lt;/code&gt; method launches an application based on a unique ID for the application (UID). 
+			It also provides a way to open a specific document (by specifying a document path), even if it is not the default file type for the application being launched. 
+			For example, you can specify a path to a document with a .txt extension to open in WordPad, even though Notepad is the default application for .txt files.
+			The application can be launched as chained (embedded) or stand-alone. 
+
+			This method can be called both synchronously and asynchronously.
+        </description>
+
+        <parameters>
+        	
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+				The criteria object specifies the application to launch.
+				The criteria object has three main properties: ApplicationID, CmdLine, and Options
+            </description>
+          </parameter>
+
+		  <parameter name="callback" type="Function" usage="optional">
+            <description>
+				The callback argument is the name of the method that is executed when an asynchronous LaunchApp call has status information to return. You must define this method separately. 
+				This argument is used only with an asynchronous LaunchApp call.
+            </description>
+		  </parameter>
+
+
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+      
+      <!-- LaunchDoc(criteria);-->
+      <method name="LaunchDoc" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+			The &lt;code&gt;LaunchDoc&lt;/code&gt; method launches an application based on a given document. 
+			This method automatically determines which application to launch for the specified document. 
+			The application can be launched as chained (embedded) or stand-alone.
+			
+			This method can be called both synchronously and asynchronously.
+        </description>
+
+        <parameters>
+        	
+          <parameter name="criteria" type="criteria" usage="required">
+            <description>
+            	This is an object that specifies which application to launch. 
+            </description>
+          </parameter>
+
+		  <parameter name="callback" type="Function" usage="optional">
+            <description>
+			The callback argument is the name of the method that is executed when an asynchronous LaunchDoc call has status information to return. You must define this method separately.				
+			This argument is used only with an asynchronous LaunchDoc call.
+            </description>
+		  </parameter>
+
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+      
+    </methods>
+
+  </class>
+  <!-- end of IAppManager -->
+  
+	<!-- IMessaging interface  -->
+	<class type="IMessaging">
+
+    	<description>
+	&lt;p&gt;The Messaging Service API allows widgets to send, retrieve, and manage messages using the Messaging Center of a device.&lt;/p&gt; 
+	&lt;p&gt;The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+
+	&lt;p&gt;To use the Messaging Service API, your widget must first createa service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+	&lt;p&gt;Use &lt;code&gt;Service.Messaging&lt;/code&gt; to identify the service provider and &lt;code&gt;IMessaging&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+
+		&lt;pre&gt;var so = device.getServiceObject("Service.Messaging", "IMessaging");&lt;/pre&gt;
+		</description>
+
+    	<browsers>
+      		<browser platform="Nokia WRT" version="1.1+" />
+    	</browsers>
+
+    	<constructors/>
+
+		<methods>
+			<!-- GetList(criteria)-->
+			<method name="GetList" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="result"/>
+				</return-types>
+				
+				<description>
+					The &lt;code&gt;GetList&lt;/code&gt; method retrieves a list of messaging objects from the Messaging Center of the S60 device. 
+					Each object contains messaging information, that is, header and content data for a single message. 
+					This is a synchronous method. 
+					The criteria object specifies what messaging information is returned and how the returned information is sorted. 
+					The GetList method returns an object that contains the requested messaging information, an error code, and an error message. 
+					To access information about individual messages, iterate through the list of objects contained in ReturnValue attribute of the returned object.
+				</description>
+
+				<parameters>
+					<parameter name="criteria" type="object" usage="required">
+						<description>
+							This is an object that specifies the search criteria. 
+						</description>
+          			</parameter>
+        		</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+
+	  		<!-- RegisterNotification(criteria, callback)-->
+      		<method name="RegisterNotification" scope="instance" visibility="basic">
+        		<return-types>
+          			<return-type type="result"/>
+        		</return-types>
+        
+        		<description>
+					&lt;p&gt;
+					The &lt;code&gt;RegisterNotification&lt;/code&gt; method registers the widget to receive notifications of new incoming messages. 
+					For each new message, the method returns the header information of that message. 
+					This is an asynchronous method.
+					&lt;/p&gt;
+					
+					&lt;pre&gt;result = so.IMessaging.RegisterNotification(criteria, callback);&lt;/pre&gt;
+			
+					&lt;p&gt;
+					Criteria object that specifies the request for notification of new messages. 
+					The object must contain the Type property (string), and this property must contain the value &lt;code&gt;NewMessage&lt;/code&gt;. 
+					The callback argument is the name of the method that is executed when &lt;code&gt;RegisterNotification&lt;/code&gt; has results or status information to return. 
+					You must define this method separately. 
+					The &lt;code&gt;RegisterNotification&lt;/code&gt; method returns an object that contains the initial return value for the asynchronous call it started. 
+					The actual notification information is returned by the callback method in the ReturnValue property of its result object.
+					&lt;code&gt;RegisterNotification&lt;/code&gt; retrieves new message updates until cancelled with &lt;code&gt;CancelNotification&lt;/code&gt; (or &lt;code&gt;Cancel&lt;/code&gt;). 
+					You can therefore have only one &lt;code&gt;RegisterNotification&lt;/code&gt; call (one instance) pending or in use at any given time.
+					&lt;/p&gt;
+        		</description>
+
+        		<parameters>
+          			<parameter name="criteria" type="object" usage="required">
+            			<description>
+							Criteria object specifies the type and details of the message to send. 
+						</description>
+          			</parameter>
+          			<parameter name="callback" type="function" usage="required">
+            			<description>
+							The callback argument is the name of the method that is executed when an asynchronous Send call has status information to return. You must define this method separately.
+            			</description>
+          			</parameter>
+        		</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+			
+	  		<!-- CancelNotification(criteria) -->
+      		<method name="CancelNotification" scope="instance" visibility="basic">
+        		<return-types>
+          			<return-type type="result"/>
+        		</return-types>
+
+        		<description>
+					&lt;p&gt;
+					The &lt;code&gt;CancelNotification&lt;/code&gt; method cancels notification of new incoming messages. 
+					This is a synchronous method.
+					&lt;/p&gt;
+					
+					&lt;pre&gt;result = so.IMessaging.CancelNotification(criteria);&lt;/pre&gt;
+
+					&lt;p&gt;
+					The criteria object specifies the request for cancelling notification of new messages. 
+					The object must contain the Type property (string), and this property must contain the value &lt;code&gt;NewMessage&lt;/code&gt;. 
+					The &lt;code&gt;CancelNotification&lt;/code&gt; method returns an object that contains an error code and an error message.
+					&lt;/p&gt;
+        		</description>
+
+        		<parameters>
+          			<parameter name="criteria" type="object" usage="required">
+            			<description>
+			The criteria object specifies the request for cancelling notification of new messages. The object must contain the Type property (string), and this property must contain the value "NewMessage". 
+            			</description>
+          			</parameter>
+        		</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+
+	  		<!-- Send(criteria, callback)-->
+      		<method name="Send" scope="instance" visibility="basic">
+        		<return-types>
+          			<return-type type="result"/>
+        		</return-types>
+        
+        		<description>
+		&lt;p&gt;
+		The &lt;code&gt;Send&lt;/code&gt; method sends an SMS or MMS message. 
+		This method can be called both synchronously and asynchronously. 
+		&lt;/p&gt;
+		
+		&lt;p&gt;
+		For synchronous calls: 
+		&lt;/p&gt;
+		
+		&lt;pre&gt;result = so.IMessaging.Send(criteria);&lt;/pre&gt;
+		
+		&lt;p&gt;	
+		For asynchronous calls:
+		&lt;/p&gt;
+		
+		&lt;pre&gt;result = so.IMessaging.Send(criteria, callback);&lt;/pre&gt;
+		
+		&lt;p&gt;	
+		Criteria object specifies the type and details of the message to send. 
+		The callback argument is the name of the method that is executed when an asynchronous &lt;code&gt;Send&lt;/code&gt; call has status information to return. 
+		You must define this method separately.
+		If synchronous, the method returns an object that contains an error code and an error message. 
+		If asynchronous, the method returns an object that contains a transaction ID for the callback instance, an error code, and an error message. 
+		When the asynchronous call has completed, callback returns an object that contains an error code and an error message.
+		&lt;/p&gt;
+        		</description>
+
+        		<parameters>
+          			<parameter name="criteria" type="object" usage="required">
+            			<description>
+							Criteria object specifies the type and details of the message to send. 
+						</description>
+          			</parameter>
+          			<parameter name="callback" type="function" usage="optional">
+            			<description>
+							The callback argument is the name of the method that is executed when an asynchronous Send call has status information to return. You must define this method separately.
+            			</description>
+          			</parameter>
+        		</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+
+      		<!-- Cancel(criteria) -->
+      		<method name="Cancel" scope="instance" visibility="basic">
+        <return-types>
+          <return-type type="result"/>
+        </return-types>
+
+        <description>
+		The &lt;code&gt;Cancel&lt;/code&gt; method cancels an outstanding asynchronous &lt;code&gt;Send&lt;/code&gt; or &lt;code&gt;RegisterNotification&lt;/code&gt; call. 
+		To cancel a &lt;code&gt;RegisterNotification&lt;/code&gt; call, use &lt;code&gt;CancelNotification&lt;/code&gt; instead, as it provides a more convenient way of doing this. 
+		This is a synchronous method. 
+		The criteria object has &lt;code&gt;TransactionID&lt;/code&gt; property which specifies the transaction ID of the &lt;code&gt;Send&lt;/code&gt; or &lt;code&gt;RegisterNotification&lt;/code&gt; call to cancel. 
+		The transaction ID is the same &lt;code&gt;TransactionID&lt;/code&gt; value that was returned as part of the result of the initial call. 
+		The &lt;code&gt;Cancel&lt;/code&gt; method returns an object that contains an error code and an error message.
+        </description>
+
+        <parameters>
+          <parameter name="criteria" type="object" usage="required">
+            <description>
+			The criteria object has TransactionID property which specifies the transaction ID of the Send or RegisterNotification call to cancel. The transaction ID is the same TransactionID value that was returned as part of the result of the initial call.
+            </description>
+          </parameter>
+        </parameters>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+      </method>
+
+		<!-- ChangeStatus(criteria) -->
+		<method name="ChangeStatus" scope="instance" visibility="basic">
+		
+			<return-types>
+				<return-type type="result"/>
+			</return-types>
+
+    	    <description>
+		&lt;p&gt;
+			The &lt;code&gt;ChangeStatus&lt;/code&gt; method changes the read status of a message. 
+			The status can be "Read", "Unread", "Replied", or "Forwarded".
+			This is a synchronous method.
+		&lt;/p&gt;
+		
+		&lt;pre&gt;result = so.IMessaging.ChangeStatus(criteria);&lt;/pre&gt;
+		
+		&lt;p&gt;	
+		Criteria object specifies the message whose status to change and the new status. 
+		The &lt;code&gt;ChangeStatus&lt;/code&gt; method returns an object that contains an error code and an error message.
+		&lt;/p&gt;
+        	</description>
+
+				<parameters>
+					<parameter name="criteria" type="object" usage="required">
+						<description>
+						Criteria object specifies the message whose status to change and the new status. The ChangeStatus method returns an object that contains an error code and an error message.
+						</description>
+					</parameter>
+				</parameters>
+		
+				<browsers>
+					<browser platform="Nokia WRT" version="1.1+" />
+				</browsers>
+		
+			</method>
+
+			<!-- Delete (criteria)-->
+			<method name="Delete" scope="instance" visibility="basic">
+
+				<return-types>
+					<return-type type="result"/>
+				</return-types>
+        
+				<description>
+		&lt;p&gt;
+			The &lt;code&gt;Delete&lt;/code&gt; method deletes a message.
+			This is a synchronous method.
+		&lt;/p&gt;	
+		
+		&lt;pre&gt;result = so.IMessaging.Delete(criteria);&lt;/pre&gt;
+		
+		&lt;p&gt;
+			The criteria object has &lt;code&gt;messageId&lt;/code&gt; attribute that specifies the message to delete. 
+			The &lt;code&gt;Delete&lt;/code&gt; method returns an object that contains an error code and an error message.
+		&lt;/p&gt;
+				</description>
+
+				<parameters>
+					<parameter name="criteria" type="object" usage="required">
+						<description>
+						The criteria object has messageId attribute that specifies the message to delete.  
+						</description>
+					</parameter>
+				</parameters>
+				
+				<browsers>
+					<browser platform="Nokia WRT" version="1.1+" />
+				</browsers>
+			</method>
+		</methods>        
+
+	</class>  
+	<!-- end of IMessaging -->
+
+	<!-- ISysInfo interface  -->
+	<class type="ISysInfo">
+
+    	<description>
+			&lt;p&gt;The SystemInfo Service API allows widgets to access and modify system information on a device.&lt;/p&gt; 
+			&lt;p&gt;The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+			&lt;p&gt;To use the SystemInfo Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+			&lt;p&gt;Use &lt;code&gt;Service.SysInfo&lt;/code&gt; to identify the service provider and &lt;code&gt;ISysInfo&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+			&lt;pre&gt;var so = device.getServiceObject("Service.SysInfo", "ISysInfo");&lt;/pre&gt;
+		</description>
+
+    	<browsers>
+      		<browser platform="Nokia WRT" version="1.1+" />
+    	</browsers>
+
+    	<constructors/>
+
+		<methods>
+			<!-- GetInfo(criteria, callback); -->
+			<method name="GetInfo" scope="instance" visibility="basic">
+				<return-types>
+					<return-type type="result"/>
+				</return-types>
+
+				<description>
+					The &lt;code&gt;GetInfo&lt;/code&gt; method retrieves information about a system attribute.
+					This method can be called both synchronously and asynchronously.
+				</description>
+
+				<parameters>
+					<parameter name="criteria" type="object" usage="required">
+						<description>
+							This is an object that specifies the search criteria. 
+						</description>
+          			</parameter>
+					
+          			<parameter name="callback" type="function" usage="optional">
+            			<description>
+							The callback argument is the name of the method that is executed when an asynchronous Send call has status information to return. You must define this method separately.
+            			</description>
+          			</parameter>
+
+        		</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+
+	  		<!-- SetInfo(criteria); -->
+      		<method name="SetInfo" scope="instance" visibility="basic">
+        		<return-types>
+          			<return-type type="result"/>
+        		</return-types>
+        
+        		<description>
+					The &lt;code&gt;SetInfo&lt;/code&gt; method modifies the value of a system attribute.
+					This is a synchronous method.
+        		</description>
+
+        		<parameters>
+          			<parameter name="criteria" type="object" usage="required">
+            			<description>
+							This is an object that specifies the new value for the system attribute. 
+						</description>
+          			</parameter>
+        		</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+			
+	  		<!-- GetNotification(criteria, callback); -->
+      		<method name="GetNotification" scope="instance" visibility="basic">
+        		<return-types>
+          			<return-type type="result"/>
+        		</return-types>
+
+        		<description>
+					The &lt;code&gt;GetNotification&lt;/code&gt; method notifies the client when the value of a system attribute is changed.
+					This is an asynchronous method.
+        		</description>
+
+        		<parameters>
+          			<parameter name="criteria" type="object" usage="required">
+            			<description>
+							This is an object that specifies the system attribute to monitor for changes.  
+            			</description>
+          			</parameter>
+					
+          			<parameter name="callback" type="function" usage="required">
+            			<description>
+							The callback argument is the name of the method that is executed when a GetNotification call has results or status information to return.
+            			</description>
+          			</parameter>
+        		</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+
+      		<!-- Cancel(criteria) -->
+			<method name="Cancel" scope="instance" visibility="basic">
+				
+				<return-types>
+					<return-type type="result"/>
+				</return-types>
+
+				<description>
+					The &lt;code&gt;Cancel&lt;/code&gt; method cancels an ongoing asynchronous call made with a SystemInfo Service API method.
+					This is a synchronous method.
+		        </description>
+
+				<parameters>
+					<parameter name="criteria" type="object" usage="required">
+						<description>
+							This is an object with the TransactionID property (number). criteria.TransactionID specifies the transaction ID of the asynchronous call to cancel. The transaction ID is the result.TransactionID value that was returned as part of the result of the initial call.
+						</description>
+					</parameter>
+				</parameters>
+        		<browsers>
+          			<browser platform="Nokia WRT" version="1.1+" />
+        		</browsers>
+      		</method>
+		</methods>        
+	</class>  
+	<!-- end of ISysInfo -->
+
+	<!-- ILocation API -->
+	<class type="ILocation">
+	
+	    <description>
+	&lt;p&gt;The Location Service API allows widgets to retrieve information about the physical location of a device and to perform calculations based on location information.&lt;/p&gt; 
+	&lt;p&gt;The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+
+	&lt;p&gt;To use the Location Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+	&lt;p&gt;Use &lt;code&gt;Service.Location&lt;/code&gt; to identify the service provider and &lt;code&gt;ILocation&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+
+		&lt;pre&gt;var so = device.getServiceObject("Service.Location", "ILocation");&lt;/pre&gt;
+		</description>
+	
+	    <browsers>
+	      <browser platform="Nokia WRT" version="1.1+" />
+	    </browsers>
+	
+	    <constructors/>
+	
+	    <methods>
+	      
+	      <!--  GetLocation(criteria, callback) -->
+	      <method name="GetLocation" scope="instance" visibility="basic">
+	        <return-types>
+	          <return-type type="result"/>
+	        </return-types>
+	        
+	        <description>
+			&lt;p&gt;
+			The &lt;code&gt;GetLocation&lt;/code&gt; method retrieves the current location of the device. 
+			This method can be called both synchronously and asynchronously. 
+			&lt;/p&gt;
+			
+			&lt;p&gt;
+			For synchronous calls:
+			&lt;/p&gt;
+			&lt;pre&gt;result = so.ILocation.GetLocation(criteria);&lt;/pre&gt;
+			
+			&lt;p&gt;	
+			For asynchronous calls:
+			&lt;/p&gt;
+			&lt;pre&gt;result = so.ILocation.GetLocation(criteria, callback);&lt;/pre&gt;
+	
+			&lt;p&gt;
+			If synchronous, the &lt;code&gt;GetLocation&lt;/code&gt; method returns an object that contains the requested location information, an error code, and an error message. 
+			If asynchronous, the &lt;code&gt;GetLocation&lt;/code&gt; method returns an object that contains the initial return value for the asynchronous call it started. 
+			The actual location information is returned by the callback method in the ReturnValue property of its result object. 
+			The availability of specific location information depends on the underlying GPS technology. 
+			Other factors, such as the number of satellites available for a location fix, also affect what information can be returned. 
+			You can change the positioning system used by an S60 device from the Settings > General > Positioning > Positioning methods menu. 
+			It takes time to retrieve the initial position fix. Subsequent requests are faster.
+			This criteria object specifies what type of device location information is returned and how.
+			The callback argument is the name of the method that is executed when an asynchronous GetLocation call has results or status information to return. 
+			You must define this method separately. 
+			This argument is used only with an asynchronous &lt;code&gt;GetLocation&lt;/code&gt; call. 
+			For more information about the criteria and returned object properties and how to define them refer to WDL Help documentation.
+			&lt;/p&gt;
+	        </description>
+	
+	        <parameters>
+	          <parameter name="criteria" type="object" usage="required">
+	            <description>
+				This is an object that specifies what type of device location information is returned and how.
+	            </description>
+	          </parameter>
+	          <parameter name="callback" type="function" usage="optional">
+	            <description>
+				The callback argument is the name of the method that is executed when an asynchronous GetLocation call has results or status information to return. You must define this method separately. This argument is used only with an asynchronous GetLocation call.
+	            </description>
+	          </parameter>
+	        </parameters>
+	        <browsers>
+	          <browser platform="Nokia WRT" version="1.1+" />
+	        </browsers>
+	      </method>
+	
+		  <!--Trace(criteria, callback)-->
+	      <method name="Trace" scope="instance" visibility="basic">
+	        <return-types>
+	          <return-type type="result"/>
+	        </return-types>
+	        
+	        <description>
+			&lt;p&gt;
+			The &lt;code&gt;Trace&lt;/code&gt; method retrieves periodic updates about the current location of the device based on a predefined update interval. 
+			This is an asynchronous method. 
+			&lt;/p&gt;
+			
+			&lt;pre&gt;result = so.ILocation.Trace(criteria, callback);&lt;/pre&gt;
+			
+			&lt;p&gt;
+			The &lt;code&gt;Trace&lt;/code&gt; method returns an object that contains the initial return value for the asynchronous call it started. 
+			The actual location information is returned by the callback method in the ReturnValue property of its result object.
+			&lt;/p&gt;
+			
+			&lt;p&gt;
+			&lt;code&gt;Trace&lt;/code&gt; retrieves location updates until cancelled with &lt;code&gt;CancelNotification&lt;/code&gt;. 
+			You can therefore have only one &lt;code&gt;Trace&lt;/code&gt; call (one instance) pending or in use at any given time. 
+			The availability of specific location information depends on the underlying GPS technology. 
+			Other factors, such as the number of satellites available for a location fix, also affect what information can be returned. 
+			You can change the positioning system used by an S60 device from the Settings > General > Positioning > Positioning methods menu. 
+			It takes time to retrieve the initial position fix. Subsequent requests are faster.
+			The criteria object specifies what type of device location information is returned and how. Note that these input properties are similar to what the GetLocation method uses. 
+			The callback argument is the name of the method that is executed when Trace has results or status information to return. You must define this method separately.
+			For more information about the criteria and returned object properties and how to define them refer to WDL Help documentation.
+			&lt;/p&gt;
+	        </description>
+	
+	        <parameters>
+	          <parameter name="criteria" type="object" usage="required">
+	            <description>
+				This is an object that specifies what type of device location information is returned and how. Note that these input properties are similar to what the GetLocation method uses.</description>
+	          </parameter>
+	          <parameter name="callback" type="function" usage="required">
+	            <description>
+				The callback argument is the name of the method that is executed when Trace has results or status information to return. You must define this method separately.
+	            </description>
+	          </parameter>
+	        </parameters>
+	        <browsers>
+	          <browser platform="Nokia WRT" version="1.1+" />
+	        </browsers>
+	      </method>
+	
+	      <!-- Calculate(criteria) -->
+	      <method name="Calculate" scope="instance" visibility="basic">
+	        <return-types>
+	          <return-type type="result"/>
+	        </return-types>
+	
+	        <description>
+			&lt;p&gt;
+			The &lt;code&gt;Calculate&lt;/code&gt; method performs mathematical calculations based on a source location and a target location. 
+			This is a synchronous method.
+			&lt;/p&gt;
+			
+			&lt;pre&gt;result = so.ILocation.Calculate(criteria);&lt;/pre&gt;
+			
+			&lt;p&gt;
+			The &lt;code&gt;Calculate&lt;/code&gt; method returns an object that contains the calculation results, an error code, and an error message. 
+			The criteria object specifies the mathematical operation to perform and the input values to use in the operation. 
+			For more information about the criteria and returned object properties and how to define them refer to WDL Help documentation.
+			&lt;/p&gt;
+	        </description>
+	
+	        <parameters>
+	          <parameter name="criteria" type="Object" usage="required">
+	            <description>
+				This is an object that specifies the mathematical operation to perform and the input values to use in the operation.
+				</description>
+	          </parameter>
+	        </parameters>
+	        <browsers>
+	          <browser platform="Nokia WRT" version="1.1+" />
+	        </browsers>
+	      </method>
+	
+	      <!-- CancelNotification(criteria) -->
+	      <method name="CancelNotification" scope="instance" visibility="basic">
+	        <return-types>
+	          <return-type type="result"/>
+	        </return-types>
+	
+	        <description>
+			&lt;p&gt;
+			The &lt;code&gt;CancelNotification&lt;/code&gt; method cancels an outstanding asynchronous call. 
+			This is a synchronous method.
+			&lt;/p&gt; 
+			
+			&lt;pre&gt;result = so.ILocation.CancelNotification(criteria);&lt;/pre&gt;
+			
+			&lt;p&gt;
+			The criteria object specifies whether to cancel a GetLocation call or a Trace call. 
+			The object must contain the &lt;code&gt;CancelRequestType&lt;/code&gt; property (string) that is used to specify the type of call to cancel.
+			&lt;/p&gt;
+			
+			&lt;p&gt; 
+			The possible values for &lt;code&gt;criteria.CancelRequestType&lt;/code&gt; are:
+			&lt;ul&gt; 
+				&lt;li&gt;&lt;code&gt;GetLocCancel&lt;/code&gt; cancels an asynchronous &lt;code&gt;GetLocation&lt;/code&gt; call.&lt;/li&gt; 
+				&lt;li&gt;&lt;code&gt;TraceCancel&lt;/code&gt; cancels a &lt;code&gt;Trace&lt;/code&gt; call.&lt;/li&gt; 
+			&lt;/ul&gt;
+			&lt;/p&gt;
+			
+			&lt;p&gt;	
+			The &lt;code&gt;CancelNotification&lt;/code&gt; method returns an object that contains an error code and an error message. 
+			For more information about the criteria and returned object properties and how to define them refer to WDL Help documentation.
+			&lt;/p&gt; 
+	        </description>
+	
+	        <parameters>
+	          <parameter name="criteria" type="object" usage="required">
+	            <description>
+				This is an object that specifies whether to cancel a GetLocation call or a Trace call. The object must contain the CancelRequestType property (string) that is used to specify the type of call to cancel. The possible values for criteria.CancelRequestType are: "GetLocCancel" cancels an asynchronous GetLocation call. "TraceCancel" cancels a Trace call.
+	            </description>
+	          </parameter>
+	        </parameters>
+	        <browsers>
+	          <browser platform="Nokia WRT" version="1.1+" />
+	        </browsers>
+	      </method>
+	
+	    </methods>        
+	
+	  </class>  
+	<!-- end of ILocation API -->
+
+	<!-- ISensor interface  -->
+	<class type="ISensor">
+
+    	<description>
+	&lt;p&gt;
+	The Sensor Service API allows widgets to access data provided by the physical sensors of a device.
+	&lt;/p&gt; 
+	&lt;p&gt;
+	The data from a given sensor is mapped to one or more sensor channels, which the API can listen to. 
+	The available sensors depend on the device.
+	&lt;/p&gt; 
+	&lt;p&gt;
+	The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.
+	&lt;/p&gt; 
+	&lt;p&gt;
+	To use the Sensor Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.
+	&lt;/p&gt; 
+	&lt;p&gt;
+	Use &lt;code&gt;Service.Sensor&lt;/code&gt; to identify the service provider and &lt;code&gt;ISensor&lt;/code&gt; to identify the supported interface:
+	&lt;/p&gt;
+	 
+	&lt;pre&gt;so = device.getServiceObject("Service.Sensor", "ISensor");&lt;/pre&gt;	
+		</description>
+
+    	<browsers>
+      		<browser platform="Nokia WRT" version="1.1+" />
+    	</browsers>
+
+    	<constructors/>
+
+    	<methods>
+      
+	  	<!-- FindSensorChannel (criteria)-->
+      	<method name="FindSensorChannel" scope="instance" visibility="basic">
+        	<return-types>
+          		<return-type type="result"/>
+        	</return-types>
+        
+        	<description>
+		&lt;p&gt;
+		The &lt;code&gt;FindSensorChannel&lt;/code&gt; method searches for sensor channels available on the device. 
+		This is a synchronous method.
+		&lt;/p&gt;
+		 
+		&lt;pre&gt;result = so.ISensor.FindSensorChannel(criteria);&lt;/pre&gt;
+		
+		&lt;p&gt;
+		The criteria object specifies the search criteria. 
+		The &lt;code&gt;FindSensorChannel&lt;/code&gt; method returns an object that contains the requested sensor channel information, an error code, and an error message.
+		&lt;/p&gt;
+        	</description>
+
+        	<parameters>
+          		<parameter name="criteria" type="object" usage="required">
+            		<description>
+						This is an object that specifies the search criteria. 
+					</description>
+          		</parameter>
+        	</parameters>
+			
+        	<browsers>
+          		<browser platform="Nokia WRT" version="1.1+" />
+        	</browsers>
+			
+      	</method>
+
+	  	<!-- RegisterForNotification(criteria, callback)-->
+      	<method name="RegisterForNotification" scope="instance" visibility="basic">
+        	<return-types>
+          		<return-type type="result"/>
+        	</return-types>
+        
+        	<description>
+		&lt;p&gt;
+		The &lt;code&gt;RegisterForNotification&lt;/code&gt; method registers the client to receive data from one sensor channel. 
+		This is an asynchronous method.
+		&lt;/p&gt;
+		
+		&lt;pre&gt;result = so.ISensor.RegisterForNotification(criteria, callback);&lt;/pre&gt;
+		
+		&lt;p&gt;
+		The &lt;code&gt;RegisterForNotification&lt;/code&gt; method returns an object that contains the initial return value for the asynchronous call it started. 
+		The actual sensor data is returned by the callback method in the ReturnValue property of its result object.
+		&lt;/p&gt;
+        	</description>
+
+        	<parameters>
+          		<parameter name="criteria" type="object" usage="required">
+            		<description>
+			This is an object that specifies the sensor channel to listen for data. 
+					</description>
+          		</parameter>
+          		<parameter name="callback" type="function" usage="required">
+            		<description>
+						The callback argument is the name of the method that is executed when a RegisterForNotification call has results or status information to return. You must define this method separately.
+            		</description>
+          		</parameter>
+        	</parameters>
+        	<browsers>
+          		<browser platform="Nokia WRT" version="1.1+" />
+        	</browsers>
+      </method>
+
+	      <!-- Cancel(criteria) -->
+	      <method name="Cancel" scope="instance" visibility="basic">
+	        <return-types>
+	          <return-type type="result"/>
+	        </return-types>
+	
+	        <description>
+			&lt;p&gt;
+			The &lt;code&gt;Cancel&lt;/code&gt; method stops an ongoing &lt;code&gt;RegisterForNotification&lt;/code&gt; call. 
+			This is a synchronous method.
+			&lt;/p&gt;
+			
+			&lt;pre&gt;result = so.ISensor.Cancel(criteria);&lt;/pre&gt;
+			
+			&lt;p&gt;
+			The criteria object has the &lt;code&gt;TransactionID&lt;/code&gt; property which specifies the transaction ID of the &lt;code&gt;RegisterForNotification&lt;/code&gt; call to cancel. 
+			The transaction ID is the value that was returned as part of the result of the initial call. 
+			The &lt;code&gt;Cancel&lt;/code&gt; method returns an object that contains an error code and an error message.
+			&lt;/p&gt;
+	        </description>
+	
+	        <parameters>
+	          <parameter name="criteria" type="object" usage="required">
+	            <description>
+				This is an object with the TransactionID property (number). criteria.TransactionID specifies the transaction ID of the RegisterForNotification call to cancel. The transaction ID is the result.TransactionID value that was returned as part of the result of the initial call.
+	            </description>
+	          </parameter>
+	        </parameters>
+	        <browsers>
+	          <browser platform="Nokia WRT" version="1.1+" />
+	        </browsers>
+	      </method>
+	
+		  <!-- GetChannelProperty (criteria)-->
+	      <method name="GetChannelProperty" scope="instance" visibility="basic">
+	        <return-types>
+	          <return-type type="result"/>
+	        </return-types>
+	        
+	        <description>
+			&lt;p&gt;
+			The &lt;code&gt;GetChannelProperty&lt;/code&gt; method retrieves information about a sensor channel property. 
+			This is a synchronous method.
+			&lt;/p&gt;
+			 
+			&lt;pre&gt;result = so.ISensor.GetChannelProperty(criteria);&lt;/pre&gt;
+			
+			&lt;p&gt;
+			This is an object that specifies which sensor channel property to retrieve information about. 
+			The &lt;code&gt;GetChannelProperty&lt;/code&gt; method returns an object that contains the requested channel property information, an error code, and an error message.
+			&lt;/p&gt;
+			
+	        </description>
+	
+	        <parameters>
+	          <parameter name="criteria" type="object" usage="required">
+	            <description>
+				This is an object that specifies which sensor channel property to retrieve information about. 
+				</description>
+	          </parameter>
+	        </parameters>
+	        <browsers>
+	          <browser platform="Nokia WRT" version="1.1+" />
+	        </browsers>
+	      </method>
+		  
+		</methods>        
+
+ 	</class>  
+	<!-- end of ISensor  -->
+
+  <!-- serviceObject  -->
+  <class type="serviceObject">
+    <description>
+      Service Object
+    </description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+
+    <constructors>
+      <constructor scope="instance">
+        <description>Service Object</description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+        <parameters/>
+        <return-types>
+          <return-type type="serviceObject"/>
+        </return-types>
+      </constructor>
+    </constructors>
+
+    <properties>
+
+      <property name="IDataSource" type="IDataSource" scope="instance" access="read-write" visibility="basic">
+        <description>
+    	This Service API allows widgets to:
+		&lt;p&gt;
+		&lt;ul&gt;
+		 	&lt;li&gt;access, create, and manage calendars/calendar entries,&lt;/li&gt;
+			&lt;li&gt;access and manage information about contacts,&lt;/li&gt;
+			&lt;li&gt;access and manage information about landmarks and landmark categories,&lt;/li&gt;
+			&lt;li&gt;add, read, and delete logging events such as call logs, messaging logs, and so forth,&lt;/li&gt;
+			&lt;li&gt;retrieve information (metadata) about the media files stored in the Media Gallery of a device.&lt;/li&gt;
+		&lt;/ul&gt;
+		&lt;/p&gt;
+		&lt;p&gt;
+		To use the &lt;code&gt;IDataSource&lt;/code&gt; Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.
+		&lt;/p&gt;
+		&lt;p&gt; 
+		Use &lt;code&gt;Service.Calendar&lt;/code&gt; or &lt;code&gt;Service.Contact&lt;/code&gt; or &lt;code&gt;Service.Landmarks&lt;/code&gt; or &lt;code&gt;Service.Logging&lt;/code&gt; or &lt;code&gt;Service.MediaManagement&lt;/code&gt; to identify the service provider and &lt;code&gt;IDataSource&lt;/code&gt; to identify the supported interface:
+		&lt;/p&gt;
+		
+		&lt;pre&gt;var so = device.getServiceObject("Service.Calendar", "IDataSource");&lt;/pre&gt;		
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="IAppManager" type="IAppManager" scope="instance" access="read-write" visibility="basic">
+        <description>
+    	&lt;p&gt;The AppManager Service API allows widgets to access and launch applications on a mobile device.&lt;/p&gt;
+		&lt;p&gt;The API is integrated with WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+		&lt;p&gt;To use the AppManager Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+		&lt;p&gt;Use &lt;code&gt;Service.AppManager&lt;/code&gt; to identify the service provider and &lt;code&gt;IAppManager&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+
+		&lt;pre&gt;var so = device.getServiceObject("Service.AppManager", "IAppManager");&lt;/pre&gt;
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="IMessaging" type="IMessaging" scope="instance" access="read-write" visibility="basic">
+        <description>
+	&lt;p&gt;The Messaging Service API allows widgets to send, retrieve, and manage messages using the Messaging Center of a device.&lt;/p&gt; 
+	&lt;p&gt;The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+
+	&lt;p&gt;To use the Messaging Service API, your widget must first createa service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+	&lt;p&gt;Use &lt;code&gt;Service.Messaging&lt;/code&gt; to identify the service provider and &lt;code&gt;IMessaging&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+
+		&lt;pre&gt;var so = device.getServiceObject("Service.Messaging", "IMessaging");&lt;/pre&gt;
+
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="ISysInfo" type="ISysInfo" scope="instance" access="read-write" visibility="basic">
+        <description>
+			&lt;p&gt;The SystemInfo Service API allows widgets to access and modify system information on a device.&lt;/p&gt; 
+			&lt;p&gt;The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+			&lt;p&gt;To use the SystemInfo Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+			&lt;p&gt;Use &lt;code&gt;Service.SysInfo&lt;/code&gt; to identify the service provider and &lt;code&gt;ISysInfo&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+			&lt;pre&gt;var so = device.getServiceObject("Service.SysInfo", "ISysInfo");&lt;/pre&gt;
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+      <property name="ILocation" type="ILocation" scope="instance" access="read-write" visibility="basic">
+        <description>
+	&lt;p&gt;The Location Service API allows widgets to retrieve information about the physical location of a device and to perform calculations based on location information.&lt;/p&gt; 
+	&lt;p&gt;The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt;
+
+	&lt;p&gt;To use the Location Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+	&lt;p&gt;Use &lt;code&gt;Service.Location&lt;/code&gt; to identify the service provider and &lt;code&gt;ILocation&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+
+		&lt;pre&gt;var so = device.getServiceObject("Service.Location", "ILocation");&lt;/pre&gt;
+ 
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+	  
+	  <property name="ISensor" type="ISensor" scope="instance" access="read-write" visibility="basic">
+        <description>
+	&lt;p&gt;The Sensor Service API allows widgets to access data provided by the physical sensors of a device.&lt;/p&gt; 
+	&lt;p&gt;The data from a given sensor is mapped to one or more sensor channels, which the API can listen to. 
+	The available sensors depend on the device.&lt;/p&gt; 
+	&lt;p&gt;The API is integrated into WRT through the &lt;code&gt;device&lt;/code&gt; object.&lt;/p&gt; 
+	&lt;p&gt;To use the Sensor Service API, your widget must first create a service object for it using the &lt;code&gt;device.getServiceObject()&lt;/code&gt; method.&lt;/p&gt; 
+	&lt;p&gt;Use &lt;code&gt;Service.Sensor&lt;/code&gt; to identify the service provider and &lt;code&gt;ISensor&lt;/code&gt; to identify the supported interface:&lt;/p&gt;
+	 
+	&lt;pre&gt;so = device.getServiceObject("Service.Sensor", "ISensor");&lt;/pre&gt;	  
+        </description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+      </property>
+
+    </properties>
+  </class>
+  <!-- end of serviceObject  -->
+  
+  <!-- Device -->
+  <class type="device">
+
+    <description>
+		The &lt;code&gt;device&lt;/code&gt; object is a built-in JavaScript object in the widget engine. 
+		It was introduced in WRT 1.1 to allow widgets access to S60 Platform Services through Service APIs. 
+		The &lt;code&gt;device&lt;/code&gt; object is used to create service objects for specific Service APIs. 
+		These service objects can then be used to access the services made available through the Service APIs.	
+	</description>
+
+    <browsers>
+      <browser platform="Nokia WRT" version="1.1+" />
+    </browsers>
+
+
+    <constructors>
+      <constructor scope="instance">
+		<description>
+			The &lt;code&gt;device&lt;/code&gt; object is a built-in JavaScript object in the widget engine. 
+			It was introduced in WRT 1.1 to allow widgets access to S60 Platform Services through Service APIs. 
+			The &lt;code&gt;device&lt;/code&gt; object is used to create service objects for specific Service APIs. 
+			These service objects can then be used to access the services made available through the Service APIs.
+		</description>
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+"/>
+        </browsers>
+        <parameters/>
+        <return-types>
+          <return-type type="device"/>
+        </return-types>
+      </constructor>
+    </constructors>
+
+    <methods>
+
+      <method name="getServiceObject" scope="" visibility="basic">
+
+        <return-types>
+          <return-type type="serviceObject"/>
+        </return-types>
+
+        <description>
+          The &lt;code&gt;getServiceObject&lt;/code&gt; method creates an object that is used to access the services made available through a Service API. 
+		  This object is referred to as a &lt;b&gt;service object&lt;/b&gt;.
+        </description>
+
+        <parameters>
+
+          <parameter name="provider" type="String" usage="required">
+
+            <values>
+              <value name="Service.AppManager" description="Application Manager." />
+              <value name="Service.SysInfo" description="System Information." />
+              <value name="Service.Sensor" description="Sensor." />
+              <value name="Service.Messaging" description="Messaging." />
+              <value name="Service.MediaManagement" description="Media Management." />
+              <value name="Service.Logging" description="Logging." />
+              <value name="Service.Location" description="Location." />
+              <value name="Service.Calendar" description="Calendar." />
+              <value name="Service.Contact" description="Contact." />
+            </values>
+			
+            <description>
+              This is a text string that defines the service provider name, that is, the name of the type of service object to create.
+			  Possible values : "Service.AppManager", 
+			  					"Service.SysInfo", 
+								"Service.Sensor",
+								"Service.Messaging",
+								"Service.MediaManagement",
+								"Service.Logging",
+								"Service.Location",
+								"Service.Calendar",
+								"Service.Contact"
+            </description>
+
+          </parameter>
+
+          <parameter name="interface" type="String" usage="required">
+            <description>
+              This is a text string that defines the supported interface for the specified service provider.
+			  Possible values : "IAppManager",
+			  					"ISysInfo",
+								"ISensor",
+								"IMessaging",
+								"IDataSource",
+								"ILocation"
+            </description>
+            <values>
+              <value name = "IAppManager" description = "Application Manager."/>
+              <value name = "ISysInfo" description = "System Information."/>
+              <value name = "ISensor" description = "Sensor."/>
+              <value name = "IMessaging" description = "Messaging."/>
+              <value name = "IDataSource" description = "Media Management, Logging, Calendar, Contact"/>
+              <value name = "ILocation" description = "Location."/>
+            </values>
+          </parameter>
+        </parameters>
+
+        <browsers>
+          <browser platform="Nokia WRT" version="1.1+" />
+        </browsers>
+
+		<example>
+			&lt;p&gt;
+				The following example creates a service object for the Media Management Service API:
+			&lt;/p&gt;
+
+			&lt;pre&gt;var so = device.getServiceObject("Service.MediaManagement", "IDataSource");&lt;/pre&gt;
+		</example>
+		
+      </method>
+    </methods>
+
+  </class>
+  <!-- end of Device  -->
+
+</javascript>
