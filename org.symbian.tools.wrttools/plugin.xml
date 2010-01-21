@@ -1,160 +1,384 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="org.eclipse.core.resources" name="Incremental Project Builders" schema="schema/org.eclipse.core.resources.exsd"/>
-   <extension-point id="org.eclipse.ui.javaScriptProjectNatureImage" name="JavaScript Nature Image" schema="schema/org.eclipse.ui.javaScriptProjectNatureImage.exsd"/>
 
-   <extension
-         id="PropertiesFileAuditor"
-         name="Properties File Auditor Project Builder"
-         point="org.eclipse.core.resources.builders">
-      <builder
-            hasNature="true">
-         <run
-               class="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
-         </run>
-      </builder>
-   </extension>
-   <extension
-         id="PropertiesAuditorNature"
-         name="Properties Auditor Nature"
-         point="org.eclipse.core.resources.natures">
-      <runtime>
-         <run
-               class="org.symbian.tools.wrttools.builder.PropertiesAuditorNature">
-         </run>
-      </runtime>
-      <requires-nature id="org.eclipse.wst.jsdt.core.jsNature"/>
-      <requires-nature id="org.eclipse.pde.PluginNature"/>
-      <builder
-            id="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
-      </builder>
-   </extension>
-   <extension-point id="projectTemplates" name="WRT application project templates" schema="schema/projectTemplates.exsd"/>
-    <extension
-         id="org.symbian.tools.wrttools.core.cssvalidator"
-         name="CSS Validator"
-         point="org.eclipse.wst.validation.validatorV2">
-      <validator
-            build="true"
-            class="org.symbian.tools.wrttools.core.internal.validation.CssBuildValidator"
-            manual="true"
-            markerId="org.symbian.tools.wrttools.core.cssValidationMarker"
-            version="0.0.1">
-         <include>
-            <rules>
-               <contentType
-                     exactMatch="false"
-                     id="org.eclipse.wst.css.core.csssource">
-               </contentType>
-            </rules>
-         </include>
-      </validator>
-   </extension>
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <category
-            id="org.symbian.tools.wrttools.core.category"
-            name="Web Runtime(WRT)">
-      </category>
-      <wizard
-            category="org.symbian.tools.wrttools.core.category"
-            class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
-            finalPerspective="org.eclipse.wst.jsdt.ui.JavaPerspective"
-            hasPages="true"
-            icon="icons/main16.gif"
-            id="org.symbian.tools.wrttools.core.wrtwidgetwizard"
-            name="Web Runtime Application"
-            project="true">
-         <description>
-            Creates a new Symbian WRT application project using one of the provided templates
+	<extension id="PropertiesFileAuditor" name="Properties File Auditor Project Builder"
+		point="org.eclipse.core.resources.builders">
+		<builder hasNature="true">
+			<run class="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
+			</run>
+		</builder>
+	</extension>
+	<extension id="PropertiesAuditorNature" name="Properties Auditor Nature"
+		point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="org.symbian.tools.wrttools.builder.PropertiesAuditorNature">
+			</run>
+		</runtime>
+		<requires-nature id="org.eclipse.wst.jsdt.core.jsNature" />
+		<requires-nature id="org.eclipse.pde.PluginNature" />
+		<builder id="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
+		</builder>
+	</extension>
+	<extension-point id="projectTemplates" name="WRT application project templates" schema="schema/projectTemplates.exsd"/>
+	<extension id="org.symbian.tools.wrttools.core.cssvalidator"
+		name="CSS Validator" point="org.eclipse.wst.validation.validatorV2">
+		<validator build="true"
+			class="org.symbian.tools.wrttools.core.internal.validation.CssBuildValidator"
+			manual="true" markerId="org.symbian.tools.wrttools.core.cssValidationMarker"
+			version="0.0.1">
+			<include>
+				<rules>
+					<contentType exactMatch="false"
+						id="org.eclipse.wst.css.core.csssource">
+					</contentType>
+				</rules>
+			</include>
+		</validator>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.symbian.tools.wrttools.core.category" name="Web Runtime(WRT)">
+		</category>
+		<wizard category="org.symbian.tools.wrttools.core.category"
+			class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
+			finalPerspective="org.symbian.tools.wrttools.mainPerspective"
+			hasPages="true" icon="icons/main16.gif"
+			id="org.symbian.tools.wrttools.core.wrtwidgetwizard" name="Web Runtime Application"
+			project="true">
+			<description>
+				Creates a new Symbian WRT application project using one of the provided
+				templates
          </description>
-      </wizard>
-      <wizard
-            category="org.symbian.tools.wrttools.core.category"
-            class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
-            finalPerspective="org.eclipse.wst.jsdt.ui.JavaPerspective"
-            hasPages="true"
-            icon="icons/main16.gif"
-            id="org.symbian.tools.wrttools.newImportAptanaProject"
-            name="Import Aptana IDE WRT Project"
-            project="true">
-      </wizard>
-   </extension>
-   <extension
-         point="org.symbian.tools.wrttools.projectTemplates">
-      <projectTemplate
-            archive="projecttemplates/basic.zip"
-            default-css-name="basic"
-            default-html-name="index"
-            default-js-name="basic"
-            icon="icons/main16.gif"
-            id-pattern="com.{0}.basic.widget"
-            name="Basic Widget Project">
-         <description>
-            This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
+		</wizard>
+		<wizard category="org.symbian.tools.wrttools.core.category"
+			class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
+			finalPerspective="org.symbian.tools.wrttools.mainPerspective"
+			hasPages="true" icon="icons/main16.gif"
+			id="org.symbian.tools.wrttools.newImportAptanaProject" name="Import Aptana IDE WRT Project"
+			project="true">
+		</wizard>
+	</extension>
+	<extension point="org.symbian.tools.wrttools.projectTemplates">
+		<projectTemplate
+		name="Basic Widget Project"
+        archive="projecttemplates/basic.zip"
+        default-css-name="basic"
+        default-html-name="index"
+        default-js-name="basic"
+        icon="icons/main16.gif"
+        id-pattern="com.{0}.basic.widget">
+			<description>
+				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
          </description>
-      </projectTemplate>
-   </extension>
-   <extension
-         point="org.eclipse.ui.importWizards">
-      <category
-            id="org.symbian.tools.wrttools.import"
-            name="Web Runtime(WRT)">
-      </category>
-      <wizard
-            category="org.symbian.tools.wrttools.import"
-            class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
-            icon="icons/main16.gif"
-            id="org.symbian.tools.wrttools.import.aptanaImport"
-            name="Aptana IDE WRT Project">
-      </wizard>
-   </extension>
-      <extension
-         id="org.symbian.tools.wrt.xmlProblem"
-         name="XML Problem"
-         point="org.eclipse.core.resources.markers">
-      <super
-            type="org.eclipse.core.resources.problemmarker">
-      </super>
-      <persistent
-            value="true">
-      </persistent>
-   </extension>
-   <extension
-         id="org.symbian.tools.wrt.jsProblem"
-         name="JSProblem"
-         point="org.eclipse.core.resources.markers">
-      <super
-            type="org.eclipse.core.resources.problemmarker">
-      </super>
-      <persistent
-            value="true">
-      </persistent>
-   </extension>
-      <extension
-         point="org.eclipse.core.contenttype.contentTypes">
-      <content-type
-            base-type="org.eclipse.core.runtime.xml"
-            file-extensions="plist"
-            id="org.symbian.tools.wrttools.contenttype.plist"
-            name="WebRuntime Descriptor File"
-            priority="normal">
-      </content-type>
-   </extension>
-      <extension
-            point="org.eclipse.ui.perspectiveExtensions">
-         <perspectiveExtension
-               targetID="org.eclipse.wst.jsdt.ui.JavaPerspective">
-            <newWizardShortcut
-                  id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
-            </newWizardShortcut>
-         </perspectiveExtension>
-         <perspectiveExtension
-               targetID="org.eclipse.debug.ui.DebugPerspective">
-            <newWizardShortcut
-                  id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
-            </newWizardShortcut>
-         </perspectiveExtension>
-      </extension>
+		</projectTemplate>
+	</extension>
+	<extension point="org.eclipse.ui.importWizards">
+		<category id="org.symbian.tools.wrttools.import" name="Web Runtime(WRT)">
+		</category>
+		<wizard category="org.symbian.tools.wrttools.import"
+			class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
+			icon="icons/main16.gif" id="org.symbian.tools.wrttools.import.aptanaImport"
+			name="Aptana IDE WRT Project">
+		</wizard>
+	</extension>
+	<extension id="org.symbian.tools.wrt.xmlProblem" name="XML Problem"
+		point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	<extension id="org.symbian.tools.wrt.jsProblem" name="JSProblem"
+		point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type base-type="org.eclipse.core.runtime.xml"
+			file-extensions="plist" id="org.symbian.tools.wrttools.contenttype.plist"
+			name="WebRuntime Descriptor File" priority="normal">
+		</content-type>
+	</extension>
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.wst.jsdt.ui.JavaPerspective">
+			<newWizardShortcut id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
+			</newWizardShortcut>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.debug.ui.DebugPerspective">
+			<newWizardShortcut id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
+			</newWizardShortcut>
+		</perspectiveExtension>
+	</extension>
+	<extension point="org.eclipse.ui.views">
+		<view allowMultiple="false" category="org.symbian.tools.wrttools.views"
+			class="org.eclipse.ui.navigator.CommonNavigator" icon="icons/main16.gif"
+			id="org.symbian.tools.wrttools.wrtnavigator" name="WRT Navigator"
+			restorable="true">
+		</view>
+		<category id="org.symbian.tools.wrttools.views" name="WRT Tools">
+		</category>
+	</extension>
+	<extension point="org.eclipse.ui.navigator.viewer">
+		<viewer viewerId="org.symbian.tools.wrttools.wrtnavigator">
+			<popupMenu allowsPlatformContributions="true"
+				id="org.eclipse.ui.navigator.ProjectExplorer#PopupMenu">
+				<insertionPoint name="group.new" />
+				<insertionPoint name="group.open" separator="true" />
+				<insertionPoint name="group.openWith" />
+				<insertionPoint name="group.edit" separator="true" />
+				<insertionPoint name="group.reorganize" />
+				<insertionPoint name="group.port" separator="true" />
+				<insertionPoint name="group.build" separator="true" />
+				<insertionPoint name="group.generate" separator="true" />
+				<insertionPoint name="group.search" separator="true" />
+				<insertionPoint name="additions" separator="true" />
+				<insertionPoint name="group.properties" separator="true" />
+
+			</popupMenu>
+		</viewer>
+		<viewerContentBinding viewerId="org.symbian.tools.wrttools.wrtnavigator">
+			<includes>
+				<contentExtension pattern="org.eclipse.ui.navigator.resourceContent" />
+				<contentExtension
+          isRoot="true"
+          pattern="org.symbian.tools.wrttools.navigatorcontent"/>
+				<contentExtension pattern="org.eclipse.ui.navigator.resources.filters.*" />
+				<contentExtension pattern="org.eclipse.ui.navigator.resources.linkHelper" />
+				<contentExtension pattern="org.eclipse.ui.navigator.resources.workingSets" />
+			</includes>
+		</viewerContentBinding>
+		<viewerActionBinding viewerId="org.symbian.tools.wrttools.wrtnavigator">
+			<includes>
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.*" />
+			</includes>
+		</viewerActionBinding>
+		<dragAssistant
+			class="org.eclipse.ui.navigator.resources.ResourceDragAdapterAssistant"
+			viewerId="org.symbian.tools.wrttools.wrtnavigator" />
+	</extension>
+	 <extension
+       point="org.eclipse.ui.navigator.navigatorContent">
+    <navigatorContent
+          activeByDefault="true"
+          contentProvider="org.symbian.tools.wrttools.navigator.WRTNavigatorContentProvider"
+          icon="icons/main16.gif"
+          id="org.symbian.tools.wrttools.navigatorcontent"
+          labelProvider="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorLabelProvider"
+          name="WRT Elements"
+          priority="high"
+          providesSaveables="false">
+       <triggerPoints>
+          <or>
+             <and>
+                <instanceof
+                      value="org.eclipse.core.resources.IResource">
+                </instanceof>
+                <adapt
+                      type="org.eclipse.core.resources.IProject">
+                   <test
+                         property="org.eclipse.core.resources.projectNature"
+                         value="org.eclipse.wst.jsdt.core.jsNature">
+                   </test>
+                </adapt>
+             </and>
+             <instanceof
+                   value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+             </instanceof>
+             <instanceof
+                   value="org.eclipse.wst.jsdt.core.IJarEntryResource">
+             </instanceof>
+             <instanceof
+                   value="org.eclipse.wst.jsdt.internal.ui.packageview.PackageFragmentRootContainer">
+             </instanceof>
+             <instanceof
+                   value="org.eclipse.wst.jsdt.ui.ProjectLibraryRoot">
+             </instanceof>
+          </or>
+       </triggerPoints>
+       <possibleChildren>
+          <or>
+             <instanceof
+                   value="org.eclipse.core.resources.IResource">
+             </instanceof>
+             <instanceof
+                   value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+             </instanceof>
+             <instanceof
+                   value="org.eclipse.wst.jsdt.core.IJarEntryResource">
+             </instanceof>
+             <instanceof
+                   value="org.eclipse.wst.jsdt.ui.ProjectLibraryRoot">
+             </instanceof>
+          </or>
+       </possibleChildren>
+       <actionProvider
+             class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorViewActionProvider"
+             id="org.eclipse.wst.jsdt.ui.navigator.actions.ViewActions">
+          <enablement>
+             <or>
+                <instanceof
+                      value="org.eclipse.core.resources.IWorkspaceRoot">
+                </instanceof>
+                <adapt
+                      type="java.util.Collection">
+                   <count
+                         value="0">
+                   </count>
+                </adapt>
+             </or>
+          </enablement>
+       </actionProvider>
+       <actionProvider
+             class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorActionProvider"
+             id="org.eclipse.wst.jsdt.ui.navigator.actions.StandardActions"
+             overrides="org.eclipse.ui.navigator.resources.actions.EditActions">
+          <enablement>
+             <or>
+                <and>
+                   <instanceof
+                         value="org.eclipse.core.resources.IProject">
+                   </instanceof>
+                   <test
+                         property="org.eclipse.core.resources.projectNature"
+                         value="org.eclipse.wst.jsdt.core.jsNature">
+                   </test>
+                </and>
+                <instanceof
+                      value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+                </instanceof>
+                <instanceof
+                      value="org.eclipse.wst.jsdt.core.IJarEntryResource">
+                </instanceof>
+                <instanceof
+                      value="org.eclipse.wst.jsdt.internal.ui.packageview.PackageFragmentRootContainer">
+                </instanceof>
+                <adapt
+                      type="java.util.Collection">
+                   <count
+                         value="0">
+                   </count>
+                </adapt>
+             </or>
+          </enablement>
+       </actionProvider>
+       <actionProvider
+             class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorRefactorActionProvider"
+             id="org.eclipse.wst.jsdt.ui.navigator.actions.RefactorActions"
+             overrides="org.eclipse.ui.navigator.resources.actions.RefactorActions">
+          <enablement>
+             <or>
+                <and>
+                   <instanceof
+                         value="org.eclipse.core.resources.IProject">
+                   </instanceof>
+                   <test
+                         property="org.eclipse.core.resources.projectNature"
+                         value="org.eclipse.wst.jsdt.core.jsNature">
+                   </test>
+                </and>
+                <instanceof
+                      value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+                </instanceof>
+                <instanceof
+                      value="org.eclipse.wst.jsdt.core.IJarEntryResource">
+                </instanceof>
+                <instanceof
+                      value="org.eclipse.wst.jsdt.internal.ui.packageview.PackageFragmentRootContainer">
+                </instanceof>
+                <adapt
+                      type="java.util.Collection">
+                   <count
+                         value="0">
+                   </count>
+                </adapt>
+             </or>
+          </enablement>
+       </actionProvider>
+       <actionProvider
+             class="org.eclipse.wst.jsdt.internal.ui.navigator.PackageExplorerOpenActionProvider"
+             id="org.eclipse.wst.jsdt.ui.navigator.actions.OpenActions"
+             overrides="org.eclipse.ui.navigator.resources.OpenActions">
+       </actionProvider>
+       <override
+             policy="InvokeAlwaysRegardlessOfSuppressedExt"
+             suppressedExtensionId="org.eclipse.ui.navigator.resourceContent">
+       </override>
+       <commonWizard
+             menuGroupId="group.new"
+             type="new"
+             wizardId="org.symbian.tools.wrttools.core.wrtwidgetwizard">
+          <enablement>
+             <or>
+                <adapt
+                      type="org.eclipse.core.resources.IResource">
+                </adapt>
+                <count
+                      value="0">
+                </count>
+             </or>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             type="new"
+             wizardId="org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard">
+          <enablement>
+             <adapt
+                   type="org.eclipse.core.resources.IResource">
+             </adapt>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             type="new"
+             wizardId="org.eclipse.wst.css.ui.internal.wizard.NewCSSWizard">
+          <enablement>
+             <adapt
+                   type="org.eclipse.core.resources.IResource">
+             </adapt>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             type="new"
+             wizardId="org.eclipse.wst.jsdt.ui.NewJSWizard">
+          <enablement>
+             <adapt
+                   type="org.eclipse.core.resources.IResource">
+             </adapt>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             type="import"
+             wizardId="org.symbian.tools.wrttools.import.aptanaImport">
+          <enablement>
+             <or>
+                <adapt
+                      type="org.eclipse.core.resources.IResource">
+                </adapt>
+                <count
+                      value="0">
+                </count>
+             </or>
+          </enablement>
+       </commonWizard>
+       <dropAssistant
+             class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaDropAdapterAssistant"
+             id="org.eclipse.wst.jsdt.ui.dropAssistant">
+          <possibleDropTargets>
+             <or>
+                <instanceof
+                      value="org.eclipse.core.resources.IResource">
+                </instanceof>
+                <instanceof
+                      value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+                </instanceof>
+             </or>
+          </possibleDropTargets>
+       </dropAssistant>
+       <commonSorter
+             class="org.symbian.tools.wrttools.navigator.NavigatorSorter"
+             id="org.symbian.tools.wrttools.sorter">
+       </commonSorter>
+    </navigatorContent>
+ </extension>
 </plugin>

@@ -13,19 +13,23 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.IPageBookViewPage;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 import org.osgi.framework.Bundle;
+import org.symbian.tools.wrttools.editing.Activator;
+import org.symbian.tools.wrttools.editing.Images;
 
-public class PreviewPage extends Page implements IPageBookViewPage {
+public class PreviewPage extends Page implements IPageBookViewPage, ISelectionProvider {
 	private static final String XUL_RUNNER_PATH_PARAMETER = "org.eclipse.swt.browser.XULRunnerPath";
 	
 	private final IAction refreshAction = new Action("Refresh") {
@@ -42,14 +46,22 @@ public class PreviewPage extends Page implements IPageBookViewPage {
 	private final IProject project;
 	private Browser browser;
 	private boolean toggleState = true;
+	private final PreviewView previewView;
+	private boolean needsRefresh = false;
 
-	public PreviewPage(IProject project) {
+	public PreviewPage(IProject project, PreviewView previewView) {
 		this.project = project;
+		this.previewView = previewView;
 	}
 
 	protected void toggleRefresh() {
 		toggleState = !toggleState;
 		toggleRefresh.setChecked(toggleState);
+		previewView.setProjectAutorefresh(project, toggleState);
+		toggleRefresh.setToolTipText(getToggleActionTooltip());
+		if (toggleState && needsRefresh) {
+			refresh();
+		}
 	}
 
 	private synchronized void initMozilla() {
@@ -95,18 +107,29 @@ public class PreviewPage extends Page implements IPageBookViewPage {
 	public void setFocus() {
 		browser.setFocus();
 	}
+	
+	private boolean refreshScheduled = false;
 
-	public void process(Collection<IFile> files) {
-		if (needsRefresh(files)) {
-			getControl().getDisplay().asyncExec(new Runnable() {
+	public synchronized void process(Collection<IFile> files) {
+		if (!refreshScheduled && needsRefresh(files)) {
+			asyncExec(new Runnable() {
 				@Override
 				public void run() {
 					if (toggleState) {
 						refresh();
+					} else {
+						needsRefresh = true;
+						refreshAction.setImageDescriptor(Activator.getImageDescriptor(Images.RED_SYNC));
+						refreshAction.setToolTipText("Refresh the preview browser (there are updated files)");
 					}
 				}
 			});
+			refreshScheduled = true;
 		}
+	}
+
+	private void asyncExec(Runnable runnable) {
+		getControl().getDisplay().asyncExec(runnable);
 	}
 
 	private boolean needsRefresh(Collection<IFile> files) {
@@ -118,24 +141,66 @@ public class PreviewPage extends Page implements IPageBookViewPage {
 		return false;
 	}
 
-	protected void refresh() {
-		browser.refresh();
+	protected synchronized void refresh() {
+		try {
+			final Control focusControl = browser.getDisplay().getFocusControl();
+			browser.refresh();
+			refreshAction.setImageDescriptor(Activator
+					.getImageDescriptor(Images.GREEN_SYNC));
+			asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					focusControl.setFocus();
+				}
+			});
+			refreshAction.setToolTipText("Refresh the preview browser");
+			needsRefresh = false;
+		} finally {
+			refreshScheduled = false;
+		}
 	}
 
 	@Override
 	public void init(IPageSite pageSite) {
 		super.init(pageSite);
 		IToolBarManager toolBar = pageSite.getActionBars().getToolBarManager();
-		ImageDescriptor image = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ELCL_SYNCED);
-		refreshAction.setImageDescriptor(image);
-		refreshAction.setDescription("Refresh the preview browser");
+		refreshAction.setImageDescriptor(Activator.getImageDescriptor(Images.GREEN_SYNC));
 		refreshAction.setToolTipText("Refresh the preview browser");
 		toolBar.add(refreshAction);
 		
-		toggleRefresh.setImageDescriptor(image);
-		toggleRefresh.setDescription("Enable or disable automatic refresh");
-		toggleRefresh.setToolTipText("Enable or disable automatic refresh");
+		toggleState = previewView.getProjectAutorefresh(project);
+		
+		toggleRefresh.setImageDescriptor(Activator.getImageDescriptor(Images.YELLOW_SYNC));
+		toggleRefresh.setToolTipText(getToggleActionTooltip());
 		toggleRefresh.setChecked(toggleState);
 		toolBar.add(toggleRefresh);
+		
+		pageSite.getActionBars().setGlobalActionHandler(ActionFactory.REFRESH.getId(), refreshAction);
+		getSite().setSelectionProvider(this);
+	}
+
+	private String getToggleActionTooltip() {
+		return toggleState ? "Disable preview autorefresh" : "Enable preview autorefresh";
+	}
+
+	@Override
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		// Do nothing
+	}
+
+	@Override
+	public ISelection getSelection() {
+		return new StructuredSelection(project);
+	}
+
+	@Override
+	public void removeSelectionChangedListener(
+			ISelectionChangedListener listener) {
+		// Do nothing
+	}
+
+	@Override
+	public void setSelection(ISelection selection) {
+		// Do nothing
 	}
 }

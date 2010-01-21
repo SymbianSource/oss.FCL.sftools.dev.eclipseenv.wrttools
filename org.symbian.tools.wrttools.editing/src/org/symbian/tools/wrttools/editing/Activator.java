@@ -1,8 +1,9 @@
 package org.symbian.tools.wrttools.editing;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -32,10 +33,18 @@ public class Activator extends AbstractUIPlugin {
 		plugin = this;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-	 */
+	@Override
+	protected void initializeImageRegistry(ImageRegistry reg) {
+		addImage(reg, Images.GREEN_SYNC);
+		addImage(reg, Images.RED_SYNC);
+		addImage(reg, Images.YELLOW_SYNC);
+	}
+	
+	private void addImage(ImageRegistry reg, String path) {
+		ImageDescriptor imageDescriptor = imageDescriptorFromPlugin(PLUGIN_ID, path);
+		reg.put(path, imageDescriptor);
+	}
+
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
@@ -50,7 +59,7 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	public static void log(CoreException e) {
+	public static void log(Exception e) {
 		log(e.getLocalizedMessage(), e);
 	}
 
@@ -59,4 +68,7 @@ public class Activator extends AbstractUIPlugin {
 		getDefault().getLog().log(status);
 	}
 
+	public static ImageDescriptor getImageDescriptor(String id) {
+		return getDefault().getImageRegistry().getDescriptor(id);
+	}
 }

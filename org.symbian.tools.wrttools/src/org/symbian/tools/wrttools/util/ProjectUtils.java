@@ -61,6 +61,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 public class ProjectUtils {
+	private static final String DEFAULT_APTANA_WORKSPACE = "Aptana Studio Workspace";
 	private static final String WRT_PREVIEW_MAIN_HTML = "wrt_preview_main.html";
 	public static final String PREVIEW_FOLDER = "preview";
 	public static final String PREVIEW_FRAME_FILE = "wrt_preview_frame.html";
@@ -250,8 +251,15 @@ public class ProjectUtils {
 	public static String getDefaultAptanaLocation() {
 		File myDocuments = FileSystemView.getFileSystemView()
 				.getDefaultDirectory();
-		File file = new File(myDocuments, "Aptana Studio Workspace");
-		return file.exists() ? file.getAbsolutePath() : "";
+		File file = new File(myDocuments, DEFAULT_APTANA_WORKSPACE); // Windows
+		if (file.exists()) {
+			return file.getAbsolutePath();
+		}
+		file = new File(myDocuments, "Documents" + File.separator + DEFAULT_APTANA_WORKSPACE); // Mac OS X
+		if (file.exists()) {
+			return file.getAbsolutePath();
+		}
+		return "";
 	}
 
 	public static boolean isAptanaProject(File f) {

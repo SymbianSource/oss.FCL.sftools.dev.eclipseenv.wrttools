@@ -9,7 +9,7 @@
             default="false"
             icon="icons/obj16/html-editor.gif"
             id="org.symbian.tools.wrttools.editing.editor2"
-            name="HTML Editor"
+            name="WRT HTML Editor"
             symbolicFontName="org.eclipse.wst.sse.ui.textfont">
          <contentTypeBinding
                contentTypeId="org.eclipse.wst.html.core.htmlsource">
@@ -19,13 +19,36 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            allowMultiple="true"
+            allowMultiple="false"
             class="org.symbian.tools.wrttools.editing.preview.PreviewView"
             icon="icons/obj16/html-editor.gif"
             id="org.symbian.tools.wrttools.editing.wrtpreview"
             name="WRT Preview"
             restorable="true">
       </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
+            id="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
+            name="WRT">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.symbian.tools.wrttools.mainPerspective">
+         <viewShortcut
+               id="org.symbian.tools.wrttools.editing.wrtpreview">
+         </viewShortcut>
+         <view
+               id="org.symbian.tools.wrttools.editing.wrtpreview"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.views.ContentOutline">
+         </view>
+      </perspectiveExtension>
    </extension>
 
 </plugin>
