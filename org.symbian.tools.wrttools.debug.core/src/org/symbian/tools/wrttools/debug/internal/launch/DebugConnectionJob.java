@@ -29,51 +29,46 @@ import org.chromium.debug.core.model.JavascriptVmEmbedder.ConnectionToRemote;
 import org.chromium.sdk.ConnectionLogger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
-import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.model.DebugTargetImpl;
+import org.symbian.tools.wrttools.previewer.http.IPreviewStartupListener;
 
-public class DebugConnectionJob extends Job {
+public class DebugConnectionJob implements IPreviewStartupListener {
 	static final NamedConnectionLoggerFactory NO_CONNECTION_LOGGER_FACTORY = new NamedConnectionLoggerFactory() {
 		public ConnectionLogger createLogger(String title) {
 			return null;
 		}
 	};
-	private URI uri;
 	private final int port;
 	private final ILaunch launch;
 	private final IProject project;
-	private boolean connected = false; 
 
 	public DebugConnectionJob(IProject project, final int port, final ILaunch launch) {
-		super("Establish debug connection");
 		this.project = project;
 		this.port = port;
 		this.launch = launch;
-		setUser(false);
+	}
+
+	protected ConnectionToRemote createConnectionToRemote(int port,
+			ILaunch launch, URI uri) throws CoreException {
+		return JavascriptVmEmbedderFactory.connectToChromeDevTools(port,
+				NO_CONNECTION_LOGGER_FACTORY, new WidgetTabSelector(uri));
+	}
+
+	private static void terminateTarget(DebugTargetImpl target) {
+		target.setDisconnected(true);
+		target.fireTerminateEvent();
 	}
 
 	@Override
-	protected IStatus run(IProgressMonitor monitor) {
-		try {
-			connect(monitor);
-		} catch (CoreException e) {
-			return e.getStatus();
-		}
-		return new Status(IStatus.OK, Activator.PLUGIN_ID, "");
-	}
-
-	private void connect(IProgressMonitor monitor) throws CoreException {
+	public boolean browserRunning(URI uri) throws CoreException {
 		final DebugTargetImpl target = new DebugTargetImpl(launch, project);
 		final JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
 				port, launch, uri);
 		try {
-
+		
 			DestructingGuard destructingGuard = new DestructingGuard();
 			try {
 				Destructable lauchDestructor = new Destructable() {
@@ -84,9 +79,9 @@ public class DebugConnectionJob extends Job {
 						}
 					}
 				};
-
+		
 				destructingGuard.addValue(lauchDestructor);
-
+		
 				Destructable targetDestructor = new Destructable() {
 					public void destruct() {
 						terminateTarget(target);
@@ -96,51 +91,27 @@ public class DebugConnectionJob extends Job {
 				boolean attached = target.attach(project.getName(), remoteServer,
 						destructingGuard, new Runnable() {
 							public void run() {
-								openProjectExplorerView(target);
+								target.setupBreakpointsFromResources();
 							}
-						}, monitor);
+						}, new NullProgressMonitor());
 				if (!attached) {
 					// Error
-					return;
+					return false;
 				}
-
+		
 				launch.setSourceLocator(target.getSourceLocator());
-
+		
 				launch.addDebugTarget(target);
-				monitor.done();
-
+		
 				// All OK
 				destructingGuard.discharge();
 			} finally {
 				destructingGuard.doFinally();
 			}
-
+		
 		} finally {
 			remoteServer.disposeConnection();
 		}
-	}
-
-	protected ConnectionToRemote createConnectionToRemote(int port,
-			ILaunch launch, URI uri) throws CoreException {
-		return JavascriptVmEmbedderFactory.connectToChromeDevTools(port,
-				NO_CONNECTION_LOGGER_FACTORY, new WidgetTabSelector(uri));
-	}
-
-	protected void openProjectExplorerView(final DebugTargetImpl target) {
-		target.setupBreakpointsFromResources();
-		connected = true;
-	}
-	
-	public boolean isConnected() {
-		return connected;
-	}
-
-	private static void terminateTarget(DebugTargetImpl target) {
-		target.setDisconnected(true);
-		target.fireTerminateEvent();
-	}
-
-	public void setTabUri(URI uri) {
-		this.uri = uri;
+		return true;
 	}
 }

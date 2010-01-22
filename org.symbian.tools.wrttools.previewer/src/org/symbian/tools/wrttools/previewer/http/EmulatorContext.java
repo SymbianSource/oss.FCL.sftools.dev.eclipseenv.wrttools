@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  *******************************************************************************/
-package org.symbian.tools.wrttools.debug.internal.web;
+package org.symbian.tools.wrttools.previewer.http;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

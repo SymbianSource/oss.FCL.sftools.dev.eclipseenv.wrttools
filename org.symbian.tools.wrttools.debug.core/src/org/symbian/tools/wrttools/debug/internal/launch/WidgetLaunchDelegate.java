@@ -38,7 +38,7 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.wrttools.debug.internal.IConstants;
-import org.symbian.tools.wrttools.debug.internal.web.WebAppInterface;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 public class WidgetLaunchDelegate implements
 		ILaunchConfigurationDelegate {
@@ -141,15 +141,12 @@ public class WidgetLaunchDelegate implements
 
 	private URI prepareDebugger(IProject project, boolean debug,
 			final ILaunch launch, final int port) {
-		final DebugConnectionJob job;
 		if (debug) {
-			job = new DebugConnectionJob(project, port, launch);
+			final DebugConnectionJob job = new DebugConnectionJob(project, port, launch);
+			return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project, job);
 		} else {
-			job = null;
+			return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project);
 		}
-		final URI uri = WebAppInterface.getInstance().prepareDebugger(project,
-				job);
-		return uri;
 	}
 
 

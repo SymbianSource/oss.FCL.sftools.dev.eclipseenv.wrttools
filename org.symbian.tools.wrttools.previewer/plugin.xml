@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
- 
- <extension
-       point="org.eclipse.ui.preferencePages">
-    <page
-          class="org.symbian.tools.wrttools.previewer.preview.WidgetPreviewPreferencePage"
-          id="org.symbian.tools.wrttools.previewer.preview.WidgetPreviewPreferencePage"
-          name="Preview"/>
-
- </extension>
     <extension
          point="org.eclipse.ui.views">
       <view

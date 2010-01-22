@@ -46,8 +46,9 @@ public class StackFrame extends org.chromium.debug.core.model.StackFrame {
 				script);
 		int line = script.getStartLine() + getLineNumber();
 		if (line != -1) {
+			String resourcePath = resource != null ? resource.getProjectRelativePath().toString() : script.getName();
 			name = NLS.bind("{0} [{1}:{2}]", new Object[] { name,
-					resource.getProjectRelativePath().toString(), line });
+					resourcePath, line });
 		}
 		return name;
 	}

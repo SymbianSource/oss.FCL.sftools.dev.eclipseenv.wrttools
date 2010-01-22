@@ -2,6 +2,7 @@ package org.symbian.tools.wrttools.previewer.preview;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collection;
@@ -31,7 +32,7 @@ import org.mozilla.interfaces.nsIPrefBranch;
 import org.mozilla.interfaces.nsIServiceManager;
 import org.mozilla.xpcom.Mozilla;
 import org.osgi.framework.Bundle;
-import org.symbian.tools.wrttools.previewer.Activator;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.Images;
 
 public class PreviewPage extends Page implements IPageBookViewPage, ISelectionProvider {
@@ -98,13 +99,12 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 		browser = new Browser(parent, SWT.MOZILLA);
 		bypassSameOriginPolicy();
 		applyProxySettings();
-		browser.setUrl(getURL());
+		browser.setUrl(getURI().toASCIIString());
 	}
 
-	private String getURL() {
-		return project.getFile("wrt_preview_frame.html").getLocationURI().toASCIIString();
+	private URI getURI() {
+		return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project);
 	}
-
 
 	@Override
 	public Control getControl() {
@@ -127,7 +127,7 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 						refresh();
 					} else {
 						needsRefresh = true;
-						refreshAction.setImageDescriptor(Activator.getImageDescriptor(Images.RED_SYNC));
+						refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.RED_SYNC));
 						refreshAction.setToolTipText("Refresh the preview browser (there are updated files)");
 					}
 				}
@@ -153,7 +153,7 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 		try {
 			final Control focusControl = browser.getDisplay().getFocusControl();
 			browser.refresh();
-			refreshAction.setImageDescriptor(Activator
+			refreshAction.setImageDescriptor(PreviewerPlugin
 					.getImageDescriptor(Images.GREEN_SYNC));
 			asyncExec(new Runnable() {
 				@Override
@@ -172,13 +172,13 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 	public void init(IPageSite pageSite) {
 		super.init(pageSite);
 		IToolBarManager toolBar = pageSite.getActionBars().getToolBarManager();
-		refreshAction.setImageDescriptor(Activator.getImageDescriptor(Images.GREEN_SYNC));
+		refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.GREEN_SYNC));
 		refreshAction.setToolTipText("Refresh the preview browser");
 		toolBar.add(refreshAction);
 		
 		toggleState = previewView.getProjectAutorefresh(project);
 		
-		toggleRefresh.setImageDescriptor(Activator.getImageDescriptor(Images.YELLOW_SYNC));
+		toggleRefresh.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.YELLOW_SYNC));
 		toggleRefresh.setToolTipText(getToggleActionTooltip());
 		toggleRefresh.setChecked(toggleState);
 		toolBar.add(toggleRefresh);
@@ -214,7 +214,7 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 	
 	private void applyProxySettings() {
 		
-		IProxyService px = Activator.getProxyService();
+		IProxyService px = PreviewerPlugin.getDefault().getProxyService();
 		if(px != null){			 
 			boolean proxyEnabled = px.isProxiesEnabled();
 
@@ -234,7 +234,7 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 		}
 		else{
 			 Exception e= new Exception();
-			 Activator.log("Proxy service returned null", e);
+			 PreviewerPlugin.log("Proxy service returned null", e);
 		 }
 	}
 	
@@ -290,7 +290,7 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 			mozillaPrefs.setCharPref("capability.principal.codebase.p0.id", "file://");
 			mozillaPrefs.setBoolPref("security.fileuri.strict_origin_policy", 0);
 		} catch (Exception e) {
-			Activator.log("Error getting preferences", e);
+			PreviewerPlugin.log("Error getting preferences", e);
 		}
 	}
 

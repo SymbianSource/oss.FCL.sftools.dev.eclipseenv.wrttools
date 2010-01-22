@@ -11,7 +11,7 @@ import org.chromium.debug.core.model.IResourceManager;
 import org.chromium.sdk.Script;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.symbian.tools.wrttools.debug.internal.web.WorkspaceResourcesServlet;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 /**
  * This object handles the mapping between {@link Script}s and their
@@ -100,7 +100,7 @@ public class ResourceManager implements IResourceManager {
 		if (name == null) {
 			return null;
 		}
-		IFile file = WorkspaceResourcesServlet.getFileFromUrl(name);
+		IFile file = PreviewerPlugin.getDefault().getHttpPreviewer().getFileFromUrl(name);
 		if (file != null && !file.isAccessible()) {
 			file = null;
 		}
@@ -133,6 +133,6 @@ public class ResourceManager implements IResourceManager {
 	}
 
 	public String translateResourceToScript(IResource resource) {
-		return WorkspaceResourcesServlet.getHttpUrl(resource);
+		return PreviewerPlugin.getDefault().getHttpPreviewer().getHttpUrl(resource);
 	}
 }

@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  *******************************************************************************/
-package org.symbian.tools.wrttools.debug.internal.web;
+package org.symbian.tools.wrttools.previewer.http;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -33,7 +33,7 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpContext;
 import org.osgi.service.http.HttpService;
-import org.symbian.tools.wrttools.debug.internal.Activator;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 /**
  * Copy from the WS Explorer
@@ -42,7 +42,7 @@ import org.symbian.tools.wrttools.debug.internal.Activator;
  *
  */
 public class WebappManager {
-	public static final String WORKSPACE_RESOURCES_CONTEXT = "/wspace";
+	public static final String WORKSPACE_RESOURCES_CONTEXT = "/preview";
 	public static final String STATIC_RESOURCES_CONTEXT = "/wrtdebugger";
 	public static final String WEB_CONTENT_ROOT = "/http-content";
 	
@@ -65,7 +65,7 @@ public class WebappManager {
 
 		JettyConfigurator.startServer(webappName, d);
 		checkBundle();
-		Bundle bundle = Activator.getDefault().getBundle();
+		Bundle bundle = PreviewerPlugin.getDefault().getBundle();
 		HttpService service = (HttpService) bundle.getBundleContext().getService(getServiceReference());
 		HttpContext httpContext = service.createDefaultHttpContext();
 		service.registerResources(STATIC_RESOURCES_CONTEXT, WEB_CONTENT_ROOT, httpContext);
@@ -91,9 +91,9 @@ public class WebappManager {
 
 	private static ServiceReference getServiceReference()
 			throws InvalidSyntaxException {
-		Bundle bundle2 = Activator.getDefault().getBundle();
+		Bundle bundle = PreviewerPlugin.getDefault().getBundle();
 		// Jetty selected a port number for us
-		ServiceReference[] reference = bundle2.getBundleContext().getServiceReferences("org.osgi.service.http.HttpService", "(other.info=org.symbian.wst.debugger)"); //$NON-NLS-1$ //$NON-NLS-2$
+		ServiceReference[] reference = bundle.getBundleContext().getServiceReferences("org.osgi.service.http.HttpService", "(other.info=org.symbian.wst.debugger)"); //$NON-NLS-1$ //$NON-NLS-2$
 		return reference[0];
 	}
 

@@ -25,22 +25,26 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.symbian.tools.wrttools.previewer.http.HttpPreviewer;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class PreviewerPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.symbian.tools.wrttools.previewer";
 
 	// The shared instance
-	private static Activator plugin;
+	private static PreviewerPlugin plugin;
+
+	private HttpPreviewer previewer = new HttpPreviewer();
 	
 	/**
 	 * The constructor
 	 */
-	public Activator() {
+	public PreviewerPlugin() {
 	}
 
 	/*
@@ -78,7 +82,7 @@ public class Activator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static Activator getDefault() {
+	public static PreviewerPlugin getDefault() {
 		return plugin;
 	}
 	
@@ -95,9 +99,15 @@ public class Activator extends AbstractUIPlugin {
 		return getDefault().getImageRegistry().getDescriptor(key);
 	}
 
-	public static IProxyService getProxyService() {
-        IProxyService service = (IProxyService) getDefault().getBundle().getBundleContext().getServiceReference(IProxyService.class.getName());
+	public IProxyService getProxyService() {
+        BundleContext bundleContext = getDefault().getBundle().getBundleContext();
+		ServiceReference serviceReference = bundleContext.getServiceReference(IProxyService.class.getName());
+		IProxyService service = (IProxyService) bundleContext.getService(serviceReference);
 		return service;
+	}
+	
+	public HttpPreviewer getHttpPreviewer() {
+		return previewer;
 	}
 
 }

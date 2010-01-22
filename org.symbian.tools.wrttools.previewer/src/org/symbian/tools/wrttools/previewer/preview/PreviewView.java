@@ -34,7 +34,7 @@ import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.MessagePage;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
-import org.symbian.tools.wrttools.previewer.Activator;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.IWrtEditingPreferences;
 
 public class PreviewView extends PageBookView {
@@ -64,7 +64,7 @@ public class PreviewView extends PageBookView {
 			try {
 				event.getDelta().accept(visitor);
 			} catch (CoreException e) {
-				Activator.log(e);
+				PreviewerPlugin.log(e);
 			}
 			refreshPages(visitor.files);
 		}
@@ -133,7 +133,7 @@ public class PreviewView extends PageBookView {
 	}
 
 	private boolean getDefaultAutorefresh(IProject project) {
-		IPreferenceStore preferenceStore = Activator.getDefault()
+		IPreferenceStore preferenceStore = PreviewerPlugin.getDefault()
 				.getPreferenceStore();
 		String value = preferenceStore
 				.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
@@ -153,7 +153,7 @@ public class PreviewView extends PageBookView {
 	}
 
 	private File getPreferencesFile() {
-		return Activator.getDefault().getStateLocation().append(
+		return PreviewerPlugin.getDefault().getStateLocation().append(
 				"autorefreshState.xml").toFile();
 	}
 
@@ -200,13 +200,13 @@ public class PreviewView extends PageBookView {
 					inputStream = new FileInputStream(preferencesFile);
 					properties.loadFromXML(inputStream);
 				} catch (IOException e) {
-					Activator.log(e);
+					PreviewerPlugin.log(e);
 				} finally {
 					if (inputStream != null) {
 						try {
 							inputStream.close();
 						} catch (IOException e) {
-							Activator.log(e);
+							PreviewerPlugin.log(e);
 						}
 					}
 				}
@@ -245,13 +245,13 @@ public class PreviewView extends PageBookView {
 						path));
 				properties.storeToXML(outputStream, null);
 			} catch (IOException e) {
-				Activator.log(e);
+				PreviewerPlugin.log(e);
 			} finally {
 				if (outputStream != null) {
 					try {
 						outputStream.close();
 					} catch (IOException e) {
-						Activator.log(e);
+						PreviewerPlugin.log(e);
 					}
 				}
 			}

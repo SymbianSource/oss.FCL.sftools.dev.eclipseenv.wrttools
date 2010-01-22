@@ -8,7 +8,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.symbian.tools.wrttools.previewer.Activator;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.IWrtEditingPreferences;
 
 /**
@@ -33,7 +33,7 @@ public class WrtEditingPreferencePage
 
 	public WrtEditingPreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(PreviewerPlugin.getDefault().getPreferenceStore());
 	}
 	
 	/**

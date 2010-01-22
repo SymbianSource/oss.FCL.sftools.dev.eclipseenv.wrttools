@@ -1,4 +1,4 @@
-<%@ page import="org.symbian.tools.wrttools.debug.internal.web.WebAppInterface" %>
+<%@ page import="org.symbian.tools.wrttools.previewer.http.WebAppInterface" %>
 <%
 	String widget = WebAppInterface.decode(request.getParameter("widget"));
 	String id = request.getParameter("session");
