@@ -34,6 +34,8 @@ import org.mozilla.xpcom.Mozilla;
 import org.osgi.framework.Bundle;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.Images;
+import org.symbian.tools.wrttools.previewer.http.WebAppInterface;
+import org.symbian.tools.wrttools.previewer.http.WebappManager;
 
 public class PreviewPage extends Page implements IPageBookViewPage, ISelectionProvider {
 	private static final String XUL_RUNNER_PATH_PARAMETER = "org.eclipse.swt.browser.XULRunnerPath";
@@ -155,12 +157,14 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 			browser.refresh();
 			refreshAction.setImageDescriptor(PreviewerPlugin
 					.getImageDescriptor(Images.GREEN_SYNC));
-			asyncExec(new Runnable() {
-				@Override
-				public void run() {
-					focusControl.setFocus();
-				}
-			});
+			if (focusControl != null) {
+				asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						focusControl.setFocus();
+					}
+				});
+			}
 			refreshAction.setToolTipText("Refresh the preview browser");
 			needsRefresh = false;
 		} finally {
@@ -239,7 +243,7 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 	}
 	
 	private void bypassSameOriginPolicy() {
-
+		WebAppInterface.getInstance();
 		try{
 			nsIServiceManager servMgr = null;
 			try {
@@ -287,7 +291,8 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 			mozillaPrefs.setCharPref("capability.policy.default.XMLHttpRequest.setRequestHeader", "allAccess");
 			/* to over-ride the internet security dialog when preview browser tries to access local hard drive */
 			mozillaPrefs.setCharPref("capability.principal.codebase.p0.granted", "UniversalXPConnect  UniversalBrowserRead");
-			mozillaPrefs.setCharPref("capability.principal.codebase.p0.id", "file://");
+			String location = "http://127.0.0.1:" + WebappManager.getPort();
+			mozillaPrefs.setCharPref("capability.principal.codebase.p0.id", location);
 			mozillaPrefs.setBoolPref("security.fileuri.strict_origin_policy", 0);
 		} catch (Exception e) {
 			PreviewerPlugin.log("Error getting preferences", e);

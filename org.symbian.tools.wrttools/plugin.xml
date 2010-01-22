@@ -17,7 +17,7 @@
 		</runtime>
 		<requires-nature id="org.eclipse.wst.jsdt.core.jsNature" />
 		<requires-nature id="org.eclipse.pde.PluginNature" />
-		<builder id="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
+		<builder id="org.symbian.tools.wrttools.PropertiesFileAuditor">
 		</builder>
 	</extension>
 	<extension-point id="projectTemplates" name="WRT application project templates" schema="schema/projectTemplates.exsd"/>
