@@ -22,5 +22,5 @@ public interface IConstants {
 	String PREF_NAME_CHROME_LOCATION="chrome.location";
 
 	String PROP_PROJECT_NAME = "projectName";
-	public static final String WRT_PREVIEW_HTML = "wrt_preview_frame.html";
+	public static final String WRT_PREVIEW_HTML = "wrt_preview_main.html";
 }

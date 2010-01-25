@@ -46,7 +46,7 @@
       <plugin id="javax.transaction" fragment="true"/>
       <plugin id="javax.xml"/>
       <plugin id="javax.xml.stream"/>
-      <plugin id="javax.xml.ws"/>
+      <plugin id="javax.xml.ws" fragment=""/>
       <plugin id="org.apache.bcel"/>
       <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.collections"/>
@@ -73,7 +73,7 @@
       <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
-      <plugin id="org.eclipse.compare.win32"/>
+      <plugin id="org.eclipse.compare.win32" fragment=""/>
       <plugin id="org.eclipse.core.boot"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
@@ -196,11 +196,11 @@
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.osgi.util"/>
       <plugin id="org.eclipse.platform"/>
-      <plugin id="org.eclipse.platform.doc.isv"/>
+      <plugin id="org.eclipse.platform.doc.isv" fragment=""/>
       <plugin id="org.eclipse.platform.doc.user"/>
       <plugin id="org.eclipse.rcp"/>
       <plugin id="org.eclipse.search"/>
-      <plugin id="org.eclipse.servertools.doc.isv"/>
+      <plugin id="org.eclipse.servertools.doc.isv" fragment=""/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
@@ -275,7 +275,7 @@
       <plugin id="org.eclipse.wst.sse.ui.infopop"/>
       <plugin id="org.eclipse.wst.standard.schemas"/>
       <plugin id="org.eclipse.wst.validation"/>
-      <plugin id="org.eclipse.wst.validation.doc.isv"/>
+      <plugin id="org.eclipse.wst.validation.doc.isv" fragment=""/>
       <plugin id="org.eclipse.wst.validation.infopop"/>
       <plugin id="org.eclipse.wst.validation.ui"/>
       <plugin id="org.eclipse.wst.xml.core"/>
@@ -291,6 +291,7 @@
       <plugin id="org.mortbay.jetty.util"/>
       <plugin id="org.mozilla.xpcom"/>
       <plugin id="org.mozilla.xulrunner"/>
+      <plugin id="org.mozilla.xulrunner.gtk.linux.x86" fragment="true"/>
       <plugin id="org.mozilla.xulrunner.win32.win32.x86" fragment="true"/>
       <plugin id="org.objectweb.asm"/>
       <plugin id="org.sat4j.core"/>

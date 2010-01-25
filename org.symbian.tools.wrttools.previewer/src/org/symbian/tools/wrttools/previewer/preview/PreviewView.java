@@ -183,7 +183,7 @@ public class PreviewView extends PageBookView {
 	}
 
 	private boolean isWrtProject(IProject project) {
-		return project.getFile("wrt_preview_frame.html").exists();
+		return project.getFile("wrt_preview_main.html").exists();
 	}
 
 	private void loadPreferences() {

@@ -39,6 +39,8 @@ public final class ChromeDebugUtils {
 		// Add more ifs as we add support for new platforms
 		if (isMac()) {
 			return "Google Chrome.app/Contents/MacOS/Google Chrome";
+		}	if (isLinux()) {
+			return "chrome";
 		} else {
 			return "chrome.exe";
 		}
@@ -62,5 +64,9 @@ public final class ChromeDebugUtils {
 
 	public static boolean isMac() {
 		return "macosx".equals(Platform.getOS());
+	}
+
+	public static boolean isLinux() {
+		return "linux".equals(Platform.getOS());
 	}
 }

@@ -39,6 +39,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	private File getDefaultFolder() {
 		if (ChromeDebugUtils.isMac()) {
 			return new File("/Applications");
+		} else if (ChromeDebugUtils.isLinux()) {
+			return new File("/opt/google/chrome");
 		}
 		String property = System.getProperty("user.home");
 		File folder = new File(property, DEFAULT_CHROME_LOCATION);
