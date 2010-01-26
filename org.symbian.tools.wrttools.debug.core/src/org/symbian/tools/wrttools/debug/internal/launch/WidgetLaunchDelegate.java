@@ -27,6 +27,7 @@ import java.text.MessageFormat;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -85,12 +86,11 @@ public class WidgetLaunchDelegate implements
 		// 2. Start Chrome
 		synchronized (CHROME_ARGS) { // No chances for collision. Still, better safe then spend several days looking for hard-to-reproduce problem
 			CHROME_ARGS[EXECUTABLE_ARG_NUM] = browserExecutable;
-			CHROME_ARGS[PROFILE_ARG_NUM] = "--user-data-dir=\"" + Activator.getDefault().getStateLocation().append("chromeprofile").toOSString() + "\"";
+			CHROME_ARGS[PROFILE_ARG_NUM] = "--user-data-dir=\"" + getChromeProfilePath() + "\"";
 			CHROME_ARGS[PORT_ARG_NUM] = "--remote-shell-port=" + port;
 			CHROME_ARGS[APP_ARG_NUM] = MessageFormat.format("--app={0}", uri.toASCIIString());
 			try {
-				Runtime.getRuntime().exec(CHROME_ARGS, null,
-						new File(browserExecutable).getParentFile());
+				Runtime.getRuntime().exec(CHROME_ARGS, null, null);
 			} catch (IOException e) {
 				launchManager.removeLaunch(launch);
 				StringBuffer commandLine = new StringBuffer(CHROME_ARGS[0]);
@@ -106,6 +106,12 @@ public class WidgetLaunchDelegate implements
 			launchManager.removeLaunch(launch);
 		}
 		monitor.done();
+	}
+
+
+	private String getChromeProfilePath() {
+		IPath location = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+		return location.append(".chrome").toOSString();
 	}
 
 
