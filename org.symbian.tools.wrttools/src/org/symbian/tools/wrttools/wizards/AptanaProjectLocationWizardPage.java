@@ -343,7 +343,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 	private static final Collection<String> EXCLUDED;
 
 	static {
-		EXCLUDED = new TreeSet<String>(Arrays.asList(".project"));
+		EXCLUDED = new TreeSet<String>(Arrays.asList(".project", "preview", "wrt_preview_main.html"));
 	}
 
 	public AptanaProjectLocationWizardPage() {
@@ -582,7 +582,6 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 				operation.setCreateContainerStructure(false);
 				operation.run(monitor);
 			}
-			ProjectUtils.importPreviewer(record.description.getLocationURI());
 		} catch (CoreException e) {
 			Activator.log(e);
 			return false;
