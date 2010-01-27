@@ -71,7 +71,6 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 			if (contents != null) {
 				copyData(contents, resp.getOutputStream());
 			} else {
-				System.err.println(path);
 				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (CoreException e) {
