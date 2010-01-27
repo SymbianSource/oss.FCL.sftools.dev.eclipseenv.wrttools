@@ -54,9 +54,9 @@ public class ProjectUtils {
 		monitor.beginTask("Create project resources", 20);
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(name);
-		ValidationFramework.getDefault().addValidationBuilder(project);
 		BuildPathsBlock.createProject(project, uri, new SubProgressMonitor(
 				monitor, 10));
+		ValidationFramework.getDefault().addValidationBuilder(project);
 
 		BuildPathsBlock.addJavaNature(project, new SubProgressMonitor(monitor,
 				10));
