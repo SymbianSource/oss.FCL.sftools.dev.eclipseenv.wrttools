@@ -128,30 +128,35 @@
 				<insertionPoint name="group.open" separator="true" />
 				<insertionPoint name="group.openWith" />
 				<insertionPoint name="group.edit" separator="true" />
-				<insertionPoint name="group.reorganize" />
+				<insertionPoint name="group.reorganize" separator="true" />
 				<insertionPoint name="group.port" separator="true" />
 				<insertionPoint name="group.build" separator="true" />
 				<insertionPoint name="group.generate" separator="true" />
 				<insertionPoint name="group.search" separator="true" />
 				<insertionPoint name="additions" separator="true" />
 				<insertionPoint name="group.properties" separator="true" />
-
 			</popupMenu>
 		</viewer>
 		<viewerContentBinding viewerId="org.symbian.tools.wrttools.wrtnavigator">
 			<includes>
-				<contentExtension pattern="org.eclipse.ui.navigator.resourceContent" />
 				<contentExtension
           isRoot="true"
           pattern="org.symbian.tools.wrttools.navigatorcontent"/>
 				<contentExtension pattern="org.eclipse.ui.navigator.resources.filters.*" />
 				<contentExtension pattern="org.eclipse.ui.navigator.resources.linkHelper" />
-				<contentExtension pattern="org.eclipse.ui.navigator.resources.workingSets" />
 			</includes>
 		</viewerContentBinding>
 		<viewerActionBinding viewerId="org.symbian.tools.wrttools.wrtnavigator">
 			<includes>
-				<actionExtension pattern="org.eclipse.ui.navigator.resources.*" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.PortingActions" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.GotoActions" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.GoIntoActions" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.NewActions" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.PropertiesActionProvider" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.WorkManagementActionProvider" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.ResourceMgmtActions" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.UndoRedoActionProvider" />
+				<actionExtension pattern="org.eclipse.ui.navigator.resources.WorkingSetActions" />
 			</includes>
 		</viewerActionBinding>
 		<dragAssistant
@@ -232,9 +237,8 @@
        </actionProvider>
        <actionProvider
              class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorActionProvider"
-             id="org.eclipse.wst.jsdt.ui.navigator.actions.StandardActions"
-             overrides="org.eclipse.ui.navigator.resources.actions.EditActions">
-          <enablement>
+             id="org.eclipse.wst.jsdt.ui.navigator.actions.StandardActions">
+<!--          <enablement>
              <or>
                 <and>
                    <instanceof
@@ -261,7 +265,7 @@
                    </count>
                 </adapt>
              </or>
-          </enablement>
+          </enablement>-->
        </actionProvider>
        <actionProvider
              class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorRefactorActionProvider"

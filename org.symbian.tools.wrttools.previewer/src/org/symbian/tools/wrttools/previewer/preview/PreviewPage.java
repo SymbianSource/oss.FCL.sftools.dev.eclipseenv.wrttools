@@ -217,7 +217,6 @@ public class PreviewPage extends Page implements IPageBookViewPage, ISelectionPr
 	}
 	
 	private void applyProxySettings() {
-		
 		IProxyService px = PreviewerPlugin.getDefault().getProxyService();
 		if(px != null){			 
 			boolean proxyEnabled = px.isProxiesEnabled();
