@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+<!-- Generic Project Builder and Project Natures  -->		
 	<extension id="PropertiesFileAuditor" name="Properties File Auditor Project Builder"
 		point="org.eclipse.core.resources.builders">
 		<builder hasNature="true">
@@ -20,6 +21,75 @@
 		<builder id="org.symbian.tools.wrttools.PropertiesFileAuditor">
 		</builder>
 	</extension>
+ 	
+<!-- Widget Project Nature -->	
+ <extension
+       id="WidgetProjectNature"
+       point="org.eclipse.core.resources.natures">
+    <runtime>
+       <run class="org.symbian.tools.wrttools.WidgetProjectNature"/>
+    </runtime>
+ </extension> 
+ 
+<!-- Widget Project Nature Images -->
+        <extension
+              point="org.eclipse.ui.ide.projectNatureImages">
+           <image
+                 icon="icons/main16.gif"
+                 id="org.symbian.tools.wrttools.natureImage"
+                 natureId="org.symbian.tools.wrttools.WidgetProjectNature">
+           </image>
+        </extension>
+        
+<!-- WRT Validators -->		
+	<extension
+			point="org.eclipse.wst.validation.validatorV2"
+			id="org.symbian.tools.wrttools.core.validator"
+			name="%VALIDATOR.Name">
+		<validator class="org.symbian.tools.wrttools.core.validator.ValidateAction">
+         	<include>
+         	     <rules>
+		               <fileext ext="xml"/>
+		               <fileext ext="html"/>
+		               <fileext ext="js"/>
+		               <fileext ext="css"/>
+		               <fileext ext="plist"/>
+		         </rules>
+            </include>
+		</validator>
+    </extension> 
+    
+<!-- Validation markers -->
+   
+        <extension
+           id="org.symbian.tools.wrttools.core.validator.marker"
+           name="Validator Marker"
+           point="org.eclipse.core.resources.markers">
+                 <super type="org.eclipse.core.resources.problemmarker"/>
+                 <persistent value ="true"/>
+        </extension>
+
+        <extension	
+          point="org.eclipse.ui.popupMenus">
+	      <objectContribution
+			 adaptable="true"
+			 id="com.nokia.wrt.core.validator"
+             objectClass="org.eclipse.core.resources.IResource">
+           <filter
+         	name="projectNature"
+         	value="org.symbian.tools.wrttools.WidgetProjectNature"/>
+           <action
+                 class="com.nokia.wrt.core.validator.ValidateAction"
+                 enablesFor="+"
+                 icon="icons/validate_widget.gif"
+                 id="com.nokia.wrt.core.validator.ValidateAction"
+                 label="Validate Widget"
+                 menubarPath="com.nokia.wrt.contextMenuGroupMarker">
+			</action>
+		   </objectContribution> 
+        </extension>  
+
+<!-- WRT Project Templates - CSS Validator -->
 	<extension-point id="projectTemplates" name="WRT application project templates" schema="schema/projectTemplates.exsd"/>
 	<extension id="org.symbian.tools.wrttools.core.cssvalidator"
 		name="CSS Validator" point="org.eclipse.wst.validation.validatorV2">
@@ -36,6 +106,8 @@
 			</include>
 		</validator>
 	</extension>
+	 
+<!-- WRT WidgetWizard and AptanaProjectImportWizard -->
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.symbian.tools.wrttools.core.category" name="Web Runtime(WRT)">
 		</category>
@@ -58,6 +130,8 @@
 			project="true">
 		</wizard>
 	</extension>
+	
+<!-- WRT Project Templates -->
 	<extension point="org.symbian.tools.wrttools.projectTemplates">
 		<projectTemplate
 		name="Basic Widget Project"
@@ -72,6 +146,8 @@
          </description>
 		</projectTemplate>
 	</extension>
+	
+<!-- Import Wizard -->
 	<extension point="org.eclipse.ui.importWizards">
 		<category id="org.symbian.tools.wrttools.import" name="Web Runtime(WRT)">
 		</category>
@@ -81,6 +157,8 @@
 			name="Aptana IDE WRT Project">
 		</wizard>
 	</extension>
+	
+<!-- Problem Markers -->
 	<extension id="org.symbian.tools.wrt.xmlProblem" name="XML Problem"
 		point="org.eclipse.core.resources.markers">
 		<super type="org.eclipse.core.resources.problemmarker">
@@ -95,12 +173,16 @@
 		<persistent value="true">
 		</persistent>
 	</extension>
+	
+<!-- WRT Content Descriptor (.plist) file -->
 	<extension point="org.eclipse.core.contenttype.contentTypes">
 		<content-type base-type="org.eclipse.core.runtime.xml"
 			file-extensions="plist" id="org.symbian.tools.wrttools.contenttype.plist"
 			name="WebRuntime Descriptor File" priority="normal">
 		</content-type>
 	</extension>
+	
+<!-- Perspective Extensions -->
 	<extension point="org.eclipse.ui.perspectiveExtensions">
 		<perspectiveExtension targetID="org.eclipse.wst.jsdt.ui.JavaPerspective">
 			<newWizardShortcut id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
@@ -111,6 +193,8 @@
 			</newWizardShortcut>
 		</perspectiveExtension>
 	</extension>
+	
+<!-- Navigator Extensions -->
 	<extension point="org.eclipse.ui.views">
 		<view allowMultiple="false" category="org.symbian.tools.wrttools.views"
 			class="org.eclipse.ui.navigator.CommonNavigator" icon="icons/main16.gif"
@@ -184,7 +268,7 @@
                       type="org.eclipse.core.resources.IProject">
                    <test
                          property="org.eclipse.core.resources.projectNature"
-                         value="org.eclipse.wst.jsdt.core.jsNature">
+                         value="org.symbian.tools.wrttools.WidgetProjectNature">
                    </test>
                 </adapt>
              </and>
@@ -246,7 +330,7 @@
                    </instanceof>
                    <test
                          property="org.eclipse.core.resources.projectNature"
-                         value="org.eclipse.wst.jsdt.core.jsNature">
+                         value="org.symbian.tools.wrttools.WidgetProjectNature">
                    </test>
                 </and>
                 <instanceof
@@ -279,7 +363,7 @@
                    </instanceof>
                    <test
                          property="org.eclipse.core.resources.projectNature"
-                         value="org.eclipse.wst.jsdt.core.jsNature">
+                         value="org.symbian.tools.wrttools.WidgetProjectNature">
                    </test>
                 </and>
                 <instanceof

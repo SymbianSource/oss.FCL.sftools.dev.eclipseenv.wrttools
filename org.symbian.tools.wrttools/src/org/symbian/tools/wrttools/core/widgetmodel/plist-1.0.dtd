@@ -1,0 +1,19 @@
+<!ENTITY % plo "(array | data | date | dict | real | integer | string | true | false )" >
+<!ELEMENT plist %plo;>
+<!ATTLIST plist version CDATA "1.0" >
+
+
+<!ELEMENT array (%plo;)*>
+<!ELEMENT dict (key, %plo;)*>
+<!ELEMENT key (#PCDATA)>
+
+
+<!ELEMENT string (#PCDATA)>
+<!ELEMENT data (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+
+
+<!ELEMENT true EMPTY>
+<!ELEMENT false EMPTY>
+<!ELEMENT real (#PCDATA)>
+<!ELEMENT integer (#PCDATA)>

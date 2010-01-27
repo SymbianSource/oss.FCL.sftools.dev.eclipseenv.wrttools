@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.symbian.tools.wrttools.sdt.utils.Logging;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -73,6 +74,11 @@ public class Activator extends AbstractUIPlugin {
 
 	public static void log(String message, Exception e) {
 		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, message, e));
+	}
+	
+	public static void log(int severity, String message, Throwable x) {
+		IStatus status = new Status(severity, PLUGIN_ID, 0, message, x);
+		Logging.log(getDefault(), status);
 	}
 
 }
