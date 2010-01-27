@@ -19,6 +19,7 @@
 package org.symbian.tools.wrttools.debug.internal;
 
 import org.chromium.debug.core.model.LineBreakpointAdapter;
+import org.chromium.debug.core.model.VProjectWorkspaceBridge;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.wst.jsdt.internal.ui.javaeditor.JavaEditor;
@@ -33,4 +34,9 @@ public class WorkspaceLineBreakpointAdapter extends LineBreakpointAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    protected String getDebugModelId() {
+      return VProjectWorkspaceBridge.DEBUG_MODEL_ID;
+    }
 }

@@ -22,7 +22,7 @@ public class ArrayValue extends Value implements IIndexedValue {
 
   private final IVariable[] elements;
 
-  public ArrayValue(IChromiumDebugTarget debugTarget, JsArray array) {
+  public ArrayValue(DebugTargetImpl debugTarget, JsArray array) {
     super(debugTarget, array);
     this.elements = createElements();
   }

@@ -4,8 +4,8 @@
 
 package org.chromium.debug.ui.actions;
 
-import org.chromium.debug.core.ChromiumDebugPlugin;
-import org.chromium.debug.core.model.StackFrame;
+import org.chromium.debug.core.model.EvaluateContext;
+import org.chromium.debug.core.model.VProjectWorkspaceBridge;
 import org.chromium.debug.core.model.Value;
 import org.chromium.sdk.JsVariable;
 import org.eclipse.core.runtime.PlatformObject;
@@ -24,7 +24,7 @@ import org.eclipse.debug.core.model.IValue;
 public class JsInspectExpression extends PlatformObject
     implements IErrorReportingExpression, IDebugEventSetListener {
 
-  private final StackFrame stackFrame;
+  private final EvaluateContext evaluateContext;
 
   private final JsVariable variable;
 
@@ -32,9 +32,9 @@ public class JsInspectExpression extends PlatformObject
 
   private final String expression;
 
-  public JsInspectExpression(StackFrame stackFrame, String expression, JsVariable variable,
+  public JsInspectExpression(EvaluateContext evaluateContext, String expression, JsVariable variable,
       String errorMessage) {
-    this.stackFrame = stackFrame;
+    this.evaluateContext = evaluateContext;
     this.expression = expression;
     this.variable = variable;
     this.errorMessage = errorMessage;
@@ -67,7 +67,7 @@ public class JsInspectExpression extends PlatformObject
 
   public IValue getValue() {
     return variable != null
-        ? Value.create(stackFrame.getDebugTarget(), variable.getValue())
+        ? Value.create(evaluateContext.getDebugTarget(), variable.getValue())
         : null;
   }
 
@@ -76,7 +76,7 @@ public class JsInspectExpression extends PlatformObject
   }
 
   public String getModelIdentifier() {
-    return ChromiumDebugPlugin.DEBUG_MODEL_ID;
+    return VProjectWorkspaceBridge.DEBUG_MODEL_ID;
   }
 
   public void handleDebugEvents(DebugEvent[] events) {

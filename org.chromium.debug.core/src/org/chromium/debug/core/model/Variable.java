@@ -26,13 +26,13 @@ public class Variable extends DebugElementImpl implements IVariable {
    */
   private final boolean isInternalProperty;
 
-  public Variable(IChromiumDebugTarget debugTarget, JsVariable variable, boolean isInternalProperty) {
+  public Variable(DebugTargetImpl debugTarget, JsVariable variable, boolean isInternalProperty) {
     super(debugTarget);
     this.variable = variable;
     this.isInternalProperty = isInternalProperty;
   }
 
-  public String getName() throws DebugException {
+  public String getName() {
     return variable.getName();
   }
 

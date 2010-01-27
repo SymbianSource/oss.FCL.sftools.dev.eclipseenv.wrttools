@@ -69,25 +69,27 @@ public class JsDebugModelPresentation extends LabelProvider implements IDebugMod
   }
 
   public String getEditorId(IEditorInput input, Object element) {
-	IFile file = null;
-	if (element instanceof IFile) {
-	  file = (IFile) element;
-	} else if (element instanceof IBreakpoint) {
-	  // Ñan the breakpoint marker be on the folder/project? Everything is possible with plugins...
-	  IResource resource = ((IBreakpoint) element).getMarker().getResource();
-	  if (resource instanceof IFile) {
-	    file = (IFile) resource;
-	  }
-	}
-	if (file != null) {
-	  // Notice that this method will pick the editor not only on extension mapping basis but also user preference 
-	  try {
-	    return IDE.getEditorDescriptor(file).getId();
-	  } catch (PartInitException e) {
-	    return JsEditor.EDITOR_ID;
-	  }
-	}
+    IFile file;
+    if (element instanceof IFile) {
+      file = (IFile) element;
+    } else if (element instanceof IBreakpoint) {
+        IBreakpoint breakpoint = (IBreakpoint) element;
+        IResource resource = breakpoint.getMarker().getResource();
+        // Can the breakpoint resource be folder or project? Better check for it.
+      if (resource instanceof IFile == false) {
+        return null;
+      }
+      file = (IFile) resource;
+    } else {
+      return null;
+    }
 
-    return null;
+    // Pick the editor based on the file extension, taking user preferences into account.
+    try {
+      return IDE.getEditorDescriptor(file).getId();
+    } catch (PartInitException e) {
+      // TODO(peter.rybin): should it really be the default case? There might be no virtual project.
+      return JsEditor.EDITOR_ID;
+    }
   }
 }

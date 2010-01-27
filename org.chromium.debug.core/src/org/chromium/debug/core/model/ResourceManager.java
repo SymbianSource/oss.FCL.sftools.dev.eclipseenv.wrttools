@@ -24,7 +24,7 @@ import org.eclipse.debug.core.DebugPlugin;
  * This object handles the mapping between {@link Script}s and their corresponding resources
  * inside Eclipse.
  */
-public class ResourceManager implements IResourceManager {
+public class ResourceManager {
   private final Map<IFile, Script> resourceToScript = new HashMap<IFile, Script>();
   private final Map<ScriptIdentifier, IFile> scriptIdToResource =
       new HashMap<ScriptIdentifier, IFile>();

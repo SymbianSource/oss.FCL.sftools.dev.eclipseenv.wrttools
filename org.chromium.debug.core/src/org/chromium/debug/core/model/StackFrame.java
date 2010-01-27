@@ -7,10 +7,12 @@ package org.chromium.debug.core.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.chromium.debug.core.ChromiumDebugPlugin;
 import org.chromium.sdk.CallFrame;
+import org.chromium.sdk.DebugContext;
 import org.chromium.sdk.JsArray;
 import org.chromium.sdk.JsFunction;
 import org.chromium.sdk.JsObject;
@@ -26,7 +28,6 @@ import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * An IStackFrame implementation over a JsStackFrame instance.
@@ -47,7 +48,7 @@ public class StackFrame extends DebugElementImpl implements IStackFrame {
    * @param thread for which the stack frame is created
    * @param stackFrame an underlying SDK stack frame
    */
-  public StackFrame(IChromiumDebugTarget debugTarget, JavascriptThread thread, CallFrame stackFrame) {
+  public StackFrame(DebugTargetImpl debugTarget, JavascriptThread thread, CallFrame stackFrame) {
     super(debugTarget);
     this.thread = thread;
     this.stackFrame = stackFrame;
@@ -77,19 +78,22 @@ public class StackFrame extends DebugElementImpl implements IStackFrame {
   }
 
   static IVariable[] wrapVariables(
-      IChromiumDebugTarget debugTarget, Collection<? extends JsVariable> jsVars,
+      DebugTargetImpl debugTarget, Collection<? extends JsVariable> jsVars,
       Collection <? extends JsVariable> jsInternalProperties) {
     List<Variable> vars = new ArrayList<Variable>(jsVars.size());
     for (JsVariable jsVar : jsVars) {
       vars.add(new Variable(debugTarget, jsVar, false));
     }
+    // Sort all regular properties by name.
+    Collections.sort(vars, VARIABLE_COMPARATOR);
+    // Always put internal properties in the end.
     for (JsVariable jsMetaVar : jsInternalProperties) {
       vars.add(new Variable(debugTarget, jsMetaVar, true));
     }
     return vars.toArray(new IVariable[vars.size()]);
   }
 
-  static IVariable[] wrapScopes(IChromiumDebugTarget debugTarget, List<? extends JsScope> jsScopes,
+  static IVariable[] wrapScopes(DebugTargetImpl debugTarget, List<? extends JsScope> jsScopes,
       JsVariable receiverVariable) {
     List<Variable> vars = new ArrayList<Variable>();
 
@@ -101,9 +105,13 @@ public class StackFrame extends DebugElementImpl implements IStackFrame {
         }
         vars.add(new Variable(debugTarget, wrapScopeAsVariable(scope), false));
       } else {
+        int startPos = vars.size();
         for (JsVariable var : scope.getVariables()) {
           vars.add(new Variable(debugTarget, var, false));
         }
+        int endPos = vars.size();
+        List<Variable> sublist = vars.subList(startPos, endPos);
+        Collections.sort(sublist, VARIABLE_COMPARATOR);
       }
     }
     if (receiverVariable != null) {
@@ -199,16 +207,7 @@ public class StackFrame extends DebugElementImpl implements IStackFrame {
   }
 
   public String getName() throws DebugException {
-    String name = stackFrame.getFunctionName();
-    Script script = stackFrame.getScript();
-    if (script == null) {
-      return Messages.StackFrame_UnknownScriptName;
-    }
-    int line = script.getStartLine() + getLineNumber();
-    if (line != -1) {
-      name = NLS.bind(Messages.StackFrame_NameFormat, new Object[] {name, script.getName(), line});
-    }
-    return name;
+    return getDebugTarget().getLabelProvider().getStackFrameLabel(this);
   }
 
   public IRegisterGroup[] getRegisterGroups() throws DebugException {
@@ -306,4 +305,22 @@ public class StackFrame extends DebugElementImpl implements IStackFrame {
     return stackFrame.hashCode();
   }
 
+  private final static Comparator<Variable> VARIABLE_COMPARATOR = new Comparator<Variable>() {
+    public int compare(Variable var1, Variable var2) {
+      return var1.getName().compareTo(var2.getName());
+    }
+  };
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public Object getAdapter(Class adapter) {
+    if (adapter == EvaluateContext.class) {
+      DebugContext debugContext = getDebugTarget().getDebugContext();
+      if (debugContext == null) {
+        return null;
+      }
+      return new EvaluateContext(getCallFrame().getEvaluateContext(), getDebugTarget());
+    }
+    return super.getAdapter(adapter);
+  }
 }

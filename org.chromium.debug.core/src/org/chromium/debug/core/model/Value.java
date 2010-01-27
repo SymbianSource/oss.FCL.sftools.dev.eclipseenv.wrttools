@@ -25,14 +25,14 @@ public class Value extends DebugElementImpl implements IValue {
 
   private IVariable[] variables;
 
-  public static Value create(IChromiumDebugTarget debugTarget, JsValue value) {
+  public static Value create(DebugTargetImpl debugTarget, JsValue value) {
     if (JsValue.Type.TYPE_ARRAY == value.getType()) {
       return new ArrayValue(debugTarget, (JsArray) value);
     }
     return new Value(debugTarget, value);
   }
 
-  Value(IChromiumDebugTarget debugTarget, JsValue value) {
+  Value(DebugTargetImpl debugTarget, JsValue value) {
     super(debugTarget);
     this.value = value;
   }

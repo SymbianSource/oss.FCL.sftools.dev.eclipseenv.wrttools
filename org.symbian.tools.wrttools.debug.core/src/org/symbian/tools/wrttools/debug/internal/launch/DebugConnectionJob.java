@@ -20,11 +20,13 @@ package org.symbian.tools.wrttools.debug.internal.launch;
 
 import java.net.URI;
 
+import org.chromium.debug.core.model.DebugTargetImpl;
 import org.chromium.debug.core.model.Destructable;
 import org.chromium.debug.core.model.DestructingGuard;
 import org.chromium.debug.core.model.JavascriptVmEmbedder;
 import org.chromium.debug.core.model.JavascriptVmEmbedderFactory;
 import org.chromium.debug.core.model.NamedConnectionLoggerFactory;
+import org.chromium.debug.core.model.WorkspaceBridge;
 import org.chromium.debug.core.model.JavascriptVmEmbedder.ConnectionToRemote;
 import org.chromium.sdk.ConnectionLogger;
 import org.eclipse.core.resources.IProject;
@@ -32,7 +34,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
-import org.symbian.tools.wrttools.debug.internal.model.DebugTargetImpl;
 import org.symbian.tools.wrttools.previewer.http.IPreviewStartupListener;
 
 public class DebugConnectionJob implements IPreviewStartupListener {
@@ -45,7 +46,8 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 	private final ILaunch launch;
 	private final IProject project;
 
-	public DebugConnectionJob(IProject project, final int port, final ILaunch launch) {
+	public DebugConnectionJob(IProject project, final int port,
+			final ILaunch launch) {
 		this.project = project;
 		this.port = port;
 		this.launch = launch;
@@ -64,53 +66,47 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 
 	@Override
 	public boolean browserRunning(URI uri) throws CoreException {
-		final DebugTargetImpl target = new DebugTargetImpl(launch, project);
-		final JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
+		JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
 				port, launch, uri);
+		DestructingGuard destructingGuard = new DestructingGuard();
 		try {
-		
-			DestructingGuard destructingGuard = new DestructingGuard();
-			try {
-				Destructable lauchDestructor = new Destructable() {
-					public void destruct() {
-						if (!launch.hasChildren()) {
-							DebugPlugin.getDefault().getLaunchManager()
-									.removeLaunch(launch);
-						}
+			Destructable lauchDestructor = new Destructable() {
+				public void destruct() {
+					if (!launch.hasChildren()) {
+						DebugPlugin.getDefault().getLaunchManager()
+								.removeLaunch(launch);
 					}
-				};
-		
-				destructingGuard.addValue(lauchDestructor);
-		
-				Destructable targetDestructor = new Destructable() {
-					public void destruct() {
-						terminateTarget(target);
-					}
-				};
-				destructingGuard.addValue(targetDestructor);
-				boolean attached = target.attach(project.getName(), remoteServer,
-						destructingGuard, new Runnable() {
-							public void run() {
-								target.setupBreakpointsFromResources();
-							}
-						}, new NullProgressMonitor());
-				if (!attached) {
-					// Error
-					return false;
 				}
-		
-				launch.setSourceLocator(target.getSourceLocator());
-		
-				launch.addDebugTarget(target);
-		
-				// All OK
-				destructingGuard.discharge();
-			} finally {
-				destructingGuard.doFinally();
+			};
+
+			destructingGuard.addValue(lauchDestructor);
+
+			WorkspaceBridge.Factory bridgeFactory = new WRTProjectWorkspaceBridge.Factory(
+					project);
+
+			final DebugTargetImpl target = new DebugTargetImpl(launch,
+					bridgeFactory);
+
+			Destructable targetDestructor = new Destructable() {
+				public void destruct() {
+					terminateTarget(target);
+				}
+			};
+			destructingGuard.addValue(targetDestructor);
+
+			boolean attached = target.attach(remoteServer, destructingGuard,
+					null, new NullProgressMonitor());
+			if (!attached) {
+				// Error
+				return false;
 			}
-		
+
+			launch.addDebugTarget(target);
+
+			// All OK
+			destructingGuard.discharge();
 		} finally {
-			remoteServer.disposeConnection();
+			destructingGuard.doFinally();
 		}
 		return true;
 	}

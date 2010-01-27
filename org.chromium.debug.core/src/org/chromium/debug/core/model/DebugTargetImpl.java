@@ -4,11 +4,7 @@
 
 package org.chromium.debug.core.model;
 
-import java.util.Collection;
-
 import org.chromium.debug.core.ChromiumDebugPlugin;
-import org.chromium.debug.core.util.ChromiumDebugPluginUtil;
-import org.chromium.sdk.Breakpoint;
 import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.DebugContext;
 import org.chromium.sdk.DebugEventListener;
@@ -17,11 +13,8 @@ import org.chromium.sdk.JavascriptVm;
 import org.chromium.sdk.Script;
 import org.chromium.sdk.DebugContext.State;
 import org.chromium.sdk.DebugContext.StepAction;
-import org.chromium.sdk.JavascriptVm.BreakpointCallback;
-import org.chromium.sdk.JavascriptVm.ScriptsCallback;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarkerDelta;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -30,25 +23,21 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.IBreakpoint;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.core.model.ISourceLocator;
-import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
 /**
  * An IDebugTarget implementation for remote JavaScript debugging.
  * Can debug any target that supports the ChromeDevTools protocol.
  */
-public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugTarget {
+public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
 
   private static final IThread[] EMPTY_THREADS = new IThread[0];
-
-  private static final long OPERATION_TIMEOUT_MS = 15000L;
 
   private final ILaunch launch;
 
@@ -56,21 +45,21 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
 
   private JavascriptVmEmbedder vmEmbedder = STUB_VM_EMBEDDER;
 
-  private ResourceManager resourceManager;
-
-  private BreakpointRegistry breakpointRegistry;
-
-  private IProject debugProject = null;
-
-  private DebugContext debugContext;
+  private volatile DebugContext debugContext;
 
   private boolean isSuspended = false;
 
   private boolean isDisconnected = false;
 
+  private final WorkspaceBridge.Factory workspaceBridgeFactory;
 
-  public DebugTargetImpl(ILaunch launch) {
+  private WorkspaceBridge workspaceRelations = null;
+
+  private final ListenerBlock listenerBlock = new ListenerBlock();
+
+  public DebugTargetImpl(ILaunch launch, WorkspaceBridge.Factory workspaceBridgeFactory) {
     super(null);
+    this.workspaceBridgeFactory = workspaceBridgeFactory;
     this.launch = launch;
     this.threads = new JavascriptThread[] { new JavascriptThread(this) };
   }
@@ -80,28 +69,23 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
    * Loads browser tabs, consults the {@code selector} which of the tabs to
    * attach to, and if any has been selected, requests an attachment to the tab.
    *
-   * @param projectNameBase to create for the browser scripts
    * @param remoteServer embedding application we are connected with
-   * @param attachCallback to invoke on successful attachment
+   * @param attachCallback to invoke on successful attachment, can fail to be called
    * @param monitor to report the progress to
    * @return whether the target has attached to a tab
    * @throws CoreException
    */
-  public boolean attach(String projectNameBase,
-      JavascriptVmEmbedder.ConnectionToRemote remoteServer, DestructingGuard destructingGuard,
-      Runnable attachCallback, IProgressMonitor monitor) throws CoreException {
+  public boolean attach(JavascriptVmEmbedder.ConnectionToRemote remoteServer,
+      DestructingGuard destructingGuard, Runnable attachCallback,
+      IProgressMonitor monitor) throws CoreException {
     monitor.beginTask("", 2); //$NON-NLS-1$
     JavascriptVmEmbedder.VmConnector connector = remoteServer.selectVm();
     if (connector == null) {
       return false;
     }
     monitor.worked(1);
-    return performAttach(projectNameBase, connector, destructingGuard, attachCallback);
-  }
-
-  private boolean performAttach(String projectNameBase, JavascriptVmEmbedder.VmConnector connector,
-      DestructingGuard destructingGuard, Runnable attachCallback) throws CoreException {
     final JavascriptVmEmbedder embedder = connector.attach(embedderListener, debugEventListener);
+    // From this moment V8 may call our listeners. We block them by listenerBlock for a while.
 
     Destructable embedderDestructor = new Destructable() {
       public void destruct() {
@@ -111,88 +95,44 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
 
     destructingGuard.addValue(embedderDestructor);
 
-    vmEmbedder = embedder;
+    this.vmEmbedder = embedder;
 
-    // We might want to add some url-specific suffix here
-    String projectName = projectNameBase;
     // We'd like to know when launch is removed to remove our project.
     DebugPlugin.getDefault().getLaunchManager().addLaunchListener(launchListener);
-    this.debugProject = ChromiumDebugPluginUtil.createEmptyProject(projectName);
-    this.breakpointRegistry = new BreakpointRegistry();
-    this.resourceManager = new ResourceManager(debugProject, breakpointRegistry);
-    onAttach(projectName, attachCallback);
+
+    this.workspaceRelations = workspaceBridgeFactory.attachedToVm(this,
+        vmEmbedder.getJavascriptVm());
+    listenerBlock.unblock();
+
+    DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
+    reloadScriptsAndPossiblyResume(attachCallback);
+
     return true;
   }
 
-  private void onAttach(String projectName, Runnable attachCallback) {
-    DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
-    reloadScriptsAndPossiblyResume(attachCallback);
-  }
-
   private void reloadScriptsAndPossiblyResume(final Runnable attachCallback) {
-    reloadScripts(true, new Runnable() {
-      public void run() {
-        try {
-          if (attachCallback != null) {
-            attachCallback.run();
-          }
-        } finally {
-          fireCreationEvent();
-        }
-        Job job = new Job("Update debugger state") {
-          @Override
-          protected IStatus run(IProgressMonitor monitor) {
-            debugEventListener.resumedByDefault();
-            return Status.OK_STATUS;
-          }
-        };
-        job.schedule();
+    workspaceRelations.reloadScriptsAtStart();
+
+    try {
+      if (attachCallback != null) {
+        attachCallback.run();
       }
-    });
-  }
+    } finally {
+      fireCreationEvent();
+    }
 
-  private void reloadScripts(boolean isSync, final Runnable runnable) {
-    Runnable command = new Runnable() {
-      public void run() {
-        vmEmbedder.getJavascriptVm().getScripts(new ScriptsCallback() {
-          public void failure(String errorMessage) {
-            ChromiumDebugPlugin.logError(errorMessage);
-          }
-
-          public void success(Collection<Script> scripts) {
-            if (!vmEmbedder.getJavascriptVm().isAttached()) {
-              return;
-            }
-            for (Script script : scripts) {
-              getResourceManager().addScript(script);
-            }
-            if (runnable != null) {
-              runnable.run();
-            }
-          }
-
-        });
+    Job job = new Job("Update debugger state") {
+      @Override
+      protected IStatus run(IProgressMonitor monitor) {
+        debugEventListener.resumedByDefault();
+        return Status.OK_STATUS;
       }
     };
-    if (isSync) {
-      command.run();
-      return;
-    }
-    Thread t = new Thread(command);
-    t.setDaemon(true);
-    t.start();
-    try {
-      t.join(OPERATION_TIMEOUT_MS);
-    } catch (InterruptedException e) {
-      ChromiumDebugPlugin.log(e);
-    }
+    job.schedule();
   }
 
   public String getName() throws DebugException {
-    if (vmEmbedder == null) {
-      return ""; //$NON-NLS-1$
-    }
-    return vmEmbedder.getTargetName();
+    return workspaceBridgeFactory.getLabelProvider().getTargetLabel(this);
   }
 
   public IProcess getProcess() {
@@ -214,8 +154,7 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
   }
 
   public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-    return ChromiumDebugPlugin.DEBUG_MODEL_ID.equals(breakpoint.getModelIdentifier()) &&
-        !isDisconnected();
+    return workspaceRelations.getBreakpointHandler().supportsBreakpoint(breakpoint);
   }
 
   @Override
@@ -228,9 +167,8 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
     return launch;
   }
 
-  @Override
-  public String getModelIdentifier() {
-    return ChromiumDebugPlugin.DEBUG_MODEL_ID;
+  public String getChromiumModelIdentifier() {
+    return workspaceBridgeFactory.getDebugModelIdentifier();
   }
 
   public boolean canTerminate() {
@@ -270,6 +208,7 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
   }
 
   public void resumed(int detail) {
+    debugContext = null;
     fireResumeEvent(detail);
   }
 
@@ -289,7 +228,7 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
     if (!canDisconnect()) {
       return;
     }
-    removeAllBreakpoints();
+    workspaceRelations.beforeDetach();
     if (!vmEmbedder.getJavascriptVm().detach()) {
       ChromiumDebugPlugin.logWarning(Messages.DebugTargetImpl_BadResultWhileDisconnecting);
     }
@@ -310,10 +249,6 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
 
   public boolean supportsStorageRetrieval() {
     return false;
-  }
-
-  public IProject getDebugProject() {
-    return debugProject;
   }
 
   /**
@@ -370,119 +305,40 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
   }
 
   public void breakpointAdded(IBreakpoint breakpoint) {
-    if (!supportsBreakpoint(breakpoint)) {
-      return;
-    }
-    try {
-      if (breakpoint.isEnabled()) {
-        // Class cast is ensured by the supportsBreakpoint implementation
-        final ChromiumLineBreakpoint lineBreakpoint = (ChromiumLineBreakpoint) breakpoint;
-        IFile file = (IFile) breakpoint.getMarker().getResource();
-        if (getResourceManager().isAddingFile(file)) {
-          return; // restoring breakpoints in progress
-        }
-        final Script script = getResourceManager().getScript(file);
-        if (script == null) {
-          // Might be a script from a different debug target
-          return;
-        }
-        final int line = (lineBreakpoint.getLineNumber() - 1) + script.getStartLine();
-        BreakpointCallback callback = new BreakpointCallback() {
-          public void success(Breakpoint breakpoint) {
-            lineBreakpoint.setBreakpoint(breakpoint);
-            breakpointRegistry.add(script, line, breakpoint);
-          }
-
-          public void failure(String errorMessage) {
-            ChromiumDebugPlugin.logError(errorMessage);
-          }
-        };
-        // ILineBreakpoint lines are 1-based while V8 lines are 0-based
-        JavascriptVm javascriptVm = vmEmbedder.getJavascriptVm();
-        if (script.getName() != null) {
-          javascriptVm.setBreakpoint(Breakpoint.Type.SCRIPT_NAME,
-              script.getName(),
-              line,
-              Breakpoint.EMPTY_VALUE,
-              breakpoint.isEnabled(),
-              lineBreakpoint.getCondition(),
-              lineBreakpoint.getIgnoreCount(),
-              callback);
-        } else {
-          javascriptVm.setBreakpoint(Breakpoint.Type.SCRIPT_ID,
-              String.valueOf(script.getId()),
-              line,
-              Breakpoint.EMPTY_VALUE,
-              breakpoint.isEnabled(),
-              lineBreakpoint.getCondition(),
-              lineBreakpoint.getIgnoreCount(),
-              callback);
-        }
-      }
-    } catch (CoreException e) {
-      ChromiumDebugPlugin.log(e);
-    }
+    workspaceRelations.getBreakpointHandler().breakpointAdded(breakpoint);
   }
 
   public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
-    if (!supportsBreakpoint(breakpoint)) {
-      return;
-    }
-    // Class cast is ensured by the supportsBreakpoint implementation
-    ((ChromiumLineBreakpoint) breakpoint).changed();
+    workspaceRelations.getBreakpointHandler().breakpointChanged(breakpoint, delta);
   }
 
   public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) {
-    if (!supportsBreakpoint(breakpoint)) {
-      return;
-    }
-    try {
-      if (breakpoint.isEnabled()) {
-        // Class cast is ensured by the supportsBreakpoint implementation
-        ChromiumLineBreakpoint lineBreakpoint = (ChromiumLineBreakpoint) breakpoint;
-        lineBreakpoint.clear();
-        breakpointRegistry.remove(
-            getResourceManager().getScript((IFile) breakpoint.getMarker().getResource()),
-            lineBreakpoint.getLineNumber() - 1,
-            lineBreakpoint.getBrowserBreakpoint());
-      }
-    } catch (CoreException e) {
-      ChromiumDebugPlugin.log(e);
-    }
+    workspaceRelations.getBreakpointHandler().breakpointRemoved(breakpoint, delta);
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public Object getAdapter(Class adapter) {
-    if (ILaunch.class.equals(adapter)) {
+    if (adapter == EvaluateContext.class) {
+      JavascriptThread thread = getThread();
+      if (thread == null) {
+        return null;
+      }
+      return thread.getAdapter(adapter);
+    } else if (adapter == ILaunch.class) {
       return this.launch;
     }
     return super.getAdapter(adapter);
   }
 
-  public IResourceManager getResourceManager() {
-    return resourceManager;
+  public IFile getScriptResource(Script script) {
+    return workspaceRelations.getScriptResource(script);
   }
 
   public JavascriptThread getThread() {
     return isDisconnected()
         ? null
         : threads[0];
-  }
-
-  private static void breakpointsHit(Collection<? extends Breakpoint> breakpointsHit) {
-    if (breakpointsHit.isEmpty()) {
-      return;
-    }
-    IBreakpoint[] breakpoints =
-        DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(
-            ChromiumDebugPlugin.DEBUG_MODEL_ID);
-    for (IBreakpoint breakpoint : breakpoints) {
-      ChromiumLineBreakpoint jsBreakpoint = (ChromiumLineBreakpoint) breakpoint;
-      if (breakpointsHit.contains(jsBreakpoint.getBrowserBreakpoint())) {
-        jsBreakpoint.setIgnoreCount(-1); // reset ignore count as we've hit it
-      }
-    }
   }
 
   private static String trim(String text, int maxLength) {
@@ -494,28 +350,6 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
 
   public DebugContext getDebugContext() {
     return debugContext;
-  }
-
-  public ISourceLocator getSourceLocator() {
-    return sourceLocator;
-  }
-
-  private void removeAllBreakpoints() {
-    IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
-    IBreakpoint[] breakpoints =
-        breakpointManager.getBreakpoints(ChromiumDebugPlugin.DEBUG_MODEL_ID);
-    for (IBreakpoint bp : breakpoints) {
-      ChromiumLineBreakpoint clb = (ChromiumLineBreakpoint) bp;
-      if (clb.getBrowserBreakpoint() != null &&
-          clb.getBrowserBreakpoint().getId() != Breakpoint.INVALID_ID) {
-        clb.getBrowserBreakpoint().clear(null);
-      }
-    }
-    try {
-      breakpointManager.removeBreakpoints(breakpoints, true);
-    } catch (CoreException e) {
-      ChromiumDebugPlugin.log(e);
-    }
   }
 
   private final DebugEventListenerImpl debugEventListener = new DebugEventListenerImpl();
@@ -543,6 +377,7 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
     }
 
     public void resumed() {
+      listenerBlock.waitUntilReady();
       synchronized (suspendResumeMonitor) {
         DebugTargetImpl.this.resumed(DebugEvent.CLIENT_REQUEST);
         alreadyResumedOrSuspended = true;
@@ -550,13 +385,15 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
     }
 
     public void scriptLoaded(Script newScript) {
-      getResourceManager().addScript(newScript);
+      listenerBlock.waitUntilReady();
+      workspaceRelations.scriptLoaded(newScript);
     }
 
     public void suspended(DebugContext context) {
+      listenerBlock.waitUntilReady();
       synchronized (suspendResumeMonitor) {
         DebugTargetImpl.this.debugContext = context;
-        breakpointsHit(context.getBreakpointsHit());
+        workspaceRelations.getBreakpointHandler().breakpointsHit(context.getBreakpointsHit());
         int suspendedDetail;
         if (context.getState() == State.EXCEPTION) {
           logExceptionFromContext(context);
@@ -593,7 +430,8 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
   private final JavascriptVmEmbedder.Listener embedderListener =
       new JavascriptVmEmbedder.Listener() {
     public void reset() {
-      getResourceManager().clear();
+      listenerBlock.waitUntilReady();
+      workspaceRelations.handleVmResetEvent();
       fireEvent(new DebugEvent(this, DebugEvent.CHANGE, DebugEvent.STATE));
     }
     public void closed() {
@@ -612,9 +450,7 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
         return;
       }
       DebugPlugin.getDefault().getLaunchManager().removeLaunchListener(this);
-      if (debugProject != null) {
-        ChromiumDebugPluginUtil.deleteVirtualProjectAsync(debugProject);
-      }
+      workspaceRelations.launchRemoved();
     }
   };
 
@@ -635,23 +471,32 @@ public class DebugTargetImpl extends DebugElementImpl implements IChromiumDebugT
     }
   };
 
-  /**
-   * This very simple source locator works because we provide our own source files.
-   * We'll have to try harder, once we link with resource js files.
-   */
-  private final ISourceLocator sourceLocator = new ISourceLocator() {
-    public Object getSourceElement(IStackFrame stackFrame) {
-      if (stackFrame instanceof StackFrame == false) {
-        return null;
-      }
-      StackFrame jsStackFrame = (StackFrame) stackFrame;
+  public WorkspaceBridge.JsLabelProvider getLabelProvider() {
+    return workspaceBridgeFactory.getLabelProvider();
+  }
 
-      Script script = jsStackFrame.getCallFrame().getScript();
-      if (script == null) {
-        return null;
+  private static class ListenerBlock {
+    private volatile boolean isBlocked = true;
+    private final Object monitor = new Object();
+    void waitUntilReady() {
+      if (isBlocked) {
+        return;
       }
-
-      return resourceManager.getResource(script);
+      synchronized (monitor) {
+        while (isBlocked) {
+          try {
+            monitor.wait();
+          } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+          }
+        }
+      }
     }
-  };
+    void unblock() {
+      isBlocked = true;
+      synchronized (monitor) {
+        monitor.notifyAll();
+      }
+    }
+  }
 }

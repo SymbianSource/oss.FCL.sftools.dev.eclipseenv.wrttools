@@ -4,11 +4,11 @@
 
 package org.chromium.debug.ui.actions;
 
-import org.chromium.debug.core.model.StackFrame;
+import org.chromium.debug.core.model.EvaluateContext;
 import org.chromium.debug.ui.ChromiumDebugUIPlugin;
 import org.chromium.debug.ui.JsEvalContextManager;
 import org.chromium.debug.ui.editors.JavascriptUtil;
-import org.chromium.sdk.CallFrame;
+import org.chromium.sdk.JsEvaluateContext;
 import org.chromium.sdk.JsVariable;
 import org.eclipse.debug.core.model.IExpression;
 import org.eclipse.debug.ui.DebugPopup;
@@ -38,7 +38,8 @@ import org.eclipse.ui.texteditor.ITextEditor;
  * Action for inspecting a JavaScript snippet.
  */
 public class JsInspectSnippetAction implements IEditorActionDelegate,
-    IWorkbenchWindowActionDelegate, IPartListener, IViewActionDelegate, CallFrame.EvaluateCallback {
+    IWorkbenchWindowActionDelegate, IPartListener, IViewActionDelegate,
+    JsEvaluateContext.EvaluateCallback {
 
   private static final String ACTION_DEFINITION_ID = "org.chromium.debug.ui.commands.Inspect"; //$NON-NLS-1$
 
@@ -139,20 +140,21 @@ public class JsInspectSnippetAction implements IEditorActionDelegate,
     return null;
   }
 
-  private StackFrame getStackFrameContext() {
+  private EvaluateContext getStackFrameContext() {
+    // TODO(peter.rybin): consider simply using DebugUITools.getDebugContext()
     IWorkbenchPart part = getTargetPart();
-    return getStackFrameForPart(part);
+    return getEvaluateContextForPart(part);
   }
 
-  private StackFrame getStackFrameForPart(IWorkbenchPart part) {
-    StackFrame frame = part == null
+  private EvaluateContext getEvaluateContextForPart(IWorkbenchPart part) {
+    EvaluateContext frame = part == null
         ? JsEvalContextManager.getStackFrameFor(getWindow())
         : JsEvalContextManager.getStackFrameFor(part);
     return frame;
   }
 
   private void run() {
-    getStackFrameContext().getCallFrame().evaluateAsync(getSelectedText(), this, null);
+    getStackFrameContext().getJsEvaluateContext().evaluateAsync(getSelectedText(), this, null);
   }
 
   protected String getSelectedText() {

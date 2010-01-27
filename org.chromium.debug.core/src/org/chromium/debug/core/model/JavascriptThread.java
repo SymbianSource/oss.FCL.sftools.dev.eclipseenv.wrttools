@@ -8,14 +8,16 @@ import java.util.List;
 
 import org.chromium.debug.core.ChromiumDebugPlugin;
 import org.chromium.sdk.CallFrame;
+import org.chromium.sdk.DebugContext;
 import org.chromium.sdk.DebugContext.StepAction;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * This class represents the only Chromium V8 VM thread.
@@ -46,25 +48,25 @@ public class JavascriptThread extends DebugElementImpl implements IThread, IAdap
    *
    * @param debugTarget this thread is created for
    */
-  public JavascriptThread(IChromiumDebugTarget debugTarget) {
+  public JavascriptThread(DebugTargetImpl debugTarget) {
     super(debugTarget);
   }
 
   public StackFrame[] getStackFrames() throws DebugException {
-    if (isSuspended()) {
-      ensureStackFrames();
-      return stackFrames;
-    } else {
-      return EMPTY_FRAMES;
-    }
+    ensureStackFrames(getDebugTarget().getDebugContext());
+    return stackFrames;
   }
 
   public void reset() {
     this.stackFrames = null;
   }
 
-  private void ensureStackFrames() {
-    this.stackFrames = wrapStackFrames(getDebugTarget().getDebugContext().getCallFrames());
+  private void ensureStackFrames(DebugContext debugContext) {
+    if (debugContext == null) {
+      this.stackFrames = EMPTY_FRAMES;
+    } else {
+      this.stackFrames = wrapStackFrames(debugContext.getCallFrames());
+    }
   }
 
   private StackFrame[] wrapStackFrames(List<? extends CallFrame> jsFrames) {
@@ -92,11 +94,7 @@ public class JavascriptThread extends DebugElementImpl implements IThread, IAdap
   }
 
   public String getName() throws DebugException {
-    String url = getDebugTarget().getJavascriptEmbedder().getThreadName();
-    return NLS.bind(Messages.JsThread_ThreadLabelFormat, (isSuspended()
-        ? Messages.JsThread_ThreadLabelSuspended
-        : Messages.JsThread_ThreadLabelRunning), (url.length() > 0
-        ? (" : " + url) : "")); //$NON-NLS-1$ //$NON-NLS-2$
+    return getDebugTarget().getLabelProvider().getThreadLabel(this);
   }
 
   public IBreakpoint[] getBreakpoints() {
@@ -148,8 +146,13 @@ public class JavascriptThread extends DebugElementImpl implements IThread, IAdap
   }
 
   private void step(StepAction stepAction, int detail) throws DebugException {
+    DebugContext debugContext = getDebugTarget().getDebugContext();
+    if (debugContext == null) {
+      throw new DebugException(new Status(IStatus.ERROR, ChromiumDebugPlugin.PLUGIN_ID,
+          "Step attempted while not suspended")); //$NON-NLS-1$
+    }
     setStepping(true);
-    getDebugTarget().getDebugContext().continueVm(stepAction, 1, null);
+    debugContext.continueVm(stepAction, 1, null);
     // The suspend event should be fired once the backtrace is ready
     // (in BacktraceProcessor).
     getDebugTarget().fireResumeEvent(detail);
@@ -189,12 +192,12 @@ public class JavascriptThread extends DebugElementImpl implements IThread, IAdap
   @Override
   @SuppressWarnings("unchecked")
   public Object getAdapter(Class adapter) {
-    if (adapter == StackFrame.class) {
-      try {
-        return getTopStackFrame();
-      } catch (DebugException e) {
-        ChromiumDebugPlugin.log(e);
+    if (adapter == EvaluateContext.class) {
+      DebugContext debugContext = getDebugTarget().getDebugContext();
+      if (debugContext == null) {
+        return null;
       }
+      return new EvaluateContext(debugContext.getGlobalEvaluateContext(), getDebugTarget());
     }
     return super.getAdapter(adapter);
   }

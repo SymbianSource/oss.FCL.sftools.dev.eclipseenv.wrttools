@@ -7,7 +7,6 @@ package org.symbian.tools.wrttools.debug.internal.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chromium.debug.core.model.IResourceManager;
 import org.chromium.sdk.Script;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -19,7 +18,7 @@ import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
  * 
  * Symbian branch is currently based on Revision 138
  */
-public class ResourceManager implements IResourceManager {
+public class ResourceManager {
 	/**
 	 * Script identifier for a breakpoint location.
 	 */
