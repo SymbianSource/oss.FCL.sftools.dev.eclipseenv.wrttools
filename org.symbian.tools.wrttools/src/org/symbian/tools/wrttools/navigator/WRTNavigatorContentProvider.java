@@ -62,7 +62,6 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 					.getFolder(p1);
 		}
 
-		@Override
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			if ((delta.getKind() & (IResourceDelta.ADDED | IResourceDelta.REMOVED)) != 0) {
 				resource = getCommonAncestor(resource, delta.getResource()
@@ -75,7 +74,6 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 
 	private static final class TreeElementsComparator implements
 			Comparator<Object> {
-		@Override
 		public int compare(Object o1, Object o2) {
 			IResource res1 = getResource(o1);
 			IResource res2 = getResource(o2);
@@ -119,7 +117,6 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 	}
 
 	private IResourceChangeListener listener = new IResourceChangeListener() {
-		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 			RootResourceFinder visitor = new RootResourceFinder();
 			try {
@@ -220,7 +217,6 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 
 	protected void refreshViewer(final IResource resource) {
 		viewer.getControl().getDisplay().asyncExec(new Runnable() {
-			@Override
 			public void run() {
 				((TreeViewer) viewer).refresh(resource);
 			}

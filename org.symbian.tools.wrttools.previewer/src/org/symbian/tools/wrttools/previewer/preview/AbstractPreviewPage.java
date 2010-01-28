@@ -82,7 +82,6 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 	public synchronized void process(Collection<IFile> files) {
 		if (!refreshScheduled && needsRefresh(files)) {
 			asyncExec(new Runnable() {
-				@Override
 				public void run() {
 					if (toggleState) {
 						refresh();
@@ -118,7 +117,6 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 					.getImageDescriptor(Images.GREEN_SYNC));
 			if (focusControl != null) {
 				asyncExec(new Runnable() {
-					@Override
 					public void run() {
 						focusControl.setFocus();
 					}
@@ -154,23 +152,19 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 		return toggleState ? "Disable preview autorefresh" : "Enable preview autorefresh";
 	}
 
-	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		// Do nothing
 	}
 
-	@Override
 	public ISelection getSelection() {
 		return new StructuredSelection(project);
 	}
 
-	@Override
 	public void removeSelectionChangedListener(
 			ISelectionChangedListener listener) {
 		// Do nothing
 	}
 
-	@Override
 	public void setSelection(ISelection selection) {
 		// Do nothing
 	}

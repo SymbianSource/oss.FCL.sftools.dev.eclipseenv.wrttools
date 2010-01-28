@@ -8,7 +8,6 @@ import org.eclipse.wst.jsdt.core.compiler.libraries.LibraryLocation;
 public class WrtContainerInitializer extends JsGlobalScopeContainerInitializer {
 	public static final String CONTAINER_ID = "org.symbian.wrt";
 	
-	@Override
 	public LibraryLocation getLibraryLocation() {
 		return new WrtLibraryLocation();
 	}

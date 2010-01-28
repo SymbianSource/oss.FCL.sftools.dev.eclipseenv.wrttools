@@ -49,7 +49,6 @@ public abstract class AbstractDataBindingPage extends WizardPage {
 			this.propertyName = propertyName;
 		}
 
-		@Override
 		public IStatus validate(Object value) {
 			if (isActive()) {
 				if (value == null || value.toString().trim().length() == 0) {

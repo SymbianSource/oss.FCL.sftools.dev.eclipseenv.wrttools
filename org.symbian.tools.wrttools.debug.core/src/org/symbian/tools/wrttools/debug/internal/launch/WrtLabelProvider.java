@@ -12,7 +12,6 @@ import org.eclipse.osgi.util.NLS;
 
 public class WrtLabelProvider implements JsLabelProvider {
 
-	@Override
 	public String getStackFrameLabel(StackFrame stackFrame)
 			throws DebugException {
 		CallFrame callFrame = stackFrame.getCallFrame();
@@ -32,13 +31,11 @@ public class WrtLabelProvider implements JsLabelProvider {
 		return name;
 	}
 
-	@Override
 	public String getTargetLabel(DebugTargetImpl debugTarget)
 			throws DebugException {
 		return "WRT Runtime";
 	}
 
-	@Override
 	public String getThreadLabel(JavascriptThread thread) throws DebugException {
 		return NLS.bind("JavaScript Thread ({0})",
 				(thread.isSuspended() ? "Suspended" : "Running")); //$NON-NLS-1$ //$NON-NLS-2$

@@ -31,7 +31,6 @@ import org.eclipse.core.runtime.CoreException;
 
    public class MyResourceChangeReporter implements IResourceChangeListener {
 
-	  @Override
 	  // TODO Auto-generated method stub
       public void resourceChanged(IResourceChangeEvent event) {
          IResource res = event.getResource();
@@ -84,7 +83,6 @@ import org.eclipse.core.runtime.CoreException;
 
    class DeltaPrinter implements IResourceDeltaVisitor {
 
-	   @Override
 	      public boolean visit(IResourceDelta delta) throws CoreException{
 	         IResource res = delta.getResource();
 	         switch (delta.getKind()) {

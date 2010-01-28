@@ -75,11 +75,9 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 		setWindowTitle("New WRT Widget");
 	}
 
-	@Override
 	public boolean performFinish() {
 		try {
 			getContainer().run(true, true, new IRunnableWithProgress() {
-				@Override
 				public void run(IProgressMonitor monitor)
 						throws InvocationTargetException, InterruptedException {
 					action(monitor);
@@ -97,7 +95,6 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 	protected void action(IProgressMonitor monitor) {
 		try {
 			ResourcesPlugin.getWorkspace().run(new IWorkspaceRunnable() {
-				@Override
 				public void run(IProgressMonitor monitor) throws CoreException {
 					createAndInitProject(monitor);
 				}
@@ -192,7 +189,6 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 		f.create(contents, true, new SubProgressMonitor(monitor, 1));
 	}
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		context = new WizardContext();
 		bindingContext = new DataBindingContext();
@@ -261,7 +257,6 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 		return workspace.isPrefixOf(project);
 	}
 	
-	@Override
 	public void setInitializationData(IConfigurationElement config,
 			String propertyName, Object data) throws CoreException {
 		this.config = config;

@@ -32,19 +32,16 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 			this.project = project;
 		}
 
-		@Override
 		public WorkspaceBridge attachedToVm(DebugTargetImpl debugTargetImpl,
 				JavascriptVm javascriptVm) {
 			return new WRTProjectWorkspaceBridge(debugTargetImpl, javascriptVm,
 					project);
 		}
 
-		@Override
 		public String getDebugModelIdentifier() {
 			return DEBUG_MODEL_ID;
 		}
 
-		@Override
 		public JsLabelProvider getLabelProvider() {
 			return new WrtLabelProvider();
 		}
@@ -69,32 +66,26 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 		launch.setSourceLocator(sourceLocator);
 	}
 
-	@Override
 	public void beforeDetach() {
 		// Do nothing
 	}
 
-	@Override
 	public BreakpointHandler getBreakpointHandler() {
 		return breakpointHandler;
 	}
 
-	@Override
 	public IFile getScriptResource(Script script) {
 		return resourceManager.getResource(script);
 	}
 
-	@Override
 	public void handleVmResetEvent() {
 		resourceManager.clear();
 	}
 
-	@Override
 	public void launchRemoved() {
 		// Do nothing
 	}
 
-	@Override
 	public void reloadScriptsAtStart() {
 		javascriptVm.getScripts(new ScriptsCallback() {
 			public void failure(String errorMessage) {
@@ -134,7 +125,6 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 		});
 	}
 
-	@Override
 	public void scriptLoaded(Script newScript) {
 		resourceManager.addScript(newScript);
 	}

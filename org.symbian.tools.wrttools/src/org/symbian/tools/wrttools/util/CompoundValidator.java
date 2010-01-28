@@ -38,7 +38,6 @@ public class CompoundValidator implements IValidator {
 		System.arraycopy(validators, 0, this.validators, 1, validators.length);
 	}
 
-	@Override
 	public IStatus validate(Object value) {
 		IStatus status = Status.OK_STATUS;
 		

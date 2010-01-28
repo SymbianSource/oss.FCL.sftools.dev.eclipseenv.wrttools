@@ -45,7 +45,6 @@ public class PreviewView extends PageBookView {
 			IResourceDeltaVisitor {
 		public final Collection<IFile> files = new HashSet<IFile>();
 
-		@Override
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			if (isRelevantResource(delta.getResource())) {
 				files.add((IFile) delta.getResource());
@@ -61,7 +60,6 @@ public class PreviewView extends PageBookView {
 	}
 
 	private final IResourceChangeListener resourceListener = new IResourceChangeListener() {
-		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 			ChangedResourcesCollector visitor = new ChangedResourcesCollector();
 			try {
@@ -120,7 +118,7 @@ public class PreviewView extends PageBookView {
 	}
 
 	private IPreviewPage createPreviewPage(IProject project) {
-		if (!CoreUtil.isMac() && Platform.getBundle(MozillaPreviewPage.XUL_RUNNER_BUNDLE) != null) {
+		if (Platform.getBundle(MozillaPreviewPage.XUL_RUNNER_BUNDLE) != null) {
 			return new MozillaPreviewPage(project, this);
 		} else {
 			return new SwtBrowserPreviewPage(project, this);

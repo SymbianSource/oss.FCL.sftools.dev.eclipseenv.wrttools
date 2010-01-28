@@ -148,7 +148,6 @@ public class FavoritesManager implements IResourceChangeListener{
 		}
 	}
 	
-	@Override
 	public void resourceChanged(IResourceChangeEvent e) {
 		// process events here
 	}

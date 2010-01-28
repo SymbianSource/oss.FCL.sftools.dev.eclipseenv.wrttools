@@ -21,18 +21,15 @@ public class WrtLibraryLocation implements LibraryLocation {
 		"widget.js".toCharArray(),
 	};
 	
-	@Override
 	public char[][] getLibraryFileNames() {
 		return FILE_NAMES;
 	}
 
-	@Override
 	public String getLibraryPath(String name) {
 		System.out.println(name);
 		return null;
 	}
 
-	@Override
 	public String getLibraryPath(char[] name) {
 		URL entry = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), LIBRARIES_PATH.append(new String(name)), null);
 		if (entry != null) {
@@ -47,12 +44,10 @@ public class WrtLibraryLocation implements LibraryLocation {
 		return null;
 	}
 
-	@Override
 	public IPath getLibraryPathInPlugin() {
 		return LIBRARIES_PATH;
 	}
 
-	@Override
 	public IPath getWorkingLibPath() {
 		return new Path(getLibraryPath(""));
 	}

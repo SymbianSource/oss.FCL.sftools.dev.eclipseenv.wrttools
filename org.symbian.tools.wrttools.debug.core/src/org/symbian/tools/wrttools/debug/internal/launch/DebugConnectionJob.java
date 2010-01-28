@@ -64,7 +64,6 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 		target.fireTerminateEvent();
 	}
 
-	@Override
 	public boolean browserRunning(URI uri) throws CoreException {
 		JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
 				port, launch, uri);

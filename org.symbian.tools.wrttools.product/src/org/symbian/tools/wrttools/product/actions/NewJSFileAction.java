@@ -18,24 +18,20 @@ public class NewJSFileAction extends AbstractOpenWizardAction implements
 		return new NewJSWizard();
 	}
 
-	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void init(IWorkbenchWindow window) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void run(IAction action) {
 		run();
 	}
 
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		// TODO Auto-generated method stub
 

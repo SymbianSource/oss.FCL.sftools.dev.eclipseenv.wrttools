@@ -55,7 +55,6 @@ public abstract class FavoriteItemType implements Comparable {
     	public IFavoriteItem loadFavorite(String info) {
     		return null;
     	}
-		@Override
 		public int compareTo(Object o) {
 			// TODO Auto-generated method stub
 			return 0;
@@ -75,7 +74,6 @@ public abstract class FavoriteItemType implements Comparable {
 		public IFavoriteItem loadFavorite(String info) {
 			return FavoriteResource.loadFavorite(this, info);
 		}
-		@Override
 		public int compareTo(Object o) {
 			// TODO Auto-generated method stub
 			return 0;
@@ -95,7 +93,6 @@ public abstract class FavoriteItemType implements Comparable {
 		public IFavoriteItem loadFavorite(String info) {
 			return FavoriteResource.loadFavorite(this, info);
 		}
-		@Override
 		public int compareTo(Object o) {
 			// TODO Auto-generated method stub
 			return 0;
