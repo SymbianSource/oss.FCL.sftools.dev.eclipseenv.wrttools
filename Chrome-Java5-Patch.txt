@@ -1,36 +1,37 @@
-diff -r bb6160d0b6f2 org.chromium.debug.core/META-INF/MANIFEST.MF
---- a/org.chromium.debug.core/META-INF/MANIFEST.MF	Thu Jan 28 10:18:04 2010 -0800
-+++ b/org.chromium.debug.core/META-INF/MANIFEST.MF	Thu Jan 28 11:23:45 2010 -0800
-@@ -20,4 +20,5 @@
-  org.chromium.debug.core.model,
-  org.chromium.debug.core.util
- Eclipse-LazyStart: true
--Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
-+ JavaSE-1.6
-diff -r bb6160d0b6f2 org.chromium.debug.ui/META-INF/MANIFEST.MF
---- a/org.chromium.debug.ui/META-INF/MANIFEST.MF	Thu Jan 28 10:18:04 2010 -0800
-+++ b/org.chromium.debug.ui/META-INF/MANIFEST.MF	Thu Jan 28 11:23:45 2010 -0800
-@@ -16,4 +16,5 @@
-  org.chromium.debug.core;bundle-version="0.1.5",
-  org.chromium.sdk;bundle-version="0.1.5"
- Bundle-ActivationPolicy: lazy
--Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
-+ JavaSE-1.6
-diff -r bb6160d0b6f2 org.chromium.sdk/META-INF/MANIFEST.MF
---- a/org.chromium.sdk/META-INF/MANIFEST.MF	Thu Jan 28 10:18:04 2010 -0800
-+++ b/org.chromium.sdk/META-INF/MANIFEST.MF	Thu Jan 28 11:23:45 2010 -0800
-@@ -13,4 +13,5 @@
-  org.chromium.sdk.internal.tools.v8.processor;x-internal:=true,
-  org.chromium.sdk.internal.tools.v8.request;x-internal:=true,
-  org.chromium.sdk.internal.transport;x-internal:=true
--Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
-+ JavaSE-1.6
-diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/BrowserImpl.java
---- a/org.chromium.sdk/src/org/chromium/sdk/internal/BrowserImpl.java	Thu Jan 28 10:18:04 2010 -0800
-+++ b/org.chromium.sdk/src/org/chromium/sdk/internal/BrowserImpl.java	Thu Jan 28 11:23:45 2010 -0800
+### Eclipse Workspace Patch 1.0
+#P org.chromium.sdk
+Index: src/org/chromium/sdk/ChromiumIOException.java
+===================================================================
+--- src/org/chromium/sdk/ChromiumIOException.java	(revision 0)
++++ src/org/chromium/sdk/ChromiumIOException.java	(revision 0)
+@@ -0,0 +1,23 @@
++package org.chromium.sdk;
++
++import java.io.IOException;
++
++public class ChromiumIOException extends IOException {
++	private static final long serialVersionUID = 3412049732071131594L;
++	private final Throwable cause;
++
++	public ChromiumIOException(Throwable cause) {
++		super();
++		this.cause = cause;
++	}
++	
++	public ChromiumIOException(String message, Throwable cause) {
++		super(message);
++		this.cause = cause;
++	}
++	
++	@Override
++	public Throwable getCause() {
++		return cause;
++	}
++}
+Index: src/org/chromium/sdk/internal/BrowserImpl.java
+===================================================================
+--- src/org/chromium/sdk/internal/BrowserImpl.java	(revision 306)
++++ src/org/chromium/sdk/internal/BrowserImpl.java	(working copy)
 @@ -17,6 +17,7 @@
  
  import org.chromium.sdk.Browser;
@@ -57,9 +58,21 @@ diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/BrowserImpl.
        }
  
        Session session = ticket.getSession();
-diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/BrowserTabImpl.java
---- a/org.chromium.sdk/src/org/chromium/sdk/internal/BrowserTabImpl.java	Thu Jan 28 10:18:04 2010 -0800
-+++ b/org.chromium.sdk/src/org/chromium/sdk/internal/BrowserTabImpl.java	Thu Jan 28 11:23:45 2010 -0800
+Index: META-INF/MANIFEST.MF
+===================================================================
+--- META-INF/MANIFEST.MF	(revision 306)
++++ META-INF/MANIFEST.MF	(working copy)
+@@ -13,4 +13,5 @@
+  org.chromium.sdk.internal.tools.v8.processor;x-internal:=true,
+  org.chromium.sdk.internal.tools.v8.request;x-internal:=true,
+  org.chromium.sdk.internal.transport;x-internal:=true
+-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
++Bundle-RequiredExecutionEnvironment: J2SE-1.5,
++ JavaSE-1.6
+Index: src/org/chromium/sdk/internal/BrowserTabImpl.java
+===================================================================
+--- src/org/chromium/sdk/internal/BrowserTabImpl.java	(revision 306)
++++ src/org/chromium/sdk/internal/BrowserTabImpl.java	(working copy)
 @@ -8,6 +8,7 @@
  
  import org.chromium.sdk.Browser;
@@ -77,9 +90,10 @@ diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/BrowserTabIm
        }
        if (Result.OK != result) {
          throw new IOException("Failed to attach with result: " + result);
-diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/StandaloneVmImpl.java
---- a/org.chromium.sdk/src/org/chromium/sdk/internal/StandaloneVmImpl.java	Thu Jan 28 10:18:04 2010 -0800
-+++ b/org.chromium.sdk/src/org/chromium/sdk/internal/StandaloneVmImpl.java	Thu Jan 28 11:23:45 2010 -0800
+Index: src/org/chromium/sdk/internal/StandaloneVmImpl.java
+===================================================================
+--- src/org/chromium/sdk/internal/StandaloneVmImpl.java	(revision 306)
++++ src/org/chromium/sdk/internal/StandaloneVmImpl.java	(working copy)
 @@ -12,6 +12,7 @@
  import java.util.logging.Level;
  import java.util.logging.Logger;
@@ -100,9 +114,10 @@ diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/StandaloneVm
      }
  
      String versionString = remoteInfo.getProtocolVersion();
-diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/transport/Handshaker.java
---- a/org.chromium.sdk/src/org/chromium/sdk/internal/transport/Handshaker.java	Thu Jan 28 10:18:04 2010 -0800
-+++ b/org.chromium.sdk/src/org/chromium/sdk/internal/transport/Handshaker.java	Thu Jan 28 11:23:45 2010 -0800
+Index: src/org/chromium/sdk/internal/transport/Handshaker.java
+===================================================================
+--- src/org/chromium/sdk/internal/transport/Handshaker.java	(revision 306)
++++ src/org/chromium/sdk/internal/transport/Handshaker.java	(working copy)
 @@ -10,8 +10,8 @@
  import java.util.concurrent.ExecutionException;
  import java.util.concurrent.Future;
@@ -140,3 +155,27 @@ diff -r bb6160d0b6f2 org.chromium.sdk/src/org/chromium/sdk/internal/transport/Ha
          }
          if (message == null) {
            throw new IOException("End of stream");
+#P org.chromium.debug.core
+Index: META-INF/MANIFEST.MF
+===================================================================
+--- META-INF/MANIFEST.MF	(revision 306)
++++ META-INF/MANIFEST.MF	(working copy)
+@@ -20,4 +20,5 @@
+  org.chromium.debug.core.model,
+  org.chromium.debug.core.util
+ Eclipse-LazyStart: true
+-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
++Bundle-RequiredExecutionEnvironment: J2SE-1.5,
++ JavaSE-1.6
+#P org.chromium.debug.ui
+Index: META-INF/MANIFEST.MF
+===================================================================
+--- META-INF/MANIFEST.MF	(revision 306)
++++ META-INF/MANIFEST.MF	(working copy)
+@@ -16,4 +16,5 @@
+  org.chromium.debug.core;bundle-version="0.1.5",
+  org.chromium.sdk;bundle-version="0.1.5"
+ Bundle-ActivationPolicy: lazy
+-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
++Bundle-RequiredExecutionEnvironment: J2SE-1.5,
++ JavaSE-1.6
