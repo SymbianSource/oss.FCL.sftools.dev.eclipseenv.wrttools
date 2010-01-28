@@ -22,6 +22,7 @@ import java.io.File;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	private final static String DEFAULT_CHROME_LOCATION = "Local Settings/Application Data/Google/Chrome/Application";
@@ -37,9 +38,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	}
 
 	private File getDefaultFolder() {
-		if (ChromeDebugUtils.isMac()) {
+		if (CoreUtil.isMac()) {
 			return new File("/Applications");
-		} else if (ChromeDebugUtils.isLinux()) {
+		} else if (CoreUtil.isLinux()) {
 			return new File("/opt/google/chrome");
 		}
 		String property = System.getProperty("user.home");
