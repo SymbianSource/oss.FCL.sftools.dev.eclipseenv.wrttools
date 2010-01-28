@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.symbian.tools.wrttools.core.validator.WidgetProjectValidator;
 
 public class WidgetProjectNature implements IProjectNature {
+	public static final String ID = Activator.PLUGIN_ID + ".WidgetProjectNature";
 	
 	private IProject project;
 

@@ -46,6 +46,7 @@ import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.wrttools.debug.internal.IConstants;
 import org.symbian.tools.wrttools.debug.internal.Images;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WidgetBasicTab extends AbstractLaunchConfigurationTab {
 	private ComboViewer project;
@@ -91,7 +92,7 @@ public class WidgetBasicTab extends AbstractLaunchConfigurationTab {
 				.getProjects();
 		LinkedList<IProject> filtered = new LinkedList<IProject>();
 		for (IProject p : projects) {
-			if (ChromeDebugUtils.isWidgetProject(p)) {
+			if (ProjectUtils.hasWrtNature(p)) {
 				filtered.add(p);
 			}
 		}

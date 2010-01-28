@@ -18,7 +18,6 @@
  */
 package org.symbian.tools.wrttools.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -28,25 +27,23 @@ import javax.swing.filechooser.FileSystemView;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.WidgetProjectNature;
 
 public class ProjectUtils {
 	private static final String DEFAULT_APTANA_WORKSPACE = "Aptana Studio Workspace";
-	private static final String WRT_PREVIEW_MAIN_HTML = "wrt_preview_frame.html";
 	public static final String PREVIEW_FOLDER = "preview";
 	public static final String PREVIEW_FRAME_FILE = "wrt_preview_frame.html";
+	public static final String PREVIEW_MAIN_FILE = "wrt_preview_main.html";
 
 	@SuppressWarnings("restriction")
 	public static IProject createWrtProject(String name, URI uri,
@@ -65,26 +62,35 @@ public class ProjectUtils {
 		// BuildPathsBlock.flush(classPathEntries, javaScriptProject, superType,
 		// monitor)
 
+		addWrtNature(project);
 
 		monitor.done();
 		return project;
 	}
 
-	public static void addPreviewer(IProject project, IPath mainHtml) {
-		try {
-			createPreviewerHomePage(project, mainHtml);
-		} catch (IOException e) {
-			StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Unable to add previewer to project"));
-		} catch (CoreException e) {
-			StatusManager.getManager().handle(e, Activator.PLUGIN_ID);
+	public static void addWrtNature(IProject project) {
+		if (!hasWrtNature(project)) {
+			try {
+				IProjectDescription description = project.getDescription();
+				String[] natureIds = description.getNatureIds();
+				String[] newNatures = new String[natureIds.length + 1];
+				System.arraycopy(natureIds, 0, newNatures, 1, natureIds.length);
+				newNatures[0] = WidgetProjectNature.ID;
+				description.setNatureIds(newNatures);
+				project.setDescription(description, new NullProgressMonitor());
+			} catch (CoreException e) {
+				Activator.log(e);
+			}
 		}
 	}
 
-	private static void createPreviewerHomePage(IProject project, IPath mainHtml)
-			throws CoreException, IOException {
-		IFile newFile = project.getFile(WRT_PREVIEW_MAIN_HTML);
-		newFile.create(new ByteArrayInputStream("Should not be in release!"
-				.getBytes()), false, new NullProgressMonitor());
+	public static boolean hasWrtNature(IProject project) {
+		try {
+			return project.hasNature(WidgetProjectNature.ID);
+		} catch (CoreException e) {
+			Activator.log(e);
+			return false;
+		}
 	}
 
 	public static String getDefaultAptanaLocation() {
@@ -94,7 +100,8 @@ public class ProjectUtils {
 		if (file.exists()) {
 			return file.getAbsolutePath();
 		}
-		file = new File(myDocuments, "Documents" + File.separator + DEFAULT_APTANA_WORKSPACE); // Mac OS X
+		file = new File(myDocuments, "Documents" + File.separator
+				+ DEFAULT_APTANA_WORKSPACE); // Mac OS X
 		if (file.exists()) {
 			return file.getAbsolutePath();
 		}
@@ -106,15 +113,38 @@ public class ProjectUtils {
 				&& new File(f, PREVIEW_FRAME_FILE).isFile();
 	}
 
-	public static void copyFile(IProject project, String name, ZipInputStream stream,
-			long size, IProgressMonitor monitor) throws CoreException,
-			IOException {
+	public static void copyFile(IProject project, String name,
+			ZipInputStream stream, long size, IProgressMonitor monitor)
+			throws CoreException, IOException {
 		IFile file = project.getFile(name);
-		file.create(new NonClosingStream(stream), true,
-				new SubProgressMonitor(monitor, 1));
+		file.create(new NonClosingStream(stream), true, new SubProgressMonitor(
+				monitor, 1));
 	}
 
 	public static boolean isAptanaProject(URI locationURI) {
 		return isAptanaProject(new File(locationURI));
+	}
+
+	public static File isAptanaProject(File[] contents) {
+		File dotProjectFile = null;
+		boolean hasPreviewer = false;
+		boolean hasFrame = false;
+		
+		for (int i = 0; i < contents.length; i++) {
+			File file = contents[i];
+			if (file.isFile() && file.getName().equals(IProjectDescription.DESCRIPTION_FILE_NAME)) {
+				dotProjectFile = file;
+			}
+			if (file.isFile() && PREVIEW_FRAME_FILE.equalsIgnoreCase(file.getName())) {
+				hasFrame = true;
+			}
+			if (file.isDirectory() && PREVIEW_FOLDER.equalsIgnoreCase(file.getName())) {
+				hasPreviewer = true;
+			}
+		}
+		if (!(hasFrame && hasPreviewer)) {
+			dotProjectFile = null;
+		}
+		return dotProjectFile;
 	}
 }

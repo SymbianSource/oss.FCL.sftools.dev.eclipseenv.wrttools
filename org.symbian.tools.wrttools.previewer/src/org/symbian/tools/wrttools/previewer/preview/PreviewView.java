@@ -36,6 +36,7 @@ import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.IWrtEditingPreferences;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PreviewView extends PageBookView {
 	private static final class ChangedResourcesCollector implements
@@ -176,14 +177,10 @@ public class PreviewView extends PageBookView {
 			IResource resource = (IResource) ((IEditorPart) part)
 					.getEditorInput().getAdapter(IResource.class);
 			if (resource != null) {
-				return isWrtProject(resource.getProject());
+				return ProjectUtils.hasWrtNature(resource.getProject());
 			}
 		}
 		return false;
-	}
-
-	private boolean isWrtProject(IProject project) {
-		return project.getFile("wrt_preview_frame.html").exists();
 	}
 
 	private void loadPreferences() {

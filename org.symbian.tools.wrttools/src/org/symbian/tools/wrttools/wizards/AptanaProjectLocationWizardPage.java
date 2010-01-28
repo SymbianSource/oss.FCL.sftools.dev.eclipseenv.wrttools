@@ -343,7 +343,9 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 	private static final Collection<String> EXCLUDED;
 
 	static {
-		EXCLUDED = new TreeSet<String>(Arrays.asList(".project", "preview", "wrt_preview_main.html"));
+		EXCLUDED = new TreeSet<String>(Arrays.asList(".project",
+				ProjectUtils.PREVIEW_FOLDER, ProjectUtils.PREVIEW_FRAME_FILE,
+				ProjectUtils.PREVIEW_MAIN_FILE));
 	}
 
 	public AptanaProjectLocationWizardPage() {
@@ -412,26 +414,10 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 			}
 		}
 
-		// first look for project description files
-		final String dotProject = IProjectDescription.DESCRIPTION_FILE_NAME;
 		
-		File dotProjectFile = null;
-		boolean hasPreviewer = false;
-		boolean hasFrame = false;
+		File dotProjectFile = ProjectUtils.isAptanaProject(contents);
 		
-		for (int i = 0; i < contents.length; i++) {
-			File file = contents[i];
-			if (file.isFile() && file.getName().equals(dotProject)) {
-				dotProjectFile = file;
-			}
-			if (file.isFile() && ProjectUtils.PREVIEW_FRAME_FILE.equalsIgnoreCase(file.getName())) {
-				hasFrame = true;
-			}
-			if (file.isDirectory() && ProjectUtils.PREVIEW_FOLDER.equalsIgnoreCase(file.getName())) {
-				hasPreviewer = true;
-			}
-		}
-		if (dotProjectFile != null && hasFrame && hasPreviewer) {
+		if (dotProjectFile != null) {
 			files.add(dotProjectFile);
 			// don't search sub-directories since we can't have nested
 			// projects

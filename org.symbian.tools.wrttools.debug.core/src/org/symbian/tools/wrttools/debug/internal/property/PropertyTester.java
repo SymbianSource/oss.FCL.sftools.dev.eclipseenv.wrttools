@@ -20,13 +20,14 @@ package org.symbian.tools.wrttools.debug.internal.property;
 
 import org.eclipse.core.resources.IResource;
 import org.symbian.tools.wrttools.debug.internal.ChromeDebugUtils;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PropertyTester extends org.eclipse.core.expressions.PropertyTester {
 
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
 		if (property.equals("isWrtProject")) {
-			return ChromeDebugUtils.isWidgetProject(((IResource) receiver).getProject());
+			return ProjectUtils.hasWrtNature(((IResource) receiver).getProject());
 		}
 		return false;
 	}
