@@ -1,6 +1,6 @@
 <project >
  <property name="buildDirectory" 
-	location="/home/symbian/workspace/wrttools-fc/wrttools" />
+	location="/home/symbian/scratch/029/wrttools" />
  <property name="baseLocation" location="" /> 
  <eclipse.buildScript 
         elements="feature@org.symbian.tools.wrttools"
@@ -8,3 +8,4 @@
 	pluginPath="/usr/eclipse/JEE/eclipse/plugins"
  />
 </project>
+
