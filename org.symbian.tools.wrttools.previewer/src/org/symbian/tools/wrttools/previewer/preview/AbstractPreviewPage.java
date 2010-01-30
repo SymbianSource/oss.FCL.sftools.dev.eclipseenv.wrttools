@@ -74,7 +74,9 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 
 	@Override
 	public void setFocus() {
-		browser.setFocus();
+		if (browser != null && !browser.isDisposed()) {
+			browser.setFocus();
+		}
 	}
 	
 	private boolean refreshScheduled = false;

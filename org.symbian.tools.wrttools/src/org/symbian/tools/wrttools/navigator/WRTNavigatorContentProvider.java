@@ -118,14 +118,18 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 
 	private IResourceChangeListener listener = new IResourceChangeListener() {
 		public void resourceChanged(IResourceChangeEvent event) {
-			RootResourceFinder visitor = new RootResourceFinder();
-			try {
-				event.getDelta().accept(visitor);
-			} catch (CoreException e) {
-				Activator.log(e);
-				refreshViewer(null);
+			IResource refresh = null;
+			if (event.getDelta() != null) {
+				RootResourceFinder visitor = new RootResourceFinder();
+				try {
+					event.getDelta().accept(visitor);
+				} catch (CoreException e) {
+					Activator.log(e);
+					refreshViewer(null);
+				}
+				refresh = visitor.resource;
 			}
-			refreshViewer(visitor.resource);
+			refreshViewer(refresh);
 		}
 	};
 	private Viewer viewer;
