@@ -46,7 +46,6 @@ public class RssReaderProjectDetailsWizardPage extends
 	}
 	
 	public static final class Factory implements IWizardPageFactory {
-		@Override
 		public WRTProjectDetailsWizardPage createPage(WizardContext context,
 				DataBindingContext bindingContext) {
 			return new RssReaderProjectDetailsWizardPage(context, bindingContext);

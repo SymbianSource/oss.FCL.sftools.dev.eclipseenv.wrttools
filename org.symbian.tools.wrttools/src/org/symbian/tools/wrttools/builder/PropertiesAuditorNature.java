@@ -38,7 +38,6 @@ public class PropertiesAuditorNature implements IProjectNature {
 	private IProject project;
 	private static final String NATURE_ID = "org.eclipse.wst.jsdt.core.jsNature";
 	
-	@Override
 	public void configure() throws CoreException {
 		// TODO Auto-generated method stub
 		PropertiesFileAuditor.addBuilderToProject(project); 
@@ -60,20 +59,17 @@ public class PropertiesAuditorNature implements IProjectNature {
 
 	}
 
-	@Override
 	public void deconfigure() throws CoreException {
 		// TODO Auto-generated method stub
 		PropertiesFileAuditor.removeBuilderFromProject(project);
 		PropertiesFileAuditor.deleteAuditMarkers(project);
 	}
 
-	@Override
 	public IProject getProject() {
 		// TODO Auto-generated method stub
 		return project;
 	}
 
-	@Override
 	public void setProject(IProject project) {
 		// TODO Auto-generated method stub
 		this.project = project;

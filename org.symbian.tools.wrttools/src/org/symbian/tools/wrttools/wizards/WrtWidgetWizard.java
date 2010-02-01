@@ -43,10 +43,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -75,11 +73,9 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 		setWindowTitle("New WRT Widget");
 	}
 
-	@Override
 	public boolean performFinish() {
 		try {
 			getContainer().run(true, true, new IRunnableWithProgress() {
-				@Override
 				public void run(IProgressMonitor monitor)
 						throws InvocationTargetException, InterruptedException {
 					action(monitor);
@@ -97,7 +93,6 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 	protected void action(IProgressMonitor monitor) {
 		try {
 			ResourcesPlugin.getWorkspace().run(new IWorkspaceRunnable() {
-				@Override
 				public void run(IProgressMonitor monitor) throws CoreException {
 					createAndInitProject(monitor);
 				}
@@ -192,7 +187,6 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 		f.create(contents, true, new SubProgressMonitor(monitor, 1));
 	}
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		context = new WizardContext();
 		bindingContext = new DataBindingContext();
@@ -232,8 +226,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 	public IWizardPage getNextPage(IWizardPage page) {
 		if (page == resourcePage) {
 			context.setProjectName(resourcePage.getProjectName());
-			context.setProjectUri(isDefaultProjectLocation() ? null
-					: resourcePage.getLocationURI());
+			context.setProjectUri(resourcePage.getLocationURI());
 		}
 		if (page == templatesPage) {
 			ProjectTemplate template = context.getTemplate();
@@ -254,14 +247,6 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 		return super.getNextPage(page);
 	}
 
-	private boolean isDefaultProjectLocation() {
-		IPath project = resourcePage.getLocationPath();
-		IPath workspace = ResourcesPlugin.getWorkspace().getRoot()
-				.getLocation();
-		return workspace.isPrefixOf(project);
-	}
-	
-	@Override
 	public void setInitializationData(IConfigurationElement config,
 			String propertyName, Object data) throws CoreException {
 		this.config = config;

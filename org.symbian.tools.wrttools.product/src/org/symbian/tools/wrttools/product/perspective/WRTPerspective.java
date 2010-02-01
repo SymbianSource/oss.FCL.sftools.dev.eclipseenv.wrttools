@@ -11,7 +11,6 @@ import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 
 public class WRTPerspective implements IPerspectiveFactory {
 
-	@Override
 	public void createInitialLayout(IPageLayout layout) {
  		String editorArea = layout.getEditorArea();
 		

@@ -71,7 +71,6 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		setDescription("Select template that will be used to populate your new project");
 	}
 	
-	@Override
 	public void createControl(Composite parent) {
 		ProjectTemplate[] allTemplates = ProjectTemplate.getAllTemplates();
 
@@ -99,8 +98,6 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		templatesData.bottom = new FormAttachment(70, 0);
 		templates.getControl().setLayoutData(templatesData);
 		templates.addSelectionChangedListener(new ISelectionChangedListener() {
-			
-			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (IStructuredSelection)event.getSelection();
 				final ProjectTemplate 
@@ -109,7 +106,6 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 			}
 		});
 		templates.addDoubleClickListener(new IDoubleClickListener() {
-			@Override
 			public void doubleClick(DoubleClickEvent arg0) {
 				switchWizardPage();
 			}
@@ -143,7 +139,6 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 	protected void switchWizardPage() {
 		Display display = getShell().getDisplay();
 		display.asyncExec(new Runnable() {
-			@Override
 			public void run() {
 				IWizardPage nextPage = getWizard().getNextPage(WRTProjectTemplateWizardPage.this);
 				getContainer().showPage(nextPage);

@@ -61,12 +61,10 @@ public class AptanaProjectsImportWizard extends Wizard implements
 		addPage(mainPage);
 	}
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// Do nothing
 	}
 
-	@Override
 	public void setInitializationData(IConfigurationElement config,
 			String propertyName, Object data) throws CoreException {
 		this.config = config;

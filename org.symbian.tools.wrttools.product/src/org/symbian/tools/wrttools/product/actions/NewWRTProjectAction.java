@@ -13,18 +13,15 @@ import org.symbian.tools.wrttools.wizards.WrtWidgetWizard;
 public class NewWRTProjectAction extends AbstractOpenWizardAction implements
 		IWorkbenchWindowActionDelegate {
 
-	@Override
 	public void init(IWorkbenchWindow window) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void run(IAction action) {
 		run();
 	}
 
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		// TODO Auto-generated method stub
 
@@ -35,7 +32,6 @@ public class NewWRTProjectAction extends AbstractOpenWizardAction implements
 		return new WrtWidgetWizard();
 	}
 
-	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
 		

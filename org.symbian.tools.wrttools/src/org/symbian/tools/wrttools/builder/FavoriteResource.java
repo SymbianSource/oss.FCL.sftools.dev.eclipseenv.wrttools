@@ -36,43 +36,36 @@ public class FavoriteResource implements IFavoriteItem {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public String getLocation() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public FavoriteItemType getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean isFavoriteFor(Object obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void setName(String newName) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public Object getAdapter(Class adapter) {
 		// TODO Auto-generated method stub
 		return null;

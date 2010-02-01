@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -36,6 +37,7 @@ import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.IWrtEditingPreferences;
+import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PreviewView extends PageBookView {
@@ -43,7 +45,6 @@ public class PreviewView extends PageBookView {
 			IResourceDeltaVisitor {
 		public final Collection<IFile> files = new HashSet<IFile>();
 
-		@Override
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			if (isRelevantResource(delta.getResource())) {
 				files.add((IFile) delta.getResource());
@@ -59,7 +60,6 @@ public class PreviewView extends PageBookView {
 	}
 
 	private final IResourceChangeListener resourceListener = new IResourceChangeListener() {
-		@Override
 		public void resourceChanged(IResourceChangeEvent event) {
 			ChangedResourcesCollector visitor = new ChangedResourcesCollector();
 			try {
@@ -71,7 +71,7 @@ public class PreviewView extends PageBookView {
 		}
 	};
 
-	private Map<IProject, PreviewPage> projectToPage = new HashMap<IProject, PreviewPage>();
+	private Map<IProject, IPreviewPage> projectToPage = new HashMap<IProject, IPreviewPage>();
 	private boolean preferencesLoaded = false;
 	private final Map<IProject, Boolean> autorefresh = new HashMap<IProject, Boolean>();
 
@@ -105,16 +105,24 @@ public class PreviewView extends PageBookView {
 				.getAdapter(IResource.class);
 
 		IProject project = resource.getProject();
-		PreviewPage page = projectToPage.get(project);
+		IPreviewPage page = projectToPage.get(project);
 
 		if (page == null) {
-			page = new PreviewPage(project, this);
+			page = createPreviewPage(project);
 			initPage(page);
 			page.createControl(getPageBook());
 			projectToPage.put(project, page);
 		}
 
 		return new PageRec(part, page);
+	}
+
+	private IPreviewPage createPreviewPage(IProject project) {
+		if (Platform.getBundle(MozillaPreviewPage.XUL_RUNNER_BUNDLE) != null) {
+			return new MozillaPreviewPage(project, this);
+		} else {
+			return new SwtBrowserPreviewPage(project, this);
+		}
 	}
 
 	@Override
@@ -221,8 +229,8 @@ public class PreviewView extends PageBookView {
 	}
 
 	protected void refreshPages(Collection<IFile> files) {
-		Collection<PreviewPage> values = projectToPage.values();
-		for (PreviewPage page : values) {
+		Collection<IPreviewPage> values = projectToPage.values();
+		for (IPreviewPage page : values) {
 			page.process(files);
 		}
 	}

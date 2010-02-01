@@ -20,9 +20,7 @@ package org.symbian.tools.wrttools.debug.internal;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.Platform;
-import org.symbian.tools.wrttools.util.ProjectUtils;
+import org.symbian.tools.wrttools.util.CoreUtil;
 
 public final class ChromeDebugUtils {
 	public static String getExecutablePath(String folder) {
@@ -38,9 +36,9 @@ public final class ChromeDebugUtils {
 
 	private static String getExecutable() {
 		// Add more ifs as we add support for new platforms
-		if (isMac()) {
+		if (CoreUtil.isMac()) {
 			return "Google Chrome.app/Contents/MacOS/Google Chrome";
-		}	if (isLinux()) {
+		} else if (CoreUtil.isLinux()) {
 			return "chrome";
 		} else {
 			return "chrome.exe";
@@ -55,15 +53,4 @@ public final class ChromeDebugUtils {
 		return getExecutablePath(Activator.getDefault().getPreferenceStore().getString(IConstants.PREF_NAME_CHROME_LOCATION));
 	}
 
-	public static boolean isWindows() {
-		return "windows".equals(Platform.getOS());
-	}
-
-	public static boolean isMac() {
-		return "macosx".equals(Platform.getOS());
-	}
-
-	public static boolean isLinux() {
-		return "linux".equals(Platform.getOS());
-	}
 }

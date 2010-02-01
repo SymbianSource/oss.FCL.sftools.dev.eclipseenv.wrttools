@@ -19,20 +19,28 @@
 package org.symbian.tools.wrttools.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.text.MessageFormat;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import javax.swing.filechooser.FileSystemView;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
@@ -45,9 +53,19 @@ public class ProjectUtils {
 	public static final String PREVIEW_FRAME_FILE = "wrt_preview_frame.html";
 	public static final String PREVIEW_MAIN_FILE = "wrt_preview_main.html";
 
+	private static boolean isDefaultProjectLocation(URI uri) {
+		File file = new File(uri);
+		IPath project = new Path(file.getAbsolutePath());
+		IPath workspace = ResourcesPlugin.getWorkspace().getRoot()
+				.getLocation();
+		return workspace.isPrefixOf(project);
+	}
+	
 	@SuppressWarnings("restriction")
 	public static IProject createWrtProject(String name, URI uri,
 			IProgressMonitor monitor) throws CoreException {
+		uri = isDefaultProjectLocation(uri) ? null
+				: uri;
 		monitor.beginTask("Create project resources", 20);
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(name);
@@ -129,16 +147,20 @@ public class ProjectUtils {
 		File dotProjectFile = null;
 		boolean hasPreviewer = false;
 		boolean hasFrame = false;
-		
+
 		for (int i = 0; i < contents.length; i++) {
 			File file = contents[i];
-			if (file.isFile() && file.getName().equals(IProjectDescription.DESCRIPTION_FILE_NAME)) {
+			if (file.isFile()
+					&& file.getName().equals(
+							IProjectDescription.DESCRIPTION_FILE_NAME)) {
 				dotProjectFile = file;
 			}
-			if (file.isFile() && PREVIEW_FRAME_FILE.equalsIgnoreCase(file.getName())) {
+			if (file.isFile()
+					&& PREVIEW_FRAME_FILE.equalsIgnoreCase(file.getName())) {
 				hasFrame = true;
 			}
-			if (file.isDirectory() && PREVIEW_FOLDER.equalsIgnoreCase(file.getName())) {
+			if (file.isDirectory()
+					&& PREVIEW_FOLDER.equalsIgnoreCase(file.getName())) {
 				hasPreviewer = true;
 			}
 		}
@@ -146,5 +168,36 @@ public class ProjectUtils {
 			dotProjectFile = null;
 		}
 		return dotProjectFile;
+	}
+
+	public static void unzip(String archiveFile, IContainer location, int trimSegments,
+			IProgressMonitor progressMonitor) throws IOException, CoreException {
+		progressMonitor.beginTask(MessageFormat.format("Unpacking {0}",
+				archiveFile), IProgressMonitor.UNKNOWN);
+		ZipInputStream stream = new ZipInputStream(new FileInputStream(
+				archiveFile));
+
+		try {
+			ZipEntry nextEntry;
+			while ((nextEntry = stream.getNextEntry()) != null) {
+				IPath p = new Path(nextEntry.getName()).removeFirstSegments(trimSegments);
+				if (!nextEntry.isDirectory()) {
+					IFile file = location.getFile(p);
+					checkParent(file.getParent());
+					file.create(new NonClosingStream(stream), false,
+							new SubProgressMonitor(progressMonitor, 1));
+				}
+			}
+		} finally {
+			stream.close();
+		}
+		progressMonitor.done();
+	}
+
+	private static void checkParent(IContainer parent) throws CoreException {
+		if (parent.getType() == IResource.FOLDER && !parent.exists()) {
+			checkParent(parent.getParent());
+			((IFolder) parent).create(false, true, new NullProgressMonitor());
+		}
 	}
 }

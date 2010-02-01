@@ -40,7 +40,6 @@ public class WRTProjectDetailsWizardPage extends AbstractDataBindingPage {
 		// Subclasses will override
 	}
 	
-	@Override
 	public void createControl(Composite parent) {
 		Composite root = new Composite(parent, SWT.NONE);
 		WizardPageSupport.create(this, bindingContext);

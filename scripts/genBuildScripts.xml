@@ -1,0 +1,11 @@
+<project >
+ <!-- WS_DIR is set in the associated shell scripts -->
+ <property environment="env"/>
+ <echo message="workspace: ${env.WS_DIR}"/>
+ <eclipse.buildScript 
+        elements="feature@org.symbian.tools.wrttools"
+        buildDirectory="${env.WS_DIR}"
+	pluginPath="/usr/eclipse/JEE/eclipse/plugins"
+ />
+</project>
+

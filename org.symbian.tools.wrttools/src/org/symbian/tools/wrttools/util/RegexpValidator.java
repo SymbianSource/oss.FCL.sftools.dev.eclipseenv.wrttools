@@ -38,7 +38,6 @@ public class RegexpValidator implements IValidator {
 		this.pattern = Pattern.compile(pattern);
 	}
 
-	@Override
 	public IStatus validate(Object value) {
 		String string = value.toString();
 		Matcher matcher = pattern.matcher(string);

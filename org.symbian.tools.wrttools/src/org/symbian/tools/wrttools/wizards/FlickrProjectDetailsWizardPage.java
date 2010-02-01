@@ -39,7 +39,6 @@ public class FlickrProjectDetailsWizardPage extends WRTProjectDetailsWizardPage 
 	}
 
 	public static final class Factory implements IWizardPageFactory { 
-		@Override
 		public WRTProjectDetailsWizardPage createPage(WizardContext context,
 				DataBindingContext bindingContext) {
 			return new FlickrProjectDetailsWizardPage(context, bindingContext);

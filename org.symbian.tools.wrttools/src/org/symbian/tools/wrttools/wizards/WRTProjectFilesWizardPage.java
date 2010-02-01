@@ -30,7 +30,6 @@ public class WRTProjectFilesWizardPage extends AbstractDataBindingPage {
 		super(context, bindingContext, "WRTApplicationFiles", "New WRT Application Project", null, "Specify Symbian WRT application file names");
 	}
 
-	@Override
 	public void createControl(Composite parent) {
 		Composite root = new Composite(parent, SWT.NONE);
 		WizardPageSupport.create(this, bindingContext);
