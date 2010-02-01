@@ -2,6 +2,8 @@
  <!-- WS_DIR is set in the associated shell scripts -->
  <property environment="env"/>
  <echo message="workspace: ${env.WS_DIR}"/>
+ <property name="source" value="1.5" />
+ <property name="target" value="1.5" />
  <eclipse.buildScript 
         elements="feature@org.symbian.tools.wrttools"
         buildDirectory="${env.WS_DIR}"
