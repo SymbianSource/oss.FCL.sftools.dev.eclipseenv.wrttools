@@ -1,10 +1,10 @@
 <project >
- <property name="buildDirectory" 
-	location="/home/symbian/scratch/029/wrttools" />
- <property name="baseLocation" location="" /> 
+ <!-- WS_DIR is set in the associated shell scripts -->
+ <property environment="env"/>
+ <echo message="workspace: ${env.WS_DIR}"/>
  <eclipse.buildScript 
         elements="feature@org.symbian.tools.wrttools"
-        buildDirectory="${buildDirectory}"
+        buildDirectory="${env.WS_DIR}"
 	pluginPath="/usr/eclipse/JEE/eclipse/plugins"
  />
 </project>
