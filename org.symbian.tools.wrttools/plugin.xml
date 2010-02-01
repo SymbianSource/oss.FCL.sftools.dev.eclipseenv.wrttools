@@ -145,6 +145,44 @@
 				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
          </description>
 		</projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/wrtkit.zip"
+            default-css-name="basic"
+            default-html-name="index"
+            default-js-name="basic"
+            icon="icons/main16.gif"
+            id-pattern="com.{0}.basic.widget"
+            name="Basic WRT Project with WRTKit Support">
+         <description>
+            This wizard generates an basic project with a minimal Info.plist, html,css and js along with WRTKit.
+         </description>
+      </projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/flickr.zip"
+            default-css-name="Flickr"
+            default-html-name="index"
+            default-js-name="Flickr"
+            icon="icons/flickr.gif"
+            id-pattern="com.{0}.flickr.widget"
+            name="Flickr Application Project"
+            wizard-page-factory="org.symbian.tools.wrttools.wizards.FlickrProjectDetailsWizardPage$Factory">
+         <description>
+            This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.
+         </description>
+      </projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/rssreader.zip"
+            default-css-name="RSSReader"
+            default-html-name="index"
+            default-js-name="RSSReader"
+            icon="icons/rss.gif"
+            id-pattern="com.{0}.rssreader.widget"
+            name="RSS Reader Application Project"
+            wizard-page-factory="org.symbian.tools.wrttools.wizards.RssReaderProjectDetailsWizardPage$Factory">
+         <description>
+            This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.
+         </description>
+      </projectTemplate>
 	</extension>
 	
 <!-- Import Wizard -->

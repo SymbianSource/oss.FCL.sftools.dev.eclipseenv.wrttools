@@ -132,7 +132,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 
 	private String readFile(IProject project, String fileName)
 			throws CoreException, UnsupportedEncodingException, IOException {
-		IFile file = project.getFile(fileName);
+		IFile file = getFile(project, fileName);
 		if (file.isAccessible()) {
 			InputStream contents = file.getContents();
 			final BufferedReader reader = new BufferedReader(
@@ -147,6 +147,19 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 				return buffer.toString();
 			} finally {
 				reader.close();
+			}
+		}
+		return null;
+	}
+
+	private IFile getFile(IProject project, String fileName) throws CoreException {
+		String n = fileName.toLowerCase();
+		IResource[] members = project.members();
+		for (IResource iResource : members) {
+			if (iResource.getType() == IResource.FILE
+					&& n.equals(iResource.getName().toLowerCase())
+					&& iResource.isAccessible()) {
+				return (IFile) iResource;
 			}
 		}
 		return null;

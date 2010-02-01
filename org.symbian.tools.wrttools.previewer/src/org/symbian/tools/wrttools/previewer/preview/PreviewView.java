@@ -107,7 +107,7 @@ public class PreviewView extends PageBookView {
 		IProject project = resource.getProject();
 		IPreviewPage page = projectToPage.get(project);
 
-		if (page == null) {
+		if (page == null || page.isDisposed()) {
 			page = createPreviewPage(project);
 			initPage(page);
 			page.createControl(getPageBook());
