@@ -16,25 +16,45 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
+
 package org.symbian.tools.wrttools.core.packager;
 
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import org.symbian.tools.wrttools.core.exception.WRTException;
 
-public class PackagerMessages {
-	private static final String BUNDLE_NAME = "org.symbian.tools.wrttools.core.packager.packageMessages"; //$NON-NLS-1$
+public class PackageException extends WRTException {
 
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
-			.getBundle(BUNDLE_NAME);
-
-	private PackagerMessages() {
+	/**
+	 * Default serial version ID 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Default constructor.
+	 */
+	public PackageException() {
+		super();
 	}
 
-	public static String getString(String key) {
-		try {
-			return RESOURCE_BUNDLE.getString(key);
-		} catch (MissingResourceException e) {
-			return '!' + key + '!';
-		}
+	/**
+	 * @param message
+	 * @param cause
+	 */
+	public PackageException(String message, Throwable cause) {
+		super(message, cause);
 	}
+
+	/**
+	 * @param message
+	 */
+	public PackageException(String message) {
+		super(message);
+	}
+
+	/**
+	 * @param cause
+	 */
+	public PackageException(Throwable cause) {
+		super(cause);
+	}
+
 }
