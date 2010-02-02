@@ -40,6 +40,7 @@ for j in `find ${WS_DIR} -name 'org.chromium*.jar' -o -name 'org.symbian*.jar'`
 do  
 	cp -p $j ${LINUX_PROD_DIR}/eclipse/plugins/
 done
+cp -p ${SCRIPTS_DIR}/supporting/* ${LINUX_PROD_DIR}/eclipse/
 
 # package it up. 
 
