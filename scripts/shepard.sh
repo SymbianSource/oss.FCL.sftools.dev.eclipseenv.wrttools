@@ -4,8 +4,7 @@ set -x
 
 SCRIPTS_DIR=/home/symbian/wrttools/scripts
 BUILD_DIR=/home/symbian/scratch/build_dir
-# DAY_OF_YEAR=`date +%j`
-DAY_OF_YEAR=033-1
+DAY_OF_YEAR=`date +%j`
 HG_CMD=/usr/local/bin/hg
 
 export WS_DIR=${BUILD_DIR}/${DAY_OF_YEAR}/workspace/wrttools
@@ -37,20 +36,9 @@ sh ${SCRIPTS_DIR}/runAnt.sh ${WS_DIR}
 # create product 
 # Linux 
 cp -pr ${LINUX_EXPORT_DIR}/eclipse ${LINUX_PROD_DIR}
-for j in `find ${WS_DIR} -name '*.jar'`
-do
-	b=`basename $j`
-	case ${b} in
-	tagsoup*) 
-	;;
-	jtidy*)
-	;;
-	tk.eclipse.plugin.htmleditor*) 
-	;;		
-	*)  
+for j in `find ${WS_DIR} -name 'org.chromium*.jar' -o -name 'org.symbian*.jar'`
+do  
 	cp -p $j ${LINUX_PROD_DIR}/eclipse/plugins/
-	;;
-	esac
 done
 
 # package it up. 
