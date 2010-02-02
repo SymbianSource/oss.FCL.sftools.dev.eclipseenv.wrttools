@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -24,6 +26,8 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
@@ -35,9 +39,9 @@ import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.MessagePage;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
-import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
+import org.osgi.framework.Bundle;
 import org.symbian.tools.wrttools.previewer.IWrtEditingPreferences;
-import org.symbian.tools.wrttools.util.CoreUtil;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PreviewView extends PageBookView {
@@ -88,6 +92,14 @@ public class PreviewView extends PageBookView {
 
 	@Override
 	public void createPartControl(Composite parent) {
+		Bundle bundle = Platform.getBundle("org.eclipse.wst.sse.ui");
+		Enumeration findEntries = bundle.findEntries("/icons/full/", "*", true);
+		URL resolved;
+		try {
+			resolved = FileLocator.resolve((URL) findEntries.nextElement());
+			System.out.println(resolved);
+		} catch (IOException e) {
+		}
 		super.createPartControl(parent);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(
 				resourceListener);

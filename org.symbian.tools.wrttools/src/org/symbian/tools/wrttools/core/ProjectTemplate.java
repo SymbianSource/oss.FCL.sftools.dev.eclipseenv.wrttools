@@ -70,6 +70,16 @@ public class ProjectTemplate {
 		}
 	}
 	
+	public String[] getLibraryIds() {
+		IConfigurationElement[] elements = element.getChildren("requires-library");
+		String[] ids = new String[elements.length];
+		for (int i = 0; i < elements.length; i++) {
+			IConfigurationElement element = elements[i];
+			ids[i] = element.getValue();
+		}
+		return ids;
+	}
+	
 	public static ProjectTemplate[] getAllTemplates() {
 		if (templates == null) {
 			IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID, "projectTemplates");
