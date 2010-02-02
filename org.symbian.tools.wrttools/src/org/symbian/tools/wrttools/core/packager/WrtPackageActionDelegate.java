@@ -75,7 +75,6 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 		boolean packaedSucess=false;
 		if (project != null) {
 
-/*
 			ValidateAction validator = new ValidateAction();
 			if(!validator.isValidProject(project)) {
 				System.out.println("Invalid widget, can not be packaged!");
@@ -84,7 +83,6 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 				reportStatus("See errors from the Problems View for more details...");
 				return packaedSucess;
 			}
-*/
 
 			try {
 				final List<String> fileList = new ArrayList<String>();
