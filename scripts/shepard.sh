@@ -43,4 +43,5 @@ done
 
 # package it up. 
 
+tar -czvf  ${LINUX_PROD_DIR}/webruntime.linux.tar ${LINUX_PROD_DIR}/eclipse/
 
