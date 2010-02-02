@@ -92,7 +92,6 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
 		try{
 			nsIServiceManager servMgr = null;
 			try {
-				Mozilla.getInstance().initialize(null);
 				servMgr = Mozilla.getInstance().getServiceManager();
 				if (servMgr == null) return;
 			} catch (Exception x) {

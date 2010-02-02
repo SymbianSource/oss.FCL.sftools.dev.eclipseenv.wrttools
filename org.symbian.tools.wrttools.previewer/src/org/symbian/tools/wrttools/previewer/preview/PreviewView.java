@@ -92,14 +92,6 @@ public class PreviewView extends PageBookView {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		Bundle bundle = Platform.getBundle("org.eclipse.wst.sse.ui");
-		Enumeration findEntries = bundle.findEntries("/icons/full/", "*", true);
-		URL resolved;
-		try {
-			resolved = FileLocator.resolve((URL) findEntries.nextElement());
-			System.out.println(resolved);
-		} catch (IOException e) {
-		}
 		super.createPartControl(parent);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(
 				resourceListener);
