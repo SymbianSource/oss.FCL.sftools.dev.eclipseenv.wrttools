@@ -170,5 +170,8 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 	public void setSelection(ISelection selection) {
 		// Do nothing
 	}
-	
+
+	public boolean isDisposed() {
+		return browser != null && browser.isDisposed();
+	}
 }

@@ -22,7 +22,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class PackagerMessages {
-	private static final String BUNDLE_NAME = "com.nokia.wrt.core.packager.packageMessages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.symbian.tools.wrttools.core.packager.packageMessages"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
 			.getBundle(BUNDLE_NAME);

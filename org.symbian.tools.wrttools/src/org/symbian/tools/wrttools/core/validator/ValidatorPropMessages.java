@@ -27,11 +27,11 @@ import java.util.logging.Logger;
 import org.symbian.tools.wrttools.util.Util;
 
 public class ValidatorPropMessages {
-	private static final String BUNDLE_NAME = "com.nokia.wrt.core.validator.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.symbian.tools.wrttools.core.validator.messages"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
 			.getBundle(BUNDLE_NAME);
-	private static Logger log = Logger.getLogger("com.nokia.wrt.core.validator.ValidatorPropMessages");
+	private static Logger log = Logger.getLogger("org.symbian.tools.wrttools.core.validator.ValidatorPropMessages");
 
 	private ValidatorPropMessages() {
 	}

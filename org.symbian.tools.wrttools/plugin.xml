@@ -59,7 +59,7 @@
 		</validator>
     </extension> 
     
-<!-- Validation markers -->
+<!-- Validator Marker -->
    
         <extension
            id="org.symbian.tools.wrttools.core.validator.marker"
@@ -69,25 +69,87 @@
                  <persistent value ="true"/>
         </extension>
 
+<!-- WRT Tool Integration (Package, Validate, Include, Exclude Settings)-->
         <extension	
           point="org.eclipse.ui.popupMenus">
-	      <objectContribution
+		   <objectContribution
+           objectClass="org.eclipse.core.resources.IResource" 
+		   adaptable="true"         
+           id="org.symbian.tools.wrttools.widget.wrttool">
+	 	   <filter
+	     	name="projectNature"
+	     	value="org.symbian.tools.wrttools.WidgetProjectNature"/>
+	       <action
+	             class="org.symbian.tools.wrttools.core.packager.WrtPackageActionDelegate"
+	             enablesFor="+"
+	             icon="icons/package_widget.gif"
+	             id="org.symbian.tools.wrttools.widget.package.WrtPackageActionDelegate"
+	             label="Package Widget"
+	             menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
+	       </action>
+          </objectContribution> 
+          	      <objectContribution
 			 adaptable="true"
-			 id="com.nokia.wrt.core.validator"
+			 id="org.symbian.tools.wrttools.core.validator"
              objectClass="org.eclipse.core.resources.IResource">
            <filter
          	name="projectNature"
          	value="org.symbian.tools.wrttools.WidgetProjectNature"/>
            <action
-                 class="com.nokia.wrt.core.validator.ValidateAction"
+                 class="org.symbian.tools.wrttools.core.validator.ValidateAction"
                  enablesFor="+"
                  icon="icons/validate_widget.gif"
-                 id="com.nokia.wrt.core.validator.ValidateAction"
+                 id="org.symbian.tools.wrttools.core.validator.ValidateAction"
                  label="Validate Widget"
-                 menubarPath="com.nokia.wrt.contextMenuGroupMarker">
+                 menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
 			</action>
-		   </objectContribution> 
-        </extension>  
+		   </objectContribution>
+          		<objectContribution
+            objectClass="org.eclipse.core.resources.IResource"            
+            id="org.symbian.tools.wrttools.widget.wrttool.packageoptions">
+         <visibility>
+            <not>
+               <or>
+               <objectState name="persistentProperty" value="org.symbian.tools.wrttools.packager.exclude"/>
+			   <objectState name="extension" value="plist"/>
+			   <objectClass name="org.eclipse.core.resources.IProject"/>
+			   </or>
+            </not>
+         </visibility>
+     	<filter
+         	name="projectNature"
+         	value="org.symbian.tools.wrttools.WidgetProjectNature"/>           
+       <action
+             class="org.symbian.tools.wrttools.core.packager.ExcludeFileAction"
+             icon="icons/exclude_archive.gif"
+             id="org.symbian.tools.wrttools.widget.wrttool.packageoptions.ExcludeFileAction"
+             label="Exclude From Widget Archive"
+             menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker"> 
+      </action>  
+    </objectContribution>    
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IResource"            
+            id="org.symbian.tools.wrttools.widget.wrttool.packageoptions">
+      <visibility>
+        <and>
+	        <not>
+	        	<objectState name="extension" value="wgz"/>
+	        </not>
+	        <and>
+	        	<objectState name="persistentProperty" value="org.symbian.tools.wrttools.packager.exclude"/>
+	        	<objectState name="projectNature" value="org.symbian.tools.wrttools.WidgetProjectNature"/>
+	        </and>
+        </and>
+       </visibility>
+       <action
+             class="org.symbian.tools.wrttools.core.packager.IncludeFileAction"
+             icon="icons/include_archive.gif"
+             id="org.symbian.tools.wrttools.widget.wrttool.packageoptions.IncludeFileAction"
+             label="Include in Widget Archive"
+             menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker"> 
+      </action>  
+    </objectContribution>
+   </extension>  
 
 <!-- WRT Project Templates - CSS Validator -->
 	<extension-point id="projectTemplates" name="WRT application project templates" schema="schema/projectTemplates.exsd"/>
@@ -145,6 +207,44 @@
 				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
          </description>
 		</projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/wrtkit.zip"
+            default-css-name="basic"
+            default-html-name="index"
+            default-js-name="basic"
+            icon="icons/main16.gif"
+            id-pattern="com.{0}.basic.widget"
+            name="Basic WRT Project with WRTKit Support">
+         <description>
+            This wizard generates an basic project with a minimal Info.plist, html,css and js along with WRTKit.
+         </description>
+      </projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/flickr.zip"
+            default-css-name="Flickr"
+            default-html-name="index"
+            default-js-name="Flickr"
+            icon="icons/flickr.gif"
+            id-pattern="com.{0}.flickr.widget"
+            name="Flickr Application Project"
+            wizard-page-factory="org.symbian.tools.wrttools.wizards.FlickrProjectDetailsWizardPage$Factory">
+         <description>
+            This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.
+         </description>
+      </projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/rssreader.zip"
+            default-css-name="RSSReader"
+            default-html-name="index"
+            default-js-name="RSSReader"
+            icon="icons/rss.gif"
+            id-pattern="com.{0}.rssreader.widget"
+            name="RSS Reader Application Project"
+            wizard-page-factory="org.symbian.tools.wrttools.wizards.RssReaderProjectDetailsWizardPage$Factory">
+         <description>
+            This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.
+         </description>
+      </projectTemplate>
 	</extension>
 	
 <!-- Import Wizard -->
@@ -156,13 +256,6 @@
 			icon="icons/main16.gif" id="org.symbian.tools.wrttools.import.aptanaImport"
 			name="Aptana IDE WRT Project">
 		</wizard>
-  <wizard
-        category="org.symbian.tools.wrttools.import"
-        class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
-        icon="icons/main16.gif"
-        id="org.symbian.tools.wrttools.importwgz"
-        name="Import WRT Application Archive">
-  </wizard>
 	</extension>
 	
 <!-- Problem Markers -->
@@ -450,29 +543,9 @@
                 <adapt
                       type="org.eclipse.core.resources.IResource">
                 </adapt>
-                <adapt
-                      type="java.util.Collection">
-	                <count
-	                      value="0">
-	                </count>
-                </adapt>
-             </or>
-          </enablement>
-       </commonWizard>
-       <commonWizard
-             type="import"
-             wizardId="org.symbian.tools.wrttools.importwgz">
-          <enablement>
-             <or>
-                <adapt
-                      type="org.eclipse.core.resources.IResource">
-                </adapt>
-                <adapt
-                      type="java.util.Collection">
-	                <count
-	                      value="0">
-	                </count>
-                </adapt>
+                <count
+                      value="0">
+                </count>
              </or>
           </enablement>
        </commonWizard>
