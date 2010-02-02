@@ -54,6 +54,9 @@ public class ProjectUtils {
 	public static final String PREVIEW_MAIN_FILE = "wrt_preview_main.html";
 
 	private static boolean isDefaultProjectLocation(URI uri) {
+		if (uri == null) {
+			return true;
+		}
 		File file = new File(uri);
 		IPath project = new Path(file.getAbsolutePath());
 		IPath workspace = ResourcesPlugin.getWorkspace().getRoot()

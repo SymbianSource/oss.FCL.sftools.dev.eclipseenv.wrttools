@@ -61,13 +61,15 @@ public class PreviewView extends PageBookView {
 
 	private final IResourceChangeListener resourceListener = new IResourceChangeListener() {
 		public void resourceChanged(IResourceChangeEvent event) {
-			ChangedResourcesCollector visitor = new ChangedResourcesCollector();
-			try {
-				event.getDelta().accept(visitor);
-			} catch (CoreException e) {
-				PreviewerPlugin.log(e);
+			if (event.getDelta() != null) {
+				ChangedResourcesCollector visitor = new ChangedResourcesCollector();
+				try {
+					event.getDelta().accept(visitor);
+				} catch (CoreException e) {
+					PreviewerPlugin.log(e);
+				}
+				refreshPages(visitor.files);
 			}
-			refreshPages(visitor.files);
 		}
 	};
 
@@ -146,7 +148,8 @@ public class PreviewView extends PageBookView {
 				.getPreferenceStore();
 		String value = preferenceStore
 				.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
-		if (value == null || value.trim().length() == 0 || MessageDialogWithToggle.PROMPT.equals(value)) {
+		if (value == null || value.trim().length() == 0
+				|| MessageDialogWithToggle.PROMPT.equals(value)) {
 			return MessageDialogWithToggle
 					.openYesNoQuestion(
 							getSite().getShell(),

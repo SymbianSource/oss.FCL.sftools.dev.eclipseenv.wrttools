@@ -92,9 +92,11 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
 		try{
 			nsIServiceManager servMgr = null;
 			try {
+				Mozilla.getInstance().initialize(null);
 				servMgr = Mozilla.getInstance().getServiceManager();
 				if (servMgr == null) return;
 			} catch (Exception x) {
+				PreviewerPlugin.log(x);
 				// known to throw NullPointException on Mac OS when you're not using 
 				// Mozilla. We don't want to pollute the error log with this
 				return;
