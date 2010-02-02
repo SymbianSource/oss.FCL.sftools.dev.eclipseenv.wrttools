@@ -45,6 +45,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -55,8 +56,14 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
+import org.eclipse.wst.jsdt.core.IIncludePathEntry;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
+import org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
+import org.symbian.tools.wrttools.core.libraries.IWrtIdeContainer;
 import org.symbian.tools.wrttools.util.NonClosingStream;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
@@ -106,8 +113,40 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 			throws CoreException {
 		monitor.beginTask("Creating project", 100);
 		IProject project = ProjectUtils.createWrtProject(context.getProjectName(), context.getProjectUri(), new SubProgressMonitor(monitor, 30));
-		populateProject(project, new SubProgressMonitor(monitor, 70));
+		populateProject(project, new SubProgressMonitor(monitor, 30));
+		try {
+			initLibraries(project, context.getTemplate().getLibraryIds(), new SubProgressMonitor(monitor, 40));
+		} catch (IOException e) {
+			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Failed to setup libraries", e));
+		}
 		monitor.done();
+	}
+
+	private void initLibraries(IProject project, String[] libraryIds, IProgressMonitor progressMonitor) throws IOException, CoreException {
+		if (libraryIds.length == 0) {
+			progressMonitor.done();
+			return;
+		}
+		progressMonitor.beginTask("Installing JS libraries", 100);
+		int perContainer = 90 / libraryIds.length;
+		for (String string : libraryIds) {
+			JsGlobalScopeContainerInitializer containerInitializer = JavaScriptCore.getJsGlobalScopeContainerInitializer(string);
+			if (containerInitializer instanceof IWrtIdeContainer) {
+				((IWrtIdeContainer) containerInitializer).populateProject(project, new SubProgressMonitor(progressMonitor, perContainer));
+			}
+		}
+		IJavaScriptProject js = JavaScriptCore.create(project);
+		IIncludePathEntry[] rawIncludepath = js.getRawIncludepath();
+		int preconfigured = rawIncludepath.length;
+		IIncludePathEntry[] newIncludepath = new IIncludePathEntry[preconfigured + libraryIds.length];
+		System.arraycopy(rawIncludepath, 0, newIncludepath, 0, preconfigured);
+		for (int i = 0; i < libraryIds.length; i++) {
+			String string = libraryIds[i];
+			IIncludePathEntry entry = JavaScriptCore.newContainerEntry(new Path(string));
+			newIncludepath[preconfigured + i] = entry;
+		}
+		js.setRawIncludepath(newIncludepath, new SubProgressMonitor(progressMonitor, 10));
+		progressMonitor.done();
 	}
 
 	private void populateProject(IProject project, IProgressMonitor monitor)

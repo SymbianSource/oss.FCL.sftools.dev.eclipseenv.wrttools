@@ -49,8 +49,11 @@
 
    <element name="projectTemplate">
       <complexType>
-         <sequence>
-            <element ref="description" minOccurs="0" maxOccurs="1"/>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <choice>
+               <element ref="description"/>
+               <element ref="requires-library" minOccurs="0" maxOccurs="unbounded"/>
+            </choice>
          </sequence>
          <attribute name="name" type="string" use="required">
             <annotation>
@@ -129,6 +132,9 @@
             <meta.element translatable="true"/>
          </appinfo>
       </annotation>
+   </element>
+
+   <element name="requires-library" type="string">
    </element>
 
    <annotation>

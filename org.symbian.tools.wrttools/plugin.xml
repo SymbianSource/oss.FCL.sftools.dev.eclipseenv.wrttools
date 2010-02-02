@@ -208,42 +208,45 @@
          </description>
 		</projectTemplate>
       <projectTemplate
+      		name="Basic WRT Project with WRTKit Support"
             archive="projecttemplates/wrtkit.zip"
             default-css-name="basic"
             default-html-name="index"
             default-js-name="basic"
             icon="icons/main16.gif"
-            id-pattern="com.{0}.basic.widget"
-            name="Basic WRT Project with WRTKit Support">
+            id-pattern="com.{0}.basic.widget">
          <description>
             This wizard generates an basic project with a minimal Info.plist, html,css and js along with WRTKit.
          </description>
+         <requires-library>org.symbian.wrtkit</requires-library>
       </projectTemplate>
       <projectTemplate
+            name="Flickr Application Project"
             archive="projecttemplates/flickr.zip"
             default-css-name="Flickr"
             default-html-name="index"
             default-js-name="Flickr"
             icon="icons/flickr.gif"
             id-pattern="com.{0}.flickr.widget"
-            name="Flickr Application Project"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.FlickrProjectDetailsWizardPage$Factory">
          <description>
             This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.
          </description>
+         <requires-library>org.symbian.wrtkit</requires-library>
       </projectTemplate>
       <projectTemplate
+            name="RSS Reader Application Project"
             archive="projecttemplates/rssreader.zip"
             default-css-name="RSSReader"
             default-html-name="index"
             default-js-name="RSSReader"
             icon="icons/rss.gif"
             id-pattern="com.{0}.rssreader.widget"
-            name="RSS Reader Application Project"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.RssReaderProjectDetailsWizardPage$Factory">
          <description>
             This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.
          </description>
+         <requires-library>org.symbian.wrtkit</requires-library>
       </projectTemplate>
 	</extension>
 	
@@ -256,7 +259,14 @@
 			icon="icons/main16.gif" id="org.symbian.tools.wrttools.import.aptanaImport"
 			name="Aptana IDE WRT Project">
 		</wizard>
-	</extension>
+       <wizard
+          category="org.symbian.tools.wrttools.import"
+          class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
+          icon="icons/main16.gif"
+          id="org.symbian.tools.wrttools.importwgz"
+          name="Import WRT Application Archive">
+       </wizard>
+    </extension>
 	
 <!-- Problem Markers -->
 	<extension id="org.symbian.tools.wrt.xmlProblem" name="XML Problem"
@@ -543,9 +553,29 @@
                 <adapt
                       type="org.eclipse.core.resources.IResource">
                 </adapt>
-                <count
-                      value="0">
-                </count>
+                <adapt
+                      type="java.util.Collection">
+	                <count
+	                      value="0">
+	                </count>
+                </adapt>
+             </or>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             type="import"
+             wizardId="org.symbian.tools.wrttools.importwgz">
+          <enablement>
+             <or>
+                <adapt
+                      type="org.eclipse.core.resources.IResource">
+                </adapt>
+                <adapt
+                      type="java.util.Collection">
+	                <count
+	                      value="0">
+	                </count>
+                </adapt>
              </or>
           </enablement>
        </commonWizard>
@@ -569,4 +599,19 @@
        </commonSorter>
     </navigatorContent>
  </extension>
+ <extension
+       point="org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer">
+    <JsGlobalScopeContainerInitializer
+       class="org.symbian.tools.wrttools.core.libraries.WrtKitLibInitializer"
+       id="org.symbian.wrtkit">
+    </JsGlobalScopeContainerInitializer>
+ </extension>
+ <extension
+        point="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
+    <JsGlobalScopeContainerPage
+            name="WRTKit"
+            class="org.symbian.tools.wrttools.wizards.WrtKitLibraryWizardPage"
+            id="org.symbian.wrtkit">
+    </JsGlobalScopeContainerPage>    
+  </extension>
 </plugin>
