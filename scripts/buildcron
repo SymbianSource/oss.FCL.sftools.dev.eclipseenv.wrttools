@@ -1,5 +1,5 @@
-# mail any output to ‘paul’, no matter whose crontab this is
+# mail any output to ‘johnk’, no matter whose crontab this is
 MAILTO=johnk@symbian.org
 # run at 1 am 
-0 1 * * 0-5  sh /home/symbian/wrttools/scripts/shepard.sh > /home/symbian/scratch/build-`date +%j`.out 2>&1
+0 1 * * 0-5  /bin/sh /home/symbian/wrttools/scripts/shepard.sh > /home/symbian/scratch/build-`date +%j`.out 2>&1
 
