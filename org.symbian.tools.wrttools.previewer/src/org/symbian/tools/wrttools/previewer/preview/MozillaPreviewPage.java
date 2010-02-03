@@ -137,7 +137,7 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
 			mozillaPrefs.setCharPref("capability.policy.default.XMLHttpRequest.setRequestHeader", "allAccess");
 			/* to over-ride the internet security dialog when preview browser tries to access local hard drive */
 			mozillaPrefs.setCharPref("capability.principal.codebase.p0.granted", "UniversalXPConnect  UniversalBrowserRead");
-			String location = "http://127.0.0.1:" + WebappManager.getPort();
+			String location = "http://" + WebappManager.getHost() + ":" + WebappManager.getPort();
 			mozillaPrefs.setCharPref("capability.principal.codebase.p0.id", location);
 			mozillaPrefs.setBoolPref("security.fileuri.strict_origin_policy", 0);
 		} catch (Exception e) {
