@@ -28,6 +28,7 @@ import java.util.zip.ZipInputStream;
 
 import javax.swing.filechooser.FileSystemView;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -42,6 +43,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
@@ -74,10 +76,10 @@ public class ProjectUtils {
 		IProject project = workspace.getRoot().getProject(name);
 		BuildPathsBlock.createProject(project, uri, new SubProgressMonitor(
 				monitor, 10));
-		ValidationFramework.getDefault().addValidationBuilder(project);
-
 		BuildPathsBlock.addJavaNature(project, new SubProgressMonitor(monitor,
 				10));
+
+		ValidationFramework.getDefault().addValidationBuilder(project);
 
 		// TODO: Build path, super type, etc.
 		// BuildPathsBlock.flush(classPathEntries, javaScriptProject, superType,
@@ -98,6 +100,18 @@ public class ProjectUtils {
 				System.arraycopy(natureIds, 0, newNatures, 1, natureIds.length);
 				newNatures[0] = WidgetProjectNature.ID;
 				description.setNatureIds(newNatures);
+				
+				ICommand[] buildSpec = description.getBuildSpec();
+				for (int i = 0; i < buildSpec.length; i++) {
+					ICommand command = buildSpec[i];
+					if (JavaScriptCore.BUILDER_ID.equals(command.getBuilderName())) {
+						buildSpec[i] = buildSpec[buildSpec.length - 1];
+						buildSpec[buildSpec.length - 1] = command;
+						description.setBuildSpec(buildSpec);
+						break;
+					}
+				}
+				
 				project.setDescription(description, new NullProgressMonitor());
 			} catch (CoreException e) {
 				Activator.log(e);
