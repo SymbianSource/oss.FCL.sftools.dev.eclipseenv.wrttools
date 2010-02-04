@@ -30,7 +30,7 @@ public class FlickrProjectDetailsWizardPage extends WRTProjectDetailsWizardPage 
 	
 	@Override
 	protected void addTemplateControls(Composite root) {
-		context.getExtensions().put("flickrUrl", "http://www.flickr.com/groups/symbianfoundation");
+		context.getExtensions().put("flickrUrl", "http://flickr.com/photos/symbianfoundation");
 		createLabel(root, "Flickr URL:");
 		createTextForExt(root, "flickrUrl", "Flickr URL");
 		createLabel(root, "");
