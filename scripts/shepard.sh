@@ -49,7 +49,7 @@ cp -p ${SCRIPTS_DIR}/supporting/* ${LINUX_PROD_DIR}/eclipse/
 # package it up. 
 
 cd ${LINUX_PROD_DIR}
-tar -czvf webruntime.linux.tar eclipse
+tar -czvf webruntime${DAY_OF_YEAR}.linux.tar eclipse
 
 # Mac OSX
 cp -pr ${MACOSX_EXPORT_DIR}/eclipse ${MACOSX_PROD_DIR}
@@ -61,7 +61,7 @@ cp -p ${SCRIPTS_DIR}/supporting/* ${MACOSX_PROD_DIR}/eclipse/
 
 # package it up. 
 cd ${MACOSX_PROD_DIR}
-tar -czvf  webruntime.macosx.tar eclipse
+tar -czvf  webruntime${DAY_OF_YEAR}.macosx.tar eclipse
 
 # Win32
 cp -pr ${WIN32_EXPORT_DIR}/eclipse ${WIN32_PROD_DIR}
@@ -74,5 +74,5 @@ cp -p ${SCRIPTS_DIR}/supporting/* ${WIN32_PROD_DIR}/eclipse/
 # package it up. 
 
 cd ${WIN32_PROD_DIR}
-tar -czvf  webruntime.win32.tar eclipse
+tar -czvf  webruntime${DAY_OF_YEAR}.win32.tar eclipse
 
