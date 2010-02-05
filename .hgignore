@@ -1,2 +1,3 @@
 syntax: regexp
 ^[\w\.]*/bin
+.*/Thumbs.db
