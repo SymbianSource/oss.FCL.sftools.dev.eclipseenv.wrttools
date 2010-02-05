@@ -125,7 +125,7 @@ public class WebappManager {
 	public static String getHost() {
 		if (host == null) {
 			try {
-				host = InetAddress.getLocalHost().getHostName();
+				host = InetAddress.getLocalHost().getHostName().toLowerCase();
 			} catch (Exception e) {
 				host = "127.0.0.1";
 			}
