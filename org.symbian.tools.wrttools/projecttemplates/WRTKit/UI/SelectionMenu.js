@@ -84,18 +84,18 @@ SelectionMenu.prototype.init = function(id, caption, options, multipleSelection,
     this.peerElement.addEventListener("mouseover", function() { self.hoverStateChanged(true); }, false);
     this.peerElement.addEventListener("mouseout", function() { self.hoverStateChanged(false); }, false);
     this.peerElement.addEventListener("change", function() { self.selectionChanged(); }, false);
-}
+};
 
 // Returns the enabled state.
 SelectionMenu.prototype.isEnabled = function() {
     return !this.peerElement.disabled;
-}
+};
 
 // Sets the enabled state.
 SelectionMenu.prototype.setEnabled = function(enabled) {
     uiLogger.debug("SelectionMenu.setEnabled(" + enabled + ")");
     this.peerElement.disabled = !enabled;
-}
+};
 
 // Sets the focused state for the control.
 // Note: This may not always succeed.
@@ -106,7 +106,7 @@ SelectionMenu.prototype.setFocused = function(focused) {
     } else {
         this.peerElement.blur();
     }
-}
+};
 
 // Sets the currently selected options. Pass a single option in a single selection
 // control or an array of selected controls in a multiple selection control. To
@@ -121,14 +121,14 @@ SelectionMenu.prototype.setSelected = function(selected) {
     for (var i = 0; i < this.options.length; i++) {
         this.optionElements[i].selected = this.isSelected(this.options[i]);
     }
-}
+};
 
 // Sets the options in the control.
 SelectionMenu.prototype.setOptions = function(options) {
     // call superclass setOptions()
     SelectionControl.prototype.setOptions.call(this, options);
     this.updateOptionElements();
-}
+};
 
 // Updates the option elements for the peer select element.
 SelectionMenu.prototype.updateOptionElements = function() {
@@ -158,7 +158,7 @@ SelectionMenu.prototype.updateOptionElements = function() {
     
     // update the style
     this.updateStyleFromState();    
-}
+};
 
 // Callback for selection change events.
 SelectionMenu.prototype.selectionChanged = function() {
@@ -179,7 +179,7 @@ SelectionMenu.prototype.selectionChanged = function() {
     
     // notify event listeners
     this.fireEvent(this.createEvent("SelectionChanged", this.getSelected()));
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 SelectionMenu.prototype.updateStyleFromState = function() {
@@ -201,4 +201,4 @@ SelectionMenu.prototype.updateStyleFromState = function() {
         var option = this.optionElements[i];
         this.setClassName(option, "SelectionMenuOption SelectionMenuOption" + peerStateName);
     }
-}
+};

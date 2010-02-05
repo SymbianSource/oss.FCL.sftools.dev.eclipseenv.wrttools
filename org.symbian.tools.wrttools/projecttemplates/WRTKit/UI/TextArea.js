@@ -75,7 +75,7 @@ TextArea.prototype.init = function(id, caption, value, rows) {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 TextArea.prototype.updateStyleFromState = function() {
@@ -93,4 +93,4 @@ TextArea.prototype.updateStyleFromState = function() {
     // set peer element class names
     var peerStateName = this.isEnabled() ? stateName : "Disabled";
     this.setClassName(this.peerElement, "TextArea TextArea" + stateName);
-}
+};

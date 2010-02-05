@@ -74,7 +74,7 @@ function Ajax()
 							//	call the native XmlHttpRequest.open method
 							this._open(method, url, flag);
 						}
-					}
+					};
 				}
 			}
 			catch(e)

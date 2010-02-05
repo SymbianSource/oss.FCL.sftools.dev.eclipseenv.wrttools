@@ -96,12 +96,12 @@ ListView.prototype.init = function(id, caption) {
     
     // set the caption
     this.setCaption(caption);
-}
+};
 
 // Returns the caption; null if none.
 ListView.prototype.getCaption = function() {
     return this.caption;
-}
+};
 
 // Sets the caption; null if none.
 ListView.prototype.setCaption = function(caption) {
@@ -113,12 +113,12 @@ ListView.prototype.setCaption = function(caption) {
     // set the caption
     this.caption = caption;
     this.captionTextElement.innerHTML = (caption == null) ? "" : caption;
-}
+};
 
 // Returns an array of controls in the view.
 ListView.prototype.getControls = function() {
     return this.controls;
-}
+};
 
 // Adds a control to the view.
 ListView.prototype.addControl = function(control) {
@@ -128,7 +128,7 @@ ListView.prototype.addControl = function(control) {
     this.controls.push(control);
     this.listElement.appendChild(control.rootElement);
     control.view = this;
-}
+};
 
 // Inserts a control to the view before the specified control.
 ListView.prototype.insertControl = function(control, beforeControl) {
@@ -148,7 +148,7 @@ ListView.prototype.insertControl = function(control, beforeControl) {
     
     // the control wasn't found so we'll add it last
     this.addControl(control);
-}
+};
 
 // Removes a control from the view.
 ListView.prototype.removeControl = function(control) {
@@ -164,7 +164,7 @@ ListView.prototype.removeControl = function(control) {
             control.view = null;
         }
     }
-}
+};
 
 // Attempts to focus the first focusable control.
 ListView.prototype.focusFirstControl = function() {
@@ -177,7 +177,7 @@ ListView.prototype.focusFirstControl = function() {
             break;
         }
     }
-}
+};
 
 // Attempts to reset all control focus states.
 // Override in subclasses as required.
@@ -186,4 +186,4 @@ ListView.prototype.resetControlFocusStates = function() {
     for (var i = 0; i < this.controls.length; i++) {
         this.controls[i].resetFocusState();
     }
-}
+};

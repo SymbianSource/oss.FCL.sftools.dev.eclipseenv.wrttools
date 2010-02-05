@@ -70,18 +70,18 @@ UIElement.prototype.init = function(id) {
     if (id != null) {
         this.rootElement.id = id;
     }
-}
+};
 
 // Returns an array containing the current event listeners.
 UIElement.prototype.getEventListeners = function() {
     return this.eventListeners;
-}
+};
 
 // Adds an event listener.
 UIElement.prototype.addEventListener = function(eventType, listener) {
     var listenerDef = { type: eventType, listener: listener };
     this.eventListeners.push(listenerDef);
-}
+};
 
 // Removes an event listener.
 UIElement.prototype.removeEventListener = function(eventType, listener) {
@@ -95,12 +95,12 @@ UIElement.prototype.removeEventListener = function(eventType, listener) {
             return;
         }
     }
-}
+};
 
 // Factory method for an event object where this object is the source object.
 UIElement.prototype.createEvent = function(type, value) {
     return { source: this, type: type, value: value };
-}
+};
 
 // Fires an event to all listeners.
 UIElement.prototype.fireEvent = function(event) {
@@ -111,4 +111,4 @@ UIElement.prototype.fireEvent = function(event) {
             listenerDef.listener.call(this, event);
         }
     }
-}
+};

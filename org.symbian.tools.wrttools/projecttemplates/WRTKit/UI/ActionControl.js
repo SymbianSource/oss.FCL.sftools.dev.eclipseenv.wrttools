@@ -71,7 +71,7 @@ ActionControl.prototype.init = function(id, caption) {
     
     // the control defaults to enabled
     this.enabled = true;
-}
+};
 
 // Common event listeners hookup function called from subclasses.
 ActionControl.prototype.bindActionControlListeners = function() {
@@ -93,19 +93,19 @@ ActionControl.prototype.bindActionControlListeners = function() {
                                                         event.preventDefault();
                                                     }
                                                  }, true);
-}
+};
 
 // Returns the enabled state.
 ActionControl.prototype.isEnabled = function() {
     return this.enabled;
-}
+};
 
 // Sets the enabled state.
 ActionControl.prototype.setEnabled = function(enabled) {
     uiLogger.debug("ActionControl.setEnabled(" + enabled + ")");
     // switch the state
     this.enabled = enabled;
-}
+};
 
 // Sets the focused state for the control.
 // Note: This may not always succeed.
@@ -118,7 +118,7 @@ ActionControl.prototype.setFocused = function(focused) {
             this.linkElement.blur();
         }
     }
-}
+};
 
 // Callback for clicks.
 ActionControl.prototype.controlClicked = function(event) {
@@ -134,11 +134,11 @@ ActionControl.prototype.controlClicked = function(event) {
         // notify event listeners
         this.actionPerformed(event);
     }
-}
+};
 
 // Callback for action performed events.
 ActionControl.prototype.actionPerformed = function(event) {
     uiLogger.debug("ActionControl.actionPerformed()");
     // notify event listeners
     this.fireEvent(this.createEvent("ActionPerformed", event));
-}
+};

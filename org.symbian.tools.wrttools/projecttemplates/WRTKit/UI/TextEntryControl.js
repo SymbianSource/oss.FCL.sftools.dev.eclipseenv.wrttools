@@ -63,7 +63,7 @@ TextEntryControl.prototype.init = function(id, caption) {
     
     // call superclass initializer
     Control.prototype.init.call(this, id, caption);
-}
+};
 
 // Common event listeners hookup function called from subclasses.
 TextEntryControl.prototype.bindTextEntryControlListeners = function() {
@@ -73,13 +73,13 @@ TextEntryControl.prototype.bindTextEntryControlListeners = function() {
     this.peerElement.addEventListener("mouseover", function() { self.hoverStateChanged(true); }, false);
     this.peerElement.addEventListener("mouseout", function() { self.hoverStateChanged(false); }, false);
     this.peerElement.addEventListener("change", function() { self.valueChanged(); }, false);
-}
+};
 
 // Returns the enabled state.
 // Override this in subclasses as required to implement the state change.
 TextEntryControl.prototype.isEnabled = function() {
     return !this.peerElement.readOnly;
-}
+};
 
 // Sets the enabled state.
 // Override this in subclasses as required to implement the state change.
@@ -88,23 +88,23 @@ TextEntryControl.prototype.setEnabled = function(enabled) {
     this.peerElement.readOnly = !enabled;
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Returns the control text.
 TextEntryControl.prototype.getText = function() {
     return this.peerElement.value;
-}
+};
 
 // Sets the text for the control.
 TextEntryControl.prototype.setText = function(text) {
     this.peerElement.value = text;
-}
+};
 
 // Returns the focusable state for the control.
 TextEntryControl.prototype.isFocusable = function() {
     // text entry controls are always focusable
     return true;
-}
+};
 
 // Sets the focused state for the control.
 // Note: This may not always succeed.
@@ -115,11 +115,11 @@ TextEntryControl.prototype.setFocused = function(focused) {
     } else {
         this.peerElement.blur();
     }
-}
+};
 
 // Callback for value change events.
 TextEntryControl.prototype.valueChanged = function() {
     uiLogger.debug("TextEntryControl.valueChanged()");
     // notify event listeners
     this.fireEvent(this.createEvent("ValueChanged", this.peerElement.value));
-}
+};

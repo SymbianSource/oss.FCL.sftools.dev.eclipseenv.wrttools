@@ -107,7 +107,7 @@ FormButton.prototype.init = function(id, text) {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Sets the enabled state.
 FormButton.prototype.setEnabled = function(enabled) {
@@ -135,18 +135,18 @@ FormButton.prototype.setEnabled = function(enabled) {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Returns the button text.
 FormButton.prototype.getText = function() {
     return this.textElement.innerHTML;
-}
+};
 
 // Sets the button text.
 FormButton.prototype.setText = function(text) {
     uiLogger.debug("FormButton.setText(" + text + ")");
     this.textElement.innerHTML = (text == null) ? "" : text;;
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 FormButton.prototype.updateStyleFromState = function() {
@@ -174,4 +174,4 @@ FormButton.prototype.updateStyleFromState = function() {
     
     // set the button text class name
     this.setClassName(this.textElement, "FormButtonText FormButtonText" + stateName);
-}
+};

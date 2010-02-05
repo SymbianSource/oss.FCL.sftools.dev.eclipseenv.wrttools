@@ -111,7 +111,7 @@ NavigationButton.prototype.init = function(id, image, text) {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Sets the enabled state.
 NavigationButton.prototype.setEnabled = function(enabled) {
@@ -139,12 +139,12 @@ NavigationButton.prototype.setEnabled = function(enabled) {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Returns the button image (URL); null if none.
 NavigationButton.prototype.getImage = function() {
     return (this.imageElement != null) ? this.imageElement.src : null;
-}
+};
 
 // Sets the button image (URL); null if none.
 NavigationButton.prototype.setImage = function(image) {
@@ -174,18 +174,18 @@ NavigationButton.prototype.setImage = function(image) {
             this.tableLeftCellElement.appendChild(this.imageElement);
         }
     }
-}
+};
 
 // Returns the button text.
 NavigationButton.prototype.getText = function() {
     return this.textElement.innerHTML;
-}
+};
 
 // Sets the button text.
 NavigationButton.prototype.setText = function(text) {
     uiLogger.debug("NavigationButton.setText(" + text + ")");
     this.textElement.innerHTML = (text == null) ? "" : text;;
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 NavigationButton.prototype.updateStyleFromState = function() {
@@ -217,4 +217,4 @@ NavigationButton.prototype.updateStyleFromState = function() {
     
     // set the button text class name
     this.setClassName(this.textElement, "NavigationButtonText NavigationButtonText" + stateName);
-}
+};

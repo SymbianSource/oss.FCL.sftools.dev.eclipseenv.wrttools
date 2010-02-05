@@ -24,9 +24,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -40,14 +42,10 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionDelegate;
-
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WRTStatusListener;
-import org.symbian.tools.wrttools.core.status.IWRTStatusListener;
-
 import org.symbian.tools.wrttools.core.status.IWRTConstants;
 import org.symbian.tools.wrttools.core.status.WRTStatus;
-import org.symbian.tools.wrttools.core.validator.ValidateAction;
 
 public class WrtPackageActionDelegate extends ActionDelegate implements
 		IObjectActionDelegate {
@@ -74,14 +72,26 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 	public boolean packageProject(IProject project) {
 		boolean packaedSucess=false;
 		if (project != null) {
-
-			ValidateAction validator = new ValidateAction();
-			if(!validator.isValidProject(project)) {
-				System.out.println("Invalid widget, can not be packaged!");
-				reportStatus("For the project "+ project.getLocation());
-				reportStatus(WRTPackagerConstants.STA_PKG_FAILED);
-				reportStatus("See errors from the Problems View for more details...");
-				return packaedSucess;
+			try {
+				project.build(IncrementalProjectBuilder.FULL_BUILD, new NullProgressMonitor());
+				IMarker[] markers = project.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+				
+				boolean hasErrors = false;
+				for (IMarker marker : markers) {
+					if (marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO) == IMarker.SEVERITY_ERROR) {
+						hasErrors = true;
+						break;
+					}
+				}
+				if(hasErrors) {
+					reportStatus("For the project "+ project.getLocation());
+					reportStatus(WRTPackagerConstants.STA_PKG_FAILED);
+					reportStatus("See errors from the Problems View for more details...");
+					return packaedSucess;
+				}
+			} catch (CoreException e1) {
+				Activator.log(e1);
+				return false;
 			}
 
 			try {

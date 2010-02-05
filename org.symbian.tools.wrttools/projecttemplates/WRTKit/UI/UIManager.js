@@ -134,12 +134,12 @@ UIManager.prototype.init = function(viewParentElement, enableScrollBar, scrollba
             self.updateScrollbar();
         }, false);
     }
-}
+};
 
 // Returns the current view.
 UIManager.prototype.getView = function() {
     return this.currentView;
-}
+};
 
 // Switches to the specified view.
 UIManager.prototype.setView = function(view) {
@@ -168,7 +168,7 @@ UIManager.prototype.setView = function(view) {
     // focus the first focusable control
     // a timer is used to prevent unwanted focus shift
     setTimeout(function() { view.focusFirstControl(); }, 1);
-}
+};
 
 // Updates the scrollbar.
 UIManager.prototype.updateScrollbar = function() {
@@ -192,7 +192,7 @@ UIManager.prototype.updateScrollbar = function() {
             uiLogger.debug("Scrollbar updated");
         }
     }
-}
+};
 
 // Starts the view manager timer.
 UIManager.prototype.startTimer = function() {
@@ -204,7 +204,7 @@ UIManager.prototype.startTimer = function() {
     } else {
         uiLogger.warn("UIManager timer already running");
     }
-}
+};
 
 // Stops the view manager timer.
 UIManager.prototype.stopTimer = function() {
@@ -215,7 +215,7 @@ UIManager.prototype.stopTimer = function() {
     } else {
         uiLogger.warn("UIManager timer already stopped");
     }
-}
+};
 
 // Timer callback function.
 UIManager.prototype.onTimer = function() {
@@ -223,18 +223,18 @@ UIManager.prototype.onTimer = function() {
         // make sure the scrollbar is up to date
         this.updateScrollbar();
     }
-}
+};
 
 // Displays a notification.
 UIManager.prototype.showNotification = function(displayTime, type, text, progress) {
     uiLogger.debug("UIManager.showNotification(" + displayTime + ", " + type + ", " + text + ", " + progress + ")");
     // use the notification popup to show the notification
     this.notificationPopup.showNotification(displayTime, type, text, progress);
-}
+};
 
 // Hides the currently displayed notification.
 UIManager.prototype.hideNotification = function() {
     uiLogger.debug("UIManager.hideNotification()");
     // hide the notification popup
     this.notificationPopup.hideNotification();
-}
+};

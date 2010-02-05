@@ -84,12 +84,12 @@ SelectionList.prototype.init = function(id, caption, options, multipleSelection,
     
     // update the option elements to match the options in this control
     this.updateOptionElements();
-}
+};
 
 // Returns the enabled state.
 SelectionList.prototype.isEnabled = function() {
     return this.enabled;
-}
+};
 
 // Sets the enabled state.
 SelectionList.prototype.setEnabled = function(enabled) {
@@ -97,7 +97,7 @@ SelectionList.prototype.setEnabled = function(enabled) {
     // switch the state and update the the control
     this.enabled = enabled;
     this.updateOptionElements();
-}
+};
 
 // Sets the focused state for the control.
 // Note: This may not always succeed.
@@ -110,7 +110,7 @@ SelectionList.prototype.setFocused = function(focused) {
             this.optionElements[0].link.blur();
         }
     }
-}
+};
 
 // Sets the currently selected options. Pass a single option in a single selection
 // control or an array of selected controls in a multiple selection control. To
@@ -120,14 +120,14 @@ SelectionList.prototype.setSelected = function(selected) {
     // call superclass setSelected()
     SelectionControl.prototype.setSelected.call(this, selected);
     this.updateStyleFromState();
-}
+};
 
 // Sets the options in the control.
 SelectionList.prototype.setOptions = function(options) {
     // call superclass setOptions()
     SelectionControl.prototype.setOptions.call(this, options);
     this.updateOptionElements();
-}
+};
 
 // Updates the option elements for the control element.
 SelectionList.prototype.updateOptionElements = function() {
@@ -168,14 +168,14 @@ SelectionList.prototype.updateOptionElements = function() {
             optionElement.addEventListener("mouseover", function() { self.hoverStateChanged(true); }, false);
             optionElement.addEventListener("mouseout", function() { self.hoverStateChanged(false); }, false);
             optionElement.addEventListener("mousedown", function(event) {
-                                                               self.optionClicked(event)
+                                                               self.optionClicked(event);
                                                                event.stopPropagation();
                                                                event.preventDefault();
                                                         }, true);
             optionElement.addEventListener("keydown", function(event) {
                                                             // center and enter trigger the action
                                                             if (event.keyCode == 0 || event.keyCode == 13) {
-                                                                self.optionClicked(event)
+                                                                self.optionClicked(event);
                                                                 event.stopPropagation();
                                                                 event.preventDefault();
                                                             }
@@ -219,7 +219,7 @@ SelectionList.prototype.updateOptionElements = function() {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Callback for focus state change events.
 SelectionList.prototype.optionFocusStateChanged = function(event, focused) {
@@ -245,7 +245,7 @@ SelectionList.prototype.optionFocusStateChanged = function(event, focused) {
     
     // call the superclass focus state change handler
     this.focusStateChanged(focused);
-}
+};
 
 // Callback for clicks.
 SelectionList.prototype.optionClicked = function(event) {
@@ -298,7 +298,7 @@ SelectionList.prototype.optionClicked = function(event) {
     
     // notify event listeners
     this.fireEvent(this.createEvent("SelectionChanged", this.getSelected()));
-}
+};
 
 // Resets the state tracking for focus and hover.
 // Override this in subclasses as required to implement the state reset.
@@ -308,7 +308,7 @@ SelectionList.prototype.resetFocusState = function() {
     this.focused = false;
     this.focusedOption = null;
     this.updateStyleFromState();
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 SelectionList.prototype.updateStyleFromState = function() {
@@ -352,4 +352,4 @@ SelectionList.prototype.updateStyleFromState = function() {
         // set option text class names
         this.setClassName(optionTextElement, "SelectionListOptionText SelectionListOptionText" + stateName);
     }
-}
+};

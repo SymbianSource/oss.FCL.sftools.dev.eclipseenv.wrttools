@@ -160,12 +160,12 @@ ContentPanel.prototype.init = function(id, caption, content, foldable, expanded)
     
     // update style
     this.updateStyleFromState();
-}
+};
 
 // Returns the enabled state.
 ContentPanel.prototype.isEnabled = function() {
     return this.enabled;
-}
+};
 
 // Sets the enabled state.
 ContentPanel.prototype.setEnabled = function(enabled) {
@@ -197,12 +197,12 @@ ContentPanel.prototype.setEnabled = function(enabled) {
     
     // update style
     this.updateStyleFromState();    
-}
+};
 
 // Returns the caption; null if none.
 ContentPanel.prototype.getCaption = function() {
     return this.caption;
-}
+};
 
 // Sets the caption; null if none.
 ContentPanel.prototype.setCaption = function(caption) {
@@ -223,24 +223,24 @@ ContentPanel.prototype.setCaption = function(caption) {
     
     // update style
     this.updateStyleFromState();
-}
+};
 
 // Returns the content.
 ContentPanel.prototype.getContent = function() {
     return this.contentElement.innerHTML;
-}
+};
 
 // Sets the content.
 ContentPanel.prototype.setContent = function(content) {
     uiLogger.debug("ContentPanel.setContent(" + content + ")");
     this.contentElement.innerHTML = (content == null) ? "" : content;
-}
+};
 
 // Returns the focusable state for the control.
 ContentPanel.prototype.isFocusable = function() {
     // a content panel is focusable if it's foldable and enabled
     return (this.foldable && this.enabled);
-}
+};
 
 // Sets the focused state for the control.
 // Note: This may not always succeed.
@@ -255,12 +255,12 @@ ContentPanel.prototype.setFocused = function(focused) {
     }
     // note that this.focused gets set as a result of focusStateChanged() being called
     // rather than setting it explicitly here
-}
+};
 
 // Returns the expanded state.
 ContentPanel.prototype.isExpanded = function() {
     return this.expanded;
-}
+};
 
 // Sets the expanded state.
 ContentPanel.prototype.setExpanded = function(expanded) {
@@ -307,7 +307,7 @@ ContentPanel.prototype.setExpanded = function(expanded) {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Returns the absolute position (y) of the given element.
 ContentPanel.prototype.getAbsoluteTop = function(element) {
@@ -319,7 +319,7 @@ ContentPanel.prototype.getAbsoluteTop = function(element) {
         element = element.offsetParent;
     }
     return absTop;
-}
+};
 
 // Callback for when the caption is clicked.
 ContentPanel.prototype.captionClicked = function() {
@@ -335,7 +335,7 @@ ContentPanel.prototype.captionClicked = function() {
         // toggle the expanded state
         this.setExpanded(!this.expanded);
     }
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 ContentPanel.prototype.updateStyleFromState = function() {
@@ -364,4 +364,4 @@ ContentPanel.prototype.updateStyleFromState = function() {
     
     // set the content element class names
     this.setClassName(this.contentElement, "ContentPanelContent");
-}
+};

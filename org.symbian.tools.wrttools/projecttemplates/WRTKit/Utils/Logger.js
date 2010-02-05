@@ -66,14 +66,14 @@ Logger.prototype.dump = function(obj) {
     if (this.enabled) {
         console.dir(obj);
     }
-}
+};
 
 // Dumps a stracktrace to the console.
 Logger.prototype.trace = function() {
     if (this.enabled) {
         console.trace();
     }
-}
+};
 
 // Prints a debug message to the console.
 Logger.prototype.debug = function(str) {
@@ -93,25 +93,25 @@ Logger.prototype.debug = function(str) {
             }
         }
     }
-}
+};
 
 // Prints an info message to the console.
 Logger.prototype.info = function(str) {
     if (this.enabled && this.level <= this.LOG_LEVEL_INFO) {
         console.info(str);
     }
-}
+};
 
 // Prints a warning message to the console.
 Logger.prototype.warn = function(str) {
     if (this.enabled && this.level <= this.LOG_LEVEL_WARN) {
         console.warn(str);
     }
-}
+};
 
 // Prints an error message to the console.
 Logger.prototype.error = function(str) {
     if (this.enabled && this.level <= this.LOG_LEVEL_ERROR) {
         console.error(str);
     }
-}
+};

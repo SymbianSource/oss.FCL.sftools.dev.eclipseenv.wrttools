@@ -68,29 +68,29 @@ Label.prototype.init = function(id, caption, text) {
     
     // set the text
     this.setText(text);
-}
+};
 
 // Returns the enabled state for the control.
 Label.prototype.isEnabled = function() {
     return true;
-}
+};
 
 // Returns the focusable state for the control.
 Label.prototype.isFocusable = function() {
     return false;
-}
+};
 
 // Returns the control text.
 Label.prototype.getText = function() {
     return this.contentElement.innerHTML;
-}
+};
 
 // Sets the text for the control.
 Label.prototype.setText = function(text) {
     uiLogger.debug("Label.setText(" + text + ")");
     this.contentElement.innerHTML = (text == null) ? "" : text;
     this.updateStyleFromState();
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 Label.prototype.updateStyleFromState = function() {
@@ -102,4 +102,4 @@ Label.prototype.updateStyleFromState = function() {
     this.setClassName(this.captionElement, "ControlCaption ControlCaptionNormal");
     this.setClassName(this.controlElement, "ControlElement");
     this.setClassName(this.contentElement, "LabelText");
-}
+};

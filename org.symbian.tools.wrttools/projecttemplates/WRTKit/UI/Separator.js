@@ -92,17 +92,17 @@ Separator.prototype.init = function(id) {
     
     // update style
     this.updateStyleFromState();
-}
+};
 
 // Returns the enabled state for the control.
 Separator.prototype.isEnabled = function() {
     return true;
-}
+};
 
 // Returns the focusable state for the control.
 Separator.prototype.isFocusable = function() {
     return false;
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 Separator.prototype.updateStyleFromState = function() {
@@ -116,4 +116,4 @@ Separator.prototype.updateStyleFromState = function() {
     this.setClassName(this.tableLeftCellElement, "SeparatorLeftCell");
     this.setClassName(this.tableCenterCellElement, "SeparatorCenterCell");
     this.setClassName(this.tableRightCellElement, "SeparatorRightCell");
-}
+};

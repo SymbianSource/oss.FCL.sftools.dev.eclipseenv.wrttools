@@ -170,4 +170,4 @@ Scrollbar.prototype.update = function(scrollY, viewportHeight, documentHeight) {
     this.thumbMiddleElement.style.top = Math.round(thumbTop + thumbTopHeight) + "px";
     this.thumbMiddleElement.style.height = Math.round(thumbHeight - thumbTopHeight - thumbBottomHeight + 1) + "px";
     this.thumbBottomElement.style.top = Math.round(thumbBottom - thumbBottomHeight) + "px";
-}
+};

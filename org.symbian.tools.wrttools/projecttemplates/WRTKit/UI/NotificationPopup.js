@@ -159,7 +159,7 @@ NotificationPopup.prototype.showNotification = function(displayTime, type, text,
     if (this.progressBarImageLoaded) {
         this.completeShowNotification();
     }
-}
+};
 
 // Completes displaying of a notification.
 // Note: Used internally - don't call this directly.
@@ -195,7 +195,7 @@ NotificationPopup.prototype.completeShowNotification = function() {
     
     // mark us as no longer processing a show notification call
     this.processingShowNotification = false;
-}
+};
 
 // Hides the currently displayed notification.
 NotificationPopup.prototype.hideNotification = function() {
@@ -214,7 +214,7 @@ NotificationPopup.prototype.hideNotification = function() {
         this.autoHideTimerId = null;
         uiLogger.debug("Auto hide timer stopped");
     }
-}
+};
 
 // Starts animation of the popup (1 to show, -1 to hide).
 NotificationPopup.prototype.animatePopup = function(direction) {
@@ -226,7 +226,7 @@ NotificationPopup.prototype.animatePopup = function(direction) {
         this.animTimerId = setInterval(function() { self.animate(); }, this.ANIM_TIMER_INTERVAL);
         uiLogger.debug("Notification popup animation started");
     }
-}
+};
 
 // Callback for animation timer.
 NotificationPopup.prototype.animate = function() {
@@ -259,7 +259,7 @@ NotificationPopup.prototype.animate = function() {
         this.animTimerId = null;
         uiLogger.debug("Notification popup animation stopped");
     }
-}
+};
 
 // Returns a URL for the progress bar image to use for the specified progress.
 NotificationPopup.prototype.getProgressBarImage = function(progress) {
@@ -279,7 +279,7 @@ NotificationPopup.prototype.getProgressBarImage = function(progress) {
         }
         return progressBarImagePath + "ProgressBar" + progPct + ".png";
     }
-}
+};
 
 // Sets the contents of the popup.
 NotificationPopup.prototype.setPopupContents = function(type, text, progress) {
@@ -313,7 +313,7 @@ NotificationPopup.prototype.setPopupContents = function(type, text, progress) {
         // to load any progress bar image
         this.progressBarImageLoaded = true;
     }
-}
+};
 
 // Callback for notifying the object that its progress bar image completed loading.
 NotificationPopup.prototype.progressBarImageLoadingCompleted = function() {
@@ -327,4 +327,4 @@ NotificationPopup.prototype.progressBarImageLoadingCompleted = function() {
     if (this.processingShowNotification) {
         this.completeShowNotification();
     }
-}
+};

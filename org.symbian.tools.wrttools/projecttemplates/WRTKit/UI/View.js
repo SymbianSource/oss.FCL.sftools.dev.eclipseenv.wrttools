@@ -62,12 +62,12 @@ View.prototype.init = function(id) {
     
     // call superclass initializer
     UIElement.prototype.init.call(this, id);
-}
+};
 
 // Returns the currently focused control; null if none.
 View.prototype.getFocusedControl = function() {
     return this.focusedControl;
-}
+};
 
 // Used to notify the view that the focused control has changed.
 View.prototype.focusedControlChanged = function(control) {
@@ -75,16 +75,16 @@ View.prototype.focusedControlChanged = function(control) {
     this.focusedControl = control;
     // notify event listeners
     this.fireEvent(this.createEvent("FocusedControlChanged", this.focusedControl));
-}
+};
 
 // Attempts to focus the first focusable control.
 // Override in subclasses as required.
 View.prototype.focusFirstControl = function() {
     uiLogger.debug("View.focusFirstControl()");
-}
+};
 
 // Attempts to reset all control focus states.
 // Override in subclasses as required.
 View.prototype.resetControlFocusStates = function() {
     uiLogger.debug("View.resetControlFocusStates()");
-}
+};

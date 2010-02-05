@@ -72,7 +72,7 @@ TextField.prototype.init = function(id, caption, value, masked) {
     
     // update the style
     this.updateStyleFromState();
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 TextField.prototype.updateStyleFromState = function() {
@@ -90,4 +90,4 @@ TextField.prototype.updateStyleFromState = function() {
     // set peer element class names
     var peerStateName = this.isEnabled() ? stateName : "Disabled";
     this.setClassName(this.peerElement, "TextField TextField" + peerStateName);
-}
+};

@@ -104,12 +104,12 @@ Control.prototype.init = function(id, caption) {
     // style is not updated because the subclass will update the style later
     // when it has completely initialized the component
     this.setCaption(caption, true);
-}
+};
 
 // Returns the caption; null if none.
 Control.prototype.getCaption = function() {
     return this.caption;
-}
+};
 
 // Sets the caption; null if none.
 Control.prototype.setCaption = function(caption, noStyleUpdate) {
@@ -126,30 +126,30 @@ Control.prototype.setCaption = function(caption, noStyleUpdate) {
     if (!noStyleUpdate) {
         this.updateStyleFromState();
     }
-}
+};
 
 // Returns the enabled state.
 // Override this in subclasses as required to implement the state change.
 Control.prototype.isEnabled = function() {
     return false;
-}
+};
 
 // Sets the enabled state.
 // Override this in subclasses as required to implement the state change.
 Control.prototype.setEnabled = function(enabled) {
     uiLogger.debug("Control.setEnabled(" + enabled + ")");
-}
+};
 
 // Returns the focusable state for the control.
 // Defaults focusable if enabled - override this in subclasses as required.
 Control.prototype.isFocusable = function() {
     return this.isEnabled();
-}
+};
 
 // Returns the focused state for the control.
 Control.prototype.isFocused = function() {
     return this.focused;
-}
+};
 
 // Sets the focused state for the control.
 // Note: This may not always succeed.
@@ -158,7 +158,7 @@ Control.prototype.setFocused = function(focused) {
     uiLogger.debug("Control.setFocused(" + focused + ")");
     // note that this.focused gets set as a result of focusStateChanged() being called
     // rather than setting it explicitly here
-}
+};
 
 // Called when the focus state has changed for this control.
 Control.prototype.focusStateChanged = function(focused) {
@@ -177,7 +177,7 @@ Control.prototype.focusStateChanged = function(focused) {
         // notify event listeners
         this.fireEvent(this.createEvent("FocusStateChanged", focused));
     }
-}
+};
 
 // Called when the hover state has changed for this control.
 Control.prototype.hoverStateChanged = function(hovering) {
@@ -191,7 +191,7 @@ Control.prototype.hoverStateChanged = function(hovering) {
         // notify event listeners
         this.fireEvent(this.createEvent("HoverStateChanged", hovering));
     }
-}
+};
 
 // Helper method that returns the state name for the current state.
 Control.prototype.getStyleStateName = function() {
@@ -205,7 +205,7 @@ Control.prototype.getStyleStateName = function() {
     } else {
         return "Normal";
     }
-}
+};
 
 // Resets the state tracking for focus and hover.
 // Override this in subclasses as required to implement the state reset.
@@ -214,7 +214,7 @@ Control.prototype.resetFocusState = function() {
     this.hovering = false;
     this.focused = false;
     this.updateStyleFromState();
-}
+};
 
 // Helper function that sets a classname for an element.
 // Only sets the class name if it actually is different from the current value.
@@ -222,10 +222,10 @@ Control.prototype.setClassName = function(element, className) {
     if (element.className != className) {
         element.className = className;
     }
-}
+};
 
 // Updates the style of the control to reflects the state of the control.
 // Override this in subclasses as required to implement the state change.
 Control.prototype.updateStyleFromState = function() {
     uiLogger.debug("Control.updateStyleFromState()");
-}
+};

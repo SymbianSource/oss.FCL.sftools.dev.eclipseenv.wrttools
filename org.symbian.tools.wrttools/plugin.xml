@@ -84,22 +84,6 @@
 	             menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
 	       </action>
           </objectContribution> 
-          	      <objectContribution
-			 adaptable="true"
-			 id="org.symbian.tools.wrttools.core.validator"
-             objectClass="org.eclipse.core.resources.IResource">
-           <filter
-         	name="projectNature"
-         	value="org.symbian.tools.wrttools.WidgetProjectNature"/>
-           <action
-                 class="org.symbian.tools.wrttools.core.validator.ValidateAction"
-                 enablesFor="+"
-                 icon="icons/validate_widget.gif"
-                 id="org.symbian.tools.wrttools.core.validator.ValidateAction"
-                 label="Validate Widget"
-                 menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
-			</action>
-		   </objectContribution>
           		<objectContribution
             objectClass="org.eclipse.core.resources.IResource"            
             id="org.symbian.tools.wrttools.widget.wrttool.packageoptions">
