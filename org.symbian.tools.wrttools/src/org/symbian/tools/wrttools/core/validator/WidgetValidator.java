@@ -68,7 +68,6 @@ public class WidgetValidator {
 	private boolean htmlVal;
 	private MandatoryFilesValidator manFilevalidator;
 	private PlistValidator plistValidator;
-	private HtmlValidator htmlValidator;
 	
 	private MessageHandler messageHandler;
 	private IMessageListener msgListener;
@@ -160,7 +159,6 @@ public class WidgetValidator {
 		log.info("ValidateMandatoryFiles  is done");
 		validatePlist( widgetProjFile);
 		log.info("Validate plist is done");
-		validateHtml( widgetProjFile);	
 		
 		} catch (ReportException e) {
 			 Util.logEvent(log, Level.INFO, e);	
@@ -199,7 +197,6 @@ public class WidgetValidator {
 		ValidateMandatoryFiles(widgetProjFile);
 		validatePlist( widgetProjFile);
 		log.info("Validate plist is done");
-		validateHtml( widgetProjFile);	
 		
 		} catch (ReportException e) {
 			 Util.logEvent(log, Level.INFO, e);	
@@ -274,32 +271,6 @@ public class WidgetValidator {
 		
 		log.finest("validatePlist--<<--<<");
 		return plistVal;
-	}
-	
-	
-	private boolean validateHtml(File fileName) throws ReportException {
-		log.info("validateHtml-->>-->>");
-		try{
-		emitStatus(ValidatorPropMessages.getString("validate.html.started"));
-//		statusHandler.emitStatus(status);		
-		htmlValidator=new HtmlValidator();
-		htmlValidator.setWidgetModel(widgetModel);
-		htmlValidator.setMessageHandler(getMessageHandler());
-		
-		if (widgetModel.isHtmlPresent()) {
-			htmlValidator.setHtmlPlistFileName(widgetModel.getMainHtml());
-			htmlVal = htmlValidator.validate( fileName);
-		}
-		log.info("validateHtml--<<--<<");
-		emitStatus(ValidatorPropMessages.getString("validate.html.finished"));
-//		statusHandler.emitStatus(status);
-		} catch (Exception e) {
-			 Util.logEvent(log, Level.INFO, e);	
-			 status.setStatusDescription("Exception "+e.getMessage());
-				
-		}
-		return htmlVal;
-
 	}
 	
 	protected void emitStatus(String statusDescription) {

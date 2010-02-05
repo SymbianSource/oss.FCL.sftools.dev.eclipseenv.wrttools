@@ -217,4 +217,9 @@ public class ProjectUtils {
 			((IFolder) parent).create(false, true, new NullProgressMonitor());
 		}
 	}
+
+	public static boolean isPlist(IResource resource) {
+		return resource.getType() == IResource.FILE
+				&& resource.getName().equalsIgnoreCase("info.plist");
+	}
 }

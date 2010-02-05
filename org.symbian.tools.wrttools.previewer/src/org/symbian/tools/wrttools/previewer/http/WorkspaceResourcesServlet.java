@@ -47,14 +47,13 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
+import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class WorkspaceResourcesServlet extends HttpServlet {
 	private static final String STARTING_PAGE = "preview-frame.html";
 	private static final String INDEX_PAGE = "wrt_preview_main.html";
 	private static final long serialVersionUID = -3217197074249607950L;
 
-	private static final Pattern HTML_FILE_NAME_PROPERTY = Pattern
-			.compile("<key>\\s*MainHTML\\s*</key>\\s*<string>\\s*(.*)\\s*</string>", Pattern.CASE_INSENSITIVE);
 	private static final Pattern HEAD_TAG_PATTERN = Pattern.compile("<head(\\s*\\w*=\"(^\")*\")*\\s*>", Pattern.CASE_INSENSITIVE);
 	private static final String SCRIPT = "<script language=\"JavaScript\" type=\"text/javascript\" src=\"preview/script/lib/loader.js\"></script>";
 
@@ -103,7 +102,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(
 				projectName);
 		if (project.isAccessible()) {
-			String indexFileName = getIndexFileName(project);
+			String indexFileName = CoreUtil.getIndexFileName(readFile(project, "Info.plist"));
 			if (indexFileName != null) {
 				String string = readFile(project, indexFileName);
 				if (string != null) {
@@ -113,18 +112,6 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 					}
 					return new ByteArrayInputStream(string.getBytes("UTF-8"));
 				}
-			}
-		}
-		return null;
-	}
-
-	private String getIndexFileName(IProject project) throws CoreException,
-			UnsupportedEncodingException, IOException {
-		String buffer = readFile(project, "Info.plist");
-		if (buffer != null) {
-			Matcher matcher = HTML_FILE_NAME_PROPERTY.matcher(buffer);
-			if (matcher.find()) {
-				return matcher.group(1);
 			}
 		}
 		return null;

@@ -59,7 +59,6 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.eclipse.wst.jsdt.core.IIncludePathEntry;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
-import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
@@ -78,6 +77,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 
 	public WrtWidgetWizard() {
 		setWindowTitle("New WRT Widget");
+		setNeedsProgressMonitor(true);
 	}
 
 	public boolean performFinish() {
@@ -135,17 +135,17 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 				((IWrtIdeContainer) containerInitializer).populateProject(project, new SubProgressMonitor(progressMonitor, perContainer));
 			}
 		}
-		IJavaScriptProject js = JavaScriptCore.create(project);
-		IIncludePathEntry[] rawIncludepath = js.getRawIncludepath();
-		int preconfigured = rawIncludepath.length;
-		IIncludePathEntry[] newIncludepath = new IIncludePathEntry[preconfigured + libraryIds.length];
-		System.arraycopy(rawIncludepath, 0, newIncludepath, 0, preconfigured);
-		for (int i = 0; i < libraryIds.length; i++) {
-			String string = libraryIds[i];
-			IIncludePathEntry entry = JavaScriptCore.newContainerEntry(new Path(string));
-			newIncludepath[preconfigured + i] = entry;
-		}
-		js.setRawIncludepath(newIncludepath, new SubProgressMonitor(progressMonitor, 10));
+//		IJavaScriptProject js = JavaScriptCore.create(project);
+//		IIncludePathEntry[] rawIncludepath = js.getRawIncludepath();
+//		int preconfigured = rawIncludepath.length;
+//		IIncludePathEntry[] newIncludepath = new IIncludePathEntry[preconfigured + libraryIds.length];
+//		System.arraycopy(rawIncludepath, 0, newIncludepath, 0, preconfigured);
+//		for (int i = 0; i < libraryIds.length; i++) {
+//			String string = libraryIds[i];
+//			IIncludePathEntry entry = JavaScriptCore.newContainerEntry(new Path(string));
+//			newIncludepath[preconfigured + i] = entry;
+//		}
+//		js.setRawIncludepath(newIncludepath, new SubProgressMonitor(progressMonitor, 10));
 		progressMonitor.done();
 	}
 
