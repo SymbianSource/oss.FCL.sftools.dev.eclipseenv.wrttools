@@ -34,6 +34,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
+import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.previewer.http.IPreviewStartupListener;
 
 public class DebugConnectionJob implements IPreviewStartupListener {
@@ -48,6 +49,10 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 
 	public DebugConnectionJob(IProject project, final int port,
 			final ILaunch launch) {
+		if (Activator.DEBUG_CONNECTION) {
+			System.out.println("Debugging " + project.getName() + " on port "
+					+ port + ", launch: " + launch.getLaunchConfiguration());
+		}
 		this.project = project;
 		this.port = port;
 		this.launch = launch;
