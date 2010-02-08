@@ -35,7 +35,7 @@ public class RssReaderProjectDetailsWizardPage extends
 	protected void addTemplateControls(Composite root) {
 		Map<String, String> extensions = context.getExtensions();
 		extensions.put("feedUrl", "http://twitter.com/statuses/user_timeline/21138778.rss");
-		extensions.put("feedName", "Symbian Foundation on Twitter");
+		extensions.put("feedName", "Symbian Twitter");
 		
 		createLabel(root, "Feed URL:");
 		createTextForExt(root, "feedUrl", "feed URL");
