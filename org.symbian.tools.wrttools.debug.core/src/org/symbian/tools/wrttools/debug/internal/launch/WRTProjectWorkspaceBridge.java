@@ -1,16 +1,17 @@
 package org.symbian.tools.wrttools.debug.internal.launch;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.chromium.debug.core.model.ChromiumLineBreakpoint;
 import org.chromium.debug.core.model.DebugTargetImpl;
 import org.chromium.debug.core.model.StackFrame;
-import org.chromium.debug.core.model.VProjectWorkspaceBridge;
 import org.chromium.debug.core.model.WorkspaceBridge;
 import org.chromium.sdk.JavascriptVm;
 import org.chromium.sdk.Script;
 import org.chromium.sdk.JavascriptVm.ScriptsCallback;
+import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -23,6 +24,7 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.model.ResourceManager;
 import org.symbian.tools.wrttools.debug.internal.model.WorkspaceBreakpointHandler;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 	public static final class Factory implements WorkspaceBridge.Factory {
@@ -48,7 +50,8 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 
 	}
 
-	public final static String DEBUG_MODEL_ID = VProjectWorkspaceBridge.DEBUG_MODEL_ID;
+//	public final static String DEBUG_MODEL_ID = VProjectWorkspaceBridge.DEBUG_MODEL_ID;
+	public final static String DEBUG_MODEL_ID = "org.symbian.debug";
 
 	private final BreakpointHandler breakpointHandler;
 	private final JavascriptVm javascriptVm;
@@ -145,7 +148,20 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 				return null;
 			}
 
-			return resourceManager.getResource(script);
+			IFile resource = resourceManager.getResource(script);
+			if (resource != null) {
+				return resource;
+			} else {
+				File file = PreviewerPlugin.getDefault().getHttpPreviewer().getLocalFile(script.getName());
+				if (file != null) {
+					try {
+						return EFS.getStore(file.toURI());
+					} catch (CoreException e) {
+						Activator.log(e);
+					}
+				}
+			}
+			return null;
 		}
 	};
 }

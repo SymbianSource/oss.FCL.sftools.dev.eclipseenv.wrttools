@@ -18,11 +18,10 @@
  *******************************************************************************/
 package org.symbian.tools.wrttools.previewer.http;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -50,6 +49,9 @@ import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class WorkspaceResourcesServlet extends HttpServlet {
+	private static final String PREVIEW_START = "/preview/wrt_preview.html";
+	private static final String METADATA_FILE = "Info.plist";
+	private static final String PREVIEW_PATH = "preview";
 	private static final String STARTING_PAGE = "preview-frame.html";
 	private static final String INDEX_PAGE = "wrt_preview_main.html";
 	private static final long serialVersionUID = -3217197074249607950L;
@@ -87,11 +89,11 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		if (relativePath.segmentCount() == 1) {
 			if (STARTING_PAGE.equals(relativePath.segment(0))) {
 				return getPluginResourceStream(new Path(
-						"/preview/wrt_preview.html"));
+						PREVIEW_START));
 			} else if (INDEX_PAGE.equals(relativePath.segment(0))) {
 				return getProjectIndexPage(path.segment(0));
 			}
-		} else if ("preview".equals(relativePath.segment(0))) {
+		} else if (PREVIEW_PATH.equals(relativePath.segment(0))) {
 			return getPluginResourceStream(relativePath.makeAbsolute());
 		}
 		return null;
@@ -102,9 +104,9 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(
 				projectName);
 		if (project.isAccessible()) {
-			String indexFileName = CoreUtil.getIndexFileName(readFile(project, "Info.plist"));
+			String indexFileName = CoreUtil.getIndexFileName(CoreUtil.readFile(project, METADATA_FILE));
 			if (indexFileName != null) {
-				String string = readFile(project, indexFileName);
+				String string = CoreUtil.readFile(project, indexFileName);
 				if (string != null) {
 					Matcher matcher = HEAD_TAG_PATTERN.matcher(string);
 					if (matcher.find()) {
@@ -112,41 +114,6 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 					}
 					return new ByteArrayInputStream(string.getBytes("UTF-8"));
 				}
-			}
-		}
-		return null;
-	}
-
-	private String readFile(IProject project, String fileName)
-			throws CoreException, UnsupportedEncodingException, IOException {
-		IFile file = getFile(project, fileName);
-		if (file.isAccessible()) {
-			InputStream contents = file.getContents();
-			final BufferedReader reader = new BufferedReader(
-					new InputStreamReader(contents, file.getCharset()));
-			StringBuffer buffer = new StringBuffer();
-			try {
-				int c = 0;
-				char[] buf = new char[4096];
-				while ((c = reader.read(buf)) > 0) {
-					buffer.append(buf, 0, c);
-				}
-				return buffer.toString();
-			} finally {
-				reader.close();
-			}
-		}
-		return null;
-	}
-
-	private IFile getFile(IProject project, String fileName) throws CoreException {
-		String n = fileName.toLowerCase();
-		IResource[] members = project.members();
-		for (IResource iResource : members) {
-			if (iResource.getType() == IResource.FILE
-					&& n.equals(iResource.getName().toLowerCase())
-					&& iResource.isAccessible()) {
-				return (IFile) iResource;
 			}
 		}
 		return null;
@@ -232,26 +199,75 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 	}
 
 	public static IFile getFileFromUrl(String name) {
+		IPath path = getProjectRelativePath(name);
+		if (path != null) {
+			return getProjectResource(path);
+		} else {
+			return null;
+		}
+	}
+
+	private static IPath getProjectRelativePath(String uri) {
+		IPath path = null;
 		try {
 			String root = getHttpUrl(null);
-			IFile file = null;
-			if (name.startsWith(root)) {
-				String fileName = name.substring(root.length());
+			if (uri.startsWith(root)) {
+				String fileName = uri.substring(root.length());
 				fileName = URLDecoder.decode(fileName, "UTF-8");
-				final IPath path = new Path(fileName);
-				file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-				if (!file.isAccessible()) {
-					return null;
+				path = new Path(fileName);
+				if (path.segmentCount() == 2 && INDEX_PAGE.equals(path.lastSegment())) {
+					IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path.segment(0));
+					path = new Path(project.getName()).append(CoreUtil.getIndexFileName(CoreUtil.readFile(project, METADATA_FILE)));
 				}
 			}
-			return file;
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
+		} catch (CoreException e) {
+			PreviewerPlugin.log(e);
+		} catch (IOException e) {
+			PreviewerPlugin.log(e);
+		}
+		return path;
+	}
+
+	private static IFile getProjectResource(IPath path) {
+		IFile file;
+		file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+		if (!file.isAccessible()) {
+			return null;
+		} else {
+			return file;
 		}
 	}
 
 	public static String getPreviewerStartingPage(String widget) {
 		return getServerURIForResource(new Path(widget).append(STARTING_PAGE)
 				.makeAbsolute().toString());
+	}
+
+	public static File getPreviewerResource(String name) {
+		try {
+			IPath path = getProjectRelativePath(name);
+			if (path.segmentCount() == 2 && STARTING_PAGE.equals(path.segment(1))) {
+				path = new Path(PREVIEW_START);
+			} else
+			if (path.segmentCount() > 2 && PREVIEW_PATH.equals(path.segment(1))) {
+				path = path.removeFirstSegments(1);
+			} else {
+				path = null;
+			}
+			if (path != null) {
+				URL pluginResource = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), path, null);
+				if (pluginResource != null) {
+					URL url = FileLocator.toFileURL(pluginResource);
+					if (url != null) {
+						return new File(url.getPath());
+					}
+				}
+			}
+		} catch (IOException e) {
+			PreviewerPlugin.log(e);
+		}
+		return null;
 	}
 }

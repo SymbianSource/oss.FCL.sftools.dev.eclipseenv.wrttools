@@ -1,9 +1,18 @@
 package org.symbian.tools.wrttools.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
@@ -42,6 +51,41 @@ public class CoreUtil {
 		if (matcher.find()) {
 			int start = matcher.start(1);
 			return new Region(start, matcher.end(1) - start);
+		}
+		return null;
+	}
+
+	public static IFile getFile(IProject project, String fileName) throws CoreException {
+		String n = fileName.toLowerCase();
+		IResource[] members = project.members();
+		for (IResource iResource : members) {
+			if (iResource.getType() == IResource.FILE
+					&& n.equals(iResource.getName().toLowerCase())
+					&& iResource.isAccessible()) {
+				return (IFile) iResource;
+			}
+		}
+		return null;
+	}
+
+	public static String readFile(IProject project, String fileName)
+			throws CoreException, UnsupportedEncodingException, IOException {
+		IFile file = getFile(project, fileName);
+		if (file.isAccessible()) {
+			InputStream contents = file.getContents();
+			final BufferedReader reader = new BufferedReader(
+					new InputStreamReader(contents, file.getCharset()));
+			StringBuffer buffer = new StringBuffer();
+			try {
+				int c = 0;
+				char[] buf = new char[4096];
+				while ((c = reader.read(buf)) > 0) {
+					buffer.append(buf, 0, c);
+				}
+				return buffer.toString();
+			} finally {
+				reader.close();
+			}
 		}
 		return null;
 	}

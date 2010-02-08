@@ -8,6 +8,7 @@ import java.util.Collection;
 import org.chromium.debug.core.ChromiumDebugPlugin;
 import org.chromium.debug.core.model.ChromiumLineBreakpoint;
 import org.chromium.debug.core.model.DebugTargetImpl;
+import org.chromium.debug.core.model.VProjectWorkspaceBridge;
 import org.chromium.debug.core.model.WorkspaceBridge.BreakpointHandler;
 import org.chromium.sdk.Breakpoint;
 import org.chromium.sdk.JavascriptVm;
@@ -32,7 +33,9 @@ public final class WorkspaceBreakpointHandler implements BreakpointHandler {
 	}
 	
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-		return WRTProjectWorkspaceBridge.DEBUG_MODEL_ID.equals(breakpoint.getModelIdentifier())
+		return (WRTProjectWorkspaceBridge.DEBUG_MODEL_ID.equals(breakpoint
+				.getModelIdentifier()) || VProjectWorkspaceBridge.DEBUG_MODEL_ID
+				.equals(breakpoint.getModelIdentifier()))
 				&& !debugTarget.isDisconnected();
 	}
 

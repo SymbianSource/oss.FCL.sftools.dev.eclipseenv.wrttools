@@ -184,4 +184,41 @@
          </actionSet>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.debug.ui.debugModelPresentations">
+      <debugModelPresentation
+            class="org.symbian.tools.wrttools.debug.internal.model.SymbianDebugModelPresentation"
+            id="org.symbian.debug">
+      </debugModelPresentation>
+   </extension>
+     <extension point="org.eclipse.debug.core.watchExpressionDelegates">
+    <watchExpressionDelegate
+        debugModel="org.symbian.debug"
+        delegateClass="org.symbian.tools.wrttools.debug.internal.model.JsWatchExpressionDelegate"/>
+  </extension>
+    <extension point="org.eclipse.ui.editorActions">
+    <editorContribution
+        targetID="org.chromium.debug.ui.editors.JsEditor"
+        id="org.chromium.debug.ui.editors.JsEditor.editorActions">
+      <action
+          toolbarPath="evaluationGroup"
+          id="org.chromium.debug.ui.SnippetInspect"
+          definitionId="org.chromium.debug.ui.commands.Inspect"
+          class="org.chromium.debug.ui.actions.JsInspectSnippetAction"
+          enablesFor="+"
+          label="Inspect"
+          tooltip="Inspect Result of Evaluating Selected Text">
+        <enablement>
+          <and>
+            <systemProperty
+                name="org.chromium.debug.ui.debuggerActive"
+                value="true"/>
+            <objectClass
+                name="org.eclipse.jface.text.ITextSelection"/>
+          </and>
+        </enablement>
+      </action>
+    </editorContribution>
+  </extension>
+  
 </plugin>
