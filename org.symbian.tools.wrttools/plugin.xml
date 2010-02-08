@@ -175,7 +175,8 @@
 	
 <!-- WRT Project Templates -->
 	<extension point="org.symbian.tools.wrttools.projectTemplates">
-		<projectTemplate
+<!--
+      <projectTemplate
 		name="Basic Widget Project"
         archive="projecttemplates/basic.zip"
         default-css-name="basic"
@@ -186,20 +187,24 @@
 			<description>
 				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
          </description>
-		</projectTemplate>
+		</projectTemplate> 
+-->
+
       <projectTemplate
-      		name="Basic WRT Project with WRTKit Support"
-            archive="projecttemplates/wrtkit.zip"
-            default-css-name="basic"
+            name="Hello Application Project with WRTKit Support"
+            archive="projecttemplates/helloWithWRTKit.zip"
+            default-css-name="HelloWithWRTKit"
             default-html-name="index"
-            default-js-name="basic"
+            default-js-name="HelloWithWRTKit"
             icon="icons/main16.gif"
-            id-pattern="com.{0}.basic.widget">
+            id-pattern="com.{0}.helloWithWRTKit.widget"
+            wizard-page-factory="org.symbian.tools.wrttools.wizards.HelloWithWRTKitProjectDetailsWizardPage$Factory">
          <description>
-            This wizard generates an basic project with a minimal Info.plist, html,css and js along with WRTKit.
+            This wizard generates a basic Hello project with a minimal Info.plist, html,css and js along with WRTKit.
          </description>
          <requires-library>org.symbian.wrtkit</requires-library>
       </projectTemplate>
+
       <projectTemplate
             name="Flickr Application Project"
             archive="projecttemplates/flickr.zip"
@@ -214,6 +219,7 @@
          </description>
          <requires-library>org.symbian.wrtkit</requires-library>
       </projectTemplate>
+
       <projectTemplate
             name="RSS Reader Application Project"
             archive="projecttemplates/rssreader.zip"
