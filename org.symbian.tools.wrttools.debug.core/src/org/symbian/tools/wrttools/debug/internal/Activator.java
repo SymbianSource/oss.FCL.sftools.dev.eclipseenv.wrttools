@@ -19,6 +19,7 @@
 package org.symbian.tools.wrttools.debug.internal;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -32,6 +33,13 @@ public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.symbian.tools.wrttools.debug.core";
 
+	public static final boolean DEBUG = Platform.inDebugMode() && Boolean.valueOf(Platform.getDebugOption(PLUGIN_ID + "/debug")); 
+	public static final boolean DEBUG_CONNECTION = DEBUG && Boolean.valueOf(Platform.getDebugOption(PLUGIN_ID + "/debugConnection")); 
+	public static final boolean DEBUG_RESOURCES = DEBUG && Boolean.valueOf(Platform.getDebugOption(PLUGIN_ID + "/debugResources")); 
+	public static final boolean DEBUG_BREAKPOINTS = DEBUG
+			&& Boolean.valueOf(Platform.getDebugOption(PLUGIN_ID
+					+ "/debugBreakpoints")); 
+	
 	// The shared instance
 	private static Activator plugin;
 	
