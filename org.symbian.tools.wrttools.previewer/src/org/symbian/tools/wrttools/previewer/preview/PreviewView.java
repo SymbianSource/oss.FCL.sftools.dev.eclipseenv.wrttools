@@ -7,9 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -26,8 +24,6 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
@@ -39,7 +35,6 @@ import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.MessagePage;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
-import org.osgi.framework.Bundle;
 import org.symbian.tools.wrttools.previewer.IWrtEditingPreferences;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.ProjectUtils;
@@ -51,7 +46,13 @@ public class PreviewView extends PageBookView {
 
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			if (isRelevantResource(delta.getResource())) {
-				files.add((IFile) delta.getResource());
+				if ((delta.getFlags() & (IResourceDelta.CONTENT
+						| IResourceDelta.COPIED_FROM | IResourceDelta.ENCODING
+						| IResourceDelta.LOCAL_CHANGED
+						| IResourceDelta.MOVED_FROM | IResourceDelta.MOVED_TO
+						| IResourceDelta.MOVED_FROM | IResourceDelta.REPLACED | IResourceDelta.SYNC)) != 0) {
+					files.add((IFile) delta.getResource());
+				}
 			}
 			return true;
 		}
