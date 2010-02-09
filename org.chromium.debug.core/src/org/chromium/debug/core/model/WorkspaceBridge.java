@@ -7,6 +7,7 @@ package org.chromium.debug.core.model;
 import java.util.Collection;
 
 import org.chromium.sdk.Breakpoint;
+import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.JavascriptVm;
 import org.chromium.sdk.Script;
 import org.eclipse.core.resources.IFile;
@@ -86,6 +87,12 @@ public interface WorkspaceBridge {
   BreakpointHandler getBreakpointHandler();
 
   /**
+   * Returns editor line number for the provided call stack frame applying all required 
+   * editor-specific translations.
+   */
+  int getLineNumber(CallFrame stackFrame);
+
+  /**
    * Breakpoint-related aspect of {@link WorkspaceBridge} interface.
    */
   interface BreakpointHandler extends IBreakpointListener {
@@ -112,4 +119,5 @@ public interface WorkspaceBridge {
      */
     String getStackFrameLabel(StackFrame stackFrame) throws DebugException;
   }
+
 }

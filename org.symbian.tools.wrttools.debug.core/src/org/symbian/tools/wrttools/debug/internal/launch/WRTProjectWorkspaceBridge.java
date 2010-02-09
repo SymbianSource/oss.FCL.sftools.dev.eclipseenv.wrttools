@@ -8,6 +8,7 @@ import org.chromium.debug.core.model.ChromiumLineBreakpoint;
 import org.chromium.debug.core.model.DebugTargetImpl;
 import org.chromium.debug.core.model.StackFrame;
 import org.chromium.debug.core.model.WorkspaceBridge;
+import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.JavascriptVm;
 import org.chromium.sdk.Script;
 import org.chromium.sdk.JavascriptVm.ScriptsCallback;
@@ -132,6 +133,15 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 		resourceManager.addScript(newScript);
 	}
 
+	public int getLineNumber(CallFrame stackFrame) {
+		int offset = 0;
+		Script script = stackFrame.getScript();
+		if (script != null) {
+			offset = script.getStartLine();
+		}
+		return offset + stackFrame.getLineNumber() + 1;
+	}
+
 	/**
 	 * This very simple source locator works because we provide our own source
 	 * files. We'll have to try harder, once we link with resource js files.
@@ -164,4 +174,5 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 			return null;
 		}
 	};
+
 }
