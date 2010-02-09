@@ -80,7 +80,7 @@
 	             enablesFor="+"
 	             icon="icons/package_widget.gif"
 	             id="org.symbian.tools.wrttools.widget.package.WrtPackageActionDelegate"
-	             label="Package Widget"
+	             label="Package WRT Application"
 	             menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
 	       </action>
           </objectContribution> 
@@ -103,7 +103,7 @@
              class="org.symbian.tools.wrttools.core.packager.ExcludeFileAction"
              icon="icons/exclude_archive.gif"
              id="org.symbian.tools.wrttools.widget.wrttool.packageoptions.ExcludeFileAction"
-             label="Exclude From Widget Archive"
+             label="Exclude From WRT Archive"
              menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker"> 
       </action>  
     </objectContribution>    
@@ -125,7 +125,7 @@
              class="org.symbian.tools.wrttools.core.packager.IncludeFileAction"
              icon="icons/include_archive.gif"
              id="org.symbian.tools.wrttools.widget.wrttool.packageoptions.IncludeFileAction"
-             label="Include in Widget Archive"
+             label="Include in WRT Archive"
              menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker"> 
       </action>  
     </objectContribution>
