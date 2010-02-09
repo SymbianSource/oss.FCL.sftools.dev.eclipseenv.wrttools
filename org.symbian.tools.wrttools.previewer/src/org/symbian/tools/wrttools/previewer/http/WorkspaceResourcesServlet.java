@@ -159,6 +159,21 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 	}
 
 	private static String getServerURIForResource(String resourcePath) {
+		Path p = new Path(resourcePath);
+		if (p.segmentCount() > 1) {
+			IProject project = ResourcesPlugin.getWorkspace().getRoot()
+					.getProject(p.segment(0));
+			try {
+				if (p.removeFirstSegments(1).toString().equals(
+						CoreUtil.getIndexFileName(CoreUtil.readFile(project,
+								METADATA_FILE)))) {
+					return getServerURIForResource(new Path(p.segment(0))
+							.append(INDEX_PAGE).makeAbsolute().toString());
+				}
+			} catch (Exception e1) {
+				PreviewerPlugin.log(e1);
+			}
+		}
 		String uri = null;
 		try {
 			String path = WebappManager.WORKSPACE_RESOURCES_CONTEXT

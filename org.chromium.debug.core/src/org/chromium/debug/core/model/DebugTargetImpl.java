@@ -499,4 +499,8 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
       }
     }
   }
+
+	public int getLineNumber(CallFrame stackFrame) {
+		return workspaceRelations.getLineNumber(stackFrame);
+	}
 }

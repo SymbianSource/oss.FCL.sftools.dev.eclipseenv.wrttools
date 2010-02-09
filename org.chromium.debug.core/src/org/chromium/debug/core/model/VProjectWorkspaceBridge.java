@@ -230,6 +230,10 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
     }
   };
 
+  public int getLineNumber(CallFrame stackFrame) {
+	  return stackFrame.getLineNumber() + 1;
+  }
+  
   /**
    * This very simple source locator works because we provide our own source files.
    * We'll have to try harder, once we link with resource js files.
@@ -282,4 +286,5 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
       return name;
     }
   };
+
 }
