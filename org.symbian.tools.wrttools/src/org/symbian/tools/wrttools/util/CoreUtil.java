@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,11 +14,15 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
+import org.symbian.tools.wrttools.Activator;
 
 public class CoreUtil {
+	public static final String METADATA_FILE = "Info.plist";
 	public static final String PROPERTY_PATTERN = "<key>\\s*{0}\\s*</key>\\s*<string>\\s*(.*)\\s*</string>";
 
 	public static boolean isWindows() {
@@ -68,25 +73,57 @@ public class CoreUtil {
 		return null;
 	}
 
-	public static String readFile(IProject project, String fileName)
-			throws CoreException, UnsupportedEncodingException, IOException {
-		IFile file = getFile(project, fileName);
-		if (file.isAccessible()) {
-			InputStream contents = file.getContents();
-			final BufferedReader reader = new BufferedReader(
-					new InputStreamReader(contents, file.getCharset()));
-			StringBuffer buffer = new StringBuffer();
-			try {
-				int c = 0;
-				char[] buf = new char[4096];
-				while ((c = reader.read(buf)) > 0) {
-					buffer.append(buf, 0, c);
+	public static String readFile(IProject project, IFile file)
+			throws CoreException {
+		try {
+			if (file.isAccessible()) {
+				InputStream contents = file.getContents();
+				final BufferedReader reader = new BufferedReader(
+						new InputStreamReader(contents, file.getCharset()));
+				StringBuffer buffer = new StringBuffer();
+				try {
+					int c = 0;
+					char[] buf = new char[4096];
+					while ((c = reader.read(buf)) > 0) {
+						buffer.append(buf, 0, c);
+					}
+					return buffer.toString();
+				} finally {
+					reader.close();
 				}
-				return buffer.toString();
-			} finally {
-				reader.close();
+			}
+			return null;
+		} catch (IOException e) {
+			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, MessageFormat.format("Failed to read file {0} in project {1}", file.getName(), project.getName())));
+		}
+	}
+
+	private static final Map<IProject, IndexFileRecord> INDEX_FILES = new HashMap<IProject, IndexFileRecord>();
+	
+	public static synchronized String getIndexFile(IProject project) throws CoreException {
+		// There will really be a lot of calls to this method. We need to cache values.
+		IFile file = getFile(project, METADATA_FILE);
+		if (INDEX_FILES.containsKey(project)) {
+			IndexFileRecord record = INDEX_FILES.get(project);
+			if (file == null || !file.isAccessible()) {
+				throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, MessageFormat.format("No Info.plist for project {0}", project.getName())));
+			}
+			if (record.timeStamp == file.getModificationStamp()) {
+				return record.fileName;
 			}
 		}
-		return null;
+		String fileName = getIndexFileName(readFile(project, file));
+		INDEX_FILES.put(project, new IndexFileRecord(fileName, file.getModificationStamp()));
+		return fileName;
+	}
+	
+	private static class IndexFileRecord {
+		public final String fileName;
+		public final long timeStamp;
+		
+		public IndexFileRecord(String fileName, long timeStamp) {
+			this.fileName = fileName;
+			this.timeStamp = timeStamp;
+		}
 	}
 }

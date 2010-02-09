@@ -28,6 +28,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.MessageFormat;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,7 +51,6 @@ import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class WorkspaceResourcesServlet extends HttpServlet {
 	private static final String PREVIEW_START = "/preview/wrt_preview.html";
-	private static final String METADATA_FILE = "Info.plist";
 	private static final String PREVIEW_PATH = "preview";
 	private static final String STARTING_PAGE = "preview-frame.html";
 	private static final String INDEX_PAGE = "wrt_preview_main.html";
@@ -62,6 +62,10 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		long time = 0;
+		if (PreviewerPlugin.TRACE_SERVLET) {
+			time = System.currentTimeMillis();
+		}
 		IPath path = new Path(req.getPathInfo());
 		InputStream contents = null;
 		try {
@@ -80,6 +84,11 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 			if (contents != null) {
 				contents.close();
 			}
+		}
+		if (PreviewerPlugin.TRACE_SERVLET) {
+			System.out.println(MessageFormat.format(
+					"Resource {0} was downloaded in {1}", req.getPathInfo(),
+					System.currentTimeMillis() - time));
 		}
 	}
 
@@ -104,9 +113,10 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(
 				projectName);
 		if (project.isAccessible()) {
-			String indexFileName = CoreUtil.getIndexFileName(CoreUtil.readFile(project, METADATA_FILE));
+			String indexFileName = CoreUtil.getIndexFile(project);
 			if (indexFileName != null) {
-				String string = CoreUtil.readFile(project, indexFileName);
+				String string = CoreUtil.readFile(project, CoreUtil.getFile(
+						project, indexFileName));
 				if (string != null) {
 					Matcher matcher = HEAD_TAG_PATTERN.matcher(string);
 					if (matcher.find()) {
@@ -165,8 +175,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 					.getProject(p.segment(0));
 			try {
 				if (p.removeFirstSegments(1).toString().equals(
-						CoreUtil.getIndexFileName(CoreUtil.readFile(project,
-								METADATA_FILE)))) {
+						CoreUtil.getIndexFile(project))) {
 					return getServerURIForResource(new Path(p.segment(0))
 							.append(INDEX_PAGE).makeAbsolute().toString());
 				}
@@ -232,14 +241,12 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 				path = new Path(fileName);
 				if (path.segmentCount() == 2 && INDEX_PAGE.equals(path.lastSegment())) {
 					IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path.segment(0));
-					path = new Path(project.getName()).append(CoreUtil.getIndexFileName(CoreUtil.readFile(project, METADATA_FILE)));
+					path = new Path(project.getName()).append(CoreUtil.getIndexFile(project));
 				}
 			}
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		} catch (CoreException e) {
-			PreviewerPlugin.log(e);
-		} catch (IOException e) {
 			PreviewerPlugin.log(e);
 		}
 		return path;

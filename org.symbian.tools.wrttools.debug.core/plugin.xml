@@ -207,5 +207,18 @@
           </provider>
        </breakpointContribution>
     </extension>
+    <extension
+          point="org.eclipse.core.runtime.adapters">
+     	 <factory 
+            class="org.symbian.tools.wrttools.debug.internal.property.LaunchableFactory" 
+            adaptableType="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+            <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
+         </factory>
+         <factory 
+            class="org.symbian.tools.wrttools.debug.internal.property.LaunchableFactory" 
+            adaptableType="org.eclipse.core.resources.IResource">
+            <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
+         </factory>
+    </extension>
   
 </plugin>

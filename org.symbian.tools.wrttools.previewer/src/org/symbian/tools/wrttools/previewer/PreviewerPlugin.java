@@ -20,6 +20,7 @@ package org.symbian.tools.wrttools.previewer;
 
 import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -36,17 +37,20 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.symbian.tools.wrttools.previewer";
 
+	public static final boolean DEBUG = Platform.inDebugMode()
+			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID + "/debug"));
+	public static final boolean TRACE_SERVLET = DEBUG
+			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID
+					+ "/servlet"));
+	public static final boolean TRACE_MAPPING = DEBUG
+			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID
+					+ "/mapping"));
+	
 	// The shared instance
 	private static PreviewerPlugin plugin;
 
 	private HttpPreviewer previewer = new HttpPreviewer();
 	
-	/**
-	 * The constructor
-	 */
-	public PreviewerPlugin() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
