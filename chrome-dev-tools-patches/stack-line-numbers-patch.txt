@@ -1,0 +1,76 @@
+Index: src/org/chromium/debug/core/model/DebugTargetImpl.java
+===================================================================
+--- src/org/chromium/debug/core/model/DebugTargetImpl.java	(revision 307)
++++ src/org/chromium/debug/core/model/DebugTargetImpl.java	(working copy)
+@@ -474,6 +474,10 @@
+   public WorkspaceBridge.JsLabelProvider getLabelProvider() {
+     return workspaceBridgeFactory.getLabelProvider();
+   }
++  
++  public int getLineNumber(CallFrame stackFrame) {
++    return workspaceRelations.getLineNumber(stackFrame);
++  }
+ 
+   private static class ListenerBlock {
+     private volatile boolean isBlocked = true;
+Index: src/org/chromium/debug/core/model/StackFrame.java
+===================================================================
+--- src/org/chromium/debug/core/model/StackFrame.java	(revision 307)
++++ src/org/chromium/debug/core/model/StackFrame.java	(working copy)
+@@ -194,8 +194,7 @@
+   }
+ 
+   public int getLineNumber() throws DebugException {
+-    // convert 0-based to 1-based
+-    return stackFrame.getLineNumber() + 1;
++    return getDebugTarget().getLineNumber(stackFrame);
+   }
+ 
+   public int getCharStart() throws DebugException {
+Index: src/org/chromium/debug/core/model/VProjectWorkspaceBridge.java
+===================================================================
+--- src/org/chromium/debug/core/model/VProjectWorkspaceBridge.java	(revision 307)
++++ src/org/chromium/debug/core/model/VProjectWorkspaceBridge.java	(working copy)
+@@ -230,6 +230,11 @@
+     }
+   };
+ 
++  public int getLineNumber(CallFrame stackFrame) {
++    // convert 0-based to 1-based
++    return stackFrame.getLineNumber() + 1;
++  }
++  
+   /**
+    * This very simple source locator works because we provide our own source files.
+    * We'll have to try harder, once we link with resource js files.
+@@ -282,4 +287,5 @@
+       return name;
+     }
+   };
++
+ }
+Index: src/org/chromium/debug/core/model/WorkspaceBridge.java
+===================================================================
+--- src/org/chromium/debug/core/model/WorkspaceBridge.java	(revision 307)
++++ src/org/chromium/debug/core/model/WorkspaceBridge.java	(working copy)
+@@ -7,6 +7,7 @@
+ import java.util.Collection;
+ 
+ import org.chromium.sdk.Breakpoint;
++import org.chromium.sdk.CallFrame;
+ import org.chromium.sdk.JavascriptVm;
+ import org.chromium.sdk.Script;
+ import org.eclipse.core.resources.IFile;
+@@ -86,6 +87,12 @@
+   BreakpointHandler getBreakpointHandler();
+ 
+   /**
++   * Returns editor line number for the provided call stack frame applying all required 
++   * editor-specific translations.
++   */
++  int getLineNumber(CallFrame stackFrame);
++
++  /**
+    * Breakpoint-related aspect of {@link WorkspaceBridge} interface.
+    */
+   interface BreakpointHandler extends IBreakpointListener {
