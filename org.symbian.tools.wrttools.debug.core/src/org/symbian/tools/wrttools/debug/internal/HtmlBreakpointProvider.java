@@ -21,10 +21,11 @@ public class HtmlBreakpointProvider implements IBreakpointProvider {
 	public IStatus addBreakpoint(IDocument document, IEditorInput input,
 			int lineNumber, int offset) throws CoreException {
 		boolean hasScript = hasJavaScript(document, lineNumber);
-		
-		System.out.println(hasScript);
-		ChromiumLineBreakpoint breakpoint = new ChromiumLineBreakpoint(getResource(input), lineNumber);
-		DebugPlugin.getDefault().getBreakpointManager().addBreakpoint(breakpoint);
+
+		if (hasScript) {
+			ChromiumLineBreakpoint breakpoint = new ChromiumLineBreakpoint(getResource(input), lineNumber);
+			DebugPlugin.getDefault().getBreakpointManager().addBreakpoint(breakpoint);
+		}
 		return Status.OK_STATUS;
 	}
 
@@ -34,9 +35,12 @@ public class HtmlBreakpointProvider implements IBreakpointProvider {
 				IStructuredDocument doc = (IStructuredDocument) document;
 				int lineOffset = doc.getLineOffset(lineNumber - 1);
 				int lineLength = doc.getLineLength(lineNumber - 1);
-				ITypedRegion[] computePartitioning = doc.computePartitioning(lineOffset, lineLength);
+				ITypedRegion[] computePartitioning = doc.computePartitioning(
+						lineOffset, lineLength);
 				for (ITypedRegion region : computePartitioning) {
-					if (IHTMLPartitions.SCRIPT.equals(region.getType()) || IHTMLPartitions.SCRIPT_EVENTHANDLER.equals(region.getType())) {
+					if (IHTMLPartitions.SCRIPT.equals(region.getType())
+							|| IHTMLPartitions.SCRIPT_EVENTHANDLER
+									.equals(region.getType())) {
 						return true;
 					}
 				}

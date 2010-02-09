@@ -226,7 +226,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		IPath path = null;
 		try {
 			String root = getHttpUrl(null);
-			if (uri.startsWith(root)) {
+			if (uri != null && uri.startsWith(root)) {
 				String fileName = uri.substring(root.length());
 				fileName = URLDecoder.decode(fileName, "UTF-8");
 				path = new Path(fileName);
@@ -263,16 +263,18 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 	public static File getPreviewerResource(String name) {
 		try {
 			IPath path = getProjectRelativePath(name);
-			if (path.segmentCount() == 2 && STARTING_PAGE.equals(path.segment(1))) {
-				path = new Path(PREVIEW_START);
-			} else
-			if (path.segmentCount() > 2 && PREVIEW_PATH.equals(path.segment(1))) {
-				path = path.removeFirstSegments(1);
-			} else {
-				path = null;
-			}
 			if (path != null) {
-				URL pluginResource = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), path, null);
+				if (path.segmentCount() == 2
+						&& STARTING_PAGE.equals(path.segment(1))) {
+					path = new Path(PREVIEW_START);
+				} else if (path.segmentCount() > 2
+						&& PREVIEW_PATH.equals(path.segment(1))) {
+					path = path.removeFirstSegments(1);
+				} else {
+					return null;
+				}
+				URL pluginResource = FileLocator.find(PreviewerPlugin
+						.getDefault().getBundle(), path, null);
 				if (pluginResource != null) {
 					URL url = FileLocator.toFileURL(pluginResource);
 					if (url != null) {
