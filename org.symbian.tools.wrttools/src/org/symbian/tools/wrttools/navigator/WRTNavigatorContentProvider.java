@@ -27,6 +27,7 @@ import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorContentProvider;
 import org.symbian.tools.wrttools.Activator;
 
+@SuppressWarnings({"restriction", "unchecked"})
 public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 		implements ITreeContentProvider {
 	private static final class RootResourceFinder implements

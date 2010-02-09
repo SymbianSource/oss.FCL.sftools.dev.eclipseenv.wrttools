@@ -28,7 +28,6 @@ import org.eclipse.wst.validation.ValidationResult;
 import org.eclipse.wst.validation.ValidationState;
 import org.eclipse.wst.validation.ValidatorMessage;
 import org.symbian.tools.wrttools.Activator;
-import org.w3c.*;
 import org.w3c.css.css.DocumentParser;
 import org.w3c.css.css.StyleSheet;
 import org.w3c.css.parser.CssError;

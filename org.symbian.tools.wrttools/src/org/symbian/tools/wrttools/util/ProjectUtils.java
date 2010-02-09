@@ -49,6 +49,7 @@ import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WidgetProjectNature;
 
+@SuppressWarnings("restriction")
 public class ProjectUtils {
 	private static final String DEFAULT_APTANA_WORKSPACE = "Aptana Studio Workspace";
 	public static final String PREVIEW_FOLDER = "preview";
@@ -66,7 +67,6 @@ public class ProjectUtils {
 		return workspace.isPrefixOf(project);
 	}
 	
-	@SuppressWarnings("restriction")
 	public static IProject createWrtProject(String name, URI uri,
 			IProgressMonitor monitor) throws CoreException {
 		uri = isDefaultProjectLocation(uri) ? null

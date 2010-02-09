@@ -39,6 +39,7 @@ import org.eclipse.ui.internal.ide.IIDEHelpContextIds;
 import org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea;
 import org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea.IErrorMessageReporter;
 
+@SuppressWarnings("restriction")
 public class WgzImportWizardPage extends WizardPage {
 	private final IFile file;
 

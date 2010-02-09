@@ -9,10 +9,10 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.wst.jsdt.internal.ui.wizards.NewJSWizard;
 import org.eclipse.wst.jsdt.ui.actions.AbstractOpenWizardAction;
 
+@SuppressWarnings("restriction")
 public class NewJSFileAction extends AbstractOpenWizardAction implements
 		IWorkbenchWindowActionDelegate {
 
-	@SuppressWarnings("restriction")
 	@Override
 	protected INewWizard createWizard() throws CoreException {
 		return new NewJSWizard();

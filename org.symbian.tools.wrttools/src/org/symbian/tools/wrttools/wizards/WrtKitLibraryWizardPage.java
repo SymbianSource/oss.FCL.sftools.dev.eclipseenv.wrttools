@@ -14,6 +14,7 @@ import org.eclipse.wst.jsdt.ui.wizards.IJsGlobalScopeContainerPageExtension;
 import org.eclipse.wst.jsdt.ui.wizards.IJsGlobalScopeContainerPageExtension2;
 import org.eclipse.wst.jsdt.ui.wizards.NewElementWizardPage;
 
+@SuppressWarnings("restriction")
 public class WrtKitLibraryWizardPage extends NewElementWizardPage implements IJsGlobalScopeContainerPage, IJsGlobalScopeContainerPageExtension, IJsGlobalScopeContainerPageExtension2  {
 
 	private static final String CONTAINER_ID="org.symbian.wrtkit";

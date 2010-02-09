@@ -19,7 +19,6 @@
 package org.symbian.tools.wrttools.debug.internal.property;
 
 import org.eclipse.core.resources.IResource;
-import org.symbian.tools.wrttools.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PropertyTester extends org.eclipse.core.expressions.PropertyTester {

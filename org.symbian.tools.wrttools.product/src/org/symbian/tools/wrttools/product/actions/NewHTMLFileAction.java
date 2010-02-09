@@ -9,10 +9,10 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard;
 import org.eclipse.wst.jsdt.ui.actions.AbstractOpenWizardAction;
 
+@SuppressWarnings("restriction")
 public class NewHTMLFileAction extends AbstractOpenWizardAction implements
 		IWorkbenchWindowActionDelegate {
 
-	@SuppressWarnings("restriction")
 	@Override
 	protected INewWizard createWizard() throws CoreException {
 		return new NewHTMLWizard();

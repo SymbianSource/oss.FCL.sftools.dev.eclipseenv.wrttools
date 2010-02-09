@@ -103,6 +103,7 @@ import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
+@SuppressWarnings({"restriction", "unchecked"})
 public class AptanaProjectLocationWizardPage extends WizardPage implements
 		IOverwriteQuery {
 
@@ -296,9 +297,6 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 	private static String previouslyBrowsedDirectory = ""; //$NON-NLS-1$
 
 	private final static String STORE_ARCHIVE_SELECTED = "WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"; //$NON-NLS-1$
-
-	// dialog store id constants
-	private final static String STORE_COPY_PROJECT_ID = "WizardProjectsImportPage.STORE_COPY_PROJECT_ID"; //$NON-NLS-1$
 
 	private Text archivePathField;
 
@@ -577,7 +575,6 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	private List filterEntries(List fileSystemObjects) {
 		List result = new LinkedList();
 		for (Object object : fileSystemObjects) {
