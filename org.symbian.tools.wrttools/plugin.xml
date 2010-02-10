@@ -248,7 +248,7 @@
        <wizard
           category="org.symbian.tools.wrttools.import"
           class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
-          icon="icons/main16.gif"
+          icon="icons/WRTImport.gif"
           id="org.symbian.tools.wrttools.importwgz"
           name="Import WRT Application Archive">
        </wizard>
