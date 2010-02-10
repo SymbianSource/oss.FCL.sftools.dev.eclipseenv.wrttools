@@ -91,6 +91,10 @@
             activityId="org.symbian.tools.wrttools.product.wtp"
             pattern="org\.eclipse\.wst\.jsdt\.web\.ui/org\.eclipse\.wst\.jsdt\.internal\.web\.ui\.convertProjects">
       </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.contextualLaunch\.profile\.submenu">
+      </activityPatternBinding>
       <category
             description="WTP UI elements that are not compatible with WRT widget development"
             id="org.symbian.tools.wrttools.product.wtp"
