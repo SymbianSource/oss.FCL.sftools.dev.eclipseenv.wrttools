@@ -2,7 +2,6 @@ package org.symbian.tools.wrttools.previewer.preview;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.core.net.proxy.IProxyData;
@@ -40,13 +39,11 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
 				if (resourceUrl != null) {
 					try {
 						URL fileUrl = FileLocator.toFileURL(resourceUrl);
-						File file = new File(fileUrl.toURI());
+						File file = new File(fileUrl.getPath());
 						System.setProperty(XUL_RUNNER_PATH_PARAMETER, file
 								.getAbsolutePath()); //$NON-NLS-1$
 					} catch (IOException e) {
-						// log the exception
-					} catch (URISyntaxException e) {
-						// log the exception
+						PreviewerPlugin.log(e);
 					}
 				}
 			}
