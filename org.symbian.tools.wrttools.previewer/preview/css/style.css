@@ -46,12 +46,12 @@ code{
 }
 
 #WidgetArea.hs_portrait{
-	background-image: url(../images/device/360x640/hs-portrait.png);
+	background-image: url(../images/device/360x640/hs-portrait.gif);
 	background-repeat: no-repeat;
 }
 
 #WidgetArea.hs_landscape{
-	background-image: url(../images/device/360x640/hs-landscape.png);
+	background-image: url(../images/device/360x640/hs-landscape.gif);
 	background-repeat: no-repeat;
 }
 #WidgetArea.hs_portrait iframe{
@@ -76,7 +76,8 @@ code{
 	height: 100px;
 	position: absolute;
 	z-index: 900;
-	background-image: url(../images/hs-iframeMask.png);
+	background-image: url(../images/hs-iframeMask.gif
+	);
 	background-repeat: no-repeat;
 	background-position: top left;
 }
@@ -257,7 +258,7 @@ div.IconFile{
 }
 
 div.IconFile:hover{
-	background-image: url(../images/IconArea-hover.png);
+	background-image: url(../images/IconArea-hover.gif);
 	background-position: center center;
 	background-repeat: no-repeat;
 }
@@ -315,7 +316,7 @@ div#loaderDiv.yellow{
 }
 
 div#orientationIcon{
-	background-image: url(../images/normal-orientation-icon.png);
+	background-image: url(../images/normal-orientation-icon.gif);
 	background-repeat: no-repeat;
 	width: 191px;
 	height: 72px;
@@ -326,7 +327,7 @@ div#orientationIcon{
 	display: none;
 }
 div#orientationIcon:hover{
-	background-image: url(../images/active-orientation-icon.png);
+	background-image: url(../images/active-orientation-icon.gif);
 }
 
 table{
@@ -450,15 +451,15 @@ div#event-messaging.inactive, div#event-memory.inactive{
 
 
 div#event-battery{
-	background-image: url(../images/battery-icon.png);
+	background-image: url(../images/battery-icon.gif);
 }
 
 div#event-messaging{
-	background-image: url(../images/messaging-icon.png);
+	background-image: url(../images/messaging-icon.gif);
 }
 
 div#event-memory{
-	background-image: url(../images/memory-icon.png);
+	background-image: url(../images/memory-icon.gif);
 }
 
 div.ui-panel{
@@ -532,7 +533,7 @@ span#Console-Toggle-Button{
 
 span#Console-Toggle-Button.open{
 	background-position: 0px 0px;
-	background-image: url(../images/console-close-icon.png);
+	background-image: url(../images/console-close-icon.gif);
 }
 
 span#Console-Toggle-Button.open:hover{
@@ -546,7 +547,7 @@ span#Console-Toggle-Button.open:active{
 
 span#Console-Toggle-Button.close{
 	background-position: 0px 0px;
-	background-image: url(../images/console-open-icon.png);
+	background-image: url(../images/console-open-icon.gif);
 }
 
 span#Console-Toggle-Button.close:hover{
@@ -590,19 +591,19 @@ span#Console-Clear-Button:hover{
 }
 
 #preview-ui-bottom-body p.info{
-	background-image: url(../images/infoIcon.png);
+	background-image: url(../images/infoIcon.gif);
 	background-repeat: no-repeat;
 	background-position: 5px center;
 	padding-left: 26px;
 }
 #preview-ui-bottom-body p.warn{
-	background: #00ffff url(../images/warningIcon.png);
+	background: #00ffff url(../images/warningIcon.gif);
 	background-repeat: no-repeat;
 	background-position: 5px center;
 	padding-left: 26px;
 }
 #preview-ui-bottom-body p.error{
-	background: #ffffe0 url(../images/errorIcon.png);
+	background: #ffffe0 url(../images/errorIcon.gif);
 	background-repeat: no-repeat;
 	background-position: 5px center;
 	padding-left: 26px;
