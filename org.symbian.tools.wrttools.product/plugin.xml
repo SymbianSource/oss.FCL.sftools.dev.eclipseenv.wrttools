@@ -5,7 +5,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.symbian.tools.wrttools.product.perspective.WRTPerspective"
-            icon="icons/main16.gif"
+            icon="icons/WRT_perspective.gif"
             id="org.symbian.tools.wrttools.mainPerspective"
             name="WebRuntime">
       </perspective>
@@ -41,7 +41,7 @@
          </action>
          <action
                class="org.symbian.tools.wrttools.product.actions.NewWRTProjectAction"
-               icon="icons/main16.gif"
+               icon="icons/newWRTproject.gif"
                id="org.symbian.tools.wrttools.product.newWRTProjectAction"
                label="New WRT Application..."
                style="push"

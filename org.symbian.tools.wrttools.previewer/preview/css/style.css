@@ -225,28 +225,28 @@ div#IconArea{
 }
 
 div#IconArea.portrait240x320{
-	background-image: url(../images/statusBar_240x320.png);
+	background-image: url(../images/statusBar_240x320_bkup.png);
 }
 div#IconArea.landscape240x320{
-	background-image: url(../images/statusBar_320x240.png);
+	background-image: url(../images/statusBar_320x240_bkup.png);
 }
 
 div#IconArea.portrait320x240{
-	background-image: url(../images/statusBar_320x240.png);
+	background-image: url(../images/statusBar_320x240_bkup.png);
 }
 div#IconArea.landscape320x240{
-	background-image: url(../images/statusBar_240x320.png);
+	background-image: url(../images/statusBar_240x320_bkup.png);
 }
 
 div#IconArea.portrait360x640{
-	background-image: url(../images/statusBar_360x640.png);
+	background-image: url(../images/statusBar_360x640_bkup.png);
 }
 div#IconArea.landscape360x640{
-	background-image: url(../images/statusBar_640x360.png);
+	background-image: url(../images/statusBar_640x360_bkup.png);
 }
 
 div#IconArea.landscape800x352{
-	background-image: url(../images/statusBar_800x352.png);
+	background-image: url(../images/statusBar_800x352_bkup.png);
 }
 
 
@@ -533,7 +533,7 @@ span#Console-Toggle-Button{
 
 span#Console-Toggle-Button.open{
 	background-position: 0px 0px;
-	background-image: url(../images/console-close-icon.gif);
+	background-image: url(../images/console-close-icon_bkup.gif);
 }
 
 span#Console-Toggle-Button.open:hover{
@@ -547,7 +547,7 @@ span#Console-Toggle-Button.open:active{
 
 span#Console-Toggle-Button.close{
 	background-position: 0px 0px;
-	background-image: url(../images/console-open-icon.gif);
+	background-image: url(../images/console-open-icon_bkup.gif);
 }
 
 span#Console-Toggle-Button.close:hover{
