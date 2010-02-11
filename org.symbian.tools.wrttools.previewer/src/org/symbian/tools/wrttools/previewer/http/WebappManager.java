@@ -18,8 +18,6 @@
  *******************************************************************************/
 package org.symbian.tools.wrttools.previewer.http;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -124,11 +122,7 @@ public class WebappManager {
 
 	public static String getHost() {
 		if (host == null) {
-			try {
-				host = InetAddress.getLocalHost().getHostName().toLowerCase();
-			} catch (Exception e) {
-				host = "127.0.0.1";
-			}
+			host = "localhost";
 		}
 		return host;
 	}

@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPart;
@@ -153,20 +154,12 @@ public class PreviewView extends PageBookView {
 				.getPreferenceStore();
 		String value = preferenceStore
 				.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
-		if (value == null || value.trim().length() == 0
-				|| MessageDialogWithToggle.PROMPT.equals(value)) {
-			return MessageDialogWithToggle
-					.openYesNoQuestion(
-							getSite().getShell(),
-							"WRT Preview",
-							"WRT IDE can refresh preview whenever any changes are made to project files. Refresh will always return the widget to initial page. Do you want to enable automatic refresh for your project?\nNote: you can toggle this setting for particular project on the preview toolbar.",
-							"Keep this setting for all new projects", false,
-							preferenceStore,
-							IWrtEditingPreferences.PREF_AUTO_REFRESH)
-					.getReturnCode() == IDialogConstants.YES_ID;
-		} else {
-			return MessageDialogWithToggle.ALWAYS.equals(value);
+		boolean toggle = !MessageDialogWithToggle.NEVER.equals(value);
+		if (MessageDialogWithToggle.NEVER.equals(value)
+				|| MessageDialogWithToggle.ALWAYS.equals(value)) {
+			setProjectAutorefresh(project, toggle);
 		}
+		return toggle;
 	}
 
 	private File getPreferencesFile() {
@@ -181,7 +174,6 @@ public class PreviewView extends PageBookView {
 				return autorefresh.get(project);
 			} else {
 				boolean value = getDefaultAutorefresh(project);
-				setProjectAutorefresh(project, value);
 				return value;
 			}
 		}
@@ -269,6 +261,33 @@ public class PreviewView extends PageBookView {
 				}
 			}
 		}
+	}
+
+	public boolean promptUserToToggle(IProject project, boolean toggle) {
+		IPreferenceStore preferenceStore = PreviewerPlugin.getDefault()
+				.getPreferenceStore();
+		String value = preferenceStore
+				.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
+		synchronized (autorefresh) {
+			if (!autorefresh.containsKey(project)) {
+				if (value == null || value.trim().length() == 0
+						|| MessageDialogWithToggle.PROMPT.equals(value)) {
+					boolean setting = MessageDialogWithToggle
+							.open(
+									MessageDialogWithToggle.QUESTION,
+									getSite().getShell(),
+									"WRT Preview",
+									"WRT IDE can refresh preview whenever any changes are made to project files. Refresh will always return the widget to initial page. Do you want to enable automatic refresh for your project?\nNote: you can toggle this setting for particular project on the preview toolbar.",
+									"Keep this setting for all new projects",
+									false, preferenceStore,
+									IWrtEditingPreferences.PREF_AUTO_REFRESH,
+									SWT.SHEET).getReturnCode() == IDialogConstants.YES_ID;
+					setProjectAutorefresh(project, setting);
+					return setting;
+				}
+			}
+		}
+		return toggle;
 	}
 
 }

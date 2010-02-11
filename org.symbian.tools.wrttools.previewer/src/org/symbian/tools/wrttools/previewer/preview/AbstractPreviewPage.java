@@ -85,16 +85,17 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 		if (!refreshScheduled && needsRefresh(files)) {
 			asyncExec(new Runnable() {
 				public void run() {
-					if (toggleState) {
-						refresh();
-					} else {
-						needsRefresh = true;
-						refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.RED_SYNC));
-						refreshAction.setToolTipText("Refresh the preview browser (there are updated files)");
-					}
+					refreshBrowser();
 				}
 			});
 			refreshScheduled = true;
+		}
+	}
+
+	protected void promptIfNeeded() {
+		if (toggleState) {
+			toggleState = previewView.promptUserToToggle(project, toggleState);
+			toggleRefresh.setChecked(toggleState);
 		}
 	}
 
@@ -173,5 +174,18 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 
 	public boolean isDisposed() {
 		return browser != null && browser.isDisposed();
+	}
+
+	private synchronized void refreshBrowser() {
+		if (toggleState) {
+			promptIfNeeded();
+		}
+		if (toggleState) {
+			refresh();
+		} else {
+			needsRefresh = true;
+			refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.RED_SYNC));
+			refreshAction.setToolTipText("Refresh the preview browser (there are updated files)");
+		}
 	}
 }
