@@ -7,7 +7,7 @@
             allowMultiple="false"
             category="org.symbian.tools.wrttools.views"
             class="org.symbian.tools.wrttools.previewer.preview.PreviewView"
-            icon="icons/obj16/html-editor.gif"
+            icon="icons/obj16/preview_view.gif"
             id="org.symbian.tools.wrttools.editing.wrtpreview"
             name="WRT Preview"
             restorable="true">

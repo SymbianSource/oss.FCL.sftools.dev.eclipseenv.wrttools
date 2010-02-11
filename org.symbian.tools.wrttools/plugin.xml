@@ -35,7 +35,7 @@
         <extension
               point="org.eclipse.ui.ide.projectNatureImages">
            <image
-                 icon="icons/main16.gif"
+                 icon="icons/WRT_main_16.png"
                  id="org.symbian.tools.wrttools.natureImage"
                  natureId="org.symbian.tools.wrttools.WidgetProjectNature">
            </image>
@@ -156,7 +156,7 @@
 		<wizard category="org.symbian.tools.wrttools.core.category"
 			class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
 			finalPerspective="org.symbian.tools.wrttools.mainPerspective"
-			hasPages="true" icon="icons/main16.gif"
+			hasPages="true" icon="icons/WRT_main_16.png"
 			id="org.symbian.tools.wrttools.core.wrtwidgetwizard" name="Web Runtime Application"
 			project="true">
 			<description>
@@ -196,7 +196,7 @@
             default-css-name="HelloWithWRTKit"
             default-html-name="index"
             default-js-name="HelloWithWRTKit"
-            icon="icons/main16.gif"
+            icon="icons/WRT_main_16.png"
             id-pattern="com.{0}.helloWithWRTKit.widget"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.HelloWithWRTKitProjectDetailsWizardPage$Factory">
          <description>

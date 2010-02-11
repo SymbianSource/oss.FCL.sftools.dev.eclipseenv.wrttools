@@ -127,15 +127,15 @@
             name="WebRuntime Toolkit IDE">
          <property
                name="windowImages"
-               value="icons/main16.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png">
+               value="icons/WRT_main_16.png,icons/WRT_32px_01.png,eclipse48.gif,eclipse.png,eclipse32.png">
          </property>
          <property
                name="aboutText"
-               value="%productBlurb">
+               value="Symbian Foundation's Open Source toolkit for developing and deploying Web applications">
          </property>
          <property
                name="aboutImage"
-               value="eclipse_lg.gif">
+               value="icons/WRT_Wizard_banner.png">
          </property>
          <property
                name="startupForegroundColor"

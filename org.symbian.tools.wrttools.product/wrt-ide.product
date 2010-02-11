@@ -4,9 +4,10 @@
 <product name="WebRuntime Toolkit IDE" uid="org.symbian.wrtide" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="eclipse_lg.gif"/>
+      <image path="icons/WRT_Wizard_banner.png"/>
       <text>
-         %productBlurb
+         Symbian Foundation&apos;s Open Source toolkit for
+developing and deploying Web applications
       </text>
    </aboutInfo>
 
@@ -19,7 +20,7 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/org.symbian.tools.wrttools.product/icons/main16.gif" i32="eclipse32.gif" i48="eclipse48.gif" i64="eclipse.png" i128="eclipse32.png"/>
+   <windowImages i16="/org.symbian.tools.wrttools.product/icons/WRT_main_16.png" i32="/org.symbian.tools.wrttools.product/icons/WRT_32px_01.png" i48="eclipse48.gif" i64="eclipse.png" i128="eclipse32.png"/>
 
    <splash
       startupProgressRect="0,280,455,15"
@@ -31,6 +32,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
       <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</macos>
@@ -46,7 +48,7 @@
       <plugin id="javax.servlet.jsp"/>
       <plugin id="javax.transaction" fragment="true"/>
       <plugin id="javax.xml"/>
-      <plugin id="javax.xml.stream"/>
+      <plugin id="javax.xml.stream" fragment=""/>
       <plugin id="org.apache.bcel"/>
       <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.collections"/>
@@ -56,7 +58,7 @@
       <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.commons.lang" version="2.3.0.v200803061910"/>
       <plugin id="org.apache.commons.logging"/>
-      <plugin id="org.apache.commons.net"/>
+      <plugin id="org.apache.commons.net" fragment=""/>
       <plugin id="org.apache.jasper"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.apache.lucene"/>
@@ -280,7 +282,7 @@
       <plugin id="org.eclipse.wst.xml.xpath.ui"/>
       <plugin id="org.eclipse.wst.xml.xpath2.processor"/>
       <plugin id="org.eclipse.wst.xmleditor.doc.user"/>
-      <plugin id="org.eclipse.wtp.epp.package.jee.intro"/>
+      <plugin id="org.eclipse.wtp.epp.package.jee.intro" fragment=""/>
       <plugin id="org.jdom"/>
       <plugin id="org.mortbay.jetty.server"/>
       <plugin id="org.mortbay.jetty.util"/>

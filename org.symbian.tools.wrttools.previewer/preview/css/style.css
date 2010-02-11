@@ -451,7 +451,7 @@ div#event-messaging.inactive, div#event-memory.inactive{
 
 
 div#event-battery{
-	background-image: url(../images/battery-icon.gif);
+	background-image: url(../images/battery-icon.png);
 }
 
 div#event-messaging{
@@ -459,7 +459,7 @@ div#event-messaging{
 }
 
 div#event-memory{
-	background-image: url(../images/memory-icon.gif);
+	background-image: url(../images/memory-icon.png);
 }
 
 div.ui-panel{
@@ -533,7 +533,7 @@ span#Console-Toggle-Button{
 
 span#Console-Toggle-Button.open{
 	background-position: 0px 0px;
-	background-image: url(../images/console-close-icon_bkup.gif);
+	background-image: url(../images/console-close-icon.gif);
 }
 
 span#Console-Toggle-Button.open:hover{
@@ -547,7 +547,7 @@ span#Console-Toggle-Button.open:active{
 
 span#Console-Toggle-Button.close{
 	background-position: 0px 0px;
-	background-image: url(../images/console-open-icon_bkup.gif);
+	background-image: url(../images/console-open-icon.gif);
 }
 
 span#Console-Toggle-Button.close:hover{
@@ -563,7 +563,7 @@ span#Console-Clear-Button{
 	height: 16px;
 	width: 39px;
 	float: right;
-	background-image: url(../images/console-clear-button.png);
+	background-image: url(../images/console-clear-button.gif);
 	background-repeat: no-repeat;
 	margin : 10px 10px 0px 0px;
 	cursor: hand;
@@ -626,7 +626,7 @@ span#wrt-help{
 	width: 28px;
 	float: right;
 	background-repeat: no-repeat;
-	background-image: url(../images/wrt-help-icon.png);
+	background-image: url(../images/wrt-help-icon.gif);
 }
 
 span#wrt-help:hover{
