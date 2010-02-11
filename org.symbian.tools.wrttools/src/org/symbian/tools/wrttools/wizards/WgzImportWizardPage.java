@@ -414,16 +414,6 @@ public class WgzImportWizardPage extends WizardPage {
 		return true;
 	}
 
-	/*
-	 * see @DialogPage.setVisible(boolean)
-	 */
-	public void setVisible(boolean visible) {
-		super.setVisible(visible);
-		if (visible) {
-			projectNameField.setFocus();
-		}
-	}
-
 	/**
 	 * Returns the useDefaults.
 	 * 

@@ -22,7 +22,7 @@
             delegate="org.symbian.tools.wrttools.debug.internal.launch.WidgetLaunchDelegate"
             id="org.symbian.tools.wrttools.debug.widget"
             modes="debug,run"
-            name="WRT Widget"
+            name="WRT Application"
             public="true">
       </launchConfigurationType>
    </extension>
@@ -30,7 +30,7 @@
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchConfigurationTabGroup"
-            description="WRT Widget"
+            description="WRT Application"
             id="org.symbian.tools.wrttools.debug.wrtTabGroup"
             type="org.symbian.tools.wrttools.debug.widget">
       </launchConfigurationTabGroup>
@@ -49,7 +49,7 @@
             class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchShortcut"
             icon="icons/main16.gif"
             id="org.symbian.tools.wrttools.debug.wrtshortcut"
-            label="WRT Widget"
+            label="WRT Application"
             modes="run, debug">
          <configurationType
                id="org.symbian.tools.wrttools.debug.widget">
@@ -73,11 +73,11 @@
             </with>
          </enablement>
             <contextLabel
-                  label="WRT Widget"
+                  label="WRT Application"
                   mode="run">
             </contextLabel>
             <contextLabel
-                  label="WRT Widget"
+                  label="WRT Application"
                   mode="debug">
             </contextLabel></contextualLaunch>
       </shortcut>

@@ -140,8 +140,10 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		Display display = getShell().getDisplay();
 		display.asyncExec(new Runnable() {
 			public void run() {
-				IWizardPage nextPage = getWizard().getNextPage(WRTProjectTemplateWizardPage.this);
-				getContainer().showPage(nextPage);
+				if (isPageComplete()) {
+					IWizardPage nextPage = getWizard().getNextPage(WRTProjectTemplateWizardPage.this);
+					getContainer().showPage(nextPage);
+				}
 			}
 		});
 	}

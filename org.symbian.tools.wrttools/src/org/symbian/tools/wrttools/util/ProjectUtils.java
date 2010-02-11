@@ -46,6 +46,7 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
+import org.eclipse.wst.validation.Validator;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WidgetProjectNature;
 
@@ -80,6 +81,7 @@ public class ProjectUtils {
 				10));
 
 		ValidationFramework.getDefault().addValidationBuilder(project);
+		ValidationFramework.getDefault().applyChanges(ValidationFramework.getDefault().getProjectSettings(project), true);
 
 		// TODO: Build path, super type, etc.
 		// BuildPathsBlock.flush(classPathEntries, javaScriptProject, superType,
