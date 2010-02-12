@@ -164,4 +164,11 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		IStructuredSelection selection = (IStructuredSelection) templates.getSelection();
 		return (ProjectTemplate) selection.getFirstElement();
 	}
+	
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		templates.getControl().setFocus();
+		
+	}
 }
