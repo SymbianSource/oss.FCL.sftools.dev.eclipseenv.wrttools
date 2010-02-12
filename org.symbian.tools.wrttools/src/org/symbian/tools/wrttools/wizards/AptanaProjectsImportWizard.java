@@ -18,6 +18,9 @@
  */
 package org.symbian.tools.wrttools.wizards;
 
+import java.util.List;
+
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
@@ -27,6 +30,7 @@ import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class AptanaProjectsImportWizard extends Wizard implements
 		IImportWizard, INewWizard, IExecutableExtension {
@@ -49,6 +53,8 @@ public class AptanaProjectsImportWizard extends Wizard implements
 	public boolean performFinish() {
 		if (mainPage.createProjects()) {
 			BasicNewProjectResourceWizard.updatePerspective(config);
+			List<IProject> projects = mainPage.getCreatedProjects();
+				ProjectUtils.focusOn(projects.toArray(new IProject[projects.size()]));
 			return true;
 		} else {
 			return false;

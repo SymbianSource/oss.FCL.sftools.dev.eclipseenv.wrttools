@@ -31,6 +31,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.symbian.tools.wrttools";
+	
+	public static final String NAVIGATOR_ID = PLUGIN_ID + ".wrtnavigator";
 
 	// The shared instance
 	private static Activator plugin;

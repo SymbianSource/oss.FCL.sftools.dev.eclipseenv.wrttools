@@ -76,7 +76,7 @@ public class CoreUtil {
 	public static String readFile(IProject project, IFile file)
 			throws CoreException {
 		try {
-			if (file.isAccessible()) {
+			if (file != null && file.isAccessible()) {
 				InputStream contents = file.getContents();
 				final BufferedReader reader = new BufferedReader(
 						new InputStreamReader(contents, file.getCharset()));
@@ -103,6 +103,9 @@ public class CoreUtil {
 	public static synchronized String getIndexFile(IProject project) throws CoreException {
 		// There will really be a lot of calls to this method. We need to cache values.
 		IFile file = getFile(project, METADATA_FILE);
+		if (file == null) {
+			return null;
+		}
 		if (INDEX_FILES.containsKey(project)) {
 			IndexFileRecord record = INDEX_FILES.get(project);
 			if (file == null || !file.isAccessible()) {

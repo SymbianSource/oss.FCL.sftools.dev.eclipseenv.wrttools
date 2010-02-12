@@ -8,6 +8,7 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.eclipse.wst.jsdt.ui.JavaScriptUI;
+import org.symbian.tools.wrttools.Activator;
 
 public class WRTPerspective implements IPerspectiveFactory {
 
@@ -15,7 +16,7 @@ public class WRTPerspective implements IPerspectiveFactory {
  		String editorArea = layout.getEditorArea();
 		
 		IFolderLayout folder= layout.createFolder("left", IPageLayout.LEFT, (float)0.25, editorArea); //$NON-NLS-1$
-		folder.addView("org.symbian.tools.wrttools.wrtnavigator");
+		folder.addView(Activator.NAVIGATOR_ID);
 		folder.addView(JavaScriptUI.ID_TYPE_HIERARCHY);
 		
 		IFolderLayout outputfolder= layout.createFolder("bottom", IPageLayout.BOTTOM, (float)0.75, editorArea); //$NON-NLS-1$

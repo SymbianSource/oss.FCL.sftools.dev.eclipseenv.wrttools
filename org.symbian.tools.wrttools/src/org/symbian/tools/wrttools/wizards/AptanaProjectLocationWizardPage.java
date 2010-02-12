@@ -376,6 +376,10 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		}
 	}
 
+	public List<IProject> getCreatedProjects() {
+		return createdProjects;
+	}
+	
 	/**
 	 * Collect the list of .project files that are under directory into files.
 	 * 

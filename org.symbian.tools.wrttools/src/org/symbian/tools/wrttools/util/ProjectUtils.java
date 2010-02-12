@@ -23,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.text.MessageFormat;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -43,10 +45,16 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.part.ISetSelectionTarget;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
-import org.eclipse.wst.validation.Validator;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WidgetProjectNature;
 
@@ -223,5 +231,39 @@ public class ProjectUtils {
 	public static boolean isPlist(IResource resource) {
 		return resource.getType() == IResource.FILE
 				&& resource.getName().equalsIgnoreCase("info.plist");
+	}
+
+	public static void focusOn(IProject... projects) {
+		try {
+			final Collection<IFile> files = new HashSet<IFile>(projects.length);
+			for (IProject project : projects) {
+				String file = CoreUtil.getIndexFile(project);
+				if (file != null) {
+					IFile index = project.getFile(file);
+					if (index.isAccessible()) {
+						files.add(index);
+					}
+				}
+			}
+			IFile[] filesArray = files.toArray(new IFile[files.size()]);
+			IWorkbenchPage activePage = PlatformUI.getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage();
+			IViewReference reference = activePage
+					.findViewReference(Activator.NAVIGATOR_ID);
+			IWorkbenchPart part = reference.getPart(false);
+			if (part instanceof ISetSelectionTarget) {
+				StructuredSelection selection;
+				if (filesArray.length == 1) {
+					selection = new StructuredSelection(filesArray[0]);
+				} else {
+					selection = new StructuredSelection(filesArray);
+				}
+				((ISetSelectionTarget) part)
+						.selectReveal(selection);
+			}
+			IDE.openEditors(activePage, filesArray);
+		} catch (CoreException e) {
+			Activator.log(e);
+		}
 	}
 }

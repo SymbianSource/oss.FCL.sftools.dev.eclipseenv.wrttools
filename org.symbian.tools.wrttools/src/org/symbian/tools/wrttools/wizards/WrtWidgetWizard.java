@@ -78,11 +78,12 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 	}
 
 	public boolean performFinish() {
+		final IProject[] holder = new IProject[1];
 		try {
 			getContainer().run(true, true, new IRunnableWithProgress() {
 				public void run(IProgressMonitor monitor)
 						throws InvocationTargetException, InterruptedException {
-					action(monitor);
+					holder[0] = action(monitor);
 				}
 			});
 		} catch (InvocationTargetException e) {
@@ -91,22 +92,27 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 			Activator.log(e);
 		}
 		BasicNewProjectResourceWizard.updatePerspective(config);
+		if (holder[0] != null) {
+			ProjectUtils.focusOn(holder[0]);
+		}
 		return true;
 	}
 
-	protected void action(IProgressMonitor monitor) {
+	protected IProject action(IProgressMonitor monitor) {
+		final IProject[] holder = new IProject[1];
 		try {
 			ResourcesPlugin.getWorkspace().run(new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
-					createAndInitProject(monitor);
+					holder[0] = createAndInitProject(monitor);
 				}
 			}, monitor);
 		} catch (CoreException e) {
 			Activator.log(e);
 		}
+		return holder[0];
 	}
 
-	protected void createAndInitProject(IProgressMonitor monitor)
+	protected IProject createAndInitProject(IProgressMonitor monitor)
 			throws CoreException {
 		monitor.beginTask("Creating project", 100);
 		IProject project = ProjectUtils.createWrtProject(context.getProjectName(), context.getProjectUri(), new SubProgressMonitor(monitor, 30));
@@ -117,6 +123,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Failed to setup libraries", e));
 		}
 		monitor.done();
+		return project;
 	}
 
 	private void initLibraries(IProject project, String[] libraryIds, IProgressMonitor progressMonitor) throws IOException, CoreException {

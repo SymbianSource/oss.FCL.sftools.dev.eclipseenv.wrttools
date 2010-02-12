@@ -39,7 +39,7 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 		addPage(page);
 	}
 
-	private void createProject(String archiveName, String projectName, URI uri,
+	private IProject createProject(String archiveName, String projectName, URI uri,
 			IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask("Importing WRT application archive", 50);
 		// 1. Create project
@@ -55,6 +55,7 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 					"Archive unpacking failed", e));
 		}
 		monitor.done();
+		return project;
 	}
 
 	@Override
@@ -63,6 +64,7 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 			final String projectName = page.getProjectName();
 			final URI uri = page.getLocationURI();
 			final String archiveName = page.getArchiveFile();
+			final IProject[] holder = new IProject[1];
 			getContainer().run(true, true, new IRunnableWithProgress() {
 
 				public void run(IProgressMonitor monitor)
@@ -73,7 +75,7 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 
 									public void run(IProgressMonitor monitor)
 											throws CoreException {
-										createProject(archiveName, projectName,
+										holder[0] = createProject(archiveName, projectName,
 												uri, monitor);
 									}
 
@@ -84,6 +86,9 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 					}
 				}
 			});
+			if (holder[0] != null) {
+				ProjectUtils.focusOn(holder[0]);
+			}
 		} catch (InvocationTargetException e) {
 			Activator.log(e);
 		} catch (InterruptedException e) {
