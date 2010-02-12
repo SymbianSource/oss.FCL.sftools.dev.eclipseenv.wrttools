@@ -398,53 +398,8 @@
           </or>
        </possibleChildren>
        <actionProvider
-             class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorViewActionProvider"
-             id="org.eclipse.wst.jsdt.ui.navigator.actions.ViewActions">
-          <enablement>
-             <or>
-                <instanceof
-                      value="org.eclipse.core.resources.IWorkspaceRoot">
-                </instanceof>
-                <adapt
-                      type="java.util.Collection">
-                   <count
-                         value="0">
-                   </count>
-                </adapt>
-             </or>
-          </enablement>
-       </actionProvider>
-       <actionProvider
              class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorActionProvider"
              id="org.eclipse.wst.jsdt.ui.navigator.actions.StandardActions">
-<!--          <enablement>
-             <or>
-                <and>
-                   <instanceof
-                         value="org.eclipse.core.resources.IProject">
-                   </instanceof>
-                   <test
-                         property="org.eclipse.core.resources.projectNature"
-                         value="org.symbian.tools.wrttools.WidgetProjectNature">
-                   </test>
-                </and>
-                <instanceof
-                      value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
-                </instanceof>
-                <instanceof
-                      value="org.eclipse.wst.jsdt.core.IJarEntryResource">
-                </instanceof>
-                <instanceof
-                      value="org.eclipse.wst.jsdt.internal.ui.packageview.PackageFragmentRootContainer">
-                </instanceof>
-                <adapt
-                      type="java.util.Collection">
-                   <count
-                         value="0">
-                   </count>
-                </adapt>
-             </or>
-          </enablement>-->
        </actionProvider>
        <actionProvider
              class="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorRefactorActionProvider"
@@ -452,31 +407,45 @@
              overrides="org.eclipse.ui.navigator.resources.actions.RefactorActions">
           <enablement>
              <or>
-                <and>
-                   <instanceof
-                         value="org.eclipse.core.resources.IProject">
-                   </instanceof>
-                   <test
-                         property="org.eclipse.core.resources.projectNature"
-                         value="org.symbian.tools.wrttools.WidgetProjectNature">
-                   </test>
-                </and>
-                <instanceof
-                      value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
-                </instanceof>
-                <instanceof
-                      value="org.eclipse.wst.jsdt.core.IJarEntryResource">
-                </instanceof>
-                <instanceof
-                      value="org.eclipse.wst.jsdt.internal.ui.packageview.PackageFragmentRootContainer">
-                </instanceof>
                 <adapt
                       type="java.util.Collection">
                    <count
                          value="0">
                    </count>
                 </adapt>
+                <and>
+                   <or>
+                      <instanceof
+                            value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+                      </instanceof>
+                      <instanceof
+                            value="org.eclipse.wst.jsdt.core.IJarEntryResource">
+                      </instanceof>
+                   </or>
+                   <not>
+                      <instanceof
+                            value="org.eclipse.wst.jsdt.core.ITypeRoot">
+                      </instanceof>
+                   </not>
+                </and>
              </or>
+          </enablement>
+       </actionProvider>
+       <actionProvider
+             class="org.symbian.tools.wrttools.navigator.RenameMoveActionProvider"
+             id="org.symbian.wrttools.navigator.MoveRename"
+             overrides="org.eclipse.ui.navigator.resources.actions.RefactorActions">
+          <enablement>
+             <and>
+                <adapt
+                      type="org.eclipse.core.resources.IResource">
+                </adapt>
+                <not>
+                   <instanceof
+                         value="org.eclipse.wst.jsdt.core.IType">
+                   </instanceof>
+                </not>
+             </and>
           </enablement>
        </actionProvider>
        <actionProvider
@@ -497,9 +466,9 @@
                 <adapt
                       type="org.eclipse.core.resources.IResource">
                 </adapt>
-                <count
-                      value="0">
-                </count>
+                <adapt
+                      type="java.util.Collection">
+                </adapt>
              </or>
           </enablement>
        </commonWizard>
@@ -540,9 +509,6 @@
                 </adapt>
                 <adapt
                       type="java.util.Collection">
-	                <count
-	                      value="0">
-	                </count>
                 </adapt>
              </or>
           </enablement>
@@ -557,9 +523,6 @@
                 </adapt>
                 <adapt
                       type="java.util.Collection">
-	                <count
-	                      value="0">
-	                </count>
                 </adapt>
              </or>
           </enablement>
