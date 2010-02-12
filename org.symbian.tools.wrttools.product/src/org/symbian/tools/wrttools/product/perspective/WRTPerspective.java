@@ -9,13 +9,14 @@ import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 public class WRTPerspective implements IPerspectiveFactory {
 
 	public void createInitialLayout(IPageLayout layout) {
  		String editorArea = layout.getEditorArea();
 		
-		IFolderLayout folder= layout.createFolder("left", IPageLayout.LEFT, (float)0.25, editorArea); //$NON-NLS-1$
+		IFolderLayout folder= layout.createFolder("left", IPageLayout.LEFT, (float)0.15, editorArea); //$NON-NLS-1$
 		folder.addView(Activator.NAVIGATOR_ID);
 		folder.addView(JavaScriptUI.ID_TYPE_HIERARCHY);
 		
@@ -28,7 +29,9 @@ public class WRTPerspective implements IPerspectiveFactory {
 		outputfolder.addPlaceholder(IPageLayout.ID_BOOKMARKS);
 		outputfolder.addPlaceholder(IProgressConstants.PROGRESS_VIEW_ID);
 		
-		layout.addView(IPageLayout.ID_OUTLINE, IPageLayout.RIGHT, (float)0.75, editorArea);
+		IFolderLayout helpersFolder = layout.createFolder("right", IPageLayout.RIGHT, (float) 0.60, editorArea);
+		helpersFolder.addView(PreviewerPlugin.PREVIEW_VIEW);
+		helpersFolder.addView(IPageLayout.ID_OUTLINE);
 		
 		layout.addActionSet(IDebugUIConstants.LAUNCH_ACTION_SET);
 		layout.addActionSet(JavaScriptUI.ID_ACTION_SET);
@@ -50,6 +53,7 @@ public class WRTPerspective implements IPerspectiveFactory {
 		layout.addShowViewShortcut(IPageLayout.ID_OUTLINE);
 		layout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
 		layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
+		layout.addShowViewShortcut(PreviewerPlugin.PREVIEW_VIEW);
 				
 		// new actions - Java project creation wizard
 		layout.addNewWizardShortcut("org.symbian.tools.wrttools.core.wrtwidgetwizard"); //$NON-NLS-1$

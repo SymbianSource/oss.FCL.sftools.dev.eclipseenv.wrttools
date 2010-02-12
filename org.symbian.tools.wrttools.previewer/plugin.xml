@@ -21,19 +21,4 @@
             name="WRT">
       </page>
    </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="org.symbian.tools.wrttools.mainPerspective">
-         <viewShortcut
-               id="org.symbian.tools.wrttools.editing.wrtpreview">
-         </viewShortcut>
-         <view
-               id="org.symbian.tools.wrttools.editing.wrtpreview"
-               minimized="false"
-               relationship="stack"
-               relative="org.eclipse.ui.views.ContentOutline">
-         </view>
-      </perspectiveExtension>
-   </extension>
   </plugin>
