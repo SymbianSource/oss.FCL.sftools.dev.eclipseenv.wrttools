@@ -24,7 +24,7 @@ import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 public abstract class AbstractPreviewPage extends Page implements IPreviewPage, ISelectionProvider {
 	private final IAction refreshAction = new Action("Refresh") {
 		public void run() {
-			refresh();
+			refresh(true);
 		};
 	};
 	private final IAction toggleRefresh = new Action("Toggle Refresh", IAction.AS_RADIO_BUTTON) {
@@ -50,7 +50,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 		previewView.setProjectAutorefresh(project, toggleState);
 		toggleRefresh.setToolTipText(getToggleActionTooltip());
 		if (toggleState && needsRefresh) {
-			refresh();
+			refresh(true);
 		}
 	}
 
@@ -112,13 +112,13 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 		return false;
 	}
 
-	protected synchronized void refresh() {
+	protected synchronized void refresh(boolean manual) {
 		try {
 			final Control focusControl = browser.getDisplay().getFocusControl();
 			browser.refresh();
 			refreshAction.setImageDescriptor(PreviewerPlugin
 					.getImageDescriptor(Images.GREEN_SYNC));
-			if (focusControl != null) {
+			if (!manual && focusControl != null) {
 				asyncExec(new Runnable() {
 					public void run() {
 						focusControl.setFocus();
@@ -181,7 +181,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 			promptIfNeeded();
 		}
 		if (toggleState) {
-			refresh();
+			refresh(false);
 		} else {
 			needsRefresh = true;
 			refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.RED_SYNC));
