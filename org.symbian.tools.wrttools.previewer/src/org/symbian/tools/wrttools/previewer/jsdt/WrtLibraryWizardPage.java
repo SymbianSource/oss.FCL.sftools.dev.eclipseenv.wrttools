@@ -17,6 +17,7 @@ import org.eclipse.wst.jsdt.ui.wizards.NewElementWizardPage;
 /**
  * Wizard page for adding IE library support to the project.
  */
+@SuppressWarnings("restriction")
 public class WrtLibraryWizardPage extends NewElementWizardPage implements
 		IJsGlobalScopeContainerPage, IJsGlobalScopeContainerPageExtension,
 		IJsGlobalScopeContainerPageExtension2 {
