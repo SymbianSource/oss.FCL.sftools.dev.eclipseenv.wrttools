@@ -114,18 +114,19 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 
 	protected synchronized void refresh(boolean manual) {
 		try {
-			final Control focusControl = browser.getDisplay().getFocusControl();
-			browser.refresh();
-			refreshAction.setImageDescriptor(PreviewerPlugin
-					.getImageDescriptor(Images.GREEN_SYNC));
-			if (!manual && focusControl != null) {
-				asyncExec(new Runnable() {
-					public void run() {
-						focusControl.setFocus();
-					}
-				});
+			if (!browser.isDisposed()) {
+				final Control focusControl = browser.getDisplay().getFocusControl();
+				browser.refresh();
+				refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.GREEN_SYNC));
+				if (!manual && focusControl != null) {
+					asyncExec(new Runnable() {
+						public void run() {
+							focusControl.setFocus();
+						}
+					});
+				}
+				refreshAction.setToolTipText("Refresh the preview browser");
 			}
-			refreshAction.setToolTipText("Refresh the preview browser");
 			needsRefresh = false;
 		} finally {
 			refreshScheduled = false;
