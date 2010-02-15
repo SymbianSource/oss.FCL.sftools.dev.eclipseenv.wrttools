@@ -131,7 +131,7 @@
          </property>
          <property
                name="aboutText"
-               value="Symbian Foundation's Open Source toolkit for developing and deploying Web applications">
+               value="%productBlurb">
          </property>
          <property
                name="aboutImage"

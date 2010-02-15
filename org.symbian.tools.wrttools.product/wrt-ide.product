@@ -6,8 +6,7 @@
    <aboutInfo>
       <image path="icons/WRT_Wizard_banner.png"/>
       <text>
-         Symbian Foundation&apos;s Open Source toolkit for
-developing and deploying Web applications
+         %productBlurb
       </text>
    </aboutInfo>
 

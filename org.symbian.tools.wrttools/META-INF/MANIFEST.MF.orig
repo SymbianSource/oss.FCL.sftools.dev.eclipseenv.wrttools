@@ -46,5 +46,6 @@ Bundle-ClassPath: lib/tagsoup-1.2.jar,
  .,
  lib/jtidy-8.0-20060801.131059-3.jar,
  lib/org.bluecove_2.1.1.jar
+Export-Package: org.symbian.tools.wrttools,
  org.symbian.tools.wrttools.util,
  org.symbian.tools.wrttools.wizards
