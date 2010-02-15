@@ -42,9 +42,10 @@ Import-Package: org.apache.velocity;version="1.5.0",
  org.eclipse.ui.internal.ide,
  org.eclipse.ui.internal.ide.dialogs,
  org.eclipse.ui.wizards.newresource
+Export-Package: org.symbian.tools.wrttools,
+ org.symbian.tools.wrttools.util,
+ org.symbian.tools.wrttools.wizards
 Bundle-ClassPath: lib/tagsoup-1.2.jar,
  .,
  lib/jtidy-8.0-20060801.131059-3.jar,
  lib/org.bluecove_2.1.1.jar
- org.symbian.tools.wrttools.util,
- org.symbian.tools.wrttools.wizards
