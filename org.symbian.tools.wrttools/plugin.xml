@@ -41,20 +41,6 @@
            </image>
         </extension>
         
-<!-- WRT Validators -->		
-<!--	<extension
-			point="org.eclipse.wst.validation.validatorV2"
-			id="org.symbian.tools.wrttools.core.validator"
-			name="%VALIDATOR.Name">
-		<validator class="org.symbian.tools.wrttools.core.validator.ValidateAction">
-         	<include>
-         	     <rules>
-		               <fileext ext="plist"/>
-		         </rules>
-            </include>
-		</validator>
-    </extension> --> 
-    
 <!-- Validator Marker -->
    
         <extension
