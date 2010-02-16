@@ -37,18 +37,25 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.MultiPartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ISetSelectionTarget;
@@ -75,11 +82,10 @@ public class ProjectUtils {
 				.getLocation();
 		return workspace.isPrefixOf(project);
 	}
-	
+
 	public static IProject createWrtProject(String name, URI uri,
 			IProgressMonitor monitor) throws CoreException {
-		uri = isDefaultProjectLocation(uri) ? null
-				: uri;
+		uri = isDefaultProjectLocation(uri) ? null : uri;
 		monitor.beginTask("Create project resources", 20);
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(name);
@@ -89,7 +95,9 @@ public class ProjectUtils {
 				10));
 
 		ValidationFramework.getDefault().addValidationBuilder(project);
-		ValidationFramework.getDefault().applyChanges(ValidationFramework.getDefault().getProjectSettings(project), true);
+		ValidationFramework.getDefault().applyChanges(
+				ValidationFramework.getDefault().getProjectSettings(project),
+				true);
 
 		// TODO: Build path, super type, etc.
 		// BuildPathsBlock.flush(classPathEntries, javaScriptProject, superType,
@@ -110,18 +118,19 @@ public class ProjectUtils {
 				System.arraycopy(natureIds, 0, newNatures, 1, natureIds.length);
 				newNatures[0] = WidgetProjectNature.ID;
 				description.setNatureIds(newNatures);
-				
+
 				ICommand[] buildSpec = description.getBuildSpec();
 				for (int i = 0; i < buildSpec.length; i++) {
 					ICommand command = buildSpec[i];
-					if (JavaScriptCore.BUILDER_ID.equals(command.getBuilderName())) {
+					if (JavaScriptCore.BUILDER_ID.equals(command
+							.getBuilderName())) {
 						buildSpec[i] = buildSpec[buildSpec.length - 1];
 						buildSpec[buildSpec.length - 1] = command;
 						description.setBuildSpec(buildSpec);
 						break;
 					}
 				}
-				
+
 				project.setDescription(description, new NullProgressMonitor());
 			} catch (CoreException e) {
 				Activator.log(e);
@@ -197,8 +206,9 @@ public class ProjectUtils {
 		return dotProjectFile;
 	}
 
-	public static void unzip(String archiveFile, IContainer location, int trimSegments,
-			IProgressMonitor progressMonitor) throws IOException, CoreException {
+	public static void unzip(String archiveFile, IContainer location,
+			int trimSegments, IProgressMonitor progressMonitor)
+			throws IOException, CoreException {
 		progressMonitor.beginTask(MessageFormat.format("Unpacking {0}",
 				archiveFile), IProgressMonitor.UNKNOWN);
 		ZipInputStream stream = new ZipInputStream(new FileInputStream(
@@ -207,7 +217,8 @@ public class ProjectUtils {
 		try {
 			ZipEntry nextEntry;
 			while ((nextEntry = stream.getNextEntry()) != null) {
-				IPath p = new Path(nextEntry.getName()).removeFirstSegments(trimSegments);
+				IPath p = new Path(nextEntry.getName())
+						.removeFirstSegments(trimSegments);
 				if (!nextEntry.isDirectory()) {
 					IFile file = location.getFile(p);
 					checkParent(file.getParent());
@@ -234,36 +245,97 @@ public class ProjectUtils {
 	}
 
 	public static void focusOn(IProject... projects) {
-		try {
-			final Collection<IFile> files = new HashSet<IFile>(projects.length);
+		new FocusOnProjectJob(projects, Display.getCurrent()).schedule(50);
+	}
+
+	private static final class TouchAllResources implements IWorkspaceRunnable {
+		private final IProject[] projects;
+
+		public TouchAllResources(IProject[] projects) {
+			this.projects = projects;
+
+		}
+
+		public void run(IProgressMonitor monitor) throws CoreException {
 			for (IProject project : projects) {
-				String file = CoreUtil.getIndexFile(project);
-				if (file != null) {
-					IFile index = project.getFile(file);
-					if (index.isAccessible()) {
-						files.add(index);
+				project.accept(new IResourceVisitor() {
+					public boolean visit(IResource resource)
+							throws CoreException {
+						if (resource.isAccessible()
+								&& resource.getType() == IResource.FILE
+								&& resource.getFileExtension().equals("js")) {
+							resource.touch(new NullProgressMonitor());
+						}
+						return true;
+					}
+				});
+			}
+		}
+	}
+
+	private static final class FocusOnProjectJob extends Job {
+
+		private final IProject[] projects;
+		private final Display display;
+
+		public FocusOnProjectJob(IProject[] projects, Display display) {
+			super("Preparing projects");
+			this.projects = projects;
+			this.display = display;
+			setRule(this.projects.length == 1 ? projects[0] : projects[0]
+					.getWorkspace().getRoot());
+			setUser(false);
+		}
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			try {
+				final Collection<IFile> files = new HashSet<IFile>(
+						projects.length);
+				for (IProject project : projects) {
+					String file = CoreUtil.getIndexFile(project);
+					if (file != null) {
+						IFile index = project.getFile(file);
+						if (index.isAccessible()) {
+							files.add(index);
+						}
 					}
 				}
+				final IFile[] filesArray = files
+						.toArray(new IFile[files.size()]);
+				display.asyncExec(new Runnable() {
+
+					public void run() {
+						IWorkbenchPage activePage = PlatformUI.getWorkbench()
+								.getActiveWorkbenchWindow().getActivePage();
+						IViewReference reference = activePage
+								.findViewReference(Activator.NAVIGATOR_ID);
+						IWorkbenchPart part = reference.getPart(false);
+						if (part instanceof ISetSelectionTarget) {
+							StructuredSelection selection;
+							if (filesArray.length == 1) {
+								selection = new StructuredSelection(
+										filesArray[0]);
+							} else {
+								selection = new StructuredSelection(filesArray);
+							}
+							((ISetSelectionTarget) part)
+									.selectReveal(selection);
+						}
+						try {
+							IDE.openEditors(activePage, filesArray);
+							ResourcesPlugin.getWorkspace().run(
+									new TouchAllResources(projects),
+									new NullProgressMonitor());
+						} catch (CoreException e) {
+							Activator.log(e);
+						}
+					}
+				});
+			} catch (CoreException e) {
+				Activator.log(e);
 			}
-			IFile[] filesArray = files.toArray(new IFile[files.size()]);
-			IWorkbenchPage activePage = PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getActivePage();
-			IViewReference reference = activePage
-					.findViewReference(Activator.NAVIGATOR_ID);
-			IWorkbenchPart part = reference.getPart(false);
-			if (part instanceof ISetSelectionTarget) {
-				StructuredSelection selection;
-				if (filesArray.length == 1) {
-					selection = new StructuredSelection(filesArray[0]);
-				} else {
-					selection = new StructuredSelection(filesArray);
-				}
-				((ISetSelectionTarget) part)
-						.selectReveal(selection);
-			}
-			IDE.openEditors(activePage, filesArray);
-		} catch (CoreException e) {
-			Activator.log(e);
+			return Status.OK_STATUS;
 		}
 	}
 }
