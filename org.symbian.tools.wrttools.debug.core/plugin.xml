@@ -13,7 +13,7 @@
             category="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
             class="org.symbian.tools.wrttools.debug.ui.DebugPreferencePage"
             id="org.symbian.tools.wrttools.debug"
-            name="WRT Debugger">
+            name="Debugger">
       </page>
    </extension>
    <extension

@@ -65,7 +65,7 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 	private final DataBindingContext bindingContext;
 
 	public WRTProjectTemplateWizardPage(WizardContext context, DataBindingContext bindingContext) {
-		super("WRTTemplate", "WRT Application Template Selection", null);
+		super("WRTTemplate", "Application Template Selection", null);
 		this.context = context;
 		this.bindingContext = bindingContext;
 		setDescription("Select template that will be used to populate your new project");

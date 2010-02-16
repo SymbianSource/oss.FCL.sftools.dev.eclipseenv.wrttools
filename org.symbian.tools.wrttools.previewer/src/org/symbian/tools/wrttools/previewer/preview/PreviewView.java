@@ -277,8 +277,10 @@ public class PreviewView extends PageBookView {
 									MessageDialogWithToggle.QUESTION,
 									getSite().getShell(),
 									"WRT Preview",
-									"WRT IDE can refresh preview whenever any changes are made to project files. Refresh will always return the widget to initial page. Do you want to enable automatic refresh for your project?\nNote: you can toggle this setting for particular project on the preview toolbar.",
-									"Keep this setting for all new projects",
+									"The preview window can refresh (reinitialize and restart) whenever a project file is saved.\n" +
+									"This setting for each project can be toggled from the preview toolbar.\n\n" +
+									"Do you want to enable automatic refresh for this project?",
+									"Keep this setting for new projects",
 									false, preferenceStore,
 									IWrtEditingPreferences.PREF_AUTO_REFRESH,
 									SWT.SHEET).getReturnCode() == IDialogConstants.YES_ID;

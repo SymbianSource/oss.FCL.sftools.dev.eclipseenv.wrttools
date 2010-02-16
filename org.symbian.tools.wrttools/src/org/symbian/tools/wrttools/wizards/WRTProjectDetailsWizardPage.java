@@ -33,7 +33,7 @@ public class WRTProjectDetailsWizardPage extends AbstractDataBindingPage {
 	private boolean isActive;
 
 	public WRTProjectDetailsWizardPage(WizardContext context, DataBindingContext bindingContext) {
-		super(context, bindingContext, "WRTWidget", "New Symbian Widget Project", null, "Specify Symbian WRT widget details");
+		super(context, bindingContext, "WRTApp", "Application Details", null, "Specify application details");
 	}
 	
 	protected void addTemplateControls(Composite root) {
@@ -44,19 +44,19 @@ public class WRTProjectDetailsWizardPage extends AbstractDataBindingPage {
 		Composite root = new Composite(parent, SWT.NONE);
 		WizardPageSupport.create(this, bindingContext);
 		root.setLayout(new GridLayout(2, false));
-		createLabel(root, "Widget name:");
+		createLabel(root, "Application name:");
 		
-		createText(root, WizardContext.WIDGET_NAME, "widget name", new RegexpValidator("[^\\w\\. ]", "Widget name cannot contain {0} character", false));
+		createText(root, WizardContext.WIDGET_NAME, "application name", new RegexpValidator("[^\\w\\. ]", "Application name cannot contain {0} character", false));
 		
 		createLabel(root, "");
-		createLabel(root, "This will be the widget's display name on the device");
+		createLabel(root, "This will be the application display name on the device");
 		createLabel(root, "");
 		createLabel(root, "");
 		createLabel(root, "Widget identifier:");
 
-		createText(root, WizardContext.WIDGET_ID, "widget identifier", new RegexpValidator("[\\w]*(\\.\\w[\\w]*)*", "{0} is not a valid widget ID", true));
+		createText(root, WizardContext.WIDGET_ID, "applicatoin identifier", new RegexpValidator("[\\w]*(\\.\\w[\\w]*)*", "{0} is not a valid applicatoin ID", true));
 		createLabel(root, "");
-		createLabel(root, "This id should be unique for succesful installation of widget on the device");
+		createLabel(root, "This id should be unique for succesful installation of application on the device");
 		createLabel(root, "");
 		createLabel(root, "");
 		

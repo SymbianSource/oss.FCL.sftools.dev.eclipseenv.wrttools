@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Composite;
 public class WRTProjectFilesWizardPage extends AbstractDataBindingPage {
 
 	public WRTProjectFilesWizardPage(WizardContext context, DataBindingContext bindingContext) {
-		super(context, bindingContext, "WRTApplicationFiles", "New WRT Application Project", null, "Specify Symbian WRT application file names");
+		super(context, bindingContext, "WRTApplicationFiles", "Application Files", null, "Specify application file names");
 	}
 
 	public void createControl(Composite parent) {

@@ -73,7 +73,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 	private IConfigurationElement config;
 
 	public WrtWidgetWizard() {
-		setWindowTitle("New WRT Widget");
+		setWindowTitle("New Web Runtime Application");
 		setNeedsProgressMonitor(true);
 	}
 
@@ -239,8 +239,8 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 	public void addPages() {
 		resourcePage = new WizardNewProjectCreationPage("Resource");
 		resourcePage
-				.setDescription("Create a WRT widget project in the workspace or other location");
-		resourcePage.setTitle("Create a New WRT Widget Project");
+				.setDescription("Create a Web Runtime application project in the workspace or other location");
+		resourcePage.setTitle("Create a New Web Runtime Application Project");
 		addPage(resourcePage);
 
 		templatesPage = new WRTProjectTemplateWizardPage(context,
