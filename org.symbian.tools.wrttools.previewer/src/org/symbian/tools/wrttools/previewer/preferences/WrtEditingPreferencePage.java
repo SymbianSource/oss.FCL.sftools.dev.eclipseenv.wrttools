@@ -48,12 +48,12 @@ public class WrtEditingPreferencePage
         projectComposite.setFont(getFieldEditorParent().getFont());
 
 		String[][] namesAndValues = {
-				{ "Enable", MessageDialogWithToggle.ALWAYS },
-				{ "Disable", MessageDialogWithToggle.NEVER },
+				{ "Enabled", MessageDialogWithToggle.ALWAYS },
+				{ "Disabled", MessageDialogWithToggle.NEVER },
 				{ "Prompt", MessageDialogWithToggle.PROMPT } };
 		enableAutorefresh = new RadioGroupFieldEditor(
 				IWrtEditingPreferences.PREF_AUTO_REFRESH,
-				"Preview autorefresh for new WRT projects",
+				"Initial auto-refresh setting for WRT Preview window",
 				namesAndValues.length, namesAndValues, projectComposite, true);
 		enableAutorefresh.setPreferenceStore(getPreferenceStore());
 		enableAutorefresh.setPage(this);
