@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="Compile org.symbian.tools.wrttools" default="main">
-	<target name="main">
-		<ant antfile="build.xml" dir="../org.symbian.tools.wrttools.jseditors" target="build.jars"/>
-		<ant antfile="build.xml" dir="../org.symbian.tools.wrttools" target="build.jars"/>
-		<ant antfile="build.xml" dir="../org.symbian.tools.wrttools.previewer" target="build.jars"/>
-		<ant antfile="build.xml" dir="../org.symbian.tools.wrttools.debug.core" target="build.jars"/>
-	</target>
-</project>
