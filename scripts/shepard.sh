@@ -27,5 +27,8 @@ ${HG_CMD} clone http://sym-mrswitch:8000 wrttools
 
 cd ${SOURCE_DIR}/scripts
 
+# set the build directory in the build.properties files. 
+cat ${SOURCE_DIR}/scripts/build.properties.SED | sed -e s#SED_BUILD_DIR#${BUILD_DIR}#g > ${SOURCE_DIR}/scripts/build.properties
+
 ${ANT_CMD} -DbuildDirectory=${BUILD_DIR} -DsourceDirectory=${SOURCE_DIR}
 
