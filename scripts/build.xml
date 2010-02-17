@@ -74,6 +74,8 @@
             <arg value="-buildfile" />
             <arg value="${eclipseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
             <arg value="-Dtimestamp=${timestamp}" />
+	    <arg value="-DbuildDirectory=${buildDirectory}" />
+            <arg value="-DsourceDirectory=${sourceDirectory}" />
             <classpath>
                 <pathelement location="${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
             </classpath>
