@@ -14,7 +14,9 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}</programArgs>
+      <programArgsLin>-os linux -ws gtk -arch x86</programArgsLin>
+      <programArgsMac>-os macosx -ws cocoa -arch x86</programArgsMac>
+      <programArgsWin>-os win32 -ws win32 -arch x86</programArgsWin>
       <vmArgs>-Xms128m -Xmx768m -XX:MaxPermSize=192m</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
@@ -25,7 +27,7 @@
       startupProgressRect="0,280,455,15"
       startupMessageRect="7,220,441,20"
       startupForegroundColor="C8D5EA" />
-   <launcher>
+   <launcher name="wrttools">
       <solaris/>
       <win useIco="false">
          <bmp/>
@@ -38,6 +40,7 @@
       <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</windows>
    </vm>
 
+
    <plugins>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.jcraft.jsch"/>
@@ -47,7 +50,7 @@
       <plugin id="javax.servlet.jsp"/>
       <plugin id="javax.transaction" fragment="true"/>
       <plugin id="javax.xml"/>
-      <plugin id="javax.xml.stream" fragment=""/>
+      <plugin id="javax.xml.stream"/>
       <plugin id="org.apache.bcel"/>
       <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.collections"/>
@@ -57,7 +60,7 @@
       <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.commons.lang" version="2.3.0.v200803061910"/>
       <plugin id="org.apache.commons.logging"/>
-      <plugin id="org.apache.commons.net" fragment=""/>
+      <plugin id="org.apache.commons.net"/>
       <plugin id="org.apache.jasper"/>
       <plugin id="org.apache.log4j"/>
       <plugin id="org.apache.lucene"/>
@@ -281,7 +284,7 @@
       <plugin id="org.eclipse.wst.xml.xpath.ui"/>
       <plugin id="org.eclipse.wst.xml.xpath2.processor"/>
       <plugin id="org.eclipse.wst.xmleditor.doc.user"/>
-      <plugin id="org.eclipse.wtp.epp.package.jee.intro" fragment=""/>
+      <plugin id="org.eclipse.wtp.epp.package.jee.intro"/>
       <plugin id="org.jdom"/>
       <plugin id="org.mortbay.jetty.server"/>
       <plugin id="org.mortbay.jetty.util"/>
