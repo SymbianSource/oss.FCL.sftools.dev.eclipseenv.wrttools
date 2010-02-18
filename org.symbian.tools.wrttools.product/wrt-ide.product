@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="WebRuntime Toolkit IDE" uid="org.symbian.wrtide" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="WebRuntime Toolkit IDE" uid="org.symbian.wrtide" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="icons/WRT_Wizard_banner.png"/>
@@ -284,7 +284,6 @@
       <plugin id="org.eclipse.wst.xml.xpath.ui"/>
       <plugin id="org.eclipse.wst.xml.xpath2.processor"/>
       <plugin id="org.eclipse.wst.xmleditor.doc.user"/>
-      <plugin id="org.eclipse.wtp.epp.package.jee.intro"/>
       <plugin id="org.jdom"/>
       <plugin id="org.mortbay.jetty.server"/>
       <plugin id="org.mortbay.jetty.util"/>
