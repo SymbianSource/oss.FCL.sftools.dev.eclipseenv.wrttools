@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="WebRuntime Toolkit IDE" uid="org.symbian.wrtide" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0" useFeatures="false" includeLaunchers="true">
+<product name="WebRuntime Toolkit IDE" uid="org.symbian.tools.wrttools" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="icons/WRT_Wizard_banner.png"/>
@@ -11,6 +11,9 @@
    </aboutInfo>
 
    <configIni use="default">
+      <linux>/org.symbian.tools.wrttools.product/config_inis/linux.ini</linux>
+      <macosx>/org.symbian.tools.wrttools.product/config_inis/macosx.ini</macosx>
+      <win32>/org.symbian.tools.wrttools.product/config_inis/windows.ini</win32>
    </configIni>
 
    <launcherArgs>
@@ -34,12 +37,10 @@
       </win>
    </launcher>
 
-
    <vm>
       <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</macos>
       <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</windows>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
