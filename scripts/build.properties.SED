@@ -44,8 +44,9 @@ collectingFolder=${archivePrefix}
 # By default the value is *,*,*
 #configs = *, *, *
 configs=win32, win32, x86 & \
-	linux, gtk, x86 
-
+linux, gtk, x86  & \
+macosx, cocoa, x86
+	
 # By default PDE creates one archive (result) per entry listed in the configs property.
 # Setting this value to true will cause PDE to only create one output containing all 
 # artifacts for all the platforms listed in the configs property.
