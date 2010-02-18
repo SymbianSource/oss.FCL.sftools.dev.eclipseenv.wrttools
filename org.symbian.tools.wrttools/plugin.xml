@@ -282,7 +282,7 @@
           class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
           icon="icons/WRTImport.gif"
           id="org.symbian.tools.wrttools.importwgz"
-          name="Import WRT Application Archive">
+          name="WRT Application Archive (WGZ) File">
        </wizard>
     </extension>
 	
