@@ -6,7 +6,7 @@
    <aboutInfo>
       <image path="icons/WRT_Wizard_banner.png"/>
       <text>
-         %productBlurb
+         Is it really taken from here?
       </text>
    </aboutInfo>
 
@@ -36,6 +36,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
       <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</macos>

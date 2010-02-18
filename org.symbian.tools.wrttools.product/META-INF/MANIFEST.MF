@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.symbian.tools.wrttools.product;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.symbian.tools.wrttools.product.Activator
 Bundle-Vendor: Symbian Foundation
+Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.wst.jsdt.ui;bundle-version="1.0.200",

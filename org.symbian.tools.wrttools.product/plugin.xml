@@ -19,7 +19,7 @@
                class="org.symbian.tools.wrttools.product.actions.NewCSSFileAction"
                icon="icons/newcss_wiz.gif"
                id="org.symbian.tools.wrttools.product.newCssFileAction"
-               label="New CSS File..."
+               label="%action.newcss.label"
                style="push"
                toolbarPath="wrtwizards">
          </action>
