@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="WebRuntime Toolkit IDE" uid="org.symbian.tools.wrttools" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0" useFeatures="false" includeLaunchers="true">
+<product name="WebRuntime Toolkit IDE" uid="org.symbian.wrtide" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="icons/WRT_Wizard_banner.png"/>
       <text>
-         Is it really taken from here?
+         %productBlurb
       </text>
    </aboutInfo>
 
    <configIni use="default">
-      <linux>/org.symbian.tools.wrttools.product/config_inis/linux.ini</linux>
-      <macosx>/org.symbian.tools.wrttools.product/config_inis/macosx.ini</macosx>
-      <win32>/org.symbian.tools.wrttools.product/config_inis/windows.ini</win32>
    </configIni>
 
    <launcherArgs>
