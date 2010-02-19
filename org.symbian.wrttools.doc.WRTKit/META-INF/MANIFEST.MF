@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WRTKit
-Bundle-SymbolicName: org.symbian.wrtools.doc.WRTKit
+Bundle-SymbolicName: org.symbian.wrttools.doc.WRTKit
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.symbian.wrtools.lib.wrtkit.Activator
+Bundle-Activator: org.symbian.wrttools.lib.wrtkit.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
