@@ -13,7 +13,10 @@
             category="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
             class="org.symbian.tools.wrttools.debug.ui.DebugPreferencePage"
             id="org.symbian.tools.wrttools.debug"
-            name="Debugger">
+            name="Debug">
+         <keywordReference
+               id="org.symbian.tools.wrttools.wrtwords">
+         </keywordReference>
       </page>
    </extension>
    <extension

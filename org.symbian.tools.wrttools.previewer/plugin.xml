@@ -19,6 +19,9 @@
             class="org.symbian.tools.wrttools.previewer.preferences.WrtEditingPreferencePage"
             id="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
             name="WRT">
+         <keywordReference
+               id="org.symbian.tools.wrttools.wrtwords">
+         </keywordReference>
       </page>
    </extension>
   </plugin>

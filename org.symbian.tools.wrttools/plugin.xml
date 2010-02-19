@@ -59,10 +59,14 @@
  <extension
        point="org.eclipse.ui.preferencePages">
     <page
+          category="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
           class="org.symbian.tools.wrttools.core.deploy.DeployPreferencePage"
           id="org.symbian.tools.wrttools.core.deploy.DeployPreferencePage"
-          category="org.symbian.tools.wrttools.WrtRootPreferences"
-          name="Deployment "/>
+          name="Deployment ">
+       <keywordReference
+             id="org.symbian.tools.wrttools.wrtwords">
+       </keywordReference>
+    </page>
  </extension>
 
 <!-- WRT Tool Integration (Package, Validate, Include, Exclude Settings)-->
@@ -613,5 +617,12 @@
           </rules>
        </include>
     </validator>
+ </extension>
+ <extension
+       point="org.eclipse.ui.keywords">
+    <keyword
+          id="org.symbian.tools.wrttools.wrtwords"
+          label="wrt, webruntime, web runtime, cwrt">
+    </keyword>
  </extension>
 </plugin>
