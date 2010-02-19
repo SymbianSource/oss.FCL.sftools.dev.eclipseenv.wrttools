@@ -122,7 +122,7 @@ public class WebappManager {
 
 	public static String getHost() {
 		if (host == null) {
-			host = "localhost";
+			host = "127.0.0.1";
 		}
 		return host;
 	}
