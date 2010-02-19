@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -39,6 +40,7 @@ import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.wrttools.debug.internal.IConstants;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
+import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class WidgetLaunchDelegate implements
 		ILaunchConfigurationDelegate {
@@ -110,6 +112,9 @@ public class WidgetLaunchDelegate implements
 
 	private String getChromeProfilePath() {
 		IPath location = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+		if (CoreUtil.isLinux() && location.toString().length() > 50) {
+			location = new Path(System.getProperty("user.home")).append(".wrtdebug");
+		}
 		return location.append(".chrome").toOSString();
 	}
 
