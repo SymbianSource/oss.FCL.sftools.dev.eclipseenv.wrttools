@@ -32,6 +32,7 @@ import org.chromium.sdk.ConnectionLogger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.symbian.tools.wrttools.debug.internal.Activator;
@@ -70,10 +71,10 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 	}
 
 	public boolean browserRunning(URI uri) throws CoreException {
-		JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
-				port, launch, uri);
 		DestructingGuard destructingGuard = new DestructingGuard();
 		try {
+			JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
+					port, launch, uri);
 			Destructable lauchDestructor = new Destructable() {
 				public void destruct() {
 					if (!launch.hasChildren()) {
@@ -82,12 +83,10 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 					}
 				}
 			};
-
 			destructingGuard.addValue(lauchDestructor);
 
 			WorkspaceBridge.Factory bridgeFactory = new WRTProjectWorkspaceBridge.Factory(
 					project);
-
 			final DebugTargetImpl target = new DebugTargetImpl(launch,
 					bridgeFactory);
 
@@ -109,6 +108,9 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 
 			// All OK
 			destructingGuard.discharge();
+		} catch (CoreException e) {
+			DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
+			throw e;
 		} finally {
 			destructingGuard.doFinally();
 		}

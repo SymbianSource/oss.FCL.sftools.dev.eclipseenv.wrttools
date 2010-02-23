@@ -55,6 +55,7 @@
       <plugin id="org.apache.commons.collections"/>
       <plugin id="org.apache.commons.discovery"/>
       <plugin id="org.apache.commons.el"/>
+      <plugin id="org.apache.commons.exec"/>
       <plugin id="org.apache.commons.httpclient"/>
       <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.commons.lang" version="2.3.0.v200803061910"/>

@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.symbian.tools.wrttools.debug.internal.launch.ChromeInstancesManager;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -42,6 +43,8 @@ public class Activator extends AbstractUIPlugin {
 	
 	// The shared instance
 	private static Activator plugin;
+
+	private final ChromeInstancesManager chromes = new ChromeInstancesManager();
 	
 	/**
 	 * The constructor
@@ -64,6 +67,7 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+		chromes.shutdown();
 		super.stop(context);
 	}
 
@@ -74,6 +78,10 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+
+	public ChromeInstancesManager getChromeInstancesManager() {
+		return chromes;
 	}
 
 	public static void log(Throwable e) {
