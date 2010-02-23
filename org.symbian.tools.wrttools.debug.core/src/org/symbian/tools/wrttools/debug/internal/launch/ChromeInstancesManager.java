@@ -37,7 +37,7 @@ import org.symbian.tools.wrttools.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class ChromeInstancesManager {
-    private static final String[] CHROME_ARGS = { "\"%s\"", "--remote-shell-port=%d", // Here we will set port
+    private static final String[] CHROME_ARGS = { "%s", "--remote-shell-port=%d", // Here we will set port
             "\"--user-data-dir=%s\"", // Here we will set profile folder so user settings have no effect
             "\"--disk-cache-dir=%s\"", // We don't care
             "--disable-web-security", // Widgets can use network now
