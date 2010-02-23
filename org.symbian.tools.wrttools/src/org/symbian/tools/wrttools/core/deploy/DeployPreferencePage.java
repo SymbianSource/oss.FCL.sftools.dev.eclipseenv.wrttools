@@ -328,7 +328,10 @@ IWorkbenchPreferencePage {
 				boolean debugEnabled = debugButton.getSelection();
 				prefOkStore.setValue(PreferenceConstants.DEBUG_ENABLED, 
 						Boolean.valueOf(debugEnabled).toString());
+				
+/* TODO -- do not enable blueCove diagnostics
 				Activator.enableBlueCoveDiagnostics(debugEnabled);
+*/
 	
 				boolean res = super.performOk();
 				return res;

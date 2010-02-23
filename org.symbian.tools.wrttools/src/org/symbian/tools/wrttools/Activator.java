@@ -73,7 +73,7 @@ public class Activator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
-	
+/*	
 	public void startBluetoothOperation() {
 		IPreferenceStore prefStore = getPreferenceStore();
 		if (prefStore.getBoolean(PreferenceConstants.DEBUG_ENABLED))
@@ -83,6 +83,7 @@ public class Activator extends AbstractUIPlugin {
 	public void stopBluetoothOperation() {
 		enableBlueCoveDiagnostics(false);
 	}
+*/
 	
 	/** Toggle BlueCove logging
 	 */
