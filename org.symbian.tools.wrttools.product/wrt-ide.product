@@ -298,6 +298,7 @@
       <plugin id="org.symbian.tools.wrttools.editors"/>
       <plugin id="org.symbian.tools.wrttools.previewer"/>
       <plugin id="org.symbian.tools.wrttools.product"/>
+      <plugin id="org.w3c.css"/>
    </plugins>
 
 
