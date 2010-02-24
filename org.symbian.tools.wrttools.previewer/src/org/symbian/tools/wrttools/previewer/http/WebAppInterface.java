@@ -33,6 +33,9 @@ public class WebAppInterface {
 	private static WebAppInterface INSTANCE;
 
 	public static void connectDebugger(String widget, String id) {
+		if (PreviewerPlugin.TRACE_WEBAPP) {
+			System.out.println("Connecting debugger");
+		}
 		getInstance().connect(widget, id);
 	}
 
@@ -53,6 +56,9 @@ public class WebAppInterface {
 	}
 
 	public static String getAjaxUri(String widget, String id) {
+		if (PreviewerPlugin.TRACE_WEBAPP) {
+			System.out.println("getAjaxUri");
+		}
 		return getInstance().createAjaxUri(widget, id).toASCIIString();
 	}
 
@@ -68,10 +74,16 @@ public class WebAppInterface {
 	}
 
 	public static boolean isConnected(String widget, String id) {
+		if (PreviewerPlugin.TRACE_WEBAPP) {
+			System.out.println("isConnected");
+		}
 		return getInstance().isJobComplete(widget, id);
 	}
 
 	public static boolean isSuccessful(String widget, String id) {
+		if (PreviewerPlugin.TRACE_WEBAPP) {
+			System.out.println("isSuccessful");
+		}
 		return getInstance().isConnectionSuccessful(widget, id);
 	}
 

@@ -71,6 +71,9 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 	}
 
 	public boolean browserRunning(URI uri) throws CoreException {
+		if (Activator.DEBUG_CONNECTION) {
+			System.out.println("Browser running, connecting @" + hashCode());
+		}
 		DestructingGuard destructingGuard = new DestructingGuard();
 		try {
 			JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
@@ -83,12 +86,18 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 					}
 				}
 			};
+			if (Activator.DEBUG_CONNECTION) {
+				System.out.println("Setting up 1@" + hashCode());
+			}
 			destructingGuard.addValue(lauchDestructor);
 
 			WorkspaceBridge.Factory bridgeFactory = new WRTProjectWorkspaceBridge.Factory(
 					project);
 			final DebugTargetImpl target = new DebugTargetImpl(launch,
 					bridgeFactory);
+			if (Activator.DEBUG_CONNECTION) {
+				System.out.println("Setting up 2@" + hashCode());
+			}
 
 			Destructable targetDestructor = new Destructable() {
 				public void destruct() {
@@ -97,8 +106,14 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 			};
 			destructingGuard.addValue(targetDestructor);
 
+			if (Activator.DEBUG_CONNECTION) {
+				System.out.println("Setting up 3@" + hashCode());
+			}
 			boolean attached = target.attach(remoteServer, destructingGuard,
 					null, new NullProgressMonitor());
+			if (Activator.DEBUG_CONNECTION) {
+				System.out.printf("Is attached: %b, @%d\n", attached, hashCode());
+			}
 			if (!attached) {
 				// Error
 				return false;

@@ -46,6 +46,9 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 	public static final boolean TRACE_MAPPING = DEBUG
 			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID
 					+ "/mapping"));
+	public static final boolean TRACE_WEBAPP = DEBUG
+			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID
+					+ "/webapp"));
 	
 	// The shared instance
 	private static PreviewerPlugin plugin;
