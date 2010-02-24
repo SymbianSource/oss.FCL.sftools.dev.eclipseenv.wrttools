@@ -46,9 +46,8 @@
         <copy todir="${buildDirectory}/plugins">
             <fileset dir="${sourceDirectory}">
                 <include name="org.chromium**/**/*" />
-            </fileset>
-           <fileset dir="${sourceDirectory}">
                 <include name="org.symbian**/**/*" />
+                <include name="org.w3c.css" />
 		<exclude name="org.symbian.tools.wrttools.feature/**/*" />
             </fileset>
         </copy>
