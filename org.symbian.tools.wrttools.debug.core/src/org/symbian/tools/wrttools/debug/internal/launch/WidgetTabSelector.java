@@ -51,11 +51,6 @@ public class WidgetTabSelector implements TabSelector {
 					// Ignore - fails because of "chrome" protocol, we should ignore these tabs anyways
 				}
 			}
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// Ignore
-			}
 		}
 		return null;
 	}
