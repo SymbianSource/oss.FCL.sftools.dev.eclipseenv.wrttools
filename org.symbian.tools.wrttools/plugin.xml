@@ -395,18 +395,6 @@
           providesSaveables="false">
        <triggerPoints>
           <or>
-             <and>
-                <instanceof
-                      value="org.eclipse.core.resources.IResource">
-                </instanceof>
-                <adapt
-                      type="org.eclipse.core.resources.IProject">
-                   <test
-                         property="org.eclipse.core.resources.projectNature"
-                         value="org.symbian.tools.wrttools.WidgetProjectNature">
-                   </test>
-                </adapt>
-             </and>
              <instanceof
                    value="org.eclipse.wst.jsdt.core.IJavaScriptElement">
              </instanceof>
@@ -419,6 +407,16 @@
              <instanceof
                    value="org.eclipse.wst.jsdt.ui.ProjectLibraryRoot">
              </instanceof>
+             <instanceof
+                   value="org.eclipse.core.resources.IResource">
+             </instanceof>
+             <adapt
+                   type="org.eclipse.core.resources.IProject">
+                <test
+                      property="org.eclipse.core.resources.projectNature"
+                      value="org.symbian.tools.wrttools.WidgetProjectNature">
+                </test>
+             </adapt>
           </or>
        </triggerPoints>
        <possibleChildren>
