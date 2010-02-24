@@ -38,10 +38,30 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.IIDEHelpContextIds;
 import org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea;
 import org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea.IErrorMessageReporter;
+import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.core.WrtIdeCorePreferences;
 
 @SuppressWarnings("restriction")
 public class WgzImportWizardPage extends WizardPage {
+	// constants
+	private static final int SIZING_TEXT_FIELD_WIDTH = 250;
+
 	private final IFile file;
+	// initial value stores
+	private String initialProjectFieldValue;
+	private ProjectContentsLocationArea locationArea;
+	private final Listener nameModifyListener = new Listener() {
+		public void handleEvent(Event e) {
+			setLocationForSelection();
+			boolean valid = validatePage();
+			setPageComplete(valid);
+
+		}
+	};
+	// widgets
+    private Text projectNameField;
+	private Text wgzName;
+	private WorkingSetGroup workingSetGroup;
 
 	protected WgzImportWizardPage(IFile file) {
 		super("ImportWgz");
@@ -49,6 +69,22 @@ public class WgzImportWizardPage extends WizardPage {
 		setTitle("Import WGZ Archive");
 		setDescription("Import WGZ archive as a new WRT application project");
 		setPageComplete(false);
+	}
+
+	protected void browse() {
+		FileDialog fileDialog = new FileDialog(getShell(), SWT.OPEN);
+		String path = wgzName.getText();
+        path = path.trim().length() > 0 ? path.trim() : Activator.getDefault().getPreferenceStore().getString(
+                WrtIdeCorePreferences.WGZ_IMPORT_PATH);
+        fileDialog.setFilterPath(path);
+		fileDialog.setFilterExtensions(new String[] {"*.wgz", "*.*"} );
+		fileDialog.setFilterNames(new String[] {"WRT Archive (wgz)", "All Files"} );
+		String res = fileDialog.open();
+		if (res != null) {
+			updateWgzName(path.trim(), res);
+			wgzName.setText(res);
+			setPageComplete(validatePage());
+		}
 	}
 
 	public void createControl(Composite parent) {
@@ -84,83 +120,6 @@ public class WgzImportWizardPage extends WizardPage {
 		Dialog.applyDialogFont(composite);
 
 		setControl(composite);
-	}
-
-	// initial value stores
-	private String initialProjectFieldValue;
-
-	// widgets
-	Text projectNameField;
-
-	private Listener nameModifyListener = new Listener() {
-		public void handleEvent(Event e) {
-			setLocationForSelection();
-			boolean valid = validatePage();
-			setPageComplete(valid);
-
-		}
-	};
-
-	private ProjectContentsLocationArea locationArea;
-	private WorkingSetGroup workingSetGroup;
-
-	// constants
-	private static final int SIZING_TEXT_FIELD_WIDTH = 250;
-
-	private Text wgzName;
-
-	/**
-	 * Create a working set group for this page. This method can only be called
-	 * once.
-	 * 
-	 * @param composite
-	 *            the composite in which to create the group
-	 * @param selection
-	 *            the current workbench selection
-	 * @param supportedWorkingSetTypes
-	 *            an array of working set type IDs that will restrict what types
-	 *            of working sets can be chosen in this group
-	 * @return the created group. If this method has been called previously the
-	 *         original group will be returned.
-	 * @since 3.4
-	 */
-	public WorkingSetGroup createWorkingSetGroup(Composite composite,
-			IStructuredSelection selection, String[] supportedWorkingSetTypes) {
-		if (workingSetGroup != null)
-			return workingSetGroup;
-		workingSetGroup = new WorkingSetGroup(composite, selection,
-				supportedWorkingSetTypes);
-		return workingSetGroup;
-	}
-
-	/**
-	 * Get an error reporter for the receiver.
-	 * 
-	 * @return IErrorMessageReporter
-	 */
-	private IErrorMessageReporter getErrorReporter() {
-		return new IErrorMessageReporter() {
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea
-			 * .IErrorMessageReporter#reportError(java.lang.String)
-			 */
-			public void reportError(String errorMessage, boolean infoOnly) {
-				if (infoOnly) {
-					setMessage(errorMessage, IStatus.INFO);
-					setErrorMessage(null);
-				} else
-					setErrorMessage(errorMessage);
-				boolean valid = errorMessage == null;
-				if (valid) {
-					valid = validatePage();
-				}
-
-				setPageComplete(valid);
-			}
-		};
 	}
 
 	/**
@@ -234,26 +193,64 @@ public class WgzImportWizardPage extends WizardPage {
 		projectNameField.addListener(SWT.Modify, nameModifyListener);
 	}
 
-	protected void browse() {
-		FileDialog fileDialog = new FileDialog(getShell(), SWT.OPEN);
-		fileDialog.setFilterPath(wgzName.getText());
-		fileDialog.setFilterExtensions(new String[] {"*.wgz", "*.*"} );
-		fileDialog.setFilterNames(new String[] {"WRT Archive (wgz)", "All Files"} );
-		String res = fileDialog.open();
-		if (res != null) {
-			updateWgzName(wgzName.getText().trim(), res);
-			wgzName.setText(res);
-			setPageComplete(validatePage());
-		}
+	/**
+	 * Create a working set group for this page. This method can only be called
+	 * once.
+	 * 
+	 * @param composite
+	 *            the composite in which to create the group
+	 * @param selection
+	 *            the current workbench selection
+	 * @param supportedWorkingSetTypes
+	 *            an array of working set type IDs that will restrict what types
+	 *            of working sets can be chosen in this group
+	 * @return the created group. If this method has been called previously the
+	 *         original group will be returned.
+	 * @since 3.4
+	 */
+	public WorkingSetGroup createWorkingSetGroup(Composite composite,
+			IStructuredSelection selection, String[] supportedWorkingSetTypes) {
+		if (workingSetGroup != null) {
+            return workingSetGroup;
+        }
+		workingSetGroup = new WorkingSetGroup(composite, selection,
+				supportedWorkingSetTypes);
+		return workingSetGroup;
 	}
 
-	private void updateWgzName(String oldValue, String newValue) {
-		String project = projectNameField.getText().trim();
-		if (project.length() == 0 || project.equals(new Path(oldValue).removeFileExtension().lastSegment())) {
-			String projectName = new Path(newValue).removeFileExtension().lastSegment();
-			projectNameField.setText(projectName);
-			locationArea.updateProjectName(projectName);
-		}
+	public String getArchiveFile() {
+		return wgzName.getText().trim();
+	}
+
+	/**
+	 * Get an error reporter for the receiver.
+	 * 
+	 * @return IErrorMessageReporter
+	 */
+	private IErrorMessageReporter getErrorReporter() {
+		return new IErrorMessageReporter() {
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea
+			 * .IErrorMessageReporter#reportError(java.lang.String)
+			 */
+			public void reportError(String errorMessage, boolean infoOnly) {
+				if (infoOnly) {
+					setMessage(errorMessage, IStatus.INFO);
+					setErrorMessage(null);
+				} else {
+                    setErrorMessage(errorMessage);
+                }
+				boolean valid = errorMessage == null;
+				if (valid) {
+					valid = validatePage();
+				}
+
+				setPageComplete(valid);
+			}
+		};
 	}
 
 	/**
@@ -324,6 +321,18 @@ public class WgzImportWizardPage extends WizardPage {
 	}
 
 	/**
+	 * Return the selected working sets, if any. If this page is not configured
+	 * to interact with working sets this will be an empty array.
+	 * 
+	 * @return the selected working sets
+	 * @since 3.4
+	 */
+	public IWorkingSet[] getSelectedWorkingSets() {
+		return workingSetGroup == null ? new IWorkingSet[0] : workingSetGroup
+				.getSelectedWorkingSets();
+	}
+
+	/**
 	 * Sets the initial project name that this page will use when created. The
 	 * name is ignored if the createControl(Composite) method has already been
 	 * called. Leading and trailing spaces in the name are ignored. Providing
@@ -353,6 +362,24 @@ public class WgzImportWizardPage extends WizardPage {
 	 */
 	void setLocationForSelection() {
 		locationArea.updateProjectName(getProjectNameFieldValue());
+	}
+
+	private void updateWgzName(String oldValue, String newValue) {
+		String project = projectNameField.getText().trim();
+		if (project.length() == 0 || project.equals(new Path(oldValue).removeFileExtension().lastSegment())) {
+			String projectName = new Path(newValue).removeFileExtension().lastSegment();
+			projectNameField.setText(projectName);
+			locationArea.updateProjectName(projectName);
+		}
+	}
+
+	/**
+	 * Returns the useDefaults.
+	 * 
+	 * @return boolean
+	 */
+	public boolean useDefaults() {
+		return locationArea.isDefault();
 	}
 
 	/**
@@ -412,31 +439,6 @@ public class WgzImportWizardPage extends WizardPage {
 		setErrorMessage(null);
 		setMessage(null);
 		return true;
-	}
-
-	/**
-	 * Returns the useDefaults.
-	 * 
-	 * @return boolean
-	 */
-	public boolean useDefaults() {
-		return locationArea.isDefault();
-	}
-
-	/**
-	 * Return the selected working sets, if any. If this page is not configured
-	 * to interact with working sets this will be an empty array.
-	 * 
-	 * @return the selected working sets
-	 * @since 3.4
-	 */
-	public IWorkingSet[] getSelectedWorkingSets() {
-		return workingSetGroup == null ? new IWorkingSet[0] : workingSetGroup
-				.getSelectedWorkingSets();
-	}
-
-	public String getArchiveFile() {
-		return wgzName.getText().trim();
 	}
 
 }

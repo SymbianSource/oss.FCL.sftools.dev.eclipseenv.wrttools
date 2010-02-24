@@ -1,5 +1,6 @@
 package org.symbian.tools.wrttools.wizards;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
@@ -22,6 +23,7 @@ import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.core.WrtIdeCorePreferences;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WgzImportWizard extends Wizard implements IImportWizard {
@@ -87,6 +89,8 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 				}
 			});
 			if (holder[0] != null) {
+                Activator.getDefault().getPreferenceStore().setValue(WrtIdeCorePreferences.WGZ_IMPORT_PATH,
+                        new File(archiveName).getParentFile().getAbsolutePath());
 				ProjectUtils.focusOn(holder[0]);
 			}
 		} catch (InvocationTargetException e) {
@@ -100,7 +104,7 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		file = null;
 		if (selection instanceof IStructuredSelection && !selection.isEmpty()) {
-			Object element = ((IStructuredSelection) selection)
+			Object element = (selection)
 					.getFirstElement();
 			if (element instanceof IAdaptable) {
 				IResource resource = (IResource) ((IAdaptable) element)

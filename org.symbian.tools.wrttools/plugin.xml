@@ -55,6 +55,9 @@
  <extension
     point="org.eclipse.core.runtime.preferences">
     <initializer class="org.symbian.tools.wrttools.core.deploy.PreferenceInitializer"/>
+    <initializer
+          class="org.symbian.tools.wrttools.core.WrtIdeCorePreferences">
+    </initializer>
  </extension>
  <extension
        point="org.eclipse.ui.preferencePages">
