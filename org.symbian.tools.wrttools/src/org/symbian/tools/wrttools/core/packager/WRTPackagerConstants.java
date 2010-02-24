@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.QualifiedName;
 
 public class WRTPackagerConstants {
 	
-	public static QualifiedName EXCLUDE_PROPERTY = new QualifiedName("com.nokia.wrt.packager", "exclude");
+	public static QualifiedName EXCLUDE_PROPERTY = new QualifiedName("org.symbian.tools.wrttools.core.packager", "exclude");
 	
 
 	public static String STA_PKG_PASSED = PackagerMessages.getString("WRTPackagerConstants.success"); //$NON-NLS-1$

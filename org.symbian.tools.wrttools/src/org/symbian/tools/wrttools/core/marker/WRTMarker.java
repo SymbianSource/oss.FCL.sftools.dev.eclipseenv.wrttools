@@ -38,7 +38,7 @@ public class WRTMarker {
 	 * WRTValidator problem marker type. This can be used to recognize those markers
 	 * in the workspace that flag problems detected by the CodeScanner plugin.
 	 */
-	public static final String WRT_PROBLEM_MARKER = Activator.PLUGIN_ID + ".com.nokia.wrt.core.validator.marker"; //$NON-NLS-1$
+	public static final String WRT_PROBLEM_MARKER = Activator.PLUGIN_ID + ".org.symbian.tools.wrttools.core.validator.marker"; //$NON-NLS-1$
 	
 //	public static final String WRT_PROBLEM_MARKER = Activator.PLUGIN_ID + ".WRTMarker"; //$NON-NLS-1$
 	

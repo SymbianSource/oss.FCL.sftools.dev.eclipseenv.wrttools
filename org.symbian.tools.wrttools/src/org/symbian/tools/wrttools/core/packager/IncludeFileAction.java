@@ -71,7 +71,7 @@ public class IncludeFileAction implements IObjectActionDelegate {
 			}
 		}
 		/*Refresh project tree when property is changed */ 
-		PlatformUI.getWorkbench().getDecoratorManager().update("com.nokia.wrt.decorator"); 
+		PlatformUI.getWorkbench().getDecoratorManager().update("org.symbian.tools.wrttools.decorator"); 
 	}
 	
 	/**

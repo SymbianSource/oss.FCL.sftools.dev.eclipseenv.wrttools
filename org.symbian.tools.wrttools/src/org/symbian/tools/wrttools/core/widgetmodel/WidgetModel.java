@@ -1272,20 +1272,7 @@ public String getWidgetName() {
 		  try {
 				showData(" ############################################################################################################################# ");
 				model.getWidgetModel( "C:/ModelTest/Flickr");	
-//			model.getWidgetModel( "C:/ModelTest/HelloWorld");
-//			  model.getWidgetModel( "C:/ModelTest/mFootyAmazonPedia.wdgt");
-			  
-//			  model.getWidgetModel( "C:/ModelTest/mFooty");
-//			  model.getWidgetModel( "C:/ModelTest/NokiaRSS");
-//			  model.getWidgetModel( "C:/ModelTest/Widgets/bmi");
-//			  model.getWidgetModel( "C:/ModelTest/blink");
-//			  model.getWidgetModel( "C:/ModelTest/Gmail");			  
-//			  model.getWidgetModel( "C:/ModelTest/MOSH");
-//			  model.getWidgetModel( "C:/ModelTest/AmazonPedia.wdgt");
-//			  model.getWidgetModel( "C:/ModelTest/UniversalDecider");
-//			  model.getWidgetModel( "d:/ModelTest/Beep");
-//				  model.getWidgetModel( "C:/ModelTest/blankPlist");
-//				 model.getWidgetModel( "C:/ModelTest/AmazonPedia.wdgt");
+
 			  /**
 				List<String> fileNames=null;	
 				FileUtil filehelper = new FileUtil();

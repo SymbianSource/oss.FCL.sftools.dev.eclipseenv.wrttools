@@ -54,7 +54,7 @@ import org.symbian.tools.wrttools.util.Util;
  * .plist -  This file will be parsed to verify for the Nokia specific DTD 
  *        
  *            1. <key >DisplayName</key> - display name should exist
- *            2. <key>Identifier</key>  - value should be of com.nokia. **
+ *            2. <key>Identifier</key>  - value should be of org.symbian.tools.wrttools. **
  *            3. <key>MainHTML</key>    - value should be same as the .html file name
  * 
  *  

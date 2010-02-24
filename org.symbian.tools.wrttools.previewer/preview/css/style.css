@@ -283,7 +283,8 @@ p.highlight span{
 div#PreferencesBtn{
 	width: 75px;
 	height: 85px;
-	background-image: url(../images/settings-icon.png);
+/*  background-image: url(../images/settings-icon.png); */
+    background-image: url(../images/test-settings.gif);
 	position: absolute;
 	top: 10px;
 	left: 10px;
@@ -455,11 +456,14 @@ div#event-battery{
 }
 
 div#event-messaging{
-	background-image: url(../images/messaging-icon.gif);
+	/* background-image: url(../images/messaging-icon.gif); */
+	background-image: url(../images/test-Messaging.png);
+	
 }
 
 div#event-memory{
-	background-image: url(../images/memory-icon.png);
+	/* background-image: url(../images/memory-icon.png); */
+	background-image: url(../images/test-Memory_icon.png);
 }
 
 div.ui-panel{
