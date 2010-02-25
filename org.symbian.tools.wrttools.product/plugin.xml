@@ -77,6 +77,10 @@
       </activity>
       <activityPatternBinding
             activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.ui\.ide/org\.eclipse\.ui\.wizards\.import\.ExternalProject">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
             pattern="org\.eclipse\.wst\.xml\.ui/org\.eclipse\.wst\.xml\.ui\.XMLExampleProjectCreationWizard">
       </activityPatternBinding>
       <activityPatternBinding
