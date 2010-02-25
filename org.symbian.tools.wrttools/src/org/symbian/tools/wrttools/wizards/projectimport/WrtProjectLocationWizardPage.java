@@ -95,7 +95,7 @@ import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 @SuppressWarnings({"restriction", "unchecked"})
-public class AptanaProjectLocationWizardPage extends WizardPage implements
+public class WrtProjectLocationWizardPage extends WizardPage implements
 		IOverwriteQuery {
 
 	/**
@@ -181,9 +181,9 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 
 	private IProject[] wsProjects;
 
-	public AptanaProjectLocationWizardPage() {
-		super("projectlocation", "Import Aptana WRT Projects", null);
-		setDescription("Select location of the Aptana WRT projects");
+    public WrtProjectLocationWizardPage() {
+        super("projectlocation", "Import WRT Projects", null);
+        setDescription("Import existing WRT project created in any IDEs");
 	}
 
 	private void addToWorkingSets() {
@@ -254,7 +254,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		}
 
 		
-		File dotProjectFile = ProjectUtils.isAptanaProject(contents);
+		File dotProjectFile = ProjectUtils.isWrtProject(contents);
 		
 		if (dotProjectFile != null) {
 			files.add(dotProjectFile);
@@ -1193,7 +1193,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 	public void updateProjectsList(final String path) {
 		// on an empty path empty selectedProjects
 		if (path == null || path.length() == 0) {
-			setMessage(DataTransferMessages.WizardProjectsImportPage_ImportProjectsDescription);
+            setMessage("Select a directory to search for existing WRT projects.");
 			selectedProjects = new ProjectRecord[0];
 			projectsList.refresh(true);
 			projectsList.setCheckedElements(selectedProjects);
@@ -1334,7 +1334,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 					DataTransferMessages.WizardProjectsImportPage_projectsInWorkspace,
 					WARNING);
 		} else {
-			setMessage(DataTransferMessages.WizardProjectsImportPage_ImportProjectsDescription);
+            setMessage("Select a directory to search for existing WRT projects.");
 		}
 		setPageComplete(projectsList.getCheckedElements().length > 0);
 		if (selectedProjects.length == 0) {

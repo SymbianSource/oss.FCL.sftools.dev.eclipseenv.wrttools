@@ -32,14 +32,14 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-public class AptanaProjectsImportWizard extends Wizard implements
+public class WrtProjectsImportWizard extends Wizard implements
 		IImportWizard, INewWizard, IExecutableExtension {
 
-	private AptanaProjectLocationWizardPage mainPage;
+    private WrtProjectLocationWizardPage mainPage;
 	private IConfigurationElement config;
 
-	public AptanaProjectsImportWizard() {
-		setWindowTitle("Import Aptana Project");
+    public WrtProjectsImportWizard() {
+        setWindowTitle("Import WRT Project");
 		setNeedsProgressMonitor(true);
 	}
 
@@ -63,7 +63,7 @@ public class AptanaProjectsImportWizard extends Wizard implements
 
 	@Override
 	public void addPages() {
-		mainPage = new AptanaProjectLocationWizardPage();
+        mainPage = new WrtProjectLocationWizardPage();
 		addPage(mainPage);
 	}
 

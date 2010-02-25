@@ -297,7 +297,7 @@ public class ProjectUtils {
 		}
 	}
 
-    public static File isAptanaProject(File[] contents) {
+    public static File isWrtProject(File[] contents) {
 		for (int i = 0; i < contents.length; i++) {
 			File file = contents[i];
             if (file.isFile() && file.getName().equalsIgnoreCase(CoreUtil.METADATA_FILE)) {

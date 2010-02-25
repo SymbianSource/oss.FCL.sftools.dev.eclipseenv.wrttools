@@ -188,7 +188,6 @@
 		</validator>
 	</extension>
 	 
-<!-- WRT WidgetWizard and AptanaProjectImportWizard -->
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.symbian.tools.wrttools.core.category" name="Web Runtime(WRT)">
 		</category>
@@ -273,9 +272,12 @@
 		<category id="org.symbian.tools.wrttools.import" name="Web Runtime(WRT)">
 		</category>
 		<wizard category="org.symbian.tools.wrttools.import"
-			class="org.symbian.tools.wrttools.wizards.projectimport.AptanaProjectsImportWizard"
-			icon="icons/import_aptana_project.gif" id="org.symbian.tools.wrttools.import.aptanaImport"
+			class="org.symbian.tools.wrttools.wizards.projectimport.WrtProjectsImportWizard"
+			icon="icons/import_aptana_project.gif" id="org.symbian.tools.wrttools.import.projectImport"
 			name="WRT Project">
+     <description>
+        Import WRT project created in Aptana, Adobe Dreamweaver or WRT IDE
+     </description>
 		</wizard>
        <wizard
           category="org.symbian.tools.wrttools.import"
@@ -283,6 +285,9 @@
           icon="icons/WRTImport.gif"
           id="org.symbian.tools.wrttools.importwgz"
           name="Sources from WGZ File">
+          <description>
+             Create WRT project from deployable WGZ application archive
+          </description>
        </wizard>
     </extension>
 	
@@ -532,7 +537,7 @@
        </commonWizard>
        <commonWizard
              type="import"
-             wizardId="org.symbian.tools.wrttools.import.aptanaImport">
+             wizardId="org.symbian.tools.wrttools.import.projectImport">
           <enablement>
              <or>
                 <adapt
