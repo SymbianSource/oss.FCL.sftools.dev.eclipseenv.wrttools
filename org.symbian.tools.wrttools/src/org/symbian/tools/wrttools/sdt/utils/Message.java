@@ -146,56 +146,56 @@ public class Message implements IMessage {
     }
 
     /* (non-Javadoc)
-     * @see com.nokia.sdt.component.sourcegen.ISourceGenProblem#getSeverity()
+     * @see org.symbian.tools.wrttools.sdt.component.sourcegen.ISourceGenProblem#getSeverity()
      */
     public int getSeverity() {
         return severity;
     }
 
     /* (non-Javadoc)
-     * @see com.nokia.sdt.utils.IMessage#getMessageLocation()
+     * @see org.symbian.tools.wrttools.sdt.utils.IMessage#getMessageLocation()
      */
     public MessageLocation getMessageLocation() {
         return ref;
     }
     
     /* (non-Javadoc)
-     * @see com.nokia.sdt.utils.IMessage#getLocation()
+     * @see org.symbian.tools.wrttools.sdt.utils.IMessage#getLocation()
      */
     public IPath getLocation() {
         return ref != null ? ref.getLocation() : null;
     }
     
     /* (non-Javadoc)
-     * @see com.nokia.sdt.utils.IMessage#getPath()
+     * @see org.symbian.tools.wrttools.sdt.utils.IMessage#getPath()
      */
     public IPath getPath() {
         return ref != null ? ref.getPath() : null;
     }
     
     /* (non-Javadoc)
-     * @see com.nokia.sdt.component.sourcegen.ISourceGenProblem#getLineNumber()
+     * @see org.symbian.tools.wrttools.sdt.component.sourcegen.ISourceGenProblem#getLineNumber()
      */
     public int getLineNumber() {
         return ref != null ? ref.lineNumber : -1;
     }
 
     /* (non-Javadoc)
-     * @see com.nokia.sdt.sourcegen.ISourceGenMessage#getColumnNumber()
+     * @see org.symbian.tools.wrttools.sdt.sourcegen.ISourceGenMessage#getColumnNumber()
      */
     public int getColumnNumber() {
         return ref != null ? ref.columnNumber : -1;
     }
     
     /* (non-Javadoc)
-     * @see com.nokia.sdt.component.sourcegen.ISourceGenProblem#getMessage()
+     * @see org.symbian.tools.wrttools.sdt.component.sourcegen.ISourceGenProblem#getMessage()
      */
     public String getMessage() {
         return text;
     }
 
     /* (non-Javadoc)
-     * @see com.nokia.sdt.component.sourcegen.ISourceGenProblem#getMessageKey()
+     * @see org.symbian.tools.wrttools.sdt.component.sourcegen.ISourceGenProblem#getMessageKey()
      */
     public String getMessageKey() {
         return key;

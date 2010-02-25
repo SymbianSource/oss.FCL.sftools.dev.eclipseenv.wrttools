@@ -203,13 +203,6 @@
 				templates
          </description>
 		</wizard>
-		<wizard category="org.symbian.tools.wrttools.core.category"
-			class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
-			finalPerspective="org.symbian.tools.wrttools.mainPerspective"
-			hasPages="true" icon="icons/import_aptana_project.gif"
-			id="org.symbian.tools.wrttools.newImportAptanaProject" name="Import Aptana IDE WRT Project"
-			project="true">
-		</wizard>
 	</extension>
 	
 <!-- WRT Project Templates -->
@@ -280,16 +273,16 @@
 		<category id="org.symbian.tools.wrttools.import" name="Web Runtime(WRT)">
 		</category>
 		<wizard category="org.symbian.tools.wrttools.import"
-			class="org.symbian.tools.wrttools.wizards.AptanaProjectsImportWizard"
+			class="org.symbian.tools.wrttools.wizards.projectimport.AptanaProjectsImportWizard"
 			icon="icons/import_aptana_project.gif" id="org.symbian.tools.wrttools.import.aptanaImport"
-			name="Aptana IDE WRT Project">
+			name="WRT Project">
 		</wizard>
        <wizard
           category="org.symbian.tools.wrttools.import"
           class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
           icon="icons/WRTImport.gif"
           id="org.symbian.tools.wrttools.importwgz"
-          name="WRT Application Archive (WGZ) File">
+          name="Sources from WGZ File">
        </wizard>
     </extension>
 	

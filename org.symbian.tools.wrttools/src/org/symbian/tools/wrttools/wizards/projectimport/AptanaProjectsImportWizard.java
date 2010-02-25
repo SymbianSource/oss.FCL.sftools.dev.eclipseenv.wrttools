@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.wrttools.wizards;
+package org.symbian.tools.wrttools.wizards.projectimport;
 
 import java.util.List;
 

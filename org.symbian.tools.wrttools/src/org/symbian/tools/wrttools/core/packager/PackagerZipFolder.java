@@ -40,8 +40,6 @@ import java.io.OutputStream;
 
 //import org.apache.commons.io.IOUtils;
 
-//import com.nokia.wrt.core.report.IMessageListener;
-//import com.nokia.wrt.core.report.Message;
 import org.symbian.tools.wrttools.core.status.IWRTConstants;
 import org.symbian.tools.wrttools.core.status.IWRTStatusListener;
 import org.symbian.tools.wrttools.core.status.WRTStatus;

@@ -2,8 +2,8 @@ package org.symbian.tools.wrttools.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +47,16 @@ public class CoreUtil {
 		return null;
 	}
 
+    public static String getApplicationName(String buffer) {
+        if (buffer != null) {
+            Matcher matcher = getPropertyLookupPattern("DisplayName").matcher(buffer);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        }
+        return null;
+    }
+
 	public static Pattern getPropertyLookupPattern(String propertyName) {
 		return Pattern.compile(MessageFormat.format(PROPERTY_PATTERN, propertyName), Pattern.CASE_INSENSITIVE);
 	}
@@ -77,26 +87,29 @@ public class CoreUtil {
 			throws CoreException {
 		try {
 			if (file != null && file.isAccessible()) {
-				InputStream contents = file.getContents();
 				final BufferedReader reader = new BufferedReader(
-						new InputStreamReader(contents, file.getCharset()));
-				StringBuffer buffer = new StringBuffer();
-				try {
-					int c = 0;
-					char[] buf = new char[4096];
-					while ((c = reader.read(buf)) > 0) {
-						buffer.append(buf, 0, c);
-					}
-					return buffer.toString();
-				} finally {
-					reader.close();
-				}
+						new InputStreamReader(file.getContents(), file.getCharset()));
+				return read(reader);
 			}
 			return null;
 		} catch (IOException e) {
 			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, MessageFormat.format("Failed to read file {0} in project {1}", file.getName(), project.getName())));
 		}
 	}
+
+    public static String read(final Reader reader) throws IOException {
+        StringBuffer buffer = new StringBuffer();
+        try {
+        	int c = 0;
+        	char[] buf = new char[4096];
+        	while ((c = reader.read(buf)) > 0) {
+        		buffer.append(buf, 0, c);
+        	}
+        	return buffer.toString();
+        } finally {
+        	reader.close();
+        }
+    }
 
 	private static final Map<IProject, IndexFileRecord> INDEX_FILES = new HashMap<IProject, IndexFileRecord>();
 	

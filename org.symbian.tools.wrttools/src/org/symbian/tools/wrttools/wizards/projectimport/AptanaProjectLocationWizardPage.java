@@ -16,35 +16,29 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.wrttools.wizards;
+package org.symbian.tools.wrttools.wizards.projectimport;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.dialogs.Dialog;
@@ -87,18 +81,15 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.dialogs.WorkingSetGroup;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.StatusUtil;
 import org.eclipse.ui.internal.wizards.datatransfer.ArchiveFileManipulations;
 import org.eclipse.ui.internal.wizards.datatransfer.DataTransferMessages;
 import org.eclipse.ui.internal.wizards.datatransfer.ILeveledImportStructureProvider;
-import org.eclipse.ui.internal.wizards.datatransfer.TarEntry;
 import org.eclipse.ui.internal.wizards.datatransfer.TarException;
 import org.eclipse.ui.internal.wizards.datatransfer.TarFile;
 import org.eclipse.ui.internal.wizards.datatransfer.TarLeveledStructureProvider;
 import org.eclipse.ui.internal.wizards.datatransfer.ZipLeveledStructureProvider;
 import org.eclipse.ui.statushandlers.StatusManager;
-import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
@@ -120,162 +111,14 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 
 		public Color getForeground(Object element) {
 			ProjectRecord projectRecord = (ProjectRecord) element;
-			if (projectRecord.hasConflicts)
-				return getShell().getDisplay().getSystemColor(SWT.COLOR_GRAY);
+            if (projectRecord.hasConflicts()) {
+                return getShell().getDisplay().getSystemColor(SWT.COLOR_GRAY);
+            }
 			return null;
 		}
 
 		public String getText(Object element) {
 			return ((ProjectRecord) element).getProjectLabel();
-		}
-	}
-
-	/**
-	 * Class declared public only for test suite.
-	 * 
-	 */
-	public class ProjectRecord {
-		IProjectDescription description;
-
-		boolean hasConflicts;
-
-		int level;
-
-		Object parent;
-
-		Object projectArchiveFile;
-
-		String projectName;
-
-		File projectSystemFile;
-
-		/**
-		 * Create a record for a project based on the info in the file.
-		 * 
-		 * @param file
-		 */
-		ProjectRecord(File file) {
-			projectSystemFile = file;
-			setProjectName();
-		}
-
-		/**
-		 * @param file
-		 *            The Object representing the .project file
-		 * @param parent
-		 *            The parent folder of the .project file
-		 * @param level
-		 *            The number of levels deep in the provider the file is
-		 */
-		ProjectRecord(Object file, Object parent, int level) {
-			this.projectArchiveFile = file;
-			this.parent = parent;
-			this.level = level;
-			setProjectName();
-		}
-
-		/**
-		 * Gets the label to be used when rendering this project record in the
-		 * UI.
-		 * 
-		 * @return String the label
-		 * @since 3.4
-		 */
-		public String getProjectLabel() {
-			if (description == null)
-				return projectName;
-
-			String path = projectSystemFile == null ? structureProvider
-					.getLabel(parent) : projectSystemFile.getParent();
-
-			return NLS.bind(
-					DataTransferMessages.WizardProjectsImportPage_projectLabel,
-					projectName, path);
-		}
-
-		/**
-		 * Get the name of the project
-		 * 
-		 * @return String
-		 */
-		public String getProjectName() {
-			return projectName;
-		}
-
-		/**
-		 * @return Returns the hasConflicts.
-		 */
-		public boolean hasConflicts() {
-			return hasConflicts;
-		}
-
-		/**
-		 * Returns whether the given project description file path is in the
-		 * default location for a project
-		 * 
-		 * @param path
-		 *            The path to examine
-		 * @return Whether the given path is the default location for a project
-		 */
-		private boolean isDefaultLocation(IPath path) {
-			// The project description file must at least be within the project,
-			// which is within the workspace location
-			if (path.segmentCount() < 2)
-				return false;
-			return path.removeLastSegments(2).toFile().equals(
-					Platform.getLocation().toFile());
-		}
-
-		/**
-		 * Set the name of the project based on the projectFile.
-		 */
-		private void setProjectName() {
-			try {
-				if (projectArchiveFile != null) {
-					InputStream stream = structureProvider
-							.getContents(projectArchiveFile);
-
-					// If we can get a description pull the name from there
-					if (stream == null) {
-						if (projectArchiveFile instanceof ZipEntry) {
-							IPath path = new Path(
-									((ZipEntry) projectArchiveFile).getName());
-							projectName = path.segment(path.segmentCount() - 2);
-						} else if (projectArchiveFile instanceof TarEntry) {
-							IPath path = new Path(
-									((TarEntry) projectArchiveFile).getName());
-							projectName = path.segment(path.segmentCount() - 2);
-						}
-					} else {
-						description = IDEWorkbenchPlugin.getPluginWorkspace()
-								.loadProjectDescription(stream);
-						stream.close();
-						projectName = description.getName();
-					}
-
-				}
-
-				// If we don't have the project name try again
-				if (projectName == null) {
-					IPath path = new Path(projectSystemFile.getPath());
-					// if the file is in the default location, use the directory
-					// name as the project name
-					if (isDefaultLocation(path)) {
-						projectName = path.segment(path.segmentCount() - 2);
-						description = IDEWorkbenchPlugin.getPluginWorkspace()
-								.newProjectDescription(projectName);
-					} else {
-						description = IDEWorkbenchPlugin.getPluginWorkspace()
-								.loadProjectDescription(path);
-						projectName = description.getName();
-					}
-
-				}
-			} catch (CoreException e) {
-				// no good couldn't get the name
-			} catch (IOException e) {
-				// no good couldn't get the name
-			}
 		}
 	}
 
@@ -338,14 +181,6 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 
 	private IProject[] wsProjects;
 
-	private static final Collection<String> EXCLUDED;
-
-	static {
-		EXCLUDED = new TreeSet<String>(Arrays.asList(".project",
-				ProjectUtils.PREVIEW_FOLDER, ProjectUtils.PREVIEW_FRAME_FILE,
-				ProjectUtils.PREVIEW_MAIN_FILE));
-	}
-
 	public AptanaProjectLocationWizardPage() {
 		super("projectlocation", "Import Aptana WRT Projects", null);
 		setDescription("Select location of the Aptana WRT projects");
@@ -355,8 +190,9 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 
 		IWorkingSet[] selectedWorkingSets = workingSetGroup
 				.getSelectedWorkingSets();
-		if (selectedWorkingSets == null || selectedWorkingSets.length == 0)
-			return; // no Working set is selected
+		if (selectedWorkingSets == null || selectedWorkingSets.length == 0) {
+            return; // no Working set is selected
+        }
 		IWorkingSetManager workingSetManager = PlatformUI.getWorkbench()
 				.getWorkingSetManager();
 		for (Iterator i = createdProjects.iterator(); i.hasNext();) {
@@ -401,8 +237,9 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 				DataTransferMessages.WizardProjectsImportPage_CheckingMessage,
 				directory.getPath()));
 		File[] contents = directory.listFiles();
-		if (contents == null)
-			return false;
+		if (contents == null) {
+            return false;
+        }
 
 		// Initialize recursion guard for recursive symbolic links
 		if (directoriesVisited == null) {
@@ -485,7 +322,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 						monitor);
 			}
 			if (elementLabel.equals(IProjectDescription.DESCRIPTION_FILE_NAME)) {
-				projectRecord = new ProjectRecord(child, entry, level);
+                projectRecord = new ArchivedProject(child, entry, level, structureProvider);
 			}
 			if (ProjectUtils.PREVIEW_FRAME_FILE.equalsIgnoreCase(elementLabel)) {
 				hasFrameHtml = true;
@@ -542,71 +379,18 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 					.getProjectName(), null,
 					new SubProgressMonitor(monitor, 10));
 			createdProjects.add(project);
-			if (record.projectArchiveFile != null) {
-				// import from archive
-				List fileSystemObjects = structureProvider
-						.getChildren(record.parent);
-				fileSystemObjects = filterEntries(fileSystemObjects);
-				structureProvider.setStrip(record.level);
-				ImportOperation operation = new ImportOperation(project
-						.getFullPath(), structureProvider.getRoot(),
-						structureProvider, this, fileSystemObjects);
-				operation.setContext(getShell());
-				operation.run(monitor);
-				return true;
-			} else {
-				File importSource = new File(record.description
-						.getLocationURI());
-				List filesToImport = filterEntries(FileSystemStructureProvider.INSTANCE
-						.getChildren(importSource));
-				ImportOperation operation = new ImportOperation(project
-						.getFullPath(), importSource,
-						FileSystemStructureProvider.INSTANCE, this,
-						filesToImport);
-				operation.setContext(getShell());
-				operation.setOverwriteResources(true); // need to overwrite
-				// .project, .classpath
-				// files
-				operation.setCreateContainerStructure(false);
-				operation.run(monitor);
-			}
+            ImportOperation operation = record.getImportOperation(project, structureProvider, this);
+            if (operation != null) {
+                operation.setContext(getShell());
+                operation.run(monitor);
+            }
+			return true;
 		} catch (CoreException e) {
 			Activator.log(e);
 			return false;
 		} finally {
 			monitor.done();
 		}
-		return true;
-	}
-
-	private List filterEntries(List fileSystemObjects) {
-		List result = new LinkedList();
-		for (Object object : fileSystemObjects) {
-			if (accepted(object)) {
-				result.add(object);
-			}
-		}
-		return result;
-	}
-
-	private boolean accepted(Object object) {
-		final String name;
-		if (object instanceof ZipEntry) {
-			name = ((ZipEntry) object).getName();
-		} else if (object instanceof TarEntry) {
-			name = ((TarEntry) object).getName();
-		} else if (object instanceof File) {
-			name = ((File) object).getAbsolutePath();
-		} else {
-			throw new IllegalArgumentException("Unforeseen entry type: "
-					+ object.getClass());
-		}
-		IPath path = new Path(name);
-		return isValidProjectFile(path.lastSegment());
-	}
-
-	private boolean isValidProjectFile(String fileName) {
-		return !EXCLUDED.contains(fileName);
 	}
 
 	/**
@@ -624,7 +408,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 			protected void execute(IProgressMonitor monitor)
 					throws InvocationTargetException, InterruptedException {
 				try {
-					monitor.beginTask("", selected.length); //$NON-NLS-1$
+					monitor.beginTask("", selected.length); 
 					if (monitor.isCanceled()) {
 						throw new OperationCanceledException();
 					}
@@ -651,7 +435,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 				status = ((CoreException) t).getStatus();
 			} else {
 				status = new Status(IStatus.ERROR,
-						IDEWorkbenchPlugin.IDE_WORKBENCH, 1, message, t);
+ Activator.PLUGIN_ID, 1, message, t);
 			}
 			ErrorDialog.openError(getShell(), message, null, status);
 			return false;
@@ -773,7 +557,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 			 */
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				ProjectRecord element = (ProjectRecord) event.getElement();
-				if (element.hasConflicts) {
+                if (element.hasConflicts()) {
 					projectsList.setChecked(element, false);
 				}
 				setPageComplete(projectsList.getCheckedElements().length > 0);
@@ -982,10 +766,11 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		selectAll.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				for (int i = 0; i < selectedProjects.length; i++) {
-					if (selectedProjects[i].hasConflicts)
-						projectsList.setChecked(selectedProjects[i], false);
-					else
-						projectsList.setChecked(selectedProjects[i], true);
+                    if (selectedProjects[i].hasConflicts()) {
+                        projectsList.setChecked(selectedProjects[i], false);
+                    } else {
+                        projectsList.setChecked(selectedProjects[i], true);
+                    }
 				}
 				setPageComplete(projectsList.getCheckedElements().length > 0);
 			}
@@ -1097,8 +882,8 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 	public ProjectRecord[] getProjectRecords() {
 		List projectRecords = new ArrayList();
 		for (int i = 0; i < selectedProjects.length; i++) {
-			if (!ProjectUtils.isAptanaProject(selectedProjects[i].description.getLocationURI()) || isProjectInWorkspace(selectedProjects[i].getProjectName())) {
-				selectedProjects[i].hasConflicts = true;
+            if (isProjectInWorkspace(selectedProjects[i].getProjectName())) {
+                selectedProjects[i].setHasConflicts(true);
 			}
 			projectRecords.add(selectedProjects[i]);
 		}
@@ -1113,7 +898,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 	 */
 	private IProject[] getProjectsInWorkspace() {
 		if (wsProjects == null) {
-			wsProjects = IDEWorkbenchPlugin.getPluginWorkspace().getRoot()
+            wsProjects = ResourcesPlugin.getWorkspace().getRoot()
 					.getProjects();
 		}
 		return wsProjects;
@@ -1187,7 +972,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		}
 
 		if (fileName.length() == 0) {
-			dialog.setFilterPath(IDEWorkbenchPlugin.getPluginWorkspace()
+            dialog.setFilterPath(ResourcesPlugin.getWorkspace()
 					.getRoot().getLocation().toOSString());
 		} else {
 			File path = new File(fileName).getParentFile();
@@ -1221,7 +1006,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		}
 
 		if (dirName.length() == 0) {
-			dialog.setFilterPath(IDEWorkbenchPlugin.getPluginWorkspace()
+            dialog.setFilterPath(ResourcesPlugin.getWorkspace()
 					.getRoot().getLocation().toOSString());
 		} else {
 			File path = new File(dirName);
@@ -1516,7 +1301,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 								.subTask(DataTransferMessages.WizardProjectsImportPage_ProcessingMessage);
 						while (filesIterator.hasNext()) {
 							File file = (File) filesIterator.next();
-							selectedProjects[index] = new ProjectRecord(file);
+                            selectedProjects[index] = new FileSystemProject(file);
 							index++;
 						}
 					} else {
@@ -1527,7 +1312,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 
 			});
 		} catch (InvocationTargetException e) {
-			IDEWorkbenchPlugin.log(e.getMessage(), e);
+            Activator.log(e.getMessage(), e);
 		} catch (InterruptedException e) {
 			// Nothing to do if the user interrupts.
 		}
@@ -1536,7 +1321,7 @@ public class AptanaProjectLocationWizardPage extends WizardPage implements
 		ProjectRecord[] projects = getProjectRecords();
 		boolean displayWarning = false;
 		for (int i = 0; i < projects.length; i++) {
-			if (projects[i].hasConflicts) {
+            if (projects[i].hasConflicts()) {
 				displayWarning = true;
 				projectsList.setGrayed(projects[i], true);
 			} else {

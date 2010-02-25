@@ -269,7 +269,7 @@ public class Logging {
      * @param option
      *            The debug option to test. The plugin's symbolic name is
      *            prepended to the option name, e.g.
-     *            "com.nokia.myplugin"+"/"+option
+     *            "org.symbian.tools.wrttools.myplugin"+"/"+option
      * @return true if debugging enabled and option enabled (e.g. defined and
      *         set to "true")
      */
@@ -325,7 +325,7 @@ public class Logging {
      *            the calling plugin, or null
      * @param option
      *            the debug option to test. The plugin name is prepended to the
-     *            option name, e.g. "com.nokia.myplugin"+"/"+option
+     *            option name, e.g. "org.symbian.tools.wrttools.myplugin"+"/"+option
      * @param status
      *            the status object
      * @see Logging#isDebugOptionEnabled(Plugin, String)

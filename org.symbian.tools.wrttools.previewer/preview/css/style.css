@@ -283,7 +283,7 @@ p.highlight span{
 div#PreferencesBtn{
 	width: 75px;
 	height: 85px;
-	background-image: url(../images/settings-icon.png);
+    background-image: url(../images/settings-icon.png); 
 	position: absolute;
 	top: 10px;
 	left: 10px;
@@ -459,7 +459,7 @@ div#event-messaging{
 }
 
 div#event-memory{
-	background-image: url(../images/memory-icon.png);
+	background-image: url(../images/memory-icon.png); 
 }
 
 div.ui-panel{

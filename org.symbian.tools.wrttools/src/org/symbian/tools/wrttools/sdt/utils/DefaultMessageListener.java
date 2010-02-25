@@ -32,7 +32,7 @@ public class DefaultMessageListener implements IMessageListener {
 	
 	
 	/* (non-Javadoc)
-	 * @see com.nokia.sdt.utils.IMessageListener#isHandlingMessage(com.nokia.sdt.utils.IMessage)
+	 * @see org.symbian.tools.wrttools.sdt.utils.IMessageListener#isHandlingMessage(org.symbian.tools.wrttools.sdt.utils.IMessage)
 	 */
 	public boolean isHandlingMessage(IMessage msg) {
 		// in case this gets added as a MessageReporting listener
