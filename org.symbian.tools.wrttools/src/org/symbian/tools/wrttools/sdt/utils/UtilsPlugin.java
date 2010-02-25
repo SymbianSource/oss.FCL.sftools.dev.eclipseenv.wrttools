@@ -84,7 +84,7 @@ public class UtilsPlugin extends Plugin {
 	public ResourceBundle getResourceBundle() {
 		try {
 			if (resourceBundle == null)
-				resourceBundle = ResourceBundle.getBundle("com.nokia.sdt.utils.UtilsPluginResources"); //$NON-NLS-1$
+				resourceBundle = ResourceBundle.getBundle("org.symbian.tools.wrttools.sdt.utils.UtilsPluginResources"); //$NON-NLS-1$
 		} catch (MissingResourceException x) {
 			resourceBundle = null;
 		}

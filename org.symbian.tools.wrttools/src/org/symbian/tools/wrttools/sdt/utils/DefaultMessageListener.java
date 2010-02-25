@@ -40,7 +40,7 @@ public class DefaultMessageListener implements IMessageListener {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.nokia.sdt.utils.IMessageListener#emitMessage(com.nokia.sdt.utils.IMessage)
+	 * @see org.symbian.tools.wrttools.sdt.utils.IMessageListener#emitMessage(org.symbian.tools.wrttools.sdt.utils.IMessage)
 	 */
 	public void emitMessage(IMessage msg) {
 		MessageReporting.emitMessage(msg);
