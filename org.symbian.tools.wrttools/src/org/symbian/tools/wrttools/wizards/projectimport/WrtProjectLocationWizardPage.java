@@ -92,6 +92,7 @@ import org.eclipse.ui.internal.wizards.datatransfer.ZipLeveledStructureProvider;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 @SuppressWarnings({"restriction", "unchecked"})
@@ -308,29 +309,24 @@ public class WrtProjectLocationWizardPage extends WizardPage implements
 			children = new ArrayList(1);
 		}
 		Iterator childrenEnum = children.iterator();
-		boolean hasPreviewFolder = false;
-		boolean hasFrameHtml = false;
 		ProjectRecord projectRecord = null;
+        Object infoPlist = null;
+        Object dotProject = null;
 		while (childrenEnum.hasNext()) {
 			Object child = childrenEnum.next();
-			String elementLabel = structureProvider.getLabel(child);
-			if (structureProvider.isFolder(child)) {
-				if (ProjectUtils.PREVIEW_FOLDER.equalsIgnoreCase(elementLabel)) {
-					hasPreviewFolder = true;
-				}
-				collectProjectFilesFromProvider(files, child, level + 1,
-						monitor);
-			}
-			if (elementLabel.equals(IProjectDescription.DESCRIPTION_FILE_NAME)) {
-                projectRecord = new ArchivedProject(child, entry, level, structureProvider);
-			}
-			if (ProjectUtils.PREVIEW_FRAME_FILE.equalsIgnoreCase(elementLabel)) {
-				hasFrameHtml = true;
-			}
+            String elementLabel = structureProvider.getLabel(child);
+            if (structureProvider.isFolder(child)) {
+                collectProjectFilesFromProvider(files, child, level + 1, monitor);
+            } else if (elementLabel.equalsIgnoreCase(IProjectDescription.DESCRIPTION_FILE_NAME)) {
+                dotProject = child;
+            } else if (elementLabel.equalsIgnoreCase(CoreUtil.METADATA_FILE)) {
+                infoPlist = child;
+            }
 		}
-		if (projectRecord != null && hasPreviewFolder && hasFrameHtml) {
-			files.add(projectRecord);
-		}
+        if (infoPlist != null) {
+            projectRecord = new ArchivedProject(infoPlist, dotProject, entry, level, structureProvider);
+            files.add(projectRecord);
+        }
 		return true;
 	}
 

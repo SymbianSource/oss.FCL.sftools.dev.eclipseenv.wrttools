@@ -18,8 +18,10 @@
  */
 package org.symbian.tools.wrttools.wizards.projectimport;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -30,10 +32,13 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
+import org.eclipse.ui.internal.wizards.datatransfer.DataTransferMessages;
 import org.eclipse.ui.internal.wizards.datatransfer.ILeveledImportStructureProvider;
 import org.eclipse.ui.internal.wizards.datatransfer.TarEntry;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
+import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 @SuppressWarnings("restriction")
@@ -41,10 +46,11 @@ public class ArchivedProject implements ProjectRecord {
     public boolean hasConflicts;
     public int level;
     public Object parent;
-    public Object projectArchiveFile;
+    public Object dotProject;
     private String projectName;
     private final ILeveledImportStructureProvider provider;
     private IProjectDescription description;
+    private final Object infoPlist;
 
     /**
      * @param file
@@ -54,9 +60,11 @@ public class ArchivedProject implements ProjectRecord {
      * @param level
      *            The number of levels deep in the provider the file is
      */
-    public ArchivedProject(Object file, Object parent, int level, ILeveledImportStructureProvider structureProvider) {
+    public ArchivedProject(Object infoPlist, Object dotProject, Object parent, int level,
+            ILeveledImportStructureProvider structureProvider) {
+        this.infoPlist = infoPlist;
+        this.dotProject = dotProject;
         provider = structureProvider;
-        this.projectArchiveFile = file;
         this.parent = parent;
         this.level = level;
         setProjectName();
@@ -83,21 +91,29 @@ public class ArchivedProject implements ProjectRecord {
      */
     private void setProjectName() {
         try {
-            InputStream stream = provider.getContents(projectArchiveFile);
+            if (dotProject != null) {
+                InputStream stream = provider.getContents(dotProject);
 
-            // If we can get a description pull the name from there
-            if (stream == null) {
-                if (projectArchiveFile instanceof ZipEntry) {
-                    IPath path = new Path(((ZipEntry) projectArchiveFile).getName());
-                    projectName = path.segment(path.segmentCount() - 2);
-                } else if (projectArchiveFile instanceof TarEntry) {
-                    IPath path = new Path(((TarEntry) projectArchiveFile).getName());
-                    projectName = path.segment(path.segmentCount() - 2);
+                // If we can get a description pull the name from there
+                if (stream != null) {
+                    description = ResourcesPlugin.getWorkspace().loadProjectDescription(stream);
+                    stream.close();
+                    projectName = description.getName();
                 }
             } else {
-                description = ResourcesPlugin.getWorkspace().loadProjectDescription(stream);
-                stream.close();
-                projectName = description.getName();
+                InputStream stream = provider.getContents(infoPlist);
+                if (stream == null) {
+                    if (dotProject instanceof ZipEntry) {
+                        IPath path = new Path(((ZipEntry) dotProject).getName());
+                        projectName = path.segment(path.segmentCount() - 2);
+                    } else if (dotProject instanceof TarEntry) {
+                        IPath path = new Path(((TarEntry) dotProject).getName());
+                        projectName = path.segment(path.segmentCount() - 2);
+                    }
+                } else {
+                    String manifest = CoreUtil.read(new BufferedReader(new InputStreamReader(stream)));
+                    projectName = CoreUtil.getApplicationName(manifest);
+                }
             }
         } catch (CoreException e) {
             // no good couldn't get the name
@@ -118,13 +134,12 @@ public class ArchivedProject implements ProjectRecord {
     }
 
     public URI getLocationURI() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     public String getProjectLabel() {
-        // TODO Auto-generated method stub
-        return null;
+        String path = provider.getLabel(parent);
+        return NLS.bind(DataTransferMessages.WizardProjectsImportPage_projectLabel, projectName, path);
     }
 
     public void setHasConflicts(boolean hasConflicts) {
