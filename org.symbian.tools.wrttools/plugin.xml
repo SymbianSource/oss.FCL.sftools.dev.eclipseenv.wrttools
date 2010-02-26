@@ -206,7 +206,7 @@
 	
 <!-- WRT Project Templates -->
 	<extension point="org.symbian.tools.wrttools.projectTemplates">
-<!--
+
       <projectTemplate
 		name="Basic Widget Project"
         archive="projecttemplates/basic.zip"
@@ -218,8 +218,7 @@
 			<description>
 				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
          </description>
-		</projectTemplate> 
--->
+	  </projectTemplate> 
 
       <projectTemplate
             name="Hello Application Project with WRTKit Support"
