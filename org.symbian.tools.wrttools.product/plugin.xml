@@ -99,6 +99,22 @@
             activityId="org.symbian.tools.wrttools.product.wtp"
             pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.contextualLaunch\.profile\.submenu">
       </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.internal\.ui\.actions\.RunDropDownAction">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.internal\.ui\.actions\.DebugDropDownAction">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.contextualLaunch\.run\.submenu">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.contextualLaunch\.debug\.submenu">
+      </activityPatternBinding>
       <category
             description="WTP UI elements that are not compatible with WRT widget development"
             id="org.symbian.tools.wrttools.product.wtp"

@@ -141,6 +141,52 @@
                menubarPath="group.properties">
          </action>
       </viewerContribution>
+      <objectContribution
+            id="org.symbian.tools.wrttools.debug.core.context"
+            objectClass="java.lang.Object">
+         <enablement>
+            <or>
+               <and>
+                  <not>
+                     <with
+                           variable="org.eclipse.core.runtime.Platform">
+                        <test
+                              args="org.eclipse.debug.core"
+                              property="org.eclipse.core.runtime.bundleState"
+                              value="ACTIVE">
+                        </test>
+                     </with>
+                  </not>
+                  <adapt
+                        type="org.eclipse.core.resources.IResource">
+                  </adapt>
+               </and>
+               <and>
+                  <with
+                        variable="org.eclipse.core.runtime.Platform">
+                     <test
+                           args="org.eclipse.debug.core"
+                           property="org.eclipse.core.runtime.bundleState"
+                           value="ACTIVE">
+                     </test>
+                  </with>
+                  <test
+                        property="org.eclipse.debug.core.launchable"
+                        value="debug">
+                  </test>
+               </and>
+            </or>
+         </enablement>
+         <action
+               class="org.eclipse.debug.internal.ui.actions.DebugLastAction"
+               enablesFor="+"
+               icon="icons/debug_exc.gif"
+               id="org.eclipse.debug.ui.contextualLaunch.debug.submenu"
+               label="Debug"
+               menubarPath="additions"
+               style="push">
+         </action>
+      </objectContribution>
    </extension>
    <extension
          point="org.eclipse.core.runtime.adapters">
@@ -178,12 +224,21 @@
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="org.eclipse.wst.jsdt.ui.JavaPerspective">
+            targetID="org.symbian.tools.wrttools.mainPerspective">
          <actionSet
                id="org.eclipse.debug.ui.breakpointActionSet">
          </actionSet>
          <actionSet
                id="org.eclipse.debug.ui.debugActionSet">
+         </actionSet>
+         <actionSet
+               id="org.symbian.tools.wrttools.debug.core.mainActions">
+         </actionSet>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.debug.ui.DebugPerspective">
+         <actionSet
+               id="org.symbian.tools.wrttools.debug.core.mainActions">
          </actionSet>
       </perspectiveExtension>
    </extension>
@@ -222,6 +277,23 @@
             adaptableType="org.eclipse.core.resources.IResource">
             <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
          </factory>
+    </extension>
+    <extension
+          point="org.eclipse.ui.actionSets">
+       <actionSet
+             description="Actions for WRT debugging"
+             id="org.symbian.tools.wrttools.debug.core.mainActions"
+             label="WRT Debug">
+          <action
+                class="org.eclipse.debug.internal.ui.actions.DebugLastAction"
+                helpContextId="debug_last_action_context"
+                icon="icons/debug_exc.gif"
+                id="org.symbian.tools.wrttools.debug.core.debug"
+                label="Debug"
+                style="push"
+                toolbarPath="debug">
+          </action>
+       </actionSet>
     </extension>
   
 </plugin>
