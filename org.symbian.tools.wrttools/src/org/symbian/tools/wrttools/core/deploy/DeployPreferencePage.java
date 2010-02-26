@@ -139,7 +139,7 @@ IWorkbenchPreferencePage {
 						emulatorDeployerPathText.setText(emulatorHashMap.get(selectionCombo.getText()).concat(IWRTConstants.DEPLOY_PATH));
 					}
 		/* TODO XXX */
-					log.info("DeployPreferencePage.addSelectionListener: Emulator Deployer Path Text: "+ emulatorDeployerPathText);
+					//log.info("DeployPreferencePage.addSelectionListener: Emulator Deployer Path Text: "+ emulatorDeployerPathText);
 				}
 			}
 		});
@@ -224,7 +224,7 @@ IWorkbenchPreferencePage {
 			}	
 			
 			/* TODO XXX */
-			log.info("DeployPreferencePage.updateButtonStates: Emulator Deployer Path Text: "+ emulatorDeployerPathText);
+			//log.info("DeployPreferencePage.updateButtonStates: Emulator Deployer Path Text: "+ emulatorDeployerPathText);
 
 
 		} else if(deviceRadioButton != null && deviceRadioButton.getSelection()){		
@@ -285,11 +285,11 @@ IWorkbenchPreferencePage {
 				selectionCombo.setItems(emulatorItems);			
 				emulatorDeployerPathText.setText(prefStore.getString(PreferenceConstants.SELECTED_EMULATOR_PATH));
 				/* TODO XXX */
-				log.info("DeployPreferencePage.performDefaults: Emulator Deployer Path Text: "+ emulatorDeployerPathText);
+				//log.info("DeployPreferencePage.performDefaults: Emulator Deployer Path Text: "+ emulatorDeployerPathText);
 			} 
 			
 			/* TODO XXX */
-			log.info("DeployPreferencePage.performDefaults: emulatorRadioButton not selected: "+ emulatorDeployerPathText);
+			//log.info("DeployPreferencePage.performDefaults: emulatorRadioButton not selected: "+ emulatorDeployerPathText);
 
 			/*if(deviceRadioButton != null && deviceRadioButton.getSelection()){ 	
 				devices = new String[1];	
