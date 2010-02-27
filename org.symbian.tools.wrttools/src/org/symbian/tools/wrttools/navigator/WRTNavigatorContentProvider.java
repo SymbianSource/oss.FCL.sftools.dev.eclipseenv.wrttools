@@ -1,7 +1,6 @@
 package org.symbian.tools.wrttools.navigator;
 
 import java.util.Collection;
-import java.util.Comparator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -14,7 +13,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -70,50 +68,6 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 				return false;
 			}
 			return true;
-		}
-	}
-
-	private static final class TreeElementsComparator implements
-			Comparator<Object> {
-		public int compare(Object o1, Object o2) {
-			IResource res1 = getResource(o1);
-			IResource res2 = getResource(o2);
-			if (o1 == o2) {
-				return 0;
-			} else if (o1 == null) {
-				return -1;
-			} else if (o2 == null) {
-				return 1;
-			}
-
-			boolean isFolder1 = isFolder(res1);
-			boolean isFolder2 = isFolder(res2);
-
-			if (isFolder1 == isFolder2) {
-				return res1.getName().compareTo(res2.getName());
-			} else if (isFolder1) {
-				return 1;
-			} else {
-				return -1;
-			}
-		}
-
-		private IResource getResource(Object o1) {
-			final IResource result;
-			if (o1 instanceof IResource) {
-				result = (IResource) o1;
-			} else if (o1 instanceof IAdaptable) {
-				result = (IResource) ((IAdaptable) o1)
-						.getAdapter(IResource.class);
-			} else {
-				result = null;
-			}
-			return result;
-		}
-
-		private boolean isFolder(IResource res1) {
-			return res1.getType() == IResource.FOLDER
-					|| res1.getType() == IResource.PROJECT;
 		}
 	}
 
@@ -221,5 +175,25 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
             }
         }
         return super.getChildren(parentElement);
+    }
+
+    @Override
+    public Object getParent(Object element) {
+        Object parent = super.getParent(element);
+        if (element instanceof IJavaScriptElement && parent instanceof IJavaScriptElement) {
+            IJavaScriptElement jsChild = (IJavaScriptElement) element;
+            IJavaScriptElement jsParent = (IJavaScriptElement) parent;
+
+            try {
+                IResource childResource = jsChild.getCorrespondingResource();
+                IResource parentResource = jsParent.getCorrespondingResource();
+                if (childResource == null && parentResource != null) {
+                    return parentResource;
+                }
+            } catch (JavaScriptModelException e) {
+                Activator.log(e);
+            }
+        }
+        return parent;
     }
 }

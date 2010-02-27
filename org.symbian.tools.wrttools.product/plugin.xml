@@ -199,4 +199,19 @@
             </class>
       </page>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.symbian.tools.wrttools.mainPerspective">
+         <showInPart
+               id="org.symbian.tools.wrttools.wrtnavigator">
+         </showInPart>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.debug.ui.DebugPerspective">
+         <showInPart
+               id="org.symbian.tools.wrttools.wrtnavigator">
+         </showInPart>
+      </perspectiveExtension>
+   </extension>
 </plugin>
