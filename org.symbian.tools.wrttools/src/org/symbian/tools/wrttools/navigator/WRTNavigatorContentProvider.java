@@ -2,8 +2,8 @@ package org.symbian.tools.wrttools.navigator;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.TreeSet;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -117,7 +117,7 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 		}
 	}
 
-	private IResourceChangeListener listener = new IResourceChangeListener() {
+	private final IResourceChangeListener listener = new IResourceChangeListener() {
 		public void resourceChanged(IResourceChangeEvent event) {
 			IResource refresh = null;
 			if (event.getDelta() != null) {
@@ -144,33 +144,16 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 		super.dispose();
 	}
 
-	private Object[] filter(IResource[] members) {
-		TreeSet<Object> output = new TreeSet<Object>(
-				new TreeElementsComparator());
-		for (int i = 0; i < members.length; i++) {
-			IResource resource = members[i];
-			Object res = resource;
-			if (resource.getType() == IResource.FILE) {
-				IJavaScriptElement element = JavaScriptCore.create(resource);
-				if (element != null) {
-					res = element;
-				}
-			}
-			output.add(res);
-		}
-		return output.toArray();
-	}
-
 	@Override
 	protected Object[] getFolderContent(IFolder folder) throws CoreException {
-		return filter(folder.members());
+        return folder.members();
 	}
 
 	@Override
 	protected Object[] getPackageFragmentRoots(IJavaScriptProject project)
 			throws JavaScriptModelException {
 		try {
-			return filter(project.getProject().members());
+            return project.getProject().members();
 		} catch (CoreException e) {
 			Activator.log(e);
 		}
@@ -227,4 +210,16 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 			}
 		});
 	}
+
+    @Override
+    public Object[] getChildren(Object parentElement) {
+        if (parentElement instanceof IFile) {
+            IFile file = (IFile) parentElement;
+            IJavaScriptElement element = JavaScriptCore.create(file);
+            if (element != null) {
+                return super.getChildren(element);
+            }
+        }
+        return super.getChildren(parentElement);
+    }
 }

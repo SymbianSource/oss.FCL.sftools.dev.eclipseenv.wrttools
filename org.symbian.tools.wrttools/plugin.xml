@@ -359,7 +359,9 @@
           isRoot="true"
           pattern="org.symbian.tools.wrttools.navigatorcontent"/>
 				<contentExtension pattern="org.eclipse.ui.navigator.resources.filters.*" />
-				<contentExtension pattern="org.eclipse.ui.navigator.resources.linkHelper" />
+				<contentExtension
+          isRoot="true"
+          pattern="org.symbian.tools.wrttools.wrtLinkHelper"/>
 			</includes>
 		</viewerContentBinding>
 		<viewerActionBinding viewerId="org.symbian.tools.wrttools.wrtnavigator">
@@ -622,5 +624,30 @@
           id="org.symbian.tools.wrttools.wrtwords"
           label="wrt, webruntime, web runtime, cwrt">
     </keyword>
+ </extension>
+ <extension
+       point="org.eclipse.ui.navigator.linkHelper">
+    <linkHelper
+          class="org.symbian.tools.wrttools.navigator.WrtNavigatorLinkHelper"
+          id="org.symbian.tools.wrttools.wrtLinkHelper">
+       <editorInputEnablement>
+          <adapt
+                type="org.eclipse.ui.IFileEditorInput">
+          </adapt>
+       </editorInputEnablement>
+       <selectionEnablement>
+          <or>
+             <adapt
+                   type="org.eclipse.wst.jsdt.core.IJavaScriptElement">
+             </adapt>
+             <instanceof
+                   value="java.util.Collection">
+             </instanceof>
+             <adapt
+                   type="org.eclipse.core.resources.IResource">
+             </adapt>
+          </or>
+       </selectionEnablement>
+    </linkHelper>
  </extension>
 </plugin>
