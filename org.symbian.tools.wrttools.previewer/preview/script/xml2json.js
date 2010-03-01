@@ -1,3 +1,16 @@
+/**
+ * Copyright (c) 2009-2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ */
+
 /*
 xml2json v 1.1
 copyright 2005-2007 Thomas Frank
@@ -28,7 +41,7 @@ var xml2json={
 		return y
 	},
 	xml_to_object:function(xmlcode){
-		var x=xmlcode.replace(/<\//g,"§");
+		var x=xmlcode.replace(/<\//g,"ï¿½");
 		x=x.split("<");
 		var y=[];
 		var level=0;
@@ -37,8 +50,8 @@ var xml2json={
 			var tagname=x[i].split(">")[0];
 			opentags.push(tagname);
 			level++
-			y.push(level+"<"+x[i].split("§")[0]);
-			while(x[i].indexOf("§"+opentags[opentags.length-1]+">")>=0){level--;opentags.pop()}
+			y.push(level+"<"+x[i].split("ï¿½")[0]);
+			while(x[i].indexOf("ï¿½"+opentags[opentags.length-1]+">")>=0){level--;opentags.pop()}
 		};
 		var oldniva=-1;
 		var objname="this.xmlobject";

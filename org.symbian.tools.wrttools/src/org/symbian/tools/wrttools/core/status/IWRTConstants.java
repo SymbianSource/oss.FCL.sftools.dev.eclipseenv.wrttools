@@ -75,10 +75,7 @@ public interface IWRTConstants {
 	 * Locally stored Nokia DTD
 	 */
 	public static String NOKIA_PLIST_DTD = "/org/symbian/tools/wrttools/core/widgetmodel/plist-1.0.dtd";
-	/**
-	 * Locally stored Apple DTD
-	 */
-//	public static String APPLE_PLIST_DTD = "/com/nokia/wrt/core/converter/PropertyList-1.0.dtd";
+
 	/**
 	 * Nokia DTD in nfo.plist file 
 	 */

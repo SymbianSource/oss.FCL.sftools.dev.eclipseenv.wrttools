@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2009-2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ */
+
+/**
 	This API is used to provide system related data.
 	It takes the sysObject as an argument that is the embeded API in the main HTML file.
 	While using this API outside mobile environment, User or developer need not to take any extara action in oprder to support SYSAPI.
