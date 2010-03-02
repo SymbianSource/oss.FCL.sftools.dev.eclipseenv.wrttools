@@ -22,6 +22,7 @@ package org.symbian.tools.wrttools.core.deploy.device;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.EOFException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.MessageFormat;
@@ -206,6 +207,9 @@ public class DeviceDeployer extends WidgetDeployer {
 					clientSession.disconnect(null);
 					clientSession.close();
 				}
+			} catch (EOFException f) {
+				// EOFException is now caught and reported back although deployment has completed
+				Activator.log(IStatus.ERROR, "EOF encountered while cleaning up Bluetooth deployment", f);
 			} catch (IOException x) {
 				Activator.log(IStatus.ERROR,
 						"Error cleaning up BlueTooth deployment", x);
