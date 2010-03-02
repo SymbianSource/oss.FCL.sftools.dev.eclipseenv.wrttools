@@ -4,6 +4,8 @@
 
 package org.chromium.debug.core.model;
 
+import java.util.List;
+
 import org.chromium.debug.core.ChromiumDebugPlugin;
 import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.DebugContext;
@@ -414,17 +416,30 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
 
   private void logExceptionFromContext(DebugContext context) {
     ExceptionData exceptionData = context.getExceptionData();
-    CallFrame topFrame = context.getCallFrames().get(0);
-    Script script = topFrame.getScript();
-    ChromiumDebugPlugin.logError(
-        Messages.DebugTargetImpl_LogExceptionFormat,
-        exceptionData.isUncaught()
-            ? Messages.DebugTargetImpl_Uncaught
-            : Messages.DebugTargetImpl_Caught,
-        exceptionData.getExceptionMessage(),
-        script != null ? script.getName() : "<unknown>", //$NON-NLS-1$
-        topFrame.getLineNumber(),
-        trim(exceptionData.getSourceText(), 80));
+    List<? extends CallFrame> callFrames = context.getCallFrames();
+    if (callFrames.size() > 0) {
+      CallFrame topFrame = callFrames.get(0);
+      Script script = topFrame.getScript();
+      ChromiumDebugPlugin.logError(
+          Messages.DebugTargetImpl_LogExceptionFormat,
+          exceptionData.isUncaught()
+              ? Messages.DebugTargetImpl_Uncaught
+              : Messages.DebugTargetImpl_Caught,
+          exceptionData.getExceptionMessage(),
+          script != null ? script.getName() : "<unknown>", //$NON-NLS-1$
+          topFrame.getLineNumber(),
+          trim(exceptionData.getSourceText(), 80));
+    } else {
+      ChromiumDebugPlugin.logError(
+          Messages.DebugTargetImpl_LogExceptionFormat,
+          exceptionData.isUncaught()
+              ? Messages.DebugTargetImpl_Uncaught
+              : Messages.DebugTargetImpl_Caught,
+          exceptionData.getExceptionMessage(),
+          "<unknown>", //$NON-NLS-1$
+          "<unknown>",
+          trim(exceptionData.getSourceText(), 80));
+    }
   }
 
   private final JavascriptVmEmbedder.Listener embedderListener =

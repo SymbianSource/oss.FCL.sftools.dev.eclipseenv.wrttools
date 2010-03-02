@@ -2,9 +2,12 @@ package org.symbian.tools.wrttools.debug.internal.launch;
 
 import org.chromium.debug.core.model.DebugTargetImpl;
 import org.chromium.debug.core.model.JavascriptThread;
+import org.chromium.debug.core.model.Messages;
 import org.chromium.debug.core.model.StackFrame;
 import org.chromium.debug.core.model.WorkspaceBridge.JsLabelProvider;
 import org.chromium.sdk.CallFrame;
+import org.chromium.sdk.DebugContext;
+import org.chromium.sdk.ExceptionData;
 import org.chromium.sdk.Script;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.debug.core.DebugException;
@@ -36,9 +39,23 @@ public class WrtLabelProvider implements JsLabelProvider {
 		return "WRT Runtime";
 	}
 
-	public String getThreadLabel(JavascriptThread thread) throws DebugException {
-		return NLS.bind("JavaScript Thread ({0})",
-				(thread.isSuspended() ? "Suspended" : "Running")); //$NON-NLS-1$ //$NON-NLS-2$
-	}
+    public String getThreadLabel(JavascriptThread thread) throws DebugException {
+        return NLS.bind("JavaScript Thread ({0})", getThreadStateLabel(thread));
+    }
+
+    private String getThreadStateLabel(JavascriptThread thread) {
+        if (thread.isSuspended()) {
+            DebugContext context = thread.getDebugTarget().getDebugContext();
+            ExceptionData exceptionData = context.getExceptionData();
+            if (exceptionData != null) {
+                return NLS.bind(Messages.JsThread_ThreadLabelSuspendedExceptionFormat, exceptionData
+                        .getExceptionMessage());
+            } else {
+                return Messages.JsThread_ThreadLabelSuspended;
+            }
+        } else {
+            return Messages.JsThread_ThreadLabelRunning;
+        }
+    }
 
 }

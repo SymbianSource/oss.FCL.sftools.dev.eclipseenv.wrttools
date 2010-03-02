@@ -55,6 +55,8 @@ public class Messages extends NLS {
 
   public static String JsThread_ThreadLabelSuspended;
 
+  public static String JsThread_ThreadLabelSuspendedExceptionFormat;
+
   public static String ResourceManager_UnnamedScriptName;
 
   public static String StackFrame_NameFormat;

@@ -10,6 +10,8 @@ import org.chromium.debug.core.ChromiumDebugPlugin;
 import org.chromium.debug.core.util.ChromiumDebugPluginUtil;
 import org.chromium.sdk.Breakpoint;
 import org.chromium.sdk.CallFrame;
+import org.chromium.sdk.DebugContext;
+import org.chromium.sdk.ExceptionData;
 import org.chromium.sdk.JavascriptVm;
 import org.chromium.sdk.Script;
 import org.chromium.sdk.JavascriptVm.BreakpointCallback;
@@ -265,10 +267,23 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
 
     public String getThreadLabel(JavascriptThread thread) {
       String url = thread.getDebugTarget().getJavascriptEmbedder().getThreadName();
-      return NLS.bind(Messages.JsThread_ThreadLabelFormat, (thread.isSuspended()
-          ? Messages.JsThread_ThreadLabelSuspended
-          : Messages.JsThread_ThreadLabelRunning), (url.length() > 0
+      return NLS.bind(Messages.JsThread_ThreadLabelFormat, getThreadStateLabel(thread), (url.length() > 0
           ? (" : " + url) : "")); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    private String getThreadStateLabel(JavascriptThread thread) {
+      if (thread.isSuspended()) {
+        DebugContext context = thread.getDebugTarget().getDebugContext();
+        ExceptionData exceptionData = context.getExceptionData();
+        if (exceptionData != null) {
+          return NLS.bind(Messages.JsThread_ThreadLabelSuspendedExceptionFormat,
+              exceptionData.getExceptionMessage());
+        } else {
+          return Messages.JsThread_ThreadLabelSuspended;
+        }
+      } else {
+        return Messages.JsThread_ThreadLabelRunning;
+      }
     }
 
     public String getStackFrameLabel(StackFrame stackFrame) throws DebugException {
