@@ -207,9 +207,10 @@ public class DeviceDeployer extends WidgetDeployer {
 					clientSession.disconnect(null);
 					clientSession.close();
 				}
-			} catch (EOFException f) {
-				// EOFException is now caught and reported back although deployment has completed
-				Activator.log(IStatus.ERROR, "EOF encountered while cleaning up Bluetooth deployment", f);
+			} catch (EOFException eof) {
+				// EOFException is now caught 
+				// Ignore the error since deployment has already completed
+				//Activator.log(IStatus.ERROR, "EOF encountered while cleaning up Bluetooth deployment", eof);
 			} catch (IOException x) {
 				Activator.log(IStatus.ERROR,
 						"Error cleaning up BlueTooth deployment", x);
