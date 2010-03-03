@@ -590,6 +590,10 @@
        class="org.symbian.tools.wrttools.core.libraries.WrtKitLibInitializer"
        id="org.symbian.wrtkit">
     </JsGlobalScopeContainerInitializer>
+    <JsGlobalScopeContainerInitializer
+       class="org.symbian.tools.wrttools.core.libraries.WrtLibInitializer"
+       id="org.symbian.wrt">
+    </JsGlobalScopeContainerInitializer>
  </extension>
  <extension
         point="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
@@ -597,6 +601,11 @@
             name="WRTKit"
             class="org.symbian.tools.wrttools.wizards.WrtKitLibraryWizardPage"
             id="org.symbian.wrtkit">
+    </JsGlobalScopeContainerPage>    
+    <JsGlobalScopeContainerPage
+            name="WebRuntime Toolkit"
+            class="org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage"
+            id="org.symbian.wrt">
     </JsGlobalScopeContainerPage>    
   </extension>
  <extension

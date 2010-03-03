@@ -63,11 +63,16 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.wizards.datatransfer.TarEntry;
 import org.eclipse.ui.part.ISetSelectionTarget;
+import org.eclipse.wst.jsdt.core.IIncludePathEntry;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.LibrarySuperType;
+import org.eclipse.wst.jsdt.internal.core.JavaProject;
 import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WidgetProjectNature;
+import org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage;
 
 @SuppressWarnings("restriction")
 public class ProjectUtils {
@@ -236,7 +241,7 @@ public class ProjectUtils {
 	public static IProject createWrtProject(String name, URI uri,
 			IProgressMonitor monitor) throws CoreException {
 		uri = isDefaultProjectLocation(uri) ? null : uri;
-		monitor.beginTask("Create project resources", 20);
+        monitor.beginTask("Create project resources", 25);
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(name);
 		BuildPathsBlock.createProject(project, uri, new SubProgressMonitor(
@@ -249,9 +254,19 @@ public class ProjectUtils {
 				ValidationFramework.getDefault().getProjectSettings(project),
 				true);
 
-		// TODO: Build path, super type, etc.
-		// BuildPathsBlock.flush(classPathEntries, javaScriptProject, superType,
-		// monitor)
+        IJavaScriptProject jsProject = JavaScriptCore.create(project);
+        final IIncludePathEntry[] includepath = jsProject.getRawIncludepath();
+        final IIncludePathEntry[] newIncludePath = new IIncludePathEntry[includepath.length + 1];
+
+        System.arraycopy(includepath, 0, newIncludePath, 0, includepath.length);
+        newIncludePath[includepath.length] = JavaScriptCore.newContainerEntry(new Path(
+                WrtLibraryWizardPage.CONTAINER_ID));
+
+        jsProject.setRawIncludepath(newIncludePath, new SubProgressMonitor(monitor, 5));
+
+        LibrarySuperType superType = new LibrarySuperType(new Path(WrtLibraryWizardPage.CONTAINER_ID), jsProject,
+                "Window");
+        ((JavaProject) jsProject).setCommonSuperType(superType);
 
 		addWrtNature(project);
 
