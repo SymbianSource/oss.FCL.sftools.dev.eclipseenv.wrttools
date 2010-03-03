@@ -5,7 +5,7 @@ set -x
 SCRIPTS_DIR=/home/symbian/wrttools/scripts
 BASE_DIR=/home/symbian/scratch/build_dir
 DAY_OF_YEAR=`date +%j`
-ECLIPSE_TIMESTAMP=`date +%Y%m%d%H%M%S`
+ECLIPSE_TIMESTAMP=`date +%Y%m%d%H%M%S`-${BUILD_NUMBER:-NO_BUILD_NUMBER}
 HG_CMD=/usr/local/bin/hg
 ANT_CMD=/usr/local/apache-ant-1.8.0/bin/ant
 
@@ -34,12 +34,12 @@ cat ${SOURCE_DIR}/scripts/build.properties.SED | sed -e s#SED_BUILD_DIR#${BUILD_
 # bug fix for 1872. [testcase: go to about box. click on installation details.  Do you see an error? ] 
 for f in `find ${SOURCE_DIR} -name MANIFEST.MF`
 do
-	cat $f | sed -e s#\.qualifier##g > ${f}
+	cat $f | sed -e s#qualifier#"${ECLIPSE_TIMESTAMP}"#g > ${f}
 done
 
 # wrt-ide.product has the orginal reference to 1.0.0.qualifier. Try deleting .qualifier 
 prod_file=${SOURCE_DIR}/org.symbian.tools.wrttools.product/wrt-ide.product
-cat $prod_file | sed -e s#\.qualifier##g > $prod_file
+cat $prod_file | sed -e s#qualifier#"${ECLIPSE_TIMESTAMP}"#g > $prod_file
 
 ${ANT_CMD} -DbuildDirectory=${BUILD_DIR} -DsourceDirectory=${SOURCE_DIR}
 
