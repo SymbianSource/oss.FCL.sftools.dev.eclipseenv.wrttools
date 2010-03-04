@@ -659,4 +659,12 @@
        </selectionEnablement>
     </linkHelper>
  </extension>
+ <extension
+       id="org.symbian.tools.wrttools.platformservices"
+       name="Platform Services Inferrence Support"
+       point="org.eclipse.wst.jsdt.core.inferrenceSupport">
+    <inferenceProvider
+          class="org.symbian.tools.wrttools.core.libraries.PlatformServicesTypeProvider">
+    </inferenceProvider>
+ </extension>
 </plugin>
