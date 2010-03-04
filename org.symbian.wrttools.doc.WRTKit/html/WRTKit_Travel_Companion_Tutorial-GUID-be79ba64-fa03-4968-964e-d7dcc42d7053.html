@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Travel Companion" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Tutorials-GUID-506c11e3-e6f3-43ec-9495-fcfa638b7e08.html" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Travel_Companion_planning_the_widget-GUID-891068c7-c802-4da7-8674-8e8292aef7eb.html" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Travel_Companion_user_interface-GUID-989d17cc-f019-46bb-b6f5-49166e258aca.html" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Travel_Companion_functionality-GUID-384f2430-3de9-4006-ac8e-86c5774c3a79.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-BE79BA64-FA03-4968-964E-D7DCC42D7053" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Travel Companion</title>
+</head>
+<body id="GUID-BE79BA64-FA03-4968-964E-D7DCC42D7053"><a name="GUID-BE79BA64-FA03-4968-964E-D7DCC42D7053"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Travel Companion</h1>
+
+    <div>
+
+        <p>
+
+            If you've completed the Hello World and RSS Reader tutorials and feel that you
+            understand them well but still want to learn more, then this tutorial is for you!
+            The Travel Companion widget that we will create in this tutorial is something that
+            would be very useful for anyone who travels a lot. It's a widget that offers many
+            helpful features for travellers: a world clock that allows the user to simultaneously
+            follow the time at home and at the destination, a 5-day weather forecast for the
+            destination city and the current weather for both the home and destination cities,
+            a currency converter, and a summary of the current news headlines.
+        </p>
+
+        <p>
+
+            But because this tutorial is about using the WRTKit for developing widget user interfaces
+            we will not implement all the code that is required to actually carry out all the
+            functionality that was described above. Instead we will have a Travel Companion "engine"
+            that will provide all these services for us so that we can focus on the user interface.
+            The engine that we will use (that has been created for this example) is a mock engine,
+            meaning that it mimics what the real Travel Companion engine would do, but actually it
+            just returns hard coded weather forecasts and exchange rates. That's all we need for this
+            tutorial, but after you've created the widget you can modify the engine so that it
+            actually fetches news headlines, currency exchange rates and weather forecasts from
+            various data sources online. There are plenty of free services that you can integrate to.
+            And here's the best part: because we will implement the user interface so that it's
+            cleanly separated from the engine, you won't have to change a single line of the user
+            interface code after you change the engine to use real world data!
+        </p>
+
+        <p>
+
+            Our widget will have no less than five views: one main view, three functional views and
+            a settings view. The main view exists purely for navigational purposes. Because the widget
+            is so complex we want to give the user an overview of what's available and an easy way of
+            getting to everything. The three functional views include an information view that gives
+            the user the most important information in a single glance, a currency converter view,
+            and a five day weather forecast view. And finally the settings view lets the user configure
+            the home and local cities, daylight saving time and temperature unit (Celsius or
+            Fahrenheit) to use in the weather forecast.
+        </p>
+
+        <p>
+
+            The tutorial will teach several important things. First of all, we'll learn how to
+            create widgets that have multiple views. Second, we'll learn how to separate the code
+            in the widget so that the user interface doesn't need to know anything about how the
+            business logic works, and vice versa. Third, we'll create a navigational view using
+            the NavigationButton control. Fourth, we'll customize the look of the widget to include
+            a logo for our application in the list view caption area. And finally, we'll learn how
+            to update the content in the user interface using a timer. We'll use the timer to keep
+            the world clock, weather forecast and news headlines up to date. This is very important
+            because widgets are often used so that the user starts them and then just keeps them
+            running for days on end. If we didn't refresh the user interface then the information
+            would quickly get old and the user would be forced to do manual refreshes.
+        </p>
+
+    </div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="WRTKit_Travel_Companion_planning_the_widget-GUID-891068c7-c802-4da7-8674-8e8292aef7eb.html">Planning the widget</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="WRTKit_Travel_Companion_user_interface-GUID-989d17cc-f019-46bb-b6f5-49166e258aca.html">Travel Companion user interface</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="WRTKit_Travel_Companion_functionality-GUID-384f2430-3de9-4006-ac8e-86c5774c3a79.html">Functionality</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Tutorials-GUID-506c11e3-e6f3-43ec-9495-fcfa638b7e08.html">WRTKit Tutorials</a></div>
+</div>
+</div>
+
+</body>
+</html>

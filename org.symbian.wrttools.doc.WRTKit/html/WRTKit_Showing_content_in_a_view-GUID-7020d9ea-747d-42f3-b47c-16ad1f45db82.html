@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Showing content in a view" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-7020D9EA-747D-42F3-B47C-16AD1F45DB82" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Showing content in a view</title>
+</head>
+<body id="GUID-7020D9EA-747D-42F3-B47C-16AD1F45DB82"><a name="GUID-7020D9EA-747D-42F3-B47C-16AD1F45DB82"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Showing content in a view</h1>
+
+    <div>
+
+        <p>
+
+            The WRTKit has two controls for showing content inside a view. The 
+            first of the controls is called Label and is useful for simple and 
+            short information to be displayed, coupled with the control caption 
+            that describes the information.
+        </p>
+
+        <div class="fignone" id="GUID-7020D9EA-747D-42F3-B47C-16AD1F45DB82__GUID-EB15E9F3-204F-4772-B820-F3375D4C040A"><a name="GUID-7020D9EA-747D-42F3-B47C-16AD1F45DB82__GUID-EB15E9F3-204F-4772-B820-F3375D4C040A"><!-- --></a><span class="figcap">Figure 1. 
+Label control</span>
+
+            
+            <br /><img src="Label_Control_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            The second control is called ContentPanel and is more sophisticated 
+            than the Label control. ContentPanel controls can be created as 
+            foldable, which means that they can expand and collapse their 
+            content areas. Users can toggle the expanded and collapsed state by 
+            clicking on the caption area of the ContentPanel.
+        </p>
+
+        <div class="fignone" id="GUID-7020D9EA-747D-42F3-B47C-16AD1F45DB82__GUID-5EC096E5-EADF-4BD6-9D6A-1B331EAA2E66"><a name="GUID-7020D9EA-747D-42F3-B47C-16AD1F45DB82__GUID-5EC096E5-EADF-4BD6-9D6A-1B331EAA2E66"><!-- --></a><span class="figcap">Figure 2. 
+Foldable content panel</span>
+
+            
+            <br /><img src="RSS_Reader_Main_Screenshot_2.png" /><br />
+        </div>
+
+        <p>
+
+            The code below creates a Label control and a foldable ContentPanel 
+            control and adds them to a view. The code assumes that a view has 
+            already been created and that a variable called exampleView refers 
+            to it.
+        </p>
+
+<pre>
+
+// create label
+var nameLabel = new Label("label1", "Name");
+exampleView.addControl(nameLabel);
+
+// create foldable content panel
+var infoPanel = new ContentPanel("info1", "Information", null, true);
+exampleView.addControl(infoPanel);
+</pre>
+
+        <p>
+
+            The first and second arguments are the same in the constructors for 
+            both controls. The first is a unique identifier for the control and 
+            the second is the control caption. The third argument is also the 
+            same but is omitted for the label and null for the content panel 
+            since in both cases we don't specify any content at this point. The 
+            fourth argument for the content panel is a boolean that specifies 
+            whether the control should be foldable or not.
+        </p>
+
+        <p>
+
+            The value for a label can be set and retrieved using the getText() and
+            setText() methods. For content panels the content in the content area
+            can be set and retrieved using getContent() and setContent(). The
+            content is defined as an XHTML fragment and can contain arbitrarily
+            complex XHTML, including images or even JavaScript.
+        </p>
+
+<pre>
+
+// set the text for the label
+nameLabel.setText("John Smith");
+
+// set content for the content panel
+infoPanel.setContent("&lt;b&gt;This is bolded!&lt;/b&gt;&lt;br/&gt;This is plain text on the second line.");
+</pre>
+
+        <p>
+
+            Foldable ContentPanel controls can be programmatically collapsed or
+            expanded using the setExpanded() method. The expanded state can be
+            retrieved using the isExpanded() method.
+        </p>
+
+<pre>
+
+// retrieve the expanded state
+var expanded = infoPanel.isExpanded();
+
+// collapse the content panel
+infoPanel.setExpanded(false);
+</pre>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>

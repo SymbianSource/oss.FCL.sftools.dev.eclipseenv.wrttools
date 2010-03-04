@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="WRTKit design considerations" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Overview_of_the_WRTKit-GUID-14c414f6-a220-40b6-8614-df13141495ab.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-CD4C583D-E6D8-4AAB-B2D8-DBA09DD7A009" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+WRTKit design considerations</title>
+</head>
+<body id="GUID-CD4C583D-E6D8-4AAB-B2D8-DBA09DD7A009"><a name="GUID-CD4C583D-E6D8-4AAB-B2D8-DBA09DD7A009"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+WRTKit design considerations</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+User interface design</h2>
+
+            
+            <p>
+
+                The WRTKit uses views and controls as the basis for all user 
+                interfaces, and those views and controls have a look and feel that 
+                is more similar to mobile device applications than to web pages, 
+                despite the fact that the underlying technology is HTML, CSS and 
+                JavaScript. The WRTKit supports both the tab and pointer based 
+                navigations modes but staying true with the application-like look 
+                and feel, it's often a good idea to use the tab navigation mode as 
+                that will probably be more familiar to users.
+            </p>
+
+            <p>
+
+                Consistency and clarity help guiding the user through the widget 
+                user interface. As the saying goes, less is more. Instead of having 
+                a huge user interface that users must scroll through to get to what 
+                they want, consider dividing the user interface into multiple views 
+                that only contain controls and functionality that logically fits 
+                together. Use NavigationButton controls or the Options menu for 
+                navigation between the views.
+            </p>
+
+            <p>
+
+                Keep in mind that the right softkey can be programmatically changed. 
+                You can take advantage of this, for example so that you use it to 
+                allow users to return back to the previous or parent view.
+            </p>
+
+            <p>
+
+                Consider placing all configurable options in a view that the user 
+                can access from the Options menu. If there are more configurable 
+                options than what fits within one or two screenfuls then it's 
+                probably a good idea to split them into multiple views.
+            </p>
+
+            <p>
+
+                Errors happen so keep those in mind when designing the widget.
+                The WRTKit offers easy to use notification popup dialogs that
+                can be used to show error messages in a way that will be familiar
+                to the user.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Security</h2>
+
+            
+            <p>
+
+                Most of methods in the WRTKit that accept strings as parameters 
+                use XHTML in their values. This allows the use of custom styles 
+                and other rich content in control and view captions, label 
+                values, content in content panels, and more. But like always 
+                when dealing with untrusted data from the Internet, you have to 
+                be careful with the data that you display in the user interface 
+                so that you don't end up placing malicious HTML (e.g. with 
+                script tags containing hostile code) into your user interface.
+            </p>
+
+            <p>
+
+                Always filter the content that you fetch using AJAX to make sure 
+                that no HTML tags have been injected into that content. This is 
+                a good idea in any case even if there are no malicious intents, 
+                since arbitrary HTML mixed into content can easily cause your 
+                user interface to behave in unpredictable ways.
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Overview_of_the_WRTKit-GUID-14c414f6-a220-40b6-8614-df13141495ab.html">Overview of the WRTKit</a></div>
+</div>
+</div>
+
+</body>
+</html>

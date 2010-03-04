@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="First steps" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_RSS_Reader_Tutorial-GUID-678d197f-c7b0-4e5e-85e2-f8549c75bbe8.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-DB42B227-1647-4020-BDB9-DACB26771779" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+First steps</title>
+</head>
+<body id="GUID-DB42B227-1647-4020-BDB9-DACB26771779"><a name="GUID-DB42B227-1647-4020-BDB9-DACB26771779"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+First steps</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Preparations</h2>
+
+            
+            <p>
+
+                You can find the ready made RSS Reader example in the Examples/RSSReader directory
+                in the WRTKit SDK. In there you can find the by-now familiar widget files: Info.plist
+                for the widget metadata, Icon.png for the S60 application grid icon, and the WRTKit
+                directory for the WRTKit user interface toolkit. You will also find the main HTML
+                file RSSReader.html, a CSS file called RSSReader.css and two JavaScript files
+                RSSReader.js and FeedUpdateBroker.js. As with all WRTKit -based widgets, we will
+                be focusing on the JavaScript files but before we get to those, let's see take a
+                look at the main HTML file:
+            </p>
+
+<pre>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;script type="text/javascript" src="WRTKit/WRTKit.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="FeedUpdateBroker.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="RSSReader.js"&gt;&lt;/script&gt;
+        &lt;style type="text/css"&gt;
+            @import url("RSSReader.css");
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body onload="init()"&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+            <p>
+
+                You probably immediately noticed that the file is almost identical to the HTML file
+                for the Hello World widget. This is despite that the RSS Reader is much more complex.
+                In fact the only differences are that we are including the two JavaScript files
+                FeedUpdateBroker.js and RSSReader.js instead of HelloWorld.js as in the Hello World
+                widget. That, and the fact that we have a CSS stylesheet file that we also import here,
+                called RSSReader.css. Like for the Hello World widget we have an onload-event handler
+                that calls a function called init() in the JavaScript to allow us to initialize the
+                widget after everything is loaded.
+            </p>
+
+            <p>
+
+                You can either examine the ready made files or create your own files as you read the
+                tutorial. The tutorial assumes that you will create your own. If you're doing that then
+                now would be a good time to create a working directory for your own widget, call it
+                RSSReader and copy the WRTKit directory, Info.plist, Icon.png and the FeedUpdateBroker.js
+                file to the your own working directory. The FeedUpdateBroker.js is an AJAX-based RSS
+                fetcher and parser that we will be using in this example. It doesn't really have anything
+                to do with the WRTKit or the user interface for the RSS Reader but we need it in order
+                to be able to fetch and parse RSS feed news items. We will not create it in this tutorial
+                and thus you should just copy it to your own widget working directory.
+            </p>
+
+            <p>
+
+                At this point you can also create an empty placeholder for the CSS stylesheet file 
+                (RSSReader.css) so that you have the file ready for when we'll create some CSS rules
+                for the widget. Also create an empty placeholder for the RSSReader.js file where the
+                majority of the widget's code will go. We'll return to this in a little bit!
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Architecture</h2>
+
+            
+            <p>
+
+                Before we write any code, let's talk about what the architecture of the RSS Reader
+                will be like. As we previously mentioned, the widget will have two views. A main
+                view for showing feed news items and a settings view to allow users to configure
+                what RSS feed to show and how often to update it. We also said that we'll have a
+                custom Options menu.
+            </p>
+
+            <p>
+
+                The entire code that implements fetching and parsing RSS feeds will be implemented
+                in the file FeedUpdateBroker.js. The widget code will use it through only one single
+                method: fetchFeed(). The way this works is that we will pass the URL of the RSS
+                feed to the method, as well as a function that will get called when the fetch has
+                been completed. Note that this call is asynchronous - it will immediately return
+                after it's called and the actual outcome of the fetch will not be known until the
+                callback method is called. As an argument to the callback we will receive an object
+                with three properties: status, lastModified and items. The status property will
+                contain a value of either "ok" or "error" depending on the outcome. The lastModified
+                will be present in case the fetch was successful and contains a timestamp that 
+                indicates when the RSS feed was last updated. This will allow us to determine whether
+                there is any new news items or not so that we only update the user interface if there
+                really is something to update. Finally the third property "items" contains an array
+                of parsed RSS news items. Each of these is a JavaScript object that has four
+                properties: title for the news item headline, date to indicate when it was created,
+                description for the news item summary, and link with an URL to the full story.
+            </p>
+
+            <p>
+
+                We will setup a timer in the widget that will run a function once every second. In
+                this function we will compare the current time to a scheduled "next update" time.
+                If we have reached the next update time, we will use the feed update broker to fetch
+                the RSS news items of the feed that we're interested in. When the feed has been
+                fetched and parsed a callback method will be called and we will react to the callback
+                by either showing an error message (if the update failed), ignoring the callback (if
+                there was no new news items for us), or update the user interface (if there's new
+                news items to show).
+            </p>
+
+            <p>
+
+                We also want to be able to update the news items on request and for that we will
+                put an option in the Options menu that triggers a function that sets the next
+                scheduled update time to be immediately. That way the normal update timer will
+                immediately get triggered and cause an update.
+            </p>
+
+            <p>
+
+                We will also set the "next update" time whenever the feed update broker is used
+                to fetch new news items. That way we will get an automatic periodic update of the
+                news that will run in the background but can also be triggered to run immediately
+                if the user asks it to be.
+            </p>
+
+            <p>
+
+                In order to fetch and update news items with this mechanism we need two things:
+                the URL to the RSS feed and the interval between the automatic updates. These are
+                also the two properties that we will allow the user to configure in the settings
+                view. The properties will be stored in the widget preferences store and updated
+                there whenever the user saves the settings. The settings will be read when the
+                widget starts.
+            </p>
+
+            <p>
+
+                When the news items are fetched we will display a notification popup dialog to
+                indicate that the loading is in progress. The main reason why this is important
+                is because the loading takes some time and if we don't react immediately to the
+                user's action then the user will feel like the widget is not responsive. However
+                we don't want to popup a progress dialog every time the widget loads news in the
+                background. That would be really annoying when the user is reading news! This
+                means that we have to know whether the update was triggered manually or if it
+                was scheduled. We'll use a flag to track this and popup the dialog only if the
+                update was commanded by the user.
+            </p>
+
+            <p>
+
+                The settings view will contain four controls: a selection control to select the
+                feed URL, another selection control to select the feed update frequency, a save
+                button and a cancel button.
+            </p>
+
+            <p>
+
+                The main view in turn will contain a variable amount of controls: one for each
+                news item. The control that we will use is a ContentPanel control, which allows
+                us to collapse and expand the content so that we can display a compact list of
+                news headlines yet allow the user to open up a particular piece of news that
+                is interesting and read the summay or go to the website where the full news
+                story can be found. The news item controls will have the news headline as the
+                caption in the control. Unlike for other controls, ContentPanel captions are
+                interactive and can be clicked. When clicked they will toggle the content area
+                of the panel. We will put the actual news story summary in this content area.
+                The news story summary will be a fragment of HTML that we will construct from
+                each news story. The HTML will also include a link to the website where the
+                full story is located. The HTML will be styled by CSS rules that we will write
+                to the RSSReader.css file.
+            </p>
+
+            <p>
+
+                Because we don't know how many news stories we will have at any given time, we
+                will add and remove ContentPanel controls to the main view dynamically whenever
+                there's some update in the RSS feed. But we're environmentally conscious so
+                we'll recycle the ContentPanels. There's no need to throw them away even if they
+                are not needed. So once we have created them we will put them in a pool so that
+                we can recycle them. Later on if we need more ContentPanels will look for them
+                in the pool first and only if there are no ready ContentPanel controls for us
+                will we create more controls (and place them in the pool). Strictly speaking such
+                recycling is not necessary but it doesn't complicate the code much and it's a good
+                skill to know.
+            </p>
+
+            <p>
+
+                Finally, as we move between the main view and settings view we will need to
+                change the right softkey so that it's "Exit" in the main view and "Cancel" in
+                the settings view.
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_RSS_Reader_Tutorial-GUID-678d197f-c7b0-4e5e-85e2-f8549c75bbe8.html">RSS Reader</a></div>
+</div>
+</div>
+
+</body>
+</html>

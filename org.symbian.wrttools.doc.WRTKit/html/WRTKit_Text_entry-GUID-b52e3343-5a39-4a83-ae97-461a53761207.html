@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Text entry" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-B52E3343-5A39-4A83-AE97-461A53761207" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Text entry</title>
+</head>
+<body id="GUID-B52E3343-5A39-4A83-AE97-461A53761207"><a name="GUID-B52E3343-5A39-4A83-AE97-461A53761207"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Text entry</h1>
+
+    <div>
+
+        <p>
+
+            The WRTKit has two controls for text entry needs. For situations when only a 
+            single line of text is needed there's the TextField control. The TextField 
+            control supports "masked text entry", meaning that any text that is entered into 
+            the control is masked so it cannot be read. The mask is implemented so that 
+            every typed character is shown as an asterisk (*) character.
+        </p>
+
+        <p>
+
+            When longer or multi-line text entry is needed, the TextArea control 
+            can be used instead of the single-line TextField. The TextArea size 
+            can be defined in number of rows when the control is created. If the 
+            argument for rows is omitted a default of 3 rows will be used. 
+            Longer text can still be entered - the size refers to number of rows 
+            that are visible without scrolling. Note that TextArea controls do 
+            not support masked text entry.
+        </p>
+
+        <div class="fignone" id="GUID-B52E3343-5A39-4A83-AE97-461A53761207__GUID-F9A88AF0-067A-43EC-8C0B-7E0B092A6850"><a name="GUID-B52E3343-5A39-4A83-AE97-461A53761207__GUID-F9A88AF0-067A-43EC-8C0B-7E0B092A6850"><!-- --></a><span class="figcap">Figure 1. 
+TextField and TextArea controls</span>
+
+            
+            <br /><img src="Text_Entry_Controls_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            The text in TextField and TextArea controls can be retrieved and set using 
+            getter and setter methods.
+        </p>
+
+        <p>
+
+            Text entry controls fire "TextChanged" events when the user edits the text in
+            the control.
+        </p>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html">Developing widgets using the WRTKit</a></div>
+</div>
+</div>
+
+</body>
+</html>

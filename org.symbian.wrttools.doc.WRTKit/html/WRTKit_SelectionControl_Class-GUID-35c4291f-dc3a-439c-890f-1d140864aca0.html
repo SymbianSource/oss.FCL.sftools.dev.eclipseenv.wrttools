@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="WRTKit SelectionControl Class" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-35C4291F-DC3A-439C-890F-1D140864ACA0" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+WRTKit SelectionControl Class</title>
+</head>
+<body id="GUID-35C4291F-DC3A-439C-890F-1D140864ACA0"><a name="GUID-35C4291F-DC3A-439C-890F-1D140864ACA0"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+WRTKit SelectionControl Class</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Description</h2>
+
+            
+            <p>
+
+                The SelectionControl class is an abstract base class for all controls that lets
+                the user select one or more options from a set of options.
+            </p>
+
+            <p>
+
+                The options in a selection control are simple option objects with two properties:
+                value and text. An option is specified using JavaScript object notation (JSON) as
+                <samp class="codeph">
+{ value: "value here", text: "Text for value goes here" }</samp>. The value
+                property specifies the actual value of the option whereas the text property specifies
+                how the option is shown to the user in the control. E.g. the value could be a boolean
+                value while the text could be "Yes" or "No". The text value is an XHTML string.
+            </p>
+
+            <p>
+
+                Don't instantiate SelectionControl directly but rather one of its subclasses.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Inherits from</h2>
+
+            
+            <p>
+
+                <a href="WRTKit_Control_Class-GUID-6ddb8154-3fed-40fc-b282-85e6d3ad494f.html">
+Control</a>
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Events</h2>
+
+            
+            <br /><ul>
+
+                <li>
+
+                    <p>
+SelectionChanged</p>
+
+                    
+
+                        <p>
+
+                            This event is fired when the user selects one or more values in the control.
+                        </p>
+
+                    
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html">WRTKit API Reference</a></div>
+</div>
+</div>
+<div class="nested1" id="GUID-8EEF9007-9B25-4140-A44E-FDC8E60E5515"><a name="GUID-8EEF9007-9B25-4140-A44E-FDC8E60E5515"><!-- --></a>
+
+        <h2 class="topictitle2">
+isMultipleSelection()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Boolean] SelectionControl.isMultipleSelection(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Returns a boolean value that indicates whether the selection control lets
+                    users select multiple options.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    True if the control lets users select multiple options, false if only a single option
+                    can be selected at any given time.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-6CFB77B9-9930-49DC-982B-99F9CEBBEBCC"><a name="GUID-6CFB77B9-9930-49DC-982B-99F9CEBBEBCC"><!-- --></a>
+
+        <h2 class="topictitle2">
+isSelected()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Boolean] SelectionControl.isSelected(Option option)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Returns a boolean value that indicates whether the the specified option
+                    is currently selected. Options are objects with two properties: value and text.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+option</p>
+
+                        
+
+                            <p>
+
+                                The option to check the selected state for.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    True if the specified option is selected, false if not.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-DE791188-37C3-4433-BB16-9362EFFECFEE"><a name="GUID-DE791188-37C3-4433-BB16-9362EFFECFEE"><!-- --></a>
+
+        <h2 class="topictitle2">
+getSelected()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Option|Array] SelectionControl.getSelected(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Retrieves the currently selected option or options. If the control is a multiple
+                    selection control then an array of selected options is returned (an empty array if
+                    no options are selected). If the control is a single selection control then the
+                    single selection option is returned, or null if no options are selected.
+                    Options are objects with two properties: value and text.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    An array containing the currently selected options for multiple selection controls.
+                    For single selection controls the return value is the selected option. If no options
+                    are selected then an empty array is returned for multiple selection controls and null
+                    is returned for single selection controls.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-348A4EC8-8962-4CB3-BD22-39D095280995"><a name="GUID-348A4EC8-8962-4CB3-BD22-39D095280995"><!-- --></a>
+
+        <h2 class="topictitle2">
+setSelected()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] SelectionControl.setSelected(Option|Array selected)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Sets the currently selected options for a selection control. The selected options
+                    should be a subset of the options contain within the control. For a multiple selection
+                    control an array of options should be specified. For a single selection control the
+                    single option that should be selected should be specified without being contained in
+                    an array. To select zero options pass an empty array for multiple selection controls
+                    and null for single selection controls. Options are objects with two properties:
+                    value and text.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+selected</p>
+
+                        
+
+                            <p>
+
+                                The options to select. For multiple selection controls this argument
+                                should be an array of the options to select or an empty array to select
+                                zero elements. For single selection controls it should be a single option
+                                object or null for no selected options.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-97BCB1F7-4DEC-4621-9B22-87123719CF7B"><a name="GUID-97BCB1F7-4DEC-4621-9B22-87123719CF7B"><!-- --></a>
+
+        <h2 class="topictitle2">
+getOptions()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Array] SelectionControl.getOptions(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Retrieves the options available to the user in the control. The options are
+                    returned as an array of option objects. Options are objects with two properties:
+                    value and text.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    An array containing the options in the control.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-167CC713-AF75-4CC7-841E-974D4CB77C1D"><a name="GUID-167CC713-AF75-4CC7-841E-974D4CB77C1D"><!-- --></a>
+
+        <h2 class="topictitle2">
+setOptions()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] SelectionControl.setOptions(Array options)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Sets the options that this control should give the user. Calling this method
+                    replaces the current options with the specified new ones. If one or more selected
+                    options are no longer part of the available options after calling this method
+                    then they will automatically be removed from the selected set. The options
+                    are given as an array of option objects. Options are objects with two properties:
+                    value and text. The text value is an XHTML string.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+options</p>
+
+                        
+
+                            <p>
+
+                                An array of options to give the user. These options replace the
+                                current options in the control.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-815B72AA-CB42-4A8C-B656-6C144BC356F6"><a name="GUID-815B72AA-CB42-4A8C-B656-6C144BC356F6"><!-- --></a>
+
+        <h2 class="topictitle2">
+getOptionForValue()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Array] SelectionControl.getOptionForValue(Object value)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Retrieves the option in the selection control that has a value that matches
+                    the specified one. If multiple options have the same value then the first matching
+                    one is returned. If there is no match then null is returned.
+                </p>
+
+                <p>
+
+                    This method is a useful helper method for situations where a specific value in the
+                    options should be programmatically selected.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+value</p>
+
+                        
+
+                            <p>
+
+                                The value to search for among the options in the selection control.
+                                The value can be of any JavaScript type.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    The first option in this selection control that has a value that matches the
+                    specified one, or null if no matching option is found.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

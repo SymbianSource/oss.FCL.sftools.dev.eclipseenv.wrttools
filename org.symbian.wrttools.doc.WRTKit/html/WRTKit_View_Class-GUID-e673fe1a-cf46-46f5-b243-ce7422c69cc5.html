@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="WRTKit View Class" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-E673FE1A-CF46-46F5-B243-CE7422C69CC5" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+WRTKit View Class</title>
+</head>
+<body id="GUID-E673FE1A-CF46-46F5-B243-CE7422C69CC5"><a name="GUID-E673FE1A-CF46-46F5-B243-CE7422C69CC5"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+WRTKit View Class</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Description</h2>
+
+            
+            <p>
+
+                The View class is an abstract base class for all views. Views are containers for controls
+                and are used to collect the set of controls that constitutes a logical view in a
+                widget user interface. The displayed view is controlled by the UIManager. Don't
+                instantiate View directly but rather one of its subclasses, e.g. ListView.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Inherits from</h2>
+
+            
+            <p>
+
+                <a href="WRTKit_UIElement_Class-GUID-37b82f75-720c-4f54-9769-cda18453ffa3.html">
+UIElement</a>
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Events</h2>
+
+            
+            <br /><ul>
+
+                <li>
+
+                    <p>
+FocusedControlChanged</p>
+
+                    
+
+                        <p>
+
+                            This event is fired when the focused control has changed in the view.
+                        </p>
+
+                    
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html">WRTKit API Reference</a></div>
+</div>
+</div>
+<div class="nested1" id="GUID-03FF9D38-7DA8-47F6-BE17-05C06A45EC23"><a name="GUID-03FF9D38-7DA8-47F6-BE17-05C06A45EC23"><!-- --></a>
+
+        <h2 class="topictitle2">
+getFocusedControl()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Control] View.getFocusedControl(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Retrieves the currently focused control in the view or null if none.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    The current focused control or null if none.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-A80F4155-D5E3-42FF-9ECA-214C7AFB8483"><a name="GUID-A80F4155-D5E3-42FF-9ECA-214C7AFB8483"><!-- --></a>
+
+        <h2 class="topictitle2">
+focusFirstControl()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Control] View.focusFirstControl(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Attempts to focus the first focusable control in the view. Note that
+                    this method call might fail to actually focus the control in certain
+                    circumstances, such as when the view is not visible or if no focusable
+                    control exists.
+                </p>
+
+                <p>
+
+                    This method is rarely needed because focus handling is to a high degree
+                    handled automatically by the user interface toolkit. For example when
+                    a new view is displayed the first focusable control is automatically
+                    given focus.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

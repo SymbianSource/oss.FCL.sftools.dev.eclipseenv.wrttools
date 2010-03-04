@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using buttons" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-8B14CEC9-92CC-4BDE-83C2-AD0A30A84942" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Using buttons</title>
+</head>
+<body id="GUID-8B14CEC9-92CC-4BDE-83C2-AD0A30A84942"><a name="GUID-8B14CEC9-92CC-4BDE-83C2-AD0A30A84942"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Using buttons</h1>
+
+    <div>
+
+        <p>
+
+            You can let users trigger actions by placing a FormButton or 
+            NavigationButton control in a view. Use FormButtons for actions that 
+            start some process and NavigationButton controls for situations 
+            where pressing the button should take the viewer to another view.
+        </p>
+
+        <div class="fignone" id="GUID-8B14CEC9-92CC-4BDE-83C2-AD0A30A84942__GUID-B008BB2B-C5B2-446D-BCED-2824528CF7CC"><a name="GUID-8B14CEC9-92CC-4BDE-83C2-AD0A30A84942__GUID-B008BB2B-C5B2-446D-BCED-2824528CF7CC"><!-- --></a><span class="figcap">Figure 1. 
+FormButton controls</span>
+
+            
+            <br /><img src="FormButton_Controls_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            You can find out when a button has been pressed by registering a 
+            callback function as an event listener to the button. The event type 
+            for button presses is "ActionPerformed". You can use whatever name 
+            you like for the callback function. The function is passed the event 
+            object as an argument. A typical callback function looks like this:
+        </p>
+
+<pre>
+
+// Callback function for button presses.
+function buttonPressed(event) {
+    // implement what happens when the button is pressed here
+}
+</pre>
+
+        <p>
+
+            Creating a button, registering the event listener and adding the 
+            button to a view is demonstrated below. The example creates a 
+            FormButton:
+        </p>
+
+<pre>
+
+// create button
+var button = new FormButton("button1", "Press me!");
+button.addEventListener("ActionPerformed", buttonPressed);
+exampleView.addControl(button);
+</pre>
+
+        <p>
+
+            Note that the example assumes that a view has already been created 
+            and that the "exampleView" variable refers to that view. "button1" 
+            is a unique identifier for the button that allows it to be identified
+            for example if several different controls are using a shared event
+            listener function. The event listener function could examine the event
+            object and check the identifier of the source control for the event.
+        </p>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>

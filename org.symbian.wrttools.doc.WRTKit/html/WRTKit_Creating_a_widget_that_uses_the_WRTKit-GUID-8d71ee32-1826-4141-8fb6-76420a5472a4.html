@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Creating a widget that uses the WRTKit" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-8D71EE32-1826-4141-8FB6-76420A5472A4" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Creating a widget that uses the WRTKit</title>
+</head>
+<body id="GUID-8D71EE32-1826-4141-8FB6-76420A5472A4"><a name="GUID-8D71EE32-1826-4141-8FB6-76420A5472A4"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Creating a widget that uses the WRTKit</h1>
+
+    <div>
+
+        <p>
+
+            To create a widget the uses the WRTKit for its user interface, start by copying
+            the WRTKit directory from the Library directory in the WRTKit to the root
+            directory of the widget you are making. The root directory of your widget is
+            the directory where your Info.plist and main HTML file is located.
+        </p>
+
+        <p>
+
+            The main HTML file should include a script tag that loads the file 
+            WRTKit/WRTKit.js in order to include and initialize the WRTKit library in your 
+            widget. The widget typically should have no content at all between its 
+            &lt;body&gt; and &lt;/body&gt; tags. You also want to include the JavaScript 
+            script file where your own widget's code is located, and you want to define some 
+            entry point function that gets called when the widget is loaded, e.g. using the 
+            onload event that you can define for the body tag. This should result in an HTML
+            file that looks something like this:
+        </p>
+
+<pre>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;script type="text/javascript" src="WRTKit/WRTKit.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="YourOwnWidgetCode.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body onload="init()"&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+        <p>
+
+            In this example the code for your own widget is in a file called YourOwnWidgetCode.js
+            and the entry point function that gets called when the widget has loaded all files is
+            called init(). Next, we want to create that function.
+        </p>
+
+        <p>
+
+            All widgets that use the WRTKit need to create an instance of the UIManager class, as
+            well as at least one view. Creating the UIManager is a simple matter of instantiating
+            the WRTKit UIManager class. You should retain the reference to that instance in a
+            global variable or some other place that is accessible to the code that will need to
+            use the UIManager's services. To do this, you would first declare the global variable
+            to hold your UIManager instance:
+        </p>
+
+<pre>
+
+// Reference to the user interface manager.
+var uiManager;
+</pre>
+
+        <p>
+
+            With the variable declared you can then add the following code to the init() function
+            to create an instance of the UIManager class and retain a reference to that instance
+            in the uiManager variable:
+        </p>
+
+<pre>
+
+// create the user interface manager
+uiManager = new UIManager();
+</pre>
+
+        <p>
+
+            Now that we have a user interface manager instance we can create a new view and set it
+            to the screen. In order to be able to access that view outside the init() function, we
+            should crate a global variable for it just like we did for the UIManager instance:
+        </p>
+
+<pre>
+
+// Reference to the main view.
+var mainView;
+</pre>
+
+        <p>
+
+            In this example we will create a ListView that has a unique identifier "example" and
+            a view caption "Example View". The unique identifier can be used to set CSS rules that
+            are targeted to a particular view. It is often not needed and can be specified as null.
+            The view caption is shown at the top of list views and is helpful to show users what
+            the view is for.
+        </p>
+
+<pre>
+
+// create the main view
+mainView = new ListView("example", "Example View");
+</pre>
+
+        <p>
+
+            We are now ready to command the view to the screen:
+        </p>
+
+<pre>
+
+// show the mainView
+uiManager.setView(mainView);
+</pre>
+
+        <p>
+
+            The example widget would now be displaying an empty list view with "Example View" in
+            its view caption and would be ready for more functionality. Let's add a button to the
+            view. You would normally do this before the view is shown. Our example button has a
+            unique identifier "exampleButton" and text "Press me!" on the face of the button.
+        </p>
+
+<pre>
+
+// add a button to the main view
+var exampleButton = new FormButton("exampleButton", "Press me!");
+mainView.addControl(exampleButton);
+</pre>
+
+        <p>
+
+            The main view now contains a button. If we wanted to be informed when the button is
+            pressed we could create a new function and register it as an "event listener". First
+            the callback function definition:
+        </p>
+
+<pre>
+
+// Callback function that gets called when the example button is pressed.
+function exampleButtonPressed(event) {
+    // popup a notification dialog when the button is pressed
+    uiManager.showNotification(3000, "info", "You pressed the button!");
+}
+</pre>
+
+        <p>
+
+            Now that we have a function to call when the button is pressed we can register the
+            event listener. You should write this code in the init() function, for example right
+            after you created the button:
+        </p>
+
+<pre>
+
+// add an event listener
+exampleButton.addEventListener("ActionPerformed", exampleButtonPressed);
+</pre>
+
+        <p>
+
+            The same idea applies even to much more complex user interfaces. You create views and
+            controls, add the controls to the views, command a view to be displayed using the
+            UIManager, and get notified of user actions using event listeners that you can
+            register to the controls.
+        </p>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>

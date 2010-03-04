@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using notification popups" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-39C7A69A-9334-45D1-92F6-8C239831A0A2" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Using notification popups</title>
+</head>
+<body id="GUID-39C7A69A-9334-45D1-92F6-8C239831A0A2"><a name="GUID-39C7A69A-9334-45D1-92F6-8C239831A0A2"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Using notification popups</h1>
+
+    <div>
+
+        <p>
+
+            Notification popup dialogs are an easy way to show information to 
+            users. In the WRTKit notification popups are used using two methods 
+            in the UIManager class: showNotification() and hideNotification(). 
+            If a notification is already showing when another is commanded to be 
+            shown then the current notification is replaced with the new one. 
+            Notifications can be either auto-hiding after a specified time or 
+            manually hidden by calling hideNotification(). Auto-hiding is an 
+            easy way in situations where a message just needs to be shown but 
+            doesn't require user acknowledgement, e.g. to let the user know that 
+            new content has loaded or similar.
+        </p>
+
+        <div class="fignone" id="GUID-39C7A69A-9334-45D1-92F6-8C239831A0A2__GUID-05D19BA1-DC3E-40EE-B587-387039A547C2"><a name="GUID-39C7A69A-9334-45D1-92F6-8C239831A0A2__GUID-05D19BA1-DC3E-40EE-B587-387039A547C2"><!-- --></a><span class="figcap">Figure 1. 
+Wait notification with unknown progress</span>
+
+            
+            <br /><img src="RSS_Reader_Main_Screenshot_3.png" /><br />
+        </div>
+
+        <p>
+
+            The API for showNotification() takes four arguments: displayTime, 
+            type, text and progress. The "displayTime" argument is an integer 
+            that specifies how long the notification popup dialog should be 
+            shown for before automatically hiding. The value is given in 
+            milliseconds (1000ms = 1s) and negative values can be used to 
+            specify that the dialog should not automatically hide. The second 
+            argument "type" is used to specify a visual style for the popup. 
+            There are three types of notifications: "info", "warning" and 
+            "wait". Info is intended for informative messages, warning for 
+            errors or other similar negative messages and finally wait is 
+            intended for dialogs that are letting the user know that some 
+            process (e.g. loading data from the Internet) is taking a long time. 
+            The fourth argument "progress" is a decimal number that should be 
+            omitted or null in all other cases except when the dialog should be 
+            a progress dialog (typically notifications of type "wait"). For 
+            progress dialogs the value should be between 0.0 and 1.0 to specify 
+            how far along the process is (0.0 for "0% done" and 1.0 for "100% 
+            done"). A negative value can be specified if the progress is 
+            unknown, resulting in an animated progress bar that indicates that 
+            the wait time and progress is not known.
+        </p>
+
+        <p>
+
+            The code below show various examples of how to show notification 
+            popup dialogs. The examples assume that the UIManager has been 
+            instantiated and that a variable called uiManager refers to that 
+            instance.
+        </p>
+
+<pre>
+
+// show an info notification - auto-hide in 3 seconds
+uiManager.showNotification(3000, "info", "Informative message here");
+
+// show a warning notification - no auto-hide
+uiManager.showNotification(-1, "warning", "Warning message here");
+
+// show a progress notification - no auto-hide, 40% progress
+uiManager.showNotification(-1, "wait", "Loading...", 0.4);
+
+// show a progress notification - no auto-hide, unknown progress
+uiManager.showNotification(-1, "wait", "Loading...", -1.0);
+</pre>
+
+        <p>
+
+            The example below shows how to hide a notification. If no
+            notification is showing when the method is called then the
+            call is ignored.
+        </p>
+
+<pre>
+
+// hide the current notification (if any)
+uiManager.hideNotification();
+</pre>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>
