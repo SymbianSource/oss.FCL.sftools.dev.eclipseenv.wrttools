@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Travel Companion user interface" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Travel_Companion_Tutorial-GUID-be79ba64-fa03-4968-964e-d7dcc42d7053.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-989D17CC-F019-46BB-B6F5-49166E258ACA" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Travel Companion user interface</title>
+</head>
+<body id="GUID-989D17CC-F019-46BB-B6F5-49166E258ACA"><a name="GUID-989D17CC-F019-46BB-B6F5-49166E258ACA"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Travel Companion user interface</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Handling multiple views</h2>
+
+            
+            <p>
+
+                The Travel Companion widget will follow many of the same patterns that the Hello World
+                and RSS Reader widgets have followed. The entry point to the widget is the init() function
+                that we call from the onload event handler in the main HTML file TravelCompanion.html.
+                We will implement the init() function along with the rest of the widget and user interface
+                in the TravelCompanion.js file. Let's start with the init() function so that we get the
+                widget up and running.
+            </p>
+
+            <p>
+
+                From previous widgets we already know a lot of things about the WRTKit and about what
+                we will need. For example we know that we will have a user interface manager and that
+                we'll need a reference to each of the views that our widget uses. And since we have
+                designed the Travel Companion widget we know what views we will have. Before we write the
+                init() function we can go ahead and declare the variables that we will use to refer to
+                the views and the user interface manager. And while we're at it we can also declare the
+                variable that we'll use to refer to the Travel Companion engine. All of these variables
+                are globals and thus go outside the init() function:
+            </p>
+
+<pre>
+
+// Reference to travel companion engine that implements the business logic.
+var engine;
+
+// Reference to the WRTKit user interface manager.
+var uiManager;
+
+// References to views.
+var mainView;
+var infoView;
+var converterView;
+var weatherView;
+var settingsView;
+</pre>
+
+            <p>
+
+                Previously we've written the init() function so that it creates the entire user interface
+                but because the Travel Companion widget has a much larger user interface than anything
+                we've done before, it's probably a good idea to split things up into smaller functions
+                so we don't end up with a huge init() function that will be hard to read and maintain.
+                Let's create a function for the creation of each view, and then one function that will
+                call these view creation functions and setup all other things that we need for the user
+                interface, such as the Options menu. We'll just create stub functions for now but we
+                will soon get to implement the functions:
+            </p>
+
+<pre>
+
+// Creates the user interface.
+function createUI() {
+}
+
+// Creates the main view.
+function createMainView() {
+}
+
+// Creates the info view.
+function createInfoView() {
+}
+
+// Creates the converter view.
+function createConverterView() {
+}
+
+// Creates the weather view.
+function createWeatherView() {
+}
+
+// Creates the settings view.
+function createSettingsView() {
+}
+</pre>
+
+            <p>
+
+                In the RSS Reader widget we used functions called showMainView() and showSettings() to
+                move between views. That allowed us to implement all the logic that was required when
+                moving between views in one place regardless of what action triggered the change of
+                views. We'll do the same thing in the Travel Companion widget but this time we'll need
+                five functions since we have five views. Let's create stubs for these too at this stage
+                so that the functions exist if we need to refer to them.
+            </p>
+
+<pre>
+
+// Displays the main view.
+function showMainView() {
+}
+
+// Displays the info view.
+function showInfoView() {
+}
+
+// Displays the converter view.
+function showConverterView() {
+}
+
+// Displays the weather view.
+function showWeatherView() {
+}
+
+// Displays the settings view.
+function showSettingsView() {
+}
+</pre>
+
+            <p>
+
+                Since we will create each user interface view in its own function our init() function
+                will be much simpler than in previous widgets. We will create the business logic engine,
+                create the user interface by calling createUI() and then display the main view.
+            </p>
+
+<pre>
+
+// Called from the onload event handler to initialize the widget.
+function init() {
+    // initialize the business logic engine
+    engine = new Engine();
+    
+    // create the user interface
+    createUI();
+    
+    // display the main view
+    showMainView();
+}
+</pre>
+
+            <p>
+
+                Let's get started with creating the user interface by returning to the createUI()
+                function. We'll want to widget to show the softkey bar and we'll want it to be in
+                tab navigation mode instead of the default pointer navigation mode. We then need
+                to create the user interface manager and the five views that this widget has. Of 
+                course those five views are actually created by the five create-functions that we
+                just wrote stubs for so we just need to call those functions from createUI().
+            </p>
+
+<pre>
+
+// Creates the user interface.
+function createUI() {
+    if (window.widget) {
+        // set tab-navigation mode and show softkeys
+        widget.setNavigationEnabled(false);
+        menu.showSoftkeys();
+    }
+    
+    // create UI manager
+    uiManager = new UIManager();
+    
+    // create views
+    createMainView();
+    createInfoView();
+    createConverterView();
+    createWeatherView();
+    createSettingsView();
+}
+</pre>
+
+            <p>
+
+                Because we created the stub functions for moving between views, we can also create
+                the Options menu now. We'll only add one item to the menu in addition to the default
+                "Exit" menu item. The item we'll add is one that will take the user to the settings
+                view. We'll first need to create a global menu item identifier:
+            </p>
+
+<pre>
+
+// Constants for menu item identifiers.
+var MENU_ITEM_SETTINGS = 0;
+</pre>
+
+            <p>
+
+                Now that we have the menu item identifier we can actually create the menu item. Because
+                the Options menu functionality is only available in the S60 Web Runtime and not in PC
+                browsers we'll add that code in the same if-clause where we set the navigation mode and
+                show the softkey bar.
+            </p>
+
+<pre>
+
+// create menu
+var settingsMenuItem = new MenuItem("Settings", MENU_ITEM_SETTINGS);
+settingsMenuItem.onSelect = menuItemSelected;
+menu.append(settingsMenuItem);
+</pre>
+
+            <p>
+
+                When the menu item is selected it calls a function called menuItemSelected(). Let's
+                create that function and handle the case when the settings menu item is selected.
+                When it is, we want to call showSettingsView() so that the user ends up in the settings
+                view as expected:
+            </p>
+
+<pre>
+
+// Callback for when menu items are selected.
+function menuItemSelected(id) {
+    switch (id) {
+        case MENU_ITEM_SETTINGS:
+            showSettingsView();
+            break;
+    }
+}
+</pre>
+
+            <p>
+
+                The framework that we'll need when implementing the actual views is now nearly complete.
+                But before we move on let's talk about how we'll be using softkeys in the Travel
+                Companion widget.
+            </p>
+
+            <p>
+
+                In the main view we want the right softkey to be the default "Exit". But in the
+                four functional views we don't want it to exit the widget but rather to return to
+                the main view. We'll thus use "Back" as the title in the functional views, except
+                in the settings view where we'll use "Cancel".
+            </p>
+
+            <p>
+
+                Let's create three functions that will handle setting the widget right softkey to
+                these configurations. The functions will check if we're actually in the S60 Web
+                Runtime before attempting to change the right softkey in order to make the widget
+                also work in a PC browser for testing purposes.
+            </p>
+
+<pre>
+
+// Sets the softkeys for the main view.
+function setMainViewSoftkeys() {
+    if (window.widget) {
+        // set right softkey to "exit"
+        menu.setRightSoftkeyLabel("", null);
+    }
+}
+
+// Sets the softkeys for sub views.
+function setSubViewSoftkeys() {
+    if (window.widget) {
+        // set right softkey to "back" (to main view)
+        menu.setRightSoftkeyLabel("Back", showMainView);
+    }
+}
+
+// Sets the softkeys for settings view.
+function setSettingsViewSoftkeys() {
+    if (window.widget) {
+        // set right softkey to "cancel" (returns to main view)
+        menu.setRightSoftkeyLabel("Cancel", showMainView);
+    }
+}
+</pre>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Main view</h2>
+
+            
+            <p>
+
+                Let's create our main view now so that we get something visible. The main view is
+                of course created in the function createMainView() for which we already created a
+                stub function. The main view will have four WRTKit NavigationButton controls in it,
+                one for each of the views (not counting the main view itself) in the widget. Using
+                the NavigationButton control is just like using a FormButton, with the difference
+                that it looks different and can have an icon image in addition to just text. Earlier
+                when we looked at the files that were in the Examples/TravelCompanion directory we
+                noticed that there were four icons there. Now it's time to use them as icons in the
+                navigation buttons.
+            </p>
+
+            <p>
+
+                We will add event listerners to the buttons so that when they are clicked (when they
+                emit an ActionPerformed event) they will call the functions we have created for
+                moving between views. At this point the functions are just stubs, but we will of
+                course fix that later.
+            </p>
+
+            <p>
+
+                We've had captions for the views that we've created so far in the Hello World and
+                RSS Reader widgets and the Travel Companion will also have view captions. However
+                for the Travel Companion we'll use an image as our view caption. We will set the
+                view caption to an empty string because if it's undefined or null then the view
+                caption area will be hidden. Then we will create a CSS rule for the ListViewCaptionText
+                class that is used by the area where the caption text goes in a list view. Because
+                our CSS rule is defined after the default WRTKit CSS rule for ListViewCaptionText,
+                our rule will be override the default one. Let's open up TravelCompanion.css and
+                create this rule:
+            </p>
+
+<pre>
+
+/* Place logo in list view caption */
+.ListViewCaptionText {
+    background: url("ListViewCaptionLogo.png") no-repeat;
+    height: 35px;
+}
+</pre>
+
+            <p>
+
+                We specified a height in addition to the background image. The height is needed
+                so that the caption text area won't collapse to zero height since it won't contain
+                any text. We're now ready to implement the createMainView() function:
+            </p>
+
+<pre>
+
+// Creates the main view.
+function createMainView() {
+    // empty caption text to display the caption bar - custom background using CSS
+    mainView = new ListView(null, "");
+    
+    // info
+    var navToInfoButton = new NavigationButton(null, "NavInfoIcon.png", "Information");
+    navToInfoButton.addEventListener("ActionPerformed", showInfoView);
+    mainView.addControl(navToInfoButton);
+    
+    // converter
+    var navToConverterButton = new NavigationButton(null, "NavConverterIcon.png", "Currency Converter");
+    navToConverterButton.addEventListener("ActionPerformed", showConverterView);
+    mainView.addControl(navToConverterButton);
+    
+    // weather
+    var navToWeatherButton = new NavigationButton(null, "NavWeatherIcon.png", "Weather Forecast");
+    navToWeatherButton.addEventListener("ActionPerformed", showWeatherView);
+    mainView.addControl(navToWeatherButton);
+    
+    // settings
+    var navToSettingsButton = new NavigationButton(null, "NavSettingsIcon.png", "Settings");
+    navToSettingsButton.addEventListener("ActionPerformed", showSettingsView);
+    mainView.addControl(navToSettingsButton);
+}
+</pre>
+
+            <p>
+
+                We now have a main view and our widget even calls showMainView() when it starts
+                but nothing will actually show up yet because we haven't implemented the showMainView()
+                function yet. Let's do that now:
+            </p>
+
+<pre>
+
+// Displays the main view.
+function showMainView() {
+    setMainViewSoftkeys();
+    uiManager.setView(mainView);
+}
+</pre>
+
+            <p>
+
+                The function calls the setMainViewSoftkeys() function to put the right softkey
+                in the proper state and then asks the user interface manager to show the main
+                view. Remember that we're already calling the showMainView() function from the
+                init() function so we can go ahead and test this now in a PC browser, emulator
+                or handset. Notice the custom list view caption image and the navigation button
+                icons. Clicking the navigation buttons doesn't do anything yet because we don't
+                have any other views yet and the functions to show other views except the main
+                view aren't implemented. But then again, because we wrote stub functions we are
+                also not getting any error messages.
+            </p>
+
+            <div class="fignone" id="GUID-989D17CC-F019-46BB-B6F5-49166E258ACA__GUID-B006B086-0D8B-4EA4-8A71-179507B7595A"><a name="GUID-989D17CC-F019-46BB-B6F5-49166E258ACA__GUID-B006B086-0D8B-4EA4-8A71-179507B7595A"><!-- --></a><span class="figcap">Figure 1. 
+Travel Companion main view</span>
+
+                
+                <br /><img src="Travel_Companion_Main_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Settings view</h2>
+
+            
+            <p>
+
+                It's a good idea to implement the settings view as early as possible because
+                that allows you to test the rest of the widget more easily. In order to get
+                the settings view up and running we'll need to do three things. First of all
+                we'll need to implement the createSettingsView() function so that the widget
+                actually has a settings view. Second, we'll need to implement the actions
+                that can be performed in that view. There are two actions: "Save" and "Cancel".
+                Of these, save is the tricker one and we'll implement it in a function that
+                we will call saveSettingsClicked(). The cancel action will simply take us back
+                to the main view and will be handled by the showMainView() function that we
+                have already implemented. And third, we need to implement the showSettingsView()
+                function so that clicking on the settings navigation button in the main view
+                takes us to the settings view and sets it up correctly so that the view
+                reflects the current preferences.
+            </p>
+
+            <p>
+
+                The settings view will have four sections that we will separate using a WRTKit
+                Separator control. The first section lets the user select the home city and the
+                whether the home city is in daylight saving time. Here we'll use a SelectionMenu
+                control for the city selection and a SelectionList control with a single option
+                for the daylight saving time option. We could have used a SelectionList with
+                two options "Daylight saving time" and "Normal time". Since the selection would
+                have been a single selection this would have resulted in two radio buttons. But
+                partly for the sake of usability and partly to show how to do it, we'll implement
+                it so that it's a single checkbox instead. Thus, we'll use a SelectionList with
+                a single option but we'll get the checkboxes instead of radio buttons by putting
+                the SelectionList in multiple selection mode. Because there's only one option
+                there will only be one checkbox.
+            </p>
+
+            <p>
+
+                The second section is just like the first one but for the local city. The third
+                section is for the temperature unit selection (Celsius or Fahrenheit) and we'll
+                implement it as a single selection SelectionList control. And finally the fourth
+                section is for the Save and Cancel FormButton controls.
+            </p>
+
+            <p>
+
+                The options for the selection controls will be created just before we create
+                the controls themselves. The daylight saving time and temperature unit options
+                are just static JSON defined option lists since we know what the options are.
+                But for the city selection we'll create it dynamically by asking the business
+                logic engine for a list of all the supported cities. We'll then create one option
+                for each city.
+            </p>
+
+            <p>
+
+                Because we'll need to access the controls in the settings view from outside the
+                creation function we'll need to create global references to them:
+            </p>
+
+<pre>
+
+// Settings view controls.
+var homeCitySelection;
+var homeCityDSTSelection;
+var localCitySelection;
+var localCityDSTSelection;
+var temperatureUnitSelection;
+</pre>
+
+            <p>
+
+                We can now implement the settings view creation function:
+            </p>
+
+<pre>
+
+// Creates the settings view.
+function createSettingsView() {
+    // empty caption text to display the caption bar - custom background using CSS
+    settingsView = new ListView(null, "");
+    
+    // create city options from cities array
+    var cityOptions = [];
+    var cities = engine.getCities();
+    for (var i = 0; i &lt; cities.length; i++) {
+        cityOptions.push({ value: cities[i], text: cities[i].name });
+    }
+    
+    // create DST option
+    dstOptions = [ { value: true, text: "DST (+1h)" } ];
+    
+    // home city
+    homeCitySelection = new SelectionMenu(null, "Home City", cityOptions);
+    settingsView.addControl(homeCitySelection);
+    
+    // home city DST (using a multiple selection but only one option to get a single checkbox)
+    homeCityDSTSelection = new SelectionList(null, "Daylight Saving Time (home)", dstOptions, true);
+    settingsView.addControl(homeCityDSTSelection);
+    
+    // separator
+    settingsView.addControl(new Separator());
+    
+    // local city
+    localCitySelection = new SelectionMenu(null, "Local City", cityOptions);
+    settingsView.addControl(localCitySelection);
+    
+    // local city DST (using a multiple selection but only one option to get a single checkbox)
+    localCityDSTSelection = new SelectionList(null, "Daylight Saving Time (local)", dstOptions, true);
+    settingsView.addControl(localCityDSTSelection);
+    
+    // separator
+    settingsView.addControl(new Separator());
+    
+    // temperature unit
+    var temperatureUnitOptions = [ { value: "c", text: "Celsius" }, { value: "f", text: "Fahrenheit" } ];
+    temperatureUnitSelection = new SelectionList(null, "Temperature Unit", temperatureUnitOptions);
+    settingsView.addControl(temperatureUnitSelection);
+    
+    // separator
+    settingsView.addControl(new Separator());
+    
+    // save button
+    var saveSettingsButton = new FormButton(null, "Save");
+    saveSettingsButton.addEventListener("ActionPerformed", saveSettingsClicked);
+    settingsView.addControl(saveSettingsButton);
+    
+    // cancel button
+    var cancelSettingsButton = new FormButton(null, "Cancel");
+    cancelSettingsButton.addEventListener("ActionPerformed", showMainView);
+    settingsView.addControl(cancelSettingsButton);
+}
+</pre>
+
+            <p>
+
+                Note that we used the actual city as the value for the city options. You can
+                use anything you want for the value property for a selection control option
+                and in this case we used the actual city object because it will come in handy
+                later when we want to set the home and local cities that the user has selected
+                to the engine.
+            </p>
+
+            <p>
+
+                Our save button calls the saveSettingsClicked() function we talked about earlier
+                but we haven't created that function yet. We'll continue implementing the user
+                interface by writing this function.
+            </p>
+
+            <p>
+
+                You'll recall that the business logic engine actually stores all the preferences
+                so all we really need to do is read what values have been selected in the settings
+                view, telling these values to the engine, calling the savePreferences() method in
+                the engine to persist the settings, and then return to the main view.
+            </p>
+
+<pre>
+
+// Called when the user clicks on the "save" button in the settings view.
+function saveSettingsClicked() {
+    // update the selected home city
+    var selectedHomeCityOption = homeCitySelection.getSelected();
+    if (selectedHomeCityOption != null) {
+        engine.setHomeCity(selectedHomeCityOption.value);
+    }
+    
+    // update the selected local city
+    var selectedLocalCityOption = localCitySelection.getSelected();
+    if (selectedLocalCityOption != null) {
+        engine.setLocalCity(selectedLocalCityOption.value);
+    }
+    
+    // update home and local city DST
+    // there's only one checkbox but we are using a multiple-selection menu.
+    // if the selected array has one element then the checkbox is checked.
+    engine.setHomeCityDST(homeCityDSTSelection.getSelected().length == 1);
+    engine.setLocalCityDST(localCityDSTSelection.getSelected().length == 1);
+    
+    // update temperature unit
+    var selectedTemperatureUnitOption = temperatureUnitSelection.getSelected();
+    if (selectedTemperatureUnitOption != null) {
+        engine.setTemperatureUnit(selectedTemperatureUnitOption.value);
+    }
+    
+    // save settings
+    engine.savePreferences();
+    
+    // go back to the main view
+    showMainView();
+}
+</pre>
+
+            <p>
+
+                We're writing defensive code here and making sure that the selection controls
+                actually have anything selected at all. This should never be possible with
+                single selection control if they have one option already selected, but we'll
+                use the principle of "better safe than sorry".
+            </p>
+
+            <p>
+
+                Notice that the daylight saving time selection is checked by asking for the
+                selected options array (we're using a multiple selection control) and checking
+                if there is exactly one selected option. We don't care about the actual selected
+                option because we know that there's only one. Either it's selected or it's not.
+            </p>
+
+            <p>
+
+                We have now implemented two of the three steps we said were necessary to get the
+                settings view fully functional. Let's implement the final step: showing the view.
+                Showing the settings view is done by first updating the settings view controls
+                to reflect the current configuration, setting the right softkey to the state that
+                it should be in for the settings view and then asking the user interface manager
+                to show the settings view.
+            </p>
+
+<pre>
+
+// Displays the settings view.
+function showSettingsView() {
+    // update settings view controls to match current configuration
+    // the DST selected sets are either the options array with its single option or an empty array
+    
+    // home city and DST setting
+    homeCitySelection.setSelected(homeCitySelection.getOptionForValue(engine.getHomeCity()));
+    homeCityDSTSelection.setSelected(engine.getHomeCityDST() ? homeCityDSTSelection.getOptions() : []);
+    
+    // local city and DST setting
+    localCitySelection.setSelected(localCitySelection.getOptionForValue(engine.getLocalCity()));
+    localCityDSTSelection.setSelected(engine.getLocalCityDST() ? localCityDSTSelection.getOptions() : []);
+    
+    // temperature unit
+    temperatureUnitSelection.setSelected(temperatureUnitSelection.getOptionForValue(engine.getTemperatureUnit()));
+    
+    setSettingsViewSoftkeys();
+    uiManager.setView(settingsView);
+}
+</pre>
+
+            <p>
+
+                We're using the convenient getOptionForValue() function that all selection controls
+                have to retrieve the right option to select for each of the selection controls. The
+                way we handle the daylight saving time selection controls may seem a little strange
+                at first but remember that we only have a single option and thus if that option should
+                be selected then the selected options array is identical with the options array - both
+                are arrays containing the one and same option. Selection controls always copy the options
+                and selected options arrays when the setOptions() and setSelected() methods are called
+                so there is no problem in passing the options array as the selected options array.
+            </p>
+
+            <p>
+
+                The settings view is now completed. You can try it out and play with it, change the
+                settings, open it up again, change some more settings, cancel the changes, etc. to
+                verify that it's working as it should.
+            </p>
+
+            <div class="fignone" id="GUID-989D17CC-F019-46BB-B6F5-49166E258ACA__GUID-66154A40-DD96-45B3-BF53-01594426BA71"><a name="GUID-989D17CC-F019-46BB-B6F5-49166E258ACA__GUID-66154A40-DD96-45B3-BF53-01594426BA71"><!-- --></a><span class="figcap">Figure 2. 
+Travel Companion settings view</span>
+
+                
+                <br /><img src="Travel_Companion_Settings_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Travel_Companion_Tutorial-GUID-be79ba64-fa03-4968-964e-d7dcc42d7053.html">Travel Companion</a></div>
+</div>
+</div>
+
+</body>
+</html>

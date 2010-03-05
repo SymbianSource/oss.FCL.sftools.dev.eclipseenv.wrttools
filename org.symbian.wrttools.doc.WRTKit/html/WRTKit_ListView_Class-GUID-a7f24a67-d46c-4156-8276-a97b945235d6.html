@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="WRTKit ListView Class" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-A7F24A67-D46C-4156-8276-A97B945235D6" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+WRTKit ListView Class</title>
+</head>
+<body id="GUID-A7F24A67-D46C-4156-8276-A97B945235D6"><a name="GUID-A7F24A67-D46C-4156-8276-A97B945235D6"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+WRTKit ListView Class</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Description</h2>
+
+            
+            <p>
+
+                The ListView is a view that arranges controls in a vertical stack similar to
+                native S60 user interfaces.
+            </p>
+
+            <div class="fignone" id="GUID-A7F24A67-D46C-4156-8276-A97B945235D6__GUID-D342BE27-89B4-454F-BC2C-B6FBDEE9112A"><a name="GUID-A7F24A67-D46C-4156-8276-A97B945235D6__GUID-D342BE27-89B4-454F-BC2C-B6FBDEE9112A"><!-- --></a><span class="figcap">Figure 1. 
+ListView with caption</span>
+
+                
+                <br /><img src="Travel_Companion_Main_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Inherits from</h2>
+
+            
+            <p>
+
+                <a href="WRTKit_View_Class-GUID-e673fe1a-cf46-46f5-b243-ce7422c69cc5.html">
+View</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html">WRTKit API Reference</a></div>
+</div>
+</div>
+<div class="nested1" id="GUID-73FAF0DC-A0AE-47B8-81A1-F723F1457FA2"><a name="GUID-73FAF0DC-A0AE-47B8-81A1-F723F1457FA2"><!-- --></a>
+
+        <h2 class="topictitle2">
+Constructor</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[ListView] new ListView(String id, String caption)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Creates a new instance of the ListView class.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+id</p>
+
+                        
+
+                            <p>
+
+                                Unique identifier for the view. Can be retrieved using the id property defined
+                                in the UIElement class that this control inherits from. Useful for example to
+                                identify the source of an event in event callback functions or to apply a CSS
+                                rule to only this particular view. The identifier can be null, in which case
+                                no id will be set for the view.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+caption</p>
+
+                        
+
+                            <p>
+
+                                The caption text for the view. A null caption can be used to hide the 
+                                caption area. Pass an empty string to this argument in order to show the
+                                caption area but without text. This can be used if a custom image should
+                                be shown instead of text for the view caption. The image can then be 
+                                defined using CSS by providing a background for the .ListViewCaptionText
+                                CSS rule. By specifying the rule only for the id that was specified with
+                                the id argument a custom background can be given to a particular view.
+                                The value is an XHTML string.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    A new instance of the ListView class.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-D382D123-2C88-46B8-8E27-129C91E2C6ED"><a name="GUID-D382D123-2C88-46B8-8E27-129C91E2C6ED"><!-- --></a>
+
+        <h2 class="topictitle2">
+getCaption()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[String] ListView.getCaption(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Retrieves the current caption of the view.
+                    The value is an XHTML string.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    The current caption of the view or null if the view doesn't have a caption.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-DB089887-5FD1-4490-8D44-A6B9F5BF0A46"><a name="GUID-DB089887-5FD1-4490-8D44-A6B9F5BF0A46"><!-- --></a>
+
+        <h2 class="topictitle2">
+setCaption()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] ListView.setCaption(String caption)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Sets the caption for the view. A null caption can be used to hide the caption area.
+                    The value is an XHTML string.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+caption</p>
+
+                        
+
+                            <p>
+
+                                The new caption for the view or null for no caption.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-277742B7-93D0-4824-8331-077573478EED"><a name="GUID-277742B7-93D0-4824-8331-077573478EED"><!-- --></a>
+
+        <h2 class="topictitle2">
+getControls()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Array] ListView.getControls(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Retrieves the controls of this view.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    An array with the controls of this view or an empty array if the view
+                    doesn't have any controls.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-A71AEDB1-3950-48D7-954D-65FB2E8FC0AE"><a name="GUID-A71AEDB1-3950-48D7-954D-65FB2E8FC0AE"><!-- --></a>
+
+        <h2 class="topictitle2">
+addControl()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] ListView.addControl(Control control)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Adds a control to the view. The control is added last, below the currently
+                    last control.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+control</p>
+
+                        
+
+                            <p>
+
+                                The control to add to the view.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-19BF7EC2-A542-412D-A930-D91D8398E3A2"><a name="GUID-19BF7EC2-A542-412D-A930-D91D8398E3A2"><!-- --></a>
+
+        <h2 class="topictitle2">
+insertControl()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] ListView.insertControl(Control control, Control beforeControl)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Inserts a control to the view. The control is added before the control that is
+                    specified using the beforeControl argument.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+control</p>
+
+                        
+
+                            <p>
+
+                                The control to add to the view.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+beforeControl</p>
+
+                        
+
+                            <p>
+
+                                The control that should be immediately after the added control after
+                                the new control is added to the view. If the argument is null or otherwise
+                                invalid (e.g. not a control in this view) then the new control is added last.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-7FC2A00B-9076-44AA-AC0D-43F5B2660D0A"><a name="GUID-7FC2A00B-9076-44AA-AC0D-43F5B2660D0A"><!-- --></a>
+
+        <h2 class="topictitle2">
+removeControl()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] ListView.removeControl(Control control)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Removes a control from the view.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+control</p>
+
+                        
+
+                            <p>
+
+                                The control to remove from the view.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="WRTKit UIElement Class" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-37B82F75-720C-4F54-9769-CDA18453FFA3" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+WRTKit UIElement Class</title>
+</head>
+<body id="GUID-37B82F75-720C-4F54-9769-CDA18453FFA3"><a name="GUID-37B82F75-720C-4F54-9769-CDA18453FFA3"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+WRTKit UIElement Class</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Description</h2>
+
+            
+            <p>
+
+                The UIElement class is the base class for all user interface elements
+                such as views and controls. Don't instantiate UIElement directly but rather
+                use one of its subclasses.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html">WRTKit API Reference</a></div>
+</div>
+</div>
+<div class="nested1" id="GUID-B15AF535-27D2-4C6A-9956-65EED6F40FE8"><a name="GUID-B15AF535-27D2-4C6A-9956-65EED6F40FE8"><!-- --></a>
+
+        <h2 class="topictitle2">
+getEventListeners()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[Array] UIElement.getEventListeners(void)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Allows retrieval of the currently registered event listeners for this user interface element.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <p>
+
+                    This method does not take any arguments.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    An array of event listeners currently registered to the user interface element.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-5C747208-730D-4ACF-BB07-CAEF1A26CAA3"><a name="GUID-5C747208-730D-4ACF-BB07-CAEF1A26CAA3"><!-- --></a>
+
+        <h2 class="topictitle2">
+addEventListener()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] UIElement.addEventListener(String eventType, Function listener)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Allows registration of a callback function to a user interface element in order to get
+                    notifications of events in the user interface element. Event registration can be done
+                    for a specific type of event or for all events.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+eventType</p>
+
+                        
+
+                            <p>
+
+                                The name of the event type the listener should be called for or null if
+                                all event types. The available event type names depend on the actual user
+                                interface element class that this method is caled for.
+                            </p>
+
+                            <p>
+
+                                The most common event type names are ActionPerformed for button control clicks,
+                                SelectionChanged for selection controls, FocusStateChanged for all controls to
+                                indicate that focus was gained or lost and FocusedControlChanged for views to
+                                announce that a new control has been brought into (or out of) focus.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+listener</p>
+
+                        
+
+                            <p>
+
+                                The function that should be called when the specified event type occurs.
+                                The function should be defined with a single argument that will receive the
+                                event object. The object has three properties: source, type and value. The
+                                source property specifies the user interface element (e.g. control) from where
+                                the event originated. The type property contains the event type name. The
+                                contents of the value property depends between event types but contains
+                                additional information about the event. For example if the value changes in
+                                a selection control then the value property contains the new value.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-A39809F7-CEC7-45E9-85E4-EC1F36E255EB"><a name="GUID-A39809F7-CEC7-45E9-85E4-EC1F36E255EB"><!-- --></a>
+
+        <h2 class="topictitle2">
+removeEventListener()</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[void] UIElement.removeEventListener(String eventType, Function listener)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Allows a specific event listener to be unregistered from a user interface control.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+eventType</p>
+
+                        
+
+                            <p>
+
+                                The event type name of the listener that should be removed. Use the exact
+                                same event type name as when adding the event listener.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+listener</p>
+
+                        
+
+                            <p>
+
+                                The callback function of the listener that should be removed.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    This method does not return a value.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nested1" id="GUID-A48BCE83-38D7-4DF3-B9C1-FF9A305359BD"><a name="GUID-A48BCE83-38D7-4DF3-B9C1-FF9A305359BD"><!-- --></a>
+
+        <h2 class="topictitle2">
+id</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[String] UIElement.id</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    The id property is a unique identifier for the user interface element.
+                    The identifier is used for the root HTML element in the element hierarchy
+                    that defines the user interface element and is useful for example in
+                    specifying specific CSS rules for a particular user interface element.
+                    The identifier can also be used to recognize the source of an event in an
+                    event callback by accessing the id property of the source property in the
+                    event object passed to the event listener callback.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

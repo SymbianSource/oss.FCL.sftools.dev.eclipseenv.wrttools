@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Planning the widget" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Travel_Companion_Tutorial-GUID-be79ba64-fa03-4968-964e-d7dcc42d7053.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-891068C7-C802-4DA7-8674-8E8292AEF7EB" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Planning the widget</title>
+</head>
+<body id="GUID-891068C7-C802-4DA7-8674-8E8292AEF7EB"><a name="GUID-891068C7-C802-4DA7-8674-8E8292AEF7EB"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Planning the widget</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Designing the user interface</h2>
+
+            
+            <p>
+
+                Because the Travel Companion is such a complex widget it is important to plan
+                both the user interface and implementation carefully before starting to write
+                any code. What are the most common use cases that we want to address with this
+                widget? How will typical users be using the widget? What kind of future features
+                might there be and can we plan for those already?
+            </p>
+
+            <p>
+
+                Because the Travel Companion widget offers so much functionality and information
+                it is important to present it in such a way that it doesn't overwhelm the user.
+                To give the user a better idea of what is available and how to get to everything,
+                we'll have a main view with nothing but navigation buttons to the other views in
+                the widget. We'll implement this view using WRTKit NavigationButton controls and
+                we will give each button its own icon so that the user can quickly see what the
+                view is about.
+            </p>
+
+            <p>
+
+                After some planning and talking to potential users we have decided to create
+                a summary view that we will call "information view". This view will include the
+                most important information in a single place so that the user can view it quickly
+                without having to press any buttons to navigate around the widget. We'll put a
+                world clock here, the current weather at home and at the local destination, and
+                the latest news headlines. The information view will be entirely composed from
+                WRTKit ContentPanel controls.
+            </p>
+
+            <p>
+
+                In addition to the information view we'll have two more specialized views. We'll
+                have a currency converter with two TextField controls (one for the home currency
+                and one for the local) and two FormButton controls. One button will convert
+                from the home currency to local currency and the other button will convert in the
+                other direction. The second specialized view is a five day weather forecast. Like
+                the information view this will be using ContentPanel controls and we will share
+                the weather content used for the information view for this view.
+            </p>
+
+            <p>
+
+                Finally we'll have a settings view that is accessible from the main view just like
+                the other views in the widget. In many other widgets we might want to hide access
+                to the settings view to the Options menu but in this case one of the common use
+                cases is to configure where in the world you are so rather than hiding access to
+                the view we want to present it clearly in the main view. The settings view will
+                use SelectionMenu controls to allow users to select their home and local cities,
+                SelectionList controls with a single option that will be presented as a checkbox
+                to configure whether the cities are in daylight saving time or not, and a
+                SelectionList control that lets the user select the temperature unit to use in
+                the weather forecasts. Finally there will be two FormButton controls to let the
+                user save or cancel any settings changes.
+            </p>
+
+            <p>
+
+                When the widget starts will setup a timer that will call a timer callback function
+                once every second. In the callback function we will check what view is currently
+                active and we'll update the views (e.g. clock) so that the views stays up to date
+                even if the user doesn't do anything. After all, the most common use case is to
+                just have the information view open and not do anything other than glance at the
+                information that is displayed.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Travel Companion widget files</h2>
+
+            
+            <p>
+
+                All the files - HTML, CSS, JavaScript and images - have been created for you.
+                You can find the completed widget with all its files in the Examples/TravelCompanion
+                directory in the WRTKit SDK. The tutorial will assume that you will create your
+                own Travel Companion widget by following the instructions but if you prefer you can
+                just open up the ready made files and examine them as you read the tutorial. If you
+                are creating the widget from scratch by following the tutorial's instructions then
+                we suggest that you create a working directory for the new widget and copy over all
+                other ready made files except TravelCompanion.js. All of our work will be on this
+                file, but before we move on to that file we'll take a look at what other files the
+                widget is using.
+            </p>
+
+            <p>
+
+                Since we're using the WRTKit to implement our user interface we have the WRTKit
+                library with all its files in a directory called "WRTKit".
+            </p>
+
+            <p>
+
+                Like all widgets the Travel Companion has an Info.plist widget metadata file and an
+                icon in a file called Icon.png. You'll also notice that there's a bunch of png
+                image files in the widget directory. There's a file called ListViewCaptionLogo.png
+                that we will use as a custom graphical element in the view caption in all of our
+                views. Four png files have names starting with "Nav" and the rest start with
+                "Weather". The image files that have names starting with "Nav" are icons for the
+                NavigationButton controls for the main view. They are simply images that are
+                30 by 30 pixels in size and have some graphical motif that captures what the button
+                does. Note that the size of images used for navigation buttons doesn't have to be
+                exactly 30 by 30 pixels - you can use any size you like. The images with names
+                starting with "Weather" are images used in the weather forecasts. There is one image
+                for each kind of weather that can be forecasted: rain, snow, sunshine, clouds, etc.
+            </p>
+
+            <p>
+
+                You'll find two JavaScript files: Engine.js and TravelCompanion.js. The Engine.js
+                file has the implementation of the business logic and the TravelCompanion.js file
+                implements the widget and its user interface. Finally there is the main widget HTML
+                file called TravelCompanion.html and a CSS file called TravelCompanion.css that
+                contains all the style rules used in the widget - above that what the WRTKit defines
+                by default, which is actually nearly everything!
+            </p>
+
+            <p>
+
+                Let's take a quick peek at TravelCompanion.html:
+            </p>
+
+<pre>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;script type="text/javascript" src="WRTKit/WRTKit.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="Engine.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="TravelCompanion.js"&gt;&lt;/script&gt;
+        &lt;style type="text/css"&gt;
+            @import url("TravelCompanion.css");
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body onload="init()"&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+            <p>
+
+                If you've gone through the Hello World and/or RSS Reader tutorials then this should
+                look very familiar. The file has no content, includes the WRTKit.js file from the
+                WRTKit library directory, includes the JavaScript files that we are using to implement
+                the Travel Companion widget, includes the TravelCompanion.css stylesheet file, and
+                finally calls a function called init() when the widget has loaded everything.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+The Travel Companion Engine</h2>
+
+            
+            <p>
+
+                Following good software engineering principles, we are implementing the Travel Companion
+                widget so that the user interface is decoupled from the implementation of the actual
+                business logic that knows weather forecasts, calculates currency conversions, etc. The
+                logic is outside of the scope for this tutorial since we're interested in learning about
+                how to use the WRTKit - not how to convert euros to dollars. Because of this we will not
+                look at all at how the business logic is implemented but we will take a close look at
+                the interface between the user interface and the business logic engine. In fact, the 
+                implementation of the engine for this example is a mock implementation and only mimics
+                what a real engine would do. But since this is only an example that's quite alright.
+                The engine interface, however, is identical to what it would be even if the engine would
+                have a real implementation.
+            </p>
+
+            <p>
+
+                The engine is implemented as a JavaScript class that you instantiate before using.
+                The reason for being implemented as a class is simply so that the engine can better
+                encapsulate its internal data and provide a kind of name space for its methods.
+            </p>
+
+            <p>
+
+                The core concept in the Travel Companion engine is that of cities. The engine supports
+                a list of cities and one will always be a "home city" and one a "local city". The
+                same city can be both home and local. Home refers to the city where the user lives
+                and local refers to the city where the user is currently located. The engine doesn't
+                know the daylight saving time schedules for cities so this is configured manually by
+                the user: one setting for the home city and one for the local city. The engine handles
+                all preferences but the user interface must tell it to save preferences if some
+                preference is modified. Preferences are automatically loaded when the engine is
+                created, which should happen when the widget starts so that all the settings are
+                available immediately.
+            </p>
+
+            <p>
+
+                A city in the engine is a JavaScript object. A city object has the following public
+                properties: name for the city name, currency for the three-letter currency abbreviation, 
+                and timezone for the timezone code (e.g. GMT). Cities are created and managed entirely
+                by the engine.
+            </p>
+
+            <p>
+
+                Below is a complete list of the public engine APIs that are related to preferences and
+                cities:
+            </p>
+
+            <p>
+
+                Loading and saving preferences:
+            </p>
+
+<pre>
+
+[void] Engine.loadPreferences(void)
+[void] Engine.savePreferences(void)
+</pre>
+
+            <p>
+
+                Retrieving all cities supported by the engine:
+            </p>
+
+<pre>
+
+[Array] Engine.getCities(void)
+</pre>
+
+            <p>
+
+                Retrieving a city based on its name:
+            </p>
+
+<pre>
+
+[City] Engine.getCityByName(String name)
+</pre>
+
+            <p>
+
+                Retrieving and settting the home city:
+            </p>
+
+<pre>
+
+[City] Engine.getHomeCity(void)
+[void] Engine.setHomeCity(City city)
+</pre>
+
+            <p>
+
+                Retrieving and settting the home city daylight saving time setting:
+            </p>
+
+<pre>
+
+[Boolean] Engine.getHomeCityDST(void)
+[void] Engine.setHomeCityDST(Boolean dst)
+</pre>
+
+            <p>
+
+                Retrieving and settting the local city:
+            </p>
+
+<pre>
+
+[City] Engine.getLocalCity(void)
+[void] Engine.setLocalCity(City city)
+</pre>
+
+            <p>
+
+                Retrieving and settting the local city daylight saving time setting:
+            </p>
+
+<pre>
+
+[Boolean] Engine.getLocalCityDST(void)
+[void] Engine.setLocalCityDST(Boolean dst)
+</pre>
+
+            <p>
+
+                Retrieving and setting the preferred temperature unit:
+            </p>
+
+<pre>
+
+[String] Engine.getTemperatureUnit(void)
+[void] Engine.setTemperatureUnit(String unit)
+</pre>
+
+            <p>
+
+                Of course the engine isn't just about preferences. Its actual purpose is to perform
+                various operations related to these cities, such as converting currencies, figuring
+                out what the time is in a foreign city, etc. To simplify the usage of the engine,
+                the public methods related to these operations are defined in terms of the home and
+                local city as it is configured at the time when the method is called.
+            </p>
+
+            <p>
+
+                Here's the full list of the actual operation methods that the engine supports:
+            </p>
+
+            <p>
+
+                Currency conversions between home and local:
+            </p>
+
+<pre>
+
+[Float] Engine.convertHomeToLocalMoney(Float amount)
+[Float] Engine.convertLocalToHomeMoney(Float amount)
+</pre>
+
+            <p>
+
+                Retrieving the current time in the home and local cities:
+            </p>
+
+<pre>
+
+[DateTime] Engine.getHomeTime(void)
+[DateTime] Engine.getLocalTime(void)
+</pre>
+
+            <p>
+
+                The DateTime object returned by getHomeTime() and getLocalTime() is a JavaScript
+                object that contains the following properties: year, month, date, day, hours, minutes,
+                seconds, timezone. All properties are integers except the timezone, which is a string
+                that represents the timezone code, e.g. "EET" for "Eastern European Time". Month and 
+                day are zero-based to simplify their use as indexes in arrays that contains the month
+                and week day names. These arrays can be found in the DateTime object. The array for
+                week day names is called dayNames and the array for month names is called monthNames.
+                Day 0 is Sunday and month 0 is January. To find out the name of the day represented
+                by a DateTime object you would do the following:
+            </p>
+
+<pre>
+
+var homeTime = engine.getHomeTime();
+var dayOfWeekName = homeTime.dayNames[homeTime.day];
+</pre>
+
+            <p>
+
+                Note that the default JavaScript Date object is not used because of its timezone-
+                related limitations.
+            </p>
+
+            <p>
+
+                Retrieving 5-day forecasts for the home and local cities:
+            </p>
+
+<pre>
+
+[Array] Engine.getHomeWeather(void)
+[Array] Engine.getLocalWeather(void)
+</pre>
+
+            <p>
+
+                The array returned by the getHomeWeather() and getLocalWeather() methods contains
+                the weather for the next five days so that the first element is the weather today,
+                the second is the weather tomorrow, etc. Each item is a JavaScript object that
+                has two properties: temperature, which is an integer in the preferred temperature
+                unit, and type, which is a string that describes the weather. The type string is
+                one of the following: "Sunny", "PartlyCloudy", "Cloudy", "Rain", "Sleet" or Snow".
+                There is a weather type image for each of these, named so that there is a "Weather"
+                prefix in front of the weather type and a ".png" suffix after it, e.g. "WeatherSunny.png".
+            </p>
+
+            <p>
+
+                Retrieving an array of the latest news headlines:
+            </p>
+
+<pre>
+
+[Array] Engine.getNewsHeadlines(void)
+</pre>
+
+            <p>
+
+                Each item in the array that the getNewsHeadlines() method returns is a JavaScript
+                object that describes one news headline. Each news headline object has two
+                properties: headline for the actual news headline text and url for the website
+                address where the full news article is located.
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Travel_Companion_Tutorial-GUID-be79ba64-fa03-4968-964e-d7dcc42d7053.html">Travel Companion</a></div>
+</div>
+</div>
+
+</body>
+</html>

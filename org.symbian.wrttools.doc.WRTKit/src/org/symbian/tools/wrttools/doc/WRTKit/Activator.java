@@ -1,4 +1,4 @@
-package org.symbian.wrtools.lib.wrtkit;
+package org.symbian.tools.wrttools.doc.WRTKit;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.symbian.wrtools.lib.WRTKit";
+	public static final String PLUGIN_ID = "org.symbian.tools.wrttools.doc.WRTKitGuide";
 
 	// The shared instance
 	private static Activator plugin;

@@ -1,11 +1,11 @@
-Manifest-Version: 1.0
+Manifest-Version: 1.0 
 Bundle-ManifestVersion: 2
 Bundle-Name: WRTKit
-Bundle-SymbolicName: org.symbian.tools.wrttools.doc.WRTKit
+Bundle-SymbolicName: org.symbian.tools.wrttools.doc.WRTKit;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.symbian.wrttools.lib.wrtkit.Activator
+Bundle-Activator: org.symbian.tools.wrttools.doc.WRTKit.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6 
+

@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Functionality" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Travel_Companion_Tutorial-GUID-be79ba64-fa03-4968-964e-d7dcc42d7053.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-384F2430-3DE9-4006-AC8E-86C5774C3A79" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Functionality</title>
+</head>
+<body id="GUID-384F2430-3DE9-4006-AC8E-86C5774C3A79"><a name="GUID-384F2430-3DE9-4006-AC8E-86C5774C3A79"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Functionality</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Weather forecast</h2>
+
+            
+            <p>
+
+                Let's continue by implementing the weather forecast view. This view will
+                be entirely composed of non-foldable ContentPanel controls. We'll have one
+                panel that displays the city for which the forecast is for and one panel
+                for each day of the five-day forecast. In order to make it easy to change
+                the number of days the forecast is for we'll store references to the forecast
+                panels in an array. Thus, we need to add two global variables to the widget:
+            </p>
+
+<pre>
+
+// Weather view controls.
+var weatherCityPanel;
+var weatherContentPanels;
+</pre>
+
+            <p>
+
+                The next step is to create the actual view in the createWeatherView() function.
+                Of course the actual content for the content panels won't be known until at
+                runtime when we know what city the forecast is for and what the actual weather
+                forecast is. Still, we can create the actual content panels and just set their
+                content later so this is not a problem.
+            </p>
+
+<pre>
+
+// Creates the weather view.
+function createWeatherView() {
+    // empty caption text to display the caption bar - custom background using CSS
+    weatherView = new ListView(null, "");
+    
+    // heading panel for city
+    weatherCityPanel = new ContentPanel();
+    weatherView.addControl(weatherCityPanel);
+    
+    // create five content panels - one for each day in the 5-day forecast
+    weatherContentPanels = [];
+    for (var i = 0; i &lt; 5; i++) {
+        var weatherContentPanel = new ContentPanel();
+        weatherView.addControl(weatherContentPanel)
+        weatherContentPanels.push(weatherContentPanel);
+    }
+}
+</pre>
+
+            <p>
+
+                When we show the weather view we have to check what the current local city
+                is and set the weatherCityPanel's content to a suitable HTML fragment that
+                will work as a heading for the weather forecast. In addition to that we'll
+                have to retrieve the weather forecast from the business logic engine and then
+                create HTML from that for each day in the forecast and set it to the five
+                content panels that we are storing references to in the weatherContentPanels
+                array. The caption for the weather forecast panels will be a string that
+                indicates the day that the forecast is for.
+            </p>
+
+            <p>
+
+                Creating the HTML fragment for the forecast heading doesn't sound so hard
+                but generating HTML for a weather forecast for five days sounds a bit tricky.
+                Let's create a separate function to do that. Remember that the weather object
+                that the engine is returning to us has two properties: temperature and type.
+                The temperature is in the preferred temperature unit and the type is one of
+                the type codes, e.g. "Sunny". We'll use it to match it up with a weather icon.
+            </p>
+
+<pre>
+
+// Returns HTML for one day of weather forecast.
+function getHTMLForWeather(weather) {
+    // build weather icon file name string
+    var weatherIcon = "Weather" + weather.type + ".png";
+    
+    // build temperature string
+    var temperatureStr = weather.temperature + "&amp;deg;" + engine.getTemperatureUnit().toUpperCase();
+    
+    // build weather HTML
+    var weatherBuf = "";
+    weatherBuf += "&lt;table class=\"WeatherForecastDayTable\"&gt;&lt;tr&gt;";
+        weatherBuf += "&lt;td class=\"WeatherForecastIconCell\"&gt;";
+            weatherBuf += "&lt;img src=\"" + weatherIcon + "\"/&gt;";
+        weatherBuf += "&lt;/td&gt;";
+        weatherBuf += "&lt;td class=\"WeatherForecastTemperatureCell\"&gt;";
+            weatherBuf += temperatureStr;
+        weatherBuf += "&lt;/td&gt;";
+    weatherBuf += "&lt;/tr&gt;&lt;/table&gt;";
+    
+    return weatherBuf;
+}
+</pre>
+
+            <p>
+
+                The HTML that we are generating is a table with a single row with two cells.
+                The left cell has the weather icon image and the right cell has the temperature.
+                We are using three CSS style rules for the table and we naturally need to create
+                those too in the TravelCompanion.css file:
+            </p>
+
+<pre>
+
+/* Table for one day of weather forecast information */
+.WeatherForecastDayTable {
+    margin: auto;
+    border-spacing: 0px;
+}
+
+/* Table cell for weather icon */
+.WeatherForecastIconCell {
+    line-height: 1px;
+    font-size: 1px;
+    vertical-align: middle;
+}
+
+/* Table cell for temperature information */
+.WeatherForecastTemperatureCell {
+    padding: 0px 0px 0px 10px;
+    vertical-align: middle;
+}
+</pre>
+
+            <p>
+
+                Now we have a way to turn a weather forecast into HTML that we can use in a
+                ContentPanel control. We'll do that in a function we call updateWeatherForecast().
+                The caption for each weather forecast panel will indicate the day that the
+                forecast is for. The first weather object in the array that the engine returns
+                is for today and the subsequent ones are for coming days.
+            </p>
+
+<pre>
+
+// Updates the weather forecast.
+function updateWeatherForecast() {
+    // get local time and weather
+    var localTime = engine.getLocalTime();
+    var localWeather = engine.getLocalWeather();
+    
+    // set the weather for each day in the forecast
+    for (var i = 0; i &lt; 5; i++) {
+        // figure out day name
+        var day = (localTime.day + i) % 7;
+        var dayName = localTime.dayNames[day];
+        
+        // set weather to content panel
+        weatherContentPanels[i].setCaption((i == 0 ? "Today, " : "") + dayName);
+        weatherContentPanels[i].setContent(getHTMLForWeather(localWeather[i]));
+    }
+}
+</pre>
+
+            <p>
+
+                We are now ready to implement the showWeatherView() function:
+            </p>
+
+<pre>
+
+// Displays the weather view.
+function showWeatherView() {
+    // set heading city panel
+    weatherCityPanel.setContent("&lt;div class=\"WeatherCityPanel\"&gt;" + engine.getLocalCity().name + " 5-day Forecast("&lt;/div&gt;");
+    
+    // update the weather forecast before showing the view
+    updateWeatherForecast();
+    
+    setSubViewSoftkeys();
+    uiManager.setView(weatherView);
+}
+</pre>
+
+            <p>
+
+                The weatherCityPanel gets a heading that matches the currently configured local city.
+                We're using another CSS rule for that so we'll have to add it to our stylesheet:
+            </p>
+
+<pre>
+
+/* City heading panel for weather forecast view */
+.WeatherCityPanel {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0px 0px 10px 0px;
+}
+</pre>
+
+            <p>
+
+                The weather forecast view and functionality is now ready to be tested.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Currency converter</h2>
+
+            
+            <p>
+
+                It's time to move on to the currency converter. This view is going to have two
+                TextField controls. One for home currency and one for local currency. In addition
+                there will be two FormButton controls to convert from the home currency to the
+                local currency, and vice versa. We'll need references to the textfields so that
+                we can retrieve their values when the form buttons are pressed:
+            </p>
+
+<pre>
+
+// Converter view controls.
+var homeMoneyField;
+var localMoneyField;
+</pre>
+
+            <p>
+
+                Creating the view is quite straight forward:
+            </p>
+
+<pre>
+
+// Creates the converter view.
+function createConverterView() {
+    // empty caption text to display the caption bar - custom background using CSS
+    converterView = new ListView(null, "");
+    
+    // home money
+    homeMoneyField = new TextField();
+    converterView.addControl(homeMoneyField);
+    
+    // local money
+    localMoneyField = new TextField();
+    converterView.addControl(localMoneyField);
+    
+    // home to local
+    var homeToLocalButton = new FormButton(null, "Convert Home to Local");
+    converterView.addControl(homeToLocalButton);
+    
+    // local to home
+    var localToHomeButton = new FormButton(null, "Convert Local to Home");
+    converterView.addControl(localToHomeButton);
+}
+</pre>
+
+            <p>
+
+                Notice that the textfields don't have any caption or text at this point. We will
+                set that just before the view is displayed because the caption will depend on
+                what the home and local cities are configured to.
+            </p>
+
+            <p>
+
+                Also notice that we don't have any event listeners for the buttons at this point.
+                That's because we haven't actually written any functions that will implement
+                the currency conversion yet. But before we do that we'll implement the
+                function to show the view:
+            </p>
+
+<pre>
+
+// Displays the converter view.
+function showConverterView() {
+    // set captions and reset fields
+    homeMoneyField.setCaption("Home Currency (" + engine.getHomeCity().currency + ")");
+    homeMoneyField.setText("");
+    localMoneyField.setCaption("Local Currency (" + engine.getLocalCity().currency + ")");
+    localMoneyField.setText("");
+    
+    setSubViewSoftkeys();
+    uiManager.setView(converterView);
+}
+</pre>
+
+            <p>
+
+                You can now test the view but it won't actually convert any currency until
+                we give our form buttons event listeners and write the code that will be
+                called when the buttons are pressed.
+            </p>
+
+            <p>
+
+                We'll implement that in two functions. One to convert from home to local and
+                another to convert in the other direction. The functions take the current
+                text value from the corresponding field and then pass it to the engine to do
+                the conversion. The result is then placed in the other of the two fields,
+                formatted so that the result has exactly two digits.
+            </p>
+
+<pre>
+
+// Called when the user clicks on the "convert home to local" button
+// in the converter view. (rounds to two decimals)
+function convertHomeToLocalMoney() {
+    var homeMoney = parseFloat(homeMoneyField.getText());
+    var localMoney = engine.convertHomeToLocalMoney(homeMoney).toFixed(2);
+    localMoneyField.setText(localMoney);
+}
+
+// Called when the user clicks on the "convert local to home" button
+// in the converter view. (rounds to two decimals)
+function convertLocalToHomeMoney() {
+    var localMoney = parseFloat(localMoneyField.getText());
+    var homeMoney = engine.convertLocalToHomeMoney(localMoney).toFixed(2);
+    homeMoneyField.setText(homeMoney);
+}
+</pre>
+
+            <p>
+
+                Now that the functions are implemented we can add the event listeners to our
+                form buttons. We'll add this code right after where the buttons are created in
+                the createConverterView() function:
+            </p>
+
+<pre>
+
+homeToLocalButton.addEventListener("ActionPerformed", convertHomeToLocalMoney);
+localToHomeButton.addEventListener("ActionPerformed", convertLocalToHomeMoney);
+</pre>
+
+            <p>
+
+                The currency converter is now working and it's time to test it. Try it with
+                different currencies by changing the home and local cities in the settings view.
+            </p>
+
+            <div class="fignone" id="GUID-384F2430-3DE9-4006-AC8E-86C5774C3A79__GUID-D5A1648B-B81D-46B0-A15F-C3C8FF2185D7"><a name="GUID-384F2430-3DE9-4006-AC8E-86C5774C3A79__GUID-D5A1648B-B81D-46B0-A15F-C3C8FF2185D7"><!-- --></a><span class="figcap">Figure 1. 
+Travel Companion converter view</span>
+
+                
+                <br /><img src="Travel_Companion_Converter_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Information view</h2>
+
+            
+            <p>
+
+                The information view is a summary of relevant information that the user is
+                will often need. Here we'll have a world clock that shows the home and local
+                time, the current weather at home and in the local city, as well as the
+                latest news headlines. We will use ContentPanel controls for all of these.
+                One for the home time, one for the local time, one for the home weather, one
+                for the local weather, and one for all the news headlines.
+            </p>
+
+            <p>
+
+                We'll need to access all of these content panels from outside the view creation
+                function so we'll need global variables to hold references to them:
+            </p>
+
+<pre>
+
+// Info view controls.
+var homeCityTimePanel;
+var localCityTimePanel;
+var homeCityWeatherPanel;
+var localCityWeatherPanel;
+var newsHeadlinesPanel;
+</pre>
+
+            <p>
+
+                We can now proceed and actually implement the creation of the information view:
+            </p>
+
+<pre>
+
+// Creates the info view.
+function createInfoView() {
+    // empty caption text to display the caption bar - custom background using CSS
+    infoView = new ListView(null, "");
+    
+    // home city time
+    homeCityTimePanel = new ContentPanel();
+    infoView.addControl(homeCityTimePanel);
+    
+    // local city time
+    localCityTimePanel = new ContentPanel();
+    infoView.addControl(localCityTimePanel);
+    
+    // separator
+    infoView.addControl(new Separator());
+    
+    // home city weather
+    homeCityWeatherPanel = new ContentPanel();
+    infoView.addControl(homeCityWeatherPanel);
+    
+    // local city weather
+    localCityWeatherPanel = new ContentPanel();
+    infoView.addControl(localCityWeatherPanel);
+    
+    // separator
+    infoView.addControl(new Separator());
+    
+    // news headlines
+    newsHeadlinesPanel = new ContentPanel();
+    infoView.addControl(newsHeadlinesPanel);
+}
+</pre>
+
+            <p>
+
+                We already have a function that turns a weather forecast into HTML but we
+                don't have similar functions for time or for news headlines. We'll need
+                that when we want to put content into the time and headline content panels
+                so let's write those functions next.
+            </p>
+
+            <p>
+
+                For time we'll need a function that takes a DateTime object and returns
+                HTML that we can use in the content panel in the information view.
+            </p>
+
+<pre>
+
+// Returns HTML for time.
+function getHTMLForTime(time) {
+    // build HTML buffer
+    var timeBuf = "";
+    timeBuf += "&lt;div class=\"Clock\"&gt;";
+        timeBuf += time.hours + ":" + (time.minutes &lt; 10 ? "0" : "") + time.minutes;
+    timeBuf += "&lt;/div&gt;";
+    return timeBuf;
+}
+</pre>
+
+            <p>
+
+                The HTML uses a CSS rule that we'll have to define in our stylesheet:
+            </p>
+
+<pre>
+
+/* Clock div */
+.Clock {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+</pre>
+
+            <p>
+
+                Next up is the function for turning the latest news headlines into HTML.
+                For each news headline we'll generate a div that contains the actual
+                news headline plus a link to the website where the full news article is.
+                Opening URLs should be done using the widget.openURL() method in the
+                S60 Web Runtime but since we don't have that functionality in a PC browser
+                we'll write a wrapper for the function just like we did for the RSS Reader:
+            </p>
+
+<pre>
+
+// Opens a URL.
+function openURL(url) {
+    if (window.widget) {
+        // in WRT
+        widget.openURL(url);
+    } else {
+        // outside WRT
+        window.open(url, "NewWindow");
+    }
+}
+</pre>
+
+            <p>
+
+                Now we can implement the function that turns news headlines into HTML:
+            </p>
+
+<pre>
+
+// Returns HTML for news headlines.
+function getHTMLForNewsHeadlines(newsHeadlines) {
+    var newsBuf = "";
+    for (var i = 0; i &lt; newsHeadlines.length; i++) {
+        newsBuf += "&lt;div class=\"NewsHeadline\"&gt;";
+            newsBuf += newsHeadlines[i].headline + "&lt;br/&gt;";
+            newsBuf += "&lt;a href=\"JavaScript:openURL('" + newsHeadlines[i].url + "');\"&gt;";
+            newsBuf += "Read more...";
+            newsBuf += "&lt;/a&gt;";
+        newsBuf += "&lt;/div&gt;";
+    }
+    return newsBuf;
+}
+</pre>
+
+            <p>
+
+                The div that encloses each news headline uses a CSS rule called NewsHeadline.
+                As with all other CSS rules that we use we'll define this one too in
+                the TravelCompanion.css stylesheet file. We also need to add rules for what
+                links should look like in the context of a news headline. We define the link
+                as bold underlined blue text in its normal state and inverse with blue background
+                and white text when focused.
+            </p>
+
+<pre>
+
+/* News headline */
+.NewsHeadline {
+    padding: 0px 0px 10px 0px;
+}
+
+/* Anchor tags in the context of a news headline link */
+.NewsHeadline a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: rgb(0,0,255);
+}
+
+/* Focused anchor tags */
+.NewsHeadline a:focus {
+    background: rgb(0,0,255);
+    color: rgb(255,255,255);
+}
+</pre>
+
+            <p>
+
+                Now we should have everything we need to be able to update the information
+                view content panels when the view is shown. It's time to implement the
+                showInfoView() function:
+            </p>
+
+<pre>
+
+// Displays the info view.
+function showInfoView() {
+    // set current information to controls
+    var homeCity = engine.getHomeCity();
+    var localCity = engine.getLocalCity();
+    
+    // set time
+    var homeTime = engine.getHomeTime();
+    var localTime = engine.getLocalTime();
+    homeCityTimePanel.setCaption(homeCity.name + " Time");
+    homeCityTimePanel.setContent(getHTMLForTime(homeTime));
+    localCityTimePanel.setCaption(localCity.name + " Time");
+    localCityTimePanel.setContent(getHTMLForTime(localTime));
+    
+    // set weather
+    var homeWeather = engine.getHomeWeather();
+    var localWeather = engine.getLocalWeather();
+    homeCityWeatherPanel.setCaption(homeCity.name + " Weather");
+    homeCityWeatherPanel.setContent(getHTMLForWeather(homeWeather[0]));
+    localCityWeatherPanel.setCaption(localCity.name + " Weather");
+    localCityWeatherPanel.setContent(getHTMLForWeather(localWeather[0]));
+    
+    // set headline
+    var newsHeadlines = engine.getNewsHeadlines();
+    newsHeadlinesPanel.setCaption("News Headlines");
+    newsHeadlinesPanel.setContent(getHTMLForNewsHeadlines(newsHeadlines));
+    
+    setSubViewSoftkeys();
+    uiManager.setView(infoView);
+}
+</pre>
+
+            <p>
+
+                If you try the view now, everything will seem to work fine. But there
+                is a big problem! We set the content in the content panels when the
+                view is shown but if we stay in the view for an hour the clocks will
+                still show the same time as when we showed the view. What's worse, it's
+                not just the information view that has this problem. The weather forecast
+                view is equally broken.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Updating views with a timer</h2>
+
+            
+            <p>
+
+                In order to keep the views up to date we'll need to start a timer that
+                periodically calls a function where we examine whether it's been long
+                enough since the last update of a view that it's time to update the
+                content in that view. Note that we only need to update a view using the
+                timer if the view is actually visible.
+            </p>
+
+            <p>
+
+                That sounds good at first but some things have to be updated more
+                frequently than others. The clocks in our information view have to not
+                only be updated once a minute but immediately when the minute changes.
+                Such accuracy is not needed for the weather forecasts or news headlines.
+                For them it's fine if they are updated once per hour. Except that weather
+                forecasts also have to be updated when the day rolls over to the next as
+                otherwise the forecast will show the wrong day. Because the home and local
+                cities can be in different timezones their days will roll over at
+                different times and thus we have to track these separately.
+            </p>
+
+            <p>
+
+                It turns out that we need no less than five variables to track this.
+                We need one to track the last minute that has been updated to the clocks,
+                one variable is needed to track when the weather was last updated, one
+                to track the day in the home city when the home city weather forecast
+                was updated, one to track the same but for the local city, and one to
+                track when the news headlines were updated. Let's declare those variables
+                and initialize them:
+            </p>
+
+<pre>
+
+// Tracks last updated minute on the clocks.
+var lastUpdatedClockMinute = -1;
+
+// Tracks last update time for weather.
+var weatherLastUpdated = -1;
+
+// Tracks the days when the weather was last updated.
+var lastUpdatedHomeWeatherDay = -1;
+var lastUpdatedLocalWeatherDay = -1;
+
+// Tracks last update time for news headlines.
+var newsHeadlinesLastUpdated = -1;
+</pre>
+
+            <p>
+
+                We'll use the time in millieconds to remember update times and compare
+                how long it's been since an update happened. Since we'll use this quite
+                a lot, let's create a small helper function for it:
+            </p>
+
+<pre>
+
+// Returns the current time in milliseconds.
+function getTimeMillis() {
+    return new Date().getTime();
+}
+</pre>
+
+            <p>
+
+                When we show a view we have to update the appropriate tracking variables
+                so the widget will properly keep track of when a view was updated. That
+                means that we have to add the following to just before we show the
+                information view in showInfoView():
+            </p>
+
+<pre>
+
+// update the tracking variables
+lastUpdatedClockMinute = homeTime.minutes;
+weatherLastUpdated = getTimeMillis();
+lastUpdatedHomeWeatherDay = homeTime.day;
+lastUpdatedLocalWeatherDay = localTime.day;
+newsHeadlinesLastUpdated = getTimeMillis();
+</pre>
+
+            <p>
+
+                In the same way the showWeatherView() function needs the following addition:
+            </p>
+
+<pre>
+
+// update the tracking variables
+weatherLastUpdated = getTimeMillis();
+lastUpdatedLocalWeatherDay = engine.getLocalTime().day;
+</pre>
+
+            <p>
+
+                Now our tracking variables should be updated to the right times whenever views
+                are shown but we still don't have a timer to handle the automatic updating
+                of the views.
+            </p>
+
+            <p>
+
+                We'll set this timer up so that the timer callback function is called once
+                every second so that we can make sure that the clocks don't fall behind. We'll
+                track the timer identifier in a variable:
+            </p>
+
+<pre>
+
+// View updating timer identifier.
+var timerId;
+</pre>
+
+            <p>
+
+                We'll make the timer call a function called updateViews() that we will
+                create shortly but first let's start the timer as the last thing in the
+                init() function:
+            </p>
+
+<pre>
+
+// start timer that keeps views up to date
+timerId = setInterval(updateViews, 1000);
+</pre>
+
+            <p>
+
+                The updateViews() function needs to check what view we are currently in and do
+                the appropriate checks depending on the view. If we're in the information view
+                then we have three things to check. The first thing is to check if the minute
+                has changed on the clock. The second is to check if it's been over 60 minutes
+                since the weather was updated or if either the home or local city has rolled
+                over to the next day. And finally the third to thing to check is if it's been
+                over 60 minutes since the news headlines were updated.
+            </p>
+
+            <p>
+
+                If we are in the weather view then we check if it's been over 60 minutes since
+                the weather was updated or if the local city has rolled over to the next day.
+                Note that the weather forecast view only displays the local weather forecast
+                so we don't have to check for if the home city has rolled over to the next day.
+            </p>
+
+            <p>
+
+                The implementation of the function is therefore as follows:
+            </p>
+
+<pre>
+
+// Timer callback function that gets called once every second to keep views up to date.
+function updateViews() {
+    
+    // get the current view
+    var currentView = uiManager.getView();
+    
+    // get home and local time as well as time in milliseconds
+    var homeTime = engine.getHomeTime();
+    var localTime = engine.getLocalTime();
+    var now = getTimeMillis();
+    
+    if (currentView == infoView) {
+        // only update the clocks if the minute has changed
+        if (homeTime.minutes != lastUpdatedClockMinute) {
+            lastUpdatedClockMinute = homeTime.minute;
+            homeCityTimePanel.setContent(getHTMLForTime(homeTime));
+            localCityTimePanel.setContent(getHTMLForTime(localTime));
+        }
+        
+        // update weather if it hasn't been updated in the last hour or if the day has changed
+        if ((now &gt; weatherLastUpdated + (1000 * 60 * 60)) ||
+                (homeTime.day != lastUpdatedHomeWeatherDay) ||
+                (localTime.day != lastUpdatedLocalWeatherDay)) {
+            weatherLastUpdated = now;
+            lastUpdatedHomeWeatherDay = homeTime.day;
+            lastUpdatedLocalWeatherDay = localTime.day;
+            var homeWeather = engine.getHomeWeather();
+            var localWeather = engine.getLocalWeather();
+            homeCityWeatherPanel.setContent(getHTMLForWeather(homeWeather[0]));
+            localCityWeatherPanel.setContent(getHTMLForWeather(localWeather[0]));
+        }
+        
+        // update news headlines if they haven't been updated in the last hour
+        if (now &gt; newsHeadlinesLastUpdated + (1000 * 60 * 60)) {
+            newsHeadlinesLastUpdated = now;
+            var newsHeadlines = engine.getNewsHeadlines();
+            newsHeadlinesPanel.setContent(getHTMLForNewsHeadlines(newsHeadlines));
+        }
+    } else if (currentView == weatherView) {
+        // update weather if it hasn't been updated in the last hour or if the day has changed
+        if ((now &gt; weatherLastUpdated + (1000 * 60 * 60)) ||
+                (localTime.day != lastUpdatedLocalWeatherDay)) {
+            weatherLastUpdated = now;
+            lastUpdatedLocalWeatherDay = localTime.day;
+            updateWeatherForecast();
+        }
+    }
+}
+</pre>
+
+            <div class="fignone" id="GUID-384F2430-3DE9-4006-AC8E-86C5774C3A79__GUID-CBE870F8-DE6F-47D9-BE2B-F7D756DC8A40"><a name="GUID-384F2430-3DE9-4006-AC8E-86C5774C3A79__GUID-CBE870F8-DE6F-47D9-BE2B-F7D756DC8A40"><!-- --></a><span class="figcap">Figure 2. 
+Travel Companion information view</span>
+
+                
+                <br /><img src="Travel_Companion_Info_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+What we have learned</h2>
+
+            
+            <p>
+
+                The Travel Companion widget is now completed! We have learned to implement
+                complex widgets with multiple views using the WRTKit. We have also learned
+                how to keep information in views up to date using a timer. And we implemented
+                the widget without any dependencies to how the business logic engine was
+                implemented. That will come in handy if you want to continue developing this
+                widget by substituting the mock engine with one that actually uses real
+                world data. You are now ready to tackle any challenge using the WRTKit!
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Travel_Companion_Tutorial-GUID-be79ba64-fa03-4968-964e-d7dcc42d7053.html">Travel Companion</a></div>
+</div>
+</div>
+
+</body>
+</html>

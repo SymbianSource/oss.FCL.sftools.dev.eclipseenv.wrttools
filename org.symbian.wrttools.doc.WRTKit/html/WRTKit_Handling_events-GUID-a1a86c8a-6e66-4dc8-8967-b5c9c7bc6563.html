@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Handling events" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-A1A86C8A-6E66-4DC8-8967-B5C9C7BC6563" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Handling events</title>
+</head>
+<body id="GUID-A1A86C8A-6E66-4DC8-8967-B5C9C7BC6563"><a name="GUID-A1A86C8A-6E66-4DC8-8967-B5C9C7BC6563"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Handling events</h1>
+
+    <div>
+
+        <p>
+
+            Event handling in the WRTKit is based on the "observer pattern", 
+            meaning that events are reported from the event source to observers 
+            that are said to be "listening" to event notifications. An event 
+            listener is simply a JavaScript function that takes a single 
+            argument: the event message. In fact even that single argument is 
+            optional and if the function is not interested in the event message 
+            then it can simply ignore it.
+        </p>
+
+        <p>
+
+            All views and controls inherit from a common base class called 
+            "UIElement" that defines the mechanics for event observation and 
+            notification. From the point of view of event listeners, the most 
+            important methods are addEventListener() and removeEventListener(). 
+            These two methods are used to register and unregister listener 
+            functions from a view or control.
+        </p>
+
+        <p>
+
+            There are different types of events though, and event listeners are 
+            typically not interested in receiving notifications of all events. 
+            For example an event listener that wants to know when a button has 
+            been pressed doesn't usually care if the pointer is currently 
+            hovering above the button or not. Filtering of event notifications 
+            works based on event type names. E.g. in this case the event 
+            listener would have been added so that it should be called only for 
+            events of the "ActionPerformed" type. The event type is given to the 
+            addEventListener() function when a listener is registered. If a 
+            listener function really wants to be notified of all event types 
+            then null can be specified as the event type. Note that the event 
+            type must also be specified when an event listener is unregistered.
+        </p>
+
+        <p>
+
+            The code below shows a typical event listener function:
+        </p>
+
+<pre>
+
+// Callback for event notifications.
+function handleEvent(event) {
+    // handle event here
+}
+</pre>
+
+        <p>
+
+            The event message is passed to the first argument (called event in 
+            this case) of the event handler function. The event message is a 
+            JavaScript object with three properties: type, source and value. The 
+            type property specifies the event type name and is useful if a 
+            listener function is listening to several types of events. The 
+            source argument is a reference to the source view or control that 
+            sent out the event notification. If a listener function is listening 
+            to events from many different controls then this is useful to figure 
+            out in which of the controls the event occurred. Here the unique 
+            identifier of views and controls can come in handy to identify the 
+            source without needing to retain references to all the source 
+            controls. Finally the value property is a event-type specific 
+            property that contains some information about the event. For example 
+            if the event type is "TextChanged" from a text entry control then 
+            the value would be the new text value that the user has typed into 
+            the control.
+        </p>
+
+        <p>
+
+            The code below demonstrates how to add and remove an event listener
+            to/from a control. The example assumes that the control has already
+            been created and that the ctrl variable refers to it.
+        </p>
+
+<pre>
+
+// add listener to ctrl
+// function to add is handleEvent() for event type "ActionPerformed"
+ctrl.addEventListener("ActionPerformed", handleEvent);
+
+// remove listener from ctrl
+// function to remove is handleEvent() for event type "ActionPerformed"
+ctrl.removeEventListener("ActionPerformed", handleEvent);
+</pre>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>

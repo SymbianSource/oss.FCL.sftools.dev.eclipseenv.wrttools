@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Selections" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-23145D13-F2E7-48BE-B24B-BC49754B2919" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Selections</title>
+</head>
+<body id="GUID-23145D13-F2E7-48BE-B24B-BC49754B2919"><a name="GUID-23145D13-F2E7-48BE-B24B-BC49754B2919"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Selections</h1>
+
+    <div>
+
+        <p>
+
+            Selection of one or more options from a set of options is one of the most common 
+            use cases in a user interface. The WRTKit supports this use case with two 
+            controls, SelectionList and SelectionMenu, each of which can be in either 
+            "single selection" or "multiple selection" mode. The two controls differe only
+            in look and interaction but not in their APIs.
+        </p>
+
+        <p>
+
+            The SelectionList control shows an expanded list of all of its options in the 
+            view. If the control is in single selection mode then each option is presented 
+            with a "radio button", of which only one can be selected at a time. This ensures 
+            that only one of the options can be selected by the user. If the SelectionList 
+            control is in multiple selection mode then each option is presented with a 
+            "checkbox". Any amount (including zero) of checkboxes can be checked at time, 
+            allowing users to select multiple options. The SelectionList control is a hybrid 
+            between the traditional way of showing radio buttons and checkboxes in a web 
+            environment and the way that an S60 application shows single and multiple choice 
+            selections. The SelectionList is recommeded to be used when the widget is using 
+            the pointer navigation mode or when there are only a few options.
+        </p>
+
+        <div class="fignone" id="GUID-23145D13-F2E7-48BE-B24B-BC49754B2919__GUID-BE87E376-AF72-4533-909F-5ED5A022DE5C"><a name="GUID-23145D13-F2E7-48BE-B24B-BC49754B2919__GUID-BE87E376-AF72-4533-909F-5ED5A022DE5C"><!-- --></a><span class="figcap">Figure 1. 
+SelectionList controls</span>
+
+            
+            <br /><img src="SelectionList_Controls_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            The SelectionMenu control is more similar to the way normal S60 applications 
+            allow users to make single or multiple choices. The SelectionMenu takes up only 
+            minimally of space in its normal state, but when activated it pops up up a list 
+            of options with either radio buttons (for single selection) or checkboxes (for 
+            multiple selection) that the user can select. The SelectionMenu control is good 
+            for the tab navigation mode or if there are many options that would use up lots 
+            of space on the screen using the SelectionList control.
+        </p>
+
+        <div class="fignone" id="GUID-23145D13-F2E7-48BE-B24B-BC49754B2919__GUID-B78AFE71-FE80-4CAB-BF67-79D8D81F744A"><a name="GUID-23145D13-F2E7-48BE-B24B-BC49754B2919__GUID-B78AFE71-FE80-4CAB-BF67-79D8D81F744A"><!-- --></a><span class="figcap">Figure 2. 
+SelectionMenu control</span>
+
+            
+            <br /><img src="SelectionMenu_Control_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            Options in the selection controls are specified as an array of JavaScript 
+            objects, where each object represents one option. Each option object has two 
+            properties: value and text. The value property can be any JavaScript value, 
+            including object references and is used to represent the concrete value of the 
+            option. The text property is used to display the option in the user interface. 
+            The value could for example be a boolean true or false while the
+            text could be "Yes" or "No".
+        </p>
+
+        <p>
+
+            The set of currently selected options can be set or retrieved from a selection 
+            control using getter and setter methods. For single selection controls the 
+            selected option is specified as a single reference to one of the options in the 
+            control. For multiple selection the selected options are specified as an array 
+            of references to zero or more of the options in the control. Note that the 
+            references to the options must refer to the very same options that are in the 
+            control - not other instances of the options even if they are identical in value 
+            and/or text.
+        </p>
+
+        <p>
+
+            Selection controls fire "SelectionChanged" events when the user makes a 
+            selection in the control.
+        </p>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html">Developing widgets using the WRTKit</a></div>
+</div>
+</div>
+
+</body>
+</html>

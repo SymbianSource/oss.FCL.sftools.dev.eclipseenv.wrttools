@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Creating the Hello World widget" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Hello_World_Tutorial-GUID-67e0a561-48ac-4938-8f1b-852422b71380.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-D638159A-D12B-476C-A74C-99055672B7BE" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Creating the Hello World widget</title>
+</head>
+<body id="GUID-D638159A-D12B-476C-A74C-99055672B7BE"><a name="GUID-D638159A-D12B-476C-A74C-99055672B7BE"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Creating the Hello World widget</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+What goes in the widget?</h2>
+
+            
+            <p>
+
+                One of the main reasons why Hello World is a good example to start with is
+                because it is a minimal widget and shows the minimal set of steps that you
+                would go through to create a widget that uses the WRTKit for its user interface.
+                We will create just two files, an HTML file called HelloWorld.html and a JavaScript
+                file called HelloWorld.js and both will be very short.
+            </p>
+
+            <p>
+
+                Before we'll start writing code let's talk about what exactly it is that we want
+                to build. A typical Hello World application simply displays the text Hello World
+                with the minimal amount of code. But because using the WRTKit is so simple, we'll
+                go one step further and make it a bit fancier.
+            </p>
+
+            <p>
+
+                WRTKit user interfaces are composed of views and controls. A view is one logical
+                group of stuff that you can see on the screen. A view can be longer than what fits
+                on the screen at once in which case the user has to scroll, but it's still one view.
+                For example in a web browser application you might have one view for the bookmarks,
+                another for settings and a third view for viewing actual web pages. Controls are
+                user interface elements like buttons, text fields, checkboxes, etc. that either
+                let the user perform some kind of interactive action or simply shows some information.
+                When you create a user interface with the WRTKit you create one or more controls,
+                one or more views, and place the controls on the views. After this, all you have to
+                do is ask one of the views to be displayed and the rest happens automatically.
+            </p>
+
+            <p>
+
+                Since this is a very simple widget we will just have one view and we'll call it
+                the "main view". Instead of just saying "Hello World" we will let the user input
+                their name and then click a button to popup a dialog that says hello to the user
+                by name. E.g. if the user enters "John" we will popup "Hello John!". But we will
+                also create some error handling so that if the user doesn't input a name we will
+                popup a warning dialog that says "Please enter your name!" instead.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+The HelloWorld.html file</h2>
+
+            
+                <p>
+
+                As mentioned earlier, you create user interfaces using JavaScript rather than
+                HTML when you use the WRTKit. Because of this it's perhaps not so surprising
+                that the HTML file is extremely short. What might come as a surprise however is
+                that it's extremely short and nearly identical no matter what kind of widget
+                you are building if you are using the WRTKit. In fact it typically only has
+                about 10 lines of code, including the DOCTYPE declaration! Here's what it looks
+                like:
+            </p>
+
+<pre>
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+    &lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;script type="text/javascript" src="WRTKit/WRTKit.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="HelloWorld.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body onload="init()"&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+            <p>
+
+                We're using XHTML 1.0 so the DOCTYPE declaration is for XHTML 1.0 Strict. And
+                because this is XHTML we also have the normal XML declaration (&lt;?xml...).
+                After that the content should be familiar even if you've used previously only
+                used HTML rather than XHTML. We have a normal html root level tag with a head
+                and body. Note that in XHTML tags are case sensitive and should be in lowercase
+                as in the example above. The xmlns attribute is a name space declaration that
+                states that all the tags used here are part of the XHTML standard.
+            </p>
+
+            <p>
+
+                Because we're creating a widget and not a web page we don't need to have a title. If you
+                want you can define one here but you won't see it anywhere. Next comes an important
+                bit: <samp class="codeph">
+&lt;script type="text/javascript" src="WRTKit/WRTKit.js"&gt;&lt;/script&gt;.</samp>
+                That piece of code instructs the Web Runtime to load a JavaScript file called WRTKit.js
+                from a directory called WRTKit. The WRTKit.js file takes care of loading the WRTKit and
+                including all the files that are needed by it. Those files are all inside the WRTKit
+                directory and you don't need to concern yourself with them at this point. In fact
+                all you need to do to use the WRTKit in a widget is to copy the WRTKit directory into
+                your own widget's root directory and then include the XHTML script tag presented above
+                that loads the WRTKit/WRTKit.js JavaScript file. If you are creating a widget of your own
+                you can find the WRTKit directory in the Library directory in the WRTKit SDK. But for your
+                convenience it has already been copied to the Hello World example.
+            </p>
+
+            <p>
+
+                Notice that there's another script tag too, this one loading a file called HelloWorld.js.
+                This is where we'll put all the JavaScript code that implements our Hello World widget.
+                We could have just written the JavaScript code inline between a &lt;script&gt; and
+                &lt;/script&gt; tag in the HelloWorld.html file but the HTML file is less cluttered if 
+                we move all JavaScript to a separate file.
+            </p>
+
+            <p>
+
+                Finally let's look at the body tag. There are two things of interest here. First of all
+                there's no content between &lt;body&gt; and &lt;/body&gt;. That's because all of the
+                content will be created by the WRTKit using JavaScript. And that leads us to the other
+                point of interest in the body: the <samp class="codeph">
+onload="init()"</samp> attribute of the
+                body tag. This sets up an event handler that gets called after the widget has loaded
+                all of its content. The event handler calls a JavaScript function called init(). This
+                is the point where we jump from the HTML to JavaScript. From this point on everything
+                will be JavaScript and the place where it all starts is the init() function that gets
+                called thanks to this little onload event handler for the body tag.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+The HelloWorld.js file</h2>
+
+            
+            <p>
+
+                The HTML file that we created above set things up so that there is a function call
+                to a function named "init()" when the widget is done loading. No such function exists
+                a this point so we have to create it. The init() function is the entry point to our
+                JavaScript and this is also where we will start the implementation.
+            </p>
+
+            <p>
+
+                The S60 Web Runtime supports two kinds of user interface interaction: tab and
+                pointer. The WRTKit supports but methods but usually the tab interaction method
+                (also known as "navigation mode") is preferred. Unfortunately the pointer based
+                navigation mode is the default so we'll have to disable it and switch to the tab
+                navigation mode. Also by default the softkey bar is hidden, which we don't want
+                because we want to give the user a clue about how to exit the widget. The good news
+                is that these two tweaks are easy to do and only requires two simple method calls.
+                The bad news is that those method calls are done through objects that only exist
+                in the Web Runtime but not in a PC web browser. Due to this, we'll create the
+                init() function as follows:
+            </p>
+
+<pre>
+
+// Called from the onload event handler to initialize the widget.
+function init() {
+    // set tab-navigation mode and show softkeys
+    // (only if we are in the WRT environment)
+    if (window.widget) {
+        widget.setNavigationEnabled(false);
+        menu.showSoftkeys();
+    }
+}
+</pre>
+
+            <p>
+
+                We wrapped the calls to disable the pointer navigation and show the softkeys
+                in an if-clause that checks if there's such an object available as window.widget.
+                This will evaluate to false on a PC web browser but true in the S60 Web Runtime.
+            </p>
+
+            <p>
+
+                Now that we've tuned the Web Runtime to our liking we can create the actual
+                user interface. We'll create four things: the so-called "user interface manager"
+                that is in charge of managing views and other user interface resources, the main
+                view for the widget, a text field where users can enter their name, and finally
+                a button that they can click on to popup a notification dialog that says "Hello"
+                Notice that we don't have to create the notification dialog because this is done
+                for us by the user interface manager.
+            </p>
+
+            <p>
+
+                Before we create those four objects we will declare four global variables so that
+                we can access those objects elsewhere in the widget. So let's add the following
+                to the top of the file (outside the init() function):
+            </p>
+
+<pre>
+
+// References to the WRTKit user interface manager and main view.
+var uiManager;
+var mainView;
+
+// References to controls in the main view.
+var helloButton;
+var nameField;
+</pre>
+
+            <p>
+
+                Now that we have some variables that can track the objects we are about to create
+                we can actually craete those objects. We'll create the objects inside the init()
+                function so that the user interface gets created right after the widget has loaded.
+            </p>
+
+            <p>
+
+                The first thing we create is the user interface manager. This is quite simple and
+                requires only a single line of code:
+            </p>
+
+<pre>
+
+// create UI manager
+uiManager = new UIManager();
+</pre>
+
+            <p>
+
+                Next we'll create the main view. The WRTKit allows all kinds of views to be created
+                if one has special needs for how user interface controls should be laid out. However
+                in the vast majority of cases the ListView class will be sufficient and that's what
+                we'll create this time too:
+            </p>
+
+<pre>
+
+// create main view
+mainView = new ListView(null, "Hello World");
+</pre>
+
+            <p>
+
+                The first argument to the ListView constructor is a unique identifier for the view.
+                All user interface elements in the WRTKit can have a unique identifier. The identifier
+                is helpful if you want to specifically target a view or control with some CSS style
+                rule or if you want to identify the source of an event in an event listener callback,
+                etc. However we don't need it here so we don't bother giving our main view a unique
+                id and just pass a null identifier value instead. The second argument is a caption for
+                the view. We'll just call our view "Hello World". The caption will be displayed at the
+                very top of the screen when we display the main view. But before we do that, let's
+                create the rest of the user interface.
+            </p>
+
+            <p>
+
+                The widget should have a text field to let users enter their name and a button to
+                trigger the greeting popup. Both the text field and the button are WRTKit controls
+                and will be created and added to the main view that we just created. There are two
+                kinds of buttons in the WRTKit though, form buttons and navigation buttons. Form
+                buttons are meant to trigger actions whereas navigation buttons are meant for 
+                situations where clicking it would result in moving from one view to another. Clearly
+                therefore, we want a form button in this case.
+            </p>
+
+            <p>
+
+                Creating the textfield and form button is done as follows:
+            </p>
+
+<pre>
+
+// add a text field to the view
+nameField = new TextField(null, "Enter your name");
+mainView.addControl(nameField);
+
+// add a button to the view
+helloButton = new FormButton(null, "Say Hello!");
+mainView.addControl(helloButton);
+</pre>
+
+            <p>
+
+                The first argument for both the textfield and button is the same as for the view:
+                an optional unique identifier. We won't need it here either so rather than scratching
+                our heads trying to come up with a unique identifier that we'll end up ignoring we'll
+                just define it as null. The second argument for the textfield constructor is a caption.
+                All controls except buttons have captions and this is the second argument in all
+                constructors for controls with captions. The caption is displayed above the control
+                and tells the user what the control does. In our case we want to have a textfield where
+                the user should enter the name so we'll use "Enter your name" as the control caption.
+                The second argument for the button constructor is the text for the button. The button
+                text for form buttons should be a verb or other descriptive text that lets the user know
+                what happens if the button is pressed. We'll put "Say Hello!" on our button.
+            </p>
+
+            <p>
+
+                After we have created a control we can add it to a view. Custom views can have their
+                own ways to do so but in the case of the default ListView that you'll use in most cases
+                you add a control by calling the addControl() method.
+            </p>
+
+            <p>
+
+                The user interface for the main view is now ready and we can show it. Showing a view
+                is done by calling setView() in the user interface manager. So we'll add one more line
+                of code to the end of the init() function:
+            </p>
+
+<pre>
+
+// display the main view
+uiManager.setView(mainView);
+</pre>
+
+            <p>
+
+                If you zipped up the widget directory, renamed it HelloWorld.wgz and installed the
+                widget on an emulator or handset, or just simply ran it in a PC web browser, you'd
+                notice that the user interface seems to work. There's just one problem. Clicking on
+                the button doesn't do anything! But don't worry, we're about to fix that.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Handling events</h2>
+
+            
+            <p>
+
+                The thing that is missing is that we have no way of knowing when the button was
+                pressed. And without knowing when it's pressed we can't react to the press and
+                show a greeting. A user interface action such as pressing a button is called an
+                "event". In the WRTKit events are reported to "listener" functions that developers
+                can register to controls. The way this is done is by creating a function that you
+                want to get called when an event occurrs, and then calling addEventListener() on
+                the control whose events you are interested in, passing the function to that method.
+                However there are many types of events and you are almost surely not interested in
+                all of them. Because of this you can specify the type of event that you want to get
+                notified about by giving the event type name to the addEventListener() method. The
+                event types and their names are described in the
+                <a href="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html">
+WRTKit API Reference</a>
+                for each control. Note that because controls inherit from other classes they also
+                inherit event types.
+            </p>
+
+            <p>
+
+                The event type that we're interested in here is "ActionPerformed". That event is
+                fired by form buttons whenever a user clicks on them. In order to get notified
+                of this event we'll need two things: create a function that will get called when
+                the event occurs and register that function as an event listener to our button.
+                Let's create the function first but leave the implementation empty for now:
+            </p>
+
+<pre>
+
+// Called when the hello-button is clicked.
+function helloButtonClicked(event) {}
+</pre>
+
+            <p>
+
+                Now that we have the event handler callback function we can add the event listener
+                registration code. Let's put that right after where we create the button in
+                the init() function:
+            </p>
+
+<pre>
+
+helloButton.addEventListener("ActionPerformed", helloButtonClicked);
+</pre>
+
+            <p>
+
+                Now our helloButtonClicked() function will get called whenever the button is
+                clicked. Notice that the function has an argument called event. This argument
+                will receive an event object that describes the event that occurred. This can
+                be useful if you have an event handler function that handles many different
+                events. The event object contains three properties that you can examine to
+                decide on what to do: a property called "source" that points back to the control
+                or view from where the event was fired, a property called "type" that contains
+                the event type name for this event, and a property called "value" that has
+                helpful additional info that depends on the event type. You'll find more detailed
+                information about this in the API Reference.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Notification popup dialogs</h2>
+
+            
+            <p>
+
+                All that remains now is to write the code that shows the greeting popup dialog
+                when the button is pressed. This code will naturally go in the helloButtonClicked()
+                function.
+            </p>
+
+            <p>
+
+                Using notification popup dialogs is very easy with the WRTKit. The user interface
+                manager has two methods: showNotification() and hideNotification() that are used
+                to show and hide notification popup dialogs. The showNotification() method takes
+                four arguments: displayTime, type, text and progress. The displayTime argument is
+                used to supply a time (in milliseconds) for how long the notification popup should
+                be shown for. We want our greeting to be visible for 3 seconds so we'll pass 3000
+                to this argument. The type argument is a string that tells the method what kind of
+                popup to show, which determines the visual style of the popup. We'll be using two types:
+                "info" and "warning". The "info" type for when we show the greeting and "warning" if
+                the user didn't enter a name and we want to show a notification dialog that complains
+                about this. The text argument is simply the text to show in the notification dialog.
+                And finally the progess argument is a decimal number between 0.0 and 1.0 that is
+                used in progress dialogs to display how far along a process is.
+            </p>
+
+            <p>
+
+                A progress of 0.0 means "0% progress" and 1.0 means "100% progress". So for example
+                if some process is 25% completed, you'd pass 0.25 to this argument. If you don't know
+                how long a process will take you can pass a negative number. This will result in an
+                animated progress bar that has a visual style that indicates that the progress is
+                unknown. Typically you'd use the "wait" notification type is you want to show a
+                progress dialog. If you don't want to show any progress information in the dialog,
+                such as in our case, you can omit the progress argument or pass a null to it.
+            </p>
+
+            <p>
+
+                Before we can write our code we need one more thing. We need to know what the user
+                wrote in the name textfield. This value can be retrieved by calling the getText()
+                method for the textfield. We're now ready to write the code for the helloButtonClicked()
+                function:
+            </p>
+
+<pre>
+
+var name = nameField.getText();
+if (name.length == "") {
+    uiManager.showNotification(3000, "warning", "Please enter your name!");
+} else {
+    uiManager.showNotification(3000, "info", "Hello " + name + "!");
+}
+</pre>
+
+            <div class="fignone" id="GUID-D638159A-D12B-476C-A74C-99055672B7BE__GUID-A2B73DB1-6494-4806-A11E-2E7F9BB1B3E7"><a name="GUID-D638159A-D12B-476C-A74C-99055672B7BE__GUID-A2B73DB1-6494-4806-A11E-2E7F9BB1B3E7"><!-- --></a><span class="figcap">Figure 1. 
+The Hello World widget</span>
+
+                
+                <br /><img src="Hello_World_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Wrapping up</h2>
+
+            
+            <p>
+
+                The Hello World widget is now done and you can zip it up, rename it to HelloWorld.wgz
+                and deploy it on a handset or emulator. But before that, let's try it in a normal PC
+                browser. Testing in a PC browser is useful because it allows you to use deubugging tools
+                (like the Firebug JavaScript debugger for Firefox) in case something isn't working. Using
+                a PC browser to test is also very fast because you don't have to install the widget to
+                the emulator or handset. Just hit reload in the web browser when you make a change and
+                you can see the results immediately. Of course there are features that will be missing
+                in a web browser, such as that you won't have access to the Options menu or any other
+                advanced widget functionality. But for the purpose of rapidly testing user interfaces
+                it can be very helpful.
+            </p>
+
+            <p>
+
+                There are a couple of points that are good to note now that the widget is ready.
+                First of all, your widget now works with both the pointer and tab navigation modes. If
+                you comment out the <samp class="codeph">
+widget.setNavigationEnabled(false)</samp> call in the init()
+                function you can try this out. Second, your widget works resolution independently.
+                You can try this either by resizing the PC browser window or by trying the widget out
+                with different resolutions in the S60 emulator. Third, the widget correctly handles
+                screen rotations and other resizes, e.g. if the softkey bar is hidden / shown. Fourth,
+                the widget looks can be customized without needing to touch any code - simply by changing
+                the UI.css and image files that you can find in the WRTKit/Resources directory.
+            </p>
+
+            <p>
+
+                But perhaps more important than any of the above is the fact that the WRTKit simplifies
+                the separation of user interface code from data and logic code. That's not something
+                that is apparent in a simple widget like this one, but it becomes very important as
+                you create something more complex and especially if the user interface contains elements
+                that are created dynamically for example based on data that has been fetched from the
+                Internet using AJAX.
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Hello_World_Tutorial-GUID-67e0a561-48ac-4938-8f1b-852422b71380.html">Hello World</a></div>
+</div>
+</div>
+
+</body>
+</html>

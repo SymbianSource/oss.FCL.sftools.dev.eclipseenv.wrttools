@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Views and the UIManager" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-F95B4AD6-0E86-4023-8371-3FF2A45E95FE" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Views and the UIManager</title>
+</head>
+<body id="GUID-F95B4AD6-0E86-4023-8371-3FF2A45E95FE"><a name="GUID-F95B4AD6-0E86-4023-8371-3FF2A45E95FE"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Views and the UIManager</h1>
+
+    <div>
+
+        <p>
+
+            All WRTKit user interfaces are divided into "views". The concept of 
+            a view is simply a set of user interface elements, such as buttons, 
+            textfields, etc., that are hosted in a container. The WRTKit 
+            architecture defines a contract for views through a base class 
+            called View and implements a concrete view class called ListView 
+            that lays out controls vertically. This layout is similar to what is 
+            commonly used in mobile device user interfaces and is thus 
+            sufficient for the vast majority of widget user interfaces. However 
+            the WRTKit allows developers to create their own custom views if 
+            some other kind of layout is preferred instead. Creating a custom 
+            view is an advanced topic that isn't covered here, but roughly 
+            speaking it is a simple matter of creating a subclass of the View 
+            class (just like ListView) and implementing all the functions that 
+            the View class defines, plus whatever custom layout the developer 
+            wants.
+        </p>
+
+        <p>
+
+            Because the ListView uses a vertical list layout for controls, 
+            adding controls can be done either to the end of the list or by 
+            inserting before a specified control in the list. There is no need 
+            to worry about actual control locations, coordinates or anything of 
+            that sort. The ListViews handles all of this automatically.
+        </p>
+
+        <p>
+
+            In addition to controls, the ListView has a view caption that is 
+            displayed at the very top of the view. The caption is optional but 
+            is good to include in order to show what a particular view is about. 
+            E.g. a view for settings could have a caption "Settings".
+        </p>
+
+        <div class="fignone" id="GUID-F95B4AD6-0E86-4023-8371-3FF2A45E95FE__GUID-E6398D37-32D1-4DF7-8313-5991D28067F9"><a name="GUID-F95B4AD6-0E86-4023-8371-3FF2A45E95FE__GUID-E6398D37-32D1-4DF7-8313-5991D28067F9"><!-- --></a><span class="figcap">Figure 1. 
+ListView with caption</span>
+
+            
+            <br /><img src="Travel_Companion_Main_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            Only one view can be visible at any given time, as is common in 
+            mobile device applications. Views are commanded to be shown using a 
+            class called UIManager, which attaches the view to the "view root". 
+            The view root is an HTML element that can be specified to the 
+            UIManager when it is created, but typically this argument is 
+            omitted, resulting in the UIManager creating a view root element 
+            that makes views take up the entire screen.
+        </p>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html">Developing widgets using the WRTKit</a></div>
+</div>
+</div>
+
+</body>
+</html>

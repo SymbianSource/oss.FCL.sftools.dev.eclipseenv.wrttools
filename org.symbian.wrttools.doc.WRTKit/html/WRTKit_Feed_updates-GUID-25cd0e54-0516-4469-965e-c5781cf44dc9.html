@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Feed updates" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_RSS_Reader_Tutorial-GUID-678d197f-c7b0-4e5e-85e2-f8549c75bbe8.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-25CD0E54-0516-4469-965E-C5781CF44DC9" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Feed updates</title>
+</head>
+<body id="GUID-25CD0E54-0516-4469-965E-C5781CF44DC9"><a name="GUID-25CD0E54-0516-4469-965E-C5781CF44DC9"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Feed updates</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Fetching news items</h2>
+
+            
+            <p>
+
+                Before we can show any news items we have to fetch them. So let's take
+                a break in implementing the user interface and write the code that fetches
+                the news items. The majority of that code is in the FeedUpdateBroker.js file
+                in a JavaScript class called FeedUpdateBroker. We'll only be using one single
+                method from that class: fetchFeed(). But how do we hook that up to our widget?
+            </p>
+
+            <p>
+
+                The actual call to fetchFeed() will be done from the timer function updateFeedTimerFunc()
+                that runs once a second. There we'll need an if-clause that checks if it's time
+                to update the feeds, if another update is already going on, if we have a valid URL
+                that we can fetch and if we're in the main view. If all of these tests tell us
+                that it's time to update the feed, we'll check if the feed update was manually
+                commanded or automatically triggered because it was time to update the feed in
+                the background. If this is a manual update then we'll popup a progress notification 
+                dialog. Next we'll create a new instance of the FeedUpdateBroker class and call
+                the fetchFeed() method to start the AJAX-based RSS feed update. We need to pass
+                two arguments to this method: the feed URL that we have in the feedURL variable
+                and a callback function that should be called when the update is completed.
+            </p>
+
+            <p>
+
+                We don't have that function yet so that's the first thing we need to implement.
+                We'll leave it empty for now but return to it in a bit:
+            </p>
+
+<pre>
+
+// Callback function that gets called when a feed update has completed.
+function feedUpdateCompleted(event) {
+}
+</pre>
+
+            <p>
+
+                After we call the fetchFeed() function we'll schedule the next feed update. In
+                theory we shouldn't do this until the feed update completes since there is a risk
+                that we do two updates at the same time. But because we're adding a check to
+                only do feed updates if another update isn't on-going this risk isn't actually
+                real. Now that we have a plan for how to update the feed, let's write the code.
+                First we need to declare a variable for the feed update broker instance that
+                we'll create:
+            </p>
+
+<pre>
+
+// Feed update broker.
+var feedUpdateBroker = null;
+</pre>
+
+            <p>
+
+                Then the actual implementation for the updateFeedTimerFunc() timer function:
+            </p>
+
+<pre>
+
+// Timer function for feed updates - called once every second.
+function updateFeedTimerFunc() {
+    var now = new Date().getTime();
+    
+    // check if a feed update has been scheduled, if it's time to update now,
+    // and if there's no update currently in progress and if we're in the main view
+    if ((feedURL != null) &amp;&amp;
+                (feedUpdateTime != -1) &amp;&amp;
+                (now &gt; feedUpdateTime) &amp;&amp;
+                (feedUpdateBroker == null) &amp;&amp; 
+                (uiManager.getView() == mainView)) {
+        // show progress dialog if this is a commanded feed update
+        if (feedUpdateCommanded) {
+            // no auto hiding, wait-type notification, unknown progress
+            uiManager.showNotification(-1, "wait", "Loading feed...", -1);
+        }
+        
+        // fetch the feed from the specified URL
+        feedUpdateBroker = new FeedUpdateBroker();
+        feedUpdateBroker.fetchFeed(feedURL, feedUpdateCompleted);
+        
+        if (feedUpdateFrequency != -1) {
+            // schedule next update
+            feedUpdateTime = now + feedUpdateFrequency;
+        } else {
+            // feed update frequency is "never"
+            feedUpdateTime = -1;
+        }
+    }
+}
+</pre>
+
+            <p>
+
+                The progress dialog is created so that it has a display time of -1 so that
+                it doesn't automatically hide but rather has to be commanded to go away. The
+                notification dialog type is "wait" and we'll give a progress of -1 since we
+                don't know how far along in the feed updating process we are. A negative 
+                progress value like -1 means "unknown progress" and will result in an animated
+                progress indicator that shows that something is going on but the exact time
+                that it will take is unknown.
+            </p>
+
+            <p>
+
+                Our feed updating should now be working and whenever a feed update is completed
+                there should be a call to the empty feedUpdateCompleted() function. Let's 
+                continue the implementation there.
+            </p>
+
+            <p>
+
+                When the feedUpdateCompleted() function is called it receives an event object
+                from the FeedUpdateBroker. This object contains a status that is either "ok"
+                or "error", a "lastModifiedTime" string that contains the time when the RSS
+                feed was last modified to help us decide if there are any new news items to
+                display, as well as an array of news item objects in a property called "items".
+                If the status is "error" then we'll show an error notification dialog. Keep in
+                mind that there might or might not be a progress dialog already showing at this
+                time. Either way we can just call the showNotification() function in the user
+                interface manager because if another dialog is already visible then it will simply
+                replace it with the one that we asked it to show. If the status is "ok" then we'll
+                call hideNotification() in the user interface manager. This will hide the progress
+                dialog if it's showing and if the dialog wasn't showing then the call will just
+                be ignored.
+            </p>
+
+            <p>
+
+                We'll then need to compare the lastModifiedTime against the last news feed that
+                we have. That means we'll need to track the lastModifiedTime of whatever news
+                feed that we are showing, and that means we need a new global variable:
+            </p>
+
+<pre>
+
+// Time when the feed was last modified.
+var feedLastModified = null;
+</pre>
+
+            <p>
+
+                If the lastModifiedTime is different from the one that we are storing in the
+                feedLastModified variable then we know that there's new news items to show.
+                If this is the case then we'll update the feedLastModified time and set the news
+                items to the main view. We could do something fancy and only update the news items
+                that have been modified but to keep the tutorial simple we'll just simply remove
+                all the current items and replace them with the new items and then focus the first
+                of the items. But before we move on to that we'll write as much as we can of the
+                feedUpdateCompleted() function:
+            </p>
+
+<pre>
+
+// Callback function that gets called when a feed update has completed.
+function feedUpdateCompleted(event) {
+    if (event.status == "ok") {
+        // if there aren't any feed items yet, we'll hide the progress dialog
+        if (feedUpdateCommanded) {
+            uiManager.hideNotification();
+        }
+        
+        // check if the feed has updated
+        if (event.lastModified != feedLastModified) {
+            // remember the last modified timestamp
+            feedLastModified = event.lastModified;
+            
+            // update news item controls here
+        }
+    } else {
+        // show error message
+        uiManager.showNotification(3000, "warning", "Error while updating feed!&lt;br/&gt;(check network settings)");
+    }
+    
+    // null the broker reference to indicate that there's no current
+    // update in progress
+    feedUpdateBroker = null;
+        
+    // reset commanded feed update flag
+    feedUpdateCommanded = false;
+}
+</pre>
+
+            <p>
+
+                We wrote a comment "update news item controls here" at the spot where we will
+                actually create and add news feed items to the main view. We'll replace that in
+                a bit with the actual code to do the job, but first we need to write some code
+                that we'll need to do that.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Showing news items</h2>
+
+            
+            <p>
+
+                The news feed items will be shown using ContentPanel controls. We'll need a way
+                to keep track of the ones we're showing so that we can easily remove them when
+                there is new news items to show. Let's create an array to track them:
+            </p>
+
+<pre>
+
+// Reference to current feed items controls.
+var feedItemControls = [];
+</pre>
+
+            <p>
+
+                Now we can implement a function that will remove all controls that are tracked
+                by this array from the main view. We'll use this as the first step when we want
+                to display news items.
+            </p>
+
+<pre>
+
+// Removes feed items.
+function removeFeedItems() {
+    // remove all current feed items from the main view
+    for (var i = 0; i &lt; feedItemControls.length; i++) {
+        mainView.removeControl(feedItemControls[i]);
+    }
+    
+    // reset feed item control array
+    feedItemControls = [];
+}
+</pre>
+
+            <p>
+
+                The function simply loops through the array and calls the removeControl() method
+                in the main view to remove each of the feed item controls from the view, one at a time.
+                Finally we'll reset the feedItemControls array so that it reflects the fact that
+                there are no more controls in the main view.
+            </p>
+
+            <p>
+
+                What about adding news items? We'll do that in a function that we'll call from the
+                feedUpdateCompleted() function. Let's call the function setFeedItems(). The function
+                will start by calling the removeFeedItems() function we just created to empty the 
+                main view from news items before we start adding new ones to it. After this we'll
+                loop through the news feed items that were handed to us from the FeedUpdateBroker.
+                For each one we need a ContentPanel control. We'll be recycling the controls instead
+                of constantly creating new ones over and over again as new news items come in. To
+                this end we'll need a way to track ContentPanel controls that we have already
+                created. We'll do this by creating an array called feedItemControlPool, which will
+                be a global variable:
+            </p>
+
+<pre>
+
+// Feed item control pool.
+var feedItemControlPool = [];
+</pre>
+
+            <p>
+
+                If we have enough controls in the pool we'll just take them from there. Otherwise
+                we'll create a new ContentPanel and add it to the pool. Either way we'll end up with
+                a ContentPanel control that is ready to be used. We'll need to reset its state since we
+                recycled it, so we make sure it's collapsed rather than expanded, we'll set its caption
+                to the title of the news item and we'll generate some HTML from the news item summary
+                that we'll set as the content for the ContentPanel. And then finally we'll add the
+                ContentPanel to the main view.
+            </p>
+
+            <p>
+
+                Lets create the code but skip the HTML for the news item summary for now:
+            </p>
+
+<pre>
+
+// Sets feed items.
+function setFeedItems(items) {
+    // start by removing all current feed items
+    removeFeedItems();
+    
+    // create new feed items and add them to the main view
+    // use feed item pool to recycle controls
+    for (var i = 0; i &lt; items.length; i++) {
+        // get a feed item control from the pool or create one and
+        // place it in the pool if there aren't enough feed item controls
+        var feedItemControl;
+        if (i == feedItemControlPool.length) {
+            feedItemControl = new ContentPanel(null, null, null, true);
+            feedItemControlPool.push(feedItemControl);
+        } else {
+            feedItemControl = feedItemControlPool[i];
+        }
+        
+        // initialize feed item control
+        var item = items[i];
+        feedItemControl.setCaption(item.title);
+        feedItemControl.setContent("placeholder");
+        feedItemControl.setExpanded(false);
+        
+        // add the feed item control to the main view
+        feedItemControls.push(feedItemControl);
+        mainView.addControl(feedItemControl);
+    }
+}
+</pre>
+
+            <p>
+
+                The items argument contains the array of news items that we received in the event
+                object argument to the feedUpdateCompleted() callback function. The items are in
+                the "items" property of the event object. Note how the feedItemControl is either
+                created or taken from the feedItemControlPool. If it's created it is given four
+                arguments: a null unique identifier because we don't need one, a null caption and
+                a null content because we will set both every time before we show it, and finally
+                a value of true to the "foldable" argument in the ContentPanel constructor. This
+                flag determines whether the ContentPanel can be folded (expanded and collapsed) or
+                not. We want a foldable one so we pass true to this argument.
+            </p>
+
+            <p>
+
+                Once we have the ContentPanel (either from the pool or newly created) we set its
+                state: caption, content and expanded state. Note that for now we'll just set a
+                placeholder string as the content. Also note that we set the expanded state to false
+                to collapse the news items by default. Finally we add the content panels to the main
+                view and to the feedItemControls array that tracks all the ContentPanels that we use
+                for the news items.
+            </p>
+
+            <p>
+
+                Now that we have written the code to create and add news items to the main view
+                we have to hook that up to the feedUpdateCompleted() function. Remember we added
+                a comment in the spot where we should return to do this? Let's replace that comment
+                with the following:
+            </p>
+
+<pre>
+
+// set feed items to the main view
+setFeedItems(event.items);
+
+// focus the first feed item control
+// (but only if we are in the main view)
+if (uiManager.getView() == mainView &amp;&amp; feedItemControls.length &gt; 0) {
+    feedItemControls[0].setFocused(true);
+}
+</pre>
+
+            <p>
+
+                We just call the setFeedItems() function we just wrote, passing it the feed items
+                that the FeedUpdateBroker fetched and parsed for us, and then if we're in the main
+                view we'll focus the first of the news feed item controls.
+            </p>
+
+            <p>
+
+                Now that we have all the code needed to fetch and update news feed items we'll go
+                back and add some more functionality to a function we wrote a little bit earlier:
+                the saveSettingsClicked() function.
+            </p>
+
+            <p>
+
+                The functionality that we're adding will handle updates of the feed items in the
+                main view after the user has modified the settings. We didn't write this earlier
+                because we didn't have all the necessary support code in place but we can add it now.
+                First we add some code to the end of the saveSettingsClicked() function to force an
+                update of the news items after the users saves the settings:
+            </p>
+
+<pre>
+
+// update the feed
+feedLastModified = null;
+updateFeed();
+</pre>
+
+            <p>
+
+                We update the feed by setting the feedLastModified variable to null to force an update
+                and then calling updateFeed(). This causes an immediate feed update and we also get the
+                progress notification dialog, which is what we want because this was a manual
+                update that was caused by the user clicking "save".
+            </p>
+
+            <p>
+
+                Let's also add some code that checks if a new feed was selected and removes all the
+                news items from the main view if the user selected a new feed. To do this we'll first
+                copy the old feedURL to a variable that we'll call oldFeedURL at the very beginning
+                of the function:
+            </p>
+
+<pre>
+
+// remember the old feed URL
+var oldFeedURL = feedURL;
+</pre>
+
+            <p>
+
+                Then we'll add the following just before we show the main view:
+            </p>
+
+<pre>
+
+// remove all feed items if the user selected a new feed
+if (feedURL != oldFeedURL) {
+    removeFeedItems();
+}
+</pre>
+
+            <p>
+
+                We can now test this in a PC browser, handset or emulator. Everything should work
+                except that there's still nothing but a placeholder for the actual content in each
+                ContentPanel. You can still expand and collapse the ContentPanels and the settings
+                and automatic and manual updates are working. We're almost done but we still need
+                to implement the code that will actually show news item summaries in the content
+                panels.
+            </p>
+
+            <p>
+
+                Remember we said that we would implement news items so that there's a link from
+                each news item to the website where the full article is. When you open links
+                to external websites in the S60 Web Runtime you should use the widget.openURL()
+                function. But PC browsers don't have that function so we'll need to create a wrapper
+                function that either calls widget.openURL() if we're in the Web Runtime or just
+                opens a new window if we're in a PC browser.
+            </p>
+
+<pre>
+
+// Opens a URL.
+function openURL(url) {
+    if (window.widget) {
+        // in WRT
+        widget.openURL(url);
+    } else {
+        // outside WRT
+        window.open(url, "NewWindow");
+    }
+}
+</pre>
+
+            <p>
+
+                Content in a ContentPanel control is a fragment of HTML. In other words it's a
+                piece of HTML that will be inserted into the control using code. That means that
+                in order to display the news item we will have to generate some HTML for it.
+                We need a function that will take a news item object and return some HTML that
+                we can give to thet setContent() method in the ContentPanel control. Let's write
+                that function:
+            </p>
+
+<pre>
+
+// Returns the content HTML for a feed item.
+function getContentHTMLForFeedItem(item) {
+    var buf = "";
+    
+    // item date
+    if (item.date != null) {
+        buf += "&lt;div class=\"FeedItemDate\"&gt;" + item.date + "&lt;/div&gt;";
+    }
+    
+    // item description
+    if (item.description != null) {
+        buf += "&lt;div class=\"FeedItemDescription\"&gt;" + item.description + "&lt;/div&gt;";
+    }
+    
+    // item URL
+    if (item.url != null) {
+        buf += "&lt;div class=\"FeedItemLink\"&gt;";
+            buf += "&lt;a href=\"JavaScript:openURL('" + item.url + "');\"&gt;";
+            buf += "Read more...";
+            buf += "&lt;/a&gt;";
+        buf += "&lt;/div&gt;";
+    }
+    
+    return buf;
+}
+</pre>
+
+            <p>
+
+                The function uses the properties in the news item object that the FeedUpdateBroker
+                created for us. There's a date property that has the publish date of the news item.
+                There's a description that contains the actual summary, and there's a URL that points
+                to the website where the full article is. Note that we're using the openURL() wrapper
+                function that we just wrote for the link to the full article.
+            </p>
+
+            <p>
+
+                Our HTML is very simple: three div-tags that have the date, description and a link as
+                their content. And ech of them has a CSS class so that we can match them with some
+                style rules. Since we have three different pieces of data we need three CSS rules:
+                FeedItemDate for the date, FeedItemDescription for the news item summary and finally
+                FeedItemLink for the link to the website. Let's create these in the RSSReader.css
+                stylesheet file:
+            </p>
+
+<pre>
+
+
+/* Feed item date */
+.FeedItemDate {
+    font-style: italic;
+}
+
+/* Feed item text */
+.FeedItemDescription {
+    padding: 4px 0px;
+}
+
+/* Feed item links */
+.FeedItemLink {
+    
+}
+
+/* Anchor tags in the context of a feed item link */
+.FeedItemLink a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: rgb(0,0,255);
+}
+
+/* Focused anchor tags */
+.FeedItemLink a:focus {
+    background: rgb(0,0,255);
+    color: rgb(255,255,255);
+}
+</pre>
+
+            <p>
+
+                The rule for links can be left empty because we will just use default ContentPanel
+                content styling. However we'll change the way the link looks in the context of that
+                FeedItemLink div. We'll make links blue, bold and underlined in their normal state
+                and inverse with a blue background and white text color when focused.
+            </p>
+
+            <p>
+
+                Now that we have a function that generates HTML for the ContentPanel we can remove
+                the placeholder content replace it with a call to our function:
+            </p>
+
+<pre>
+
+feedItemControl.setContent(getContentHTMLForFeedItem(item));
+</pre>
+
+            <p>
+
+                We're done! Now you can try the widget in a PC browser and then on the handset
+                or emulator.
+            </p>
+
+            <div class="fignone" id="GUID-25CD0E54-0516-4469-965E-C5781CF44DC9__GUID-F7A5DBAA-7F9F-4C48-A25A-0DACE463CBF4"><a name="GUID-25CD0E54-0516-4469-965E-C5781CF44DC9__GUID-F7A5DBAA-7F9F-4C48-A25A-0DACE463CBF4"><!-- --></a><span class="figcap">Figure 1. 
+RSS Reader main view</span>
+
+                
+                <br /><img src="RSS_Reader_Main_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+What we have learned</h2>
+
+            
+            <p>
+
+                The RSS Reader tutorial has taught us several things. We have learned to create a widget
+                that has more than just one view. We have learned how to use several new WRTKit controls.
+                We used the SelectionList, SelectionMenu and FormButton controls in our settings view, 
+                and in the main view we used the ContentPanel control that allowed us to add our own
+                content as a seamless part of the rest of the user interface using HTML fragments that
+                we styled with CSS rules. We have learned to modify a view while the widget runs by adding
+                and removing controls. And we have learned how to separate our widget code so that the
+                user interface code doesn't contain any logic code and so that the logic code doesn't
+                contain any user interface code.
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_RSS_Reader_Tutorial-GUID-678d197f-c7b0-4e5e-85e2-f8549c75bbe8.html">RSS Reader</a></div>
+</div>
+</div>
+
+</body>
+</html>

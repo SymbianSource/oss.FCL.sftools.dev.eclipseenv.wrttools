@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using text entry controls" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-76AEB0E3-698D-41DE-A34B-8FEA6D8E00D2" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Using text entry controls</title>
+</head>
+<body id="GUID-76AEB0E3-698D-41DE-A34B-8FEA6D8E00D2"><a name="GUID-76AEB0E3-698D-41DE-A34B-8FEA6D8E00D2"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Using text entry controls</h1>
+
+    <div>
+
+        <p>
+
+            The WRTKit supports two controls for text entry: TextField for 
+            a single line of text and TextArea for multiple lines of text.
+            The API for both controls is identical, except for the constructor.
+            The TextField can be created in masked mode, which is useful for
+            entry of text that should not be displayed (e.g. passwords). For
+            every character that is typed in masked mode, an asterisk is shown
+            instead in the text field. While a TextArea control can hold an
+            unlimited number of lines of text, its height (as number of rows
+            to display without scrolling) is specified when it is constructed.
+        </p>
+
+        <div class="fignone" id="GUID-76AEB0E3-698D-41DE-A34B-8FEA6D8E00D2__GUID-D4E1D422-DAB9-4F40-9A13-231B4ACF1FE5"><a name="GUID-76AEB0E3-698D-41DE-A34B-8FEA6D8E00D2__GUID-D4E1D422-DAB9-4F40-9A13-231B4ACF1FE5"><!-- --></a><span class="figcap">Figure 1. 
+TextField and TextArea controls</span>
+
+            
+            <br /><img src="Text_Entry_Controls_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            TextField and TextArea controls are created and added to views like 
+            any other controls in the WRTKit. The code assumes that a view has 
+            already been created and that a variable called exampleView refers 
+            to it.
+        </p>
+
+<pre>
+
+// create textfield
+var nameField = new TextField("field1", "Enter your name");
+exampleView.addControl(nameField);
+</pre>
+
+        <p>
+
+            "field1" is a unique identifier for the control and "Enter your 
+            name" is the control caption. An optional third argument to the 
+            constructor can be used to specify the text to display in the 
+            control, however the text can also be set at any time later on using 
+            the setText() method as follows:
+        </p>
+
+<pre>
+
+// set the text in the textfield
+nameField.setText("John Smith");
+</pre>
+
+        <p>
+
+            The current text in a text entry control can be retrieved using the
+            getText() method:
+        </p>
+
+<pre>
+
+// get the current text from the textfield
+var text = nameField.getText();
+</pre>
+
+        <p>
+
+            Text entry controls fire "TextChanged" events when a user edits the 
+            text in a control. These events can be handled using by registering 
+            an event listener to the control. The code below shows what a 
+            typical callback function would look like:
+        </p>
+
+<pre>
+
+// Callback function for text changed events.
+function nameChanged(event) {
+    // implement what happens when the text changed here
+}
+</pre>
+
+        <p>
+
+            Registering the event listener function is done as follows, for
+            example right after the control was created:
+        </p>
+
+<pre>
+
+// register event listener
+nameField.addEventListener("TextChanged", nameChanged);
+</pre>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Using selection controls" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-5E36D276-CCE8-4BC9-BCBA-78E721ADB8C6" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Using selection controls</title>
+</head>
+<body id="GUID-5E36D276-CCE8-4BC9-BCBA-78E721ADB8C6"><a name="GUID-5E36D276-CCE8-4BC9-BCBA-78E721ADB8C6"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Using selection controls</h1>
+
+    <div>
+
+        <p>
+
+            Selection controls are used to let users make selections among a set 
+            of options. The WRTKit has two controls: SelectionList and 
+            SelectionMenu that have an identical API but differ in look and 
+            feel. The SelectionList shows all the options and selections 
+            directly in the view while the SelectionMenu only shows the selected 
+            options and opens up a menu with the options when the user activates 
+            the control. Selection controls can either be in single or multiple
+            selection mode. In single selection mode only one of the options can
+            be selected at a time while in multiple selection mode any number
+            (including zero) can be selected.
+        </p>
+
+        <div class="fignone" id="GUID-5E36D276-CCE8-4BC9-BCBA-78E721ADB8C6__GUID-9F9B7E8B-2E27-4D95-AFBD-246DD16580B2"><a name="GUID-5E36D276-CCE8-4BC9-BCBA-78E721ADB8C6__GUID-9F9B7E8B-2E27-4D95-AFBD-246DD16580B2"><!-- --></a><span class="figcap">Figure 1. 
+SelectionList controls</span>
+
+            
+            <br /><img src="SelectionList_Controls_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            The SelectionList control is recommended to be used with the pointer 
+            navigation mode or if there are few options to choose from. The 
+            SelectionMenu control is recommended for large numbers of options or in 
+            the tab navigation mode.
+        </p>
+
+        <div class="fignone" id="GUID-5E36D276-CCE8-4BC9-BCBA-78E721ADB8C6__GUID-B3A04D05-2DA2-48B1-B37F-F0803B499DCC"><a name="GUID-5E36D276-CCE8-4BC9-BCBA-78E721ADB8C6__GUID-B3A04D05-2DA2-48B1-B37F-F0803B499DCC"><!-- --></a><span class="figcap">Figure 2. 
+SelectionMenu control</span>
+
+            
+            <br /><img src="SelectionMenu_Control_Screenshot_1.png" /><br />
+        </div>
+
+        <p>
+
+            The options of a selection control are defined as an array of option 
+            objects, each with two properties: value and text. The value 
+            property can be any JavaScript value and represent the concrete 
+            value of the option, while the text property is a string that is 
+            shown in the user interface for the option.
+        </p>
+
+        <p>
+
+            Option arrays can conveniently be created using JavaScript object
+            notation (JSON) for example as follows:
+        </p>
+
+<pre>
+
+// create an array with three options
+var options = [
+        { value: 1, text: "Coffee" },
+        { value: 2, text: "Tea" },
+        { value: 3, text: "Water" }
+    ];
+</pre>
+
+        <p>
+
+            The selected options are defined differently depending on whether 
+            the selection control is in single or multiple selection mode. In 
+            single selection mode the selected option is defined as a reference 
+            to the option in the control that should be selected. In multiple 
+            selection mode the selected options set is defined as an array of 
+            references to options in the control. Note that the references must 
+            be to one of the options objects defined for the control. It is not 
+            sufficient to define new option objects that happen to be identical 
+            to the ones in the control.
+        </p>
+
+<pre>
+
+// create a set of two selected options for multiple selection control
+var selectedOptions = [ options[1], options[2] ];
+</pre>
+
+        <p>
+
+            Note that the selectedOptions array is constructed so that the two 
+            elements in the array refer to the "Tea" and "Water" options in the 
+            options array.
+        </p>
+
+        <p>
+
+            The code below creates a SelectionList control in multiple selection
+            mode and initializes it with the options and selectedOptions arrays
+            created above. The code assumes that a view has already been created
+            and that a variable called exampleView refers to it.
+        </p>
+
+<pre>
+
+// create selection list control
+var drinkList = new SelectionList("selection1", "Favorite drinks",
+                                  options, true, selectedOptions);
+exampleView.addControl(drinkList);
+</pre>
+
+        <p>
+
+            "selection1" is a unique identifier for the control, "Favorite 
+            drinks" is the control caption, the option argument refers to the 
+            options array that we previously created, the following argument 
+            determines whether the control is in multiple selection mode, and 
+            finally the selectedOptions argument refers to the array with 
+            selected options and defines which of the options in the control
+            should be selected by default.
+        </p>
+
+        <p>
+
+            All of the arguments are optional and can be specified later as
+            needed. For example if the options are not known when the control
+            is created, or if the options change, they can be set using the
+            setOptions() method. In the same way the selected options can be
+            set using the setSelected() method.
+        </p>
+
+<pre>
+
+// set options
+drinkList.setOptions(options);
+
+// set selected options
+drinkList.setSelected(selectedOptions);
+</pre>
+
+        <p>
+
+            The currently selected options can be retrieved using the 
+            getSelected() method. As mentioned earlier, in single selection mode 
+            the selected is just a single reference to an option (or null if no 
+            option is selected), while in multiple selection mode it's an array 
+            with references to the selected options. If no options are selected 
+            in multiple selection mode then the array is empty.
+        </p>
+
+<pre>
+
+// find out which options are currently selected
+var selected = drinkList.getSelected();
+</pre>
+
+        <p>
+
+            Selection controls fire "SelectionChanged" events when a user changes
+            the selection of options in a control. These events can be handled
+            using by registering an event listener to the control. The code below
+            shows what a typical callback function would look like:
+        </p>
+
+<pre>
+
+// Callback function for selection change events.
+function favoriteDrinkChanged(event) {
+    // implement what happens when the selection changed here
+}
+</pre>
+
+        <p>
+
+            Registering the event listener function is done as follows, for
+            example right after the control was created:
+        </p>
+
+<pre>
+
+// register event listener
+drinkList.addEventListener("SelectionChanged", favoriteDrinkChanged);
+</pre>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>

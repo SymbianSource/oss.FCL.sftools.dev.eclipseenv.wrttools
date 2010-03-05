@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Control states" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-F98575AC-F913-466D-A790-0FF0207463A3" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Control states</title>
+</head>
+<body id="GUID-F98575AC-F913-466D-A790-0FF0207463A3"><a name="GUID-F98575AC-F913-466D-A790-0FF0207463A3"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Control states</h1>
+
+    <div>
+
+        <p>
+
+            Controls can be in a number of different states. Some of the states are specific
+            to a particular type of control (e.g. whether a checkbox is checked) and some
+            are common to all controls. Some states can be explicitly set while others are
+            implicit based on some user action (e.g. moving the pointer over a control).
+            The states can be retrieved using "getter" functions and in cases when a state
+            can be explicitly set there is a "setter" function that allows the state to be
+            manipulated. The following presents the common control states.
+        </p>
+
+        <div class="section"><h2 class="sectiontitle">
+Focusable</h2>
+
+            
+            <p>
+
+                The focusable state is a boolean (i.e. true or false) value that indicates
+                whether the control can receive the focus and receive input or not. Some
+                non-interactive controls like labels are never focusable, others are focusable
+                unless the control has specifically been disabled, and some are always
+                focusable. E.g. textfields can be focused even when disabled in order to be able
+                to copy text from them to the clipboard.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Focused</h2>
+
+            
+            <p>
+
+                The focused state is a boolean value that specifies if a control is currently
+                selected for interaction. The focused typically changes implicitly through user
+                actions like moving the 4-way controller, however the focus can also be
+                explicitly set. Unlike other states, setting the focus to a control is more like
+                a request than an absolute command because it is not always possible to actually
+                set the focus to the control to which it is requested. For example if a control
+                is not focusable or not visible on the screen, the focus cannot be set to it.
+            </p>
+
+            <div class="fignone" id="GUID-F98575AC-F913-466D-A790-0FF0207463A3__GUID-E7C3B5D6-F0CE-43D0-8FF4-304F6F716050"><a name="GUID-F98575AC-F913-466D-A790-0FF0207463A3__GUID-E7C3B5D6-F0CE-43D0-8FF4-304F6F716050"><!-- --></a><span class="figcap">Figure 1. 
+Focused and unfocused FormButton controls</span>
+
+                
+                <br /><img src="FormButton_Controls_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Hovering</h2>
+
+            
+            <p>
+
+                Hovering means that the pointer arrow is over a control. It is always implicit
+                and changes based on pointer movement. The hovering state is a boolean value.
+                The hovering state is rarely needed outside a control itself, which uses it to
+                determine how the control draws itself.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Enabled</h2>
+
+            
+            <p>
+
+                Controls are always enabled by default, but can be disabled to prevent
+                interaction. Disabling a control doesn't hide it but rather causes it to be
+                displayed in some way (typically with dimmer or duller colors) that indicates to
+                users that it cannot be used. Toggling the enabled state is always an explicit
+                action. The enabled state is a boolean value. Note that toggling the enabled
+                state can have an effect on other things. Focus is typically lost from controls
+                that are disabled and they become non-focusable.
+            </p>
+
+            <div class="fignone" id="GUID-F98575AC-F913-466D-A790-0FF0207463A3__GUID-ADB1D1B7-A652-4A3C-A89F-A23C5E1B0D44"><a name="GUID-F98575AC-F913-466D-A790-0FF0207463A3__GUID-ADB1D1B7-A652-4A3C-A89F-A23C5E1B0D44"><!-- --></a><span class="figcap">Figure 2. 
+Enabled and disabled FormButton controls</span>
+
+                
+                <br /><img src="FormButton_Controls_Screenshot_2.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Activated</h2>
+
+            
+            <p>
+
+                Certain controls like textfields cannot be interacted with despite being
+                focused. Instead the focus merely indicates that they are selected for
+                interaction. In order to actually interact with them they have to be "activated"
+                by pressing a selection button. The reason for this is that the same 4-way
+                controller keys are used for navigating between controls and within a control.
+                When a control such as a textfield is activated, all key presses are consumed by
+                the control. Activation of a control is transparent to the WRTKit and due to
+                this cannot be queried nor commanded. Also note that activation is not needed on
+                PC computers and thus will not occur when testing a WRTKit user interface in a
+                PC browser.
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Developing_widgets_using_the_WRTKit-GUID-a321db96-0a01-4e55-b24b-96905f40cb5c.html">Developing widgets using the WRTKit</a></div>
+</div>
+</div>
+
+</body>
+</html>

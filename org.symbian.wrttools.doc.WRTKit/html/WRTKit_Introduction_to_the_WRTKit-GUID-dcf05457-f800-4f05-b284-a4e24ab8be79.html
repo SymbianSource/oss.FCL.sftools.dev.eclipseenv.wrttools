@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Introduction to the WRTKit" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Overview_of_the_WRTKit-GUID-14c414f6-a220-40b6-8614-df13141495ab.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-DCF05457-F800-4F05-B284-A4E24AB8BE79" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Introduction to the WRTKit</title>
+</head>
+<body id="GUID-DCF05457-F800-4F05-B284-A4E24AB8BE79"><a name="GUID-DCF05457-F800-4F05-B284-A4E24AB8BE79"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Introduction to the WRTKit</h1>
+
+    <div>
+
+        <p>
+
+            The S60 Web Runtime allows developers to use familiar web technologies like 
+            HTML, CSS and JavaScript to create applications called "widgets" very easily. 
+            But because widgets are based on web technologies they look and behave more like 
+            web pages than S60 applications by default, which is not always desirable.
+        </p>
+
+        <p>
+
+            Web pages use a document metaphor where content can be laid out arbitrarily. 
+            Interaction with the web page is based on using a mouse or other similar device 
+            to place a pointer arrow on elements on the web page and activating them by 
+            pressing a button. When the pointer is over some user interface element it is 
+            said to be "hovering". The element that the pointer is hovering over is often 
+            displayed in a distinct style to show that it could be activated if the mouse 
+            button was pressed.
+        </p>
+
+        <p>
+
+            Mobile device applications, on the other hand, have limitations that make this 
+            methapor less than ideal. The screen is small so discipline is needed to lay out 
+            user interface elements in a way that is easy to understand for the user. The 
+            physical controls on a mobile device are also not very suitable for moving 
+            around a pointer arrow on the screen. Instead of having a pointer to select 
+            elements the concept of "focus" is used. One of the elements on the screen is 
+            considered selected and this selection can be moved between the user interface 
+            elements using a 4-way controller. The element that is selected is said to be 
+            "focused". Like for hovering, the focused element is displayed with a distinct 
+            style to set it apart from other elements. This interaction method is called 
+            "tab navigation" due to the fact that the tab key was originally used to move 
+            the focus on PC computers.
+        </p>
+
+        <p>
+
+            The S60 Web Runtime supports both the pointer-based and tab-based interaction 
+            modes so that you can choose the one that fits your widget best. But while 
+            simple user interfaces are easy to implement in both modes, more sophisticated 
+            application-like user interfaces can be quite tricky. Hover and focus must be 
+            handled correctly and the hover and focus states must be displayed consistently 
+            throughout the user interface. Different screen sizes as well as screen resizes 
+            and rotations must be taken into account. User interface controls like buttons, 
+            checkboxes and scrollbars must be able to take on a look that fits the overall 
+            visual theme of the widget, for example that of a commercial brand.
+        </p>
+
+        <p>
+
+            The WRTKit is a complete library of JavaScript code, CSS style rules and 
+            graphical elements that are required to implement the kind of sophisticated, 
+            customizable, application-like user interfaces that are described above. It 
+            gives widget developers an easy way to create high quality user interfaces 
+            without having to worry about the problems that would otherwise plague their 
+            widgets.
+        </p>
+
+        <p>
+
+            When the WRTKit is used in a widget, complex and fully featured user interfaces 
+            can be created with just a few lines of JavaScript code. The WRTKit takes care 
+            of generating all the HTML and CSS automatically behind the scenes. What's more, 
+            the visual look of the user interfaces created by the WRTKit is controlled 
+            entirely using CSS, allowing complete customization without touching any code. 
+            WRTKit user interfaces also work in standards-compliant PC web browsers, 
+            enabling rapid development and debugging using familiar web development tools.
+        </p>
+
+        <div class="fignone" id="GUID-DCF05457-F800-4F05-B284-A4E24AB8BE79__GUID-A4ECC4FA-F3CB-4BD3-8B41-501B77168B29"><a name="GUID-DCF05457-F800-4F05-B284-A4E24AB8BE79__GUID-A4ECC4FA-F3CB-4BD3-8B41-501B77168B29"><!-- --></a><span class="figcap">Figure 1. 
+WRTKit-based widget user interface</span>
+
+            
+            <br /><img src="Travel_Companion_Main_Screenshot_1.png" /><br />
+        </div>
+        
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Overview_of_the_WRTKit-GUID-14c414f6-a220-40b6-8614-df13141495ab.html">Overview of the WRTKit</a></div>
+</div>
+</div>
+
+</body>
+</html>

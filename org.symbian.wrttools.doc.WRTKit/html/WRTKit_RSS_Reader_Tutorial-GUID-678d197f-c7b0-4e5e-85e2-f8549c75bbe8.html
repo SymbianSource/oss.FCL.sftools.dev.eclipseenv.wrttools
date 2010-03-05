@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="RSS Reader" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Tutorials-GUID-506c11e3-e6f3-43ec-9495-fcfa638b7e08.html" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_RSS_Reader_first_steps-GUID-db42b227-1647-4020-bdb9-dacb26771779.html" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_RSS_Reader_user_interface-GUID-1083a0c4-a953-4b6e-a4d0-45a031e51c35.html" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Feed_updates-GUID-25cd0e54-0516-4469-965e-c5781cf44dc9.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-678D197F-C7B0-4E5E-85E2-F8549C75BBE8" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+RSS Reader</title>
+</head>
+<body id="GUID-678D197F-C7B0-4E5E-85E2-F8549C75BBE8"><a name="GUID-678D197F-C7B0-4E5E-85E2-F8549C75BBE8"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+RSS Reader</h1>
+
+    <div>
+
+        <p>
+
+            The RSS Reader example is the first complete, working widget that actually
+            does something useful that you will create using the WRTKit. It is quite a bit
+            more complex than the Hello World example, but then again it also contains
+            a lot more functionality.
+        </p>
+
+        <p>
+
+            For the Hello World widget we covered a lot of very fine details but for the
+            RSS Reader it is assumed that the reader already knows the basics of how to
+            create a widget, deploy it, test it, and so on. If you skipped the Hello World
+            tutorial and feel that you're not comfortable with the basics of creating
+            widgets yet then it's recommended that you go back and read the Hello World
+            widget tutorial first and then come back and continue with the RSS Reader.
+        </p>
+
+        <p>
+
+            The RSS Reader that we're going to build in this tutorial will have two views:
+            a main view that displays news items from an RSS feed and a settings view where
+            the user can configure what news feed should be displayed in the main view and
+            how often it should be updated from the Internet. We will let users choose from
+            a list of feeds that we will pre-configure. In principle you can use whatever
+            RSS feeds you want in your own widget but it's probably best to test first with
+            the ones we have in our example since they have been tested and known to work.
+        </p>
+
+        <p>
+
+            The actual news feed items will be displayed as a list of foldable content
+            panels on the main view. The panels allow the user to see the headline for each
+            piece of news and clicking on the headline will expand the news item so that the
+            actual story summary can be read. At the bottom of the summary we'll place a
+            link to the full story in a similar fashion to many other RSS reader applications.
+        </p>
+
+        <p>
+
+            We will also implement a couple of features to make the widget more user friendly.
+            For example the first time when the widget is started we'll go directly to the
+            settings view to let the user configure the widget before the first use. We'll
+            also show helpful information such as loading progress and any error messages in
+            notification popup windows. And of course all configuration settings will be
+            persistent so that the user doesn't have to re-configure the widget every time
+            its started.
+        </p>
+
+        <p>
+
+            In order to make the widget similar to other S60 applications, we will tweak
+            the softkeys and Options menu so that the settings view can be reached from the
+            menu and so that the right softkey will let the user go back from the settings
+            view to the main view. In the main view the right softkey will be used to exit
+            the widget. We will also allow the user to manually force a refresh of the news
+            items by adding a "Refresh" option to the options menu.
+        </p>
+
+        <p>
+
+            And last but not least, we'll implement the widget so that it will work in a
+            standards-compliant PC web browser such as Firefox. This will allow you to test
+            and debug the widget quickly as you develop it on your PC.
+        </p>
+
+    </div>
+
+<div>
+<ul class="ullinks">
+<li class="ulchildlink"><strong><a href="WRTKit_RSS_Reader_first_steps-GUID-db42b227-1647-4020-bdb9-dacb26771779.html">First steps</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="WRTKit_RSS_Reader_user_interface-GUID-1083a0c4-a953-4b6e-a4d0-45a031e51c35.html">RSS Reader user interface</a></strong><br />
+</li>
+<li class="ulchildlink"><strong><a href="WRTKit_Feed_updates-GUID-25cd0e54-0516-4469-965e-c5781cf44dc9.html">Feed updates</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Tutorials-GUID-506c11e3-e6f3-43ec-9495-fcfa638b7e08.html">WRTKit Tutorials</a></div>
+</div>
+</div>
+
+</body>
+</html>

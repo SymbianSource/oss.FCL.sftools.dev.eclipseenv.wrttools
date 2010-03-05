@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Terminology" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Overview_of_the_WRTKit-GUID-14c414f6-a220-40b6-8614-df13141495ab.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-EBD8D7C4-03F6-498D-BECC-EB8D4081ED8B" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Terminology</title>
+</head>
+<body id="GUID-EBD8D7C4-03F6-498D-BECC-EB8D4081ED8B"><a name="GUID-EBD8D7C4-03F6-498D-BECC-EB8D4081ED8B"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Terminology</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Control</h2>
+
+            
+            <p>
+
+                A control is a user interface element that the user can interact with. Controls
+                are used in PC applications, in web pages and in mobile device applications. In
+                web pages controls are often known as "form controls". Common controls include
+                textfields, textareas, buttons, checkboxes, radio buttons, scrollbars, labels
+                and progress bars, among others. Not all controls are interactive, e.g. labels
+                simply display a value. Controls are contained within some kind of user
+                interface container such as a view or window.
+            </p>
+
+            <p>
+
+                In the WRTKit, controls are JavaScript objects that contain the state and
+                implement the behavior of the control. Controls take care of drawing themselves,
+                including changing their appearence as a result of various state changes.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+View</h2>
+
+            
+            <p>
+
+                A container for user interface elements such as controls. On a mobile device
+                user interface views typically fill the entire screen and thus only one view can
+                be shown at a time. Views in a mobile device tend to lay out the elements it
+                contains in a vertical list that can be scrolled up and down if there is more
+                content in the view than what fits on the screen at a time.
+            </p>
+
+            <p>
+
+                In the WRTKit, views are responsible for laying out controls. Custom views can
+                be created to support advanced layouts but in the vast majority of cases the
+                default ListView is sufficient. WRTKit views are JavaScript objects.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Event</h2>
+
+            
+            <p>
+
+                An event is a notification of some occurrence in a user interface element, such
+                as a view or control. Events are typically propagated to application code as
+                messages or function calls or a combination of the two.
+            </p>
+
+            <p>
+
+                The WRTKit uses a model known as the "observer pattern" to deliver event
+                messages, which are JavaScript objects, to event listeners, which are JavaScript
+                callback functions. WRTKit events have a type name that can be used to
+                distinguish between different types of events. E.g. a button press produces an
+                "ActionPerformed" event.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Focus</h2>
+
+            
+            <p>
+
+                The control that is currently selected to receive input is said to be focused.
+                Controls can be focused in both the tab and pointer navigation modes. In the tab
+                mode the focus is moved between controls using the 4-way controller. In
+                the pointer mode the focus is moved between controls by moving the pointer to
+                "hover" above a control and then pressing a selection button to select that
+                control. Focused controls are displayed in a distinct way from other controls to
+                indicate that they are ready to be interacted with.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Hovering</h2>
+
+            
+            <p>
+
+                In pointer navigation mode, the pointer is said to be "hovering" above a control
+                if the pointer is located inside the control's area on the screen. Hovering is
+                similar to focus, but differs because hovering in itself does not select a
+                control for interaction. Rather a selection key must be pressed in order to
+                focus the control that the pointer is currently hovering over. Hover is
+                indicated by displaying a control in a distinct way from other controls.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Navigation mode</h2>
+
+            
+            <p>
+
+                A navigation mode refers to a method of selecting what user interface element to
+                interact with. The S60 Web Runtime supports two navigation modes: "tab" and
+                "pointer". In the tab mode, focus is moved between controls using the 4-way
+                controller. In pointer mode there is a pointer arrow on the screen that can be
+                moved freely using the 4-way controller. A control is focused by moving the
+                pointer arrow so that it hovers above a control, and then pressing a selection
+                key to select that control. In tab mode a control can be either in normal or
+                focused state, whereas in the pointer mode a control can be in normal, hover or
+                focused state.
+            </p>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Overview_of_the_WRTKit-GUID-14c414f6-a220-40b6-8614-df13141495ab.html">Overview of the WRTKit</a></div>
+</div>
+</div>
+
+</body>
+</html>

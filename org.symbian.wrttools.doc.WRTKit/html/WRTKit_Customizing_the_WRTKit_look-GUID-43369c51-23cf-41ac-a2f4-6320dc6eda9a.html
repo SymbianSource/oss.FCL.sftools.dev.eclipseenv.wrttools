@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="Customizing the WRTKit look" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-43369C51-23CF-41AC-A2F4-6320DC6EDA9A" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+Customizing the WRTKit look</title>
+</head>
+<body id="GUID-43369C51-23CF-41AC-A2F4-6320DC6EDA9A"><a name="GUID-43369C51-23CF-41AC-A2F4-6320DC6EDA9A"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+Customizing the WRTKit look</h1>
+
+    <div>
+
+        <p>
+
+            All visuals in the WRTKit are defined using CSS and images that are 
+            located inside the WRTKit library in the Resources directory. The 
+            code that implements the WRTKit user interface elements does not 
+            actually know or care what the user interface looks like. Instead 
+            the code creates an HTML element hierarchy to implement each control 
+            and view and then sets CSS style class names to these elements. 
+            Whenever the state changes (e.g. the control gets focused) the class 
+            names are updated to reflect the new state. The CSS in the Resources 
+            directory defines the style rules for the class names and visuals 
+            are applied to the controls and views like for any other CSS styled 
+            HTML elements. This results in a system where only CSS and images 
+            need to be modified in order to implement a new look for a custom 
+            WRTKit user interface - but no JavaScript code.
+        </p>
+
+        <p>
+
+            All CSS rules for the WRTKit are defined in a file called UI.css in 
+            the WRTKit library Resources directory. This file defines hundreds 
+            of style classes and can seem intimidating and complex, but the 
+            principle behind the classes is actually very simple. Each HTML 
+            element in each control has a common class and a set of state-
+            specific classes. E.g. the text element in the NavigationButton 
+            control has "NavigationButtonText", "NavigationButtonTextNormal", 
+            "NavigationButtonTextFocus", etc. The classes are applied based on 
+            the current state of that element. So in our example if the button 
+            was focused, the text element would be assigned the CSS classes 
+            "NavigationButtonText" and "NavigationButtonTextFocus". Two classes 
+            define all of the styling for the text element portion of the 
+            NavigationButton control in the focused state.
+        </p>
+
+        <p>
+
+            Using two classes at the same time is convenient because it allows 
+            common elements to be defined in the common class and only special 
+            adaptations of that common rule in the state-specific class. One 
+            pattern that is repeated throughout the WRTKit is to define a 
+            background image in the common class and an image position offset in 
+            the state-specific class. This makes switching from one state to 
+            another (e.g. when a checkbox is checked) very straight forward. 
+            Even if the graphics appear to change, no images need to be loaded 
+            or switched but instead just the image offset changes and the result 
+            is that the graphics have changed.
+        </p>
+
+        <p>
+
+            Controls and views use HTML element hierarchies that are fine 
+            grained enough that various kinds of layout customizations can be 
+            applied without having CSS styles affect parts of a control that 
+            they were not intended to affect. The result is more CSS rules and 
+            more expansive element hierarchies, but also more freedom and 
+            flexibility.
+        </p>
+
+        <p>
+
+            In most cases all that is needed to change the visuals of a WRTKit 
+            user interface is to modify the images in the Resource directory and 
+            update the color definitions for controls in the CSS file. The image 
+            files that supply graphics to views and controls in the Resource 
+            directory are named with clear names to make customization easy. 
+            Just make a backup copy of the default graphics and CSS styles and 
+            experiment! You will probably be surprised at how easy it is to make 
+            a custom user interface theme!
+        </p>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_Common_WRTKit_tasks-GUID-24870895-4449-4307-9a54-7c90f7b3905e.html">Common WRTKit tasks</a></div>
+</div>
+</div>
+
+</body>
+</html>

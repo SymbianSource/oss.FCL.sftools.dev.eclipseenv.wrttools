@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="RSS Reader user interface" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_RSS_Reader_Tutorial-GUID-678d197f-c7b0-4e5e-85e2-f8549c75bbe8.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-1083A0C4-A953-4B6E-A4D0-45A031E51C35" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+RSS Reader user interface</title>
+</head>
+<body id="GUID-1083A0C4-A953-4B6E-A4D0-45A031E51C35"><a name="GUID-1083A0C4-A953-4B6E-A4D0-45A031E51C35"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+RSS Reader user interface</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Preferences</h2>
+
+            
+            <p>
+
+                Now it's time to write some code so let's open up RSSReader.js. The first thing
+                we will do is implement the init() function that gets called when the widget has
+                loaded. We will begin by setting up the timer-based updating mechanism for the
+                feed updates by declaring four variables that we'll need for that:
+            </p>
+
+<pre>
+
+// Feed update timer identifier.
+var updateTimerId = null;
+
+// Feed URL and update frequency (in milliseconds; -1 if no auto update).
+var feedURL = null;
+var feedUpdateFrequency = -1;
+
+// Next scheduled update time; -1 if never.
+var feedUpdateTime = -1;
+</pre>
+
+            <p>
+
+                We know that we'll need to get some working values for the feed URL and feed update
+                frequency variables and we know that they will be configurable values so let's write
+                the code for this:
+            </p>
+
+<pre>
+
+// Called from the onload event handler to initialize the widget.
+function init() {
+    // load preferences
+    loadPreferences();
+
+    // start feed update timer (called once every second)
+    updateTimerId = setInterval(updateFeedTimerFunc, 1000);
+}
+
+// Loads widget preferences.
+function loadPreferences() {
+    if (window.widget) {
+        // read feed URL and update frequency from the widget settings
+        feedURL = widget.preferenceForKey("FeedURL");
+        var feedUpdateFrequencyStr = widget.preferenceForKey("FeedUpdateFrequency");
+        feedUpdateFrequency = (feedUpdateFrequencyStr == null) ? -1 : parseInt(feedUpdateFrequencyStr);
+    }
+}
+
+// Timer function for feed updates - called once every second.
+function updateFeedTimerFunc() {
+    
+}
+</pre>
+
+            <p>
+
+                The init() function does two things at this point. First it calls our newly created
+                loadPreferences() function that takes care of reading some values for the feedURL
+                and feedUpdateFrequency variables. After this it starts up an interval timer that
+                calls updateFeedTimerFunc() once every second. The function doesn't do anything
+                yet but we'll get to that in a bit. The timer identifier is stored in the updateTimerId 
+                variable. If no configuration is found, feedURL will have a value of null and
+                feedUpdateFrequency will have a value of -1. Note that all preferences are stored
+                as strings so we need to parse the string value to an integer. Also note that we
+                wrapped the preference loading code in an if-clause that checks if we are in the
+                S60 Web Runtime environment. This allows us to run the code in a PC browser without
+                getting an error message about the widget -related methods that don't exist outside
+                of the S60 Web Runtime.
+            </p>
+
+            <p>
+
+                While we're on the topic of preferences we'll write a save counterpart for the
+                loadPreferences() function.
+            </p>
+
+<pre>
+
+// Saves widget preferences.
+function savePreferences() {
+    if (window.widget) {
+        // save settings in widget preferences store
+        widget.setPreferenceForKey(feedURL, "FeedURL");
+        widget.setPreferenceForKey(feedUpdateFrequency.toString(), "FeedUpdateFrequency");
+    }
+}
+</pre>
+
+            <p>
+
+                We're now almost done with the timer mechanism that will update the RSS feed but
+                we are missing one thing: a way to manually schedule an immediate update of the
+                feeds. Let's add a flag that we can use to track if an update was triggered
+                automatically or manually:
+            </p>
+
+<pre>
+
+// Flag that tracks if a feed update is commanded or automatic.
+var feedUpdateCommanded = false;
+</pre>
+
+            <p>
+
+                And now let's add a function that can be called to schedule an immediate update:
+            </p>
+
+<pre>
+
+// Schedules an immediate feed update.
+function updateFeed() {
+    feedUpdateTime = 0;
+    feedUpdateCommanded = true;
+}
+</pre>
+
+            <p>
+
+                The function just sets the next update time to 0 so that the next time the
+                timer function runs it will notice that it's time to schedule a feed update.
+                The function also sets the feedUpdateCommanded flag to true so that the
+                updating mechanism will know that this was a manual update.
+            </p>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Creating the user interface</h2>
+
+            
+            <p>
+
+                Now let's create the user interface. We'll start by declaring three variables
+                where we will hold references to the user interface manager, main view and settings
+                view. Note that these should be outside the init() function.
+            </p>
+
+<pre>
+
+// References to the WRTKit user interface manager and views.
+var uiManager;
+var mainView;
+var settingsView;
+</pre>
+
+            <p>
+
+                We want our user interface to be in tab navigation mode and we want the softkey
+                bar to be visible. The code for this is the same as in the Hello World example.
+                Next we create the user interface manager, main view and settings view by adding
+                the following code to the init() function:
+            </p>
+
+<pre>
+
+if (window.widget) {
+    // set tab-navigation mode and show softkeys
+    widget.setNavigationEnabled(false);
+    menu.showSoftkeys();
+}
+
+// create UI manager
+uiManager = new UIManager();
+
+// create main view
+mainView = new ListView();
+
+// create settings view
+settingsView = new ListView(null, "Settings");
+</pre>
+
+            <p>
+
+                You might have noticed that we didn't supply any arguments to the ListView constructor
+                when the main view was created. The reason for this is that we will set the view caption
+                dynamically depending on the news feed we are following. And since we don't need the
+                unique identifier for the main view we don't even have to pass null to it. Remember: in
+                JavaScript if you don't pass an argument it will be undefined, which is equal to null.
+            </p>
+
+            <p>
+
+                The main view will not get populated with controls until we have some news feed items
+                to display, but we can go ahead and create the settings view. Again, we will first
+                declare variables to hold references to the controls and again, they should be declared
+                outside the init() method so that they are accessible elsewhere in the widget code:
+            </p>
+
+<pre>
+
+// Reference to settings controls.
+var feedSelection;
+var feedUpdateFrequencySelection;
+var settingsSaveButton;
+var settingsCancelButton;
+</pre>
+
+            <p>
+
+                Now that we have variables to receive the control references we can go ahead and create
+                them and add them to the settings view. We will create a SelectionMenu control to let
+                the user select the RSS feed to show, a SelectionList control to allow selection of
+                the feed update frequency and two form buttons: "Save" and "Cancel". The SelectionMenu
+                and SelectionList controls are identical from a developer's point of view but look
+                very different. The SelectionMenu takes up very little space in the view but when clicked
+                it pops up a list of options that the user can select from. This is good if theres a lot
+                of options and we don't want to use up a lot of space from the view. The SelectionList
+                is the exact opposite and shows all the options right there in the view. This is good
+                if the widget is in pointer navigation mode or if there are very few options.
+            </p>
+
+            <p>
+
+                Options for the SelectionMenu and SelectionList controls are defined as an array of
+                JavaScript objects that have two properties: value and text. The value property contains
+                the actual data of the option and the text property contains the string to display to
+                the user. Before we create the controls we need to create the option arrays for the
+                RSS feed options and update frequency options. These will simply be hard coded arrays
+                that are defined using JavaScript object notation (JSON) and we'll place them at the top
+                of the widget code so that they can be easily customized later on:
+            </p>
+
+<pre>
+
+// Feed source options.
+var feedOptions = [
+    { value: "http://www.womworld.com/nseries/feed/", text: "Nseries WOM World" },
+    { value: "http://feeds.feedburner.com/N958GB", text: "N95 8GB News" },
+    { value: "http://feeds.feedburner.com/N95", text: "N95 News" },
+    { value: "http://feeds.feedburner.com/N93", text: "N93 News" },
+    { value: "http://feeds.feedburner.com/N91", text: "N91 News" },
+    { value: "http://feeds.feedburner.com/N82", text: "N82 News" },
+    { value: "http://feeds.feedburner.com/N81", text: "N81 News" },
+    { value: "http://feeds.feedburner.com/N810", text: "N810 News" },
+    { value: "http://feeds.feedburner.com/N800", text: "N800 News" },
+    { value: "http://feeds.feedburner.com/N76", text: "N76 News" }
+];
+
+// Feed update frequency.
+var updateFrequencyOptions = [
+    { value: -1, text: "never" },
+    { value: (1000 * 60 * 5), text: "every 5 min" },
+    { value: (1000 * 60 * 15), text: "every 15 min" },
+    { value: (1000 * 60 * 60), text: "every 60 min" },
+];
+</pre>
+
+            <p>
+
+                The RSS feeds are all from the Nokia Nseries WOM World website but you could put any
+                RSS feed URLs here that you like. However it is probably a good idea to stick with
+                these for now since we know that they work. Later when the widget is completed you can try
+                with other feeds. Note how the value is a URL but the text to display is a human readable
+                name for the RSS feeds.
+            </p>
+
+            <p>
+
+                The update frequency options are defined in milliseconds and there is one option with a
+                magic value of -1 for "never". Here too you'll notice the difference between the value
+                (an integer in this case) and the human readable text.
+            </p>
+
+            <p>
+
+                Now that we have the option arrays we can create the controls for the settings view by
+                adding the following code to the init() function:
+            </p>
+
+<pre>
+
+    // feed selection control
+    feedSelection = new SelectionMenu(null, "Select feed", feedOptions);
+    settingsView.addControl(feedSelection);
+    
+    // feed update frequency selection control
+    feedUpdateFrequencySelection = new SelectionList(null, "Check for updates", updateFrequencyOptions);
+    settingsView.addControl(feedUpdateFrequencySelection);
+    
+    // save settings button
+    settingsSaveButton = new FormButton(null, "Save");
+    settingsView.addControl(settingsSaveButton);
+    
+    // cancel settings button
+    settingsCancelButton = new FormButton(null, "Cancel");
+    settingsView.addControl(settingsCancelButton);
+</pre>
+
+            <p>
+
+                The two first arguments for the SelectionMenu and SelectionList constructors are the
+                same as for most other controls: a unique identifier and a control caption. The third 
+                argument points to the array of options that the controls should display. You could
+                also have omitted that argument from the constructor and instead called setOptions()
+                later on, but why do it in two steps when you can do it in one?
+            </p>
+
+            <p>
+
+                The user interface views are now done (minus the actual news items to display in the main
+                view of course) but we still have some things to implement for the user interface. The
+                buttons in the settings view don't do anything yet so let's fix that.
+            </p>
+
+            <p>
+
+                The cancel button should take the user to the main view and the save button should
+                start using the newly configured settings, save them, and then go to the main view.
+                Our plan to implement this is to create a function for showing the main view, called
+                "showMainView()", a similar function for showing the settings view that we will call
+                "showSettings()", and a function that will be called when the save button is clicked
+                called "saveSettingsClicked()". We will then add event listeners to the two buttons
+                so that clicking the save button will result in a call to the saveSettingsClicked()
+                function and clicking the cancel button will result in a call to the showMainView()
+                function. Let's create empty placeholders for the functions first:
+            </p>
+
+<pre>
+
+// Callback for settings view save button.
+function saveSettingsClicked() {
+}
+
+// Show main view.
+function showMainView() {
+}
+
+// Show settings view.
+function showSettings() {
+}
+</pre>
+
+            <p>
+
+                Now that we have those functions let's register the event listeners to the form
+                buttons by adding these two lines of code immediately after where the buttons
+                are created:
+            </p>
+
+<pre>
+
+settingsSaveButton.addEventListener("ActionPerformed", saveSettingsClicked);
+settingsCancelButton.addEventListener("ActionPerformed", showMainView);
+</pre>
+
+            <p>
+
+                We are now ready to implement the functions to show the main view, settings view
+                and react to the save button click. But we won't implement those just yet because
+                we want to do one more thing before that. Let's create the custom Options menu.
+                The Options menu isn't using any WRTKit code but rather the standard S60 Web Runtime
+                widget menu functionality. We'll have two menu items: "Refresh" to schedule an immediate
+                news feed update and "Settings" to go to the settings view. The Web Runtime Options
+                menu works so that a callback function gets called when the user selections an Options
+                menu item. In order to recognize which menu item was selected we'll need a unique
+                identifier for each of them. Let's create those:
+            </p>
+
+<pre>
+
+// Constants for menu item identifiers.
+var MENU_ITEM_SETTINGS = 0;
+var MENU_ITEM_REFRESH = 1;
+</pre>
+
+            <p>
+
+                Next we'll create the callback function that will be called when the menu items are
+                selected:
+            </p>
+
+<pre>
+
+// Callback for when menu items are selected.
+function menuItemSelected(id) {
+    switch (id) {
+        case MENU_ITEM_SETTINGS:
+            showSettings();
+            break;
+        case MENU_ITEM_REFRESH:
+            updateFeed();
+            break;
+    }
+}
+</pre>
+
+            <p>
+
+                This function gets the menu item identifier passed to it when the user selects
+                a menu item. The switch-case will branch off to call showSettings() if the "Settings"
+                menu item was selected and updateFeed() if the "Refresh" menu item was selected.
+                But we haven't actually created the menu yet so let's do that by adding this to the
+                init() function right after where we show the softkey bar. We want to have this piece
+                of code inside the if-clause that checks if we're in the S60 Web Runtime because we
+                don't have the Options menu functionality on a PC browser.
+            </p>
+
+<pre>
+
+// create menu
+var settingsMenuItem = new MenuItem("Settings", MENU_ITEM_SETTINGS);
+settingsMenuItem.onSelect = menuItemSelected;
+menu.append(settingsMenuItem);
+var refreshMenuItem = new MenuItem("Refresh", MENU_ITEM_REFRESH);
+refreshMenuItem.onSelect = menuItemSelected;
+menu.append(refreshMenuItem);
+</pre>
+
+            <p>
+
+                The code simply creates two MenuItem objects, gives them a label and a unique
+                identifier, specifies the callback function to call when selected and then adds
+                them to the Options menu. The menu object is a global object that automatically
+                exists in the S60 Web Runtime.
+            </p>
+
+            <p>
+
+                Now let's return to the three functions we created but didn't implement. We will
+                start with the showMainMenu() function. This function should perform all necessary
+                steps to show the main menu. This includes the following: setting a caption for
+                the main view, setting the right softkey to be the default "Exit" label and 
+                functionality, and then actually showing the main view by calling setView() in the
+                user interface manager. We'll get the main view caption by checking which of the
+                RSS feeds the user has currently selected. We do this by looping through the feed
+                options and looking for the feed URL that is currently in use. If we can't find one
+                we'll default to "RSS Reader".
+            </p>
+
+<pre>
+
+// Show main view.
+function showMainView() {
+    // set main view caption from feed name
+    var feedName = null;
+    for (var i = 0; i &lt; feedOptions.length; i++) {
+        if (feedOptions[i].value == feedURL) {
+            feedName = feedOptions[i].text;
+            break;
+        }
+    }
+    var mainViewCaption = (feedName == null) ? "RSS Reader" : feedName;
+    mainView.setCaption(mainViewCaption);
+    
+    // set right softkey to "exit"
+    if (window.widget) {
+        menu.setRightSoftkeyLabel("", null);
+    }
+    
+    // show the main view
+    uiManager.setView(mainView);
+}
+</pre>
+
+            <p>
+
+                When the settings view is shown we first want to place the controls into
+                a state that reflects the current configuration. In other words we want
+                the currently configured feed to be the one that's selected in the feed selection
+                control. In the same way the currently configured feed update frequency should
+                be selected in the feed update frequency selection control. There is a very
+                convenient method available for this called getOptionForValue(). Using that
+                function we can pass the currently configured feed URL and feed update frequency
+                and get back the options object that corresponds to the configuration value.
+                After this we can use that options object when we call setSelected() to select
+                that option.
+            </p>
+
+            <p>
+
+                If there is no valid configuration then we disable the cancel button and make
+                the right softkey be "Exit". This is useful when the widget is started for the
+                first time so that user has to enter a valid configuration before starting to
+                use the widget. If there is a valid configuration we set the right softkey to
+                "Cancel" and make it call the showMainView() function that we just created. The
+                "Cancel" button will also be enabled.
+            </p>
+
+            <p>
+
+                Finally we'll switch to the settings view by calling setView() in the user 
+                interface manager.
+            </p>
+
+<pre>
+
+// Show settings view.
+function showSettings() {
+    // URL (use first available feed if null)
+    var feedOption = (feedURL == null) ? feedOptions[0] : feedSelection.getOptionForValue(feedURL);
+    feedSelection.setSelected(feedOption);
+    
+    // frequency
+    var feedUpdateFrequencyOption = feedUpdateFrequencySelection.getOptionForValue(feedUpdateFrequency);
+    feedUpdateFrequencySelection.setSelected(feedUpdateFrequencyOption);
+    
+    if (feedURL == null) {
+        // no valid configuration
+        // disable cancel button - set right softkey to "exit"
+        settingsCancelButton.setEnabled(false);
+        if (window.widget) {
+            menu.setRightSoftkeyLabel("", null);
+        }
+    } else {
+        // we have a valid configuration
+        // enable cancel button - set right softkey to "cancel"
+        settingsCancelButton.setEnabled(true);
+        if (window.widget) {
+            menu.setRightSoftkeyLabel("Cancel", showMainView);
+        }
+    }
+    
+    // show the settings view
+    uiManager.setView(settingsView);
+}
+</pre>
+
+            <p>
+
+                The third function to implement is the callback for when the save button is clicked.
+                First we take the selected options from the feed selection and feed update frequency
+                selection controls. Those selected values are copied to the feedURL and feedUpdateFrequency
+                variables that are used by the widget during runtime. Next the settings are saved using
+                the savePreferences() function that we implemented earlier. And finally we call the
+                showMainView() method so that the widget shows the main view with the news items.
+            </p>
+
+<pre>
+
+// Callback for settings view save button.
+function saveSettingsClicked() {
+    // update feed URL
+    var selectedFeed = feedSelection.getSelected();
+    feedURL = (selectedFeed != null) ? selectedFeed.value : null;
+    
+    // update frequency
+    var selectedFrequency = feedUpdateFrequencySelection.getSelected();
+    feedUpdateFrequency = (selectedFrequency != null) ? selectedFrequency.value : -1;
+    
+    // save preferences
+    savePreferences();
+    
+    // return to main view
+    showMainView();
+}
+</pre>
+
+            <p>
+
+                The user interface is now nearly done but the init() function needs one more
+                thing. We need to show a view after the function is done initializing
+                the widget. The view to show depeneds on whether we have a valid
+                configuration or not. If we do then we'll show the main view. If not then
+                we'll show the settings view. Let's add this code to the end of the init()
+                function, just before we start the update timer:
+            </p>
+
+<pre>
+
+// display the main view if a feed has been configured
+// otherwise show the settings view
+if (feedURL != null) {
+    showMainView();
+    updateFeed();
+} else {
+    showSettings();
+}
+</pre>
+
+            <p>
+
+                You can now go ahead and try out the widget either on a handset, emulator
+                or in a PC browser. You should have a working settings view and when clicking
+                the save button in the settings view you should end up in the main view. From
+                there you can go to the settings by selecting "Settings" in the Options menu.
+            </p>
+
+            <p>
+
+                There are no news items to show yet but that's our next task.
+            </p>
+
+            <div class="fignone" id="GUID-1083A0C4-A953-4B6E-A4D0-45A031E51C35__GUID-31A7B99C-BD6B-42E2-8430-631D210FAFC0"><a name="GUID-1083A0C4-A953-4B6E-A4D0-45A031E51C35__GUID-31A7B99C-BD6B-42E2-8430-631D210FAFC0"><!-- --></a><span class="figcap">Figure 1. 
+RSS Reader settings view</span>
+
+                
+                <br /><img src="RSS_Reader_Settings_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+    </div>
+
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_RSS_Reader_Tutorial-GUID-678d197f-c7b0-4e5e-85e2-f8549c75bbe8.html">RSS Reader</a></div>
+</div>
+</div>
+
+</body>
+</html>

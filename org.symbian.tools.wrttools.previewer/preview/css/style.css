@@ -1,3 +1,4 @@
+@charset "utf-8";
 /**
  * Copyright (c) 2009-2010 Symbian Foundation and/or its subsidiary(-ies).
  * All rights reserved.
@@ -10,9 +11,10 @@
  * Symbian Foundation - initial contribution.
  * Contributors:
  */
-@charset "utf-8";
+
 body {
-	background-image: url(../images/Gradient0Background.png);
+/*  background-image: url(../images/Gradient0Background.png); */
+	background-image: url(../images/Gradient0Background_2.png);
 	background-repeat: repeat-x;
 	margin: 0px;
 	font-family: "Nokia Sans", "Nokia Sans SemiBold", "Arial Narrow";

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta name="copyright" content="(C) Copyright 2005" />
+<meta name="DC.rights.owner" content="(C) Copyright 2005" />
+<meta content="concept" name="DC.Type" />
+<meta name="DC.Title" content="WRTKit SelectionMenu Class" />
+<meta scheme="URI" name="DC.Relation" content="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html" />
+<meta content="XHTML" name="DC.Format" />
+<meta content="GUID-3AE54FDF-E938-400B-969D-E41575331AA0" name="DC.Identifier" />
+<meta content="en" name="DC.Language" />
+<link href="commonltr.css" type="text/css" rel="stylesheet" />
+<title>
+WRTKit SelectionMenu Class</title>
+</head>
+<body id="GUID-3AE54FDF-E938-400B-969D-E41575331AA0"><a name="GUID-3AE54FDF-E938-400B-969D-E41575331AA0"><!-- --></a>
+
+
+
+    <h1 class="topictitle1">
+WRTKit SelectionMenu Class</h1>
+
+    <div>
+
+        <div class="section"><h2 class="sectiontitle">
+Description</h2>
+
+            
+            <p>
+
+                The SelectionMenu class is an implementation of a selection control that lets
+                users select options from a popup menu.
+            </p>
+
+            <p>
+
+                The SelectionMenu control has two modes: a display mode and a selection mode.
+                Normally the display mode is shown and users can see what the currently selected
+                options are. When a user selects the control a menu pops up that displays the
+                available options. The user can then select the option (or options) from this
+                menu. After the selection is done the menu goes away and the control returns to
+                display mode. The SelectionMenu control is useful in situations where there
+                are many options and showing them all uses up too much space.
+            </p>
+
+            <div class="fignone" id="GUID-3AE54FDF-E938-400B-969D-E41575331AA0__GUID-2E45D9D7-D1FF-4271-A8EC-3EF46BCA768D"><a name="GUID-3AE54FDF-E938-400B-969D-E41575331AA0__GUID-2E45D9D7-D1FF-4271-A8EC-3EF46BCA768D"><!-- --></a><span class="figcap">Figure 1. 
+SelectionMenu control</span>
+
+                
+                <br /><img src="SelectionMenu_Control_Screenshot_1.png" /><br />
+            </div>
+
+        </div>
+
+        <div class="section"><h2 class="sectiontitle">
+Inherits from</h2>
+
+            
+            <p>
+
+                <a href="WRTKit_SelectionControl_Class-GUID-35c4291f-dc3a-439c-890f-1d140864aca0.html">
+SelectionControl</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="WRTKit_API_Reference-GUID-00e47c27-0a1a-443f-ae85-cf3381635170.html">WRTKit API Reference</a></div>
+</div>
+</div>
+<div class="nested1" id="GUID-C81342E7-7AFF-4071-94A2-95FB56C1AEE9"><a name="GUID-C81342E7-7AFF-4071-94A2-95FB56C1AEE9"><!-- --></a>
+
+        <h2 class="topictitle2">
+Constructor</h2>
+
+        <div>
+
+            <div class="section"><h3 class="sectiontitle">
+Syntax</h3>
+
+                
+                <pre>
+[SelectionMenu] new SelectionMenu(String id, String caption, Array options, Boolean multipleSelection, Array|Option selected)</pre>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Description</h3>
+
+                
+                <p>
+
+                    Creates a new instance of the SelectionMenu class.
+                </p>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Arguments</h3>
+
+                
+                <br /><ul>
+
+                    <li>
+
+                        <p>
+id</p>
+
+                        
+
+                            <p>
+
+                                Unique identifier for the control. Can be retrieved using the id property defined
+                                in the UIElement class that this control inherits from. Useful for example to
+                                identify the source of an event in event callback functions or to apply a CSS
+                                rule to only this particular control. The identifier can be null, in which case
+                                no id will be set for the control.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+caption</p>
+
+                        
+
+                            <p>
+
+                                The caption text for the control. A null caption can be used to hide the 
+                                caption area. The value is an XHTML string.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+options</p>
+
+                        
+
+                            <p>
+
+                                An array of options that the selection menu should display to the user.
+                                If the argument is omitted or null the control will not display any 
+                                options. The options can be set or changed later by calling setOptions().
+                                Options are objects with two properties: value and text. Use JavaScript
+                                object notation (JSON) to construct option objects, e.g.
+                                <samp class="codeph">
+{ value: "value here", text: "Text for value goes here" }</samp>.
+                                The text value is an XHTML string.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+multipleSelection</p>
+
+                        
+
+                            <p>
+
+                                The multipleSelection argument is a boolean flag that determines whether
+                                the control should be in multipleSelection mode or not. Use true to put
+                                the control in multiple selection mode and false to put it in single
+                                selection mode. If this argument is omitted the control will go to single
+                                selection mode by default.
+                            </p>
+
+                        
+                    </li>
+
+                    <li>
+
+                        <p>
+selected</p>
+
+                        
+
+                            <p>
+
+                                The selected argument specifies which of the options should be selected at
+                                creation time. For multiple selection controls this should be given as an
+                                array of option objects with an empty array if no options should be selected.
+                                For single selection controls this should be the single option object that
+                                should be selected or null if no option should be selected. If the argument
+                                is omitted or null no options will be selected.
+                            </p>
+
+                        
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="section"><h3 class="sectiontitle">
+Return value</h3>
+
+                
+                <p>
+
+                    A new instance of the SelectionMenu class.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>
