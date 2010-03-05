@@ -11,9 +11,6 @@
    </aboutInfo>
 
    <configIni use="default">
-      <linux>/org.symbian.tools.wrttools.product/config_inis/linux/config.ini</linux>
-      <macosx>/org.symbian.tools.wrttools.product/config_inis/macosx/config.ini</macosx>
-      <win32>/org.symbian.tools.wrttools.product/config_inis/windows/config.ini</win32>
    </configIni>
 
    <launcherArgs>
