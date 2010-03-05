@@ -56,20 +56,14 @@ Widget.prototype.isrotationsupported = new Boolean();
 /**
  * Allows the definition of a function to be called
  * when a Widget.is displayed
- * @param {Void}
- *     onshow()
- * @return {Void}
  */
-Widget.prototype.onshow = new Object();
+Widget.prototype.onshow = new Function();
 
 /**
  * Allows the definition of a function to be called
  * when a Widget.sent into the background (hidden)
- * @param {Void}
- *     onhide()
- * @return {Void}
  */
-Widget.prototype.onhide = new Object();
+Widget.prototype.onhide = new Function();
 	
 /**
  * Launches the browser with the specified url

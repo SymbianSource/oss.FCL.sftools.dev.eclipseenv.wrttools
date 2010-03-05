@@ -35,11 +35,14 @@ public class PlatformServicesTypeProvider implements InferrenceProvider {
     public int applysTo(IInferenceFile scriptFile) {
         char[] fileName = scriptFile.getFileName();
         if (fileName != null) {
-            IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(new String(fileName)));
-            if (file.exists()) {
-                IProject project = file.getProject();
-                if (ProjectUtils.hasWrtNature(project)) {
-                    return InferrenceProvider.ONLY_THIS;
+            Path path = new Path(String.valueOf(fileName));
+            if (path.segmentCount() > 1) {
+                IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+                if (file.exists()) {
+                    IProject project = file.getProject();
+                    if (ProjectUtils.hasWrtNature(project)) {
+                        return InferrenceProvider.ONLY_THIS;
+                    }
                 }
             }
         }

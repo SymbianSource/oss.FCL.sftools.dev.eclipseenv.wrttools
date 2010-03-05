@@ -24,8 +24,10 @@ import java.util.TreeMap;
 import org.eclipse.wst.jsdt.core.ast.IASTNode;
 import org.eclipse.wst.jsdt.core.ast.IExpression;
 import org.eclipse.wst.jsdt.core.ast.IFunctionCall;
+import org.eclipse.wst.jsdt.core.ast.IFunctionDeclaration;
 import org.eclipse.wst.jsdt.core.infer.InferEngine;
 import org.eclipse.wst.jsdt.core.infer.InferredType;
+import org.eclipse.wst.jsdt.internal.compiler.ast.SingleNameReference;
 import org.eclipse.wst.jsdt.internal.compiler.ast.StringLiteral;
 
 @SuppressWarnings("restriction")
@@ -65,6 +67,11 @@ public class WRTInferEngine extends InferEngine {
                         }
                     }
                 }
+            }
+        } else if (expression instanceof SingleNameReference) {
+            IFunctionDeclaration fun = getDefinedFunction(expression);
+            if (fun != null) {
+                return FunctionType;
             }
         }
         return super.getTypeOf(expression);

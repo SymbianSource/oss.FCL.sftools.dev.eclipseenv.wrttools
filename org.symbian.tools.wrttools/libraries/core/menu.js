@@ -80,7 +80,7 @@ Menu.prototype.clear = function() {};
  * The onShow property of the menu object is an event handler 
  * for the event of when the options menu is open.
  */
-Menu.prototype.onShow = new Object();
+Menu.prototype.onShow = new Function();
 
 
 /**
@@ -111,4 +111,4 @@ MenuItem.prototype.setDimmed = function(flag) {}
 /**
  * Event handler for the event when the menu item is selected.
  */
-MenuItem.prototype.onSelect = new Object();
+MenuItem.prototype.onSelect = new Function();
