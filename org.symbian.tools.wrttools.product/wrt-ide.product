@@ -27,7 +27,7 @@
       startupProgressRect="0,280,455,15"
       startupMessageRect="7,220,441,20"
       startupForegroundColor="C8D5EA" />
-   <launcher name="wrttools">
+   <launcher name="wrtide">
       <solaris/>
       <win useIco="false">
          <bmp/>
