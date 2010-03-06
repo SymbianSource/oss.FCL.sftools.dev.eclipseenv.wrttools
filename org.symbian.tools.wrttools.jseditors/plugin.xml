@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-  <extension
-         point="org.eclipse.ui.propertyPages">
-      <page
-            name="Sample Page"
-            nameFilter="*.*"
-            class="org.symbian.tools.wrttools.jseditors.properties.SamplePropertyPage"
-            id="org.symbian.tools.wrttools.jseditors.properties.samplePropertyPage">
-         <enabledWhen>
-            <instanceof
-                  value="org.eclipse.core.resources.IFile">
-            </instanceof>
-         </enabledWhen>
-      </page>
-   </extension>
+
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            name="Sample XML File"
+            name="XML File"
             extensions="xml"
             icon="icons/sample.gif"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="org.symbian.tools.wrttools.jseditors.editors.XMLEditor"
             id="org.symbian.tools.wrttools.jseditors.editors.XMLEditor">
       </editor>
+
       <editor
-            name="Sample Multi-page Editor"
-            extensions="mpe"
-            icon="icons/sample.gif"
-            contributorClass="jstesteditor2.editors.MultiPageEditorContributor"
-            class="org.symbian.tools.wrttools.jseditors.editors.MultiPageEditor"
-            id="org.symbian.tools.wrttools.jseditors.editors.MultiPageEditor">
-      </editor>
-      <editor
-            name="Sample JavaScript File"
+            name="JavaScript File"
             extensions="js"
             icon="icons/sample.gif"
             contributorClass="org.symbian.tools.wrttools.jseditors.editors.JSEditorContributor"
@@ -71,6 +51,7 @@
             id="org.symbian.tools.wrttools.jseditors.wizards.NewJSWizard">
       </wizard>
    </extension>
+<!--
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
@@ -85,16 +66,9 @@
             class="org.symbian.tools.wrttools.jseditors.preferences.PreferenceInitializer">
       </initializer>
    </extension>
-   <extension
-         point="org.eclipse.help.toc">
-      <toc
-            file="toc.xml">
-      </toc>
-      <toc
-            file="testToc.xml"
-            primary="true">
-      </toc>
-   </extension>
+-->
+
+<!--
    <extension
          point="org.eclipse.ui.decorators">
       <decorator
@@ -122,6 +96,7 @@
          </enablement>
       </decorator>
    </extension>
+-->
 
    <extension
          point="org.eclipse.ui.intro.configExtension">
@@ -139,6 +114,7 @@
             id="org.symbian.tools.wrttools.jseditors.perspectives.RelEngPerspective">
       </perspective>
    </extension>
+
    <extension
          id="org.symbian.tools.wrttools.jseditors.builders.SampleBuilder"
          name="Sample Project Builder"
@@ -150,6 +126,8 @@
          </run>
       </builder>
    </extension>
+-->
+
    <extension
          id="org.symbian.tools.wrttools.jseditors.builders.SampleNature"
          name="Sample Project Nature"
@@ -163,6 +141,7 @@
             id="org.symbian.tools.wrttools.jseditors.builders.SampleBuilder">
       </builder>
    </extension>
+
    <extension
          id="org.symbian.tools.wrttools.jseditors.xmlProblem"
          name="XML Problem"
