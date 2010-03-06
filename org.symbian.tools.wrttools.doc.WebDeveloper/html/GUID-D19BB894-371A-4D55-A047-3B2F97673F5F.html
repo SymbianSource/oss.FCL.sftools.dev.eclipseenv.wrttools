@@ -1,0 +1,161 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.Import()"/><meta name="DC.Relation" scheme="URI" content="GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F"/><meta name="DC.Relation" scheme="URI" content="GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-D19BB894-371A-4D55-A047-3B2F97673F5F"/><title>IDataSource.Import() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-D19BB894-371A-4D55-A047-3B2F97673F5F"><span>IDataSource.</span>Import()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Import</code> method imports entries into a calendar.
+The information must be imported from an iCal or vCal file. For more information
+about these two formats, see the <a href="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571.html#GUID-AE9A928B-F938-49B5-BC9E-72CB42046571">Calendar
+Service overview page</a>.</p>
+<p>This method can be called both synchronously and asynchronously.</p>
+<p><strong>Syntax:</strong></p>
+<p>For synchronous calls:</p>
+<pre class="codeblock" id="GUID-173FE57C-5F1D-45F7-A3A3-83CA5A05D0A5">result = so.IDataSource.Import(criteria);</pre>
+
+<p>For asynchronous calls:</p>
+<pre class="codeblock" id="GUID-141D4B72-7957-49FD-AC57-C785FC5E7A55">result = so.IDataSource.Import(criteria, callback);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the calendar entries to import and
+optionally the target calendar. For more information about the object properties
+and how to define them, see section <a href="GUID-B86F1686-F2AC-438F-8306-4B9D70F879EC.html#GUID-B86F1686-F2AC-438F-8306-4B9D70F879EC">Criteria for importing calendar entries</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when an asynchronous <code>Import</code> call has
+results or status information to return. You must define this method separately.
+Follow the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+<p>This argument is used only with an asynchronous <code>Import</code> call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>If synchronous, the <code>Import</code> method returns an object
+that contains a list of the imported calendar entries, an error code, and
+an error message.</p>
+<div class="tablenoborder"><a name="GUID-42E868DB-E737-4102-A248-1B2ECCBE639F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-42E868DB-E737-4102-A248-1B2ECCBE639F" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for a synchronous Import</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e22949">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e22954">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e22959">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22949 ">
+<p><code>result.ReturnValue</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22954 ">
+<p>This is an iterator that contains an ordered list of objects. The objects
+contain the <code>id</code>s (strings) of the entries that were successfully
+imported to the calendar. The same <code>id</code> may be repeated
+multiple times in case of child entries.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22959 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22949 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22954 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22959 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22949 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22954 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e22959 ">
+<p>See <a href="GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35.html#GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35">Calendar Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If asynchronous, the <code>Import</code> method returns an object
+that contains a transaction ID for the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> instance,
+an error code, and an error message (see the following table). When the asynchronous
+call has completed, <code>callback</code> returns an object that contains
+a list of the imported calendar entries, an error code, and an error message
+(see the preceding table).</p>
+<div class="tablenoborder"><a name="GUID-11253E50-8BE1-4C85-A6C2-A07E3DD1F542"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-11253E50-8BE1-4C85-A6C2-A07E3DD1F542" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for an asynchronous Import</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e23069">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e23074">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e23079">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23069 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23074 ">
+<p>This is a number used as an identification to match transactions started
+with an asynchronous <code>Import</code> call to one or more calls
+it generates to <code>callback</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23079 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23069 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23074 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23079 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23069 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23074 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e23079 ">
+<p>See <a href="GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35.html#GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35">Calendar Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p>If entries are imported to a calendar other than the default
+one, the corresponding calendar file must exist on the device.</p></li>
+<li><p>For detailed information about calendar entries, see section <a href="GUID-798E9CA0-2A46-4D10-B567-04C9567500F4.html#GUID-798E9CA0-2A46-4D10-B567-04C9567500F4">Calendar entries</a>.</p></li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3.html#GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3">the full example</a>.</p>
+
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

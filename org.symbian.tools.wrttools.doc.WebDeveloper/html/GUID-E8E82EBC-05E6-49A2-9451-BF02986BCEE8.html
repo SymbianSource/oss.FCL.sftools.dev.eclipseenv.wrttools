@@ -1,0 +1,33 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="preferenceForKey()"/><meta name="DC.Relation" scheme="URI" content="GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404"/><meta name="DC.Relation" scheme="URI" content="GUID-DF4D8745-B6D4-4BC4-AF2D-0F71F28E9F27"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-E8E82EBC-05E6-49A2-9451-BF02986BCEE8"/><title>preferenceForKey() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-E8E82EBC-05E6-49A2-9451-BF02986BCEE8">preferenceForKey()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>preferenceForKey</code> method allows a previously stored preference to be restored.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-3B28AB5C-8147-4D73-8DD2-34ACE925C6E9">[string] window.widget.preferenceForKey(String key) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-5B8798B4-FC24-4E21-914F-96AB4D51B404">[string] widget.preferenceForKey(String key)</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>key</code>:</p>
+
+<p>A text string specifying the name that represents the preference to be restored.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>A text string contains the preference value associated with the specified key.</p>
+<p>If the key does not exist, the return value is "undefined".</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-DBFFAA0E-633F-4728-A307-15B343D9DC2D">// Check for the existence of searchKey
+if(widget.preferenceForKey('searchKey'))
+{
+ // get the searchKey from the preference
+ var searchArg = widget.preferenceForKey('searchKey');
+ // set the search argument to the search field
+ document.forms[0].searchKey.value = searchArg;
+}</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

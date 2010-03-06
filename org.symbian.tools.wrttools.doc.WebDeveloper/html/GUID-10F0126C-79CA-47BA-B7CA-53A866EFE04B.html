@@ -1,0 +1,84 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Navigating on screens"/><meta name="abstract" content="Navigation is the foundation of a usable and accessible application. Users need to know where they are in the application at all times, even if they are interrupted and have to put the mobile device aside for a while. Minimize the time users have to spend on navigating through menus and options to get to the content."/><meta name="description" content="Navigation is the foundation of a usable and accessible application. Users need to know where they are in the application at all times, even if they are interrupted and have to put the mobile device aside for a while. Minimize the time users have to spend on navigating through menus and options to get to the content."/><meta name="DC.Relation" scheme="URI" content="GUID-5277B7B8-722A-48ED-9333-4DD2D6A085C0"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-C359CC7E-B8BA-491B-A0C4-0FF1D3C4110C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-10F0126C-79CA-47BA-B7CA-53A866EFE04B"/><meta name="DC.Language" content="en"/><title>Navigating on screens </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-10F0126C-79CA-47BA-B7CA-53A866EFE04B">Navigating on screens</h1><div><p>Navigation is the foundation of a usable and accessible application. Users need to know where they are in the application at all times, even if they are interrupted and have to put the mobile device aside for a while. Minimize the time users have to spend on navigating through menus and options to get to the content. </p>
+<p>For usability guidelines, see <a href="http://library.forum.nokia.com/topic/Design_and_User_Experience_Library/GUID-6051868C-35DD-4735-A2D7-84F9B81234CC.html" target="_blank">Navigation</a>.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The information in this topic does not apply to touch devices. On touch devices, users navigate by touching the controls with a stylus or finger.</p></div>
+<div><h3>Selecting a navigation mode</h3><p>You can use one of the following navigation modes on mobile devices that have a five way navigation pad:</p><ul>
+<li><p>Cursor navigation</p></li>
+<li><p>Tab navigation</p></li>
+<li><p>Customized navigation</p></li>
+</ul><div class="figure" id="GUID-F6AE989C-25F8-4A46-8D7D-21B2A22162DD"><img src="GUID-0EF1628D-BAF8-4AC4-BA6C-E1F6A192A7FA_d0e4046_href.png"/><p class="figure-title"><strong>Figure: </strong>Cursor (left) and tab (right) navigation</p></div><p>In the figure, the widget on the left illustrates how users can navigate on the screen by clicking the navigation keys that move the cursor. The widget on the right illustrates how users can move the focus between the <span class="uicontrol">Say Hello!</span> button and the <span class="uicontrol">Enter your name</span> field by clicking the up and down navigation keys.</p><div class="note"><p><strong class="note_title">Note: </strong> Use tab navigation and softkeys as much as possible, because some users might find controlling the cursor with the navigation keys difficult. </p></div><p>For an example of using cursor and tab navigation modes and capturing key events, see the <a href="http://www.forum.nokia.com/info/sw.nokia.com/id/1c27d9d7-8946-4e26-947d-2b140c454876/Web_Run-Time_AccuWidget_Example.html" target="_blank">AccuWidget Example</a> on Forum Nokia.</p></div>
+<div><h3>Using cursor navigation</h3><p>In cursor navigation, users control the mouse pointer with the five way navigation pad. When users move the cursor inside the control's area on the screen, the cursor is said to be <em>hovering</em> . User graphical means to indicate hovering. Hovering is similar to focus, but it does not select a control for interaction until users press a selection key.</p></div>
+<div><h3>Using tab navigation</h3><p>While mouse pointer mode is effective for navigating web pages, consider using key navigation for widgets. The simplest form of key navigation is tab navigation. Tab navigation is a special mode in S60 Web Runtime (WRT) widgets that turns off the mouse pointer, and enables users to navigate on screens and select controls using the five way navigation pad.</p><p>The downside of tab navigation mode is that the WRT engine controls the tab order. It uses a special algorithm to determine the next closest link to tab to. Tab navigation mode was primarily designed as a web browser feature to enable users to navigate simple vertical lists of links.</p><p>You can try tab navigation to see if it produces acceptable results. If not, you can revert to the simpler mouse pointer navigation, or develop a more sophisticated navigation mode by using custom navigation. Tab navigation allows you to collect navigation key events in your code. You can also implement custom navigation by enabling tab navigation and using HTML key events.</p></div>
+<div><h3>Customizing navigation</h3><p>If you are an experienced JavaScript developer, you can capture and process <a href="GUID-5277B7B8-722A-48ED-9333-4DD2D6A085C0.html#GUID-5277B7B8-722A-48ED-9333-4DD2D6A085C0">key events</a> to customize navigation. You can control the navigation and UI effects, such as highlighting, programmatically.</p><p>However, widgets that rely solely on key events for navigation and input do not work on devices that only support touch interfaces.</p><p>In general, browser engines display key event codes in varying ways at JavaScript level. S60 WRT widget text and input field components do not support all key events found in the other browser or widget environments. Make sure that navigation elements appear on the screen and that a JavaScript <code>onClick</code> handler is added to them.  An HTML anchor tag is one such example. You can also add <code>onClick</code> handlers to a <code>div</code> element.  The JavaScript <code>onClick</code> handler JavaScript function can then activate the appropriate navigation option or action.</p></div>
+<div><h3>To toggle between navigation modes</h3><div class="p">Use the <a href="GUID-87B333A2-FDA1-4BC3-8803-C5702C5869A1.html#GUID-87B333A2-FDA1-4BC3-8803-C5702C5869A1"><code>setNavigationEnabled()</code></a> method of the <code>widget</code> object in your JavaScript files to toggle between the navigation modes.<pre class="codeblock">// Tab mode
+widget.setNavigationEnabled(false); 
+// Cursor mode
+widget.setNavigationEnabled(true);</pre> </div></div>
+<div><h3>To capture JavaScript key events</h3><ol>
+<li id="GUID-E2F76CDB-3250-4112-B15A-C8F8F2A504B9"><a name="GUID-E2F76CDB-3250-4112-B15A-C8F8F2A504B9"><!----></a><p>Attach key listeners.</p></li>
+<li id="GUID-70B90C02-D9A8-4DEB-B2C8-AB57C7BCD629"><a name="GUID-70B90C02-D9A8-4DEB-B2C8-AB57C7BCD629"><!----></a><p>Disable navigation mode to collect cursor key events.</p></li>
+<li id="GUID-0A47F7C5-BB4A-4B5F-A65B-CCEDA40EFA25"><a name="GUID-0A47F7C5-BB4A-4B5F-A65B-CCEDA40EFA25"><!----></a><p>Show key code and character code.</p></li>
+<li id="GUID-1DF1BEF6-C62E-42E4-B33C-0CAC523ADFDF"><a name="GUID-1DF1BEF6-C62E-42E4-B33C-0CAC523ADFDF"><!----></a><p>Create <a href="GUID-5277B7B8-722A-48ED-9333-4DD2D6A085C0.html#GUID-5277B7B8-722A-48ED-9333-4DD2D6A085C0">key events</a> on pages.</p></li>
+</ol><p>For example:</p><pre class="codeblock">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript"&gt;		
+			
+      /*
+       * attach key listeners
+       */
+      document.onkeypress = keyPress;
+      document.onkeyup = keyUp;
+      document.onkeydown = keyDown;
+ 
+      /*
+       * disable cursor navigation - otherwise cursor 
+       * key events are not received by keypress callbacks
+       */
+      widget.setNavigationEnabled(false);
+			
+      /*
+       * show keyCode and charCode.
+       */
+      function keyPress(event) {
+	document.getElementById('keypressField').innerHTML = event.keyCode + " / " + 
+event.charCode;
+      }
+      
+      function keyDown(event) {
+	document.getElementById('keydownField').innerHTML = event.keyCode + " / " + 
+event.charCode;
+      }
+			
+      function keyUp(event) {
+	document.getElementById('keyupField').innerHTML = event.keyCode + " / " +
+event.charCode;
+      }
+    &lt;/script&gt;
+		
+    &lt;/head&gt;
+  &lt;body&gt;
+    keyCode / charCode:
+    
+    &lt;div&gt;
+      KeyPress: 
+      &lt;div id="keypressField"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+      Keydown: 
+      &lt;div id="keydownField"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+      Keyup: 
+      &lt;div id="keyupField"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+ 
+  &lt;/body&gt;
+&lt;/html&gt;	</pre></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

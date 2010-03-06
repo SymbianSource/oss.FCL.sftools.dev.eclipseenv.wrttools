@@ -1,0 +1,27 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Designing for dynamic screen orientation"/><meta name="abstract" content="Some S60 devices support screen rotation. On these devices, applications can be displayed in portrait or landscape orientation."/><meta name="description" content="Some S60 devices support screen rotation. On these devices, applications can be displayed in portrait or landscape orientation."/><meta name="DC.Relation" scheme="URI" content="GUID-B74565A3-C981-4377-99F0-FAD87B9E516D"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-9E0EC12F-EF50-4831-B0F4-C588590871D8"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-36CDDA1B-3B62-4936-9E06-7935AAD1CD77"/><meta name="DC.Language" content="en"/><title>Designing for dynamic screen orientation </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-36CDDA1B-3B62-4936-9E06-7935AAD1CD77">Designing for dynamic screen orientation</h1><div><p>Some S60 devices support screen rotation. On these devices, applications can be displayed in portrait or landscape orientation.</p>
+<p>Screen rotation can be supported in the following ways:</p>
+<ul>
+<li><p>You can add a menu option to your widget that enables the user to rotate the UI.</p></li>
+<li><p>Some devices support rotation in response to a user action such as opening a cover or moving a slider. For an example, see <a href="GUID-B12990B6-979C-4BBA-B030-FB7CEC04CB3A.html#GUID-B12990B6-979C-4BBA-B030-FB7CEC04CB3A">STEW: supporting screen rotation</a>.</p></li>
+<li><p>Some devices enable software developers to use <a href="GUID-6CD2776F-A868-4280-967F-4EB426212556.html#GUID-6CD2776F-A868-4280-967F-4EB426212556"><code>widget</code></a> object methods to programmatically rotate the screen.</p></li>
+</ul>
+<p>Combine the JavaScript <code>onResize</code> DOM event handler with the height and width properties from the window and screen objects to calculate the effective area or viewport available for a widget. See the <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Viewport widget</a> for an example of how to determine the effective viewport size.</p>
+<div><h3>Rotation and softkey styles</h3><p>In the landscape orientation, the softkeys can either be placed on either side of the display or at the bottom of the display. In the bottom softkey style, the layout is stretched horizontally to fit the screen, leaving the softkeys below the screen as in portrait orientation. Touch devices do not support the bottom softkey style. Design widgets to work in both portrait orientation and landscape orientation with side softkeys.</p><div class="figure" id="GUID-DDAAA5C9-8E5B-431A-AB00-CA0E84C6393C"><img src="GUID-180DCD93-B532-481C-A0B4-E0C1CC7C3440_d0e2671_href.png"/><p class="figure-title"><strong>Figure: </strong>Page layout in portrait and landscape</p></div><div class="note"><p><strong class="note_title">Note: </strong> The WRT environment adjusts the softkey labels.</p></div></div>
+<div><h3>To add a rotation command to the options menu</h3><ol>
+<li id="GUID-371FBDFB-146B-43C1-93C6-8B93DD785A6E"><a name="GUID-371FBDFB-146B-43C1-93C6-8B93DD785A6E"><!----></a><p>Add a rotation option to the options menu.</p><p>For more information, see <a href="GUID-94946735-D23B-49C6-BB65-8BE31737AE42.html#GUID-94946735-D23B-49C6-BB65-8BE31737AE42">Using softkeys</a>.</p></li>
+<li id="GUID-A2449068-D09F-4A00-8590-9084CA55CBDF"><a name="GUID-A2449068-D09F-4A00-8590-9084CA55CBDF"><!----></a><p>Create the code for the menu option. Check that the device supports screen rotation and use <code>widget</code> object methods to change the screen orientation. </p><div class="p">For example, the following code changes the orientation to landscape if the screen height is less than the screen width:<pre class="codeblock">if (widget.isrotationsupported)
+
+// Change the screen orientation
+
+var h = window.screen.height;
+var w = window.screen.width;
+ 
+if (h &lt; w)
+  widget.setDisplayLanscape();</pre></div></li>
+</ol></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

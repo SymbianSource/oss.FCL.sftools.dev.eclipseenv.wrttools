@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Enabling STEW for the home screen"/><meta name="abstract" content="Users can add the Simple Texting Example Widget (STEW) to the home screen."/><meta name="description" content="Users can add the Simple Texting Example Widget (STEW) to the home screen."/><meta name="DC.Relation" scheme="URI" content="GUID-8DC78944-809B-462B-BEC2-0114696F8B14"/><meta name="DC.Relation" scheme="URI" content="GUID-1FD5C597-43B8-402E-92B8-FE0787DB4F3B"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-1812A0D5-74CC-4A94-AF91-970465F6A738"/><meta name="DC.Language" content="en"/><title>Enabling STEW for the home screen </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-1812A0D5-74CC-4A94-AF91-970465F6A738">Enabling STEW for the home screen</h1><div><p>Users can add the Simple Texting Example Widget (STEW) to the home screen.</p>
+<p>The resolution of <a href="GUID-78D2B232-BC16-4633-8B66-DCD0C496B354.html#GUID-78D2B232-BC16-4633-8B66-DCD0C496B354">STEW</a> on the home screen is 309 x 85 pixels and the data is refreshed every 1 second.</p>
+<div class="figure" id="GUID-0FAAEC49-0143-499F-86F9-A7A991E15EBA"><img src="GUID-2A567315-DB83-4876-8E78-C3F1944CAB89_d0e12345_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW on the home screen</p></div>
+<p>Before you can add STEW to the home screen, you must create STEW, as instructed in <a href="GUID-EB2043BB-E557-429B-BA0A-E350A6D06597.html#GUID-EB2043BB-E557-429B-BA0A-E350A6D06597">Designing STEW user interface</a></p>
+<div class="figure" id="GUID-F7D0E4B3-A7D9-4C8C-8B11-F8E661724503"><img src="GUID-65E5FE9D-5585-4A81-A70B-B0F593CE0436_d0e12357_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW Update Status view in full screen mode</p></div>
+<div><h3>To enable STEW for the home screen</h3><ol>
+<li id="GUID-C182FBC9-DB35-4F52-BE3C-4DEEF0B8F693"><a name="GUID-C182FBC9-DB35-4F52-BE3C-4DEEF0B8F693"><!----></a><p>Download the <a href="stew.wgz">STEW home screen widget source files</a> to your computer.</p></li>
+<li id="GUID-582B7B1A-FD16-4779-A752-4546FA119C5F"><a name="GUID-582B7B1A-FD16-4779-A752-4546FA119C5F"><!----></a><p>Modify the <code>info.plist</code> file to include the following key:</p><pre class="codeblock">&lt;key&gt;MiniViewEnabled&lt;/key&gt;
+&lt;true/&gt; 
+</pre>For more information on the <code>info.plist</code>, see <a href="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B.html#GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B">Creating the info.plist file</a>.</li>
+<li id="GUID-76C9F586-9FFC-40B8-8D27-ABEA59902C51"><a name="GUID-76C9F586-9FFC-40B8-8D27-ABEA59902C51"><!----></a><p>Add a home screen widget area (<code>mini_view</code>) to the <code>main.html</code> file:</p><pre class="codeblock">&lt;body onload="javascript:init();" onresize="javascript:onResize();" onshow="javascript:setViewMode();"&gt;
+
+&lt;div id="container"&gt;
+	...
+&lt;/div&gt; &lt;!-- end of 'container' --&gt;
+
+&lt;div id="mini_view" class="hidden"&gt;
+	&lt;table id="mini_view_table" class="miniview_tweets" cellspacing="0"&gt;
+		&lt;tr&gt;
+			&lt;td id="miniViewLoading"&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+</pre>For more information on the HTML file, see <a href="GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA.html#GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA">Creating the widget HTML file</a>.</li>
+</ol></div>
+<div><h3>To detect screen changes</h3><ol>
+<li id="GUID-89F18D54-1D36-4B6B-80AA-70E18D4E9000"><a name="GUID-89F18D54-1D36-4B6B-80AA-70E18D4E9000"><!----></a><p>Add the <code>onshow</code> event handler to the <code>main.html</code> to detect screen (viewport) changes:</p><pre class="codeblock">&lt;body onload="javascript:init();" onresize="javascript:onResize();" onshow="javascript:setViewMode();"&gt;</pre></li>
+<li id="GUID-0951E6D9-2333-4166-804C-87B6B939231E"><a name="GUID-0951E6D9-2333-4166-804C-87B6B939231E"><!----></a><p>Modify the <code>onresize</code> method in the <code>main.js</code> file to check whether the widget should be displayed on the home screen or in full screen mode:</p><pre class="codeblock">function onResize(){
+	if ( !Helper.isMiniViewMode() ) {
+		resizeNormalView();
+	}
+	setViewMode();          
+}
+</pre><p>The function <code>resizeNormalView</code> contains all the code previously implemented in the <code>onresize</code> function.</p></li>
+<li id="GUID-1E4532DD-29B1-4459-9D8E-580AADAB854F"><a name="GUID-1E4532DD-29B1-4459-9D8E-580AADAB854F"><!----></a><p>Implement the <code>setViewMode</code> function to show or hide the HTML for the full screen widget or the home screen widget:</p><pre class="codeblock">function setViewMode(){
+	var isInMiniView = Helper.isMiniViewMode();
+	
+	if ( isInMiniView ) {
+		// Hide main screen.
+		Helper.show( "container", false );
+		// ... and show MiniView.
+		Helper.show( "mini_view", true );
+		miniView.onActivated();
+	} else {
+		// Hide MiniView.
+		Helper.show( "mini_view", false );
+		miniView.onDeactivated();
+		// ... and show main screen.
+		Helper.show( "container", true );
+	}
+}
+</pre></li>
+<li id="GUID-D2B95F8C-DCC3-45E1-B190-AE4B7F82D6E4"><a name="GUID-D2B95F8C-DCC3-45E1-B190-AE4B7F82D6E4"><!----></a><p>To determine whether a widget is running on the home screen, set a threshold value for the screen size in the <code>helper.js</code> file:</p><pre class="codeblock">isMiniViewMode: function() {
+	var size = this.getScreenSize();
+	return ( size.height &lt; Helper.MINI_VIEW_TRESHOLD );
+}	
+
+Helper.MINI_VIEW_TRESHOLD = 150;
+</pre><p>If the screen size is less than the threshold value, you can assume that the widget is running on the home screen.</p></li>
+</ol></div>
+<div><h3>To lay out STEW on the home screen</h3><ol>
+<li id="GUID-7F36A5E2-1FFB-41C6-8DE9-2BD24E0932AB"><a name="GUID-7F36A5E2-1FFB-41C6-8DE9-2BD24E0932AB"><!----></a><p>Create a separate CSS file, <code>miniview.css</code>, that defines the layout of STEW on the home screen:</p><pre class="codeblock">/* ******** */
+/* MINIVIEW */
+/* ******** */
+#mini_view {
+    width: 308px;
+    height: 85px;
+		background: white;
+    overflow: hidden;
+}
+
+#mini_view th {
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	background: #7fcce5;
+	padding: 4px 6px;
+	text-align: left;
+}
+
+#mini_view .miniview_tweets {
+    width: 100%;
+}
+
+#mini_view .miniview_tweets .tweet{
+    background: url(images/tr_bg.png) repeat-x bottom #fff;
+}
+
+#mini_view .miniview_tweets .tweet .image{
+    padding: 1px 3px 1px 2px;
+    width: 16px;
+	min-width: 16px;
+    vertical-align: top;
+}
+
+#mini_view .miniview_tweets .tweet .image img{ 
+    width: 100%;
+}
+
+#mini_view .miniview_tweets .tweet .tweet_content{
+    padding: 2px;
+    vertical-align: top;
+}
+
+#mini_view .miniview_tweets .tweet .name {
+    color: #0099cc;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#mini_view .miniview_tweets .tweet .status {
+    color: #666666;
+    font-size: 10px;
+    float: left;
+}
+
+</pre></li>
+<li id="GUID-A1E760B1-F7AE-40DC-996D-EDE047F532F3"><a name="GUID-A1E760B1-F7AE-40DC-996D-EDE047F532F3"><!----></a><p>Add a reference to <code>miniview.css</code> to the <code>main.html</code> file:</p><pre class="codeblock">&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+	&lt;link href="style.css" rel="stylesheet" type="text/css"&gt;
+	&lt;link href="style_small.css" rel="stylesheet" type="text/css"&gt;
+	&lt;link href="miniview.css" rel="stylesheet" type="text/css"&gt;
+		...
+&lt;/head&gt;
+</pre></li>
+</ol></div>
+<div><h3>To implement the functionality of STEW on the home screen</h3><ol>
+<li id="GUID-E5DE6571-D162-4FE0-8302-7C4CB9D9240A"><a name="GUID-E5DE6571-D162-4FE0-8302-7C4CB9D9240A"><!----></a><p>Implement STEW home screen widget functionality in the <code>MiniView.js</code> file. </p></li>
+<li id="GUID-18EFA1DD-5AC2-49AF-8589-94A4C6C51DF5"><a name="GUID-18EFA1DD-5AC2-49AF-8589-94A4C6C51DF5"><!----></a><p>Users can set the refresh rate for the home screen widget in the STEW <span class="uicontrol">Settings</span> view when the widget is running in full screen mode. Create the <code>onActivated</code> function that is called from the <code>setViewMode</code> function to check the refresh rate when the home screen widget is activated:</p><pre class="codeblock">function MiniView() {
+
+}
+MiniView.prototype.onActivated = function() {
+	// Get the refresh rate.
+	var refresh = parseInt( widget.preferenceForKey( SettingsScreen.KEY_REFRESH ) );
+	if ( isNaN( refresh ) ) {
+		refresh = 30000; // Default to 30 seconds.
+	}</pre></li>
+<li id="GUID-9B03ABE9-CAA7-4BD9-8250-C8E78A2B4F14"><a name="GUID-9B03ABE9-CAA7-4BD9-8250-C8E78A2B4F14"><!----></a><p>Create a timer to refresh the home screen widget at the set intervals. The first refresh happens immediately to fetch the latest status updates. </p><pre class="codeblock">	// Start the timer which refreshes the miniview.
+	var self = this;
+	this.timerId = setInterval( function(){
+		self.refresh();
+	}, refresh );
+	
+	// Timer will trigger after the refresh period so refresh manually now.
+	this.refresh();
+}
+
+MiniView.prototype.refresh = function() {
+	var self = this;
+	twitterService.onSuccess = function( response ) { self.onTwitterResponse( response ) }
+	twitterService.onError = function( status ) { self.onTwitterError( status ) }
+	
+	twitterService.getPublicTweets( 3 );
+}</pre></li>
+<li id="GUID-1573799D-A20C-498A-AE51-8CEC0381A3E6"><a name="GUID-1573799D-A20C-498A-AE51-8CEC0381A3E6"><!----></a><p>Timers consume battery power on mobile devices. Create a function to stop the timer when the home screen widget is deactivated. The function is called from the <code>setViewMode</code> function.</p><pre class="codeblock">MiniView.prototype.onDeactivated = function() {
+	// Stop timer.
+	clearInterval( this.timerId );	
+}</pre></li>
+<li id="GUID-825B5BCE-24CF-4BEC-9787-FEFC365366B6"><a name="GUID-825B5BCE-24CF-4BEC-9787-FEFC365366B6"><!----></a>Create a function to fetch data for the home screen widget:<p/><pre class="codeblock">MiniView.prototype.onTwitterResponse = function( response ) {
+	// Fill in dummy data here.
+	var tweetsTable = document.getElementById( "mini_view_table" );
+	var html = Helper.createTableHeader( "Friends and my tweets" );
+
+	// Fill in the table.
+	for ( var i = 0; i &lt; response.length; ++i ) {
+		var tweet = response[i];
+		
+		html += Helper.createStatusRow( tweet.user.profile_image_url,
+			tweet.user.screen_name,
+			tweet.text, "", "" );
+	}
+	
+	tweetsTable.innerHTML = html;
+}</pre></li>
+<li id="GUID-1B800C38-6250-4170-8F75-9682B0E0AAE7"><a name="GUID-1B800C38-6250-4170-8F75-9682B0E0AAE7"><!----></a><p>If an error occurs during data retrieval, display an error message:</p><pre class="codeblock">MiniView.prototype.onTwitterError = function( status ) {
+	var tweetsTable = document.getElementById( "mini_view_table" );
+	tweetsTable.innerHTML = "Error...";
+}</pre></li>
+</ol></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

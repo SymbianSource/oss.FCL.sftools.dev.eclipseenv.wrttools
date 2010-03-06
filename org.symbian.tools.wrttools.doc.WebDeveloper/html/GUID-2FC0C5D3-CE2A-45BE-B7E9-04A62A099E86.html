@@ -1,0 +1,114 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Media Management Service API error messages"/><meta name="DC.Relation" scheme="URI" content="GUID-B7297E44-2CCE-4098-807B-551684CF608E"/><meta name="DC.Relation" scheme="URI" content="GUID-4EBD83E1-B179-4F8B-93AB-4D58C5F749C3"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-E5684FF0-28C9-4721-9421-6B9432087086"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-2FC0C5D3-CE2A-45BE-B7E9-04A62A099E86"/><title>Media Management Service API error messages </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-2FC0C5D3-CE2A-45BE-B7E9-04A62A099E86">Media Management Service API error messages</h1><div>
+<p>This section provides information about the error messages returned
+by the Media Management Service API methods.</p>
+<div><h3>GetList</h3>
+<p>The following table describes the error messages returned by <a href="GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB.html#GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB"><code>GetList</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>GetList</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-33E0EAE0-3A63-47F6-BBEC-557E1500DA7A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-33E0EAE0-3A63-47F6-BBEC-557E1500DA7A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetList error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e57813">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e57818">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e57813 ">
+<p><code>MediaMgmt:GetList:Server busy</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57818 ">
+<p>The provider is busy processing another request.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e57813 ">
+<p><code>MediaMgmt:GetList:Type Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57818 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e57813 ">
+<p><code>MediaMgmt:GetList:Type not supported(should be FileInfo)</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57818 ">
+<p>The content type is invalid.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e57813 ">
+<p><code>MediaMgmt:GetList:Filter parameter missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57818 ">
+<p>The <code>Filter</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e57813 ">
+<p><code>MediaMgmt:GetList:Filter parameter type mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57818 ">
+<p>The type of the <code>Filter</code> property is invalid.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e57813 ">
+<p><code>MediaMgmt:GetList:Sort parameter type mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57818 ">
+<p>The type of the <code>Sort</code> property is invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e57813 ">
+<p><code>MediaMgmt:GetList:FileType missing in Filter map</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57818 ">
+<p>Either the <code>FileType</code> property is not present in
+the <code>Filter</code> map or the <code>FileType</code> property
+contains a value with an invalid type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Cancel</h3>
+<p>The following table describes the error messages returned by <a href="GUID-4EBD83E1-B179-4F8B-93AB-4D58C5F749C3.html#GUID-4EBD83E1-B179-4F8B-93AB-4D58C5F749C3"><code>Cancel</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-086F1F8B-2D77-43E7-BDDB-9CE1F9DD8DD4"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-086F1F8B-2D77-43E7-BDDB-9CE1F9DD8DD4" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Cancel error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e57985">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e57990">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e57985 ">
+<p><code>MediaMgmt:Cancel:Invalid TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57990 ">
+<p>Either an invalid <code>TransactionID</code> was passed or an
+asynchronous call associated with this ID has already been completed.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e57985 ">
+<p><code>MediaMgmt:Cancel:Transaction ID missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e57990 ">
+<p>The <code>TransactionID</code> property is missing from the
+input.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

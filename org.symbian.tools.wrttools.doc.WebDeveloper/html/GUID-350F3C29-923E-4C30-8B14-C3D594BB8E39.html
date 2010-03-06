@@ -1,0 +1,325 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Sensor Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-46FAFCDA-BCF3-41CB-B154-C17BBF7CD755"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-350F3C29-923E-4C30-8B14-C3D594BB8E39"/><title>Sensor Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-350F3C29-923E-4C30-8B14-C3D594BB8E39">Sensor Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-6FBE64B7-0949-4AAE-B835-52B276540A59.html#GUID-6FBE64B7-0949-4AAE-B835-52B276540A59">Sensor Service</a>.
+You can download the <code>wgz</code> package for this widget from
+section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<p>For widget development and debugging purposes, this example writes its
+output to <code>c:\data\jslog_widget.log</code> using <code>console.info</code>.
+For instructions on how to enable logging in the Web browser for S60, see
+section <a href="GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html#GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript console</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-CD42B8F8-DF33-4605-B365-0834C7DF4A9F">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;DisplayName&lt;/key&gt;
+  &lt;string&gt;SensorSample&lt;/string&gt;
+  &lt;key&gt;Identifier&lt;/key&gt;
+  &lt;string&gt;com.nokia.widget.sapi.sensor.sample&lt;/string&gt;
+  &lt;key&gt;Version&lt;/key&gt;
+  &lt;string&gt;1.0&lt;/string&gt;
+  &lt;key&gt;MainHTML&lt;/key&gt;
+  &lt;string&gt;sensor-sample.html&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+</div>
+<div><h3>sensor-sample.html</h3>
+<pre class="codeblock" id="GUID-2530A43F-A36C-472E-8B99-CD98B03CE5BE">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript" src="js/common.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="js/sensor-sample.js" charset="utf-8"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body onload='setup()' bgcolor="#ddeeff"&gt;
+    &lt;form name="frm"&gt;
+      &lt;h3&gt;Sapi Sensor Sample Widget&lt;/h3&gt;
+      &lt;input type="button" onclick="findSensorChannel('img1')" value="FindSensorChannel"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getChannelProperty('img2')" value="GetChannelProperty"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="setChannelProperty('img3')" value="RegisterForNotification"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="stopReceivingNotification('img6')" value="Cancel"&gt;&lt;img id="img6" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;hr&gt;
+      &lt;div class='sensor' id='sensor' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;&lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-9276D901-4CAC-4CDD-AFC4-6A94C816785C">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+  
+  if (errCode) {
+    msg = message + "&lt;BR&gt;" + "Failed Error: " + errCode + "&lt;BR&gt;";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no"); 
+  } else {
+    showIMG(imgId,"yes"); 
+  }
+
+  //print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+  
+  return errCode;
+}
+
+// Build the message by reading a iteratorable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showIterableList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try { 
+    if ( typeof obj != 'object' )
+      return "" + obj + '&lt;BR/&gt;';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += '&lt;BR/&gt;';
+      }
+      txt += '&lt;BR/&gt;';
+    }
+  } 
+  catch (e) 
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK) 
+{
+  if(imgId == null || imgId == undefined)
+    return;
+  
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+  
+  for (i = 0; i &lt; sText.length &amp;&amp; IsNumber == true; i++) 
+  { 
+    Char = sText.charAt(i); 
+    if (ValidChars.indexOf(Char) == -1) 
+    {
+      IsNumber = false;
+    }
+  }
+  return IsNumber; 
+}</pre>
+</div>
+<div><h3>sensor-sample.js</h3>
+<pre class="codeblock" id="GUID-55D3CB19-580C-4F4F-9564-5D268A27A7A7">// sensor-sample.js
+//
+// In this sample the sensor will be found, get and set;
+// Also, async operation will be canceled.
+//
+
+// SAPI Error Codes
+// 0  - Success
+// 1000 - InvalidServiceArgument
+// 1001 - UnknownArgumentName
+// 1002 - BadArgumentType
+// 1003 - MissingArgument
+// 1004 - ServiceNotSupported
+// 1005 - ServiceInUse
+// 1006 - ServiceNotReady
+// 1007 - NoMemory
+// 1008 - HardwareNotAvailable
+// 1009 - ServerBusy
+// 1010 - EntryExists
+// 1011 - AccessDenied
+// 1012 - NotFound
+// 1013 - UnknownFormat
+// 1014 - GeneralError
+// 1015 - CancelSuccess
+// 1016 - ServiceTimedOut
+// 1017 - PathNotFound
+
+// Usage:
+// 1. Call FindSensorChannel (input searchCriterion) - this call obtains a list of maps.The list can be fetched using the key : ReturnValue
+// 2. From the list you need to fetch one ChannelInfo as a map.The fetching depends on how the runtime fetches items from an CLiwDefaultList.
+// 3. It is this ChannelInfo map that needs to be supplied to all the other APIs that follow.
+ 
+// Declare the service object
+var so;
+
+// imgid for callback1 function
+var imgid_callback1;
+
+// id of the div used to display information
+const DIV_ID = 'sensor';
+
+// transaction id
+var transactionID;
+
+// Called from onload()
+function setup()
+{
+  try {
+    so = device.getServiceObject("Service.Sensor", "ISensor");
+    console.info("setup: so: %s", so);
+  }
+  catch (e) {
+    alert('&lt;setup&gt; ' +e);
+  }
+}
+
+//FindSensorChannel - searches and list available sensor channels.
+function findSensorChannel(imgId)
+{
+  var criteria = new Object();
+  criteria.SearchCriterion = "Rotation";
+
+  try
+  {
+    var result = so.ISensor.FindSensorChannel(criteria);
+    if(!checkError("ISensor::findSensorChannel",result,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+    }
+  }
+  catch (e)
+  {
+    showIMG(imgId,"no");
+    alert ("findSensorChannel: " + e);
+  }
+}
+
+// GetChannelProperty
+function getChannelProperty(imgId)
+{
+  var channelInfoMap = new Object();
+  channelInfoMap.ChannelId = 1;
+  channelInfoMap.ContextType = 0;  // 0-not defined; 1- to measure pressure, ...
+  channelInfoMap.Quantity = 0;
+  channelInfoMap.ChannelType = 0 ;
+
+  var criteria = new Object();
+  criteria.PropertyId = "Description";
+  criteria.ChannelInfoMap = channelInfoMap;
+
+  try
+  {
+    var result = so.ISensor.GetChannelProperty(criteria);
+    if(!checkError("ISensor::getChannelProperty",result,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+    }
+  }
+  catch (e)
+  {
+    showIMG(imgId,"no");
+    alert ("getChannelProperty: " + e);
+  }
+}
+
+// RegisterForNotification - register to receive
+// notification about channel data.
+function registerForNotification(imgId)
+{
+  var channelInfoMap = new Object();
+  channelInfoMap.ChannelId = 1;
+  channelInfoMap.ContextType = 0;  // 0-not defined; 1- to measure pressure, ...
+  channelInfoMap.Quantity = 0;
+  channelInfoMap.ChannelType = 0 ;
+
+  var criteria = new Object();
+  criteria.ListeningType = "ChannelData";
+  criteria.ChannelInfoMap = channelInfoMap;
+
+  try
+  {
+    imgid_callback1 = imgId
+    var result = so.ISensor.RegisterForNotification(criteria, callback1);
+    transactionID = result.TransactionID;
+    if(!checkError("ISensor::registerForNotification",result,DIV_ID,imgId)){
+      showIMG(imgId,"");
+    }
+  }
+  catch (e)
+  {
+    showIMG(imgId,"no");
+    alert ("registerForNotification: " + e);
+  }
+}
+
+//Cancel Notification
+function Cancel(imgId)
+{
+  var criteria = new Object();
+  criteria.TransactionID = transactionID;
+  try
+  {
+    var result = so.ISensor.Cancel(criteria);
+    checkError("ISensor::Cancel",result,DIV_ID,imgId)
+  }
+  catch (e)
+  {
+    showIMG(imgId,"no");
+    alert ("Cancel: " + e);
+  }
+}
+
+// This is the asynchronous callback handler
+function callback1(transId, eventCode, result)
+{
+  console.info("callback1: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("ISensor::registerForNotification",result,DIV_ID,imgid_callback1)) {
+    document.getElementById(DIV_ID).innerHTML = "Channel Property changes";
+  }
+}</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

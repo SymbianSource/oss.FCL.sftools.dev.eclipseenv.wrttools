@@ -1,0 +1,83 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="ISensor.GetChannelProperty()"/><meta name="DC.Relation" scheme="URI" content="GUID-FEB5D463-F6A1-44D9-9456-D95DE4BAED77"/><meta name="DC.Relation" scheme="URI" content="GUID-3A306F4B-638D-4133-8575-2E269E565B7F"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C2731B38-6294-419C-B7E2-AFB918F508D4"/><title>ISensor.GetChannelProperty() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C2731B38-6294-419C-B7E2-AFB918F508D4"><span>ISensor.</span>GetChannelProperty()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>GetChannelProperty</code> method retrieves information
+about a sensor channel property.</p>
+<p>This is a synchronous method.</p>
+<p><strong>Syntax:</strong></p>
+
+<pre class="codeblock" id="GUID-6A4CBB81-B375-4B42-A5FB-C365028CA2BC">result = so.ISensor.GetChannelProperty(criteria);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies which sensor channel property to retrieve
+information about. For more information about the object properties and how
+to define them, see section <a href="GUID-6F263194-7237-42E8-8DD1-445A69291524.html#GUID-6F263194-7237-42E8-8DD1-445A69291524">Criteria for retrieving channel property information</a>.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>GetChannelProperty</code> method returns an object
+that contains the requested channel property information, an error code, and
+an error message.</p>
+<div class="tablenoborder"><a name="GUID-7D73BAE6-4ECA-4784-AEA5-A43745D8A62A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-7D73BAE6-4ECA-4784-AEA5-A43745D8A62A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for GetChannelProperty</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e65352">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e65357">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e65362">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65352 ">
+<p><code>result.ReturnValue</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65357 ">
+<p>This is an object that contains the information for the specified sensor
+channel property.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65362 ">
+<p>See <a href="GUID-ADE02C34-39FC-4E54-ABF6-536165352004.html#GUID-ADE02C34-39FC-4E54-ABF6-536165352004">Returned channel property information</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65352 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65357 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65362 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65352 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65357 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e65362 ">
+<p>See <a href="GUID-46FAFCDA-BCF3-41CB-B154-C17BBF7CD755.html#GUID-46FAFCDA-BCF3-41CB-B154-C17BBF7CD755">Sensor Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-350F3C29-923E-4C30-8B14-C3D594BB8E39.html#GUID-350F3C29-923E-4C30-8B14-C3D594BB8E39">the
+full example</a>.</p>
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

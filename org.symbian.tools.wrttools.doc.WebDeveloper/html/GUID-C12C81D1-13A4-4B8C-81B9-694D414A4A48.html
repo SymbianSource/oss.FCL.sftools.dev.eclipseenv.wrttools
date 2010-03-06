@@ -1,0 +1,85 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IMessaging.GetList()"/><meta name="DC.Relation" scheme="URI" content="GUID-5295F092-004B-43F4-85DB-7C54ED14D6DB"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48"/><title>IMessaging.GetList() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48"><span>IMessaging.</span>GetList()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>GetList</code> method retrieves a list of messaging
+objects from the Messaging Center of the S60 device. Each object contains
+messaging information, that is, header and content data for a single message.</p>
+<p>This is a synchronous method.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-2D4C231F-8EE3-4092-AF17-E71B29685228">result = so.IMessaging.GetList(criteria);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies what messaging information is returned
+and how the returned information is sorted. For more information about the
+object properties and how to define them, see section <a href="GUID-5720512C-9198-4883-81B1-46F1B963C6B9.html#GUID-5720512C-9198-4883-81B1-46F1B963C6B9">Criteria for retrieving messaging information</a>.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>GetList</code> method returns an object that contains
+the requested messaging information, an error code, and an error message.</p>
+<div class="tablenoborder"><a name="GUID-C6726530-BC9B-4982-9579-8F95692BB379"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C6726530-BC9B-4982-9579-8F95692BB379" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for GetList</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e58357">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e58362">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e58367">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58357 ">
+<p><code>result.ReturnValue</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58362 ">
+<p>This is an iterator that contains the requested messaging information.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58367 ">
+<p>See <a href="GUID-C8571941-AD6E-4FAD-B4A1-35E7BDB99689.html#GUID-C8571941-AD6E-4FAD-B4A1-35E7BDB99689">Returned messaging information</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58357 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58362 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58367 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58357 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58362 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e58367 ">
+<p>See <a href="GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A.html#GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A">Messaging Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<p>To access information about individual messages, iterate through the
+list of objects contained in <code>result.ReturnValue</code>.</p>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B.html#GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B">the full example</a>.</p>
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

@@ -1,0 +1,170 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for retrieving contact information"/><meta name="DC.Relation" scheme="URI" content="GUID-CD495D49-E492-4E88-833D-29EF222B097F"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Relation" scheme="URI" content="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-06C803FE-DD16-44B5-B9C7-2EC9D497D425"/><title>Criteria for
+retrieving contact information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-06C803FE-DD16-44B5-B9C7-2EC9D497D425"><span>Criteria</span> for
+retrieving contact information</h1><div>
+<p>The <code>criteria</code> object specifies what contact
+information is returned and how the returned information is sorted.</p>
+<p>Each <a href="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007.html#GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"><code>GetList</code></a> call
+targets one type of contact information:</p>
+<ul>
+<li><p><strong>Contacts</strong> are individual contact entries in a contacts
+database. You can retrieve a specific contact or a list of contacts depending
+on the filtering <span>criteria</span>.</p></li>
+<li><p><strong>Contact groups</strong> are associations that group individual
+contacts together by ID. You can retrieve a specific group or a list of groups
+depending on the filtering <span>criteria</span>.</p></li>
+<li><p><strong>Contacts databases</strong> are databases that store information
+about contacts and contact groups. You can retrieve a list of all the open
+databases.</p></li>
+</ul>
+<p>The <code>criteria</code> object has three main properties: <code>Type</code>, <code>Filter</code>,
+and <code>Sort</code>. These are described in the following table.
+Properties enclosed in brackets are optional.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>All string values in the object are Unicode.</p>
+</div>
+<div class="tablenoborder"><a name="GUID-B67A6220-91E1-4928-8B1C-1D0B291ECFD5"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-B67A6220-91E1-4928-8B1C-1D0B291ECFD5" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e30899">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e30904">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e30909">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e30914">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30899 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30904 ">
+<p>Specifies the type of contact information to retrieve.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>If this property is set to <code>"Database"</code>, the call
+automatically retrieves a list of all available databases. No <code>Filter</code> <span>criteria</span> are
+used.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30909 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30914 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Contact"</code></p></li>
+<li><p><code>"Group"</code></p></li>
+<li><p><code>"Database"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30899 ">
+<p><code>[criteria.Filter]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30904 ">
+<p>Specifies how the information to be retrieved is filtered.</p>
+<p>This property is valid only if <code>Type</code> is <code>"Contact"</code> or <code>"Group"</code>.</p>
+<p>If this property is not specified and <code>Type</code> is <code>"Contact"</code>,
+then all contacts are retrieved from the default database.</p>
+<p>If this property is not specified and <code>Type</code> is <code>"Group"</code>,
+then all contact groups are retrieved from the default database.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30909 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30914 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30899 ">
+<p><code>[criteria.Filter.DBUri]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30904 ">
+<p>Specifies the contacts database from which to retrieve the information.</p>
+<p>If this property is not specified, the default database is used.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30909 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30914 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30899 ">
+<p><code>[criteria.Filter.id]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30904 ">
+<p>Specifies the unique identifier of the contact or contact group to retrieve.</p>
+<p>If this property is specified, <code>Filter.DBUri</code> and <code>Filter.SearchVal</code> are
+ignored.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30909 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30914 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30899 ">
+<p><code>[criteria.Filter.SearchVal]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30904 ">
+<p>Specifies a text string by which to search for contacts. The search
+is based on first name and last name. Any contact whose first name or last
+name contains this string is retrieved.</p>
+<p>If this property is not specified, all contacts are retrieved from the
+database.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>This property is valid only if <code>Type</code> is <code>"Contact"</code>.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30909 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30914 ">
+<p>The string cannot exceed 255 characters.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30899 ">
+<p><code>[criteria.Sort]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30904 ">
+<p>Specifies how the returned list of information is sorted.</p>
+<p>Sorting is based on last name and first name, in that order of priority.
+By default, sorting is done in ascending order.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Sorting is done only if <code>Type</code> is <code>"Contact"</code>.
+Sorting is not supported for calls whose <code>Type</code> is <code>"Group"</code> or <code>"Database"</code>.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30909 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30914 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30899 ">
+<p><code>[criteria.Sort.Order]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30904 ">
+<p>Specifies the sort order.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30909 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e30914 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Ascending"</code></p></li>
+<li><p><code>"Descending"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

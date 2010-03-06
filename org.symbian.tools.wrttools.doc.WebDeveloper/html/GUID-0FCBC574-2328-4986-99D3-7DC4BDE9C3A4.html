@@ -1,0 +1,26 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: loading the widget at startup"/><meta name="abstract" content="This section describes how to load a widget at startup."/><meta name="description" content="This section describes how to load a widget at startup."/><meta name="DC.Relation" scheme="URI" content="GUID-B12990B6-979C-4BBA-B030-FB7CEC04CB3A"/><meta name="DC.Relation" scheme="URI" content="GUID-5906D140-663D-4EE2-B0C1-4FECA5759384"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-EB2043BB-E557-429B-BA0A-E350A6D06597"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-0FCBC574-2328-4986-99D3-7DC4BDE9C3A4"/><meta name="DC.Language" content="en"/><title>STEW: loading the widget at startup </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-0FCBC574-2328-4986-99D3-7DC4BDE9C3A4">STEW: loading the widget at startup</h1><div><p>This section describes how to load a widget at startup.</p>
+<p>The <code>init</code> function in the <code>main.js</code> file loads the widget. The function is triggered by the <code>init</code> event of the widget body element. The following code illustrates how to assign a function to the <code>onload</code> event handler,  <code>&lt;body onload="javascript:init();"&gt;</code>:</p>
+<pre class="codeblock">&lt;body onload="javascript:init();"&gt;
+
+function init() {
+	// Disable cursor mode.	
+	widget.setNavigationEnabled( false );
+	
+	// Create the views.
+	widgetMenu = new Menu();
+	loginScreen = new LoginScreen();
+	updateScreen = new UpdateScreen();
+	searchScreen = new SearchScreen();
+	settingsScreen = new SettingsScreen();
+	
+	// Show first view.
+	widgetMenu.activate( Menu.LOGIN_SCREEN );
+}
+</pre>
+<p>The above code creates all the widget views and activates the <span class="uicontrol">Login</span> view screen by calling the <code>activate</code> function assigned to the menu option.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

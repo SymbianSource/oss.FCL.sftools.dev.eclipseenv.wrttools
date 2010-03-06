@@ -1,0 +1,93 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for change notifications"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Relation" scheme="URI" content="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-ABF4EC7E-557F-4C6D-8B2C-F734A0BBC082"/><title>Criteria for
+change notifications </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-ABF4EC7E-557F-4C6D-8B2C-F734A0BBC082"><span>Criteria</span> for
+change notifications</h1><div>
+<p/>
+<p>The <code>criteria</code> object specifies the <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">system attribute</a> to
+monitor for changes.</p>
+<p>The <code>criteria</code> object has a three properties: <code>Entity</code>, <code>Key</code>,
+and <code>SystemData</code>. These are described in the following
+table. Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-C903B191-5828-48F3-8E39-363ECFA79856"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C903B191-5828-48F3-8E39-363ECFA79856" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e69004">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e69009">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e69014">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e69019">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69004 ">
+<p><code>criteria.Entity</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69009 ">
+<p>Specifies the entity of the system attribute.</p>
+<p>Together with <code>Key</code>, this specifies the system attribute
+to monitor.</p>
+<p>For more information about entities, see section <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69014 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69019 ">
+<p>For a complete list of supported entities, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example: <code>"Battery"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69004 ">
+<p><code>criteria.Key</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69009 ">
+<p>Specifies the key of the system attribute. The available keys depend
+on the entity.</p>
+<p>Together with <code>Entity</code>, this specifies the system
+attribute to monitor.</p>
+<p>For more information about keys, see section <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69014 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69019 ">
+<p>For a complete list of supported keys per entity, see the <strong>Key</strong> column
+of the tables in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example: <code>"BatteryStrength"</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69004 ">
+<p><code>[criteria.SystemData]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69009 ">
+<p>Specifies the value of the system attribute.</p>
+<p>Some system attributes require this property as input for <a href="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E.html#GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"><code>GetNotification</code></a>. To find out which attributes, see the <strong>Input</strong> column of the
+tables in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>The <code>SystemData</code> object has one or more properties
+that together represent the system attribute value. The exact set of properties
+depends on the system attribute (specifically, on the system data type used
+for input).</p>
+<p>For more information about system attribute values, see sections <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69014 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69019 ">
+<p>The object properties depend on the system attribute. See the <strong>Input</strong> column
+cell for the appropriate system attribute in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example, the <code>Battery - BatteryStrength</code> system
+attribute takes <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a> information as input for <code>GetNotification</code>:</p>
+<p><code>SystemData.Status = 50</code></p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

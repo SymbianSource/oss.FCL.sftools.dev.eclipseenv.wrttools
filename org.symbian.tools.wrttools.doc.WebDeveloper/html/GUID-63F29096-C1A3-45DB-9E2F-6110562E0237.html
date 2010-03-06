@@ -1,0 +1,37 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Localizing widget resources"/><meta name="abstract" content="You might need to localize widget resources, such as images, to support multiple languages."/><meta name="description" content="You might need to localize widget resources, such as images, to support multiple languages."/><meta name="DC.Relation" scheme="URI" content="GUID-0FEFAF39-7048-4F4A-8676-C4BF1AF37120"/><meta name="DC.Relation" scheme="URI" content="GUID-C442113C-5FBE-493E-AD5A-CF0A0FB3C5FD"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-E3EA4F85-E0AE-42AB-8E51-EFD3F0E0A51E"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-63F29096-C1A3-45DB-9E2F-6110562E0237"/><title>Localizing
+widget resources </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-63F29096-C1A3-45DB-9E2F-6110562E0237">Localizing
+widget resources</h1><div><p>You might need to localize widget resources, such as images, to
+support multiple languages.</p>
+<div><h3>To localize widget resources</h3><ol>
+<li id="GUID-5D265B84-5E04-4D3C-B089-9C5433BF1030"><a name="GUID-5D265B84-5E04-4D3C-B089-9C5433BF1030"><!----></a><p>Create localized versions
+of the resources for the languages that require localization.</p></li>
+<li id="GUID-184ACA6B-359E-4D0D-8EA6-69030BBF10A9"><a name="GUID-184ACA6B-359E-4D0D-8EA6-69030BBF10A9"><!----></a><p>Store the files into
+the appropriate <a href="GUID-71BE0F0B-B6B2-475C-A87B-A04E207F3292.html#GUID-71BE0F0B-B6B2-475C-A87B-A04E207F3292">language
+project directories</a>.</p></li>
+<li id="GUID-C70F6285-475A-438C-B01F-163EDAA5F83A"><a name="GUID-C70F6285-475A-438C-B01F-163EDAA5F83A"><!----></a><p>Provide default resources
+in the widget root directory.</p><p>If a specific language does
+not require resource localization, the resource files do not need to be included
+in the corresponding language project directory.  When that language is set
+as the device language, the default resources are loaded and used.</p></li>
+</ol><p>When loading a localized resource, specify the path to the resource
+file as relative to the widget root directory.</p></div>
+<div><h3>Example </h3><p>The following pieces of code provide an
+example of widget resource localization for Finnish, English and for a default
+case.</p><ol>
+<li id="GUID-638685CA-2861-4697-A250-E7A095FF46F9"><a name="GUID-638685CA-2861-4697-A250-E7A095FF46F9"><!----></a><p>Add the Finnish flag for use when system language is Finnish:</p><pre class="codeblock" id="GUID-79A0F7CE-B838-40C9-8FE3-68138D8E3AB3">[root]\fi.lproj\
+   flag.png</pre><div class="figure" id="GUID-CA3E49DC-838C-4DAD-ACB4-05EF49C47332"><img src="GUID-16D4BAFC-1AC3-46B5-BA44-4B82014D97E9_d0e9797_href.png"/></div></li>
+<li id="GUID-F750BEF3-B86F-41D4-AD4B-66DFE98766B8"><a name="GUID-F750BEF3-B86F-41D4-AD4B-66DFE98766B8"><!----></a><p>Add the English flag for use when the system language is English:</p><pre class="codeblock" id="GUID-C1D1753A-57B1-45B8-8DCD-A11974053BDC">[root]\en.lproj\
+   flag.png</pre><div class="figure" id="GUID-E78D9299-DB2E-443C-87F0-8B5FFD3BEBDC"><img src="GUID-C247B2C6-F997-42A7-AC7D-7D24F1F77A57_d0e9807_href.png"/></div></li>
+<li id="GUID-C62232C6-C74B-405F-9FB6-4E3F7AF790E2"><a name="GUID-C62232C6-C74B-405F-9FB6-4E3F7AF790E2"><!----></a><p>Add the UN flag for use with any other system language:</p><pre class="codeblock" id="GUID-EFDD13A6-9027-49C7-8FE3-A592E1B04565">[root]\
+   flag.png</pre><div class="figure" id="GUID-327BF0D4-E90E-4647-97A1-90E61A91D1D3"><img src="GUID-C5FB6206-2BEB-494F-A1A4-3573E4310EC3_d0e9819_href.png"/></div></li>
+<li id="GUID-577ED378-949A-40D1-A5EC-F1C25DA1FC77"><a name="GUID-577ED378-949A-40D1-A5EC-F1C25DA1FC77"><!----></a><p>In the JavaScript file that implements the logic of the widget, create
+the following code to load and show the appropriate flag dynamically. :</p><pre class="codeblock" id="GUID-077B2DF6-A2B2-454A-8E37-957C0DC8CC49">var flag = document.createElement('img');
+flag.setAttribute('src', 'flag.png');
+</pre></li>
+</ol></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

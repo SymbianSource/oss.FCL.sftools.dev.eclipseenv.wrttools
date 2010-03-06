@@ -1,0 +1,39 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript AppManager Service API"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><title>JavaScript AppManager
+Service API </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-2D651505-F68C-4053-B565-9FF826C5B897"><span>JavaScript</span> AppManager
+Service API</h1><div>
+<p/>
+<p>The <a href="GUID-E092BF10-C076-4476-9E80-87919940201B.html#GUID-E092BF10-C076-4476-9E80-87919940201B">AppManager
+Service</a> API is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.1</a>.</p>
+<p>The AppManager Service API allows <span>widgets</span> to access and launch
+applications on a mobile device. The API is integrated with <span>WRT</span> through the <a href="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html#GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"><code>device</code></a> object.</p>
+<p>For an overview of the service and the API, see section <a href="GUID-E092BF10-C076-4476-9E80-87919940201B.html#GUID-E092BF10-C076-4476-9E80-87919940201B">Accessing and launching installed applications</a>.</p>
+<div><h3>Using the AppManager Service API</h3>
+<p>To use the AppManager Service API, your <span>widget</span> must first create <span>a service object for it
+using the <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a> method</span>.
+Use <code>Service.AppManager</code> to identify the service provider
+and <code>IAppManager</code> to identify the supported interface:</p>
+<pre class="codeblock" id="GUID-0581BEE4-05E3-4D5A-9537-EB9CA4F58EE0-GENIDd0e17677">var so = device.getServiceObject("Service.AppManager", "IAppManager");</pre>
+
+<p>This service object can then be used to access the services provided
+by the API:</p>
+<ul>
+<li><p><a href="GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952.html#GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952"><code>IAppManager.GetList()</code></a></p>
+</li>
+<li><p><a href="GUID-697AFF1F-24C7-43BD-A072-8352B3BE973C.html#GUID-697AFF1F-24C7-43BD-A072-8352B3BE973C"><code>IAppManager.LaunchApp()</code></a></p>
+</li>
+<li><p><a href="GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA.html#GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA"><code>IAppManager.LaunchDoc()</code></a></p>
+</li>
+<li><p><a href="GUID-64CC3AB4-5444-474A-9470-818F423C5611.html#GUID-64CC3AB4-5444-474A-9470-818F423C5611"><code>IAppManager.Cancel()</code></a></p>
+</li>
+</ul>
+</div>
+<div><h3>Emulator support</h3>
+<p>The S60 5th Edition SDK emulator provides full support for the AppManager
+Service API.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

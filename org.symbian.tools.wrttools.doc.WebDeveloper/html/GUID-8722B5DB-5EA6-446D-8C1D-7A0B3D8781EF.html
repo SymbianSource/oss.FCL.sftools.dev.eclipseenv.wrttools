@@ -1,0 +1,811 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Contacts Service API error messages"/><meta name="DC.Relation" scheme="URI" content="GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1"/><meta name="DC.Relation" scheme="URI" content="GUID-686FDCE2-4487-4402-8347-875350D30163"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF"/><title>Contacts Service API error messages </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF">Contacts Service API error messages</h1><div>
+<p>This section provides information about the error messages returned
+by the Contacts Service API methods.</p>
+<p/>
+<div><h3>Generic error messages</h3>
+<p>The following table describes the error messages returned during the
+loading of the service provider.</p>
+<div class="tablenoborder"><a name="GUID-B85948C6-6679-4026-96EA-C544B8010B41"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-B85948C6-6679-4026-96EA-C544B8010B41" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Service provider
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e36812">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e36817">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e36812 ">
+<p><code>Contacts : Requested interface not supported by the provider</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36817 ">
+<p>The requested interface is not supported by the service provider.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e36812 ">
+<p><code>Contacts : Interface name missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36817 ">
+<p>The interface name is missing from the request.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e36812 ">
+<p><code>Contacts : Requested command not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36817 ">
+<p>The specified command is not supported by the interface. The name of
+the command is invalid.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the error messages returned by asynchronous
+method calls.</p>
+<div class="tablenoborder"><a name="GUID-7A4B8A7F-4474-4092-BCD4-AB3F2AA2339C"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-7A4B8A7F-4474-4092-BCD4-AB3F2AA2339C" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Asynchronous
+call error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e36891">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e36896">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e36891 ">
+<p><code>Contacts : Callback not found</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36896 ">
+<p>The <code>callback</code> method was not called.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>GetList</h3>
+<p>The following table describes the error messages returned by <a href="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007.html#GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"><code>GetList</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>GetList</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-4BC4DAAA-17D4-4333-8D87-06923156ECC3"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-4BC4DAAA-17D4-4333-8D87-06923156ECC3" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetList error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e36956">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e36961">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Type is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>Type</code> property is missing from input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Invalid value for Type, Must be Contact/Group/Database</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>Type</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Invalid Sort Type, Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>Sort</code> property contains a value with an invalid
+type. An object is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Sort Order Value is not a String</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>Sort.Order</code> property contains a value with an
+invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Invalid Type of Filter, Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>Filter</code> property contains a value with an invalid
+type. An object is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Wrong Type of Sort Order value</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>Sort.Order</code> property contains an invalid value.
+The value must be <code>"Ascending"</code> or <code>"Descending"</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Wrong Type of Search value</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>SearchVal</code> property contains a value with an
+invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e36956 ">
+<p><code>Contacts : GetList : Wrong Type of ContentType</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e36961 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Add</h3>
+<p>The following table describes the error messages returned by <a href="GUID-20D66938-A870-43D7-9515-AC7E22AEDC14.html#GUID-20D66938-A870-43D7-9515-AC7E22AEDC14"><code>Add</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Add</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-366CE8CC-0149-4E96-90CC-CB5AB2C5B5C5"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-366CE8CC-0149-4E96-90CC-CB5AB2C5B5C5" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Add error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e37160">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e37165">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Type is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Invalid Type, must be Contact/Group</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Type</code> property contains an invalid value. The
+value must be <code>"Contact"</code> or <code>"Group"</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Add Data is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Data</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Add data Object is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Data</code> property does not contain a value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Group Label is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Data.GroupLabel</code> property is missing from the
+input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Mandatory Argument is not present</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>Some mandatory parameters are missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Type of Contact Id is wrong</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Data.id</code> property for the contact contains a
+value with an invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Invalid Type of Data, Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type. An object is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Invalid Type of Field value, Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>A <code>&lt;key&gt;.Value</code> property contains a value with
+an invalid type. An object is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Invalid Type of NextField value, Object is
+required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>A <code>&lt;key&gt;.Next</code> property contains a value with
+an invalid type. An object is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Invalid Type of Id</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Data.id</code> property for the contact group contains
+a value with an invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Invalid Type of GroupLabel</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Data.GroupLabel</code> property contains a value with
+an invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Wrong Type of ContentType</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : At least one field is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>At least one key (<code>Data.&lt;key&gt;</code>) must be specified.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Group Label is Empty</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The mandatory <code>Data.GroupLabel</code> property is an empty
+string.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Invalid Field Key : &lt;key&gt;</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The key (<code>Data.&lt;key&gt;</code>) is not a valid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Field Key Not Supported on this Database:
+&lt;key&gt;</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The key (<code>Data.&lt;key&gt;</code>) is not supported on the
+given database.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37160 ">
+<p><code>Contacts : Add : Field Value too long for key : &lt;key&gt;</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37165 ">
+<p>The key (<code>Data.&lt;key&gt;</code>) has a length greater than
+the maximum length allowed for that key.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Delete</h3>
+<p>The following table describes the error messages returned by <a href="GUID-E6FAAB7C-EE2D-4464-9D0F-B1D89E26ABCF.html#GUID-E6FAAB7C-EE2D-4464-9D0F-B1D89E26ABCF"><code>Delete</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Delete</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-D8BAC78F-7146-417C-98AD-F502CE69D8CA"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D8BAC78F-7146-417C-98AD-F502CE69D8CA" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Delete error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e37551">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e37556">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Type is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Invalid Type, must be Contact/Group</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The <code>Type</code> property contains an invalid value. The
+value must be <code>"Contact"</code> or <code>"Group"</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Delete data Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The <code>Data</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Invalid Type of Data , Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type. An object is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : List of Ids is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The list of IDs indicating the contacts or contact groups to be deleted
+(<code>Data.IdList</code>) is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Type of IdList is wrong, List is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The <code>Data.IdList</code> property contains a value with
+an invalid type. An array is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Invalid Type of Id</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The <code>Data.id</code> property for the contact or contact
+group contains a value with an invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Wrong Type of ContentType</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37551 ">
+<p><code>Contacts : Delete : Mandatory Argument is not present</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37556 ">
+<p>Some mandatory parameters are missing from the input.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Import</h3>
+<p>The following table describes the error messages returned by <a href="GUID-154DA5F4-32F6-42E2-A107-A7C72F6F9DE5.html#GUID-154DA5F4-32F6-42E2-A107-A7C72F6F9DE5"><code>Import</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Import</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-02E5DB2E-73DA-465F-8E94-080F66B8334B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-02E5DB2E-73DA-465F-8E94-080F66B8334B" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Import error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e37771">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e37776">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Type is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Invalid Type,it must be Contact</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Type</code> property contains an invalid value. The
+value must be <code>"Contact"</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Import data Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Data</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Invalid Type of Data , Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type. An object is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Import Source Filename is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Data.SourceFile</code> property is missing from the
+input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Import Source File is not a String</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Data.SourceFile</code> property contains a value with
+an invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Wrong Type of ContentType</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Mandatory Argument is not present</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>Some mandatory parameters are missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Import DataBaseUri is not a String</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The <code>Data.DBUri</code> property contains a value with an
+invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e37771 ">
+<p><code>Contacts : Import : Filename too long</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e37776 ">
+<p>The value of the <code>Data.SourceFile</code> property exceeds
+256 characters.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Export</h3>
+<p>The following table describes the error messages returned by <a href="GUID-CA7C3A7B-6733-47E0-9C6F-FBFB0993F034.html#GUID-CA7C3A7B-6733-47E0-9C6F-FBFB0993F034"><code>Export</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Export</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-D6620095-A931-412F-9654-E7387C390D42"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D6620095-A931-412F-9654-E7387C390D42" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Export error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e38007">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e38012">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Type is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Invalid Type, it must be Contact</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Type</code> property contains an invalid value. The
+value must be <code>"Contact"</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Export Data Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Data</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Invalid Type of Data , Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type. An object is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Export Destination Filename is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Data.DestinationFile</code> property is missing from
+the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Contact Id to be exported is missing.</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Data.id</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Wrong Type of ContentType</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Destination Filename is  of wrong Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Data.DestinationFile</code> property contains a value
+with an invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Id is of wrong Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Data.id</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Mandatory Argument is not present</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>Some mandatory parameters are missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Export DataBaseUri is not a String</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The <code>Data.DBUri</code> property contains a value with an
+invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38007 ">
+<p><code>Contacts : Export : Filename too long</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38012 ">
+<p>The value of the <code>Data.DestinationFile</code> property
+exceeds 256 characters.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Organise</h3>
+<p>The following table describes the error messages returned by <a href="GUID-F2CE0F94-324C-4D45-BD37-DA55F9DAC077.html#GUID-F2CE0F94-324C-4D45-BD37-DA55F9DAC077"><code>Organise</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Organise</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-C5BDD922-2BFA-44FB-9B7F-1378FA637573"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C5BDD922-2BFA-44FB-9B7F-1378FA637573" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Organise error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e38281">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e38286">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Type is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Invalid Content Type, It must be Group</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Type</code> property contains an invalid value. The
+value must be <code>"Group"</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Organise Data is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Data</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Invalid Type of Data , Object is required</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type. An object is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : List of Ids is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The list of contact IDs (<code>Data.IdList</code>) is missing
+from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Id is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The contact group ID (<code>Data.id</code>) is missing from
+the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : OperationType is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>OperationType</code> property is missing from the
+input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Operation Type is Wrong</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>OperationType</code> property contains a value with
+an invalid type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Invalid Operation Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>OperationType</code> property contains an invalid
+value. The value must be <code>"Associate"</code> or <code>"Disassociate"</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Id type is wrong</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Data.id</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : IdList  type is wrong</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Data.IdList</code> property contains a value with
+an invalid type. An array is expected.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Wrong Type of ContentType</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type. A string is expected.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Mandatory Argument is not present</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>Some mandatory parameters are missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38281 ">
+<p><code>Contacts : Organise : Id  List is empty</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38286 ">
+<p>The <code>Data.IdList</code> array contains no items.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Cancel</h3>
+<p>The following table describes the error messages returned by <a href="GUID-231C11D4-82B3-4202-8E86-DE8A3556C9DE.html#GUID-231C11D4-82B3-4202-8E86-DE8A3556C9DE"><code>Cancel</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-05620AA3-9B07-4C9D-A09A-73FBAC6A637D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-05620AA3-9B07-4C9D-A09A-73FBAC6A637D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Cancel error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e38592">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e38597">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e38592 ">
+<p><code>Contacts : Cancel : Cancel Unsuccessful</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38597 ">
+<p>The <code>Cancel</code> call was unsuccessful. Check the <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">error code</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e38592 ">
+<p><code>Contacts : Cancel : Transaction ID is Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e38597 ">
+<p>The <code>TransactionID</code> property is missing from the
+input.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

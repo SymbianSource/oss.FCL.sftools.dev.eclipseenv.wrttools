@@ -1,0 +1,1697 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Supported system attributes (entities and keys)"/><meta name="DC.Relation" scheme="URI" content="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Relation" scheme="URI" content="GUID-B796D072-4E51-4BC7-9259-84530DB3539D"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D"/><title>Supported
+system attributes (entities and keys) </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported
+system attributes (entities and keys)</h1><div>
+<p>The <a href="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3.html#GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3">SystemInfo
+Service API</a> supports the following system attribute entities:</p>
+<ul>
+<li><p><a href="#GUID-DBA52090-BEA7-4D30-A2EB-C3B0BDFDAB11"><code>Battery</code></a></p></li>
+<li><p><a href="#GUID-C6D1B3A7-0B9A-4818-8E12-5BF85FEB9B93"><code>Connectivity</code></a></p></li>
+<li><p><a href="#GUID-81F15BA2-DAC0-4523-8941-F91969D8C3E5"><code>Device</code></a></p></li>
+<li><p><a href="#GUID-10E1E78F-E439-425C-AA69-45D00A0C60B8"><code>Display</code></a></p></li>
+<li><p><a href="#GUID-DB94F20F-29E9-4995-848A-0E19ED60CC5B"><code>Features</code></a></p></li>
+<li><p><a href="#GUID-5EB2CC71-D411-40EA-914D-B4488E6769E1"><code>General</code></a></p></li>
+<li><p><a href="#GUID-5F2D5549-8DE9-45EC-B769-2C821067E8D9"><code>Memory</code></a></p></li>
+<li><p><a href="#GUID-D70CE0E3-A609-4482-81C5-6D5AC42F7E66"><code>Network</code></a></p></li>
+</ul>
+<p>The following tables describe the system attributes supported by the
+SystemInfo Service API. Read the columns as follows:</p>
+<ul>
+<li><p><strong>Key</strong> specifies the name of the system attribute key.
+Together with the entity, this specifies the system attribute; for example: <code>Battery
+- BatteryStrength</code>.</p></li>
+<li><p><strong>Input</strong> specifies the <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">system
+data type</a> for an input value. The properties specified for a particular
+data type are used as the <code>SystemData</code> properties in method
+input. <strong>NA</strong> indicates that no input is applicable.</p></li>
+<li><p><strong>Output</strong> specifies the <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">system
+data type</a> for an output value. The properties specified for a particular
+data type are used as the <code>ReturnValue</code> properties in method
+output.</p></li>
+<li><p><strong>Value</strong> optionally describes the value or the value
+range of the system attribute, or provides an example value. This is used
+for both input, if valid, and output. For detailed information about system
+attribute values, see section <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">System data types</a>.</p>
+</li>
+<li><p><strong>GetInfo</strong>, <strong>SetInfo</strong>, and <strong>GetNotification</strong> indicate
+whether the system attribute supports the <a href="GUID-279A3698-D09B-44BF-8340-739E19F94727.html#GUID-279A3698-D09B-44BF-8340-739E19F94727"><code>GetInfo</code></a>, <a href="GUID-4347A7F1-1560-4B28-B4A8-DC570864F505.html#GUID-4347A7F1-1560-4B28-B4A8-DC570864F505"><code>SetInfo</code></a>,
+and <a href="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E.html#GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"><code>GetNotification</code></a> methods,
+respectively.</p></li>
+<li><p><strong>GetInfo mode</strong> indicates whether the system attribute
+supports synchronous (<strong>Sync</strong>) or asynchronous (<strong>Async</strong>) <code>GetInfo</code> calls.</p>
+</li>
+<li><p><strong>Capability</strong> specifies the Symbian capabilities required
+of any process that loads the <span>Web Runtime</span> to
+invoke the SystemInfo Service API and access the system attribute.</p>
+</li>
+</ul>
+<p/>
+<p>The following table describes the <code>Battery</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-DBA52090-BEA7-4D30-A2EB-C3B0BDFDAB11"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-DBA52090-BEA7-4D30-A2EB-C3B0BDFDAB11" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Battery system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70058">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70063">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70068">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70073">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70078">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70083">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70088">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70093">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70098">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70058 ">
+<p><code>BatteryStrength</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70063 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+<p>Threshold battery strength for notification request</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70068 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70073 ">
+<p>0 - 100 %</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70078 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70083 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70088 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70093 ">
+<p>Async</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70098 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70058 ">
+<p><code>ChargingStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70063 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70068 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70073 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70078 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70083 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70088 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70093 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70098 ">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>Connectivity</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-C6D1B3A7-0B9A-4818-8E12-5BF85FEB9B93"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C6D1B3A7-0B9A-4818-8E12-5BF85FEB9B93" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Connectivity
+system attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70251">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70256">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70261">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70266">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70271">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70276">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70281">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70286">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70291">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70251 ">
+<p><code>BlueTooth</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70256 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70261 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70266 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70271 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70276 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70281 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70286 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70291 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70251 ">
+<p><code>InfraRed</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70256 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70261 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70266 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70271 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70276 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70281 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70286 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70291 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70251 ">
+<p><code>ActiveConnections</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70256 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70261 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-95A86239-F5BC-46E7-9059-506EE37BFAEC"><code>ConnectionList</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70266 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70271 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70276 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70281 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70286 ">
+<p>Async</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70291 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70251 ">
+<p><code>ConnectionStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70256 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70261 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-02CAF5CE-6BCB-43E3-8981-39FA12DAB0AE"><code>ConnectionInfo</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70266 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70271 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70276 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70281 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70286 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70291 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70251 ">
+<p><code>WLanMacAddress</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70256 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70261 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70266 ">
+<p>For example: <code>"00:18:0f:1e:96:a2"</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70271 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70276 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70281 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70286 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70291 ">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>Device</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-81F15BA2-DAC0-4523-8941-F91969D8C3E5"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-81F15BA2-DAC0-4523-8941-F91969D8C3E5" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Device system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70585">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70590">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70595">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70600">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70605">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70610">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70615">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70620">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e70625">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70585 ">
+<p><code>FirmwareVersion</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70590 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70595 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70600 ">
+<p>For example: <code>"V 06.27.1.0_10-07-2006_RM170_NOKIA E50"</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70605 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70610 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70615 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70620 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70625 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70585 ">
+<p><code>PlatformVersion</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70590 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70595 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-25423780-95B5-4689-B4E1-4B29CC2CAD43"><code>Version</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70600 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70605 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70610 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70615 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70620 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70625 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70585 ">
+<p><code>ProductType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70590 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70595 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+<div class="note"><p><strong class="note_title">Note: </strong>If this is not specified for the device, <code>GetInfo</code> returns <code>"Unknown"</code> as <code>ProductType</code>.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70600 ">
+<p>For example: <code>"RM-160"</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70605 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70610 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70615 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70620 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70625 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70585 ">
+<p><code>Manufacturer</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70590 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70595 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70600 ">
+<p>For example: <code>"Nokia"</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70605 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70610 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70615 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70620 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70625 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70585 ">
+<p><code>MachineId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70590 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70595 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70600 ">
+<p>For example: <code>101FB2B1</code></p>
+<p>This is a unique ID.</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70605 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70610 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70615 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70620 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70625 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70585 ">
+<p><code>PhoneModel</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70590 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70595 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70600 ">
+<p>For example: <code>"E50"</code>, <code>"N70"</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70605 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70610 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70615 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70620 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70625 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70585 ">
+<p><code>IMEI</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70590 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70595 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70600 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70605 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70610 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70615 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70620 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e70625 ">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>Display</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-10E1E78F-E439-425C-AA69-45D00A0C60B8"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-10E1E78F-E439-425C-AA69-45D00A0C60B8" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Display system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71044">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71049">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71054">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71059">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71064">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71069">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71074">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71079">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71084">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>Brightness</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>5 - 95 %</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>ScreenSaverTimeout</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>5 - 90 seconds</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>UserInactivity</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+<p>Time in seconds</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>0 - 1 seconds</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>KeyGuardTime</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>0 - 3600 seconds</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>AutoLockTime</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>0 - 999 minutes</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>AutoLockStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>Wallpaper</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>Full path and file name; for example: <code>"C://Data//Others//wallpaper.jpeg"</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>LightTimeout</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>5 - 60 seconds</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>DisplayResolution</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-DF014B20-E009-4FC6-9D89-F2077B1ADE69"><code>Resolution</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71044 ">
+<p><code>DisplayOrientation</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71049 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71054 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71059 ">
+<p>0 - 3</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71064 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71069 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71074 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71079 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71084 ">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>Features</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-DB94F20F-29E9-4995-848A-0E19ED60CC5B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-DB94F20F-29E9-4995-848A-0E19ED60CC5B" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Features system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71643">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71648">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71653">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71658">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71663">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71668">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71673">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71678">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e71683">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>BlueTooth</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>InfraRed</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>CAMERA</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>MemoryCard</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>FMRADIO</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>QWERTY</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>WLAN</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>USB</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>Pen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>LED</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>CoverUI</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>SideVolumeKeys</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71643 ">
+<p><code>Vibra</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71648 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71653 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71658 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71663 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71668 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71673 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71678 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e71683 ">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>General</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-5EB2CC71-D411-40EA-914D-B4488E6769E1"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-5EB2CC71-D411-40EA-914D-B4488E6769E1" frame="border" border="1" rules="all"><caption><strong>Table: </strong>General system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72395">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72400">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72405">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72410">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72415">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72420">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72425">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72430">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e72435">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>AccessoryStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-32FABF97-57BF-4736-85A5-E60B401270B0"><code>AccessoryInfo</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>ConnectedAccessories</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4B4F4A06-600D-4514-8F14-ED9BE1976B1A"><code>AccessoryList</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>InputLanguage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">
+<p>S60 language enumeration</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>SupportedLanguages</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-DA5BB8EB-3626-4D4A-A8E6-B6C45F359777"><code>LanguageList</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">
+<p>List of S60 language enumerations</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>PredictiveText</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>VibraActive</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>AvailableUSBModes</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-A5C305E9-9389-4808-A508-02381F87282F"><code>StringList</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>ActiveUSBMode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>FlipStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72395 ">
+<p><code>GripStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72400 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72405 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72410 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72415 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72420 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72425 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72430 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e72435 ">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>Memory</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-5F2D5549-8DE9-45EC-B769-2C821067E8D9"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-5F2D5549-8DE9-45EC-B769-2C821067E8D9" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Memory system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73009">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73014">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73019">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73024">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73029">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73034">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73039">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73044">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73049">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73009 ">
+<p><code>ListDrives</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73014 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73019 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-04BCC0E2-AAA0-4F50-A554-C63A075E052D"><code>DriveList</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73024 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73029 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73034 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73039 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73044 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73049 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73009 ">
+<p><code>DriveInfo</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73014 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73019 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73024 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73029 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73034 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73039 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73044 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73049 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73009 ">
+<p><code>CriticalMemory</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73014 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a></p>
+<p>For notification requests</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73019 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p>
+<p>Specifies the drive; for example: <code>"C:\\"</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73024 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73029 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73034 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73039 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73044 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73049 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73009 ">
+<p><code>MemoryCard</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73014 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73019 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73024 ">
+<p>0 - 1</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73029 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73034 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73039 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73044 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73049 ">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>Network</code> system
+attributes.</p>
+<div class="tablenoborder"><a name="GUID-D70CE0E3-A609-4482-81C5-6D5AC42F7E66"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D70CE0E3-A609-4482-81C5-6D5AC42F7E66" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Network system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73293">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73298">
+<p>Input</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73303">
+<p>Output</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73308">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73313">
+<p>GetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73318">
+<p>SetInfo</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73323">
+<p>GetNotification</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73328">
+<p>GetInfo mode</p>
+</th><th class="cellrowborder" valign="top" width="11.11111111111111%" id="d0e73333">
+<p>Capability</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73293 ">
+<p><code>SignalStrength</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73298 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+<p>Threshold dB for notification request</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73303 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73308 ">
+<p>40 - 110 dB, where 40 is high</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73313 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73318 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73323 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73328 ">
+<p>Async</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73333 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73293 ">
+<p><code>RegistrationStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73298 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73303 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73308 ">
+<p>0 - 6</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73313 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73318 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73323 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73328 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73333 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73293 ">
+<p><code>NetworkMode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73298 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73303 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73308 ">
+<p>0 - 2</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73313 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73318 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73323 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73328 ">
+<p>Sync</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73333 ">
+<p>None</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73293 ">
+<p><code>CurrentNetwork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73298 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73303 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-493933AB-731B-46CA-A6E9-DCDF3ADC8F6A"><code>NetworkInfo</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73308 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73313 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73318 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73323 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73328 ">
+<p>Async</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73333 ">
+<p>ReadUserData, Location</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73293 ">
+<p><code>LocationArea</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73298 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73303 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73308 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73313 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73318 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73323 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73328 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73333 ">
+<p>ReadUserData, Location</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73293 ">
+<p><code>CellID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73298 ">
+<p>NA</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73303 ">
+<p><a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73308 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73313 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73318 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73323 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73328 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.11111111111111%" headers="d0e73333 ">
+<p>ReadUserData, Location</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

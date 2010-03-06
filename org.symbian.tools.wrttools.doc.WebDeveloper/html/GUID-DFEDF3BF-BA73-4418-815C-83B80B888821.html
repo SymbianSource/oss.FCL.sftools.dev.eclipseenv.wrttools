@@ -1,0 +1,101 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IMessaging.RegisterNotification()"/><meta name="DC.Relation" scheme="URI" content="GUID-E2FDB3FB-2B5E-430C-81B5-9C0C22C4CC04"/><meta name="DC.Relation" scheme="URI" content="GUID-5295F092-004B-43F4-85DB-7C54ED14D6DB"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-DFEDF3BF-BA73-4418-815C-83B80B888821"/><title>IMessaging.RegisterNotification() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-DFEDF3BF-BA73-4418-815C-83B80B888821"><span>IMessaging.</span>RegisterNotification()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>RegisterNotification</code> method registers the <span>widget</span> to receive notifications of new incoming messages.
+For each new message, the method returns the header information of that message.</p>
+<p>This is an asynchronous method.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-F06488BB-1105-4469-9B1C-95D84AB2C6AE">result = so.IMessaging.RegisterNotification(criteria, callback);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the request for notification of new
+messages. The object must contain the <code>Type</code> property (string),
+and this property must contain the value <code>"NewMessage"</code>:</p>
+<pre class="codeblock" id="GUID-B00A008F-EB4B-4094-9FF4-A60D8BCC0CF3">criteria.Type = "NewMessage";</pre>
+
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when <code>RegisterNotification</code> has results
+or status information to return. You must define this method separately. Follow
+the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>RegisterNotification</code> method returns an object
+that contains the initial return value for the asynchronous call it started
+(see the following table). The actual notification information is returned
+by the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> method
+in the <code>ReturnValue</code> property of its result object. The
+returned information is described in section <a href="GUID-F7E268AD-E112-4564-BB1D-4BD1E111A767.html#GUID-F7E268AD-E112-4564-BB1D-4BD1E111A767">Returned notification information</a>.</p>
+<div class="tablenoborder"><a name="GUID-C4E9C64A-AAC1-4CB4-A42F-40A7D4A918B9"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C4E9C64A-AAC1-4CB4-A42F-40A7D4A918B9" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for RegisterNotification</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e60411">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e60416">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e60421">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60411 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60416 ">
+<p>This is a number used as an identification to match transactions started
+with a <code>RegisterNotification</code> call to one or more calls
+it generates to <code>callback</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60421 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60411 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60416 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60421 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60411 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60416 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60421 ">
+<p>See <a href="GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A.html#GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A">Messaging Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<p><code>RegisterNotification</code> retrieves new message updates
+until cancelled with <a href="GUID-E2FDB3FB-2B5E-430C-81B5-9C0C22C4CC04.html#GUID-E2FDB3FB-2B5E-430C-81B5-9C0C22C4CC04"><code>CancelNotification</code></a> (or <a href="GUID-2EBDD073-499C-4A1E-A0DA-4FF8243A6479.html#GUID-2EBDD073-499C-4A1E-A0DA-4FF8243A6479"><code>Cancel</code></a>).
+You can therefore have only one <code>RegisterNotification</code> call
+(one instance) pending or in use at any given time.</p>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B.html#GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B">the full example</a>.</p>
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

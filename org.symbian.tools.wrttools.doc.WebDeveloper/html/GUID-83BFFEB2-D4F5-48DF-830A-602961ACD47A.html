@@ -1,0 +1,89 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Moving between views"/><meta name="abstract" content="Design intuitive ways for users to move between views by clicking buttons or links, selecting items, or pressing softkeys."/><meta name="description" content="Design intuitive ways for users to move between views by clicking buttons or links, selecting items, or pressing softkeys."/><meta name="DC.Relation" scheme="URI" content="GUID-E75BCEAE-6673-4ADF-9DC2-058F0C8C0DBB"/><meta name="DC.Relation" scheme="URI" content="GUID-5277B7B8-722A-48ED-9333-4DD2D6A085C0"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-C359CC7E-B8BA-491B-A0C4-0FF1D3C4110C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-83BFFEB2-D4F5-48DF-830A-602961ACD47A"/><meta name="DC.Language" content="en"/><title>Moving between views </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-83BFFEB2-D4F5-48DF-830A-602961ACD47A">Moving between views</h1><div><p>Design intuitive ways for users to move between views by clicking buttons or links, selecting items, or pressing softkeys.</p>
+<p>Users can move between views in the following ways:</p>
+<ul>
+<li><p>Click button controls in views. </p><p>Use JavaScript to open a new page when users click a button.</p></li>
+<li><p>Select softkeys. </p><p>For example, you can add the <span class="uicontrol">Back</span> or <span class="uicontrol">Cancel</span> option to the right softkey to take users back to the original page. For more information, see <a href="GUID-94946735-D23B-49C6-BB65-8BE31737AE42.html#GUID-94946735-D23B-49C6-BB65-8BE31737AE42">Using softkeys</a>.</p></li>
+<li><p>Select items in the Options menu. </p></li>
+<li><p>Click links. </p><p>However, using links in widgets is not recommended. Links are one-way shortcuts; there is no direct path back to the original page. </p></li>
+</ul>
+<p>The <a href="http://www.forum.nokia.com/info/sw.nokia.com/id/1c27d9d7-8946-4e26-947d-2b140c454876/Web_Run-Time_AccuWidget_Example.html" target="_blank">AccuWidget example</a> illustrates changing views in different ways.</p>
+<div class="figure" id="GUID-D798EEAC-4C8A-4204-8A99-7E6011FB1F7D"><img src="GUID-D71A525A-01E7-403C-802A-8564EF825008_d0e4659_href.png"/><p class="figure-title"><strong>Figure: </strong>Selecting a button changes the view</p></div>
+<p>The <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">STEW example</a> provides users with different ways to change views depending on whether the widget is run on a touch device. On touch devices, a button menu is provided, whereas an <span class="uicontrol">Options</span> menu that is associated with the left soft key is provided on other devices. For more information, see <a href="GUID-EB2043BB-E557-429B-BA0A-E350A6D06597.html#GUID-EB2043BB-E557-429B-BA0A-E350A6D06597">Designing STEW user interface</a>.</p>
+<div class="figure" id="GUID-C92297D6-CD5E-4ED5-A8A7-EB6A2CEEC693-GENIDd0e4824"><img src="GUID-5BB933A3-E1F3-47A5-B85F-A78C988C8779_d0e4678_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW button menu</p></div>
+<div><h3>To use buttons to change views</h3><ol>
+<li id="GUID-A35CB9B1-26BA-429C-A4EE-4209010F735C"><a name="GUID-A35CB9B1-26BA-429C-A4EE-4209010F735C"><!----></a><p>In the HTML file, create clickable buttons that users select to change the view.</p><pre class="codeblock">    &lt;div id="locationsContainer" class="mainContainer"&gt;
+        &lt;h2&gt;Select the location:&lt;/h2&gt;
+            &lt;div id="locations"&gt;
+                &lt;table id="locationTable"&gt;
+                    &lt;tr&gt;
+                        &lt;td onclick="locationSelected(0, '10001', 'New York');"&gt;
+                            &lt;img src="gfx/city_icons/new_york.png" alt="New York" /&gt;&lt;br /&gt;
+                            New York
+                        &lt;/td&gt;
+                        &lt;td onclick="locationSelected(1, 'EUR|UK|UK241|LONDON', 'London');"&gt;
+                            &lt;img src="gfx/city_icons/london.png" alt="London" /&gt;&lt;br /&gt;
+                            London
+                        &lt;/td&gt;
+                        &lt;td onclick="locationSelected(2, 'EUR|FR|FR012|PARIS|', 'Paris');"&gt;
+                            &lt;img src="gfx/city_icons/paris.png" alt="Paris" /&gt;&lt;br /&gt;
+                            Paris
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td onclick="locationSelected(3, 'OCN|AU|NSW|SYDNEY|', 'Sydney');"&gt;
+                            &lt;img src="gfx/city_icons/sydney.png" alt="Sydney" /&gt;&lt;br /&gt;
+                            Sydney
+                        &lt;/td&gt;
+                        &lt;td onclick="locationSelected(4, 'ASI|JP|JA041|TOKYO|', 'Tokyo');"&gt;
+                            &lt;img src="gfx/city_icons/tokyo.png" alt="Tokyo" /&gt;&lt;br /&gt;
+                            Tokyo
+                        &lt;/td&gt;
+                        &lt;td onclick="locationSelected(5, null, 'Custom location');"&gt;
+                            &lt;img src="gfx/city_icons/custom.png" alt="[Custom location]" /&gt;&lt;br /&gt;
+                            [Custom location]
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;</pre></li>
+<li id="GUID-497C0CC0-D18D-47A9-967C-946493595858"><a name="GUID-497C0CC0-D18D-47A9-967C-946493595858"><!----></a><p>Create JavaScript that changes the view. Use the HTML Document Object Model (DOM) <code>style</code> object to show or hide the display and the <a href="GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404.html#GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404"><code>prepareForTransition()</code></a> and <a href="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB.html#GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB"><code>performTransition()</code></a> method of the <code>widget</code> object to disable updates to the widget UI to prevent screen flickering when the view changes.</p><pre class="codeblock">// Shows the placeholder for weather forecast
+function showForecast() {
+    // Reset the currently selected forecast
+    currentlySelectedForecast = CURRENT;
+
+    widget.prepareForTransition("fade");
+
+    // Hide the location list and show the forecast view
+    document.getElementById("locationsContainer").style.display = "none";
+    document.getElementById("forecastContainer").style.display = "block";
+
+    // Change the right softkey so that it shows the location list
+    window.menu.setRightSoftkeyLabel("Back", showLocations);
+
+    // Refresh the view
+    setTimeout("widget.performTransition();", 0);
+}
+
+// Shows the location table
+function showLocations() {
+    widget.prepareForTransition("fade");
+
+    // Hide the forecast view and show the city view
+    document.getElementById("forecastContainer").style.display = "none";
+    document.getElementById("locationsContainer").style.display = "block";
+
+    // Restore the default right softkey
+    window.menu.setRightSoftkeyLabel("", null);
+
+    // Refresh the view
+    setTimeout("widget.performTransition();", 0);
+}</pre></li>
+</ol></div>
+<div><h3>To use softkeys to change views</h3><p>Enable softkeys and add options to the <span class="uicontrol">Options</span> menu to change views, as instructed in <a href="GUID-94946735-D23B-49C6-BB65-8BE31737AE42.html#GUID-94946735-D23B-49C6-BB65-8BE31737AE42">Using softkeys</a>.</p><p>For an example, see <a href="GUID-EED2A703-672F-4723-87AE-26EA53C7E9E6.html#GUID-EED2A703-672F-4723-87AE-26EA53C7E9E6">STEW: adding menu options</a>.</p></div>
+<div><h3>To use links to change views</h3><p>If you specify a link to open a URI on the Internet, the new HTML page is loaded so that it replaces the widget main page and there is no way to return to the widget. Therefore, you should use the <a href="GUID-EFCCE3CA-A1D2-4CD0-8D10-BD6320B19E5A.html#GUID-EFCCE3CA-A1D2-4CD0-8D10-BD6320B19E5A"><code>openURL()</code></a> method of the <code>widget</code> object to open the specified link in the Web Browser for S60 in stand-alone mode. The widget remains open but is sent to the background.</p><pre class="codeblock">&lt;a onclick="javascript:widget.openURL(http://www.forum.nokia.com)"&gt;Open Forum Nokia&lt;/a&gt;</pre></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

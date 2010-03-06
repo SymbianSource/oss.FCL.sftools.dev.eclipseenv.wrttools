@@ -1,0 +1,54 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="setRightSoftkeyLabel()"/><meta name="DC.Relation" scheme="URI" content="GUID-ED95464B-9BA7-4294-A06F-CA80429B70ED"/><meta name="DC.Relation" scheme="URI" content="GUID-6359AD9D-2D02-4265-8B47-AF18713AB726"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-857CF71D-3398-40C2-981A-DEC428A7BA6B"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-5610C4B8-8988-4895-8F88-36F444B4ACFC"/><title>setRightSoftkeyLabel() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-5610C4B8-8988-4895-8F88-36F444B4ACFC">setRightSoftkeyLabel()</h1><div>
+<p><strong>Description:</strong></p>
+<p>Call the <code>setRightSoftkeyLabel</code> method to customize
+the label and the operation associated with the right softkey.</p>
+<p>By default, the right softkey of a device is assigned to the "Exit"
+function, which terminates a running widget. The default label depends on
+the current used system language (<code>Exit</code> for English).</p>
+<p>For more general information on using softkeys in your widget, see <a href="GUID-94946735-D23B-49C6-BB65-8BE31737AE42.html#GUID-94946735-D23B-49C6-BB65-8BE31737AE42">Using softkeys</a>.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-68C30FF5-39E6-4000-96D4-3B4DAF4107BF">[void] window.menu.setRightSoftkeyLabel(String label, Function callbackfunc) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-654A91FF-7E28-44C0-B33D-B71D8A8D59AD">[void] menu.setRightSoftkeyLabel(String label, Function callbackfunc)</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>label</code>:</p>
+
+<p>A text string specifies the label to be shown on the right softkey.</p>
+
+</li>
+<li><p><code>callbackfunc</code>:</p>
+
+<p>A reference to the callback function, which will be called by the system
+when the right softkey is pressed.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Remarks:</strong></p>
+<p>The default label and "Exit" function of the right softkey can be restored
+by calling the <code>setRightSoftkeyLabel</code> with an empty string
+('') specified for the <code>label</code> argument and the <code>callbackfunc</code> argument
+set to <code>null</code>.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-1DC7DEC9-A8A7-4DCE-AE9D-FC494C03BF70">function switchToSettingsView()
+{
+ // implement and show settings
+ ...
+ // customize the right softkey
+ window.menu.<code>setRightSoftkeyLabel</code>('Back', returnToMainView);
+}</pre>
+<pre class="codeblock" id="GUID-B79117B2-FAE0-4CED-9A04-B05EC59427E0">function returnToMainView()
+{
+  // show main view
+ ...
+ // restore the default right softkey
+ window.menu.<code>setRightSoftkeyLabel</code>('', null);
+}</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

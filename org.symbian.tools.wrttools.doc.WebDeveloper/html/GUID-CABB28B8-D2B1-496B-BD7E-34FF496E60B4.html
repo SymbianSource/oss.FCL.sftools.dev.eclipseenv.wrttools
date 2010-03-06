@@ -1,0 +1,45 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript Calendar Service API"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Relation" scheme="URI" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><title>JavaScript Calendar
+Service API </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"><span>JavaScript</span> Calendar
+Service API</h1><div>
+<p>The <a href="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571.html#GUID-AE9A928B-F938-49B5-BC9E-72CB42046571">Calendar
+Service</a> API is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.1</a>.</p>
+<p>The Calendar Service API allows <span>widgets</span> to
+access, create, and manage calendars and calendar entries stored on a device.
+The API is integrated into <span>WRT</span> through the <a href="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html#GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"><code>device</code></a> object.</p>
+<p>For an overview of the service and the API, see section <a href="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571.html#GUID-AE9A928B-F938-49B5-BC9E-72CB42046571">Accessing and managing calendar information</a>.</p>
+<div><h3>Using the Calendar Service API</h3>
+<p>To use the Calendar Service API, your <span>widget</span> must
+first create <span>a service object for it
+using the <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a> method</span>.
+Use <code>Service.Calendar</code> to identify the service provider
+and <code>IDataSource</code> to identify the supported interface:</p>
+
+<pre class="codeblock" id="GUID-320AB6C2-D2DB-4CD8-AC54-1264DE058516">var so = device.getServiceObject("Service.Calendar", "IDataSource");</pre>
+<p>This service object can then be used to access the services provided
+by the API:</p>
+<ul>
+<li><p><a href="GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4.html#GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4"><code>IDataSource.GetList()</code></a></p>
+</li>
+<li><p><a href="GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51.html#GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51"><code>IDataSource.Add()</code></a></p>
+</li>
+<li><p><a href="GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A.html#GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A"><code>IDataSource.Delete()</code></a></p>
+</li>
+<li><p><a href="GUID-D19BB894-371A-4D55-A047-3B2F97673F5F.html#GUID-D19BB894-371A-4D55-A047-3B2F97673F5F"><code>IDataSource.Import()</code></a></p>
+</li>
+<li><p><a href="GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F.html#GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F"><code>IDataSource.Export()</code></a></p>
+</li>
+<li><p><a href="GUID-D4014B08-C48C-48EB-B3A5-1A09FF636B3C.html#GUID-D4014B08-C48C-48EB-B3A5-1A09FF636B3C"><code>IDataSource.RequestNotification()</code></a></p></li>
+<li><p><a href="GUID-0D3A1E17-C699-4A9D-9124-9CEB71E2EBBF.html#GUID-0D3A1E17-C699-4A9D-9124-9CEB71E2EBBF"><code>IDataSource.Cancel()</code></a></p>
+</li>
+</ul>
+</div>
+<div><h3>Emulator support</h3>
+<p>The S60 5th Edition SDK emulator provides full support for the Calendar
+Service API.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

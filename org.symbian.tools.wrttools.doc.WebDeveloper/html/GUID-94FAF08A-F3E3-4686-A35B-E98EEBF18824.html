@@ -1,0 +1,212 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for adding and editing contact information"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Relation" scheme="URI" content="GUID-20D66938-A870-43D7-9515-AC7E22AEDC14"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-94FAF08A-F3E3-4686-A35B-E98EEBF18824"/><title>Criteria for
+adding and editing contact information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-94FAF08A-F3E3-4686-A35B-E98EEBF18824"><span>Criteria</span> for
+adding and editing contact information</h1><div>
+<p>The  <code>criteria</code> object specifies what contact
+information to add or edit and for which database. The information can be
+either a contact or a contact group. For a contact, the actual contact details
+are contained in one or more <a href="GUID-686FDCE2-4487-4402-8347-875350D30163.html#GUID-686FDCE2-4487-4402-8347-875350D30163">keys</a>,
+with each key representing a specific piece of information. If no database
+is specified, the information is added to the default database. If the default
+database does not exist, it is created.</p>
+<p>Use the <a href="GUID-20D66938-A870-43D7-9515-AC7E22AEDC14.html#GUID-20D66938-A870-43D7-9515-AC7E22AEDC14"><code>Add</code></a> method
+as follows:</p>
+<ul>
+<li><p>To add a new contact or contact group, do not set its <code>id</code> property.</p>
+</li>
+<li><p>To edit an existing contact or contact group, retrieve it
+using <a href="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007.html#GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"><code>GetList</code></a>,
+edit the information, and then send it to <code>Add</code> with the <code>id</code> property
+unchanged. This overwrites the old entry.</p></li>
+</ul>
+<p>The  <code>criteria</code> object has two main properties: <code>Type</code> and <code>Data</code>.
+These are described in the following table. Properties enclosed in brackets
+are optional.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>All string values in the object are Unicode.</p>
+</div>
+<div class="tablenoborder"><a name="GUID-C05DA5A7-A2B6-419C-A81A-0D6191987480"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C05DA5A7-A2B6-419C-A81A-0D6191987480" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e32113">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e32118">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e32123">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e32128">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Specifies the type of contact information to add or edit.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Contact"</code></p></li>
+<li><p><code>"Group"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>criteria.Data</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Specifies the contact information to add or edit.</p>
+<p>If <code>Type</code> is <code>"Contact"</code>, this
+property takes one or more <code>&lt;key&gt;</code> properties. The number
+of keys depends on how much information is added about the contact.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>[criteria.Data.DBUri]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Specifies the contacts database where the information is added or edited.</p>
+<p>If this property is not specified, the default database is used.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>[criteria.Data.id]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Specifies the unique identifier of the contact or contact group to add
+or edit.</p>
+<div class="note"><p><strong class="note_title">Note: </strong></p><ul>
+<li><p>If you want to add a new entry to the database, do not specify
+this property.</p></li>
+<li><p>If you want to edit (replace) an existing entry in the database,
+specify the ID of that entry.</p></li>
+</ul>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>criteria.Data.&lt;key&gt;</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Each key represents one piece of information about the contact, such
+as first name, last name, home phone number, or email address. At least one
+key must be specified for the contact.</p>
+<p>For example:</p>
+<ul>
+<li><p><code>Data.FirstName</code></p></li>
+<li><p><code>Data.LastName</code></p></li>
+<li><p><code>Data.LandPhoneHome</code></p></li>
+<li><p><code>Data.EmailHome</code></p></li>
+</ul>
+<p>For a list of supported keys, see section <a href="GUID-686FDCE2-4487-4402-8347-875350D30163.html#GUID-686FDCE2-4487-4402-8347-875350D30163">Supported contact keys</a>.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>This property is valid only if <code>Type</code> is <code>"Contact"</code>.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>criteria.Data.&lt;key&gt;.Label</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Specifies a label that describes the key value.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>criteria.Data.&lt;key&gt;.Value</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Specifies the value for the key.</p>
+<p>If this is an empty string, the property is not included.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>[criteria.Data.&lt;key&gt;.Next]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>This is an object that specifies an additional value for the key. This
+object contains the same properties as a key: <code>Label</code>, <code>Value</code>,
+and optionally <code>Next</code>, where <code>Next</code> is
+an object identical to this one, specifying yet another value for the same
+key.</p>
+<p>There is no limit to how many nested values a key can contain.</p>
+<p>For example, an <code>EmailHome</code> key with two values (two
+email addresses) has the following property structure:</p>
+<ul>
+<li><p><code>Data.EmailHome</code></p></li>
+<li><p><code>Data.EmailHome.Label</code></p></li>
+<li><p><code>Data.EmailHome.Value</code></p></li>
+<li><p><code>Data.EmailHome.Next</code></p></li>
+<li><p><code>Data.EmailHome.Next.Label</code></p></li>
+<li><p><code>Data.EmailHome.Next.Value</code></p></li>
+</ul>
+<p>The first email address is contained in <code>Data.EmailHome.Value</code> and
+the second one in <code>Data.EmailHome.Next.Value</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">
+<p>Object with the same properties as <code>Data.&lt;key&gt;</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32113 ">
+<p><code>criteria.Data.GroupLabel</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32118 ">
+<p>Specifies the name of the contact group.</p>
+<p>If the database does not support group labels, this property is ignored.
+SIM databases, for example, do not support group labels.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>This property is valid only if <code>Type</code> is <code>"Group"</code>.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32123 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e32128 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

@@ -1,0 +1,170 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="ISysInfo.GetNotification()"/><meta name="DC.Relation" scheme="URI" content="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"/><meta name="DC.Relation" scheme="URI" content="GUID-4347A7F1-1560-4B28-B4A8-DC570864F505"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"/><title>ISysInfo.GetNotification() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"><span>ISysInfo.</span>GetNotification()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>GetNotification</code> method notifies the client
+when the value of a <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">system
+attribute</a> is changed.</p>
+<p>This is an asynchronous method.</p>
+<p><strong>Syntax:</strong></p>
+
+<pre class="codeblock" id="GUID-058A4EA2-A311-495C-AFEB-BA23E482DE22">result = so.ISysInfo.GetNotification(criteria, callback);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the system attribute to monitor for
+changes. For more information about the object properties and how to define
+them, see section <a href="GUID-ABF4EC7E-557F-4C6D-8B2C-F734A0BBC082.html#GUID-ABF4EC7E-557F-4C6D-8B2C-F734A0BBC082">Criteria for change notifications</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when a <code>GetNotification</code> call has results
+or status information to return. You must define this method separately. Follow
+the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>GetNotification</code> method returns an object that
+contains the initial return value for the asynchronous call it started (see
+the following table). The actual notification information is returned by the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> method
+in the <code>ReturnValue</code> property of its <a href="#GUID-C4D4A6CE-04BE-48FF-B22A-75987DDF5839">result object</a>.</p>
+<div class="tablenoborder"><a name="GUID-4E591038-D3E9-4149-865A-7237C8106C9D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-4E591038-D3E9-4149-865A-7237C8106C9D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for GetNotification</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e68618">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e68623">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e68628">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68618 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68623 ">
+<p>This is a number used as an identification to match transactions started
+with the asynchronous <code>GetNotification</code> call to one or
+more calls it generates to <code>callback</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68628 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68618 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68623 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68628 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68618 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68623 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68628 ">
+<p>See <a href="GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1.html#GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1">SystemInfo Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-C4D4A6CE-04BE-48FF-B22A-75987DDF5839"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C4D4A6CE-04BE-48FF-B22A-75987DDF5839" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return
+value properties for GetNotification callback</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e68723">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e68728">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e68733">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68723 ">
+<p><code>result.ReturnValue</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68728 ">
+<p>This is an object (a system attribute object) that contains the information
+for the changed system attribute.</p>
+<p>This object contains the properties <code>Entity</code> and <code>Key</code> as
+well as one or more additional properties representing the system attribute
+value. The name and type of these properties depend on the <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">specific
+system attribute</a> and its <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">system
+data type</a>.</p>
+<p>For example, if you request notification for the <code>Connectivity
+- ConnectionStatus</code> system attribute, whose system data type is <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-02CAF5CE-6BCB-43E3-8981-39FA12DAB0AE"><code>ConnectionInfo</code></a>,
+callback returns the following properties:</p>
+<ul>
+<li><p><code>ReturnValue.Entity</code></p></li>
+<li><p><code>ReturnValue.Key</code></p></li>
+<li><p><code>ReturnValue.ConnectionStatus</code></p>
+</li>
+<li><p><code>ReturnValue.IAPID</code></p></li>
+<li><p><code>ReturnValue.ConnectionType</code></p></li>
+<li><p><code>ReturnValue.IAPName</code></p></li>
+<li><p><code>ReturnValue.NetworkName</code></p></li>
+<li><p><code>ReturnValue.IAPConnectionName</code></p>
+</li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68733 ">
+<p>See <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68723 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68728 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68733 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68723 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68728 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e68733 ">
+<p>See <a href="GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1.html#GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1">SystemInfo Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p><code>GetNotification</code> returns notifications
+until cancelled with <a href="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B.html#GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"><code>Cancel</code></a>.</p></li>
+<li><p>Only some system attributes can be monitored for changes.
+To find out which system attributes support <code>GetNotification</code>,
+see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+</li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF.html#GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF">the
+full example</a>.</p>
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

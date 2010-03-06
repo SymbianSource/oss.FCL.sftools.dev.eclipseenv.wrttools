@@ -1,0 +1,114 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.Import()"/><meta name="DC.Relation" scheme="URI" content="GUID-CA7C3A7B-6733-47E0-9C6F-FBFB0993F034"/><meta name="DC.Relation" scheme="URI" content="GUID-E6FAAB7C-EE2D-4464-9D0F-B1D89E26ABCF"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-154DA5F4-32F6-42E2-A107-A7C72F6F9DE5"/><title>IDataSource.Import() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-154DA5F4-32F6-42E2-A107-A7C72F6F9DE5"><span>IDataSource.</span>Import()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Import</code> method imports a contact to a contacts
+database. The information must be imported from a vCard file.</p>
+<p>This method can be called both synchronously and asynchronously.</p>
+<p><strong>Syntax:</strong></p>
+<p>For synchronous calls:</p>
+<pre class="codeblock" id="GUID-F1C1F991-A130-4AF1-8A26-C73E9B6FEE1D">result = so.IDataSource.Import(criteria);</pre>
+
+<p>For asynchronous calls:</p>
+<pre class="codeblock" id="GUID-134F0C4F-3A91-464E-8E5C-A6D2014AEDF5">result = so.IDataSource.Import(criteria, callback);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the contact to import and optionally
+the target database. For more information about the object properties and
+how to define them, see section <a href="GUID-F631E6D3-AA0A-4C4E-95C4-13F9CA3F8AFF.html#GUID-F631E6D3-AA0A-4C4E-95C4-13F9CA3F8AFF">Criteria for importing a contact</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when an asynchronous <code>Import</code> call has
+results or status information to return. You must define this method separately.
+Follow the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+<p>This argument is used only with an asynchronous <code>Import</code> call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>If synchronous, the <code>Import</code> method returns an object
+that contains an error code and an error message.</p>
+<p>If asynchronous, the method returns an object that contains a transaction
+ID for the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> instance,
+an error code, and an error message. When the asynchronous call has completed, <code>callback</code> returns
+an object that contains an error code and an error message (see <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-E43BC9EA-3EBE-4C7F-A57E-A1C33BB01CF4">Table: Callback return value</a>).</p>
+<div class="tablenoborder"><a name="GUID-BBF0731C-3AA4-44A8-AB98-727767CC3586"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-BBF0731C-3AA4-44A8-AB98-727767CC3586" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for Import</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e33185">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e33190">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e33195">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33185 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33190 ">
+<p>This is a number used as an identification to match transactions started
+with an asynchronous <code>Import</code> call to one or more calls
+it generates to <code>callback</code>.</p>
+<p>This property is only valid for asynchronous calls.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33195 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33185 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33190 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33195 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33185 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33190 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e33195 ">
+<p>See <a href="GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF.html#GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF">Contacts Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p>The default contacts database is <code>cntdb://c:contacts.cdb</code>.</p>
+</li>
+<li><p>If the contacts database is specified, the contact is imported
+there. If no database is specified, the default database is used. If the default
+database does not exist, it is created and the contact is imported there.</p>
+</li>
+<li><p>SIM card databases only support name and number keys for
+vCard.</p></li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1.html#GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1">the
+full example</a>.</p>
+
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

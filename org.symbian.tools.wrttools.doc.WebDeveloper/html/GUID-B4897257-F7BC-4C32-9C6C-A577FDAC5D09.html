@@ -1,0 +1,102 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="ISensor.RegisterForNotification()"/><meta name="DC.Relation" scheme="URI" content="GUID-3A306F4B-638D-4133-8575-2E269E565B7F"/><meta name="DC.Relation" scheme="URI" content="GUID-46DB749E-A388-46B2-BB13-A274385CA97C"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B4897257-F7BC-4C32-9C6C-A577FDAC5D09"/><title>ISensor.RegisterForNotification() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B4897257-F7BC-4C32-9C6C-A577FDAC5D09"><span>ISensor.</span>RegisterForNotification()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>RegisterForNotification</code> method registers the
+client to receive data from one sensor channel.</p>
+<p>This is an asynchronous method.</p>
+<p><strong>Syntax:</strong></p>
+
+<pre class="codeblock" id="GUID-76779290-2870-4637-925E-009722ED727B">result = so.ISensor.RegisterForNotification(criteria, callback);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the sensor channel to listen for data.
+For more information about the object properties and how to define them, see
+section <a href="GUID-B024688A-3701-4282-9C98-D984477E00C2.html#GUID-B024688A-3701-4282-9C98-D984477E00C2">Criteria for receiving sensor data</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when a <code>RegisterForNotification</code> call
+has results or status information to return. You must define this method separately.
+Follow the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>RegisterForNotification</code> method returns an object
+that contains the initial return value for the asynchronous call it started
+(see the following table). The actual sensor data is returned by the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> method
+in the <code>ReturnValue</code> property of its result object. The
+returned data is described in section <a href="GUID-7FD32D4D-871F-4251-844C-6CB59B593730.html#GUID-7FD32D4D-871F-4251-844C-6CB59B593730">Returned sensor data</a>.</p>
+<div class="tablenoborder"><a name="GUID-F78FBD65-AAE7-4C1C-B5E5-5002FFC613B4"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-F78FBD65-AAE7-4C1C-B5E5-5002FFC613B4" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for RegisterForNotification</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64207">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64212">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64217">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64207 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64212 ">
+<p>This is a number used as an identification to match transactions started
+with the <code>RegisterForNotification</code> call to one or more
+calls it generates to <code>callback</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64217 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64207 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64212 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64217 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64207 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64212 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64217 ">
+<p>See <a href="GUID-46FAFCDA-BCF3-41CB-B154-C17BBF7CD755.html#GUID-46FAFCDA-BCF3-41CB-B154-C17BBF7CD755">Sensor Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p><code>RegisterForNotification</code> retrieves sensor
+data until cancelled with <a href="GUID-3A306F4B-638D-4133-8575-2E269E565B7F.html#GUID-3A306F4B-638D-4133-8575-2E269E565B7F"><code>Cancel</code></a>.</p></li>
+<li><p>Invoking the same call on the same sensor channel from the
+same user without cancelling the previous <code>RegisterForNotification</code> request
+results in an error, since the channel is already listening on the pre-registered
+notifications.</p></li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-350F3C29-923E-4C30-8B14-C3D594BB8E39.html#GUID-350F3C29-923E-4C30-8B14-C3D594BB8E39">the
+full example</a>.</p>
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

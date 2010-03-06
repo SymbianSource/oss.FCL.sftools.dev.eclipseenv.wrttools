@@ -1,0 +1,238 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Returned sensor data"/><meta name="DC.Relation" scheme="URI" content="GUID-B024688A-3701-4282-9C98-D984477E00C2"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29"/><meta name="DC.Relation" scheme="URI" content="GUID-B4897257-F7BC-4C32-9C6C-A577FDAC5D09"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7FD32D4D-871F-4251-844C-6CB59B593730"/><title>Returned
+sensor data </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7FD32D4D-871F-4251-844C-6CB59B593730">Returned
+sensor data</h1><div>
+<p>The <code>ReturnValue</code> property returned by <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> is an object containing data from one sensor channel. <code>callback</code> returns
+an object every time a notification is received for the <a href="GUID-B024688A-3701-4282-9C98-D984477E00C2.html#GUID-B024688A-3701-4282-9C98-D984477E00C2">specified
+channel</a>. The exact set of object properties depends on the type of
+sensor data provided by the channel:</p>
+<ul>
+<li><p><a href="#GUID-CB1171A2-636D-411C-BC94-76A15330809D"><code>AccelerometerAxis</code></a></p></li>
+<li><p><a href="#GUID-18C19DEC-98DD-428D-A558-E6F6EB7F63B0"><code>AccelerometerDoubleTapping</code></a></p></li>
+<li><p><a href="#GUID-9A46418C-4FDA-4EBC-AF50-045CCE00B0B2"><code>Orientation</code></a></p></li>
+<li><p><a href="#GUID-5327B865-96F5-4CC1-9672-023E1564DA33"><code>Rotation</code></a></p></li>
+</ul>
+<div class="tablenoborder"><a name="GUID-CB1171A2-636D-411C-BC94-76A15330809D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-CB1171A2-636D-411C-BC94-76A15330809D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Object properties
+for AccelerometerAxis data</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64590">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64595">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64600">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64590 ">
+<p><code>DataType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64595 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64600 ">
+<p><code>"AxisData"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64590 ">
+<p><code>TimeStamp</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64595 ">
+<p><span>string</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64600 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64590 ">
+<p><code>XAxisData</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64595 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64600 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64590 ">
+<p><code>YAxisData</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64595 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64600 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64590 ">
+<p><code>ZAxisData</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64595 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64600 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-18C19DEC-98DD-428D-A558-E6F6EB7F63B0"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-18C19DEC-98DD-428D-A558-E6F6EB7F63B0" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Object
+properties for AccelerometerDoubleTapping data</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64720">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64725">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64730">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64720 ">
+<p><code>DataType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64725 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64730 ">
+<p><code>"DoubleTappingData"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64720 ">
+<p><code>TimeStamp</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64725 ">
+<p><span>string</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64730 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64720 ">
+<p><code>DeviceDirection</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64725 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64730 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-9A46418C-4FDA-4EBC-AF50-045CCE00B0B2"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-9A46418C-4FDA-4EBC-AF50-045CCE00B0B2" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Object
+properties for Orientation data</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64814">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64819">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64824">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64814 ">
+<p><code>DataType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64819 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64824 ">
+<p><code>"OrientationData"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64814 ">
+<p><code>TimeStamp</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64819 ">
+<p><span>string</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64824 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64814 ">
+<p><code>DeviceOrientation</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64819 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64824 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Undefined"</code></p></li>
+<li><p><code>"DisplayUp"</code></p></li>
+<li><p><code>"DisplayDown"</code></p></li>
+<li><p><code>"DisplayLeftUp"</code></p></li>
+<li><p><code>"DisplayRightUp"</code></p></li>
+<li><p><code>"DisplayUpwards"</code></p></li>
+<li><p><code>"DisplayDownwards"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-5327B865-96F5-4CC1-9672-023E1564DA33"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-5327B865-96F5-4CC1-9672-023E1564DA33" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Object
+properties for Rotation data</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64950">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64955">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e64960">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64950 ">
+<p><code>DataType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64955 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64960 ">
+<p><code>"RotationData"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64950 ">
+<p><code>TimeStamp</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64955 ">
+<p><span>string</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64960 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64950 ">
+<p><code>XRotation</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64955 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64960 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64950 ">
+<p><code>YRotation</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64955 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64960 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64950 ">
+<p><code>ZRotation</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64955 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e64960 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

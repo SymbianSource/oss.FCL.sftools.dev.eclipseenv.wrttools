@@ -1,0 +1,131 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for organizing contacts in a contact group"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Relation" scheme="URI" content="GUID-F2CE0F94-324C-4D45-BD37-DA55F9DAC077"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-72B5BFF3-DA09-4475-AA88-865852AAB2F0"/><title>Criteria for
+organizing contacts in a contact group </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-72B5BFF3-DA09-4475-AA88-865852AAB2F0"><span>Criteria</span> for
+organizing contacts in a contact group</h1><div>
+<p>The <code>criteria</code> object specifies which contact
+group to organize and how. This involves:</p>
+<ul>
+<li><p>Defining the target group</p></li>
+<li><p>Defining the target contact or contacts</p></li>
+<li><p>Defining whether to add the contacts to the group (associate)
+or remove the contacts from the group (disassociate)</p></li>
+<li><p>Optionally defining on which contacts database to perform
+the operation</p></li>
+</ul>
+<p>The <code>criteria</code> object has three main properties: <code>Type</code>, <code>Data</code>,
+and <code>OperationType</code>. These are described in the following
+table. Properties enclosed in brackets are optional.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>All string values in the object are Unicode.</p>
+</div>
+<div class="tablenoborder"><a name="GUID-C13B472E-3CA4-4337-8281-74B4CC5AD173"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C13B472E-3CA4-4337-8281-74B4CC5AD173" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e34473">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e34478">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e34483">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e34488">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34473 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34478 ">
+<p>Specifies the type of contact information to organize. This is always <code>"Group"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34483 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34488 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Group"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34473 ">
+<p><code>criteria.Data</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34478 ">
+<p>Specifies the contact group to organize.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34483 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34488 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34473 ">
+<p><code>[criteria.Data.DBUri]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34478 ">
+<p>Specifies the contacts database on which to perform the operation.</p>
+<p>If this property is not specified, the default database is used.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34483 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34488 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34473 ">
+<p><code>criteria.Data.id</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34478 ">
+<p>Specifies the unique identifier of the contact group to organize.</p>
+<p>Use <a href="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007.html#GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"><code>GetList</code></a> to
+retrieve this ID.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34483 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34488 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34473 ">
+<p><code>criteria.Data.IdList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34478 ">
+<p>Specifies the unique identifiers of the contacts to add or remove.</p>
+<p><code>Data.IdList[0]</code> contains the ID of the first contact.</p>
+<p>Use <a href="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007.html#GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"><code>GetList</code></a> to
+retrieve these IDs.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34483 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34488 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34473 ">
+<p><code>criteria.OperationType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34478 ">
+<p>Specifies whether to add the contacts to the group (associate) or remove
+the contacts from the group (disassociate).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34483 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e34488 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Associate"</code></p></li>
+<li><p><code>"Disassociate"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

@@ -1,0 +1,396 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Filter criteria for landmarks"/><meta name="DC.Relation" scheme="URI" content="GUID-54D264D2-0E5F-4478-9334-712A9DCD0ABD"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Relation" scheme="URI" content="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"/><meta name="DC.Relation" scheme="URI" content="GUID-8074E501-A64A-41F8-B598-05D8B496438F"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7B55EBBB-B61B-4D2A-B93F-752E3488D58B"/><title>Filter
+criteria for landmarks </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7B55EBBB-B61B-4D2A-B93F-752E3488D58B">Filter
+criteria for landmarks</h1><div>
+<p>The following table describes the different criteria by which you can
+search for landmarks and lists the required <code>Filter</code> object
+properties per criterion. <a href="#GUID-9B000741-0B00-4314-814F-951DADBF2E9B">Table:
+Filter object properties for a landmark search</a> describes the actual
+properties. To search for landmarks, specify the <code>Filter</code> properties
+for one or more criteria.</p>
+<div class="tablenoborder"><a name="GUID-9565915C-B5B2-4485-940F-5F59CC12CEE7"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-9565915C-B5B2-4485-940F-5F59CC12CEE7" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Landmark search
+criteria</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e40024">
+<p>Criterion</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e40029">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e40034">
+<p>Properties to specify</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40024 ">
+<p>Area</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40029 ">
+<p>You can search for landmarks in a particular geographical area. Specify
+the search area by providing the enclosing latitudes and longitudes:</p>
+<p>-90 &lt;= South Latitude &lt;= North Latitude &lt;= +90</p>
+<p>-180 &lt;= West Longitude &lt;= East Longitude &lt;= +180</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40034 ">
+<ul>
+<li><p><code>BoundedArea</code></p></li>
+<li><p><code>[MaximumMatches]</code></p></li>
+<li><p><code>[PreviousMatchesOnly]</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40024 ">
+<p>Category</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40029 ">
+<p>You can search for landmarks by category. The category name search is
+case sensitive and does not support wild cards.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40034 ">
+<ul>
+<li><p><code>CategoryName</code></p></li>
+<li><p><code>[MaximumMatches]</code></p></li>
+<li><p><code>[PreviousMatchesOnly]</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40024 ">
+<p>Nearest</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40029 ">
+<p>You can search for landmarks closest to a specific location (a set of
+coordinates).</p>
+<p>To narrow down the search results, specify <code>MaximumDistance</code> from
+the location.</p>
+<p>If <code>CoverageRadiusOption</code> is set to <code>true</code>,
+the system takes into account the coverage radius of a landmark, so that the
+effective distance considered is the distance to the center of a landmark
+minus its coverage radius. In other words, if the distance between the source
+location and the border of a landmark's coverage area falls within <code>MaximumDistance</code>,
+the landmark is returned by <code>GetList</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40034 ">
+<ul>
+<li><p><code>LandmarkPosition</code></p></li>
+<li><p><code>CoverageRadiusOption</code></p></li>
+<li><p><code>MaximumDistance</code></p></li>
+<li><p><code>[MaximumMatches]</code></p></li>
+<li><p><code>[PreviousMatchesOnly]</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40024 ">
+<p>Text</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40029 ">
+<p>You can search for landmarks based on a name or description. The text
+search is not case sensitive and supports wild cards, for example "?" (single
+character) and "*" (zero or more characters).</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e40034 ">
+<ul>
+<li><p><code>LandmarkName</code></p></li>
+<li><p><code>LandmarkDesc</code></p></li>
+<li><p><code>[MaximumMatches]</code></p></li>
+<li><p><code>[PreviousMatchesOnly]</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the <code>Filter</code> object
+properties for <a href="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html#GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><code>GetList</code></a> calls
+that retrieve information about landmarks.</p>
+<div class="tablenoborder"><a name="GUID-9B000741-0B00-4314-814F-951DADBF2E9B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-9B000741-0B00-4314-814F-951DADBF2E9B" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Filter object
+properties for a landmark search</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e40256">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e40261">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e40266">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e40271">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[DatabaseURI]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the landmark database in which to search for landmarks. If
+this is not specified, the search is performed on the default database.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>Maximum length 255 characters</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[LandmarkName]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the landmark name to search by. This is checked against the <code>LandmarkName</code> property
+of a <a href="GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE.html#GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE">landmark</a>.</p>
+<p>This string is not case sensitive and supports wild cards, for example
+"?" (single character) and "*" (zero or more characters).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>Maximum length 255 characters</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[LandmarkPosition]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the source location to search by. The location is expressed
+as latitude, longitude, and altitude. However, only the latitude and longitude
+are considered in the search. The source location does not have a coverage
+radius.</p>
+<p>The properties of this object are described in <a href="GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE.html#GUID-5E68B836-4D5C-43A3-A76F-1C3101D2D202">Table: LandmarkPosition object properties</a>.</p>
+<p>Landmarks are returned in order of ascending distance from the source
+location.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>See <a href="GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE.html#GUID-5E68B836-4D5C-43A3-A76F-1C3101D2D202">Table:
+LandmarkPosition object properties</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[CoverageRadiusOption]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies whether to take into account the coverage radius of a landmark
+when calculating the distance between the source location and the landmark.</p>
+<p>If set to <code>true</code>, the effective distance considered
+is the distance to the center of a landmark minus its coverage radius, that
+is, the distance to the border of the landmark's coverage area.</p>
+<p>If set to <code>false</code>, the distance considered is the
+distance to the center of a landmark. That is, the landmark's coverage area
+is not considered.</p>
+<p>The default value is <code>false</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>true</code></p></li>
+<li><p><code>false</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[MaximumDistance]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the maximum distance in meters from the source location. Landmarks
+that fall outside this radius are not returned by <code>GetList</code>.</p>
+<p>If <code>CoverageRadiusOption</code> is set to <code>false</code>,
+the distance considered is the distance to the center of a landmark.</p>
+<p>If <code>CoverageRadiusOption</code> is set to <code>true</code>,
+the distance considered is the distance to the center of a landmark minus
+its coverage radius, that is, the distance to the border of the landmark's
+coverage area.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[CategoryName]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the landmark category name to search by.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>Maximum length 124 characters</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[LandmarkDesc]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the text to be searched for in landmark descriptions. This
+is checked against the <code>LandmarkDesc</code> property of a <a href="GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE.html#GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE">landmark</a>.</p>
+<p>This string is not case sensitive and supports wild cards, for example
+"?" (single character) and "*" (zero or more characters).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>Maximum length 255 characters</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[BoundedArea]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the geographical area in which to search for landmarks. The
+area is defined as enclosing NSEW latitudes and longitudes:</p>
+<p>-90 &lt;= South Latitude &lt;= North Latitude &lt;= +90</p>
+<p>-180 &lt;= West Longitude &lt;= East Longitude &lt;= +180</p>
+<p>The properties of this object are described in <a href="#GUID-064D7AE1-436E-4E00-A0F0-3B6B8E751ABE">Table: BoundedArea object properties</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>See <a href="#GUID-064D7AE1-436E-4E00-A0F0-3B6B8E751ABE">Table:
+BoundedArea object properties</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[MaximumMatches]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies the maximum number of landmark items to retrieve. If this
+property is not specified, <code>GetList</code> returns all landmarks
+matching the search criteria.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40256 ">
+<p><code>[PreviousMatchesOnly]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40261 ">
+<p>Specifies whether to perform the search on previous search results only:</p>
+<ul>
+<li><p>If set to <code>true</code>, <code>GetList</code> searches
+for matching landmarks in previous search results only.</p></li>
+<li><p>If set to <code>false</code>, <code>GetList</code> performs
+a new search on the entire database.</p></li>
+</ul>
+<p>The default value is <code>false</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40266 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40271 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>true</code></p></li>
+<li><p><code>false</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-064D7AE1-436E-4E00-A0F0-3B6B8E751ABE"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-064D7AE1-436E-4E00-A0F0-3B6B8E751ABE" frame="border" border="1" rules="all"><caption><strong>Table: </strong>BoundedArea
+object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e40710">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e40715">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e40720">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e40725">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40710 ">
+<p><code>BoundedArea.NorthLatitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40715 ">
+<p>Specifies the northern-most latitude of the search area in <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS 84 datum</a> format.</p>
+<div class="note"><p><strong class="note_title">Note: </strong><code>NorthLatitude</code> &gt;=<code>SouthLatitude</code></p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40720 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40725 ">
+<p>[-90.00, +90.00]</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40710 ">
+<p><code>BoundedArea.SouthLatitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40715 ">
+<p>Specifies the southern-most latitude of the search area in <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS 84 datum</a> format.</p>
+<div class="note"><p><strong class="note_title">Note: </strong><code>SouthLatitude</code> &lt;= <code>NorthLatitude</code></p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40720 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40725 ">
+<p>[-90.00, +90.00]</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40710 ">
+<p><code>BoundedArea.EastLongitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40715 ">
+<p>Specifies the eastern longitude of the search area in <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS
+84 datum</a> format.</p>
+<div class="note"><p><strong class="note_title">Note: </strong><code>EastLongitude</code> &gt;= <code>WestLongitude</code></p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40720 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40725 ">
+<p>[-180.00, +180.00]</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40710 ">
+<p><code>BoundedArea.WestLongitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40715 ">
+<p>Specifies the western longitude of the search area in <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS
+84 datum</a> format.</p>
+<div class="note"><p><strong class="note_title">Note: </strong><code>WestLongitude</code> &lt;= <code>EastLongitude</code></p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40720 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e40725 ">
+<p>[-180.00, +180.00]</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

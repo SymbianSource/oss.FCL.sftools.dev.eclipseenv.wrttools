@@ -1,0 +1,278 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="openApplication()"/><meta name="DC.Relation" scheme="URI" content="GUID-A8DAB890-1BB6-42C6-8448-05F38EAFE985"/><meta name="DC.Relation" scheme="URI" content="GUID-87B333A2-FDA1-4BC3-8803-C5702C5869A1"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-180F11FD-8D26-4305-814F-01BF8DB2DDC8"/><title>openApplication() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-180F11FD-8D26-4305-814F-01BF8DB2DDC8">openApplication()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>openApplication</code> method enables a widget to launch an S60 mobile application in the stand-alone mode.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-30D1C34B-F271-4165-984A-21BB7DD393BA">[void] window.widget.openApplication(HexNumber Uid, String param) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-B75206DB-3C72-40E3-9414-B76894E0843E">[void] widget.openApplication(HexNumber Uid, String param)</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>Uid</code>:</p>
+
+<p>A hexadecimal number that specifies the UID of the S60 application to be activated. See the table below for example application UIDs.</p>
+
+</li>
+<li><p><code>param</code>:</p>
+
+<p>A text string defining a possible argument string that is accepted by the S60 application to be activated. The arguments vary between applications. For example, when defined for the Web Browser for S60 application (UID: 0x10008D39), the parameter <code>"4"+"&lt;Space&gt;"+"&lt;url&gt;"</code> tells the browser to open with content from a specific URL. The parameter <code>"5"</code> launches the browser with the Start page open. You can also use an empty string with any application, which results in launching the specified application with default behavior.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Remarks:</strong></p>
+<p>For security reasons, a widget cannot open another widget by using this method.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-AE538B76-0457-43B6-B162-1100CBC216E9">// function launches the S60 Profiles application
+widget.openApplication(0x100058F8, "");</pre>
+<p><strong>Example application UIDs:</strong></p>
+<p>The following table lists some of the applications that can be launched from a widget, as well as the application UIDs.</p>
+<div class="tablenoborder"><a name="GUID-7C01555E-63C3-431D-A2C4-5AAEEC0A1551"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-7C01555E-63C3-431D-A2C4-5AAEEC0A1551" frame="border" border="1" rules="all">
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="20.930232558139533%" id="d0e14234">
+<p>Application name</p>
+</th><th class="cellrowborder" valign="top" width="18.272425249169437%" id="d0e14239">
+<p>Application UID</p>
+</th><th class="cellrowborder" valign="top" width="60.797342192691026%" id="d0e14244">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Web Browser for S60</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x10008D39</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Default browser application of the S60 platform.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Messaging</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x100058C5</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables messaging operations, such as sending and receiving text messages and email.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Contacts</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x101f4cce</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to store and manage information related to his or her contacts, for example, phone numbers and email addresses.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Log</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x101f4cd5</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Provides a record of communication events, such as missed voice calls, duration of the last voice call, and received text messages.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Profiles</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x100058F8</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to have different settings for different situations, for example, to set the device ringing type to silent during a meeting or set the vibrating alert on when outdoors.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Calendar</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x10005901</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Helps the mobile device user in organizing his or her schedule, for example by adding notes to specific dates.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Clock</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x10005903</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to see the date and time for selected cities around the world, as well as set alarms.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Recorder</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x100058CA</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to record audio clips.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Converter</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x101F4668</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to convert various measures from one unit to another, for example meters to yards.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Calculator</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x10005902</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to make basic calculations.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Notes</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x1000599d</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Text editor that enables the mobile device user to write, view and edit short textual notes.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>File Manager</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x101f84eb</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to manage and organize files that are stored in the phone memory of the device or on an external memory card.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Gallery</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x101f8599</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to view and manage media files, such as images, music files and video clips.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Camera - on a device with one camera</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>101f857a</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to take and manage still pictures as well as to record short video clips with the digital camera of the device.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Camera - on a device with two cameras</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>101ffa86</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to take and manage still pictures as well as to record short video clips with the digital cameras of the device.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Music Player</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x102072c3</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to listen to music and sound files as well as to manage his or her music collection.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>RealPlayer</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x10005a3e</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to play and manage media files that are stored in the device, such as video clips, or media streams from remote locations.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Bluetooth</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x10005951</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to connect to other devices using the Bluetooth local connectivity technology.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Infrared</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x1000594d</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to connect to other devices using the infrared technology.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Settings</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x100058ec</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to manage application and device settings.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="20.930232558139533%" headers="d0e14234 ">
+<p>Themes</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.272425249169437%" headers="d0e14239 ">
+<p>0x10005a32</p>
+</td>
+<td class="cellrowborder" valign="top" width="60.797342192691026%" headers="d0e14244 ">
+<p>Enables the mobile device user to personalize the look and feel of the device with specific UI themes.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

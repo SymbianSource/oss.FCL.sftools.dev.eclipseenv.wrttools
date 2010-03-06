@@ -1,0 +1,40 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="beep()"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7"/><meta name="DC.Relation" scheme="URI" content="GUID-8A6C9B2B-F130-4174-B105-C89A0E0469E0"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-F9E3AC4C-2883-450F-835C-B5F8E2AC6325"/><title>beep() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-F9E3AC4C-2883-450F-835C-B5F8E2AC6325">beep()</h1><div>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-871468F0-F7B8-428B-BA9D-2EA0AC8C8F00">[void] sysinfo.beep(Int frequency, Int duration)</pre>
+<p><strong>Description:</strong></p>
+<p>The <code>beep</code> method produces a beep tone in a specified frequency for a specified duration.</p>
+<p><strong>Argument:</strong></p>
+<ul>
+<li><p><code>frequency</code>:</p>
+
+<p>Defines the frequency of the tone measured in Hz (Hertz).</p>
+
+</li>
+</ul>
+<div class="note"><p><strong class="note_title">Note: </strong>The maximum and minimum values for frequency are naturally device-specific. If the specified frequency is out of the device's supported range, the maximum frequency is applied.</p>
+</div>
+<ul>
+<li><p><code>duration</code>:</p>
+
+<p>Defines the duration of how long the beep tone lasts. The period is measured in milliseconds.</p>
+<p>If the duration is <code>0</code>, the beep tone will last infinitely.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Remarks:</strong></p>
+<p>To stop an infinitive beep, call the beep method again with any value that is different from <code>0</code>.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-01F0C36C-6B44-4764-AACF-6766A4836A96">function beepAlert()
+{
+   // call the beep function with frequency 220Hz 
+   // for the duration 2 seconds
+   sysinfo.beep(220, 2000);
+}</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

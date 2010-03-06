@@ -1,0 +1,236 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for retrieving calendar information"/><meta name="DC.Relation" scheme="URI" content="GUID-10DA851F-1022-4B8C-8F01-F4242AD6EA08"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Relation" scheme="URI" content="GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-00DB3F96-E09F-4CA2-B02D-598EAEF214FF"/><title>Criteria for
+retrieving calendar information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-00DB3F96-E09F-4CA2-B02D-598EAEF214FF"><span>Criteria</span> for
+retrieving calendar information</h1><div>
+<p>The <code>criteria</code> object specifies what calendar
+information is returned.</p>
+<p>Each <a href="GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4.html#GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4"><code>GetList</code></a> call
+targets one type of calendar information:</p>
+<ul>
+<li><p>Calendar</p></li>
+<li><p><a href="GUID-798E9CA0-2A46-4D10-B567-04C9567500F4.html#GUID-798E9CA0-2A46-4D10-B567-04C9567500F4">Calendar
+entry</a></p></li>
+</ul>
+<p>For more information about the types, see the <a href="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571.html#GUID-AE9A928B-F938-49B5-BC9E-72CB42046571">Calendar
+Service overview page</a>.</p>
+<p>The <code>criteria</code> object has two main properties: <code>Type</code> and <code>Filter</code>.
+These are described in the following table. Properties enclosed in brackets
+are optional.</p>
+<div class="tablenoborder"><a name="GUID-93AEB426-1A4C-4A26-B55D-542C688AF629"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-93AEB426-1A4C-4A26-B55D-542C688AF629" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e20627">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e20632">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e20637">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e20642">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>Specifies the type of calendar information to retrieve.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The available <code>Filter</code> properties depend on the selected
+type.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Calendar"</code></p></li>
+<li><p><code>"CalendarEntry"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>Specifies how the information to be retrieved is filtered.</p>
+<p>If this property is not specified, <code>GetList</code> returns
+a list of all available calendars or calendar entries (instances).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" colspan="4" valign="top" headers="d0e20627 d0e20632 d0e20637 d0e20642 ">
+<p><strong>The following properties are only valid if Type is "Calendar"</strong></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.DefaultCalendar]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>If this property is set to <code>true</code>, <code>GetList</code> returns
+a list with only one item, the default calendar.</p>
+<p>If this property is set to <code>false</code>, <code>GetList</code> returns
+a list of all available calendars, including the default one.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>true</code></p></li>
+<li><p><code>false</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" colspan="4" valign="top" headers="d0e20627 d0e20632 d0e20637 d0e20642 ">
+<p><strong>The following properties are only valid if Type is "CalendarEntry"</strong></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.CalendarName]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>Specifies the calendar file from which the information is retrieved.</p>
+<p>If this property is not specified, the default calendar is used.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">
+<p><code>&lt;DriveLetter&gt;:&lt;FileName&gt;</code></p>
+<p>For example: <code>"C:Calendar"</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.id]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>Specifies the globally unique identifier of a calendar entry. This is
+unique across all calendars on any device. If the entry has child entries,
+they share the same <code>id</code> as the parent but have unique <code>LocalId</code>s.</p>
+<p>If this property is specified, <code>GetList</code> returns
+the entry whose <code>id</code> matches the specified value. If the
+entry has child entries, <code>GetList</code> returns both the parent
+and child entries. In this case, the parent entry is the first item in the
+returned array.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Specify either <code>Filter.id</code> or <code>Filter.LocalId</code> or
+neither, but not both. If you specify either one, the other <code>Filter</code> properties
+are ignored. If you specify neither, <code>GetList</code> returns
+a list of instances.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.LocalId]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>Specifies the locally unique identifier of a parent entry or child entry.
+This is unique within a calendar and distinguishes between parent and child
+entries that share the same <code>id</code>.</p>
+<p>If this property is specified, <code>GetList</code> returns
+the parent or child entry whose <code>LocalId</code> matches the specified
+value.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Specify either <code>Filter.id</code> or <code>Filter.LocalId</code> or
+neither, but not both. If you specify either one, the other <code>Filter</code> properties
+are ignored. If you specify neither, <code>GetList</code> returns
+a list of instances.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.StartRange]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>If only <code>StartRange</code> is specified, all entries that
+occur on or after this date are retrieved.</p>
+<p>If both <code>StartRange</code> and <code>EndRange</code> are
+specified, all entries that occur within these dates are retrieved.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.EndRange]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>If only <code>EndRange</code> is specified, all entries that
+occur on or before this date are retrieved.</p>
+<p>If both <code>StartRange</code> and <code>EndRange</code> are
+specified, all entries that occur within these dates are retrieved.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.SearchText]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>Specifies a text string matched against the <code>Summary</code> value
+of an entry. The match is not case sensitive.</p>
+<p>For more information about calendar entries, see section <a href="GUID-798E9CA0-2A46-4D10-B567-04C9567500F4.html#GUID-798E9CA0-2A46-4D10-B567-04C9567500F4">Calendar entries</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20627 ">
+<p><code>[criteria.Filter.Type]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20632 ">
+<p>Specifies the type of calendar entries about which to return information.</p>
+<p>If this property is not specified or if it is set to <code>"IncludeAll"</code>, <code>GetList</code> returns
+information about all types of entries.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20637 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e20642 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Anniversary"</code></p></li>
+<li><p><code>"DayEvent"</code></p></li>
+<li><p><code>"Meeting"</code></p></li>
+<li><p><code>"Reminder"</code></p></li>
+<li><p><code>"ToDo"</code></p></li>
+<li><p><code>"IncludeAll"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

@@ -1,0 +1,84 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="onSelect"/><meta name="DC.Relation" scheme="URI" content="GUID-BE6DC1F8-A847-49B5-A3BF-318D0D1E9D8A"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-111DE423-9C84-4E4B-A45E-15081FE2A30D"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-A022ED1B-E618-4C44-A437-78393900599C"/><title>onSelect </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-A022ED1B-E618-4C44-A437-78393900599C">onSelect</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>onSelect</code> property of the <a href="GUID-111DE423-9C84-4E4B-A45E-15081FE2A30D.html#GUID-111DE423-9C84-4E4B-A45E-15081FE2A30D"><code>MenuItem</code></a> object is an event handler for the event of when the menu item is selected.
+In other words, when the end user opens the options menu and selects a menu
+item either from the top-level menu list or from a submenu list, the system
+will fire an event and a widget can catch the event by providing a callback
+function.</p>
+<p>The callback function is passed with an argument, which is an integer
+identifier identifying the menu item that was just selected. </p>
+<p>It is possible to assign an individual callback function for each menu
+item so that the <code>id</code> argument can be ignored.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-0A790E5F-77BF-437D-A0BF-2D859FB63D32">MenuItem.onSelect = function(Integer id) { }</pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-34A713EA-E992-4944-8A88-08FD4F1DE666">MenuItem.onSelect = onMenuItemSelected;</pre>
+<pre class="codeblock" id="GUID-2A4AEE42-F882-4CE9-9EA1-8261F56BA332">function onMenuItemSelected(id)
+{
+  // ...
+}</pre>
+<p><strong>Remarks:</strong></p>
+<p>Submenu item's callback function must be assigned to the <code>onSelect</code> property
+after the parent menu item is appended to the main menu pane.</p>
+<p>For more general information on constructing an options menu, see <a href="GUID-94946735-D23B-49C6-BB65-8BE31737AE42.html#GUID-94946735-D23B-49C6-BB65-8BE31737AE42">Using softkeys</a>.</p>
+<p><strong>Example code:</strong></p>
+<p><em>Creating a menu:</em></p>
+<pre class="codeblock" id="GUID-EAF0A325-47DD-4AA7-81FA-D26EE10DECB6">window.onload = createMenu();</pre>
+<pre class="codeblock" id="GUID-82C1CA79-4F88-4547-8A43-5960CDF26296">// function to create a menu
+function createMenu()
+{
+  // Create a Menu Object
+  var optionsMenu = window.menu;
+
+  // Set a callback function for Menu
+  optionsMenu.onShow = function()
+  { 
+     alert('Event Trigger: optionsMenu.onShow');
+  }
+
+  // Create two Menu items
+  var m1 = new MenuItem('Beverages', 2001);
+  var m2 = new MenuItem('Snacks', 2002);
+
+  // Assign a callback function for the menu items
+  m1.onSelect = menuEventHandler;
+  m2.onSelect = menuEventHandler;
+
+  // Append two Menu items to Menu
+  optionsMenu.append(m1);
+  optionsMenu.append(m2);
+
+  // Create two more Menu items for Sub-Menu
+  var m11 = new MenuItem('Coca Cola', 3001);
+  var m12 = new MenuItem('Pepsi', 3002);
+
+  // Append two Sub Menu Items to Menu 'Beverages'
+  // get Menu Item reference by ID
+  optionsMenu.getMenuItemById(2001).append(m11);
+
+  // get Menu Item reference by Name
+  optionsMenu.getMenuItemByName('Beverages').append(m12);
+
+  // Assign a callback function for the submenu items
+  m11.onSelect = submenuEventHandler;
+  m12.onSelect = submenuEventHandler;
+}</pre>
+<p><em>Implement menu event handler:</em></p>
+<pre class="codeblock" id="GUID-646EDADD-F105-4946-A09D-8E087BD1E033">function menuEventHandler(id)
+{
+  switch (id)
+  {
+case 2001:
+break;
+case 2002:
+// do something
+break;
+  }
+}
+</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Web Developer's Library 1.4" topic="GUID-4D13AF3F-4733-44E7-996F-F27A11C9D6BF_cover.html">
+<topic href="html/GUID-E0223DD8-CB25-4990-A369-F2B0A67193B2.html" label="Legal notice"/>
+<topic href="html/GUID-43F2AB31-124B-4654-8AB0-AEEBB6E0447B.html" label="Change history"/>
+<topic href="html/GUID-56D42F03-F3C2-4977-AC32-772760AE1D4D.html" label="Guide to Web Developer's Library">
+<topic href="html/GUID-51077516-7EFB-4C49-B964-18814354DD2F.html" label="Library contents"/></topic>
+<topic href="html/GUID-91B65EA3-06B7-475E-9557-29EE584731E5.html" label="Introduction to S60 Web Runtime environment">
+<topic href="html/GUID-48122EAF-E5D8-46CE-B0F6-E93EDF5FD363.html" label="What you need to know"/>
+<topic href="html/GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html" label="Web Runtime versions and device support"/>
+<topic href="html/GUID-2786E26F-EF1E-4935-9C5F-56E36717E89D.html" label="Web Runtime standards"/>
+<topic href="html/GUID-B00941F9-2530-4D3D-BBC7-59EDA3A4C151.html" label="Web Runtime features"/>
+<topic href="html/GUID-05A1F618-5FB1-4821-8408-A213F38F2EDA.html" label="Introduction to widgets"/>
+<topic href="html/GUID-DA3E6868-F769-4576-A0C3-6776BF358B44.html" label="Introduction to home screen widgets">
+<topic href="html/GUID-D2BDE786-CB68-4A2E-9EA9-82E53F6506B3.html" label="Life cycle of a home screen widget"/>
+<topic href="html/GUID-06861FDF-BF8B-4702-B877-41ED90F587BB.html" label="Home screen widget appearance"/></topic>
+<topic href="html/GUID-F7A8BF61-042E-4B80-9959-DEDF65BD9153.html" label="Widget security">
+<topic href="html/GUID-BDBE85E0-2A33-4AE9-92F6-85E1861256F0.html" label="Runtime Security Manager"/>
+<topic href="html/GUID-C4C76205-55BD-4DD1-BA08-6A17B9B696C7.html" label="Runtime Security Manager access policy"/></topic></topic>
+<topic href="html/GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D.html" label="Designing widgets">
+<topic href="html/GUID-5949FE0C-207D-4B15-8C03-96AE48986973.html" label="Laying out pages">
+<topic href="html/GUID-B2976236-0DC6-4CBB-B2FA-B1A6E6639A1D.html" label="Designing for a specific audience"/>
+<topic href="html/GUID-7962116F-3FDB-4960-B1C9-6367451554FD.html" label="Designing simple pages"/>
+<topic href="html/GUID-D82B43D9-37B4-482A-87C0-FFCF534C712C.html" label="Performing one task in a view"/>
+<topic href="html/GUID-EC9DB569-733E-47A8-AD2D-B878B38660B9.html" label="Presenting content on screens"/>
+<topic href="html/GUID-ED04600B-B079-4BC9-84B1-507604C09A4C.html" label="Working with images">
+<topic href="html/GUID-98CA07C9-6AA6-44B7-8D0D-17C813277473.html" label="Supported image formats"/>
+<topic href="html/GUID-70769124-8CCC-4389-9C45-2423B8BB04AC.html" label="Using images in the HTML"/>
+<topic href="html/GUID-4B7957CA-D6B8-4F8A-8E15-A610D1534D6B.html" label="Setting the widget background"/>
+</topic></topic>
+<topic href="html/GUID-9E0EC12F-EF50-4831-B0F4-C588590871D8.html" label="Designing for mobile devices">
+<topic href="html/GUID-B74565A3-C981-4377-99F0-FAD87B9E516D.html" label="Designing for small screens"/>
+<topic href="html/GUID-36CDDA1B-3B62-4936-9E06-7935AAD1CD77.html" label="Designing for dynamic screen orientation"/>
+</topic>
+<topic href="html/GUID-3DA126B3-12E2-44C8-A009-8D25E7B3F7E6.html" label="Customizing style sheets for S60 devices">
+<topic href="html/GUID-9EA77434-CC44-429F-BDD3-3AF4357CCF69.html" label="Creating styles for dynamic content"/>
+<topic href="html/GUID-46BD4E18-092D-4CE2-90CF-91F10B2303B0.html" label="Using multiple CSS"/></topic>
+<topic href="html/GUID-2D87333D-5475-4A8F-9E98-1EBF8035EF96.html" label="Porting widgets"/>
+<topic href="html/GUID-6DD2B3D2-BA3B-4936-BBC9-F61B6757B6F8.html" label="Managing user interaction">
+<topic href="html/GUID-94946735-D23B-49C6-BB65-8BE31737AE42.html" label="Using softkeys"/>
+<topic href="html/GUID-13E2DE63-47E5-4E2A-85FF-C8B0CAB9D4DE.html" label="Using screen controls">
+<topic href="html/GUID-C4B403C9-FA4D-47E2-821B-53FE7ACC33E3.html" label="Creating HTML controls"/>
+<topic href="html/GUID-1666F263-F1CB-4928-B2A7-E518B43983BA.html" label="Handling text input"/>
+<topic href="html/GUID-0EFEA51B-F98B-4C0B-9960-5D6247355ACA.html" label="Handling selection lists"/>
+<topic href="html/GUID-63F9FB97-9A0D-4DE4-A645-F3DB7DC39716.html" label="Using JavaScript controls"/>
+<topic href="html/GUID-CCB9E780-C759-45B2-BBC8-7FAE2102C39F.html" label="Creating touch controls"/>
+<topic href="html/GUID-EE119DD2-C37A-473C-B428-21408867D583.html" label="Customizing screen controls"/></topic>
+<topic href="html/GUID-AE9BB3E0-C243-476B-A236-40958A1DAED9.html" label="Checking for touch support"/>
+<topic href="html/GUID-04ABC9FC-26FE-4854-9F88-63A2C4911886.html" 
+label="Providing tactile feedback for user actions"/></topic>
+<topic href="html/GUID-C359CC7E-B8BA-491B-A0C4-0FF1D3C4110C.html" 
+label="Moving within widgets">
+<topic href="html/GUID-10F0126C-79CA-47BA-B7CA-53A866EFE04B.html" 
+label="Navigating on screens"/>
+<topic href="html/GUID-5277B7B8-722A-48ED-9333-4DD2D6A085C0.html" 
+label="Key event codes supported by WRT"/>
+<topic href="html/GUID-83BFFEB2-D4F5-48DF-830A-602961ACD47A.html" 
+label="Moving between views"/>
+<topic href="html/GUID-E75BCEAE-6673-4ADF-9DC2-058F0C8C0DBB.html" 
+label="Using focus"/></topic>
+<topic href="html/GUID-1C067AC7-2B92-4EEB-896B-814B4064590F.html" 
+label="Designing for limited resources">
+<topic href="html/GUID-A33B7539-EE4A-4E0D-B72B-28565AEF369D.html" 
+label="Using graphics and scripting effectively"/>
+<topic href="html/GUID-A60E9080-A08C-4701-A45E-0D0BAE33C88F.html" 
+label="Keeping response times short"/>
+<topic href="html/GUID-159FCC18-2C9D-49F0-BAC1-DFEAADCF1D89.html" 
+label="Saving battery time"/>
+<topic href="html/GUID-C158B834-9FF8-47C1-B2B5-BA154EBFA8BC.html" 
+label="Dealing with network issues"/>
+<topic href="html/GUID-AFAF423C-2193-440D-A2D3-80549FFF0A46-1AFC49140A2B.html" 
+label="Coping with the processing limits of the device"/>
+<topic href="html/GUID-46FA9398-10C1-429F-B496-EC70E88F9CC7.html" 
+label="Retrieving data"/></topic></topic>
+<topic href="html/GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A.html" 
+label="Developing widgets">
+<topic href="html/GUID-85179E6B-E915-4D96-A5D1-D17D7C7180C7.html" 
+label="Getting started with widgets">
+<topic href="html/GUID-700E79DD-D201-4B68-925F-D65B717BA032.html" 
+label="Before you start"/>
+<topic href="html/GUID-E5AF6C82-3A6E-47DE-BF58-750D97AAD70E.html" 
+label="Widget development process"/>
+<topic href="html/GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html" 
+label="Widget component files">
+<topic href="html/GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B.html" 
+label="Creating the info.plist file"/>
+<topic href="html/GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA.html" 
+label="Creating the widget HTML file"/>
+<topic href="html/GUID-DD35B82F-CB1F-4F7B-A351-C0417E21D5E4.html" 
+label="Creating a CSS file"/>
+<topic href="html/GUID-A942935B-ACF6-451C-8383-874BEEC52F1A.html" 
+label="Creating a JavaScript file"/></topic></topic>
+<topic href="html/GUID-46EABDC1-37CB-412A-ACAD-1A1A9466BB68.html" 
+label="Using platform services">
+<topic href="html/GUID-E092BF10-C076-4476-9E80-87919940201B.html" 
+label="Accessing and launching installed applications"/>
+<topic href="html/GUID-AE9A928B-F938-49B5-BC9E-72CB42046571.html" 
+label="Accessing and managing calendar information"/>
+<topic href="html/GUID-662F2E2E-9538-42E5-9B5A-5664F1C11A9E.html" 
+label="Accessing and managing information about contacts"/>
+<topic href="html/GUID-D581028C-06ED-422D-866E-AE6C93075084.html" 
+label="Accessing and managing information about landmarks"/>
+<topic href="html/GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8.html" 
+label="Accessing device location information"/>
+<topic href="html/GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7.html" 
+label="Accessing device logs"/>
+<topic href="html/GUID-E3D26890-581A-427F-8AFF-16081528A8B8.html" 
+label="Accessing information about media files stored on a device"/>
+<topic href="html/GUID-2240F5BE-97BD-4CB3-8DB3-B5CF7C23BF54.html" 
+label="Accessing messages and using messaging services"/>
+<topic href="html/GUID-6FBE64B7-0949-4AAE-B835-52B276540A59.html" 
+label="Accessing data from the physical sensors of a device"/>
+<topic href="html/GUID-E0ED671A-BBDA-4C07-828F-BD35782D9B36.html" 
+label="Accessing and modifying system information"/>
+<topic href="html/GUID-E9A578AA-58C5-4902-B418-4CE44EA40D5D.html" 
+label="Accessing system information and controlling device features"/>
+<topic href="html/GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html" 
+label="Defining the callback handler for an asynchronous method"/>
+</topic><topic href="html/GUID-E3EA4F85-E0AE-42AB-8E51-EFD3F0E0A51E.html" 
+label="Supporting multiple languages">
+<topic href="html/GUID-71BE0F0B-B6B2-475C-A87B-A04E207F3292.html" 
+label="Language project directory"/>
+<topic href="html/GUID-4CD10DEB-6C79-4320-AC82-F17DD264CF28.html" 
+label="Localizing widget display name"/>
+<topic href="html/GUID-C442113C-5FBE-493E-AD5A-CF0A0FB3C5FD.html" 
+label="Localizing widget display text"/>
+<topic href="html/GUID-63F29096-C1A3-45DB-9E2F-6110562E0237.html" 
+label="Localizing widget resources"/>
+<topic href="html/GUID-0FEFAF39-7048-4F4A-8676-C4BF1AF37120.html" 
+label="Localizing widget layout"/></topic>
+<topic href="html/GUID-63F4E17E-8895-4054-82AD-762B90610B30.html" 
+label="Developing home screen widgets">
+<topic href="html/GUID-5B0BE2FA-9FBB-4B8D-A1CE-219634C9C27A.html" 
+label="Determining whether to display home screen or full screen"/>
+<topic href="html/GUID-53F53EE5-D92E-49A9-B882-741D389412BE.html" 
+label="Creating content specific to home screen widgets"/></topic>
+<topic href="html/GUID-2A74FA05-A13B-4133-8E1A-03152B6B1499.html" 
+label="Testing your widget"/>
+<topic href="html/GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html" 
+label="JavaScript console"/></topic>
+<topic href="html/GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html" 
+label="Example widgets">
+<topic href="html/GUID-78D2B232-BC16-4633-8B66-DCD0C496B354.html" 
+label="Introducing STEW"/>
+<topic href="html/GUID-EB2043BB-E557-429B-BA0A-E350A6D06597.html" 
+label="Designing STEW user interface">
+<topic href="html/GUID-F6A64898-72AD-4F15-ADCB-3E623E3E403F.html" 
+label="STEW: defining the HTML and CSS structure"/>
+<topic href="html/GUID-C6AC727B-52DC-4C7B-8689-19E98126346D.html" 
+label="STEW: adding JavaScript to drive the widget logic"/>
+<topic href="html/GUID-5906D140-663D-4EE2-B0C1-4FECA5759384.html" 
+label="STEW: managing user interaction"/>
+<topic href="html/GUID-0FCBC574-2328-4986-99D3-7DC4BDE9C3A4.html" 
+label="STEW: loading the widget at startup"/>
+<topic href="html/GUID-B12990B6-979C-4BBA-B030-FB7CEC04CB3A.html" 
+label="STEW: supporting screen rotation"/>
+<topic href="html/GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84.html" 
+label="STEW: supporting different screen sizes"/>
+<topic href="html/GUID-EED2A703-672F-4723-87AE-26EA53C7E9E6.html" 
+label="STEW: adding menu options"/></topic>
+<topic href="html/GUID-1FD5C597-43B8-402E-92B8-FE0787DB4F3B.html" 
+label="Retrieving STEW data">
+<topic href="html/GUID-71A21D8D-78E3-4FEE-9F46-5D175DE5BC12.html" 
+label="STEW: implementing a Twitter service"/>
+<topic href="html/GUID-A3C4CDE4-4231-463D-B6A8-4969B91BDA0C.html" 
+label="STEW: presenting content on screens"/>
+<topic href="html/GUID-9405C97E-4784-4043-BA75-77518EF0A38F.html" 
+label="STEW: indicating progress"/></topic>
+<topic href="html/GUID-1812A0D5-74CC-4A94-AF91-970465F6A738.html" 
+label="Enabling STEW for the home screen"/>
+<topic href="html/GUID-8DC78944-809B-462B-BEC2-0114696F8B14.html" 
+label="Localizing STEW"/></topic>
+<topic href="html/GUID-4BE0F634-6995-4738-A650-5D3CCBC26647.html" 
+label="Integrating widgets with devices">
+<topic href="html/GUID-CCA3FA0B-9D75-453A-947C-B3CB2A85C684.html" 
+label="Deploying widgets"/>
+<topic href="html/GUID-EAE0823B-5914-49C2-9DBC-15B61DE49E60.html" 
+label="Managing widgets on mobile devices"/>
+<topic href="html/GUID-4F4EE10B-BC2C-4046-ADDB-AD4B67DB2A11.html" 
+label="Managing widgets on the home screen"/></topic>
+<topic href="html/GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81.html" 
+label="Web Runtime API reference">
+<topic href="html/GUID-6CD2776F-A868-4280-967F-4EB426212556.html" 
+label="JavaScript widget object">
+<topic href="html/GUID-EFCCE3CA-A1D2-4CD0-8D10-BD6320B19E5A.html" 
+label="openURL()"/>
+<topic href="html/GUID-DF4D8745-B6D4-4BC4-AF2D-0F71F28E9F27.html" 
+label="setPreferenceForKey()"/>
+<topic href="html/GUID-E8E82EBC-05E6-49A2-9451-BF02986BCEE8.html" 
+label="preferenceForKey()"/>
+<topic href="html/GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404.html" 
+label="prepareForTransition()"/>
+<topic href="html/GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB.html" 
+label="performTransition()"/>
+<topic href="html/GUID-87B333A2-FDA1-4BC3-8803-C5702C5869A1.html" 
+label="setNavigationEnabled()"/>
+<topic href="html/GUID-180F11FD-8D26-4305-814F-01BF8DB2DDC8.html" 
+label="openApplication()"/>
+<topic href="html/GUID-A8DAB890-1BB6-42C6-8448-05F38EAFE985.html" 
+label="setDisplayLandscape()"/>
+<topic href="html/GUID-69A2FEC3-0BB7-4165-A473-76F1823A4534.html" 
+label="setDisplayPortrait()"/>
+<topic href="html/GUID-40BE0552-37F0-43C8-9ADC-2A488B032C0D.html" 
+label="identifier"/>
+<topic href="html/GUID-F18FD3A0-9CCC-4117-8CC4-4222842E8C59.html" 
+label="onshow"/>
+<topic href="html/GUID-55F6778A-D1DA-4288-93B2-0863558D34B7.html" 
+label="onhide"/>
+<topic href="html/GUID-6CD85E8A-698E-4BE2-B965-887E66E51ACC.html" 
+label="isrotationsupported"/></topic>
+<topic href="html/GUID-857CF71D-3398-40C2-981A-DEC428A7BA6B.html" 
+label="JavaScript menu object">
+<topic href="html/GUID-704CF29C-1FDC-4192-9338-C8B9B926111C.html" 
+label="append()"/>
+<topic href="html/GUID-CE03834C-A275-458D-8FD3-086A472C28E2.html" 
+label="remove()"/>
+<topic href="html/GUID-860D488F-98AA-4EF2-BDEC-8400A642CBD6.html" 
+label="getMenuItemById()"/>
+<topic href="html/GUID-6359AD9D-2D02-4265-8B47-AF18713AB726.html" 
+label="getMenuItemByName()"/>
+<topic href="html/GUID-5610C4B8-8988-4895-8F88-36F444B4ACFC.html" 
+label="setRightSoftkeyLabel()"/>
+<topic href="html/GUID-ED95464B-9BA7-4294-A06F-CA80429B70ED.html" 
+label="showSoftkeys()"/>
+<topic href="html/GUID-876B67CB-99C0-4925-A51C-646EA5F867B6.html" 
+label="hideSoftkeys()"/>
+<topic href="html/GUID-AD589188-128C-4A48-B25C-BF0B4D9923C8.html" 
+label="clear()"/>
+<topic href="html/GUID-9FE7E588-7621-4067-9BEC-4F59855BB42F.html" 
+label="onShow"/></topic>
+<topic href="html/GUID-111DE423-9C84-4E4B-A45E-15081FE2A30D.html" 
+label="JavaScript MenuItem object">
+<topic href="html/GUID-960AD4A0-AE70-4608-99E7-B663FB99A68D.html" 
+label="Constructor"/>
+<topic href="html/GUID-D498AD58-DF42-4FBA-8767-91FC624873C0.html" 
+label="append()"/>
+<topic href="html/GUID-E869B263-7EBF-4590-890B-563871C438C6.html" 
+label="remove()"/>
+<topic href="html/GUID-BE6DC1F8-A847-49B5-A3BF-318D0D1E9D8A.html" 
+label="setDimmed()"/>
+<topic href="html/GUID-A022ED1B-E618-4C44-A437-78393900599C.html" 
+label="onSelect"/></topic>
+<topic href="html/GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html" 
+label="JavaScript device object">
+<topic href="html/GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html" 
+label="getServiceObject()"/></topic>
+<topic href="html/GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C.html" 
+label="JavaScript Service API reference">
+<topic href="html/GUID-2D651505-F68C-4053-B565-9FF826C5B897.html" 
+label="JavaScript AppManager Service API">
+<topic href="html/GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952.html" 
+label="IAppManager.GetList()">
+<topic href="html/GUID-A509AD23-015E-44D9-97EB-895A75593C87.html" 
+label="Criteria for retrieving information about applications"/>
+<topic href="html/GUID-5614CFF0-EF37-46DD-A89D-C2AD6122F6A5.html" 
+label="Returned application information"/></topic>
+<topic href="html/GUID-697AFF1F-24C7-43BD-A072-8352B3BE973C.html" 
+label="IAppManager.LaunchApp()">
+<topic href="html/GUID-7DD6AB91-0582-4A46-9E19-2F12DC2FE674.html" 
+label="Criteria for launching an application"/></topic>
+<topic href="html/GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA.html" 
+label="IAppManager.LaunchDoc()">
+<topic href="html/GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51.html" 
+label="Criteria for launching an application"/></topic>
+<topic href="html/GUID-64CC3AB4-5444-474A-9470-818F423C5611.html" 
+label="IAppManager.Cancel()"/>
+<topic href="html/GUID-50795090-A429-41CF-8CAA-EA2004D2643A.html" 
+label="AppManager Service API error messages"/>
+<topic href="html/GUID-2D47E7D9-199D-4D59-BD6A-592FA9F8B16A.html" 
+label="AppManager Service API example"/></topic>
+<topic href="html/GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4.html" 
+label="JavaScript Calendar Service API">
+<topic href="html/GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4.html" 
+label="IDataSource.GetList()">
+<topic href="html/GUID-00DB3F96-E09F-4CA2-B02D-598EAEF214FF.html" 
+label="Criteria for retrieving calendar information"/>
+<topic href="html/GUID-10DA851F-1022-4B8C-8F01-F4242AD6EA08.html" 
+label="Returned calendar information"/></topic>
+<topic href="html/GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51.html" 
+label="IDataSource.Add()">
+<topic href="html/GUID-54013A2F-7503-4DA3-85C7-904BCD98B011.html" 
+label="Criteria for adding and updating calendar information"/>
+</topic><topic href="html/GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A.html" 
+label="IDataSource.Delete()">
+<topic href="html/GUID-11652F7C-4A0A-432D-A7BE-E9C27C32319A.html" 
+label="Criteria for deleting calendar information"/></topic>
+<topic href="html/GUID-D19BB894-371A-4D55-A047-3B2F97673F5F.html" 
+label="IDataSource.Import()">
+<topic href="html/GUID-B86F1686-F2AC-438F-8306-4B9D70F879EC.html" 
+label="Criteria for importing calendar entries"/></topic>
+<topic href="html/GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F.html" 
+label="IDataSource.Export()">
+<topic href="html/GUID-36434377-FA7E-45F2-AEB3-BA0B7A378422.html" 
+label="Criteria for exporting calendar entries"/></topic>
+<topic href="html/GUID-D4014B08-C48C-48EB-B3A5-1A09FF636B3C.html" 
+label="IDataSource.RequestNotification()">
+<topic href="html/GUID-B11EEC60-6A5C-40A6-A54A-74504B2BEE4F.html" 
+label="Criteria for change notifications"/>
+<topic href="html/GUID-13C405C4-F914-469C-84BF-D1EDF0322A24.html" 
+label="Returned notification information"/></topic>
+<topic href="html/GUID-0D3A1E17-C699-4A9D-9124-9CEB71E2EBBF.html" 
+label="IDataSource.Cancel()"/>
+<topic href="html/GUID-798E9CA0-2A46-4D10-B567-04C9567500F4.html" 
+label="Calendar entries">
+<topic href="html/GUID-5D53649F-FDE2-4421-A362-25C91EE76EF4.html" 
+label="Calendar entry properties"/>
+<topic href="html/GUID-2B27591B-F58B-4C6B-8C35-6F65FCF599C6.html" 
+label="Properties and calendar entry types"/></topic>
+<topic href="html/GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35.html" 
+label="Calendar Service API error messages"/>
+<topic href="html/GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3.html" 
+label="Calendar Service API example"/></topic>
+<topic href="html/GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18.html" 
+label="JavaScript Contacts Service API">
+<topic href="html/GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007.html" 
+label="IDataSource.GetList()">
+<topic href="html/GUID-06C803FE-DD16-44B5-B9C7-2EC9D497D425.html" 
+label="Criteria for retrieving contact information"/>
+<topic href="html/GUID-CD495D49-E492-4E88-833D-29EF222B097F.html" 
+label="Returned contact information"/></topic>
+<topic href="html/GUID-20D66938-A870-43D7-9515-AC7E22AEDC14.html" 
+label="IDataSource.Add()">
+<topic href="html/GUID-94FAF08A-F3E3-4686-A35B-E98EEBF18824.html" 
+label="Criteria for adding and editing contact information"/></topic>
+<topic href="html/GUID-E6FAAB7C-EE2D-4464-9D0F-B1D89E26ABCF.html" 
+label="IDataSource.Delete()">
+<topic href="html/GUID-9FF007CF-0CFF-4572-B399-B98C4F98C250.html" 
+label="Criteria for deleting contact information"/></topic>
+<topic href="html/GUID-154DA5F4-32F6-42E2-A107-A7C72F6F9DE5.html" 
+label="IDataSource.Import()">
+<topic href="html/GUID-F631E6D3-AA0A-4C4E-95C4-13F9CA3F8AFF.html" 
+label="Criteria for importing a contact"/></topic>
+<topic href="html/GUID-CA7C3A7B-6733-47E0-9C6F-FBFB0993F034.html" 
+label="IDataSource.Export()">
+<topic href="html/GUID-92D152D3-E29A-4010-B5A0-9D37A0369A21.html" 
+label="Criteria for exporting a contact"/></topic>
+<topic href="html/GUID-F2CE0F94-324C-4D45-BD37-DA55F9DAC077.html" 
+label="IDataSource.Organise()">
+<topic href="html/GUID-72B5BFF3-DA09-4475-AA88-865852AAB2F0.html" 
+label="Criteria for organizing contacts in a contact group"/></topic>
+<topic href="html/GUID-231C11D4-82B3-4202-8E86-DE8A3556C9DE.html" 
+label="IDataSource.Cancel()"/>
+<topic href="html/GUID-686FDCE2-4487-4402-8347-875350D30163.html" 
+label="Supported contact keys"/>
+<topic href="html/GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF.html" 
+label="Contacts Service API error messages"/>
+<topic href="html/GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1.html" 
+label="Contacts Service API example"/></topic>
+<topic href="html/GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F.html" 
+label="JavaScript Landmarks Service API">
+<topic href="html/GUID-E138B464-2086-4E74-B356-ACF8687BBB5A.html" 
+label="IDataSource.New()"/>
+<topic href="html/GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html" 
+label="IDataSource.GetList()">
+<topic href="html/GUID-8074E501-A64A-41F8-B598-05D8B496438F.html" 
+label="Criteria for retrieving landmark information">
+<topic href="html/GUID-7B55EBBB-B61B-4D2A-B93F-752E3488D58B.html" 
+label="Filter criteria for landmarks"/>
+<topic href="html/GUID-54D264D2-0E5F-4478-9334-712A9DCD0ABD.html" 
+label="Filter criteria for landmark categories"/>
+<topic href="html/GUID-60B94D3B-4743-4254-8FD9-EB591DAADA0F.html" 
+label="Filter criteria for landmark databases"/></topic>
+<topic href="html/GUID-89A7E790-06F0-488E-B833-AC63B9995E25.html" 
+label="Returned landmark information"/></topic>
+<topic href="html/GUID-D85C2567-F041-42A1-A2B5-650FCAAD60A9.html" 
+label="IDataSource.Add()">
+<topic href="html/GUID-F97A125E-0DCC-4E4A-B607-42068DBD12EC.html" 
+label="Criteria for adding and editing landmark information"/></topic>
+<topic href="html/GUID-2B13380C-37C8-473F-B0A7-564439312DA3.html" 
+label="IDataSource.Delete()">
+<topic href="html/GUID-8787F2FD-41C1-46EC-B99E-7A9351C5A26B.html" 
+label="Criteria for deleting landmark information"/></topic>
+<topic href="html/GUID-4D4E5B3E-ABC4-43CA-A7E8-027C46BD1FE6.html" 
+label="IDataSource.Import()">
+<topic href="html/GUID-387912B8-1FF4-40EE-ABC5-AB50DBF8A137.html" 
+label="Criteria for importing landmarks"/></topic>
+<topic href="html/GUID-A9024277-4FA2-429D-9C54-A155ED658B32.html" 
+label="IDataSource.Export()">
+<topic href="html/GUID-DD6F754D-6438-4B4E-8775-7BC1A9C45330.html" 
+label="Criteria for exporting landmarks"/></topic>
+<topic href="html/GUID-B8869924-0E95-4543-954E-5A4246922CB4.html" 
+label="IDataSource.Organise()">
+<topic href="html/GUID-C5E6EDA9-DDE8-44E0-99C1-2031514B3072.html" 
+label="Criteria for organizing landmarks in a landmark category"/></topic>
+<topic href="html/GUID-6D7228E7-8E06-495D-85F7-A4B1716D4CDE.html" 
+label="IDataSource.Cancel()"/>
+<topic href="html/GUID-85F12A75-C9B1-43E3-A052-6EE8745B211F.html" 
+label="Landmarks, categories, and databases">
+<topic href="html/GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE.html" 
+label="Landmark"/>
+<topic href="html/GUID-40EAD781-6B30-406E-B05F-0BE932EFE86A.html" 
+label="Landmark category"/>
+<topic href="html/GUID-5A23A9AC-2BC4-4D05-82FF-980986CFF4F6.html" 
+label="Landmark database"/></topic>
+<topic href="html/GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C.html" 
+label="Landmarks Service API error messages"/>
+<topic href="html/GUID-11D59F76-EC4C-4297-B262-D5174E826B43.html" 
+label="Landmarks Service API example"/></topic>
+<topic href="html/GUID-53CE4DE6-F065-4339-8C18-5C30A9540053.html" 
+label="JavaScript Location Service API">
+<topic href="html/GUID-150E440F-56E4-4249-8739-A5A7A2050600.html" 
+label="ILocation.GetLocation()">
+<topic href="html/GUID-4541E532-CC1A-4115-8467-7FA1C4378307.html" 
+label="Criteria for retrieving location information"/>
+<topic href="html/GUID-A6C9AF19-6694-478B-A9FE-7898A2091C4B.html" 
+label="Returned location information"/></topic><topic 
+href="GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5.html" 
+label="ILocation.Trace()"/>
+<topic href="html/GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206.html" 
+label="ILocation.Calculate()">
+<topic href="html/GUID-9115340A-5D15-4139-A236-945D199583AF.html" 
+label="Calculation criteria"/>
+<topic href="html/GUID-B1BFA47E-DAC0-40B1-898E-B3FCE14AE78F.html" 
+label="Calculation results"/></topic>
+<topic href="html/GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56.html" 
+label="ILocation.CancelNotification()"/>
+<topic href="html/GUID-DEA4164E-5F03-4B57-97B9-4C6238481F89.html" 
+label="Location Service API error messages"/>
+<topic href="html/GUID-620340F8-F844-445E-80AA-71C757320B7E.html" 
+label="Location Service API example"/></topic>
+<topic href="html/GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C.html" 
+label="JavaScript Logging Service API">
+<topic href="html/GUID-F146B956-77AE-41B5-BA17-20F48AF8DBA7.html" 
+label="IDataSource.Add()">
+<topic href="html/GUID-DDF5BDA7-E0DA-40EB-94E7-30824B0F4365.html" 
+label="Criteria for adding a log entry"/></topic>
+<topic href="html/GUID-7E53CD9F-E213-42E7-8569-02AEA1198E52.html" 
+label="IDataSource.GetList()">
+<topic href="html/GUID-258A8E34-56F4-4BF2-8C94-F7BB7FAE71F8.html" 
+label="Criteria for retrieving log events"/>
+<topic href="html/GUID-F22F30CF-0BCB-4720-9F47-691BDC517E5C.html" 
+label="Returned log event information"/></topic>
+<topic href="html/GUID-0022AED9-7B79-4C96-B82E-8B1EDF455E1D.html" 
+label="IDataSource.Delete()">
+<topic href="html/GUID-59A3DC52-36FB-4A05-8D37-0305AE4B80D0.html" 
+label="Criteria for deleting an event"/></topic>
+<topic href="html/GUID-894E87F7-7146-44DD-8CAF-60F7C446B0D8.html" 
+label="IDataSource.RequestNotification()">
+<topic href="html/GUID-4F84676A-16EE-4A66-A6DC-67A57001A565.html" 
+label="Criteria for requesting notification"/></topic>
+<topic href="html/GUID-043C7578-485F-4186-830F-013223A156D1.html" 
+label="IDataSource.Cancel()"/>
+<topic href="html//GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6.html" label="Logging Service API error messages"/>
+<topic href="html//GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D.html" label="Logging Service API example"/></topic>
+<topic href="html//GUID-E5684FF0-28C9-4721-9421-6B9432087086.html" label="JavaScript Media Management Service API">
+<topic href="html//GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB.html" label="IDataSource.GetList()">
+<topic href="html//GUID-474623C2-0C81-445A-802B-77FA1C8C6C54.html" label="Criteria for retrieving media information"/>
+<topic href="html//GUID-521A45D0-9CCD-4BFE-807E-DE731D45EAE4.html" label="Returned media information"/></topic>
+<topic href="html//GUID-4EBD83E1-B179-4F8B-93AB-4D58C5F749C3.html" label="IDataSource.Cancel()"/>
+<topic href="html//GUID-2FC0C5D3-CE2A-45BE-B7E9-04A62A099E86.html" label="Media Management Service API error messages"/>
+<topic href="html//GUID-B7297E44-2CCE-4098-807B-551684CF608E.html" label="Media Management Service API example"/></topic>
+<topic href="html//GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5.html" label="JavaScript Messaging Service API">
+<topic href="html//GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48.html" label="IMessaging.GetList()">
+<topic href="html//GUID-5720512C-9198-4883-81B1-46F1B963C6B9.html" label="Criteria for retrieving messaging information"/>
+<topic href="html//GUID-C8571941-AD6E-4FAD-B4A1-35E7BDB99689.html" label="Returned messaging information"/></topic>
+<topic href="html//GUID-5295F092-004B-43F4-85DB-7C54ED14D6DB.html" label="IMessaging.Send()">
+<topic href="html//GUID-1A98E402-3609-4E83-A86C-98AB37025A47.html" label="Criteria for sending a message"/></topic>
+<topic href="html//GUID-DFEDF3BF-BA73-4418-815C-83B80B888821.html" label="IMessaging.RegisterNotification()">
+<topic href="html//GUID-F7E268AD-E112-4564-BB1D-4BD1E111A767.html" label="Returned notification information"/></topic>
+<topic href="html//GUID-E2FDB3FB-2B5E-430C-81B5-9C0C22C4CC04.html" label="IMessaging.CancelNotification()"/>
+<topic href="html//GUID-74A4C52A-6150-4237-81B5-A864F01FADF5.html" label="IMessaging.ChangeStatus()"/>
+<topic href="html//GUID-BE6FB5B3-020A-44F3-A4AC-DFD0FEA42B7A.html" label="IMessaging.Delete()"/>
+<topic href="html//GUID-2EBDD073-499C-4A1E-A0DA-4FF8243A6479.html" label="IMessaging.Cancel()"/><topic href="html//GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A.html" label="Messaging Service API error messages"/>
+<topic href="html//GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B.html" label="Messaging Service API example"/></topic><topic href="html//GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29.html" label="JavaScript Sensor Service API"><topic href="html//GUID-46DB749E-A388-46B2-BB13-A274385CA97C.html" label="ISensor.FindSensorChannel()"><topic href="html//GUID-A4538B4D-0D90-43F8-B1FA-72F616937760.html" label="Criteria for searching sensor channels"/></topic><topic href="html//GUID-B4897257-F7BC-4C32-9C6C-A577FDAC5D09.html" label="ISensor.RegisterForNotification()"><topic href="html//GUID-B024688A-3701-4282-9C98-D984477E00C2.html" label="Criteria for receiving sensor data"/><topic href="html//GUID-7FD32D4D-871F-4251-844C-6CB59B593730.html" label="Returned sensor data"/></topic><topic href="html//GUID-3A306F4B-638D-4133-8575-2E269E565B7F.html" label="ISensor.Cancel()"/><topic href="html//GUID-C2731B38-6294-419C-B7E2-AFB918F508D4.html" label="ISensor.GetChannelProperty()"><topic href="html//GUID-6F263194-7237-42E8-8DD1-445A69291524.html" label="Criteria for retrieving channel property information"/><topic href="html//GUID-ADE02C34-39FC-4E54-ABF6-536165352004.html" label="Returned channel property information"/></topic><topic href="html//GUID-FEB5D463-F6A1-44D9-9456-D95DE4BAED77.html" label="Sensor channel information"/><topic href="html//GUID-46FAFCDA-BCF3-41CB-B154-C17BBF7CD755.html" label="Sensor Service API error messages"/><topic href="html//GUID-350F3C29-923E-4C30-8B14-C3D594BB8E39.html" label="Sensor Service API example"/></topic><topic href="html//GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3.html" label="JavaScript SystemInfo Service API (WRT 1.1)"><topic href="html//GUID-279A3698-D09B-44BF-8340-739E19F94727.html" label="ISysInfo.GetInfo()"><topic href="html//GUID-D14E0D5C-2D99-41C8-8857-455409065500.html" label="Criteria for retrieving system attribute information"/></topic><topic href="html//GUID-4347A7F1-1560-4B28-B4A8-DC570864F505.html" label="ISysInfo.SetInfo()"><topic href="html//GUID-13E5F1C9-D033-4260-AEE8-168F2622A147.html" label="Criteria for modifying a system attribute value"/></topic><topic href="html//GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E.html" label="ISysInfo.GetNotification()"><topic href="html//GUID-ABF4EC7E-557F-4C6D-8B2C-F734A0BBC082.html" label="Criteria for change notifications"/></topic><topic href="html//GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B.html" label="ISysInfo.Cancel()"/><topic href="html//GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html" label="System attributes"><topic href="html//GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html" label="Supported system attributes (entities and keys)"/><topic href="html//GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html" label="System data types"/></topic><topic href="html//GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1.html" label="SystemInfo Service API error messages"/><topic href="html//GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF.html" label="SystemInfo Service API example"/></topic><topic href="html//GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7.html" label="JavaScript SystemInfo Service API (WRT 1.0)"><topic href="html//GUID-6521F749-FA06-493B-A11D-B47F4DC0E6D6.html" label="Power information services"><topic href="html//GUID-F13F64A5-FFB0-4928-A888-BF2501E42091.html" label="chargelevel"/><topic href="html//GUID-386E1E84-6AD0-464F-9228-389126856177.html" label="onchargelevel"/><topic href="html//GUID-E6C99179-3126-49F6-8E40-FB07E6FF8E38.html" label="chargerconnected"/><topic href="html//GUID-C3AAF370-D049-475B-9D21-3CFC5C83052F.html" label="onchargerconnected"/></topic><topic href="html//GUID-92D6E2DB-8BAF-4710-AB23-C16F7DE917CA.html" label="Network information services"><topic href="html//GUID-814031D6-BCE6-4536-845E-C5A54EC7A881.html" label="signalbars"/><topic href="html//GUID-9E8CBB8A-E918-4208-9F11-D2147A98EC4F.html" label="networkname"/><topic href="html//GUID-C0ADE739-7F72-4D1D-85FC-631983AAE6D5.html" label="networkregistrationstatus"/></topic><topic href="html//GUID-318BD3F5-D351-4BC2-8F4F-6E096A56CD54.html" label="Display and keypad illumination information and control services"><topic href="html//GUID-D66AB112-1BC4-4A88-AFCF-1CDBB94366B7.html" label="lighton()"/><topic href="html//GUID-7A68BE34-5C07-4008-A886-A20D92669E05.html" label="lightoff()"/><topic href="html//GUID-63189AAF-B987-450D-B605-A75921D2E61D.html" label="lightblink()"/><topic href="html//GUID-EF4E58FF-E9EA-429C-9D3D-5F0911B534CA.html" label="lightminintensity"/><topic href="html//GUID-9695EFDE-3134-4AA7-9422-613DEDEAE314.html" label="lightmaxintensity"/><topic href="html//GUID-F51B8923-8A46-49A0-B307-E84194904454.html" label="lightdefaultintensity"/><topic href="html//GUID-A4CEF923-1DE8-46E0-8D42-79AA621A06A2.html" label="lightinfiniteduration"/><topic href="html//GUID-9B63C06E-3FCE-4201-B6C5-4F728894DA40.html" label="lightmaxduration"/><topic href="html//GUID-3ED63699-D71D-479A-A191-F7145271CCBC.html" label="lightdefaultcycletime"/><topic href="html//GUID-528CD4D9-2019-4A08-A533-FC918E261AE6.html" label="lighttargetprimarydisplayandkeyboard"/><topic href="html//GUID-EEC3199A-50A8-4A26-914D-B66CB9CA1271.html" label="lighttargetsystem"/></topic><topic href="html//GUID-6B348161-2ED2-498E-A166-C3B28C58BC68.html" label="Vibration information and control services"><topic href="html//GUID-08AA357E-7499-4A8E-B756-4FCDFBEDB9FC.html" label="startvibra()"/><topic href="html//GUID-236F8C40-96D8-4408-97A7-CAA7E0B1FE46.html" label="stopvibra()"/><topic href="html//GUID-F26B6080-87E3-4AE1-82D6-B571158F0449.html" label="vibraminintensity"/><topic href="html//GUID-ACC73314-813D-46C7-9500-61A61BA910FA.html" label="vibramaxintensity"/><topic href="html//GUID-C1F8A945-7C9C-4E3B-8F54-B9AFC502482A.html" label="vibramaxduration"/><topic href="html//GUID-B0F9DE3D-8F22-4976-8BE3-F7F40A90D6FC.html" label="vibrasettings"/></topic><topic href="html//GUID-8A6C9B2B-F130-4174-B105-C89A0E0469E0.html" label="Beep tone control services"><topic href="html//GUID-F9E3AC4C-2883-450F-835C-B5F8E2AC6325.html" label="beep()"/></topic><topic href="html//GUID-896164BE-C1A6-42BF-B2BD-7C63CF8C166A.html" label="Memory and file system information services"><topic href="html//GUID-FD1799EE-A7AB-488C-9159-2BC315058DC0.html" label="drivesize()"/><topic href="html//GUID-0A0DE525-723F-45BD-9F10-76AAB4616426.html" label="drivefree()"/><topic href="html//GUID-FED41C53-03B6-44A8-BEBB-0576E037B62B.html" label="totalram"/><topic href="html//GUID-034D852F-27C5-47D2-9617-B8C92748A49C.html" label="freeram"/><topic href="html//GUID-8F2A8087-A590-43B8-A1B3-BE986CDCFEEC.html" label="drivelist"/></topic><topic href="html//GUID-7BC25BBD-5BC2-4E37-A5A1-E85484ED3EF5.html" label="System language information services"><topic href="html//GUID-5DA8B0F1-C299-44C6-90A7-FA12C33C11F8.html" label="language"/></topic></topic><topic href="html//GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html" label="Service API error codes"/></topic></topic><topic href="html//GUID-B0BAAE5B-CA8B-4443-B3E1-CB5AC84B9631.html" label="Developer resources"/><topic href="html//GUID-10E4BB0E-08E5-40FD-8EB4-A83009F64F19.html" label="Terms and abbreviations"/><topic href="html//GUID-9A9AFCBE-29C3-4579-9C5D-3C41CD22C7FA.html" label="Discussion about this resource"/></toc>

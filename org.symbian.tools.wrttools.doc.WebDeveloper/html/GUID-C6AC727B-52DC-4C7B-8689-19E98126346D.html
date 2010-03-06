@@ -1,0 +1,61 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: adding JavaScript to drive the widget logic"/><meta name="abstract" content="In the STEW example, JavaScript files are used to implement widget functionality."/><meta name="description" content="In the STEW example, JavaScript files are used to implement widget functionality."/><meta name="DC.Relation" scheme="URI" content="GUID-5906D140-663D-4EE2-B0C1-4FECA5759384"/><meta name="DC.Relation" scheme="URI" content="GUID-F6A64898-72AD-4F15-ADCB-3E623E3E403F"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-EB2043BB-E557-429B-BA0A-E350A6D06597"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C6AC727B-52DC-4C7B-8689-19E98126346D"/><meta name="DC.Language" content="en"/><title>STEW: adding JavaScript to drive the widget logic </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C6AC727B-52DC-4C7B-8689-19E98126346D">STEW: adding JavaScript to drive the widget logic</h1><div><p>In the STEW example, JavaScript files are used to implement widget functionality.</p>
+<div><h3>Implementing the button menu</h3><div class="figure" id="GUID-842E3EF5-C0CD-413E-997B-35E865663BF6"><img src="GUID-5BB933A3-E1F3-47A5-B85F-A78C988C8779_d0e11410_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW button menu</p></div><p/><p>The logic for the button menu is implemented in the <code>Menu.js</code> file.  A click event handler is assigned to each button by calling the <code>document.getElementById</code> function to retrieve the DOM element of each button.  An <code>activate</code> function is assigned to the <code>onclick</code> event handler and executed when the handler is triggered. The function takes the ID of the button as a parameter. It is important to call the function in the correct context.</p><pre class="codeblock">function Menu() {
+	var self = this;	
+
+	// Handle clicks from menu buttons to activate the relevant views. 
+	var updateButton = document.getElementById( "button_update" );
+	updateButton.onclick = function() {
+		 self.activate( Menu.UPDATE_STATUS_SCREEN );
+	};
+	var searchButton = document.getElementById( "button_search" );
+	searchButton.onclick = function() {
+		 self.activate( Menu.SEARCH_SCREEN );
+	};
+	var settingsButton = document.getElementById( "button_settings" );
+	settingsButton.onclick = function() {
+		 self.activate( Menu.SETTINGS_SCREEN );
+	};		
+}
+</pre></div>
+<div><h3>Implementing title bar buttons</h3><p>The STEW title bar displays the widget title as well as <span class="uicontrol">Logout</span> and <span class="uicontrol">Exit</span> buttons.</p><div class="figure" id="GUID-985B16ED-8E64-4D5D-9D1F-C7EBF7BB81D2"><img src="GUID-BFE9DD29-269F-42E3-B151-B816C99082E4_d0e11448_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW title bar</p></div><p>The logic for the title bar buttons is also implemented in the <code>Menu()</code> function:</p><pre class="codeblock">var logoutButton = document.getElementById( "button_logout" );
+logoutButton.onclick = function() { widgetMenu.activate( Menu.LOGIN_SCREEN ); };
+var exitButton = document.getElementById( "button_exit" );
+exitButton.onclick = function() { window.close(); };
+</pre></div>
+<div><h3>Changing views</h3><p>The <code>activate</code> function shows and hides views according to the view ID that it receives as a parameter.  Switching from one view to another requires a major screen update, and therefore the WRT <code>widget.prepareForTransition</code> and <code>widget.performTransition</code> methods are used.  This prevents screen flicker and adds a fade effect when the views change.</p><pre class="codeblock">Menu.prototype.activate = function( screenId ) {	
+	widget.prepareForTransition( "fade" ); 
+	
+	Helper.show( "menu_strip", screenId != Menu.LOGIN_SCREEN );		
+
+	// Show the desired screen.
+	Helper.show( Menu.LOGIN_SCREEN, screenId == Menu.LOGIN_SCREEN );
+	Helper.show( Menu.UPDATE_STATUS_SCREEN, screenId == Menu.UPDATE_STATUS_SCREEN );
+	Helper.show( Menu.SEARCH_SCREEN, screenId == Menu.SEARCH_SCREEN );
+	Helper.show( Menu.SETTINGS_SCREEN, screenId == Menu.SETTINGS_SCREEN );
+			
+	// Update the menu strip manually.
+	// Activate the selected button.
+	this._activateButton( screenId );
+	}	
+	
+	// Known issue: Below line doesn't work if the activation comes from widget's submenu.
+	//widget.performTransition();
+	setTimeout ( "widget.performTransition();", 0 );
+}
+</pre><p>The code above uses a helper function called <code>show</code> to show and hide views. The function is located in the <code>Helper.js</code> file. The function retrieves the DOM element of the ID it accepts as a parameter and assigns or deletes a <code>hidden</code> style to or from it by using the <code>className</code> property.</p></div>
+<div><h3>Activating views</h3><p>The logic behind each view needs to be informed that the view is being activated, so that the functions assigned to views can be performed when the view is shown. For example, reload data from the storage in the <span class="uicontrol">Settings</span> view, refresh data in the <span class="uicontrol">Update Status</span> view, and so on. Each view implements an <code>onActivated</code> function to receive notification when it is activated.</p><pre class="codeblock">if ( screenId == Menu.LOGIN_SCREEN ) {
+	loginScreen.onActivated();
+} else if ( screenId == Menu.UPDATE_STATUS_SCREEN ) {
+	updateScreen.onActivated();
+} else if ( screenId == Menu.SEARCH_SCREEN ) {
+	searchScreen.onActivated();
+} else if ( screenId == Menu.SETTINGS_SCREEN ) {
+	settingsScreen.onActivated();
+}
+</pre></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

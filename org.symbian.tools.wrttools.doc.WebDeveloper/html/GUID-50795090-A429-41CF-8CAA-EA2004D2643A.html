@@ -1,0 +1,159 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="AppManager Service API error messages"/><meta name="DC.Relation" scheme="URI" content="GUID-2D47E7D9-199D-4D59-BD6A-592FA9F8B16A"/><meta name="DC.Relation" scheme="URI" content="GUID-64CC3AB4-5444-474A-9470-818F423C5611"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-50795090-A429-41CF-8CAA-EA2004D2643A"/><title>AppManager Service API error messages </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-50795090-A429-41CF-8CAA-EA2004D2643A">AppManager Service API error messages</h1><div>
+<p>This section provides information about the error messages returned
+by the AppManager Service API methods.</p>
+<div><h3>GetList</h3>
+<p>The following table describes the error messages returned by <a href="GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952.html#GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952"><code>GetList</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-E32C83F2-8F14-4B6B-A1F8-CEACE2BE8F77"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-E32C83F2-8F14-4B6B-A1F8-CEACE2BE8F77" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetList error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e19758">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e19763">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e19758 ">
+<p><code>AppManager : GetList : Typ eMissing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19763 ">
+<p>This indicates that the <code>Type</code> property is missing
+from the input or that the type of the <code>Type</code> property
+is incorrect.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e19758 ">
+<p><code>AppManager : GetList : Filter type mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19763 ">
+<p>This indicates that the type of the <code>Filter</code> property
+is incorrect.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e19758 ">
+<p><code>AppManager : GetList: Asynchronous version of API is not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19763 ">
+<p>This indicates that the asynchronous version of <code>GetList</code> method
+was called but it is not supported.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>LaunchApp</h3>
+<p>The following table describes the error messages returned by <a href="GUID-697AFF1F-24C7-43BD-A072-8352B3BE973C.html#GUID-697AFF1F-24C7-43BD-A072-8352B3BE973C"><code>LaunchApp</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>LaunchApp</code> as
+part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-78B483E6-E6C6-4FD5-890B-C969DB2FC2E0"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-78B483E6-E6C6-4FD5-890B-C969DB2FC2E0" frame="border" border="1" rules="all"><caption><strong>Table: </strong>LaunchApp error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e19864">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e19869">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e19864 ">
+<p><code>AppManager : LaunchApp : Application ID Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19869 ">
+<p>This indicates that <code>ApplicationID</code> property is missing
+from the input or the type is incorrect.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e19864 ">
+<p><code>AppManager : LaunchApp : Command Line type mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19869 ">
+<p>This indicates that the type of the <code>CndLine</code> property
+is incorrect.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e19864 ">
+<p><code>AppManager : LaunchApp : OptionMap type mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19869 ">
+<p>This indicates that the type of the <code>Options</code> property
+is incorrect.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>LaunchDoc</h3>
+<p>The following table describes the error messages returned by <a href="GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA.html#GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA"><code>LaunchDoc</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>LaunchDoc</code> as
+part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-E63FAD23-7907-4CD8-B7D7-EDF1FC1E7153"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-E63FAD23-7907-4CD8-B7D7-EDF1FC1E7153" frame="border" border="1" rules="all"><caption><strong>Table: </strong>LaunchDoc error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e19967">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e19972">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e19967 ">
+<p><code>AppManager : LaunchDoc : Document/MimeType Missing or datatype
+mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19972 ">
+<p>This indicates that the <code>Document</code>/<code>MimeType</code> property
+is missing from the input or the type is incorrect.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e19967 ">
+<p><code>AppManager : LaunchDoc : OptionMap type mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e19972 ">
+<p>This indicates that the type of the <code>Options</code> property
+is incorrect.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Cancel</h3>
+<p>The following table describes the error messages returned by <a href="GUID-64CC3AB4-5444-474A-9470-818F423C5611.html#GUID-64CC3AB4-5444-474A-9470-818F423C5611"><code>Cancel</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-998069A5-D75A-4D89-9690-868131FC23D6"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-998069A5-D75A-4D89-9690-868131FC23D6" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Cancel error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e20047">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e20052">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e20047 ">
+<p><code>AppManager : Cancel: Invalid Transaction ID</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e20052 ">
+<p>This indicates that either an invalid <code>TransactionID</code> was
+passed or an asynchronous call associated with this ID has already been completed.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e20047 ">
+<p><code>AppManager : Cancel: Missing Transaction ID</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e20052 ">
+<p>This indicates that the <code>TransactionID</code> property
+is missing from the input.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

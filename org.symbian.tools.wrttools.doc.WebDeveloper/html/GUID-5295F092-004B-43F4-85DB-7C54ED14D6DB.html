@@ -1,0 +1,106 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IMessaging.Send()"/><meta name="DC.Relation" scheme="URI" content="GUID-DFEDF3BF-BA73-4418-815C-83B80B888821"/><meta name="DC.Relation" scheme="URI" content="GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-5295F092-004B-43F4-85DB-7C54ED14D6DB"/><title>IMessaging.Send() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-5295F092-004B-43F4-85DB-7C54ED14D6DB"><span>IMessaging.</span>Send()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Send</code> method sends an SMS or MMS message.</p>
+<p>This method can be called both synchronously and asynchronously.</p>
+<p><strong>Syntax:</strong></p>
+<p>For synchronous calls:</p>
+<pre class="codeblock" id="GUID-0A45190E-1AD2-4CA0-9808-7192ABEFF3AC">result = so.IMessaging.Send(criteria);</pre>
+
+<p>For asynchronous calls:</p>
+<pre class="codeblock" id="GUID-1B239649-3C04-4E43-86B1-4EBEC2EA1045">result = so.IMessaging.Send(criteria, callback);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the type and details of the message
+to send. For more information about the object properties and how to define
+them, see section <a href="GUID-1A98E402-3609-4E83-A86C-98AB37025A47.html#GUID-1A98E402-3609-4E83-A86C-98AB37025A47">Criteria for sending a message</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when an asynchronous <code>Send</code> call has status
+information to return. You must define this method separately. Follow the
+instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+<p>This argument is used only with an asynchronous <code>Send</code> call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>If synchronous, the <code>Send</code> method returns an object
+that contains an error code and an error message.</p>
+<p>If asynchronous, the method returns an object that contains a transaction
+ID for the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> instance,
+an error code, and an error message (see the following table). When the asynchronous
+call has completed, <code>callback</code> returns an object that contains
+an error code and an error message (see <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-E43BC9EA-3EBE-4C7F-A57E-A1C33BB01CF4">Table:
+Callback return value</a>).</p>
+<div class="tablenoborder"><a name="GUID-1A7A6218-106F-4490-9FFA-0A1F5216D529"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-1A7A6218-106F-4490-9FFA-0A1F5216D529" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for Send</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e59584">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e59589">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e59594">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59584 ">
+<p><code>result.ReturnValue</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59589 ">
+<p>This is a number used as an identification to match transactions started
+with an asynchronous <code>Send</code> call to one or more calls it
+generates to <code>callback</code>.</p>
+<p>This property is only valid for asynchronous calls.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59594 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59584 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59589 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59594 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59584 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59589 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59594 ">
+<p>See <a href="GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A.html#GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A">Messaging Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<p>Apart from status information and transaction IDs for asynchronous calls,
+the <code>Send</code> method does not return any result information.</p>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B.html#GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B">the full example</a>.</p>
+
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

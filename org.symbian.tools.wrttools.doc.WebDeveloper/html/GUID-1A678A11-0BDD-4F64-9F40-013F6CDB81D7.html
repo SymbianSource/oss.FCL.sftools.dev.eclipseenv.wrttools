@@ -1,0 +1,26 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript SystemInfo Service API (WRT 1.0)"/><meta name="DC.Relation" scheme="URI" content="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7"/><title>JavaScript SystemInfo Service API (WRT 1.0) </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7">JavaScript SystemInfo Service API (WRT 1.0)</h1><div>
+<p>This <a href="GUID-E9A578AA-58C5-4902-B418-4CE44EA40D5D.html#GUID-E9A578AA-58C5-4902-B418-4CE44EA40D5D">SystemInfo Service</a> API is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.0</a>.</p>
+<p>The SystemInfo Service provides a set of system information services, allowing widgets to access a device's properties and to control certain device features. The SystemInfo Service API is implemented in a plug-in module and it is integrated into the WRT environment.</p>
+<p>To use the SystemInfo APIs, each widget must load the plug-in module explicitly by defining the following HTML code in its main HTML document:</p>
+<pre class="codeblock" id="GUID-5DAC9857-1923-467F-B17E-BF61A5DE57FE">&lt;embed type="application/x-systeminfo-widget" hidden="yes"&gt;&lt;/embed&gt;</pre>
+<p>Then the reference to the object must be retrieved via a JavaScript code as shown below:</p>
+<pre class="codeblock" id="GUID-87D58196-5B80-459F-8B75-DFE8ED9D0D3B">var sysinfo = document.embeds[0];</pre>
+<div class="note"><p><strong class="note_title">Note: </strong>In the code above, it is assumed that the embedded systeminfo is the first <code>embed</code> element in the HTML file.</p>
+<p>Throughout the following sections where syntax and example codes illustrate the usage of the SystemInfo API, it is assumed that the plug-in module is loaded and the reference to the object is defined as <code>sysinfo</code> as implemented above.</p>
+</div>
+<p>The services provided by the plug-in SystemInfo API can be divided into seven main categories:</p>
+<ul>
+<li><p><a href="GUID-6521F749-FA06-493B-A11D-B47F4DC0E6D6.html#GUID-6521F749-FA06-493B-A11D-B47F4DC0E6D6">Power information services</a></p></li>
+<li><p><a href="GUID-92D6E2DB-8BAF-4710-AB23-C16F7DE917CA.html#GUID-92D6E2DB-8BAF-4710-AB23-C16F7DE917CA">Network information services</a></p></li>
+<li><p><a href="GUID-318BD3F5-D351-4BC2-8F4F-6E096A56CD54.html#GUID-318BD3F5-D351-4BC2-8F4F-6E096A56CD54">Display and keypad illumination information and control services</a></p></li>
+<li><p><a href="GUID-6B348161-2ED2-498E-A166-C3B28C58BC68.html#GUID-6B348161-2ED2-498E-A166-C3B28C58BC68">Vibration information and control services</a></p></li>
+<li><p><a href="GUID-8A6C9B2B-F130-4174-B105-C89A0E0469E0.html#GUID-8A6C9B2B-F130-4174-B105-C89A0E0469E0">Beep tone control services</a></p></li>
+<li><p><a href="GUID-896164BE-C1A6-42BF-B2BD-7C63CF8C166A.html#GUID-896164BE-C1A6-42BF-B2BD-7C63CF8C166A">Memory and file system information services</a></p></li>
+<li><p><a href="GUID-7BC25BBD-5BC2-4E37-A5A1-E85484ED3EF5.html#GUID-7BC25BBD-5BC2-4E37-A5A1-E85484ED3EF5">System language information services</a></p></li>
+</ul>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

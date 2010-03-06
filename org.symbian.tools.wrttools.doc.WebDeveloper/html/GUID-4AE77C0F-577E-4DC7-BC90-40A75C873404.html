@@ -1,0 +1,30 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="prepareForTransition()"/><meta name="DC.Relation" scheme="URI" content="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB"/><meta name="DC.Relation" scheme="URI" content="GUID-E8E82EBC-05E6-49A2-9451-BF02986BCEE8"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404"/><title>prepareForTransition() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404">prepareForTransition()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The widget's view is composed by HTML elements such as text display area, buttons, edit fields, and so on. The appearance of these HTML elements can be dynamically changed. For example, they can be shown or hidden dynamically using the HTML DOM style object to set the display property to "block" or "none" respectively. For instance:</p>
+<p>To show an element, call <code>[object].style.display = "block"</code></p>
+<p>To hide an element, call <code>[object].style.display = "none"</code></p>
+<p>The purpose of the <code>prepareForTransition</code> method is to prepare a widget for a transition state before modifying the widget view by disabling updates to the widget UI. Thus, when modifying a widget view where the appearance of many HTML elements will be changed, <code>prepareForTransition</code> will help to prevent the widget UI from being updated at once and one by one, which could potentially cause screen flickering.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-F0F3DC2C-A0E0-4A99-8222-5CC639481389">[void] widget.prepareForTransition(String transitionMode) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-3AD6934C-3654-434E-BE1A-B25B03DFBCD4">[void] window.widget.prepareForTransition(String transitionMode)</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>transitionMode</code>:</p>
+
+<p>A text string defining a desired transition mode. Currently the only supported transition mode is "fade", which causes the widget's view changing in fading mode.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Remarks:</strong></p>
+<p>This method is to be used together with the <a href="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB.html#GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB"><code>performTransition</code></a> method. A widget's screen is not updated until the <a href="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB.html#GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB"><code>performTransition</code></a> method is called.</p>
+<p><strong>Example code:</strong></p>
+<p>See the <a href="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB.html#GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB"><code>performTransition</code></a> example code.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

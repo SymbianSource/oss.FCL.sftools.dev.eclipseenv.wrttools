@@ -1,0 +1,440 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for retrieving media information"/><meta name="DC.Relation" scheme="URI" content="GUID-521A45D0-9CCD-4BFE-807E-DE731D45EAE4"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-E5684FF0-28C9-4721-9421-6B9432087086"/><meta name="DC.Relation" scheme="URI" content="GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-474623C2-0C81-445A-802B-77FA1C8C6C54"/><title>Criteria for
+retrieving media information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-474623C2-0C81-445A-802B-77FA1C8C6C54"><span>Criteria</span> for
+retrieving media information</h1><div>
+<p>The <code>criteria</code> object specifies what media
+information is returned and how the returned information is sorted.</p>
+<p>The <code>criteria</code> object has three main properties: <code>Type</code>, <code>Filter</code>,
+and <code>Sort</code>. These are described in the following table.
+Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-4F8D9779-9506-4CAF-82A4-EF088E413713"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-4F8D9779-9506-4CAF-82A4-EF088E413713" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e55875">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e55880">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e55885">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e55890">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies the type of media objects to retrieve.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"FileInfo"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>criteria.Filter</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies how the information to be retrieved is filtered.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>criteria.Filter.FileType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies the type of media files about which to retrieve information.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Music"</code></p></li>
+<li><p><code>"Sound"</code></p></li>
+<li><p><code>"Image"</code></p></li>
+<li><p><code>"Video"</code></p></li>
+<li><p><code>"StreamingURL"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>[criteria.Filter.Key]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>This property is used together with <code>Filter.StartRange</code> and
+optionally <code>Filter.EndRange</code> to specify a further filter
+criterion based on a media file property ("key"). If you specify this property,
+you must also specify <code>Filter.StartRange</code>.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>If this property is not specified, then all files of <code>Filter.FileType</code> are
+fetched.</p>
+</div>
+<p>For more information about keys, see <a href="#GUID-CB490613-D986-4D01-8B46-ED64073B4FF8">Table:
+Keys for filtering and sorting</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"FileName"</code></p></li>
+<li><p><code>"FileExtension"</code></p></li>
+<li><p><code>"Drive"</code></p></li>
+<li><p><code>"FileSize"</code></p></li>
+<li><p><code>"FileDate"</code></p></li>
+<li><p><code>"MimeType"</code></p></li>
+<li><p><code>"FileNameAndPath"</code></p></li>
+<li><p><code>"SongName"</code></p></li>
+<li><p><code>"Artist"</code></p></li>
+<li><p><code>"Album"</code></p></li>
+<li><p><code>"Genre"</code></p></li>
+<li><p><code>"TrackNumber"</code></p></li>
+<li><p><code>"Composer"</code></p></li>
+<li><p><code>"LinkFirstURL"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>[criteria.Filter.StartRange]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies the starting range and is valid for all key types.</p>
+<p>For example, if you set <code>Filter.Key</code> to <code>"FileName"</code>,
+specify the file name in this property and leave <code>Filter.EndRange</code> unspecified.</p>
+<p>This property is mandatory only if you specify <code>Filter.Key</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Depends on <code>Filter.Key</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>[criteria.Filter.EndRange]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies the end range and is valid for the following keys:</p>
+<ul>
+<li><p><code>FileSize</code> </p></li>
+<li><p><code>FileDate</code> </p></li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Depends on <code>Filter.Key</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>[criteria.Sort]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies how the returned list of information is sorted.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>[criteria.Sort.Key]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies the key to sort by.</p>
+<p>For more information about keys, see <a href="#GUID-CB490613-D986-4D01-8B46-ED64073B4FF8">Table:
+Keys for filtering and sorting</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"FileName"</code></p></li>
+<li><p><code>"FileExtension"</code></p></li>
+<li><p><code>"Drive"</code></p></li>
+<li><p><code>"FileSize"</code></p></li>
+<li><p><code>"FileDate"</code></p></li>
+<li><p><code>"MimeType"</code></p></li>
+<li><p><code>"FileNameAndPath"</code></p></li>
+<li><p><code>"SongName"</code></p></li>
+<li><p><code>"Artist"</code></p></li>
+<li><p><code>"Album"</code></p></li>
+<li><p><code>"Genre"</code></p></li>
+<li><p><code>"TrackNumber"</code></p></li>
+<li><p><code>"Composer"</code></p></li>
+<li><p><code>"LinkFirstURL"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55875 ">
+<p><code>[criteria.Sort.Order]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55880 ">
+<p>Specifies the sort order.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>By default, sorting is done in ascending order based on file name.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55885 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e55890 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Ascending"</code></p></li>
+<li><p><code>"Descending"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the possible values for <code>Filter.StartRange</code> and <code>Filter.EndRange</code> depending
+on the selected key.</p>
+<div class="tablenoborder"><a name="GUID-CB490613-D986-4D01-8B46-ED64073B4FF8"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-CB490613-D986-4D01-8B46-ED64073B4FF8" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Keys for filtering
+and sorting</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e56445">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e56450">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e56455">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e56460">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>FileName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by file name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full file name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>FileExtension</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by file extension.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>"." + file extension</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>Drive</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by file drive.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Drive letter + ":"</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>FileSize</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by file size.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>File size in bytes</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Start range and end range are needed.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>FileDate</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by file date.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>File date as YYYYMMDD:HHMMSS</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Start range and end range are needed.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>FileNameAndPath</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by full path and file name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full path including file name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>SongName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by song name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full song name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>Artist</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by artist name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full artist name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>Album</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by album name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full album name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>Genre</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by genre.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full genre name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>TrackNumber</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by track number.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full track number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>Composer</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by composer.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full composer name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>LinkFirstURL</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by URL.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>Full URL of the streaming media file</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56445 ">
+<p><code>MimeType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56450 ">
+<p>Filter/sort the result by MIME type.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56455 ">
+<p>MIME type</p>
+<p>For example: <code>image/jpg</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e56460 ">
+<p>string</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

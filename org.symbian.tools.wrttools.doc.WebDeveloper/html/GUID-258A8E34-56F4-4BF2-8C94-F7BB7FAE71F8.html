@@ -1,0 +1,242 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for retrieving log events"/><meta name="DC.Relation" scheme="URI" content="GUID-F22F30CF-0BCB-4720-9F47-691BDC517E5C"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"/><meta name="DC.Relation" scheme="URI" content="GUID-7E53CD9F-E213-42E7-8569-02AEA1198E52"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-258A8E34-56F4-4BF2-8C94-F7BB7FAE71F8"/><title>Criteria for
+retrieving log events </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-258A8E34-56F4-4BF2-8C94-F7BB7FAE71F8"><span>Criteria</span> for
+retrieving log events</h1><div>
+<p>The <code>criteria</code> object specifies what log event
+information is returned.</p>
+<p>The <code>criteria</code> object has two main properties: <code>Type</code> and <code>Filter</code>.
+These are described in the following table. Properties enclosed in brackets
+are optional.</p>
+<div class="tablenoborder"><a name="GUID-6AD9C1FD-A522-4FD8-8521-A1940AA67167"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-6AD9C1FD-A522-4FD8-8521-A1940AA67167" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e52189">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" id="d0e52194">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" id="d0e52199">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" id="d0e52204">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies the type of content.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Log"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies the criteria to search for specific events in the log database.</p>
+<p>If <code>Filter</code> is not specified, all of the events from
+the log database are retrieved.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.id]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies a unique identifier of an event in the log database.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>When <code>[id]</code> is specified, all other keys are ignored.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.RecentList]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Creates a view of the most recent 20 events in the specified recent
+call list. The recent call list derives from recent log entries (a subset
+of all log entries). </p>
+<p>On successful completion, the view is positioned at the first (most
+recent) event in the recent call list.</p>
+<p>Recent lists do not contain individual entries for duplicate events,
+such as two outgoing calls to the same number.  </p>
+<div class="note"><p><strong class="note_title">Note: </strong>When <code>[RecentList]</code> is specified, all other keys
+are ignored. If <code>[id]</code> is specified, it takes precedence
+and <code>[RecentList]</code> is ignored.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p><strong>Value - Description:</strong></p>
+<p><code>-1</code> - EKLogNullRecentList</p>
+<p><code>1</code> - EKLogRecentIncomingCalls</p>
+<p><code>2</code> - EKLogRecentOutgoingCalls</p>
+<p><code>3</code> - EKLogRecentMissedCalls</p>
+<p>A value of <code>-1</code> - EKLogNullRecentList results in
+a view that includes events from all of the recent event lists.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.EventType]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies a unique identifier for the type of event; such as call, fax,
+etc.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p><strong>Value - Description:</strong></p>
+<p><code>0</code> - EKLogCallEventType</p>
+<p><code>1</code> - EKLogDataEventType</p>
+<p><code>2</code> - EKLogFaxEventType</p>
+<p><code>3</code> - EKLogShortMessageEventType</p>
+<p><code>4</code> - EKLogPacketDataEventType</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.PhoneNumber]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies the phone number associated with the event. </p>
+<div class="note"><p><strong class="note_title">Note: </strong>This is used when the number cannot be stored in any other key. For
+example, if there is an entry in the contacts database for a person named
+Prakash, then <code>RemoteParty</code> is specified as "Prakash" and <code>PhoneNumber</code> is
+needed to specify the phone number. If there is no entry for Prakash, <code>RemoteParty</code> is
+specified as the phone number.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p>Up to 100 characters. If the length of the specified string is greater
+than 100 characters, the number is truncated.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.RemoteParty]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies the destination of the outgoing event or the source of incoming
+event.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p>Up to 64 characters. If the length of the specified string is greater
+than 64 characters, the data is truncated.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.Direction]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies whether the event is incoming, outgoing, or missed and if
+it came in on an alternate line.</p>
+<p>Alternate line refers to the second phone call on the mobile device.
+Alternate line values, such as <code>2</code> - EIncomingEventAlternateline,
+are valid for call events only.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p><strong>Value - Description:</strong></p>
+<p><code>0</code> - EIncomingEvent</p>
+<p><code>1</code> - EOutgoingEvent</p>
+<p><code>2</code> - EIncomingEventAlternateline</p>
+<p><code>3</code> - EOutgoingEventAlternateline</p>
+<p><code>4</code> - EFetchedEvent</p>
+<p><code>5</code> - EMissedEvent</p>
+<p><code>6</code> - EMissedEventAlternateline</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.DeliveryStatus]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies whether the event was delivered, is pending, failed to be
+delivered, etc.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p><strong>Value - Description:</strong></p>
+<p><code>0</code> - EStatusPending</p>
+<p><code>1</code> - EStatusSent</p>
+<p><code>2</code> - EStatusFailed</p>
+<p><code>3</code> - EStatusNone</p>
+<p><code>4</code> - EStatusDone</p>
+<p><code>5</code> - EStatusSent</p>
+<p><code>6</code> - EStatusScheduled</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.EndTime]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Events added to the log after this time will not be retrieved.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">
+<p>date object</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e52189 ">
+<p><code>[criteria.Filter.LogFlags]</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52194 ">
+<p>Specifies the flags for this event. This method does not change any
+other flag bit settings.</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52199 ">
+<p><strong>Value - Description:</strong></p>
+<p><code>0</code> - EKLogEventContactSearched</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The EKLogEventContactSearched flag is set when the user searches the
+contact database for any operation such as a voice call or SMS.</p>
+</div>
+<p><code>1</code> - EKLogEventRead</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The EKLogEventRead flag is set when the user "reads" the event in the
+log database.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e52204 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

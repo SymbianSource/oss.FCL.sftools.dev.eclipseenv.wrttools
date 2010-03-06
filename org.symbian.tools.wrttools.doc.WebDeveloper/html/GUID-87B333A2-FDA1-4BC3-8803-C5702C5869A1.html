@@ -1,0 +1,31 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="setNavigationEnabled()"/><meta name="DC.Relation" scheme="URI" content="GUID-180F11FD-8D26-4305-814F-01BF8DB2DDC8"/><meta name="DC.Relation" scheme="URI" content="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-87B333A2-FDA1-4BC3-8803-C5702C5869A1"/><title>setNavigationEnabled() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-87B333A2-FDA1-4BC3-8803-C5702C5869A1">setNavigationEnabled()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The navigation mode in a widget can be toggled between a cursor and a tabbed navigation mode. By default, the browsing mode of a widget is set to use a cursor (pointer). The <code>setNavigationEnabled</code> method is used for changing the widget's navigation mode.</p>
+<p>The argument <code>navigationType</code> is of Boolean type and can be set to <code>true</code> or <code>false</code> to toggle the navigation mode between the cursor mode and the tab mode respectively.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-D64B9411-C4FD-4EDF-8431-70BC3BEFA891">[void] window.widget.setNavigationEnabled(Boolean navigationMode) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-727EBFD0-D7F5-47F7-B32A-0FE6D516F167">[void] widget.setNavigationEnabled(Boolean navigationMode)</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>navigationMode</code>:</p>
+
+<p>Set to <code>true</code> to enable the cursor navigation mode, and set to <code>false</code> to enable the tabbed navigation mode.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Remarks:</strong></p>
+<p>Tab navigation is only recommended for simple vertical navigation. Enable the tabbed navigation mode to disable the cursor pointer when using JavaScript to handle key events. For more information, see <a href="GUID-10F0126C-79CA-47BA-B7CA-53A866EFE04B.html#GUID-10F0126C-79CA-47BA-B7CA-53A866EFE04B">Navigating on screens</a>. </p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-80A0AEF2-7F8D-4D47-BBF0-FD0DFFC65786">// Tab mode
+widget.setNavigationEnabled(false); 
+// Cursor mode
+widget.setNavigationEnabled(true);</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

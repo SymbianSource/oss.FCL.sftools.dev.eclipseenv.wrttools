@@ -1,0 +1,95 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.Add()"/><meta name="DC.Relation" scheme="URI" content="GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A"/><meta name="DC.Relation" scheme="URI" content="GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51"/><title>IDataSource.Add() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51"><span>IDataSource.</span>Add()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Add</code> method creates a new calendar on the device
+or adds an entry to a calendar. In the latter case, if an entry with the same <code>LocalId</code> already
+exists in the calendar, it is modified accordingly. You can thus use this
+method to both add and update calendar entries. The entry is added to the
+specified calendar or, if no calendar is specified, to the default one. If
+the default calendar does not exist, it is created.</p>
+<p>This is a synchronous method.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-0EE18D9D-227E-4F3E-B727-747F9EB2FE05">result = so.IDataSource.Add(criteria);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the calendar to create or the calendar
+entry to add or update. For more information about the object properties and
+how to define them, see section <a href="GUID-54013A2F-7503-4DA3-85C7-904BCD98B011.html#GUID-54013A2F-7503-4DA3-85C7-904BCD98B011">Criteria for adding and updating calendar information</a>.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>Add</code> method returns an object that contains
+an error code and an error message. In addition, if a calendar entry was added
+or updated, the result object contains the <code>id</code> of that
+entry.</p>
+<div class="tablenoborder"><a name="GUID-D69A1555-681F-4BCD-B9A8-4B676111E795"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D69A1555-681F-4BCD-B9A8-4B676111E795" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for Add</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e21301">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e21306">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e21311">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21301 ">
+<p><code>[result.ReturnValue]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21306 ">
+<p>This is a text string that contains the <code>id</code> of the
+entry that was added or updated.</p>
+<p>If a new calendar was created, this property is not included in the
+result object.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21311 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21301 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21306 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21311 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21301 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21306 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e21311 ">
+<p>See <a href="GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35.html#GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35">Calendar Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p>If an entry is added or updated to a calendar other than
+the default one, the corresponding calendar file must exist on the device.</p>
+</li>
+<li><p>For detailed information about calendar entries, see section <a href="GUID-798E9CA0-2A46-4D10-B567-04C9567500F4.html#GUID-798E9CA0-2A46-4D10-B567-04C9567500F4">Calendar entries</a>.</p></li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3.html#GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3">the full example</a>.</p>
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

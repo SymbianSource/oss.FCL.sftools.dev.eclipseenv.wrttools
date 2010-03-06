@@ -1,0 +1,204 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Returned messaging information"/><meta name="DC.Relation" scheme="URI" content="GUID-5720512C-9198-4883-81B1-46F1B963C6B9"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Relation" scheme="URI" content="GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C8571941-AD6E-4FAD-B4A1-35E7BDB99689"/><title>Returned
+messaging information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C8571941-AD6E-4FAD-B4A1-35E7BDB99689">Returned
+messaging information</h1><div>
+<p>The <code>ReturnValue</code> property returned by <a href="GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48.html#GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48"><code>GetList</code></a> is an iterator containing the requested messaging information. Each
+item (object) in the iterator corresponds to one message, that is, each item
+contains the data and metadata of a specific message.</p>
+<div class="tablenoborder"><a name="GUID-987A7D39-4930-4801-B424-90AB7C9E702B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-987A7D39-4930-4801-B424-90AB7C9E702B" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue properties
+for messaging information</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e59039">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e59044">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e59049">
+<p>Notes</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.MessageType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"SMS"</code></p></li>
+<li><p><code>"MMS"</code></p></li>
+<li><p><code>"unknown"</code></p></li>
+</ul>
+<p>The Messaging Service only supports SMS and MMS. Other types of messages
+are <code>unknown</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Sender</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Subject</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">
+<p>Since SMS does not support subject, this property contains the first
+few characters of <code>BodyText</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Time</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>object</p>
+
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Priority</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Low"</code></p></li>
+<li><p><code>"Medium"</code></p></li>
+<li><p><code>"High"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Attachment</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Unread</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.MessageId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.BodyText</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.To</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Cc</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.Bcc</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.AttachmentList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>array of objects</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">
+<p>Each object in the array contains the properties specified below.</p>
+<p>The first attachment is specified in <code>AttachmentList[0]</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.AttachmentList[].FileName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">
+<p>This property is only valid for MMS. SMS does not support attachments.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.AttachmentList[].FileHandle</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.AttachmentList[].MimeType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59039 ">
+<p><code>&lt;item&gt;.AttachmentList[].FileSize</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59044 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e59049 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

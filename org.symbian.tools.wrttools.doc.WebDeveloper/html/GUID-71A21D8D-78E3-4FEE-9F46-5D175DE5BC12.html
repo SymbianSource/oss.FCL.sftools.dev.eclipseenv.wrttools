@@ -1,0 +1,77 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: implementing a Twitter service"/><meta name="abstract" content="Implement a Twitter service to fetch data from Twitter."/><meta name="description" content="Implement a Twitter service to fetch data from Twitter."/><meta name="DC.Relation" scheme="URI" content="GUID-A3C4CDE4-4231-463D-B6A8-4969B91BDA0C"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-1FD5C597-43B8-402E-92B8-FE0787DB4F3B"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-71A21D8D-78E3-4FEE-9F46-5D175DE5BC12"/><meta name="DC.Language" content="en"/><title>STEW: implementing a Twitter service </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-71A21D8D-78E3-4FEE-9F46-5D175DE5BC12">STEW: implementing a Twitter service</h1><div><p>Implement a Twitter service to fetch data from Twitter.</p>
+<p>The <code>TwitterService</code> object that fetches data from Twitter is located in the <code>TwitterService.js</code> file. A REST (Representational State Transfer) API call is created by constructing a URL with the appropriate Twitter method name and parameters. The credentials are encoded in the URL to log users into Twitter automatically. A JSON (JavaScript Object Notation) response is requested and the maximum number of returned responses is set. The URL is passed to the <code>_doRequest</code> function.</p>
+<pre class="codeblock">TwitterService.prototype.getFriendsTweets = function( count, progressId ) {
+	// Build URL and do the request.
+	var url = "http://" + this.username + ":" + this.password + "@twitter.com/statuses/friends_timeline.json?count=" + count;
+	this._doRequest( url );
+}
+</pre>
+<p>The <code>_doRequest</code> function makes an asynchronous request to the URL.  The function also sets the type of the request to GET or POST.  Before making the actual request by calling the XMLHttpRequest <code>send</code> function a function is assigned to the XMLHttpRequest <code>readystatechange</code> event handler.</p>
+<pre class="codeblock">TwitterService.prototype._doRequest = function( url, type ){
+    this.httpReq = new XMLHttpRequest();
+	
+    var self = this;
+    this.httpReq.onreadystatechange = function() { 
+		self._readyStateChanged(); 
+	};
+
+	// Default to GET HTTP request if none is provided.
+	if ( type == null ) {
+		type = "GET";
+	}
+	
+    this.httpReq.open( type, url, true );			
+    this.httpReq.send( "" );
+}
+</pre>
+<p>The <code>_readyStateChanged</code> function is the heart of the <code>TwitterService</code>. The <code>readystatechange</code> event is not only triggered when the request is complete so whenever the event handler function gets called, the value of the XMLHttpRequest <code>readyState</code> property must be checked. Value 4 (DONE) indicates that the data transfer has been completed or that something went wrong during the transfer. Because it indicates both successful and unsuccessful requests, the response status of the request must be determined by looking at the <code>status</code> property of the XMLHttpRequest. If the value is 200 (OK), the response text is retrieved from the XMLHttpRequest <code>responseText</code> property. Any other value indicates that an error has occurred during the request.</p>
+<pre class="codeblock">TwitterService.prototype._readyStateChanged = function() {
+    // complete request?
+    if ( this.httpReq.readyState == 4 ) {
+        // attempt to get response status
+        var responseStatus = null;
+        try {
+            responseStatus = this.httpReq.status;
+        } 
+		catch (noStatusException) {
+			alert( StringTable.Code.twitterServiceNoStatusAlert );
+		}
+		
+		// Check response status.
+		if ( responseStatus == 200 ) {
+			var res = null;
+			
+			// If response doesn't contain xml, forward text.
+			res = this.httpReq.responseText;
+
+			// Not needed anymore.
+			this.httpReq = null;
+			this.handleSuccessResponse.call( this, res );
+		} else {
+			this.handleErrorResponse.call( this, responseStatus );
+		}
+    }
+}
+</pre>
+<p>Depending on the response status of the request, either <code>handleSuccessResponse</code> or <code>handleErrorResponse</code> is triggered to notify whoever triggered the request.  Since this is all done asynchronously, callback functions are used.</p>
+<pre class="codeblock">TwitterService.prototype.handleSuccessResponse = function( arg ) {
+	// Eval the data.
+	var response = eval( "(" + arg  + ")" );
+
+    // Feed fetched and parsed successfully.
+	if ( this.onSuccess )
+		this.onSuccess.call( this, response );	
+}
+	
+TwitterService.prototype.handleErrorResponse = function( status ) {
+	if ( this.onError )
+		this.onError.call( this, status );
+}
+</pre>
+<p>If <code>onSuccess</code> or <code>onError</code> functions are defined, they are called with a response object.  For an error response, this object is an integer that indicates the status of the request. For a successful response, before triggering the <code>onSuccess</code> callback, an <code>eval</code> is performed on the response text.  This creates JavaScript objects from JSON response text into the response variable, which is then passed as a parameter to the <code>onSuccess</code> callback.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

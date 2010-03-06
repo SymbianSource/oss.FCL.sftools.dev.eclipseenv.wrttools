@@ -1,0 +1,150 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for retrieving landmark information"/><meta name="DC.Relation" scheme="URI" content="GUID-89A7E790-06F0-488E-B833-AC63B9995E25"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Relation" scheme="URI" content="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-8074E501-A64A-41F8-B598-05D8B496438F"/><title>Criteria for
+retrieving landmark information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-8074E501-A64A-41F8-B598-05D8B496438F"><span>Criteria</span> for
+retrieving landmark information</h1><div>
+<p>The <code>criteria</code> object specifies what landmark
+information is returned and how the returned information is sorted.</p>
+<p>Each <a href="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html#GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><code>GetList</code></a> call
+targets one type of landmark information:</p>
+<ul>
+<li><p>Landmark</p></li>
+<li><p>Landmark category</p></li>
+<li><p>Landmark database</p></li>
+</ul>
+<p>For more information about the types, see the <a href="GUID-D581028C-06ED-422D-866E-AE6C93075084.html#GUID-D581028C-06ED-422D-866E-AE6C93075084">Landmarks
+Service overview page</a>.</p>
+<p>The <code>criteria</code> object has three main properties: <code>Type</code>, <code>Filter</code>,
+and <code>Sort</code>. These are described in the following table.
+Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-B83DB416-E379-4F2E-9728-4C3C1BA3BA3B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-B83DB416-E379-4F2E-9728-4C3C1BA3BA3B" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e39638">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e39643">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e39648">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e39653">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39638 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39643 ">
+<p>Specifies the type of landmark information to retrieve.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The available <code>Filter</code> properties depend on the selected
+type.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39648 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39653 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Landmark"</code></p></li>
+<li><p><code>"Category"</code></p></li>
+<li><p><code>"Database"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39638 ">
+<p><code>[criteria.Filter]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39643 ">
+<p>Specifies how the information to be retrieved is filtered.</p>
+<p>The properties of this object depend on the specified <code>Type</code>:</p>
+<ul>
+<li><p><a href="GUID-7B55EBBB-B61B-4D2A-B93F-752E3488D58B.html#GUID-7B55EBBB-B61B-4D2A-B93F-752E3488D58B">Landmark
+properties</a></p></li>
+<li><p><a href="GUID-54D264D2-0E5F-4478-9334-712A9DCD0ABD.html#GUID-54D264D2-0E5F-4478-9334-712A9DCD0ABD">Landmark
+category properties</a></p></li>
+<li><p><a href="GUID-60B94D3B-4743-4254-8FD9-EB591DAADA0F.html#GUID-60B94D3B-4743-4254-8FD9-EB591DAADA0F">Landmark
+database properties</a></p></li>
+</ul>
+<p>If the <code>Filter</code> property is not specified, <code>GetList</code> returns
+a list of all the available landmarks, landmark categories, or landmark databases,
+depending on the specified <code>Type</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39648 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39653 ">
+<p>For example:</p>
+<p><code>criteria</code><code>.Filter.LandmarkName</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39638 ">
+<p><code>[criteria.Sort]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39643 ">
+<p>Specifies how the returned list of information is sorted.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39648 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39653 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39638 ">
+<p><code>[criteria.Sort.Key]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39643 ">
+<p>Specifies the information field (object property) to sort by.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39648 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39653 ">
+<p>Possible values:</p>
+<ul>
+<li><p>If <code>Type</code> is <code>"Landmark"</code>: <code>"LandmarkName"</code></p>
+</li>
+<li><p>If <code>Type</code> is <code>"Category"</code>: <code>"CategoryName"</code></p>
+</li>
+<li><p>If <code>Type</code> is <code>"Database"</code>: <code>"DatabaseURI"</code></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39638 ">
+<p><code>criteria.Sort.Order</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39643 ">
+<p>Specifies the sort order.</p>
+<p>The default value for this property depends on <code>Type</code>:</p>
+<ul>
+<li><p>If <code>Type</code> is <code>"Landmark"</code>: <code>"Ascending"</code></p>
+</li>
+<li><p>If <code>Type</code> is <code>"Category"</code>:
+No default value</p></li>
+<li><p>If <code>Type</code> is <code>"Database"</code>: <code>"Ascending"</code></p>
+</li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39648 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e39653 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Ascending"</code></p></li>
+<li><p><code>"Descending"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

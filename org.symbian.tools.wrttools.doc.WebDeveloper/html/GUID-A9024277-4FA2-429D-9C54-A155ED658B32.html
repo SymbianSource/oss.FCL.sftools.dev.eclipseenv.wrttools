@@ -1,0 +1,80 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.Export()"/><meta name="DC.Relation" scheme="URI" content="GUID-B8869924-0E95-4543-954E-5A4246922CB4"/><meta name="DC.Relation" scheme="URI" content="GUID-4D4E5B3E-ABC4-43CA-A7E8-027C46BD1FE6"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-A9024277-4FA2-429D-9C54-A155ED658B32"/><title>IDataSource.Export() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-A9024277-4FA2-429D-9C54-A155ED658B32"><span>IDataSource.</span>Export()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Export</code> method exports a set of landmarks from
+a landmark database.</p>
+<p>This is a synchronous method.</p>
+<p><strong>Syntax:</strong></p>
+
+<pre class="codeblock" id="GUID-EA5FE476-A276-42C9-8C1F-80067D72E46B">result = so.IDataSource.Export(criteria);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies the set of landmarks to export and
+optionally the source database. For more information about the object properties
+and how to define them, see section <a href="GUID-DD6F754D-6438-4B4E-8775-7BC1A9C45330.html#GUID-DD6F754D-6438-4B4E-8775-7BC1A9C45330">Criteria for exporting landmarks</a>.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>Export</code> method returns an object that contains
+an error code and an error message.</p>
+<div class="tablenoborder"><a name="GUID-3825B3B8-E032-4A32-B2C9-76552CEDD7B0"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-3825B3B8-E032-4A32-B2C9-76552CEDD7B0" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for Export</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e42888">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e42893">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e42898">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e42888 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e42893 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e42898 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e42888 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e42893 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e42898 ">
+<p>See <a href="GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C.html#GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C">Landmarks Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p>If no landmark database is specified, <code>Export</code> is
+performed on the default database. If the default database does not exist,
+it is created and set active. The default database is <code>file://c:eposlm.ldb</code>.</p>
+</li>
+<li><p>For more information about landmarks, landmark categories,
+and landmark databases, see the <a href="GUID-D581028C-06ED-422D-866E-AE6C93075084.html#GUID-D581028C-06ED-422D-866E-AE6C93075084">Landmarks
+Service overview page</a>.</p></li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-11D59F76-EC4C-4297-B262-D5174E826B43.html#GUID-11D59F76-EC4C-4297-B262-D5174E826B43">the
+full example</a>.</p>
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

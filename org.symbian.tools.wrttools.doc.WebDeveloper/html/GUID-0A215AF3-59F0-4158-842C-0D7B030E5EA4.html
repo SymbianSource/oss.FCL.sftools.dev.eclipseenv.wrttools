@@ -1,0 +1,202 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Service API error codes"/><meta name="DC.Relation" scheme="URI" content="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4"/><title>Service
+API error codes </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service
+API error codes</h1><div>
+<p>The following table lists the possible error codes returned by the Service
+API methods as part of their return value.</p>
+<p/>
+<div class="tablenoborder"><a name="GUID-11CAB47D-E3C4-4CF7-A5CB-2FCB62DF2459"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-11CAB47D-E3C4-4CF7-A5CB-2FCB62DF2459" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Service API error
+codes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="17%" id="d0e79205">
+<p>Error code</p>
+</th><th class="cellrowborder" valign="top" width="83%" id="d0e79210">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+
+
+
+
+
+
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>0</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Success</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1000</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Invalid service argument</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1001</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Unknown argument name</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1002</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Bad argument type</p>
+<p>This error can occur for any of the following reasons:</p>
+<ul>
+<li><p><code>StartRange</code> or <code>EndRange</code> is
+not specified or supported for the given <code>Key</code>.</p>
+</li>
+<li><p><code>EndRange</code> is less than <code>StartRange</code>.</p>
+</li>
+<li><p>The sorting <code>Key</code> is not supported.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1003</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Missing argument</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1004</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Service not supported</p>
+<p>This error can occur for any of the following reasons:</p>
+<ul>
+<li><p>The <code>FileType</code> or <code>Key</code> is
+wrong.</p></li>
+<li><p>The <code>Key</code> is not supported for the given <code>FileType</code>.</p>
+</li>
+<li><p>A synchronous call is placed instead of an asynchronous one.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1005</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Service in use</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1006</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Service not ready</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1007</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>No memory</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1008</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Hardware not available</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1009</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Server busy</p>
+<p>The service provider is busy with an ongoing request and cannot accept
+another one.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1010</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Entry exists</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1011</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Access denied</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1012</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Not found</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1013</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Unknown format</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1014</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>General error</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1015</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Cancel success</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1016</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Service timed-out</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="17%" headers="d0e79205 ">
+<p>1017</p>
+</td>
+<td class="cellrowborder" valign="top" width="83%" headers="d0e79210 ">
+<p>Path not found</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

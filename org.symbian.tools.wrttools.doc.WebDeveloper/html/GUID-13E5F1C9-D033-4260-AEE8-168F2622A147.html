@@ -1,0 +1,91 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for modifying a system attribute value"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Relation" scheme="URI" content="GUID-4347A7F1-1560-4B28-B4A8-DC570864F505"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-13E5F1C9-D033-4260-AEE8-168F2622A147"/><title>Criteria for
+modifying a system attribute value </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-13E5F1C9-D033-4260-AEE8-168F2622A147"><span>Criteria</span> for
+modifying a system attribute value</h1><div>
+<p>The <code>criteria</code> object specifies the new value
+for the <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">system attribute</a>.</p>
+<p>The <code>criteria</code> object has three properties: <code>Entity</code>, <code>Key</code>,
+and <code>SystemData</code>. These are described in the following
+table.</p>
+<div class="tablenoborder"><a name="GUID-275A0FA2-70D9-4796-9074-10F91964B83A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-275A0FA2-70D9-4796-9074-10F91964B83A" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e68307">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e68312">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e68317">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e68322">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68307 ">
+<p><code>criteria.Entity</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68312 ">
+<p>Specifies the entity of the system attribute.</p>
+<p>Together with <code>Key</code>, this specifies the system attribute
+to modify.</p>
+<p>For more information about entities, see section <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68317 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68322 ">
+<p>For a complete list of supported entities, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example: <code>"Display"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68307 ">
+<p><code>criteria.Key</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68312 ">
+<p>Specifies the key of the system attribute. The available keys depend
+on the entity.</p>
+<p>Together with <code>Entity</code>, this specifies the system
+attribute to modify.</p>
+<p>For more information about keys, see section <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68317 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68322 ">
+<p>For a complete list of supported keys per entity, see the <strong>Key</strong> column
+of the tables in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example: <code>"Wallpaper"</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68307 ">
+<p><code>criteria.SystemData</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68312 ">
+<p>Specifies the new value for the system attribute.</p>
+<p>The <code>SystemData</code> object has one or more properties
+that together represent the system attribute value. The exact set of properties
+depends on the system attribute (specifically, on the system data type used
+for input).</p>
+<p>For more information about system attribute values, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68317 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e68322 ">
+<p>The object properties depend on the system attribute. See the <strong>Input</strong> column
+cell for the appropriate system attribute in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example, the <code>Display - Wallpaper</code> system attribute
+takes <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a> information
+as input for <code>SetInfo</code>:</p>
+<p><code>SystemData.StringData = "C://Data//Others//wallpaper.jpeg"</code></p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

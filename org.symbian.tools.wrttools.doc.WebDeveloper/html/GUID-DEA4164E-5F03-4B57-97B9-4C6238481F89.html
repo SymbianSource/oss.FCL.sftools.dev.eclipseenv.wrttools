@@ -1,0 +1,222 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Location Service API error messages"/><meta name="DC.Relation" scheme="URI" content="GUID-620340F8-F844-445E-80AA-71C757320B7E"/><meta name="DC.Relation" scheme="URI" content="GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-DEA4164E-5F03-4B57-97B9-4C6238481F89"/><title>Location Service API error messages </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-DEA4164E-5F03-4B57-97B9-4C6238481F89">Location Service API error messages</h1><div>
+<p>This section provides information about the error messages returned
+by the Location Service API methods.</p>
+<p/>
+<div><h3>GetLocation</h3>
+<p>The following table describes the error messages returned by <a href="GUID-150E440F-56E4-4249-8739-A5A7A2050600.html#GUID-150E440F-56E4-4249-8739-A5A7A2050600"><code>GetLocation</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>GetLocation</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-912B708B-90FA-4829-9472-B7F3D6383C65"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-912B708B-90FA-4829-9472-B7F3D6383C65" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetLocation error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e50142">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e50147">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50142 ">
+<p><code>Location : GetLocation : Wrong category info should be BasicLocationInformation/GenericLocationInfo</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50147 ">
+<p>The <code>LocationInformationClass</code> property contains
+an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50142 ">
+<p><code>Location : GetLocation : BadArgument - Updateoptions</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50147 ">
+<p>An <code>Updateoptions</code> property has an invalid name.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50142 ">
+<p><code>Location : GetLocation : Negative Time Interval</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50147 ">
+<p>The <code>Updateoptions.UpdateInterval</code> property is negative.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50142 ">
+<p><code>Location : GetLocation : Updateoptions Type Mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50147 ">
+<p>An <code>Updateoptions</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Trace</h3>
+<p>The following table describes the error messages returned by <a href="GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5.html#GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5"><code>Trace</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Trace</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-44216F66-C9C4-45C7-8E5B-B8BE874FF0FC"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-44216F66-C9C4-45C7-8E5B-B8BE874FF0FC" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Trace error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e50264">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e50269">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50264 ">
+<p><code>Location : Trace : Invalid LocationInformationClass</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50269 ">
+<p>The <code>LocationInformationClass</code> property contains
+an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50264 ">
+<p><code>Location : Trace : BadArgument - Updateoptions</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50269 ">
+<p>An <code>Updateoptions</code> property has an invalid name.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50264 ">
+<p><code>Location : Trace : Negative Time Interval</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50269 ">
+<p>The <code>Updateoptions.UpdateInterval</code> property is negative.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50264 ">
+<p><code>Location : Trace : Updateoptions Type Mismatch</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50269 ">
+<p>An <code>Updateoptions</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Calculate</h3>
+<p>The following table describes the error messages returned by <a href="GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206.html#GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206"><code>Calculate</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-1D0892CD-CA46-4BC9-B947-2C871AAEF0E5"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-1D0892CD-CA46-4BC9-B947-2C871AAEF0E5" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Calculate error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e50379">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e50384">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50379 ">
+<p><code>Location : Calculate : Missing argument - MathRequest</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50384 ">
+<p>The <code>MathRequest</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50379 ">
+<p><code>Location : Calculate : Wrong argument - MathRequest</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50384 ">
+<p>The <code>MathRequest</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50379 ">
+<p><code>Location : Calculate : Missing argument - locationcoordinate</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50384 ">
+<p>Location coordinates are missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50379 ">
+<p><code>Location : Calculate : Missing argument - MoveByThisDistance</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50384 ">
+<p>The <code>MoveByThisDistance</code> property is missing from
+the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50379 ">
+<p><code>Location : Calculate : Missing argument - MoveByThisBearing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50384 ">
+<p>The <code>MoveByThisBearing</code> property is missing from
+the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50379 ">
+<p><code>Location : Calculate : TypeMismatch - MoveByThisDistance</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50384 ">
+<p>The <code>MoveByThisDistance</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50379 ">
+<p><code>Location : Calculate : TypeMismatch - MoveByThisBearing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50384 ">
+<p>The <code>MoveByThisBearing</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>CancelNotification</h3>
+<p>The following table describes the error messages returned by <a href="GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56.html#GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56"><code>CancelNotification</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-72503C54-A2CC-4B91-85EA-208106D3E323"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-72503C54-A2CC-4B91-85EA-208106D3E323" frame="border" border="1" rules="all"><caption><strong>Table: </strong>CancelNotification
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e50548">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e50553">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50548 ">
+<p><code>Location : Cancel : BadArgument – cancel type</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50553 ">
+<p>The cancel type property in the input has an invalid name. The expected
+name is <code>CancelRequestType</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e50548 ">
+<p><code>Location : Cancel : Missing cancel type</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50553 ">
+<p>The <code>CancelRequestType</code> property is missing from
+the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e50548 ">
+<p><code>Location : Cancel : Wrong cancel type</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e50553 ">
+<p>The <code>CancelRequestType</code> property contains an invalid
+value.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

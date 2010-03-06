@@ -1,0 +1,38 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript Media Management Service API"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Relation" scheme="URI" content="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-E5684FF0-28C9-4721-9421-6B9432087086"/><title>JavaScript Media
+Management Service API </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-E5684FF0-28C9-4721-9421-6B9432087086"><span>JavaScript</span> Media
+Management Service API</h1><div>
+<p>The <a href="GUID-E3D26890-581A-427F-8AFF-16081528A8B8.html#GUID-E3D26890-581A-427F-8AFF-16081528A8B8">Media Management
+Service</a> API is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.1</a>.</p>
+<p>The Media Management Service API allows <span>widgets</span> to retrieve information
+(metadata) about the media files stored in the Media Gallery of a device.
+The API is integrated into <span>WRT</span> through the <a href="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html#GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"><code>device</code></a> object.</p>
+<p>For an overview of the service and the API, see section <a href="GUID-E3D26890-581A-427F-8AFF-16081528A8B8.html#GUID-E3D26890-581A-427F-8AFF-16081528A8B8">Accessing information about media files stored on a device</a>.</p>
+<div><h3>Using the Media Management Service API</h3>
+<p>To use the Media Management Service API, your <span>widget</span>  must first create <span>a service object for it
+using the <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a> method</span>.
+Use <code>Service.MediaManagement</code> to identify the service provider
+and <code>IDataSource</code> to identify the supported interface:</p>
+<pre class="codeblock" id="GUID-E2C5C349-0E25-4508-A09C-78065249F25D-GENIDd0e56266">var so = device.getServiceObject("Service.MediaManagement", "IDataSource");</pre>
+
+<p>This service object can then be used to access the services provided
+by the API:</p>
+<ul>
+<li><p><a href="GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB.html#GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB"><code>IDataSource.GetList()</code></a></p>
+</li>
+<li><p><a href="GUID-4EBD83E1-B179-4F8B-93AB-4D58C5F749C3.html#GUID-4EBD83E1-B179-4F8B-93AB-4D58C5F749C3"><code>IDataSource.Cancel()</code></a></p>
+</li>
+</ul>
+</div>
+<div><h3>Emulator support</h3>
+<p>The S60 5th Edition SDK emulator provides full support for the Media
+Management Service API.</p>
+<p>Retrieving media file information from a memory card is only possible
+on a physical device. In the emulator, drive E: simulates the memory card
+installed on a physical device.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

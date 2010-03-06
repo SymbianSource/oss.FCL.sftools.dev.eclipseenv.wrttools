@@ -1,0 +1,262 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Returned location information"/><meta name="DC.Relation" scheme="URI" content="GUID-4541E532-CC1A-4115-8467-7FA1C4378307"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><meta name="DC.Relation" scheme="URI" content="GUID-150E440F-56E4-4249-8739-A5A7A2050600"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-A6C9AF19-6694-478B-A9FE-7898A2091C4B"/><title>Returned
+location information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-A6C9AF19-6694-478B-A9FE-7898A2091C4B">Returned
+location information</h1><div>
+<p/>
+<p>The <code>ReturnValue</code> property returned by a synchronous <a href="GUID-150E440F-56E4-4249-8739-A5A7A2050600.html#GUID-150E440F-56E4-4249-8739-A5A7A2050600"><code>GetLocation</code></a> call
+and by <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for
+an asynchronous <code>GetLocation</code> or <a href="GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5.html#GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5"><code>Trace</code></a> call
+is an object containing the requested device location information. Each property
+in the object corresponds to one kind of location information.</p>
+<p>The exact set of properties included in the <code>ReturnValue</code> object
+depends on the <a href="GUID-4541E532-CC1A-4115-8467-7FA1C4378307.html#GUID-4541E532-CC1A-4115-8467-7FA1C4378307"><span>criteria</span></a> defined
+for the <code>GetLocation</code> or <code>Trace</code> call
+and on the capabilities of the positioning system that provides the location
+information for the mobile device. If a particular piece of location information
+cannot be retrieved by the positioning system, the property for that information
+is not included in the <code>ReturnValue</code> object. For example,
+if basic location information is requested, the <code>ReturnValue</code> object
+only contains properties for longitude, latitude, and altitude; no other location
+information is returned. Similarly, if the positioning system used by the
+S60 device cannot provide satellite information, the <code>SatelliteNumView</code> and <code>SatelliteNumViewUsed</code> properties
+are not included in <code>ReturnValue</code>.</p>
+<p>The <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS
+84 datum</a> is used to reference coordinates. The representation is
+in decimal degrees.</p>
+<p>The following table describes the location information returned by a <code>GetLocation</code> or <code>Trace</code> call.</p>
+<div class="tablenoborder"><a name="GUID-E1EDEBA8-6DC8-471D-92FB-8BB4CCBB0E12"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-E1EDEBA8-6DC8-471D-92FB-8BB4CCBB0E12" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue properties
+for location information</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e48050">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e48055">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e48060">
+<p>Value type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e48065">
+<p>Location information type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>Longitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Longitude estimate in degrees. The value range is [+180, -180].</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Basic or Generic</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>Latitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Latitude estimate in degrees. The value range is [+90, -90].</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Basic or Generic</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>Altitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Elevation estimate in meters relative to the WGS 84 datum.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Basic or Generic</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>SatelliteNumView</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Number of satellites currently in view.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>SatelliteNumViewUsed</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Number of satellites used to obtain the location fix.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>HorizontalSpeed</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Horizontal speed estimate in meters per second. This is the speed of
+the device at the time the location fix was obtained.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>HorizontalSpeedError</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Horizontal speed error in meters per second.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>TrueCourse</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Current direction of movement in degrees in relation to true north.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>TrueCourseError</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p><code>TrueCourse</code> error in degrees.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>MagneticHeading</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Current direction of movement in degrees in relation to magnetic north.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>MagneticHeadingError</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p><code>MagneticHeading</code> error in degrees.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>Heading</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Current instantaneous direction of movement in degrees in relation to
+true north.</p>
+<p/>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>HeadingError</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p><code>Heading</code> error in degrees.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>MagneticCourse</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p>Current instantaneous direction of movement in degrees in relation to
+magnetic north.</p>
+<p/>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48050 ">
+<p><code>MagneticCourseError</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48055 ">
+<p><code>MagneticCourse</code> error in degrees.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48060 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e48065 ">
+<p>Generic</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

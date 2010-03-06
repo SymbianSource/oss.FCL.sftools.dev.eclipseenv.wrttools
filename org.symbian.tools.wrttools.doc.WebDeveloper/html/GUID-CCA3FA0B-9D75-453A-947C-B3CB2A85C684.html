@@ -1,0 +1,47 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Deploying widgets"/><meta name="DC.Relation" scheme="URI" content="GUID-EAE0823B-5914-49C2-9DBC-15B61DE49E60"/><meta name="DC.Relation" scheme="URI" content="GUID-4BE0F634-6995-4738-A650-5D3CCBC26647"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-CCA3FA0B-9D75-453A-947C-B3CB2A85C684"/><title>Deploying widgets </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-CCA3FA0B-9D75-453A-947C-B3CB2A85C684">Deploying widgets</h1><div>
+<p>The following table lists the methods that are supported for deploying widgets on mobile devices:</p>
+<div class="tablenoborder"><a name="GUID-DDDC3E75-8875-49D8-A893-43F9A8FBA16F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-DDDC3E75-8875-49D8-A893-43F9A8FBA16F" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Widget deployment methods</caption>
+<thead align="left">
+<tr class="title ">
+
+<th class="cellrowborder" valign="top" width="31%" id="d0e12757"><p>Deployment method</p></th>
+<th class="cellrowborder" valign="top" width="32.33333333333333%" id="d0e12761"><p>Deployment location on the device</p></th>
+<th class="cellrowborder" valign="top" width="36.66666666666667%" id="d0e12765"><p>Installation method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="31%" headers="d0e12757 "><p>Transfer via Bluetooth, email or other communication method</p></td>
+<td class="cellrowborder" valign="top" width="32.33333333333333%" headers="d0e12761 "><p><span class="uicontrol">Inbox</span> folder of the <span class="uicontrol">Messaging</span> application</p></td>
+<td class="cellrowborder" valign="top" width="36.66666666666667%" headers="d0e12765 "><p>Using the <span class="uicontrol">Messaging</span> application.</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="31%" headers="d0e12757 "><p>Transfer using a USB cable</p></td>
+<td class="cellrowborder" valign="top" width="32.33333333333333%" headers="d0e12761 "><p>Phone memory</p></td>
+<td class="cellrowborder" valign="top" width="36.66666666666667%" headers="d0e12765 "><p>Using the File Manager (<span class="uicontrol">File mgr.</span>) application.</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="31%" headers="d0e12757 "><p>Transfer via a memory card</p></td>
+<td class="cellrowborder" valign="top" width="32.33333333333333%" headers="d0e12761 "><p>Memory card</p></td>
+<td class="cellrowborder" valign="top" width="36.66666666666667%" headers="d0e12765 "><p>Using the File Manager (<span class="uicontrol">File mgr.</span>) application.</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="31%" headers="d0e12757 "><p>Transfer using the Web Browser for S60</p></td>
+<td class="cellrowborder" valign="top" width="32.33333333333333%" headers="d0e12761 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="36.66666666666667%" headers="d0e12765 "><p>If the MIME type is specified correctly for the widget package, the installation will be completed automatically. See the instructions below.</p></td>
+</tr>
+</tbody>
+</table></div>
+<p/>
+<p>The Web Runtime (WRT) environment includes a component that is able to detect when the user activates a widget for installation. It recognizes the file as a widget based on the file extension and MIME type. Therefore, if you decide to provide widgets on your Web site for download, you need to do the following to enable successful download and installation on mobile devices:</p>
+<ol>
+<li id="GUID-64EFF71C-51BA-4061-8870-1E27E7B9FB8A"><a name="GUID-64EFF71C-51BA-4061-8870-1E27E7B9FB8A"><!----></a><p>Provide a URL to the widget on the Web site.</p></li>
+<li id="GUID-AF0EA75D-D1F3-49F4-8469-D3CC4EAB16C4"><a name="GUID-AF0EA75D-D1F3-49F4-8469-D3CC4EAB16C4"><!----></a><p>Specify the MIME type of the widget installation package in the HTTP response header. The MIME type must be <code>application/x-nokia-widget</code>.</p><p>The following is an example of how to define the widget MIME type for an Apache server configuration file:</p><pre class="codeblock" id="GUID-2B441606-EBC8-46F8-907B-76C71C298F29">AddType x-nokia-widget .wgz</pre></li>
+</ol>
+<p>Widgets do not need to be signed (for example, Symbian Signed) before deploying them on a mobile device.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

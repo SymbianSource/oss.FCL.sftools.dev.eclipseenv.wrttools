@@ -1,0 +1,69 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="ISysInfo.Cancel()"/><meta name="DC.Relation" scheme="URI" content="GUID-B796D072-4E51-4BC7-9259-84530DB3539D"/><meta name="DC.Relation" scheme="URI" content="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"/><title>ISysInfo.Cancel() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"><span>ISysInfo.</span>Cancel()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Cancel</code> method cancels an ongoing asynchronous
+call made with a SystemInfo Service API method.</p>
+<p>This is a synchronous method.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-B160E7BE-F33A-4F83-8E93-BC72E7811F4E">result = so.ISysInfo.Cancel(criteria);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object with the <code>TransactionID</code> property
+(number). <code>criteria.TransactionID</code> specifies the transaction
+ID of the asynchronous call to cancel. The transaction ID is the <code>result.TransactionID</code> value
+that was returned as part of the result of the initial call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>Cancel</code> method returns an object that contains
+an error code and an error message.</p>
+<div class="tablenoborder"><a name="GUID-B2D18C24-099C-4869-8262-B0F40A551E54"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-B2D18C24-099C-4869-8262-B0F40A551E54" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for Cancel</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e69297">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e69302">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e69307">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e69297 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e69302 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e69307 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e69297 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e69302 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e69307 ">
+<p>See <a href="GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1.html#GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1">SystemInfo Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget that demonstrates how to
+use this Service API, see <a href="GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF.html#GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF">the
+full example</a>.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

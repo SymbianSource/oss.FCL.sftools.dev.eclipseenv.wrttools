@@ -1,0 +1,434 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Messaging Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B"/><title>Messaging Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B">Messaging Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-2240F5BE-97BD-4CB3-8DB3-B5CF7C23BF54.html#GUID-2240F5BE-97BD-4CB3-8DB3-B5CF7C23BF54">Messaging Service</a>.
+You can download the <code>wgz</code> package for this widget from
+section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<p>For widget development and debugging purposes, this example writes its
+output to <code>c:\data\jslog_widget.log</code> using <code>console.info</code>.
+For instructions on how to enable logging in the Web browser for S60, see
+section <a href="GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html#GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript console</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-A2EB8D22-1BB0-48BB-9696-25A307FD7695">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;DisplayName&lt;/key&gt;
+  &lt;string&gt;MessagingSample&lt;/string&gt;
+  &lt;key&gt;Identifier&lt;/key&gt;
+  &lt;string&gt;com.nokia.widget.sapi.Messaging.sample&lt;/string&gt;
+  &lt;key&gt;Version&lt;/key&gt;
+  &lt;string&gt;1.0&lt;/string&gt;
+  &lt;key&gt;MainHTML&lt;/key&gt;
+  &lt;string&gt;messaging-sample.html&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+</div>
+<div><h3>messaging-sample.html</h3>
+<pre class="codeblock" id="GUID-CB207FE7-3656-4F42-9320-FD5CB36DCD95">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="content-type" content="text/html; charset=utf-8"&gt;
+  &lt;script type="text/javascript" src="js/messaging-sample.js" charset="utf-8"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="js/common.js" charset="utf-8"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+&lt;body onload='setup()' bgcolor="#ddeeff"&gt;
+
+  &lt;form name="frm"&gt;
+    &lt;h3&gt;Messaging Service API Sample Widget&lt;/h3&gt;
+    &lt;input type="button" onclick="getList('img1')" value="GetList"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+    &lt;input type="button" onclick="SendMMS('img2')" value="SendMmsSync"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+    &lt;input type="button" onclick="SendASyncMMS('img3')" value="SendMmsAsync"&gt;&lt;img id="img3" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+    &lt;input type="button" onclick="cancelSendASyncMMS('img4')" value="cancelSendMmsAsync"&gt;&lt;img id="img4" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+    &lt;input type="button" onclick="Delete('img5')" value="RegisterNotification"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+    &lt;input type="button" onclick="ChangeStatus('img6')" value="DeleteMsg"&gt;&lt;img id="img6" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+    &lt;input type="button" onclick="RegisterNotification('img7')" value="RegisterNotification"&gt;&lt;img id="img7" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+    &lt;input type="button" onclick="CancelNotification('img8')" value="DeleteMsg"&gt;&lt;img id="img8" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;hr&gt;
+    &lt;div class='messaging' id='messaging' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-9630DCB3-6F70-4F07-BB14-DC8B5CA50740">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+
+  if (errCode) {
+    msg = message + "&lt;BR&gt;" + "Failed Error: " + errCode + "&lt;BR&gt;";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no");
+  } else {
+    showIMG(imgId,"yes");
+  }
+
+  //print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+
+  return errCode;
+}
+
+// Build the message by reading a iteratorable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showIterableList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try {
+    if ( typeof obj != 'object' )
+      return "" + obj + '&lt;BR/&gt;';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += '&lt;BR/&gt;';
+      }
+      txt += '&lt;BR/&gt;';
+    }
+  }
+  catch (e)
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK)
+{
+  if(imgId == null || imgId == undefined)
+    return;
+
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+
+  for (i = 0; i &lt; sText.length &amp;&amp; IsNumber == true; i++)
+  {
+    Char = sText.charAt(i);
+    if (ValidChars.indexOf(Char) == -1)
+    {
+      IsNumber = false;
+    }
+  }
+  return IsNumber;
+}</pre>
+</div>
+<div><h3>messaging-sample.js</h3>
+<pre class="codeblock" id="GUID-40320252-5A48-451C-976A-AD31ACC3FE6C">// messaging-sample.js
+//
+// In this sample Messaging will be send, deleted, and listed.
+// Also, async operation will be canceled
+
+//SAPI Error Codes
+// 0    - Success
+// 1000 - InvalidServiceArgument
+// 1001 - UnknownArgumentName
+// 1002 - BadArgumentType
+// 1003 - MissingArgument
+// 1004 - ServiceNotSupported
+// 1005 - ServiceInUse
+// 1006 - ServiceNotReady
+// 1007 - NoMemory
+// 1008 - HardwareNotAvailable
+// 1009 - ServerBusy
+// 1010 - EntryExists
+// 1011 - AccessDenied
+// 1012 - NotFound
+// 1013 - UnknownFormat
+// 1014 - GeneralError
+// 1015 - CancelSuccess
+// 1016 - ServiceTimedOut
+// 1017 - PathNotFound
+
+// Declare the service object
+var so;
+
+// id of the div used to display information
+const DIV_ID = 'messaging';
+
+// imgid for callback1 function
+var imgid_callback1;
+
+// imgid for callback2 function
+var imgid_callback2;
+
+// Test entry point
+function setup()
+{
+  try
+  {
+    so = device.getServiceObject("Service.Messaging", "IMessaging");
+      console.info("setup: so: %s", so);
+  }
+  catch(e)
+  {
+    alert('&lt;setup&gt; ' +e);
+  }
+}
+
+//Get message list
+function getList(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.Type = 'Inbox';
+  criteria.Filter = new Object();
+  criteria.Filter.MessageTypeList = new Array();
+  criteria.Filter.MessageTypeList[0] = 'MMS';
+  criteria.Filter.MessageTypeList[1] = 'SMS';
+
+  try
+  {
+    // Messaging supports synchronous call
+    var result = so.IMessaging.GetList(criteria);
+    if(!checkError("IMessaging::getList",result,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('getList: '+e);
+  }
+}
+
+//send MMS message
+// Sync operation
+function SendMMS(imgId)
+{
+    // Setup input params using dot syntax
+    var criteria = new Object();
+    criteria.MessageType = 'MMS';
+    criteria.To = '4567809';
+    criteria.BodyText ='Hello:TestSendSync: Sending message using SAPI';
+    try
+    {
+      result = so.IMessaging.Send(criteria);
+    checkError("IMessaging::SendMMS",result,DIV_ID,imgId);
+    }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('SendMMS: '+e);
+  }
+}
+
+//send MMS message
+// Async operation
+function SendASyncMMS(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.MessageType = 'MMS';
+  criteria.To = '9876543210';
+  criteria.BodyText = 'TestSendASync: Sending message using SAPI';
+
+  try
+  {
+    imgid_callback1 = imgId;
+    result = so.IMessaging.Send(criteria, callback1);
+    if(!checkError("IMessaging::SendASyncMMS",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('SendASyncMMS: '+e);
+  }
+}
+
+// cancel send MMS message
+// Async operation
+function cancelSendASyncMMS(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.MessageType = 'MMS';
+  criteria.To = '9876543210';
+  criteria.BodyText = 'TestSendASync: Sending message using SAPI';
+
+  try
+  {
+    imgid_callback1 = imgId;
+    result = so.IMessaging.Send(criteria, callback1);
+    if(!checkError("IMessaging::cancelSendASyncMMS",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var result2 = so.IMessaging.Cancel(criteria2);
+      checkError("IMessaging::cancelSendASyncMMS",result2,DIV_ID,imgId); 
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('cancelSendASyncMMS: '+e);
+  }
+}
+
+// function deletes message with specified MessageId
+// sync operation
+function Delete(imgId)
+{
+  var msgIdStr = prompt("Please type the message id", "0");
+  if(msgIdStr == "" || msgIdStr == null)
+    return;
+
+  // Setup input params using dot syntax
+  var msgId = parseInt(msgIdStr);
+  var criteria = new Object();
+  criteria.MessageId = msgId;
+
+  // function sends message
+  try
+  {
+    var result = so.IMessaging.Delete(criteria);
+    checkError("IMessaging::Delete",result,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('Delete: '+e);
+  }
+}
+
+// function changes status of message
+// Sync operation
+function ChangeStatus(imgId)
+{
+  var msgIdStr = prompt("Please type the message id", "0");
+  if(msgIdStr == "" || msgIdStr == null)
+    return;
+
+  var criteria = new Object();
+  var msgId = parseInt(msgIdStr);
+  criteria.MessageId = msgId;
+  criteria.Status = 'Unread';
+
+  try
+  {
+    var result = so.IMessaging.ChangeStatus(criteria);
+    checkError("IMessaging::ChangeStatus",result,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('ChangeStatus: '+e);
+  }
+}
+
+// function cancels notification of new messages.
+// sync operation
+function CancelNotification(imgId)
+{
+  var criteria = new Object();
+  criteria.Type = 'NewMessage';
+  try
+  {
+    var result = so.IMessaging.CancelNotification(criteria);
+    checkError("IMessaging::CancelNotification",result,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('CancelNotification: '+e);
+  }
+}
+
+// function registers for notification of new messages
+// Sync operation
+// to test RegisterNotification(): 1) click on RegisterNotification 2) click on sendMMS button to get callback
+function RegisterNotification(imgId)
+{
+  var criteria = new Object();
+  criteria.Type = 'NewMessage';
+  try
+  {
+    imgid_callback2 = imgId;
+    // Register for notification
+    result = so.IMessaging.RegisterNotification(criteria, callback2);
+    if(!checkError("IMessaging::RegisterNotification",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert('RegisterNotification: '+e);
+  }
+}
+
+function callback1(transId, eventCode, result)
+{
+  console.info("callback1: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IMessaging::SendASyncMMS",result,DIV_ID,imgid_callback1)) {
+    document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+  }
+}
+
+function callback2(transId, eventCode, result)
+{
+  console.info("callback2: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IMessaging::SendASyncMMS",result,DIV_ID,imgid_callback2)) {
+    document.getElementById(DIV_ID).innerHTML = "Messaging status was changed";
+  }
+}</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

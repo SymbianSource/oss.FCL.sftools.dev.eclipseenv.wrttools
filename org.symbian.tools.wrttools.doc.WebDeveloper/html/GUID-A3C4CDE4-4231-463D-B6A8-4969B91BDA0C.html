@@ -1,0 +1,34 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: presenting content on screens"/><meta name="abstract" content="Implement functions to display the data that you retrieve from Twitter in the STEW views."/><meta name="description" content="Implement functions to display the data that you retrieve from Twitter in the STEW views."/><meta name="DC.Relation" scheme="URI" content="GUID-9405C97E-4784-4043-BA75-77518EF0A38F"/><meta name="DC.Relation" scheme="URI" content="GUID-71A21D8D-78E3-4FEE-9F46-5D175DE5BC12"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-1FD5C597-43B8-402E-92B8-FE0787DB4F3B"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-A3C4CDE4-4231-463D-B6A8-4969B91BDA0C"/><meta name="DC.Language" content="en"/><title>STEW: presenting content on screens </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-A3C4CDE4-4231-463D-B6A8-4969B91BDA0C">STEW: presenting content on screens</h1><div><p>Implement functions to display the data that you retrieve from Twitter in the STEW views.</p>
+<p>The <code>UpdateScreen</code> object in the <code>UpdateScreen.js</code> file sets the <code>onSuccess</code> and <code>onError</code> callback functions to be handled by the <code>onTwitterUserResponse</code> and <code>onTwitterServiceError</code> functions.  These functions are triggered when the request is completed, either successfully or with an error. The last line of the following code makes the actual request to Twitter:</p>
+<pre class="codeblock">UpdateScreen.prototype.onActivated = function() {
+	// Add event listeners.
+	var self = this;
+	twitterService.onSuccess = function( response ) {
+self.onTwitterUserResponse( response )
+}
+	twitterService.onError = function( status ) {
+self.onTwitterServiceError( status )
+}
+
+	// Start the request.
+	twitterService.getTweetsForUser( null, 1 );
+}
+</pre>
+<p>The <code>onTwitterUserResponse</code> function illustrates how the response is handled as a JavaScript object:</p>
+<pre class="codeblock">UpdateScreen.prototype.onTwitterUserResponse = function( response ) {
+	// Set my latest status update.
+	var tweet = response[0];
+	this.setMyLatestStatus( tweet.text,
+new Date( tweet.created_at ).toLocaleString() );
+}
+UpdateScreen.prototype.onTwitterServiceError = function( status ) {
+	alert("Error: (" + status + ")" );
+}
+</pre>
+<p>The <code>TwitterService</code> performs the necessary conversions. For more information, see <a href="GUID-71A21D8D-78E3-4FEE-9F46-5D175DE5BC12.html#GUID-71A21D8D-78E3-4FEE-9F46-5D175DE5BC12">STEW: implementing a Twitter service</a>. The data can be accessed by calling various properties on the object retrieved, such as <code>.text</code> or <code>.created</code>. For more information about the responses and requests that you can make, see the Twitter API documentation.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

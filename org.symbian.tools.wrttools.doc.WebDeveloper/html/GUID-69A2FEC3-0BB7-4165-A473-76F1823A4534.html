@@ -1,0 +1,25 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="setDisplayPortrait()"/><meta name="DC.Relation" scheme="URI" content="GUID-40BE0552-37F0-43C8-9ADC-2A488B032C0D"/><meta name="DC.Relation" scheme="URI" content="GUID-A8DAB890-1BB6-42C6-8448-05F38EAFE985"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-69A2FEC3-0BB7-4165-A473-76F1823A4534"/><title>setDisplayPortrait() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-69A2FEC3-0BB7-4165-A473-76F1823A4534">setDisplayPortrait()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>setDisplayPortrait</code> method changes the orientation of a widget's screen to the portrait mode.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-156F3327-C4C7-43B0-833A-636286DAEADE">[void] window.widget.setDisplayPortrait(void) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-AC732C35-FC25-45FF-9B7C-2837EF764C7E">[void] widget.setDisplayPortrait(void)</pre>
+<p><strong>Arguments:</strong></p>
+<p>This method does not take any arguments.</p>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Remarks:</strong></p>
+<p><code>setDisplayPortrait()</code> should be used only if a device supports screen orientation changes. To check this, use the <a href="GUID-6CD85E8A-698E-4BE2-B965-887E66E51ACC.html#GUID-6CD85E8A-698E-4BE2-B965-887E66E51ACC"><code>isrotationsupported</code></a> property.</p>
+<p>This method only changes the orientation of the screen. It does not change the behavior of other UI components of a device such as the softkeys and their associated keys.</p>
+<p>For more information on handling screen orientation changes in a widget, see <a href="GUID-36CDDA1B-3B62-4936-9E06-7935AAD1CD77.html#GUID-36CDDA1B-3B62-4936-9E06-7935AAD1CD77">Designing for dynamic screen orientation</a>.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-975EE439-0711-4886-8A8A-9579637008C5">if (widget.isrotationsupported)
+   // change the screen orientation
+   widget.setDisplayPortrait();</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

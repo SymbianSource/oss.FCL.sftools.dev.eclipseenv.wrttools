@@ -1,0 +1,93 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Creating HTML controls"/><meta name="DC.Relation" scheme="URI" content="GUID-1666F263-F1CB-4928-B2A7-E518B43983BA"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-6DD2B3D2-BA3B-4936-BBC9-F61B6757B6F8"/><meta name="DC.Relation" scheme="URI" content="GUID-13E2DE63-47E5-4E2A-85FF-C8B0CAB9D4DE"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C4B403C9-FA4D-47E2-821B-53FE7ACC33E3"/><meta name="DC.Language" content="en"/><title>Creating HTML controls </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C4B403C9-FA4D-47E2-821B-53FE7ACC33E3">Creating HTML controls</h1><div>
+<p>You can use the following standard HTML controls:</p>
+<ul>
+<li><p>Push buttons—Perform functions as specified by JavaScript that you associate with the button <code>onclick</code> event.</p></li>
+<li><p>Check boxes—Allow users to select options by turning them on and off.</p></li>
+<li><p>Radio buttons—Allow users to select options by turning them on and off. Only one radio button can be turned on at a time.</p></li>
+<li><p>Menus—Offer users options to choose from.</p></li>
+<li><p>Text fields—Allow users to input text. For more information, see <a href="GUID-1666F263-F1CB-4928-B2A7-E518B43983BA.html#GUID-1666F263-F1CB-4928-B2A7-E518B43983BA">Handling text input</a>.</p></li>
+<li><p>Hidden controls—Allow you to submit values with a form and to store information between client/server exchanges that would otherwise be lost because HTTP connections are stateless.</p></li>
+<li><p>Object controls—Allow you to submit associated values with other controls.</p></li>
+</ul>
+<p>The HTML elements are mapped to standard S60 components on mobile devices. You can use a cascading style sheet (CSS) to define the appearance of the controls. </p>
+<div><h3>To use HTML controls</h3><ol>
+<li id="GUID-E6243D93-E862-481F-9E8F-4C9506A45502"><a name="GUID-E6243D93-E862-481F-9E8F-4C9506A45502"><!----></a><p>Use the HTML <code>input</code> element to create screen controls, such as text fields, check boxes, and buttons.</p><pre class="codeblock">&lt;div class="login_container"&gt;
+	&lt;table cellspacing="0"&gt;
+		&lt;tr&gt;
+			&lt;th&gt;Login&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;Please login using you Twitter credentials...&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td class="table_subtitle"&gt;Username&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td class="input_container"&gt;
+				&lt;input id="login_username" type="text"&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td class="table_subtitle"&gt;Password&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td class="input_container"&gt;
+				&lt;input id="login_password" type="password"&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				&lt;input id="login_remember_me" type="checkbox"&gt;&lt;label for="login_remember_me"&gt;Remember Me&lt;/label&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td class="button_container"&gt;&lt;a id="login_button" href="#" class="button"&gt;Login&lt;/a&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/table&gt;
+&lt;/div&gt;</pre><div class="figure" id="GUID-5BC7985B-2F1C-47B9-9E74-B1B7A825454D"><img src="GUID-38EF5741-0A6A-4A55-BDE5-4DB3F686D21E_d0e3492_href.jpg"/><p class="figure-title"><strong>Figure: </strong>STEW Login view</p></div></li>
+<li id="GUID-FD577FEC-1850-4AB9-A713-0B012223710C"><a name="GUID-FD577FEC-1850-4AB9-A713-0B012223710C"><!----></a><p>Create JavaScript to implement the functionality of the controls:</p><pre class="codeblock">function LoginScreen() {
+	// Get the login button element and assign an 'onclick' event to it.
+	var self = this;
+	var loginButton = document.getElementById( "login_button" );
+	loginButton.onclick = function() {
+		 self.onLoginClicked();
+	};
+	
+	// Get all the UI elements that we can interact with.
+	this.tbUsername = document.getElementById( "login_username" );
+	this.tbPassword = document.getElementById( "login_password" );
+	this.cbRememberMe = document.getElementById( "login_remember_me" );
+}
+
+LoginScreen.prototype.onLoginClicked = function() {
+	var username = this.tbUsername.value;
+	var password = this.tbPassword.value;
+	var rememberMe = this.cbRememberMe.checked;
+			
+	// Save the data to the storage if the user checked "Remember Me".
+	widget.setPreferenceForKey( rememberMe.toString(), LoginScreen.KEY_REMEMBER_ME );
+	// If "Remember Me" is unchecked, the username and password are cleared because
+	// default values for username and password values are null.
+	widget.setPreferenceForKey( rememberMe ? username : null, LoginScreen.KEY_USERNAME );
+	// REMEMBER: Never store passwords uncoded. See encryption algorithms on
+	// how to encode the password before saving it.
+	widget.setPreferenceForKey( rememberMe ? password : null, LoginScreen.KEY_PASSWORD );
+	
+	// Remember the username and password.
+	twitterService.setCredentials( username, password );
+	
+	// Check which page is the startup page.
+	var startupPage = widget.preferenceForKey( SettingsScreen.KEY_STARTUP_PAGE );
+	if ( startupPage == SettingsScreen.SEARCH_PAGE ) {
+		widgetMenu.activate( Menu.SEARCH_SCREEN );
+	} else {
+		widgetMenu.activate( Menu.UPDATE_STATUS_SCREEN );
+	} 
+}</pre></li>
+</ol></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

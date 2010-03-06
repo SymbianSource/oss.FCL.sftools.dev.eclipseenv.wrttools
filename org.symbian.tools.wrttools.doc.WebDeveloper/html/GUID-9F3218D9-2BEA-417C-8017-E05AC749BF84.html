@@ -1,0 +1,50 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: supporting different screen sizes"/><meta name="abstract" content="STEW is designed for the 240 x 320 (QVGA) and the 360 x 640 (nHD) screen size. Separate CSS files are used to specify the user interface on each screen size. The nHD devices support touch, and therefore all buttons, text boxes, and other screen controls must be bigger so that users can use fingers or a stylus to select them. On QVGA screens, screen controls can be smaller, because users use the five way navigation pad to move between them."/><meta name="description" content="STEW is designed for the 240 x 320 (QVGA) and the 360 x 640 (nHD) screen size. Separate CSS files are used to specify the user interface on each screen size. The nHD devices support touch, and therefore all buttons, text boxes, and other screen controls must be bigger so that users can use fingers or a stylus to select them. On QVGA screens, screen controls can be smaller, because users use the five way navigation pad to move between them."/><meta name="DC.Relation" scheme="URI" content="GUID-EED2A703-672F-4723-87AE-26EA53C7E9E6"/><meta name="DC.Relation" scheme="URI" content="GUID-B12990B6-979C-4BBA-B030-FB7CEC04CB3A"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-EB2043BB-E557-429B-BA0A-E350A6D06597"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84"/><meta name="DC.Language" content="en"/><title>STEW: supporting different screen sizes </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84">STEW: supporting different screen sizes</h1><div><p>STEW is designed for the 240 x 320 (QVGA) and the 360 x 640 (nHD) screen size. Separate CSS files are used to specify the user interface on each screen size. The nHD devices support touch, and therefore all buttons, text boxes, and other screen controls must be bigger so that users can use fingers or a stylus to select them. On QVGA screens, screen controls can be smaller, because users use the five way navigation pad to move between them.</p>
+<div><h3>Specifying styles according to screen size</h3><p>The STEW example uses a CSS file called <code>style.css</code> to render views on nHD screens.</p><pre class="codeblock">.button {
+	width: 116px;
+	height: 37px;
+	background: url(images/button_bg.png) no-repeat;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 3px;
+	padding-top: 12px;
+	display: inline-block;
+	text-align: center;	
+}
+</pre><p>Another CSS file, <code>style_small.css</code>, is used to render views on QVGA screens.</p><pre class="codeblock">.button {
+	width: 80px;
+	height: 25px;
+	background: url(images/small_button_bg.png) no-repeat;
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 2px;
+	padding-top: 9px;
+	display: inline-block;
+	text-align: center;	
+}
+</pre><p>References to the style sheets are added to the <code>main.html</code> file:</p><pre class="codeblock">&lt;link href="style.css" rel="stylesheet" type="text/css"&gt;
+&lt;link href="style_small.css" rel="stylesheet" type="text/css"&gt;
+</pre></div>
+<div><h3>Selecting the CSS file to use</h3><p>To avoid having to iterate through all DOM elements and change their style according to the screen size and having to maintain a table of all element IDs and different styles associated to each of them, STEW switches between the two CSS files according to the screen size. The CSS file is selected at application init by adding the <code>applyCorrectStyles</code> helper function to the <code>init</code> function in the <code>main.js</code> file, as follows:</p><pre class="codeblock">// Set the correct stylesheet depending on whether we are running
+// on bigger or smaller screens.
+Helper.applyCorrectStyles();
+</pre><p>The <code>applyCorrectStyles</code> function is defined in the <code>Helper.js</code> file:</p><pre class="codeblock">applyCorrectStyles: function() {
+	var largeScreen = Helper.isLargeScreen();
+	
+	document.styleSheets[0].disabled = !largeScreen;
+	document.styleSheets[1].disabled = largeScreen;
+}
+</pre><p>The style sheets are embedded as elements in the widget DOM document. The <code>applyCorrectStyles</code> function checks the screen size and disables all the CSS rules in the style sheet that is not used.</p><p>The screen resolution could be checked to determine the screen size. However, this example uses a more general solution, which sets a threshold that separates small and large screens.</p><pre class="codeblock">isLargeScreen: function() {
+	var size = this.getScreenSize();
+	return ( size.height &gt; Helper.SMALL_SCREEN_TRESHOLD );
+}
+
+Helper.SMALL_SCREEN_TRESHOLD = 320;
+</pre><p>This solution cannot detect all screen sizes, such as 800 x 352 pixels landscape on the Nokia E90, but it is good enough for the target devices in this example.</p></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

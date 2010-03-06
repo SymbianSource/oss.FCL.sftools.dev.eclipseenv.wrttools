@@ -1,0 +1,44 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript Location Service API"/><meta name="DC.Relation" scheme="URI" content="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><title>JavaScript Location
+Service API </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"><span>JavaScript</span> Location
+Service API</h1><div>
+<p>The <a href="GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8.html#GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8">Location
+Service</a> API is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.1</a>.</p>
+<p>The Location Service API allows <span>widgets</span> to retrieve information
+about the physical location of a device and to perform calculations based
+on location information. The API is integrated into <span>WRT</span> through the <a href="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html#GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"><code>device</code></a> object.</p>
+<p>For an overview of the service and the API, see section <a href="GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8.html#GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8">Accessing device location information</a>.</p>
+<div><h3>Using the Location Service API</h3>
+<p>To use the Location Service API, your <span>widget</span> must first create <span>a service object for it
+using the <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a> method</span>.
+Use <code>Service.Location</code> to identify the service provider
+and <code>ILocation</code> to identify the supported interface:</p>
+<pre class="codeblock" id="GUID-E2C5C349-0E25-4508-A09C-78065249F25D-GENIDd0e47704">var so = device.getServiceObject("Service.Location", "ILocation");</pre>
+
+<p>This service object can then be used to access the services provided
+by the API:</p>
+<ul>
+<li><p><a href="GUID-150E440F-56E4-4249-8739-A5A7A2050600.html#GUID-150E440F-56E4-4249-8739-A5A7A2050600"><span><code>ILocation.GetLocation()</code></span></a></p>
+</li>
+<li><p><a href="GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5.html#GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5"><span><code>ILocation.Trace()</code></span></a></p>
+</li>
+<li><p><a href="GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206.html#GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206"><span><code>ILocation.Calculate()</code></span></a></p>
+</li>
+<li><p><a href="GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56.html#GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56"><span><code>ILocation.CancelNotification()</code></span></a></p>
+</li>
+</ul>
+<p>For the location services to function on an S60 device, the device must
+be location aware. It must include some location information provider, such
+as GPS, AGPS, or GPS across Bluetooth.</p>
+</div>
+<div><h3>Emulator support</h3>
+<p>The S60 5th Edition SDK emulator provides full support for the Location
+Service API.</p>
+<p>GPS data is simulated by using Position System plugins (PSY) as dummy
+providers. Dummy providers are available on the emulator by default.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

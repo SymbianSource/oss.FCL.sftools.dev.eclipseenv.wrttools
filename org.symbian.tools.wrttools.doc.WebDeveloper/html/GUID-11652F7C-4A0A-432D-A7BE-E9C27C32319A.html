@@ -1,0 +1,174 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for deleting calendar information"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Relation" scheme="URI" content="GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-11652F7C-4A0A-432D-A7BE-E9C27C32319A"/><title>Criteria for
+deleting calendar information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-11652F7C-4A0A-432D-A7BE-E9C27C32319A"><span>Criteria</span> for
+deleting calendar information</h1><div>
+<p>The <code>criteria</code> object specifies which calendar
+or calendar entries to delete. For entries, if no calendar is specified, the
+delete operation is performed on the default calendar.</p>
+<p>The <code>criteria</code> object has two main properties: <code>Type</code> and <code>Data</code>.
+These are described in the following table. Properties enclosed in brackets
+are optional.</p>
+<div class="tablenoborder"><a name="GUID-F8841817-6210-48E5-81A7-2A3D701E1A36"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-F8841817-6210-48E5-81A7-2A3D701E1A36" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e22421">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e22426">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e22431">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e22436">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>Specifies the type of calendar information to delete.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Calendar"</code></p></li>
+<li><p><code>"CalendarEntry"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>criteria.Data</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>Specifies the calendar information to delete.</p>
+<p>If deleting a calendar, specify only <code>Data.CalendarName</code>.</p>
+<p>If deleting calendar entries, specify at least one of the following:</p>
+<ul>
+<li><p><code>Data.IdList</code> or <code>Data.LocalIdList</code></p>
+</li>
+<li><p><code>Data.StartRange</code></p></li>
+<li><p><code>Data.EndRange</code></p></li>
+<li><p><code>Data.DeleteAll</code></p></li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>criteria.Data.CalendarName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>If <code>Type</code> is <code>"Calendar"</code>, this
+is a mandatory property that specifies the calendar to delete. No other <span>criteria</span> are
+required.</p>
+<p>If <code>Type</code> is <code>"CalendarEntry"</code>,
+this is an optional property that specifies the calendar from which to delete
+the entries. If this property is not specified, the default calendar is used.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">
+<p><code>&lt;DriveLetter&gt;:&lt;FileName&gt;</code></p>
+<p>For example: <code>"C:Calendar"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>[criteria.Data.IdList]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>Specifies the <code>id</code>s of the entries to delete. If
+an entry has child entries, both the parent and child entries are deleted.
+Invalid values are ignored.</p>
+<p>Specify either <code>Data.IdList</code> or <code>Data.LocalIdList</code> or
+neither, but not both.</p>
+<p>The first <code>id</code> is specified in <code>Data.IdList[0]</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>[criteria.Data.LocalIdList]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>Specifies the <code>LocalId</code>s of the entries to delete.
+If an entry is a child entry, only it is deleted. Invalid values ignored.</p>
+<p/>
+<p>Specify either <code>Data.IdList</code> or <code>Data.LocalIdList</code> or
+neither, but not both.</p>
+<p>The first <code>LocalId</code> is specified in <code>Data.LocalIdList[0]</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>[criteria.Data.StartRange]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>If <code>StartRange</code> is specified, all entries that occur
+on or after this date are deleted.</p>
+<p>If both <code>StartRange</code> and <code>EndRange</code> are
+specified, all entries that occur within these dates are deleted.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>[criteria.Data.EndRange]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>If <code>EndRange</code> is specified, all entries that occur
+on or before this date are deleted.</p>
+<p>If both <code>StartRange</code> and <code>EndRange</code> are
+specified, all entries that occur within these dates are deleted.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22421 ">
+<p><code>[criteria.Data.DeleteAll]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22426 ">
+<p>If <code>DeleteAll</code> is set to <code>true</code>,
+all entries are deleted from the calendar.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22431 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e22436 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>true</code></p></li>
+<li><p><code>false</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

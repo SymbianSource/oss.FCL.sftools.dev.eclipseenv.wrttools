@@ -1,0 +1,25 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Runtime Security Manager"/><meta name="DC.Relation" scheme="URI" content="GUID-C4C76205-55BD-4DD1-BA08-6A17B9B696C7"/><meta name="DC.Relation" scheme="URI" content="GUID-91B65EA3-06B7-475E-9557-29EE584731E5"/><meta name="DC.Relation" scheme="URI" content="GUID-F7A8BF61-042E-4B80-9959-DEDF65BD9153"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-BDBE85E0-2A33-4AE9-92F6-85E1861256F0"/><title>Runtime
+Security Manager </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-BDBE85E0-2A33-4AE9-92F6-85E1861256F0">Runtime
+Security Manager</h1><div><p>This section provides information about an access policy used by the
+Runtime Security Manager (security manager) to control access to platform
+services for Web Runtime version 1.1 (WRT 1.1) widgets.  The security manager
+uses this policy to determine whether a widget has access to a platform service
+and then prompts the mobile device user accordingly.  </p><p>The mobile device manufacturer determines the access policy for all
+WRT 1.1 widgets launched on that mobile device - it is not customizable by
+the widget developer or the mobile device user.  WRT 1.1 provides a default
+access policy that mobile devices can use if they do not define their own.
+ This section also provides information about the WRT 1.1 default access policy.
+ It is not common for mobile devices to customize the default policy but you
+should verify this if you are interested in creating a widget for a particular
+device.  For information on a particular mobile device, see the <a href="http://www.forum.nokia.com/devices/matrix_all_1.html" target="_blank">Device
+Specifications</a> page at Forum Nokia.</p><p>The widget security lifecycle for WRT 1.1 is as follows:</p><ul><li><p>WRT 1.1 files an access policy with the security manager.
+For more information on the access policy, see section <a href="GUID-C4C76205-55BD-4DD1-BA08-6A17B9B696C7.html#GUID-C4C76205-55BD-4DD1-BA08-6A17B9B696C7">Runtime Security Manager access policy</a>.</p></li><li><p>The security manager registers a widget when it is installed.</p></li><li><p>WRT 1.1 starts a session with the security manager each time
+that it attempts to access a new platform service (by creating a new service
+object).</p></li><li><p>During a session, the security manager performs runtime access
+control to platform services (prompts the user) according to the access policy
+filed for the mobile device.</p></li><li><p>The security manager unregisters a widget when it is uninstalled.</p></li></ul></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

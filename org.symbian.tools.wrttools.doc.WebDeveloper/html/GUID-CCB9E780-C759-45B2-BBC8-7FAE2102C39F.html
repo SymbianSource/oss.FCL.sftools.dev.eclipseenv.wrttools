@@ -1,0 +1,22 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Creating touch controls"/><meta name="abstract" content="When you design screen controls for touch-enabled devices, make them big enough to select with a finger."/><meta name="description" content="When you design screen controls for touch-enabled devices, make them big enough to select with a finger."/><meta name="DC.Relation" scheme="URI" content="GUID-EE119DD2-C37A-473C-B428-21408867D583"/><meta name="DC.Relation" scheme="URI" content="GUID-63F9FB97-9A0D-4DE4-A645-F3DB7DC39716"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-6DD2B3D2-BA3B-4936-BBC9-F61B6757B6F8"/><meta name="DC.Relation" scheme="URI" content="GUID-13E2DE63-47E5-4E2A-85FF-C8B0CAB9D4DE"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-CCB9E780-C759-45B2-BBC8-7FAE2102C39F"/><meta name="DC.Language" content="en"/><title>Creating touch controls </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-CCB9E780-C759-45B2-BBC8-7FAE2102C39F">Creating touch controls</h1><div><p>When you design screen controls for touch-enabled devices, make them big enough to select with a finger.</p>
+<div><h3>Specifying text box size</h3><p>Specify text box size in a CSS file.</p><pre class="codeblock">.input_container input {
+	width: 100%;
+	height: 45px;
+	...
+
+}
+</pre></div>
+<div><h3>Creating touch buttons</h3><p>Create <em>clickable</em> HTML elements and make them big enough to select with a finger. Add a JavaScript <code>onClick</code> handler to the buttons to make them clickable. </p><p>For example, the following code creates two arrow buttons that users can press to change views.</p><pre class="codeblock">&lt;div id="navigationLeft" class="navigationBar"&gt;
+  &lt;img id="arrowLeft" src="gfx/arrow_left.png" alt="Previous day" onclick="navigationArrowClicked('left');" /&gt;
+&lt;/div&gt;
+
+&lt;div id="navigationRight" class="navigationBar"&gt;
+  &lt;img id="arrowRight" src="gfx/arrow_right.png" alt="Next day" onclick="navigationArrowClicked('right');" /&gt;
+&lt;/div&gt;
+</pre><div class="figure" id="GUID-65ABE967-E2CF-485A-AAE4-E1FE1D537176"><img src="GUID-AFFB2140-ABEF-4E7D-893B-B4CC8912C85F_d0e3745_href.jpg"/><p class="figure-title"><strong>Figure: </strong>Arrow buttons</p></div><p>You can also create custom controls. For more information, see <a href="GUID-EE119DD2-C37A-473C-B428-21408867D583.html#GUID-EE119DD2-C37A-473C-B428-21408867D583">Customizing screen controls</a>.</p></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

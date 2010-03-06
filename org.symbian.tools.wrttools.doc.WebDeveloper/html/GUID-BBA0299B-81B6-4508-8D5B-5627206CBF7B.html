@@ -1,0 +1,78 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Creating the info.plist file"/><meta name="DC.Relation" scheme="URI" content="GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-85179E6B-E915-4D96-A5D1-D17D7C7180C7"/><meta name="DC.Relation" scheme="URI" content="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B"/><title>Creating the info.plist file </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B">Creating the info.plist file</h1><div>
+<p>To create the <code>info.plist</code> file of a widget:</p>
+<ol>
+<li id="GUID-92D046EE-98D7-4F74-B5F3-188890F775FC"><a name="GUID-92D046EE-98D7-4F74-B5F3-188890F775FC"><!----></a><p>Create an XML-formatted document that conforms to the Document Type Definition (DTD) defined by Nokia.</p><p>The properties of a widget are defined in the form of key and value pairs, where a key is a predefined term and a value is a configurable string. The format of the <code>info.plist</code> file and the syntax of the key/value pairs are illustrated in the following sample code:</p><pre class="codeblock" id="GUID-DF3FE1CD-832C-480C-AAC8-852BE86A28C5">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+	&lt;key&gt;DisplayName&lt;/key&gt;
+	&lt;string&gt;WidgetName&lt;/string&gt;
+	&lt;key&gt;Identifier&lt;/key&gt;
+	&lt;string&gt;com.company.widget.projectname&lt;/string
+	&lt;key&gt;MainHTML&lt;/key&gt;
+	&lt;string&gt;Main.html&lt;/string&gt;
+	&lt;key&gt;Version&lt;/key&gt;
+	&lt;string&gt;1.0&lt;/string&gt;
+	&lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+	&lt;false/&gt;
+	&lt;key&gt;MiniViewEnabled&lt;/key&gt;
+	&lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre><p>The easiest way to create the <code>info.plist</code> file is to copy from a template that already contains all supported keys and then modify each key accordingly.</p></li>
+<li id="GUID-1E0F36C1-8983-4C1F-AAFE-2312C7C5C37D"><a name="GUID-1E0F36C1-8983-4C1F-AAFE-2312C7C5C37D"><!----></a><p>Save the XML document under the widget project root folder with the name <code>info.plist</code>.</p></li>
+</ol>
+<p>The following table lists the properties supported in the Web Runtime environment.</p>
+<div class="tablenoborder"><a name="GUID-88B3B40B-FB31-4C0D-B993-8B76B286CBB3"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-88B3B40B-FB31-4C0D-B993-8B76B286CBB3" frame="border" border="1" rules="all">
+<thead align="left">
+<tr class="title ">
+<th class="cellrowborder" valign="top" id="d0e5869"><p>Property name</p></th>
+<th class="cellrowborder" valign="top" id="d0e5873"><p>Type</p></th>
+<th class="cellrowborder" valign="top" id="d0e5877"><p>Use</p></th>
+<th class="cellrowborder" valign="top" id="d0e5881"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e5869 "><p><code>DisplayName</code></p></td>
+<td class="cellrowborder" valign="top" headers="d0e5873 "><p>String</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5877 "><p>Mandatory</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5881 "><p>The name of the widget to be displayed in the application menu.</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e5869 "><p><code>Identifier</code></p></td>
+<td class="cellrowborder" valign="top" headers="d0e5873 "><p>String</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5877 "><p>Mandatory</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5881 "><p>A unique string identifier for the widget. The identifier should specify the company’s reverse domain format, for example.</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e5869 "><p><code>MainHTML</code></p></td>
+<td class="cellrowborder" valign="top" headers="d0e5873 "><p>String</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5877 "><p>Mandatory</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5881 "><p>The name of the main HTML file to be loaded when the widget starts running.</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e5869 "><p><code>Version</code></p></td>
+<td class="cellrowborder" valign="top" headers="d0e5873 "><p>String</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5877 "><p>Optional</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5881 "><p>The release version of the widget.</p><p>Widgets support updates where a new version of a widget is provided on the Web and installed on top of the previous widget version on a mobile device. For more information on creating self-updating widgets, see <a href="GUID-EAE0823B-5914-49C2-9DBC-15B61DE49E60.html#GUID-EAE0823B-5914-49C2-9DBC-15B61DE49E60">Managing widgets on mobile devices</a>.</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e5869 "><p><code>AllowNetworkAccess</code></p></td>
+<td class="cellrowborder" valign="top" headers="d0e5873 "><p>Boolean</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5877 "><p>Optional</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5881 "><p>Access right to network-based resources or data. If the value is <code>true</code>, access is granted. If the value is <code>false</code>, the widget cannot access the network.</p></td>
+</tr>
+<tr class="bg ">
+
+<td class="cellrowborder" valign="top" headers="d0e5869 "><code>MiniViewEnabled</code></td>
+<td class="cellrowborder" valign="top" headers="d0e5873 "><p>Boolean</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5877 "><p>Optional</p></td>
+<td class="cellrowborder" valign="top" headers="d0e5881 "><p>Enables a widget for the home screen on compatible devices, such as the Nokia N97. If the device does not support home screen widgets, this parameter is ignored and the widget operates normally in full screen mode.</p></td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

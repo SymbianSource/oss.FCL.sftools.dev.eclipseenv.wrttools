@@ -1,0 +1,96 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Customizing screen controls"/><meta name="abstract" content="You cannot change the size of the standard HTML radio buttons and check boxes. To make them bigger, you must design your own controls. You only need to do this for touch devices."/><meta name="description" content="You cannot change the size of the standard HTML radio buttons and check boxes. To make them bigger, you must design your own controls. You only need to do this for touch devices."/><meta name="DC.Relation" scheme="URI" content="GUID-CCB9E780-C759-45B2-BBC8-7FAE2102C39F"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-6DD2B3D2-BA3B-4936-BBC9-F61B6757B6F8"/><meta name="DC.Relation" scheme="URI" content="GUID-13E2DE63-47E5-4E2A-85FF-C8B0CAB9D4DE"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-EE119DD2-C37A-473C-B428-21408867D583"/><meta name="DC.Language" content="en"/><title>Customizing screen controls </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-EE119DD2-C37A-473C-B428-21408867D583">Customizing screen controls</h1><div><p>You cannot change the size of the standard HTML radio buttons and check boxes. To make them bigger, you must design your own controls. You only need to do this for touch devices.</p>
+<p>Check boxes and radio buttons are composed of two elements: input and label. The label element contains the text associated with the control whereas the input is the actual check box. Even if you increase the font size of the label to make it bigger, the control remains small. To create a larger control, position the check box or radio button off-screen to hide it by setting it a negative absolute position. Then set a background image for the label that looks like a check box or a radio button. Offset the label text to reveal the background image which shows the control.</p>
+<div class="figure" id="GUID-9FC48000-336B-49EB-8374-EC6A92D527DB"><img src="GUID-3BE91359-26F3-44A7-88EE-6087960F67A8_d0e3784_href.png"/><p class="figure-title"><strong>Figure: </strong>Customizing check boxes and radio buttons</p></div>
+<p>For an example of how to create custom controls, see the <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">STEW example files</a>.</p>
+<div><h3>To create custom controls</h3><div class="figure" id="GUID-4CC13B36-A59D-483D-A377-593886563C04"><img src="GUID-C55C28BD-5CB8-40C0-9F05-6CED51927956_d0e3801_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW Settings view with custom controls</p></div><ol>
+<li id="GUID-5E2BBF6D-30AD-401C-B2FE-3ADD34134925"><a name="GUID-5E2BBF6D-30AD-401C-B2FE-3ADD34134925"><!----></a><p>Wrap the input and label in an unordered list (ul) to enable absolute vertical positioning of the input element and top-down navigation:</p><pre class="codeblock">&lt;ul class="cb"&gt;
+	&lt;li&gt;&lt;input id="login_remember_me" type="checkbox"&gt;&lt;label id="loginLabelRememberMe" for="login_remember_me"&gt;&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre></li>
+<li id="GUID-40D82947-B513-4529-8E47-C74B9CEA39C6"><a name="GUID-40D82947-B513-4529-8E47-C74B9CEA39C6"><!----></a><p>Add styles for the HTML elements to the CSS file. Reset default layout for the ul and li elements and bulleted lists. Position the input element off-screen by setting it a negative absolute position, and specify an image for the label background.</p><pre class="codeblock">/* ************************* */
+/* BIGGER CHECKBOX FOR TOUCH */
+/* ************************* */
+.cb {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.cb li{
+	padding: 0;
+	margin: 0;
+}
+
+.cb li label {
+	background: transparent url(images/checkbox.png) no-repeat scroll 0 6px;
+	padding: 8px 0 5px 30px;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	height: 25px;
+}
+
+.cb li.checked label {
+	background-image: url(images/checkbox_activated.png);
+}
+
+.cb li input {
+	position: absolute; left: -9999px;
+}
+</pre></li>
+<li id="GUID-652A97EB-9866-4C5E-BC0F-808B432E4341"><a name="GUID-652A97EB-9866-4C5E-BC0F-808B432E4341"><!----></a><p>To add logic to custom controls, add JavaScript code to the constructor of the <code>LoginScreen</code> object in the <code>LoginScreen.js</code> file. The following code implements the functionality of the <span class="uicontrol">Remember Me</span> check box:</p><pre class="codeblock">function LoginScreen() {
+	...
+	this.cbRememberMe = document.getElementById( "login_remember_me" );
+	// Click handling via styles for touch screens.
+	this.cbRememberMe.onclick = function() {
+		Helper.handleCustomControlClick( self.cbRememberMe );
+	};
+}
+</pre></li>
+<li id="GUID-7480375B-1150-4692-B0ED-D8F03BA3B6ED"><a name="GUID-7480375B-1150-4692-B0ED-D8F03BA3B6ED"><!----></a><p>Assign a function to the <code>onclick</code> event handler of the custom control and call a helper function that changes the style of the parent item depending on whether the <code>checked</code> property is set for the control:</p><pre class="codeblock">handleCustomControlClick: function( control ) {
+	control.parentNode.className = control.checked ? "checked" : "";
+}
+</pre><p>Assign the event handler to the input control and set the style to the parent node of the input element to enable using the HTML input as the basis of the control even though it is off-screen, and therefore invisible. Style the label element of the container list item, but get the parent node instead of searching for a sibling item of the appropriate type. The state of the control and events is reused from the input and label HTML composite, and therefore you need not implement them.</p></li>
+<li id="GUID-1A206C4B-5EB6-4CDB-9546-8DF6DF0B0DC6"><a name="GUID-1A206C4B-5EB6-4CDB-9546-8DF6DF0B0DC6"><!----></a><p>To hide the custom controls on smaller screens and devices that do not support touch, redefine the styles and reposition all controls in the CSS file:</p><pre class="codeblock">/* *************************** */
+/* CLEAR THE STYLES FOR BIGGER */
+/* CHECKBOX FOR TOUCH          */
+/* *************************** */
+.cb {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.cb li{
+	padding: 0;
+	padding-bottom: 3px;
+	margin: 0;
+	position: relative;
+	clear: both;
+}
+
+.cb li label {
+	padding: 2px 0 0 17px;
+	background: none;
+	font-weight: bold;
+	font-size: 12px;
+	float: left;
+}
+
+.cb li.checked label {
+	background-image: none;
+}
+
+.cb li input {
+	float: left;
+	left: auto;
+	display: block;
+}
+</pre></li>
+</ol></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

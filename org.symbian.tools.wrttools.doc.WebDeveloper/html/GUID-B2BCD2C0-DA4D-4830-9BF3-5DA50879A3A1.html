@@ -1,0 +1,845 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Contacts Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1"/><title>Contacts Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1">Contacts Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-662F2E2E-9538-42E5-9B5A-5664F1C11A9E.html#GUID-662F2E2E-9538-42E5-9B5A-5664F1C11A9E">Contacts Service</a>.
+You can download the <code>wgz</code> package for this widget from
+section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<p>For widget development and debugging purposes, this example writes its
+output to <code>c:\data\jslog_widget.log</code> using <code>console.info</code>.
+For instructions on how to enable logging in the Web browser for S60, see
+section <a href="GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html#GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript console</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-F38B000F-B0A5-40F2-92F4-52B48314B147">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;DisplayName&lt;/key&gt;
+  &lt;string&gt;ContactSample&lt;/string&gt;
+  &lt;key&gt;Identifier&lt;/key&gt;
+  &lt;string&gt;com.nokia.widget.sapi.contact.sample&lt;/string&gt;
+  &lt;key&gt;Version&lt;/key&gt;
+  &lt;string&gt;1.0&lt;/string&gt;
+  &lt;key&gt;MainHTML&lt;/key&gt;
+  &lt;string&gt;contact-sample.html&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+</div>
+<div><h3>contact-sample.html</h3>
+<pre class="codeblock" id="GUID-8E2E2DE4-7C29-4325-888F-5526F42B372C">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript" src="js/common.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="js/contact-sample.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body id='docBody' bgcolor="#ddeeff" onload="setup()" style=width:100%;height:100%;&gt;
+    &lt;form name="frm"&gt;
+      &lt;h3&gt;Contact API Sample Widget&lt;/h3&gt;
+      Async&lt;input type="checkbox" id="async_check" onClick="check_async()"&gt;
+      Cancel&lt;input type="checkbox" id="cancel_check" onClick="check_cancel()"&gt;&lt;br/&gt;
+      &lt;hr&gt;
+      &lt;input type="button" onclick="addContact('img1')" value="AddContact"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="delContact('img2')" value="DeleteContact"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getContactList('img3')" value="GetContactList"&gt;&lt;img id="img3" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="importContact('img4')" value="ImportContact"&gt;&lt;img id="img4" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="exportContact('img5')" value="ExportContact"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;hr&gt;
+      &lt;input type="button" onclick="addGroup('img6')" value="AddGroup"&gt;&lt;img id="img6" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="delGroup('img7')" value="DeleteGroup"&gt;&lt;img id="img7" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getGroupList('img8')" value="GetGroupList"&gt;&lt;img id="img8" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="organiseGroup('img9')" value="OrganiseGroup"&gt;&lt;img id="img9" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;hr&gt;
+      &lt;div class='contactsample' id='contactsample' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;&lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-4A563AFF-3E2C-4289-B256-1AE1B30E0027">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+
+  if (errCode) {
+    msg = message + "&lt;BR&gt;" + "Failed Error: " + errCode + "&lt;BR&gt;";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no"); 
+  } else {
+    showIMG(imgId,"yes"); 
+  }
+
+  //print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+
+  return errCode;
+}
+
+// Build the message by reading a iteratorable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showIterableList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try {
+    if ( typeof obj != 'object' )
+      return "" + obj + '&lt;BR/&gt;';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += '&lt;BR/&gt;';
+      }
+      txt += '&lt;BR/&gt;';
+    }
+  }
+  catch (e)
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK) 
+{
+  if(imgId == null || imgId == undefined)
+    return;
+
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+
+  for (i = 0; i &lt; sText.length &amp;&amp; IsNumber == true; i++)
+  {
+    Char = sText.charAt(i);
+    if (ValidChars.indexOf(Char) == -1)
+    {
+      IsNumber = false;
+    }
+  }
+  return IsNumber;
+}</pre>
+</div>
+<div><h3>contact-sample.js</h3>
+<pre class="codeblock" id="GUID-B088017C-63A8-4E47-99F8-E2FE21112ED4">// contact-sample.js
+//
+// In this sample Contact and Group will be added, deleted, and listed from
+// default database; Contact will be imported and exported; Group will be
+// organised; Also, async operation will be canceled
+//
+
+//SAPI Error Codes
+// 0    - Success
+// 1000 - InvalidServiceArgument
+// 1001 - UnknownArgumentName
+// 1002 - BadArgumentType
+// 1003 - MissingArgument
+// 1004 - ServiceNotSupported
+// 1005 - ServiceInUse
+// 1006 - ServiceNotReady
+// 1007 - NoMemory
+// 1008 - HardwareNotAvailable
+// 1009 - ServerBusy
+// 1010 - EntryExists
+// 1011 - AccessDenied
+// 1012 - NotFound
+// 1013 - UnknownFormat
+// 1014 - GeneralError
+// 1015 - CancelSuccess
+// 1016 - ServiceTimedOut
+// 1017 - PathNotFound
+
+// declare the service object
+var so;
+
+// async Test Mode
+var asyncMode;
+
+// cancel Test Mode
+var cancelMode;
+
+// imgid for callback1 function
+var imgid_callback1;
+
+// imgid for callback2 function
+var imgid_callback2;
+
+// imgid for callback3 function
+var imgid_callback3;
+
+// imgid for callback4 function
+var imgid_callback4;
+
+// imgid for callback5 function
+var imgid_callback5;
+
+// imgid for callback6 function
+var imgid_callback6;
+
+// imgid for callback7 function
+var imgid_callback7;
+
+// id of the div used to display information
+const DIV_ID = 'contactsample';
+
+// Called from onload()
+function setup()
+{
+  try {
+    so = device.getServiceObject("Service.Contact", "IDataSource");
+    console.info("setup: so: %s", so);
+  }
+  catch (e) {
+    alert('&lt;setup&gt; ' +e);
+  }
+}
+
+// Async checkbox handler
+function check_async() {
+  var asyncChk = document.getElementById("async_check");
+  asyncMode = asyncChk.checked;
+  if (!asyncMode) {
+    var cancelChk = document.getElementById("cancel_check");
+    cancelChk.checked = false;
+    cancelChk = false;
+  }
+}
+
+// cancel checkbox handler
+function check_cancel() {
+  var cancelChk = document.getElementById("cancel_check");
+  cancelMode = cancelChk.checked;
+
+  // if cancel checkbox is selected, the async checkbox should be
+  // selected automatically
+  if(cancelMode) {
+    var asyncChk = document.getElementById("async_check");
+    asyncChk.checked = true;
+    asyncMode = true;
+  }
+}
+
+// Add Contact
+function addContact(imgId) {
+
+  var last = new Object();
+  last.Label = "Last name";
+  last.Value = "Shen";
+
+  var first = new Object();
+  first.Label = "First name";
+  first.Value = "Yi";
+
+  var contactdata = new Object();
+  contactdata.LastName = last;
+  contactdata.FirstName = first;
+
+  var criteria = new Object();
+  criteria.Type = "Contact";
+  criteria.Data = contactdata;
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.Add(criteria);
+      checkError("IDataSource::addContact",result,DIV_ID,imgId);
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback1 function
+      imgid_callback1 = imgId;
+      result = so.IDataSource.Add(criteria, callback1);
+      if(!checkError("IDataSource::addContactAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback1 function
+      imgid_callback1 = imgId;
+      result = so.IDataSource.Add(criteria, callback1);
+      if(!checkError("IDataSource::cancelAddContactAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelAddContactAsync",result2,DIV_ID,imgId);
+      }
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("addContact: " + e);
+  }
+}
+
+// Delete Contact
+function delContact(imgId) {
+
+  // using the getFirstId to get the Contact Id
+  // it is impossible to ask user to type the Contact Id because
+  // the id is in binary and hard to be displayed by javascritp
+
+  var contactId = getFirstId("Contact");
+  if(contactId == null) {
+    alert("No contact exists!");
+    return;
+  }
+
+  var contactdata = new Object();
+  contactdata.IdList = new Array();
+  contactdata.IdList[0] = contactId;
+
+  var criteria = new Object();
+  criteria.Type = "Contact";
+  criteria.Data = contactdata;
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.Delete(criteria);
+      checkError("IDataSource::delContact",result,DIV_ID,imgId);
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback2 function
+      imgid_callback2 = imgId;
+      result = so.IDataSource.Delete(criteria, callback2);
+      if(!checkError("IDataSource::delContactAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback2 function
+      imgid_callback2 = imgId;
+      result = so.IDataSource.Delete(criteria, callback2);
+      if(!checkError("IDataSource::cancelDelContactAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelDelContactAsync",result2,DIV_ID,imgId);
+      }
+     }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("delContact: " + e);
+  }
+}
+
+// Show Contact List
+// find the property names in AddContact()
+// Note, the contact id cannot be display correctly by javascript because
+// it is a binary number
+function showContactList(iterator) {
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      var lastName = item['LastName'];
+      var firstName = item['FirstName'];
+      msg += lastName['Label'] + ":" + lastName['Value'] + "&lt;br&gt;";
+      msg += firstName['Label'] + ":" + firstName['Value'] + "&lt;br&gt;";
+      msg += "&lt;br&gt;";
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showContacList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Get the first Id
+function getFirstId(type) {
+
+  var criteria = new Object();
+  criteria.Type = type;
+
+  var result;
+  var firstId = null;
+  result = so.IDataSource.GetList(criteria);
+  if(!result.ErrorCode) {
+    var iterator = result.ReturnValue;
+    var item = iterator.getNext();
+    firstId = item['id'];
+  }
+
+  return firstId;
+}
+
+// Get Contact List
+function getContactList(imgId) {
+
+  var criteria = new Object();
+  criteria.Type = "Contact";
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.GetList(criteria);
+      if(!checkError("IDataSource::getContactList",result,DIV_ID,imgId)) {
+        document.getElementById(DIV_ID).innerHTML = showContactList(result.ReturnValue);
+      }
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback7 function
+      imgid_callback7 = imgId;
+      result = so.IDataSource.GetList(criteria, callback7);
+      if(!checkError("IDataSource::getContactListAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback7 function
+      imgid_callback7 = imgId;
+      result = so.IDataSource.GetList(criteria, callback7);
+      if(!checkError("IDataSource::cancelGetContactListAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelGetContactListAsync",result2,DIV_ID,imgId);
+      }
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getContactList: " + e);
+  }
+}
+
+// Import Contact
+function importContact(imgId) {
+
+  var impFileName = prompt("Please enter the file name", "contact-export.txt");
+  if (impFileName == "")
+    return;
+
+  var contactdata = new Object();
+  contactdata.SourceFile = impFileName;
+
+  var criteria = new Object();
+  criteria.Type = "Contact";
+  criteria.Data = contactdata;
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.Import(criteria);
+      checkError("IDataSource::Import",result,DIV_ID,imgId);
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback4 function
+      imgid_callback4 = imgId;
+      result = so.IDataSource.Import(criteria, callback4);
+      if(!checkError("IDataSource::ImportAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback4 function
+      imgid_callback4 = imgId;
+      result = so.IDataSource.Import(criteria, callback4);
+      if(!checkError("IDataSource::cancelImportAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelImportAsync",result2,DIV_ID,imgId);
+      }
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("importContact: " + e);
+  }
+}
+
+// Export Contact
+function exportContact(imgId) {
+
+  // using the getFirstId to get the Contact Id
+  // it is impossible to ask user to type the Contact Id because
+  // the id is in binary and hard to be displayed by javascritp
+
+  var contactId = getFirstId("Contact");
+  if(contactId == null) {
+    alert("No contact exists!");
+    return;
+  }
+
+  var expFileName = prompt("Please enter the file name", "contact-export.txt");
+  if (expFileName == "" || expFileName == null)
+    return;
+
+  var contactdata = new Object();
+  contactdata.id = contactId;
+  contactdata.DestinationFile = expFileName;
+
+  var criteria = new Object();
+  criteria.Type = "Contact";
+  criteria.Data = contactdata;
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.Export(criteria);
+      checkError("IDataSource::Export",result,DIV_ID,imgId);
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback5 function
+      imgid_callback5 = imgId;
+      result = so.IDataSource.Export(criteria, callback5);
+      if(!checkError("IDataSource::ExportAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback5 function
+      imgid_callback5 = imgId;
+      result = so.IDataSource.Export(criteria, callback5);
+      if(!checkError("IDataSource::cancelExportAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelExportAsync",result2,DIV_ID,imgId);
+      }
+   }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("exportContact: " + e);
+  }
+}
+
+// Add Group
+function addGroup(imgId) {
+
+  var groupdata = new Object();
+  groupdata.GroupLabel = "TestGroupName"
+
+  var criteria = new Object();
+  criteria.Type = "Group";
+  criteria.Data = groupdata;
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.Add(criteria);
+      checkError("IDataSource::addGroup",result,DIV_ID,imgId);
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback1 function
+      imgid_callback1 = imgId;
+      result = so.IDataSource.Add(criteria, callback1);
+      if(!checkError("IDataSource::addGroupAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback1 function
+      imgid_callback1 = imgId;
+      result = so.IDataSource.Add(criteria, callback1);
+      if(!checkError("IDataSource::cancelAddGroupAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelAddGroupAsync",result2,DIV_ID,imgId);
+      }
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("addGroup: " + e);
+  }
+}
+
+// Delete Group
+function delGroup(imgId) {
+
+  // using the getFirstId to get the Group Id
+  // it is impossible to ask user to type the Group Id because
+  // the id is in binary and hard to be displayed by javascritp
+
+  var groupId = getFirstId("Group");
+  if(groupId == null) {
+    alert("No Group exists!");
+    return;
+  }
+
+  var groupdata = new Object();
+  groupdata.IdList = new Array();
+  groupdata.IdList[0] = groupId;
+
+  var criteria = new Object();
+  criteria.Type = "Group";
+  criteria.Data = groupdata;
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.Delete(criteria);
+      checkError("IDataSource::delGroup",result,DIV_ID,imgId);
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback2 function
+      imgid_callback2 = imgId;
+      result = so.IDataSource.Delete(criteria, callback2);
+      if(!checkError("IDataSource::delGroupAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback2 function
+      imgid_callback2 = imgId;
+      result = so.IDataSource.Delete(criteria, callback2);
+      if(!checkError("IDataSource::cancelDelGroupAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelDelGroupAsync",result2,DIV_ID,imgId);
+      }
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("delGroup: " + e);
+  }
+}
+
+// Show Group List
+// find the property names in AddGroup()
+// Note, the group id cannot be display correctly by javascript because
+// it is a binary number
+function showGroupList(iterator) {
+  var msg = "";
+  try {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      msg += item['GroupLabel'] + "&lt;br&gt;";
+      var groupList = item['Contents'];
+      if(groupList == null || groupList == undefined)
+        msg += "No group member.&lt;br&gt;";
+      else {
+        var i = 0;
+        for (var key in groupList)
+          i++;
+        msg += "There are " + i +" contacts in this group.&lt;br&gt;";
+      }
+      msg += "&lt;br&gt;";
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showGroupList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Get Group
+function getGroupList(imgId) {
+
+  var criteria = new Object();
+  criteria.Type = "Group";
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.GetList(criteria);
+      if(!checkError("IDataSource::getGroupList",result,DIV_ID,imgId)) {
+        document.getElementById(DIV_ID).innerHTML = showGroupList(result.ReturnValue);
+      }
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback3 function
+      imgid_callback3 = imgId;
+      result = so.IDataSource.GetList(criteria, callback3);
+      if(!checkError("IDataSource::getGroupListAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback3 function
+      imgid_callback3 = imgId;
+      result = so.IDataSource.GetList(criteria, callback3);
+      if(!checkError("IDataSource::cancelGetGroupListAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelGetGroupListAsync",result2,DIV_ID,imgId);
+      }
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getGroupList: " + e);
+  }
+}
+
+// Organise Group
+function organiseGroup(imgId) {
+
+  // using the getFirstId to get the Group Id
+  // it is impossible to ask user to type the Group Id because
+  // the id is in binary and hard to be displayed by javascritp
+
+  var groupId = getFirstId("Group");
+  if(groupId == null) {
+    alert("No Group exists!");
+    return;
+  }
+
+  // using the getFirstId to get the Contact Id
+  // it is impossible to ask user to type the Contact Id because
+  // the id is in binary and hard to be displayed by javascritp
+
+  var contactId = getFirstId("Contact");
+  if(contactId == null) {
+    alert("No contact exists!");
+    return;
+  }
+
+  //"Associate"
+  //"Disassociate"
+  var msg = "Please enter the operation type ['Associate' or 'Disassociate']";
+  var optype = prompt(msg, "Associate");
+  if (optype == "" || optype == null)
+    return;
+
+  var groupdata = new Object();
+  groupdata.id = groupId;
+  groupdata.IdList = new Array();
+  groupdata.IdList[0] = contactId;
+
+  var criteria = new Object();
+  criteria.Type = "Group";
+  criteria.Data = groupdata;
+  criteria.OperationType = optype;
+
+  try {
+    var result;
+    if (!asyncMode &amp;&amp; !cancelMode) { // sync
+      result = so.IDataSource.Organise(criteria);
+      checkError("IDataSource::organiseGroup",result,DIV_ID,imgId);
+    } else if (asyncMode &amp;&amp; !cancelMode) {// async
+      // set the image id for callback6 function
+      imgid_callback6 = imgId;
+      result = so.IDataSource.Organise(criteria, callback6);
+      if(!checkError("IDataSource::organiseGroupAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+      }
+    } else if (cancelMode){ // cancel
+      // set the image id for callback6 function
+      imgid_callback6 = imgId;
+      result = so.IDataSource.Organise(criteria, callback6);
+      if(!checkError("IDataSource::cancelOrganiseGroupAsync",result,DIV_ID,imgId)) {
+        showIMG(imgId,"");
+        var criteria2 = new Object();
+        criteria2.TransactionID = result.TransactionID;
+        var result2 =so.IDataSource.Cancel(criteria2);
+        checkError("IDataSource::cancelOrganiseGroupAsync",result2,DIV_ID,imgId);
+      }
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("organiseGroup: " + e);
+  }
+}
+
+// This is the asynchronous callback handler
+function callback1(transId, eventCode, result)
+{
+  console.info("addAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::addAsync",result,DIV_ID,imgid_callback1);
+}
+
+// This is the asynchronous callback handler
+function callback2(transId, eventCode, result)
+{
+  console.info("delAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::delAsync",result,DIV_ID,imgid_callback2);
+}
+
+// This is the asynchronous callback handler
+function callback3(transId, eventCode, result)
+{
+  console.info("getListAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::getListAsync",result,DIV_ID,imgid_callback3)) {
+    document.getElementById(DIV_ID).innerHTML = showGroupList(result.ReturnValue);
+  }
+}
+
+// This is the asynchronous callback handler
+function callback4(transId, eventCode, result)
+{
+  console.info("importAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::importAsync",result,DIV_ID,imgid_callback4);
+}
+
+// This is the asynchronous callback handler
+function callback5(transId, eventCode, result)
+{
+  console.info("exportAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::exportAsync",result,DIV_ID,imgid_callback5);
+}
+
+// This is the asynchronous callback handler
+function callback6(transId, eventCode, result)
+{
+  console.info("organiseAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::organiseAsync",result,DIV_ID,imgid_callback6);
+}
+
+// This is the asynchronous callback handler
+function callback7(transId, eventCode, result)
+{
+  console.info("getListAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::getListAsync",result,DIV_ID,imgid_callback7)) {
+    document.getElementById(DIV_ID).innerHTML = showContactList(result.ReturnValue);
+  }
+}</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

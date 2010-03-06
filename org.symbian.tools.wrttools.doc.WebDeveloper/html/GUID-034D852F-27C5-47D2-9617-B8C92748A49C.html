@@ -1,0 +1,17 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="freeram"/><meta name="DC.Relation" scheme="URI" content="GUID-8F2A8087-A590-43B8-A1B3-BE986CDCFEEC"/><meta name="DC.Relation" scheme="URI" content="GUID-FED41C53-03B6-44A8-BEBB-0576E037B62B"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7"/><meta name="DC.Relation" scheme="URI" content="GUID-896164BE-C1A6-42BF-B2BD-7C63CF8C166A"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-034D852F-27C5-47D2-9617-B8C92748A49C"/><title>freeram </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-034D852F-27C5-47D2-9617-B8C92748A49C">freeram</h1><div>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-5BAE38C7-5170-44F6-8EC9-C108C10E6895">[int] sysinfo.freeram</pre>
+<p><strong>Description:</strong></p>
+<p>This is a read-only property that returns an integer value indicating the amount of free RAM of a device, measured in bytes.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-D47D0BBF-6B0B-4F53-8846-8E24E7C1A8AE">// get free RAM size in bytes
+var freeRamSize = sysinfo.freeram;
+var freeRamSize /= 1024; // convert to kB
+if (freeRamSize &lt; 100)
+    alert("Low memory");</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

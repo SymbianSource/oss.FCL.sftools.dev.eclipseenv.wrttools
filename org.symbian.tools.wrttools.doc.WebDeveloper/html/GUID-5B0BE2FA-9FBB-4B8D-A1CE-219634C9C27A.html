@@ -1,0 +1,52 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Determining whether to display home screen or full screen"/><meta name="abstract" content="A widget enabled for the home screen has two views, home screen view and a full screen view. You must implement a function in your widget that determines in which view to display the widget and call that function in response to communication from the home screen."/><meta name="description" content="A widget enabled for the home screen has two views, home screen view and a full screen view. You must implement a function in your widget that determines in which view to display the widget and call that function in response to communication from the home screen."/><meta name="DC.Relation" scheme="URI" content="GUID-53F53EE5-D92E-49A9-B882-741D389412BE"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-63F4E17E-8895-4054-82AD-762B90610B30"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-5B0BE2FA-9FBB-4B8D-A1CE-219634C9C27A"/><meta name="DC.Language" content="en"/><title>Determining
+whether to display home screen or full screen  </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-5B0BE2FA-9FBB-4B8D-A1CE-219634C9C27A">Determining
+whether to display home screen or full screen </h1><div><p>A widget enabled for the home screen has two views, home screen
+view and a full screen view. You must implement a function in your widget
+that determines in which view to display the widget and call that function
+in response to communication from the home screen.</p>
+<p>The home screen communicates with the widget when users interact with the
+home screen. Communication between the home screen and the widget occurs at
+the system level, so it happens automatically. When the widget receives communication
+from the home screen, it fires the following events:</p>
+<ul>
+<li><p><code>onload()</code> and <code>onshow()</code> when
+users add a widget to the home screen.</p></li>
+<li><p><code>onshow()</code> and <code>onresize()</code> when
+the mobile device user selects a home screen widget to launch it in full view.</p></li>
+<li><p><code>onshow()</code> and <code>onresize()</code> when
+the home screen moves from the background to the foreground.</p></li>
+</ul>
+<div><h3>To determine which view to display</h3><ol>
+<li id="GUID-C2F4608F-C6E9-469E-84DE-7A07D71FC86E"><a name="GUID-C2F4608F-C6E9-469E-84DE-7A07D71FC86E"><!----></a><p>Write JavaScript code
+that determines the current screen size and uses that value to initialize
+either the home screen view or the full screen view. </p><p>For example, the
+following functions set a threshold value of 150 pixels to determine whether
+to display the widget in full screen view (<code>initFull</code>)
+or home screen view (<code>initHomeScreen</code>).</p><pre class="codeblock">function setViewMode(){
+   var isInHSView = isHSViewMode();
+	
+   if ( isInHSView ) {
+       initHomeScreen();
+		   
+	 } else {
+		   initFull();
+   }
+}
+</pre><pre class="codeblock">isHSViewMode: function() {
+	   var size = this.getScreenSize();
+	   return ( size.height &lt; HS_VIEW_TRESHOLD );
+}	
+
+</pre><pre class="codeblock">HS_VIEW_TRESHOLD = 150;
+</pre></li>
+<li id="GUID-FD38A295-3E2A-4B7F-AFFC-314709F1CB3F"><a name="GUID-FD38A295-3E2A-4B7F-AFFC-314709F1CB3F"><!----></a><p>Call the <code>setViewMode()</code> function
+in response to <code>onload()</code>, <code>onshow()</code>, and <code>onresize()</code> events
+fired by the widget UI.</p><p>For example, the following HTML code calls <code>setViewMode()</code> in
+response to these events. </p><pre class="codeblock">&lt;body id="body" onload="setViewMode();" onshow="setViewMode();" onresize="setViewMode();"&gt;</pre></li>
+</ol><p>For an example, see <a href="GUID-1812A0D5-74CC-4A94-AF91-970465F6A738.html#GUID-1812A0D5-74CC-4A94-AF91-970465F6A738">Enabling STEW for the home screen</a>.</p></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

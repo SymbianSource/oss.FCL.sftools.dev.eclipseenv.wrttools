@@ -1,0 +1,156 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="System attributes"/><meta name="DC.Relation" scheme="URI" content="GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1"/><meta name="DC.Relation" scheme="URI" content="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B796D072-4E51-4BC7-9259-84530DB3539D"/><title>System
+attributes </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System
+attributes</h1><div>
+<p/>
+<p>System information is represented as system attributes. Each system
+attribute consists of an <strong>entity</strong> and a <strong>key</strong>. The entity broadly
+represents a device component or feature, such as battery or connectivity.
+The key is an attribute of the entity. Entities can have multiple keys, with
+each entity-key pair representing a single system attribute. For example,
+battery strength and charging status are attributes of battery. The system
+attributes for these are <code>Battery - BatteryStrength</code> and <code>Battery
+- ChargingStatus</code>, respectively (see <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBA52090-BEA7-4D30-A2EB-C3B0BDFDAB11">Table:
+Battery system attributes</a>). Each system attribute has a value that
+contains data about the attribute. For some system attributes, the value can
+be <a href="GUID-4347A7F1-1560-4B28-B4A8-DC570864F505.html#GUID-4347A7F1-1560-4B28-B4A8-DC570864F505">modified</a>.</p>
+<p>For more information about the supported system attributes, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For more information about the system data types that determine system
+attribute values, see section <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">System data types</a>.</p>
+<p>In <span>JavaScript</span>,
+a system attribute is represented as an object, with the entity, key, and
+value as properties of that object:</p>
+<div class="tablenoborder"><a name="GUID-0FA117EC-0049-43F7-BFB8-C777A4D2414D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-0FA117EC-0049-43F7-BFB8-C777A4D2414D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>System attribute
+object</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e69463">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e69468">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e69473">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e69478">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69463 ">
+<p><code>Entity</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69468 ">
+<p>Specifies the entity of the system attribute.</p>
+<p>Together with <code>Key</code>, this specifies the system attribute.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69473 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69478 ">
+<p>For a complete list of supported entities, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69463 ">
+<p><code>Key</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69468 ">
+<p>Specifies the key of the system attribute. The available keys depend
+on the entity.</p>
+<p>Together with <code>Entity</code>, this specifies the system
+attribute.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69473 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69478 ">
+<p>For a complete list of supported keys per entity, see the <strong>Key</strong> column
+of the tables in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69463 ">
+<p>&lt;<code>Value</code>&gt;</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69468 ">
+<p>Specifies the value of the system attribute.</p>
+<p/>
+<p>The name, type, and content of this property depend on the system attribute
+and whether the system attribute object is used as input or output:</p>
+<p><strong>INPUT</strong></p>
+<p>If the system attribute object is used as input for a method call, this
+property is an object named <code>SystemData</code>. The actual system
+attribute value is represented as one or more properties of the <code>SystemData</code> object.
+The exact set of properties depends on the <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">specific
+system attribute</a> and its <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">system
+data type</a> for input.</p>
+<p>For example: If you input the <code>Battery - BatteryStrength</code> system
+attribute, whose input data type is <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a>, the <code>criteria</code> argument takes the following
+properties:</p>
+<ul>
+<li><p><code>criteria</code><code>.Entity</code></p>
+</li>
+<li><p><code>criteria</code><code>.Key</code></p>
+</li>
+<li><p><code>criteria</code><code>.SystemData.Status</code></p>
+</li>
+</ul>
+<p>Here, <code>criteria</code> is the input object representing
+the system attribute, <code>SystemData</code> is the object containing
+the system attribute value, and <code>Status</code> is the object
+property specifying the actual value (as defined by the system data type).</p>
+<p>Similarly, if you input the <code>Memory - DriveInfo</code> system
+attribute, whose input data type is <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a>, the <code>criteria</code> argument takes the following
+properties:</p>
+<ul>
+<li><p><code>criteria</code><code>.Entity</code></p>
+</li>
+<li><p><code>criteria</code><code>.Key</code></p>
+</li>
+<li><p><code>criteria</code><code>.SystemData.Drive</code></p>
+</li>
+<li><p><code>criteria</code><code>.SystemData.&lt;...&gt;</code> (other
+properties associated with <code>DriveInfo</code>)</p></li>
+</ul>
+<p><strong>OUTPUT</strong></p>
+<p>If the system attribute object is received as output from a method call,
+the system attribute value is represented as one or more properties of the <code>ReturnValue</code> object
+returned by the call. The exact set of properties depends on the <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">specific
+system attribute</a> and its <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">system
+data type</a> for output.</p>
+<p>For example: If the <code>Battery - BatteryStrength</code> system
+attribute, whose output data type is <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a>, is received as output, the <code>ReturnValue</code> object
+contains the following properties:</p>
+<ul>
+<li><p><code>ReturnValue.Entity</code></p></li>
+<li><p><code>ReturnValue.Key</code></p></li>
+<li><p><code>ReturnValue.Status</code></p></li>
+</ul>
+<p>Here, <code>ReturnValue</code> is the output object representing
+the system attribute, and <code>Status</code> is the object property
+specifying the system attribute value (as defined by the system data type).</p>
+<p>Similarly, if the <code>Memory - DriveInfo</code> system attribute,
+whose output data type is <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a>, is received as output, the <code>ReturnValue</code> object
+contains the following properties:</p>
+<ul>
+<li><p><code>ReturnValue.Entity</code></p></li>
+<li><p><code>ReturnValue.Key</code></p></li>
+<li><p><code>ReturnValue.Drive</code></p></li>
+<li><p><code>ReturnValue.TotalSpace</code></p></li>
+<li><p><code>ReturnValue.FreeSpace</code></p></li>
+<li><p><code>ReturnValue.CriticalSpace</code></p></li>
+<li><p><code>ReturnValue.MediaType</code></p></li>
+<li><p><code>ReturnValue.BatteryState</code></p></li>
+<li><p><code>ReturnValue.DriveName</code></p></li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69473 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e69478 ">
+<p>See the <strong>Input</strong> and <strong>Output</strong> columns of the tables in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

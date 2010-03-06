@@ -1,0 +1,69 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Managing widgets on the home screen"/><meta name="abstract" content="Home screen widgets are WRT widgets that are enabled for the home screen. They have two views, home screen view and a full screen view."/><meta name="description" content="Home screen widgets are WRT widgets that are enabled for the home screen. They have two views, home screen view and a full screen view."/><meta name="DC.Relation" scheme="URI" content="GUID-EAE0823B-5914-49C2-9DBC-15B61DE49E60"/><meta name="DC.Relation" scheme="URI" content="GUID-4BE0F634-6995-4738-A650-5D3CCBC26647"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-4F4EE10B-BC2C-4046-ADDB-AD4B67DB2A11"/><meta name="DC.Language" content="en"/><title>Managing widgets on the home screen </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-4F4EE10B-BC2C-4046-ADDB-AD4B67DB2A11">Managing widgets on the home screen</h1><div><p>Home screen widgets are WRT widgets that are enabled for the home screen. They have two views, home screen view and a full screen view. </p>
+<p>Mobile device users can manage widgets on the home screen, as follows:</p>
+<ul>
+<li><p>Add a widget to the home screen.</p></li>
+<li><p>Remove a widget from the home screen. </p></li>
+<li><p>Suspend the home screen by sending from the foreground to the background.</p></li>
+<li><p>Launch the home screen widget in full view.</p></li>
+<li><p>Resume the home screen by sending it from the background to the foreground.</p></li>
+</ul>
+<div><h3>Home screen widget features</h3><p>Mobile device users can access widgets from:</p><ul>
+<li><p>Home screen</p></li>
+<li><p>Applications menu</p></li>
+</ul><p>The following table lists features of a widget enabled for the home screen and differences in the widget functionality in the home screen view and full screen view. </p><div class="tablenoborder"><a name="GUID-2F6F9CF1-D773-4D1D-A4BD-FB9D7773B285"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-2F6F9CF1-D773-4D1D-A4BD-FB9D7773B285" frame="border" border="1" rules="all">
+<thead align="left">
+<tr class="title ">
+<th class="cellrowborder" valign="top" id="d0e13137"><p>Widget feature</p></th>
+<th class="cellrowborder" valign="top" id="d0e13141"><p>Home screen view</p></th>
+<th class="cellrowborder" valign="top" id="d0e13145"><p>Full screen view</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e13137 "><p>Users can interact with the widget</p></td>
+<td class="cellrowborder" valign="top" headers="d0e13141 "><p>No</p></td>
+<td class="cellrowborder" valign="top" headers="d0e13145 "><p>Yes</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e13137 "><p>Widget appears in the open applications list</p></td>
+<td class="cellrowborder" valign="top" headers="d0e13141 "><p>No</p><p>The home screen is listed in the open applications list but individual home screen widgets are not</p></td>
+<td class="cellrowborder" valign="top" headers="d0e13145 "><p>Yes</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e13137 "><p>Users can exit the widget</p></td>
+<td class="cellrowborder" valign="top" headers="d0e13141 "><p>No</p><p>Users can remove widgets from the home screen</p></td>
+<td class="cellrowborder" valign="top" headers="d0e13145 "><p>Yes</p><p>However, the widget remains running in the background and is still displayed on the home screen, until users remove it</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e13137 "><p>Users can uninstall the widget</p></td>
+<td class="cellrowborder" valign="top" headers="d0e13141 "><p>Yes</p><p>However, users must first remove the widget from the home screen</p> </td>
+<td class="cellrowborder" valign="top" headers="d0e13145 "><p>Yes</p><p>However, users must first remove the widget from the home screen</p></td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Adding widgets to the home screen</h3><p>Once mobile device users add widgets to the home screen, they are running. If users launche the widget (for example, from <span class="uicontrol">Applications</span> ) the home screen widget is displayed in full screen view. A separate instance of the widget is not launched.</p><p>Widgets that you <a href="GUID-63F4E17E-8895-4054-82AD-762B90610B30.html#GUID-63F4E17E-8895-4054-82AD-762B90610B30">enable for the home screen</a> are automatically added to the list of available content in home screen options in alphabetic order. The name that appears in the list is determined by the <code>DisplayName</code> key in the <a href="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B.html#GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B"><code>info.plist</code></a> file. </p><p>Widgets that are currently displayed on the home screen are hidden from the content list. When users uninstall a widget, it is removed from the content list automatically.</p><div class="p">The home screen informs the widget when users add a widget to the home screen. The widget responds by: <ol>
+<li id="GUID-F7DAD5B3-610B-4BE6-BD78-D27551A25C9B"><a name="GUID-F7DAD5B3-610B-4BE6-BD78-D27551A25C9B"><!----></a><p>Launching the widget in the background. </p></li>
+<li id="GUID-35EADBC5-4E17-4FFB-8686-8ED31776E054"><a name="GUID-35EADBC5-4E17-4FFB-8686-8ED31776E054"><!----></a><p>Firing <code>onload()</code> and <code>onshow()</code> events.</p></li>
+<li id="GUID-FE84A62E-3353-4820-AC1E-6D023813F70F"><a name="GUID-FE84A62E-3353-4820-AC1E-6D023813F70F"><!----></a><p>Prompting the user for permissions. </p></li>
+<li id="GUID-20EFC9B1-1063-4AAC-A38C-E9BA0FDA83DE"><a name="GUID-20EFC9B1-1063-4AAC-A38C-E9BA0FDA83DE"><!----></a><p>Sending bitmap updates of the widget data to the home screen. </p></li>
+</ol></div></div>
+<div><h3>Removing widgets from the home screen</h3><p>The home screen informs the widget when mobile device users remove a widget from the home screen. The widget shuts down.</p></div>
+<div><h3>Suspending the home screen</h3><div class="p">The home screen is suspended when it is sent to the background. This happens when mobile device users swap to another application, open a home screen widget in full view, and so forth. The widget responds by:<ol>
+<li id="GUID-45D3EF50-74A1-4B86-8F38-279723D05971"><a name="GUID-45D3EF50-74A1-4B86-8F38-279723D05971"><!----></a><p>Suspending timers.</p></li>
+<li id="GUID-94F08F94-8D4D-4B4B-B601-C147F3D0370D"><a name="GUID-94F08F94-8D4D-4B4B-B601-C147F3D0370D"><!----></a><p>Suspending bitmap updates of the widget.</p></li>
+<li id="GUID-6A3D0AAE-C078-4452-B2DA-EF73D841DAAB"><a name="GUID-6A3D0AAE-C078-4452-B2DA-EF73D841DAAB"><!----></a><p>Firing an <code>onhide()</code> event.</p></li>
+</ol><div class="note"><p><strong class="note_title">Note: </strong> The widget does not need to do anything in response to the </p><code>onhide()</code> event.</div></div></div>
+<div><h3>Opening home screen widgets in full screen view</h3><div class="p">The home screen informs the widget when a mobile device user selects a home screen widget to open in full screen view. Note that before informing the widget, the home screen suspends all other widgets on the home screen. The widget responds by:<ol>
+<li id="GUID-75FA60FF-1656-4A20-9C2D-501B1D626D4D"><a name="GUID-75FA60FF-1656-4A20-9C2D-501B1D626D4D"><!----></a><p>Starting the JavaScript timers for the widget.</p></li>
+<li id="GUID-9123D94E-065A-4F94-AC9C-4A54CB571CC2"><a name="GUID-9123D94E-065A-4F94-AC9C-4A54CB571CC2"><!----></a><p>Firing <code>onshow()</code> and <code>onresize()</code> events for the widget.</p></li>
+</ol></div></div>
+<div><h3>Resuming the home screen</h3><div class="p">The home screen is resumed when the home screen is sent to the foreground. For example, when mobile device users swap back to the home screen from another application, users exit full view of a widget added to the home screen, and so forth. The widget responds by:<ol>
+<li id="GUID-49DB6E19-B940-429A-882D-242B9198DA81"><a name="GUID-49DB6E19-B940-429A-882D-242B9198DA81"><!----></a><p>Starting JavaScript timers for all widgets added to the home screen. </p></li>
+<li id="GUID-E6014592-9091-486E-9C79-9121795EC11B"><a name="GUID-E6014592-9091-486E-9C79-9121795EC11B"><!----></a><p>Sending <code>onshow()</code> and <code>onresize()</code> events for all widgets added to the home screens.</p></li>
+</ol></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

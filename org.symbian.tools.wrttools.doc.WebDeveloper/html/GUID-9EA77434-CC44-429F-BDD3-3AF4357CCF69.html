@@ -1,0 +1,43 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Creating styles for dynamic content"/><meta name="abstract" content="You can either develop several versions of a widget or web page for use on different mobile devices or design a layout that can adapt to different screen sizes."/><meta name="description" content="You can either develop several versions of a widget or web page for use on different mobile devices or design a layout that can adapt to different screen sizes."/><meta name="DC.Relation" scheme="URI" content="GUID-46BD4E18-092D-4CE2-90CF-91F10B2303B0"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-3DA126B3-12E2-44C8-A009-8D25E7B3F7E6"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-9EA77434-CC44-429F-BDD3-3AF4357CCF69"/><meta name="DC.Language" content="en"/><title>Creating styles for dynamic content </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-9EA77434-CC44-429F-BDD3-3AF4357CCF69">Creating styles for dynamic content</h1><div><p>You can either develop several versions of a widget or web page for use on different mobile devices or design a layout that can adapt to different screen sizes.</p>
+<p>Relate the position and size of each screen control to the dimensions of the display. This enables the same set of information to be presented on the screen in all resolutions; higher resolution devices just display finer graphics. However, this layout method works only when the screen aspect ratio is always the same. It does not produce good results when the screen orientation changes. Therefore, scaling should also account for aspect ratio change. </p>
+<div class="figure" id="GUID-52B3CEBE-FE69-4613-A005-A0E139B26958"><img src="GUID-95C2B298-903A-4B2E-8714-0D2DB91470AA_d0e2780_href.png"/><p class="figure-title"><strong>Figure: </strong>A widget on 360 x 640 and 240 x 320 pixel screens</p></div>
+<p>Use a cascading style sheet (CSS) to specify relative measurements for all characteristics, such as line height, margins, padding, of all screen elements. You can use the following relative units to specify the characteristics of screen elements:</p>
+<ul>
+<li><p><code>em</code>—font size in relation to the parent element.</p></li>
+<li><p><code>ex</code>—font height in relation to the lowercase character x.</p></li>
+<li><p><code>px</code>—font size in relation to the resolution of the viewing device.</p></li>
+</ul>
+<p>Mobile devices support a limited number of font sizes. Use relative font sizes instead of absolute font sizes. </p>
+<p>For an example of how to use CSS to design widgets for multiple screen sizes, see the <a href="http://www.forum.nokia.com/info/sw.nokia.com/id/1c27d9d7-8946-4e26-947d-2b140c454876/Web_Run-Time_AccuWidget_Example.html" target="_blank">AccuWidget Example</a> on Forum Nokia. </p>
+<p>If you want more control on the screen layout for widgets, you can use separate CSS files that are selected for use according to the screen size. For an example, see <a href="GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84.html#GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84">STEW: supporting different screen sizes</a>.</p>
+<div><h3>To base the layout on percentage</h3><p> Use the <code>em</code> unit to specify the characteristics of elements in relation to their parent element. For example, the following example specifies that the font size of a first level heading is 100% greater than that of a second level heading, and that the font size of a second level heading is 50% greater than that of a third level heading:</p><pre class="codeblock">h1 {
+    display: block;
+    font-size: 2em;
+    margin: .67__qem 0 .67em 0;
+    font-weight: bold;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin: .83__qem 0 .83em 0;
+    font-weight: bold;
+}</pre><p>The following example specifies that images are scaled by using per cent and pixel   measurements:</p><pre class="codeblock">    #graphicalForecast img {
+        height: 35%;
+    }
+
+    #locationTable td {
+        width: 52px;
+        height: 52px;
+    }
+
+    #locationTable td img {
+        width: 100%;
+        height: 100%;
+    }</pre></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

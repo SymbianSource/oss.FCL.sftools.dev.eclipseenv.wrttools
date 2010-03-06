@@ -1,0 +1,35 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Localizing STEW"/><meta name="abstract" content="This example illustrates how to localize a widget into several languages. To be able to localize a widget, you must place all text that is visible on the display into separate JavaScript files."/><meta name="description" content="This example illustrates how to localize a widget into several languages. To be able to localize a widget, you must place all text that is visible on the display into separate JavaScript files."/><meta name="DC.Relation" scheme="URI" content="GUID-1812A0D5-74CC-4A94-AF91-970465F6A738"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-8DC78944-809B-462B-BEC2-0114696F8B14"/><meta name="DC.Language" content="en"/><title>Localizing STEW </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-8DC78944-809B-462B-BEC2-0114696F8B14">Localizing STEW</h1><div><p>This example illustrates how to localize a widget into several languages. To be able to localize a widget, you must place all text that is visible on the display into separate JavaScript files.</p>
+<p>In this example, STEW is localized into Simplified Chinese. For more information about the localization process, see <a href="GUID-E3EA4F85-E0AE-42AB-8E51-EFD3F0E0A51E.html#GUID-E3EA4F85-E0AE-42AB-8E51-EFD3F0E0A51E">Supporting multiple languages</a>.</p>
+<div><h3>To localize STEW</h3><ol>
+<li id="GUID-D3C6A336-C529-4BD0-8DD1-9939858CC0FD"><a name="GUID-D3C6A336-C529-4BD0-8DD1-9939858CC0FD"><!----></a>Create STEW, as described in the section <a href="GUID-78D2B232-BC16-4633-8B66-DCD0C496B354.html#GUID-78D2B232-BC16-4633-8B66-DCD0C496B354">Introducing STEW</a>.<p/></li>
+<li id="GUID-587B03D8-9903-434D-B49D-333042A8DC64"><a name="GUID-587B03D8-9903-434D-B49D-333042A8DC64"><!----></a><p>Create a string table in the <code>localizedTextStrings.js</code> file.</p></li>
+<li id="GUID-4AD59472-708C-46A9-B4DF-4AD92D3DBCFF"><a name="GUID-4AD59472-708C-46A9-B4DF-4AD92D3DBCFF"><!----></a><p>Translate the display text in the <code>localizedTextStrings.js</code> file into Chinese.</p></li>
+<li id="GUID-CCDDC561-4A5C-416D-AD1C-79F0DA48DB8B"><a name="GUID-CCDDC561-4A5C-416D-AD1C-79F0DA48DB8B"><!----></a><p>Create a folder called <code>zh.lproj</code> in the widget root folder.</p></li>
+<li id="GUID-839481F1-D884-447D-BA7E-52703DB77AEB"><a name="GUID-839481F1-D884-447D-BA7E-52703DB77AEB"><!----></a><p>Store the translated <code>localizedTextStrings.js</code> file in the <code>zh.lproj</code> folder.</p></li>
+</ol><p>The users who select Chinese as the language on their devices automatically see all STEW display text in Chinese.</p></div>
+<div><h3>Creating the string table</h3><p>The <code>localizedTextStrings.js</code> file contains a <code>StringTable</code> object that has two properties: <code>HTML</code> and <code>Code</code>.</p><pre class="codeblock">var StringTable = {
+	
+	HTML: {
+		...
+	},
+
+	Code: {
+		...
+	}
+}
+</pre> <p>The <code>HTML</code> property is a placeholder array of all strings in the <code>main.html</code> file that are visible to users.  Each line contains an ID and a text string.</p><p>For example, the following code is difficult to localize, because the text is located within the HTML:</p><pre class="codeblock">&lt;th &gt;Login&lt;/th&gt;</pre><p>To make the code easy to localize, use an ID to refer to the string in the HTML:</p><pre class="codeblock"> &lt;th id="loginLabel"&gt;&lt;/th&gt;</pre><p>Then add the ID to the <code>HTML</code> section of the <code>StringTable</code> object:</p><pre class="codeblock">HTML: {
+	loginLabel:				"Login"
+}
+</pre><p>All strings are stored in the <code>StringTable</code> object and mapped to DOM element IDs as the key and text as values.  Add a <code>loadStringTable</code> function call to the <code>init</code> function to load the strings to the HTML:</p><pre class="codeblock">function loadStringTable() {
+	for ( var name in StringTable.HTML ) {
+		var element = document.getElementById( name );
+		element.innerHTML = StringTable.HTML[name];
+	}
+}
+</pre><p>The function iterates through all the properties it finds in <code>StringTable.HTML</code>, searches for the name from the DOM, and sets the value to <code>innerHTML</code>.  The same procedure applies to all strings in the code.  The sample below illustrates how the code changes:</p><pre class="codeblock">statusTd.innerHTML = "&lt;span class='latest'&gt;Latest: &lt;/span&gt;" + ...</pre><pre class="codeblock">statusTd.innerHTML = "&lt;span class='latest'&gt;" + StringTable.Code.updateScreenLatest + ": &lt;/span&gt;" + ...</pre><p>Similarly, all display text in the JavaScript files is added to the <code>Code</code> property of the <code>StringTable</code> object.</p></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

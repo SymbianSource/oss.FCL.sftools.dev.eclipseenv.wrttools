@@ -1,0 +1,19 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Using JavaScript controls"/><meta name="abstract" content="You can create JavaScript objects that contain the state and implement the behavior of a control. The controls take care of drawing themselves, including changing their appearance as a result of various state changes."/><meta name="description" content="You can create JavaScript objects that contain the state and implement the behavior of a control. The controls take care of drawing themselves, including changing their appearance as a result of various state changes."/><meta name="DC.Relation" scheme="URI" content="GUID-CCB9E780-C759-45B2-BBC8-7FAE2102C39F"/><meta name="DC.Relation" scheme="URI" content="GUID-0EFEA51B-F98B-4C0B-9960-5D6247355ACA"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-6DD2B3D2-BA3B-4936-BBC9-F61B6757B6F8"/><meta name="DC.Relation" scheme="URI" content="GUID-13E2DE63-47E5-4E2A-85FF-C8B0CAB9D4DE"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-63F9FB97-9A0D-4DE4-A645-F3DB7DC39716"/><meta name="DC.Language" content="en"/><title>Using JavaScript controls </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-63F9FB97-9A0D-4DE4-A645-F3DB7DC39716">Using JavaScript controls</h1><div><p>You can create JavaScript objects that contain the state and implement the behavior of a control. The controls take care of drawing themselves, including changing their appearance as a result of various state changes.</p>
+<div><h3>To create JavaScript controls</h3><p>Create JavaScript to add screen controls. The following example adds a text box and a button.</p><pre class="codeblock">var helloButton;
+var nameField;
+
+...
+    // Add a text box to the view
+    nameField = new TextField(null, "Enter your name");
+    mainView.addControl(nameField);
+    
+    // Add a button to the view
+    helloButton = new FormButton(null, "Say Hello!");
+    helloButton.addEventListener("ActionPerformed", helloButtonClicked);
+    mainView.addControl(helloButton);</pre><div class="figure" id="GUID-335D9862-EE2C-49FE-870C-C11B1DCCEC7A"><img src="GUID-F4DF6925-6F88-4774-8074-ACC6B009D02A_d0e3690_href.jpg"/><p class="figure-title"><strong>Figure: </strong>Hello World widget</p></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

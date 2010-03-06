@@ -1,0 +1,284 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="AppManager Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-50795090-A429-41CF-8CAA-EA2004D2643A"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-2D47E7D9-199D-4D59-BD6A-592FA9F8B16A"/><title>AppManager Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-2D47E7D9-199D-4D59-BD6A-592FA9F8B16A">AppManager Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-E092BF10-C076-4476-9E80-87919940201B.html#GUID-E092BF10-C076-4476-9E80-87919940201B">AppManager
+Service</a>. You can download the <code>wgz</code> package for
+this widget from section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<p>For widget development and debugging purposes, this example writes its
+output to <code>c:\data\jslog_widget.log</code> using <code>console.info</code>.
+For instructions on how to enable logging in the Web browser for S60, see
+section <a href="GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html#GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript console</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-A35E60E0-29C4-4323-843F-15C2B8FF0686">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;DisplayName&lt;/key&gt;
+  &lt;string&gt;AppManagerSample&lt;/string&gt;
+  &lt;key&gt;Identifier&lt;/key&gt;
+  &lt;string&gt;com.nokia.widget.sapi.appmanager.sample&lt;/string&gt;
+  &lt;key&gt;Version&lt;/key&gt;
+  &lt;string&gt;1.0&lt;/string&gt;
+  &lt;key&gt;MainHTML&lt;/key&gt;
+  &lt;string&gt;appmanager-sample.html&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+</div>
+<div><h3>AppManager-sample.html</h3>
+<pre class="codeblock" id="GUID-5A405838-8192-438B-9114-297402F253C5">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript" src="js/common.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="js/appmanager-sample.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body id='docBody' bgcolor="#ddeeff" onload="setup()" style=width:100%;height:100%;&gt;
+
+    &lt;form name="frm"&gt;
+    	&lt;h3&gt;AppManager API Sample Widget&lt;/h3&gt;
+      &lt;input type="button" onclick="getList('img1')" value="GetList"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getFilteredList('img2')" value="GetFilteredList"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="launchDoc('img3')" value="LaunchDoc"&gt;&lt;img id="img3" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="launchApp('img4')" value="LaunchApp"&gt;&lt;img id="img4" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="launchDocAsync('img5')" value="LaunchDocAsync"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="launchAppAsync('img6')" value="LaunchAppAsync"&gt;&lt;img id="img6" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelLaunchDocAsync('img7')" value="CancelLaunchDocAsync"&gt;&lt;img id="img7" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelLaunchAppAsync('img8')" value="CancelLaunchAppAsync"&gt;&lt;img id="img8" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;hr&gt;
+      &lt;div class='appman' id='appman' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-21B896E2-D1B1-40D8-A2D4-29DB48BA44F4">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+  
+  if (errCode) {
+    msg = message + "QBRZ" + "Failed Error: " + errCode + "QBRZ";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no"); 
+  } else {
+    showIMG(imgId,"yes"); 
+  }
+
+  //Print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+  
+  return errCode;
+}
+
+// Build the message by reading an iterable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+       msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('QshowIterableListZ ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try { 
+    if ( typeof obj != 'object' )
+      return "" + obj + 'QBR/Z';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += 'QBR/Z';
+      }
+      txt += 'QBR/Z';
+    }
+  } 
+  catch (e) 
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK) 
+{
+  if(imgId == null || imgId == undefined)
+    return;
+  
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+  
+  for (i = 0; i Q sText.length &amp;&amp; IsNumber == true; i++) 
+  { 
+    Char = sText.charAt(i); 
+    if (ValidChars.indexOf(Char) == -1) 
+    {
+       IsNumber = false;
+    }
+  }
+  return IsNumber; 
+}
+</pre>
+</div>
+<div><h3>AppManager-sample.js</h3>
+<pre class="codeblock" id="GUID-05F658FA-CDFE-40BD-BAAD-18FF22B7B0CA">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+  
+  if (errCode) {
+    msg = message + "QBRZ" + "Failed Error: " + errCode + "QBRZ";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no"); 
+  } else {
+    showIMG(imgId,"yes"); 
+  }
+
+  //Print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+  
+  return errCode;
+}
+
+// Build the message by reading an iterable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+       msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('QshowIterableListZ ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try { 
+    if ( typeof obj != 'object' )
+      return "" + obj + 'QBR/Z';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += 'QBR/Z';
+      }
+      txt += 'QBR/Z';
+    }
+  } 
+  catch (e) 
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK) 
+{
+  if(imgId == null || imgId == undefined)
+    return;
+  
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+  
+  for (i = 0; i Q sText.length &amp;&amp; IsNumber == true; i++) 
+  { 
+    Char = sText.charAt(i); 
+    if (ValidChars.indexOf(Char) == -1) 
+    {
+       IsNumber = false;
+    }
+  }
+  return IsNumber; 
+}
+</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

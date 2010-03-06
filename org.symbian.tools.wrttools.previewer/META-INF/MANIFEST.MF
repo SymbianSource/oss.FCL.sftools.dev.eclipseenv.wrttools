@@ -15,8 +15,7 @@ Require-Bundle: org.eclipse.ui,
  org.symbian.tools.wrttools;bundle-version="1.0.0",
  org.mozilla.xulrunner;bundle-version="1.9.1";resolution:=optional
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5,
- JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.symbian.tools.wrttools.previewer,
  org.symbian.tools.wrttools.previewer.http
 Import-Package: javax.servlet;version="2.5.0",

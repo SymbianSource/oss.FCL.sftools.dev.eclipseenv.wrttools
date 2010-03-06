@@ -1,0 +1,166 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.GetList()"/><meta name="DC.Relation" scheme="URI" content="GUID-D85C2567-F041-42A1-A2B5-650FCAAD60A9"/><meta name="DC.Relation" scheme="URI" content="GUID-E138B464-2086-4E74-B356-ACF8687BBB5A"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"/><title>IDataSource.GetList() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><span>IDataSource.</span>GetList()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>GetList</code> method retrieves information about
+landmarks, landmark categories, or landmark databases. Landmarks and landmark
+categories are retrieved from the specified landmark database or, if no database
+is specified, from the default one.</p>
+<p>This method can be called both synchronously and asynchronously.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>For retrieving information about databases, only synchronous <code>GetList</code> is
+supported.</p>
+</div>
+<p><strong>Syntax:</strong></p>
+<p>For synchronous calls:</p>
+
+<pre class="codeblock" id="GUID-DD166A2E-3858-4E89-8401-438CF7414173">result = so.IDataSource.GetList(criteria);</pre>
+<p>For asynchronous calls:</p>
+
+<pre class="codeblock" id="GUID-56AC7152-6F96-4C30-9CE9-92AAD69C60B3">result = so.IDataSource.GetList(criteria, callback);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies what landmark information is returned
+and how the returned information is sorted. For more information about the
+object properties and how to define them, see section <a href="GUID-8074E501-A64A-41F8-B598-05D8B496438F.html#GUID-8074E501-A64A-41F8-B598-05D8B496438F">Criteria for retrieving landmark information</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when an asynchronous <code>GetList</code> call has
+results or status information to return. You must define this method separately.
+Follow the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+<p>This argument is used only with an asynchronous <code>GetList</code> call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>If synchronous, the <code>GetList</code> method returns an object
+that contains the requested landmark information, an error code, and an error
+message.</p>
+<div class="tablenoborder"><a name="GUID-F460C206-1FEA-45D5-AC5A-0369D2E356CE"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-F460C206-1FEA-45D5-AC5A-0369D2E356CE" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for a synchronous GetList</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e39289">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e39294">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e39299">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39289 ">
+<p><code>result.ReturnValue</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39294 ">
+<p>This is an iterator that contains the requested landmark information.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39299 ">
+<p>See <a href="GUID-89A7E790-06F0-488E-B833-AC63B9995E25.html#GUID-89A7E790-06F0-488E-B833-AC63B9995E25">Returned landmark information</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39289 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39294 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39299 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39289 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39294 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39299 ">
+<p>See <a href="GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C.html#GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C">Landmarks Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If asynchronous, the <code>GetList</code> method returns an
+object that contains the initial return value for the asynchronous call it
+started (see the following table). The actual landmark information is returned
+by the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> method
+in the <code>ReturnValue</code> property of its result object. The
+returned information is described in section <a href="GUID-89A7E790-06F0-488E-B833-AC63B9995E25.html#GUID-89A7E790-06F0-488E-B833-AC63B9995E25">Returned landmark information</a>.</p>
+<div class="tablenoborder"><a name="GUID-AB68C15D-FCCD-49F5-8EA4-D707749EB94C"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-AB68C15D-FCCD-49F5-8EA4-D707749EB94C" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for an asynchronous GetList</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e39411">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e39416">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e39421">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39411 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39416 ">
+<p>This is a number used as an identification to match transactions started
+with the asynchronous <code>GetList</code> call to one or more calls
+it generates to <code>callback</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39421 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39411 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39416 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39421 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39411 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39416 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e39421 ">
+<p>See <a href="GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C.html#GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C">Landmarks Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p>If <code>GetList</code> is performed on the default
+landmark database and it does not exist, it is created and set active. The
+default database is <code>file://c:eposlm.ldb</code>.</p></li>
+<li><p>For more information about landmarks, landmark categories,
+and landmark databases, see the <a href="GUID-D581028C-06ED-422D-866E-AE6C93075084.html#GUID-D581028C-06ED-422D-866E-AE6C93075084">Landmarks
+Service overview page</a>.</p></li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-11D59F76-EC4C-4297-B262-D5174E826B43.html#GUID-11D59F76-EC4C-4297-B262-D5174E826B43">the
+full example</a>.</p>
+
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

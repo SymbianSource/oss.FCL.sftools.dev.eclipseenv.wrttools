@@ -1,0 +1,119 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="networkregistrationstatus"/><meta name="DC.Relation" scheme="URI" content="GUID-9E8CBB8A-E918-4208-9F11-D2147A98EC4F"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7"/><meta name="DC.Relation" scheme="URI" content="GUID-92D6E2DB-8BAF-4710-AB23-C16F7DE917CA"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C0ADE739-7F72-4D1D-85FC-631983AAE6D5"/><title>networkregistrationstatus </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C0ADE739-7F72-4D1D-85FC-631983AAE6D5">networkregistrationstatus</h1><div>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-9AA4D224-9A38-463C-8C43-1EDFCE4BED1D">[int] sysinfo.networkregistrationstatus;</pre>
+<p><strong>Description:</strong></p>
+<p>The <code>networkregistrationstatus</code> property is an integer indicating the current network registration status.</p>
+<p>The returned value can be one of the statuses listed in the following table.</p>
+<div class="tablenoborder"><a name="GUID-A4DC7D36-E4D3-40D8-BB83-9B43382A1EF8"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-A4DC7D36-E4D3-40D8-BB83-9B43382A1EF8" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Values returned by networkregistrationstatus</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e76959">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" id="d0e76964">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>0</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Registration status is unknown.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>1</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Not registered. The mobile device cannot detect any other networks and is not currently searching a new operator to register to.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>2</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Not registered. The mobile device can detect other networks on which it is possible to make emergency calls only.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>3</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Not registered, but the mobile device is currently searching for a new operator to register to.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>4</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Registered, network busy.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>5</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Registered on home network.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>6</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Registration denied.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e76959 ">
+<p>7</p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76964 ">
+<p>Registered on visited network (roaming).</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>For more information on network connection related aspects that you should take into account in your widget, see <a href="GUID-C158B834-9FF8-47C1-B2B5-BA154EBFA8BC.html#GUID-C158B834-9FF8-47C1-B2B5-BA154EBFA8BC">Dealing with network issues</a>.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-E7146E33-6926-4197-BBFC-5FCC2502C224">window.onload = function(){
+  // Detect the current status
+  networkRegEventHandler();
+}
+networkRegEventHandler() {
+  var textInfo = null;
+  var networkName = "";
+  var status = sysinfo.networkregistrationstatus;
+  switch (status) {
+     case 0:
+     case 1:
+     case 2:
+     case 3:
+     case 4:
+     case 6:
+         textInfo = "Network registration failed!";
+         break;
+     case 5:
+         networkName = sysinfo.networkname;
+         textInfo ="Registered on home network named );
+         break;
+     case 7:
+         networkName = sysinfo.networkname;
+         textInfo ="Registered on foreign network named );
+         break;
+     default:
+         break;
+  }
+  alert(textInfo + networkname);
+}</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

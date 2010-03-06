@@ -1,0 +1,134 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for organizing landmarks in a landmark category"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Relation" scheme="URI" content="GUID-B8869924-0E95-4543-954E-5A4246922CB4"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C5E6EDA9-DDE8-44E0-99C1-2031514B3072"/><title>Criteria for
+organizing landmarks in a landmark category </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C5E6EDA9-DDE8-44E0-99C1-2031514B3072"><span>Criteria</span> for
+organizing landmarks in a landmark category</h1><div>
+<p>The <code>criteria</code> object specifies which landmarks
+to associate or disassociate and with which landmark category.</p>
+<p>The <code>criteria</code> object has three main properties: <code>Type</code>, <code>Data</code>,
+and <code>OperationType</code>. These are described in the following
+table.</p>
+<div class="tablenoborder"><a name="GUID-439F013C-6C73-4883-80B4-70217B7DAFC3"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-439F013C-6C73-4883-80B4-70217B7DAFC3" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e43547">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e43552">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e43557">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e43562">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43547 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43552 ">
+<p>Specifies the type of landmark information to organize. This is always <code>"Landmark"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43557 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43562 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Landmark"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43547 ">
+<p><code>criteria.Data</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43552 ">
+<p>Specifies which landmarks to organize, in which landmark category, and
+how (associate or disassociate).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43557 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43562 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43547 ">
+<p><code>[criteria.Data.DatabaseURI]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43552 ">
+<p>Specifies the URI of the landmark database in which the landmarks are
+organized.</p>
+<p>If this property is not specified, the landmarks are organized in the
+default database.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43557 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43562 ">
+<p>For example: <code>file://c:landmarks.ldb</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43547 ">
+<p><code>criteria.Data.id</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43552 ">
+<p>Specifies the ID of the landmark category to organize. The specified
+landmarks are associated or disassociated with this category.</p>
+<p>Use the <a href="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html#GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><code>GetList</code></a> method
+to retrieve this ID.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43557 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43562 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43547 ">
+<p><code>criteria.Data.IdList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43552 ">
+<p>Specifies the IDs of the landmarks to organize. These landmarks are
+associated or disassociated with the specified category.</p>
+<p>Use the <a href="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html#GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><code>GetList</code></a> method
+to retrieve these IDs.</p>
+<div class="note"><p><strong class="note_title">Note: </strong></p><ul>
+<li><p>If any of the specified landmarks does not exist, it is ignored
+and the operation is performed on the other landmarks.</p></li>
+<li><p>If any of the specified landmarks is already associated/disassociated
+with the specified category, it is ignored.</p></li>
+</ul>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43557 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43562 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43547 ">
+<p><code>criteria.OperationType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43552 ">
+<p>Specifies whether to add the landmarks to the category (associate) or
+remove the landmarks from the category (disassociate).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43557 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e43562 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Associate"</code></p></li>
+<li><p><code>"Disassociate"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

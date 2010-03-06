@@ -1,0 +1,604 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Logging Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D"/><title>Logging Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D">Logging Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7.html#GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7">Logging service</a>.
+You can download the <code>wgz</code> package for this widget from
+section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<p>For widget development and debugging purposes, this example writes its
+output to <code>c:\data\jslog_widget.log</code> using <code>console.info</code>.
+For instructions on how to enable logging in the Web browser for S60, see
+section <a href="GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html#GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript console</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-FBF62C65-8270-49CA-912E-8B28A7893D3C">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;DisplayName&lt;/key&gt;
+	 &lt;string&gt;LoggingSample&lt;/string&gt;
+	 &lt;key&gt;Identifier&lt;/key&gt;
+  &lt;string&gt;com.nokia.widget.sapi.logging.sample&lt;/string&gt;
+  &lt;key&gt;Version&lt;/key&gt;
+  &lt;string&gt;1.0&lt;/string&gt;
+  &lt;key&gt;MainHTML&lt;/key&gt;
+  &lt;string&gt;logging-sample.html&lt;/string&gt;
+  &lt;key&gt;AllowNetworkAccess&lt;/key&gt;
+  &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre>
+</div>
+<div><h3>Logging-sample.html</h3>
+<pre class="codeblock" id="GUID-6A2FBAA5-54EC-47CF-8637-89A9345B0614">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript" src="js/common.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="js/logging-sample.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body id='docBody' bgcolor="#ddeeff" onload="setup()" style=width:100%;height:100%;&gt;
+
+    &lt;form name="frm"&gt;
+    	&lt;h3&gt;Logging API Sample Widget&lt;/h3&gt;
+     	
+      &lt;input type="button" onclick="addLog('img1')" value="AddLog"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="delLog('img2')" value="DeleteLog"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getLogList('img3')" value="GetLogList"&gt;&lt;img id="img3" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="addLogAsync('img4')" value="AddLogAsync"&gt;&lt;img id="img4" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="delLogAsync('img5')" value="DeleteLogAsync"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getLogListAsync('img6')" value="GetLogListAsync"&gt;&lt;img id="img6" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="requestNotification('img7')" value="RequestNotification"&gt;&lt;img id="img7" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelAddLogAsync('img8')" value="CancelAddLogAsync"&gt;&lt;img id="img8" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelDelLogAsync('img9')" value="CancelDeleteLogAsync"&gt;&lt;img id="img9" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelGetLogListAsync('img10')" value="CancelGetLogListAsync"&gt;&lt;img id="img10" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelRequestNotification('img11')" value="CancelRequestNotification"&gt;&lt;img id="img11" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+
+			&lt;hr&gt;
+      &lt;div class='loggingsample' id='loggingsample' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-A4CCD027-781C-4761-A76E-21CDA239B7CB">errCode = resultList.ErrorCode;
+  var msg = "";
+  
+  if (errCode) {
+    msg = message + "&lt;BR&gt;" + "Failed Error: " + errCode + "&lt;BR&gt;";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no"); 
+  } else {
+    showIMG(imgId,"yes"); 
+  }
+
+  //print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+  
+  return errCode;
+}
+
+// Build the message by reading an iterable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+       msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showIterableList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try { 
+    if ( typeof obj != 'object' )
+      return "" + obj + '&lt;BR/&gt;';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += '&lt;BR/&gt;';
+      }
+      txt += '&lt;BR/&gt;';
+    }
+  } 
+  catch (e) 
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK) 
+{
+  if(imgId == null || imgId == undefined)
+    return;
+  
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+  
+  for (i = 0; i &lt; sText.length &amp;&amp; IsNumber == true; i++) 
+  { 
+    Char = sText.charAt(i); 
+    if (ValidChars.indexOf(Char) == -1) 
+    {
+       IsNumber = false;
+    }
+  }
+  return IsNumber; 
+}
+</pre>
+</div>
+<div><h3>Logging-sample.js</h3>
+<pre class="codeblock" id="GUID-7DDB5A09-0A19-4685-8D11-52F387BDFF22">// logging-sample.js
+// 
+// In this sample a log event will be added, deleted, and listed. The notification will
+// be sent when the log changes.  Also, an async operation will be cancelled.
+//
+
+//SAPI Error Codes
+// 0  - Success
+// 1000 - InvalidServiceArgument
+// 1001 - UnknownArgumentName
+// 1002 - BadArgumentType
+// 1003 - MissingArgument
+// 1004 - ServiceNotSupported
+// 1005 - ServiceInUse
+// 1006 - ServiceNotReady
+// 1007 - NoMemory
+// 1008 - HardwareNotAvailable
+// 1009 - ServerBusy
+// 1010 - EntryExists
+// 1011 - AccessDenied
+// 1012 - NotFound
+// 1013 - UnknownFormat
+// 1014 - GeneralError
+// 1015 - CancelSuccess
+// 1016 - ServiceTimedOut
+// 1017 - PathNotFound
+
+// Declare the service object 
+var so;
+
+// imgid for callback1 function
+var imgid_callback1;
+
+// imgid for callback2 function
+var imgid_callback2;
+
+// imgid for callback3 function
+var imgid_callback3;
+
+// imgid for callback4 function
+var imgid_callback4;
+
+// id of the div used to display information
+const DIV_ID = 'loggingsample';
+
+// Called from onload()        
+function setup()
+{
+  try {
+    so = device.getServiceObject('Service.Logging', 'IDataSource');
+    console.info("setup: so: %s", so);
+  }
+  catch (e) {
+      alert('&lt;setup&gt; ' +e);
+  }
+}
+
+// Add Log
+function addLog(imgId) {
+  
+  var itemMap = new Object();
+  itemMap.EventType = 3; // ShortMessage event
+  itemMap.RemoteParty = '16172333568';
+  itemMap.PhoneNumber = '17819933882';
+  itemMap.Direction = 1; // outgoing
+  itemMap.Subject = 'Test txt msg';
+  itemMap.Description = 'Hi, this is a text message to you';
+  itemMap.DeliveryStatus = 1;  // Sent 
+
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Item = itemMap;
+  
+  try {
+    var result = so.IDataSource.Add(criteria);
+    checkError("IDataSource::Add",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert("addLog: " + e);
+  }
+}
+
+// Delete Log
+function delLog(imgId) {
+  
+  // get "id" by using RequestNotification()
+  var logId = prompt("Please enter the target log id", "");
+  if (logId == "" || logId == null)
+    return;
+    
+  var itemData = new Object();
+  itemData.id = logId;
+  
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Data = itemData;
+  
+  try {
+    var result = so.IDataSource.Delete(criteria);
+    checkError("IDataSource::Delete",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("delLog: " + e);
+  }
+}
+
+// Get the List of Log
+function getLogList(imgId) {
+
+  var filterMap = new Object();
+  filterMap.EventType = 3;// shortMessage event
+
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Filter = filterMap;  
+  
+  try {
+    var result = so.IDataSource.GetList(criteria);
+    if(!checkError("IDataSource::getLogList",result,DIV_ID,imgId)) {
+      var msg = "";
+      var obj;
+      var it = result.ReturnValue;   
+      while ((obj = it.getNext()) != undefined) {
+        msg = msg + "id: " + obj['id']+ "&lt;br&gt;";
+        msg = msg + "EventType: " + obj['EventType'] + "&lt;br&gt;";
+        msg = msg + "RemoteParty: " + obj['RemoteParty'] + "&lt;br&gt;";
+        msg = msg + "PhoneNumber: " + obj['PhoneNumber'] + "&lt;br&gt;";
+        msg = msg + "Subject: " + obj['Subject'] + "&lt;br&gt;";
+        msg = msg + "Description: " + obj['Description'] + "&lt;br&gt;";
+        msg = msg + "DeliveryStatus: " + obj['DeliveryStatus'] + "&lt;br&gt;&lt;br&gt;";
+      }      
+      it.reset();
+      document.getElementById(DIV_ID).innerHTML = msg;
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getLogList: " + e);
+  }
+}
+
+// Add Log Async
+function addLogAsync(imgId) {
+  
+  var itemMap = new Object();
+  itemMap.EventType = 3; // ShortMessage event
+  itemMap.RemoteParty = '16172333568';
+  itemMap.PhoneNumber = '17819933882';
+  itemMap.Direction = 1; // outgoing
+  itemMap.Subject = 'Test txt msg';
+  itemMap.Description = 'Hi, this is a text message to you';
+  itemMap.DeliveryStatus = 1;  // Sent 
+
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Item = itemMap;
+  
+  // Set image id for callback1 function
+  imgid_callback1 = imgId;
+  
+  try {
+    var result = so.IDataSource.Add(criteria, callback1);
+    if(!checkError("IDataSource::addLogAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("addLogAsync: " + e);
+  }
+}
+
+// Delete Log Async
+function delLogAsync(imgId) {
+  
+  // get "id" by using RequestNotification()
+  var logId = prompt("Please enter the target log id", "");
+  if (logId == "" || logId == null)
+    return;
+    
+  var itemData = new Object();
+  itemData.id = logId;
+  
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Data = itemData;
+  
+  // Set image id for callback2 function
+  imgid_callback2 = imgId;
+  
+  try {
+    var result = so.IDataSource.Delete(criteria, callback2);
+    if(!checkError("IDataSource::delLogAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("delLogAsync: " + e);
+  }
+}
+
+// Get Log List Async
+function getLogListAsync(imgId) {
+  
+  var filterMap = new Object();
+  filterMap.EventType = 3;
+
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Filter = filterMap;  
+  
+  // Set image id for callback3 function
+  imgid_callback3 = imgId;
+  
+  try {
+    var result = so.IDataSource.GetList(criteria, callback3);
+    if(!checkError("IDataSource::getLogListAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getLogListAsync: " + e);
+  }
+}
+
+// Cancel Add Log Async
+function cancelAddLogAsync(imgId) {
+  
+  var itemMap = new Object();
+  itemMap.EventType = 3; // ShortMessage event
+  itemMap.RemoteParty = '16172333568';
+  itemMap.PhoneNumber = '17819933882';
+  itemMap.Direction = 1; // outgoing
+  itemMap.Subject = 'Test txt msg';
+  itemMap.Description = 'Hi, this is a text message to you';
+  itemMap.DeliveryStatus = 1;  // Sent 
+
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Item = itemMap;
+  
+  // Set image id for callback1 function
+  imgid_callback1 = imgId;
+  
+  try {
+    var result = so.IDataSource.Add(criteria, callback1);     
+    if(!checkError("IDataSource::cancelAddLogAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var result2 = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::cancelAddLogAsync",result2,DIV_ID,imgId);      
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("cancelAddLogAsync: " + e);
+  }
+}
+
+// Cancel Delete Log Async
+function cancelDelLogAsync(imgId) {
+  
+  // get "id" by using RequestNotification()
+  var logId = prompt("Please enter the target log id", "");
+  if (logId == "" || logId == null)
+    return;
+    
+  var itemData = new Object();
+  itemData.id = logId;
+  
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Data = itemData;
+  
+  // Set image id for callback2 function
+  imgid_callback2 = imgId;
+  
+  try {
+    var result = so.IDataSource.Delete(criteria, callback2);
+    if(!checkError("IDataSource::cancelDelLogAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var result2 = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::cancelDelLogAsync",result2,DIV_ID,imgId);      
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("cancelDelLogAsync: " + e);
+  }
+}
+
+// Cancel Get Log List Async
+function cancelGetLogListAsync(imgId) {
+  
+  var filterMap = new Object();
+  filterMap.EventType = 3;// shortMessage event
+
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Filter = filterMap;  
+  
+  // Set image id for callback3 function
+  imgid_callback3 = imgId;
+  
+  try {
+    var result = so.IDataSource.GetList(criteria, callback3);
+    if(!checkError("IDataSource::cancelGetLogListAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var result2 = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::cancelGetLogListAsync",result2,DIV_ID,imgId);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("cancelGetLogListAsync: " + e);
+  }
+}
+
+// Request Notification
+function requestNotification(imgId) {
+  
+  var filter = new Object();
+  // The Minimum time, in Microseconds,
+  // that elapses before the notification request can complete.
+  filter.DelayTime = 2000000;
+  
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Filter = filter;
+
+  // Set image id for callback4 function
+  imgid_callback4 = imgId;
+  
+  try {
+    var result = so.IDataSource.RequestNotification(criteria,callback4);
+    checkError("IDataSource::requestNotification",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("requestNotification: " + e);
+  }
+}
+
+// Cancel Request Notification
+function cancelRequestNotification(imgId) {
+  
+  var filter = new Object();
+  // The Minimum time, in Microseconds,
+  // that elapses before the notification request can complete.
+  filter.DelayTime = 2000000;
+  
+  var criteria = new Object();
+  criteria.Type = 'Log';
+  criteria.Filter = filter;
+
+  // Set image id for callback4 function
+  imgid_callback4 = imgId;
+  
+  try {
+    var result = so.IDataSource.RequestNotification(criteria,callback4);
+    if(!checkError("IDataSource::cancelRequestNotification",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var result2 = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::cancelRequestNotification",result2,DIV_ID,imgId);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("cancelRequestNotification: " + e);
+  }
+}
+
+// This is the asynchronous callback handler 
+function callback1(transId, eventCode, result)
+{
+  console.info("addLogAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::addLogAsync",result,DIV_ID,imgid_callback1);
+}
+
+// This is the asynchronous callback handler 
+function callback2(transId, eventCode, result)
+{
+  console.info("delLogAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::delLogAsync",result,DIV_ID,imgid_callback2);
+}
+
+// This is the asynchronous callback handler
+function callback3(transId, eventCode, result)
+{
+  console.info("getLogListAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::getLogListAsync",result,DIV_ID,imgid_callback3)) {
+    var msg = "";
+    var obj;
+    var meetingIt = result.ReturnValue;
+    while ((obj = meetingIt.getNext()) != undefined) {
+      msg = msg + "id: " + obj['id']+ "&lt;br&gt;";
+      msg = msg + "EventType: " + obj['EventType'] + "&lt;br&gt;";
+      msg = msg + "RemoteParty: " + obj['RemoteParty'] + "&lt;br&gt;";
+      msg = msg + "PhoneNumber: " + obj['PhoneNumber'] + "&lt;br&gt;";
+      msg = msg + "Subject: " + obj['Subject'] + "&lt;br&gt;";
+      msg = msg + "Description: " + obj['Description'] + "&lt;br&gt;";
+      msg = msg + "DeliveryStatus: " + obj['DeliveryStatus'] +"&lt;br&gt;&lt;br&gt;";
+    }      
+    meetingIt.reset();
+    document.getElementById(DIV_ID).innerHTML = msg;
+  }
+}
+
+// This is the asynchronous callback handler 
+function callback4(transId, eventCode, result)
+{
+  console.info("getLogListAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::RequestNotificationAsync",result,DIV_ID,imgid_callback4)) {
+    document.getElementById(DIV_ID).innerHTML = showObject("Event Log has been updated!");
+  }
+}
+</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

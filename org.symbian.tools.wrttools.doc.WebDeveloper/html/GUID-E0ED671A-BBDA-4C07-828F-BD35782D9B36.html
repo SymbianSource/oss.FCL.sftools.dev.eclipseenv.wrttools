@@ -1,0 +1,91 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Accessing and modifying system information"/><meta name="DC.Relation" scheme="URI" content="GUID-E9A578AA-58C5-4902-B418-4CE44EA40D5D"/><meta name="DC.Relation" scheme="URI" content="GUID-6FBE64B7-0949-4AAE-B835-52B276540A59"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-46EABDC1-37CB-412A-ACAD-1A1A9466BB68"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-E0ED671A-BBDA-4C07-828F-BD35782D9B36"/><title>Accessing
+and modifying system information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-E0ED671A-BBDA-4C07-828F-BD35782D9B36">Accessing
+and modifying system information</h1><div>
+<p>The <a href="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3.html#GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3">SystemInfo
+Service API<span> of WRT 1.1</span></a> allows <span>widgets</span> to
+access and modify system information on a device. System information is represented
+as a set of system attributes. You can use the SystemInfo Service to create <span>widgets</span> that:</p>
+<ul>
+<li><p>Read and modify system attribute values</p></li>
+<li><p>Notify the user when system attribute values change</p>
+</li>
+</ul>
+<p>The system attributes are grouped into the following categories:</p>
+<ul>
+<li><p>Battery</p></li>
+<li><p>Connectivity</p></li>
+<li><p>Device</p></li>
+<li><p>Display</p></li>
+<li><p>Features</p></li>
+<li><p>General</p></li>
+<li><p>Memory</p></li>
+<li><p>Network</p></li>
+</ul>
+<p>Only a few system attributes are modifiable and support change notifications.
+For more information about system attributes, see section <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a></p>
+<div><h3>Accessing the API and supported methods</h3>
+<p>To create a <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080">service
+object</a> for the SystemInfo Service API, use <code>Service.SysInfo</code> to
+identify the service provider and <code>ISysInfo</code> to identify
+the supported interface:</p>
+
+<pre class="codeblock" id="GUID-9F7EE91E-7245-44A9-BFAE-BF043CA4E67D-GENIDd0e9114">var so = device.getServiceObject("Service.SysInfo", "ISysInfo");</pre>
+<p>The <code>ISysInfo</code> interface provides the following methods:</p>
+<ul>
+<li><p><a href="GUID-279A3698-D09B-44BF-8340-739E19F94727.html#GUID-279A3698-D09B-44BF-8340-739E19F94727"><code>GetInfo()</code></a></p>
+
+<p>Use the <code>GetInfo()</code> method to retrieve information
+about a system attribute.</p>
+
+</li>
+<li><p><a href="GUID-4347A7F1-1560-4B28-B4A8-DC570864F505.html#GUID-4347A7F1-1560-4B28-B4A8-DC570864F505"><code>SetInfo()</code></a></p>
+
+<p>Use the <code>SetInfo()</code> method to modify the value of
+a system attribute.</p>
+
+</li>
+<li><p><a href="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E.html#GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"><code>GetNotification()</code></a></p>
+
+<p>Use the <code>GetNotification()</code> method to receive a notification
+when the value of a system attribute is changed.</p>
+
+</li>
+<li><p><a href="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B.html#GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"><code>Cancel()</code></a></p>
+
+<p>Use the <code>Cancel()</code> method to cancel an ongoing asynchronous
+call. This method is valid for any asynchronous call made through the SystemInfo
+Service API.</p>
+
+</li>
+</ul>
+</div>
+<div><h3>Using the service in a widget</h3>
+<p>To access and modify system information using the SystemInfo Service
+API:</p>
+<ol>
+<li id="GUID-E8ECDB2F-00C4-488F-A253-87FABDA66CA6-GENIDd0e9200"><a name="GUID-E8ECDB2F-00C4-488F-A253-87FABDA66CA6-GENIDd0e9200"><!----></a><p>Create a service
+object for the API using <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a>.</p>
+</li>
+<li id="GUID-0625B45D-A5C9-4ADA-BC21-07963F957A7C-GENIDd0e9209"><a name="GUID-0625B45D-A5C9-4ADA-BC21-07963F957A7C-GENIDd0e9209"><!----></a><p>Define the
+tasks you want to perform and choose the correct methods for them.</p>
+</li>
+<li id="GUID-DBD9997B-CD51-45F9-9ED0-38A98AF08A12-GENIDd0e9214"><a name="GUID-DBD9997B-CD51-45F9-9ED0-38A98AF08A12-GENIDd0e9214"><!----></a><p>Optionally,
+define how you want the results filtered.</p></li>
+<li id="GUID-AAB5C193-F848-4B0A-AF03-6BA7425BD10B-GENIDd0e9218"><a name="GUID-AAB5C193-F848-4B0A-AF03-6BA7425BD10B-GENIDd0e9218"><!----></a><p>Define methods
+to process the results.</p></li>
+<li id="GUID-F0C3D20F-6F77-4C88-AF35-39DA70DE701B-GENIDd0e9222"><a name="GUID-F0C3D20F-6F77-4C88-AF35-39DA70DE701B-GENIDd0e9222"><!----></a><p>Retrieve the
+results using the methods from step 2. Use asynchronous methods together with <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback()</code></a>.</p>
+</li>
+<li id="GUID-0ABE0CB0-D76C-444B-AE53-0D435B3C6E74-GENIDd0e9231"><a name="GUID-0ABE0CB0-D76C-444B-AE53-0D435B3C6E74-GENIDd0e9231"><!----></a><p>Process the
+results using the methods defined in step 4.</p></li>
+</ol>
+<p>For the complete source of a sample widget that demonstrates how to
+use this service, see <a href="GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF.html#GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF">the
+full example</a>.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

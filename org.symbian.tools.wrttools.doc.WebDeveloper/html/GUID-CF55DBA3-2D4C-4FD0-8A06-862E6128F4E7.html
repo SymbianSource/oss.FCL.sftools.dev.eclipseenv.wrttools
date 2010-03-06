@@ -1,0 +1,87 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Accessing device logs"/><meta name="DC.Relation" scheme="URI" content="GUID-E3D26890-581A-427F-8AFF-16081528A8B8"/><meta name="DC.Relation" scheme="URI" content="GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-46EABDC1-37CB-412A-ACAD-1A1A9466BB68"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7"/><title>Accessing
+device logs </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7">Accessing
+device logs</h1><div>
+<p>The <a href="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C.html#GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C">Logging Service
+API</a> allows <span>widgets</span> to access mobile device logging
+events such as call logs, messaging logs, and data logs. You can use the Logging
+Service to create <span>widgets</span> that add, read, and delete logging
+events. For example, you can create <span>widgets</span> that:</p>
+<ul>
+<li><p>Automatically delete the records of received calls older
+than a specified number of days</p></li>
+<li><p>Create unique records of calls based on criteria such as
+call duration</p></li>
+<li><p>Provide useful information to mobile device users such as
+the number of MB of data sent and received for the day</p></li>
+</ul>
+<div><h3>Accessing the API and supported methods</h3>
+<p>To create a <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080">service
+object</a> for the Logging Service API, use <code>Service.Logging</code> to
+identify the service provider and <code>IDataSource</code> to identify
+the supported interface:</p>
+
+<pre class="codeblock" id="GUID-A2F3BA97-7375-4A1A-82EB-B7D0CCFDBB63-GENIDd0e8208">var so = device.getServiceObject("Service.Logging", "IDataSource");</pre>
+<p>The <code>IDataSource</code> interface provides the following
+methods:</p>
+<ul>
+<li><p><a href="GUID-F146B956-77AE-41B5-BA17-20F48AF8DBA7.html#GUID-F146B956-77AE-41B5-BA17-20F48AF8DBA7"><code>Add()</code></a></p>
+
+<p>Use the <code>Add()</code> method to add an entry to the event
+log; for example, to create new types of application-specific log entries.</p>
+
+</li>
+<li><p><a href="GUID-7E53CD9F-E213-42E7-8569-02AEA1198E52.html#GUID-7E53CD9F-E213-42E7-8569-02AEA1198E52"><code>GetList()</code></a></p>
+
+<p>Use the <code>GetList()</code> method to retrieve event details
+such as phone number or call duration from the event log.</p>
+
+</li>
+<li><p><a href="GUID-0022AED9-7B79-4C96-B82E-8B1EDF455E1D.html#GUID-0022AED9-7B79-4C96-B82E-8B1EDF455E1D"><code>Delete()</code></a></p>
+
+<p>Use the <code>Delete()</code> method to delete an entry from
+the event log.</p>
+
+</li>
+<li><p><a href="GUID-894E87F7-7146-44DD-8CAF-60F7C446B0D8.html#GUID-894E87F7-7146-44DD-8CAF-60F7C446B0D8"><code>RequestNotification()</code></a></p>
+
+<p>Use the <code>RequestNotification()</code> method to request
+notification of updates to the event log.</p>
+
+</li>
+<li><p><a href="GUID-043C7578-485F-4186-830F-013223A156D1.html#GUID-043C7578-485F-4186-830F-013223A156D1"><code>Cancel()</code></a></p>
+
+<p>Use the <code>Cancel()</code> method to cancel an ongoing asynchronous
+call. This method is valid for any asynchronous call made through the Logging
+Service API.</p>
+
+</li>
+</ul>
+</div>
+<div><h3>Using the service in a widget</h3>
+<p>To access and manage logs using the Logging Service API:</p>
+<ol>
+<li id="GUID-09408614-B079-437A-BF7C-1580105906C1-GENIDd0e8310"><a name="GUID-09408614-B079-437A-BF7C-1580105906C1-GENIDd0e8310"><!----></a><p>Create a service
+object for the API using <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a>.</p>
+</li>
+<li id="GUID-C7877560-C290-4E7D-980C-D65D50DC5B4A-GENIDd0e8319"><a name="GUID-C7877560-C290-4E7D-980C-D65D50DC5B4A-GENIDd0e8319"><!----></a><p>Define the
+tasks you want to perform and choose the correct methods for them.</p>
+</li>
+<li id="GUID-C4DFB650-8BAD-4947-AE25-74DFCD52229C-GENIDd0e8324"><a name="GUID-C4DFB650-8BAD-4947-AE25-74DFCD52229C-GENIDd0e8324"><!----></a><p>Optionally,
+define how you want the results filtered.</p></li>
+<li id="GUID-03590B36-FFCA-4E39-A781-92080EE16B34-GENIDd0e8328"><a name="GUID-03590B36-FFCA-4E39-A781-92080EE16B34-GENIDd0e8328"><!----></a><p>Define functions
+to process the results.</p></li>
+<li id="GUID-76B47850-874B-4F80-9440-DB7E2A2B9477-GENIDd0e8332"><a name="GUID-76B47850-874B-4F80-9440-DB7E2A2B9477-GENIDd0e8332"><!----></a><p>Retrieve the
+results.</p></li>
+<li id="GUID-759B4621-D6DE-47E3-A9EE-6DC6AA4BCB97"><a name="GUID-759B4621-D6DE-47E3-A9EE-6DC6AA4BCB97"><!----></a><p>Process the
+results.</p></li>
+</ol>
+<p>For the complete source of a sample widget that demonstrates how to
+use this service, see <a href="GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D.html#GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D">the
+full example</a>.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

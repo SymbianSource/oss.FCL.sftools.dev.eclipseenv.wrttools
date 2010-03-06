@@ -1,0 +1,114 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Calculation results"/><meta name="DC.Relation" scheme="URI" content="GUID-9115340A-5D15-4139-A236-945D199583AF"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><meta name="DC.Relation" scheme="URI" content="GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B1BFA47E-DAC0-40B1-898E-B3FCE14AE78F"/><title>Calculation
+results </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B1BFA47E-DAC0-40B1-898E-B3FCE14AE78F">Calculation
+results</h1><div>
+<p>The <code>ReturnValue</code> property returned by <a href="GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206.html#GUID-DBEE8177-7246-4FEE-A0F1-D6AEEA6EA206"><code>Calculate</code></a> contains the calculation results for the requested operation. The
+type of the value depends on the operation.</p>
+<p>The following table describes the calculation results returned for each
+operation.</p>
+<div class="tablenoborder"><a name="GUID-26AEADF2-2171-44E6-99A6-F023609C655A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-26AEADF2-2171-44E6-99A6-F023609C655A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue per
+operation</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e49668">
+<p>Operation</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e49673">
+<p>ReturnValue description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e49678">
+<p>ReturnValue type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49668 ">
+<p><code>FindDistance</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49673 ">
+<p>Contains the distance between the source location and the target location
+in meters.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49678 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49668 ">
+<p><code>FindBearingTo</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49673 ">
+<p>Contains the bearing to the target location from the source location.
+The bearing is expressed in degrees counting clockwise relative to true north.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49678 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49668 ">
+<p><code>MoveCoordinates</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49673 ">
+<p>Contains the coordinates of the new location. The properties of this
+object are described in the following table.</p>
+<p>The coordinates are referenced according to the <a href="http://en.wikipedia.org/wiki/World_Geodetic_System" target="_blank">WGS
+84 datum</a>. The representation is in decimal degrees.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49678 ">
+<p>object</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-AC5F7558-DEDC-40BF-BEDA-5E72DD2F0DE8"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-AC5F7558-DEDC-40BF-BEDA-5E72DD2F0DE8" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue
+object properties for MoveCoordinates</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e49774">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e49779">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e49784">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49774 ">
+<p><code>Longitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49779 ">
+<p>Specifies the longitude coordinate of the new location.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49784 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49774 ">
+<p><code>Latitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49779 ">
+<p>Specifies the latitude coordinate of the new location.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49784 ">
+<p>number</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49774 ">
+<p><code>Altitude</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49779 ">
+<p>Specifies the altitude coordinate of the new location.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e49784 ">
+<p>number</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p/>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

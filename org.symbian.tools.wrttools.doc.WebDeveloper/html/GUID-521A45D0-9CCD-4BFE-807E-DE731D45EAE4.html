@@ -1,0 +1,330 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Returned media information"/><meta name="DC.Relation" scheme="URI" content="GUID-474623C2-0C81-445A-802B-77FA1C8C6C54"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-E5684FF0-28C9-4721-9421-6B9432087086"/><meta name="DC.Relation" scheme="URI" content="GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-521A45D0-9CCD-4BFE-807E-DE731D45EAE4"/><title>Returned
+media information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-521A45D0-9CCD-4BFE-807E-DE731D45EAE4">Returned
+media information</h1><div>
+<p>The <code>ReturnValue</code> property returned by <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> is an iterator containing the requested media information. Each item
+(object) in the iterator corresponds to one media file, that is, each item
+contains the information for a specific file. The exact set of object properties
+depends on the media file type defined for <a href="GUID-474623C2-0C81-445A-802B-77FA1C8C6C54.html#GUID-474623C2-0C81-445A-802B-77FA1C8C6C54">filtering</a> in
+the <a href="GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB.html#GUID-39C0BA48-E615-41B1-84FF-D4D0C4597DAB"><code>GetList</code></a> call.</p>
+<p>The following table lists the object properties returned for different
+media types. Media files do not always have all the property values defined.
+In that case, the properties are optional. Only properties that contain a
+value are returned. For example, if a music file does not contain artist information,
+the <code>Artist</code> property is not returned as part of the result
+object for that file.</p>
+<div class="tablenoborder"><a name="GUID-52C671FA-2DFD-4F76-B68D-53CD2DF2C6B9"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-52C671FA-2DFD-4F76-B68D-53CD2DF2C6B9" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue properties
+according to media type</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="32.04577968526466%" id="d0e56945">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="11.301859799713878%" id="d0e56950">
+<p>Value</p>
+</th><th class="cellrowborder" valign="top" width="11.301859799713878%" id="d0e56955">
+<p>Image</p>
+</th><th class="cellrowborder" valign="top" width="11.444921316165951%" id="d0e56960">
+<p>Sound</p>
+</th><th class="cellrowborder" valign="top" width="11.301859799713878%" id="d0e56965">
+<p>Video</p>
+</th><th class="cellrowborder" valign="top" width="11.301859799713878%" id="d0e56970">
+<p>Music</p>
+</th><th class="cellrowborder" valign="top" width="11.301859799713878%" id="d0e56975">
+<p>Streaming URL</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.FileName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.FileExtension</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.Drive</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.FileSize</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.FileDate</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>time</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.FileNameAndPath</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.SongName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.Artist</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.Album</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.TrackNumber</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.Genre</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.Composer</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.LinkFirstURL</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="32.04577968526466%" headers="d0e56945 ">
+<p><code>&lt;item&gt;.MimeType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56950 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56955 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.444921316165951%" headers="d0e56960 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56965 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56970 ">
+<p>X</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.301859799713878%" headers="d0e56975 ">
+<p>X</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

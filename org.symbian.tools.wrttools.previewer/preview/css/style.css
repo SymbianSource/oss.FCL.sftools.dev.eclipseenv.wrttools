@@ -297,7 +297,8 @@ p.highlight span{
 div#PreferencesBtn{
 	width: 75px;
 	height: 85px;
-    background-image: url(../images/settings-icon.png); 
+/*  background-image: url(../images/settings-icon.png); */
+	background-image: url(../images/settings_2.png); 
 	position: absolute;
 	top: 10px;
 	left: 10px;
@@ -306,6 +307,7 @@ div#PreferencesBtn{
 }
 
 div#PreferencesBtn:hover{
+	background-image: url(../images/settings_1.png);
 	background-position: left top;
 }
 
@@ -454,27 +456,46 @@ div#event-battery, div#event-messaging, div#event-memory{
 }
 
 div#event-battery.active:hover, div#event-messaging.active:hover, div#event-memory.active:hover{
-	background-position: 0px -50px;
+/*	background-position: 0px -50px; */
+    background-position: 0px -100px;
 	border: 1px solid #75ea4f;
 }
 
 div#event-messaging.inactive, div#event-memory.inactive{
-	background-position: 0px -100px;
+/*	background-position: 0px -100px; */
+	background-position: 0px -50px;
 	border: 1px solid #676767;
 }
 
 
 div#event-battery{
-	background-image: url(../images/battery-icon.png);
+/*	background-image: url(../images/battery-icon.png); */
+    background-image: url(../images/battery_1.png); 
 }
 
 div#event-messaging{
-	background-image: url(../images/messaging-icon.gif);
+/* background-image: url(../images/messaging-icon.gif); */
+   background-image: url(../images/messaging_1.png); 
 }
 
 div#event-memory{
-	background-image: url(../images/memory-icon.png); 
+/* background-image: url(../images/memory-icon.png); */
+   background-image: url(../images/memory_1.png); 
 }
+
+
+div#event-battery.active:hover{
+	background-image: url(../images/battery_2.png);
+}
+
+div#event-messaging.active:hover{
+	background-image: url(../images/messaging_2.png);
+}
+
+div#event-memory.active:hover{
+	background-image: url(../images/memory_2.png); 
+}
+
 
 div.ui-panel{
 	height:30px;	

@@ -1,0 +1,118 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for importing calendar entries"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Relation" scheme="URI" content="GUID-D19BB894-371A-4D55-A047-3B2F97673F5F"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B86F1686-F2AC-438F-8306-4B9D70F879EC"/><title>Criteria for
+importing calendar entries </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B86F1686-F2AC-438F-8306-4B9D70F879EC"><span>Criteria</span> for
+importing calendar entries</h1><div>
+<p>The <code>criteria</code> object specifies the calendar
+entries to import and optionally the target calendar.</p>
+<p>The <code>criteria</code> object has two main properties: <code>Type</code> and <code>Data</code>.
+These are described in the following table. Properties enclosed in brackets
+are optional.</p>
+<div class="tablenoborder"><a name="GUID-EFB4B7E0-C316-4B39-93DE-9B7FEEF77C7F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-EFB4B7E0-C316-4B39-93DE-9B7FEEF77C7F" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e23258">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e23263">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e23268">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e23273">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23258 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23263 ">
+<p>Specifies the type of calendar information to import. This is always <code>"CalendarEntry"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23268 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23273 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"CalendarEntry"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23258 ">
+<p><code>criteria.Data</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23263 ">
+<p>Specifies the entries to import.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23268 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23273 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23258 ">
+<p><code>[criteria.Data.CalendarName]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23263 ">
+<p>Specifies the calendar into which the entries are imported.</p>
+<p>If this property is not specified, the entries are imported into the
+default calendar. If the default calendar does not exist, it is created.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23268 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23273 ">
+<p><code>&lt;DriveLetter&gt;:&lt;FileName&gt;</code></p>
+<p>For example: <code>"C:Calendar"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23258 ">
+<p><code>criteria.Data.FileName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23263 ">
+<p>Specifies the full path and file name of the source file from which
+the entries are imported.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23268 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23273 ">
+<p>The string cannot exceed 239 characters</p>
+<p>For example: <code>C:\\Data\\importfile.txt</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23258 ">
+<p><code>criteria.Data.Format</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23263 ">
+<p>Specifies the data format of the source file. The supported formats
+are:</p>
+<ul>
+<li><p>iCal</p></li>
+<li><p>vCal</p></li>
+</ul>
+<p>For more information about these two formats, see the <a href="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571.html#GUID-AE9A928B-F938-49B5-BC9E-72CB42046571">Calendar
+Service overview page</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23268 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e23273 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"ICal"</code></p></li>
+<li><p><code>"VCal"</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

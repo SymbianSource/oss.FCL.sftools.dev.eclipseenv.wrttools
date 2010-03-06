@@ -1,0 +1,18 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Creating a JavaScript file"/><meta name="DC.Relation" scheme="URI" content="GUID-DD35B82F-CB1F-4F7B-A351-C0417E21D5E4"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-85179E6B-E915-4D96-A5D1-D17D7C7180C7"/><meta name="DC.Relation" scheme="URI" content="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-A942935B-ACF6-451C-8383-874BEEC52F1A"/><title>Creating
+a JavaScript file </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-A942935B-ACF6-451C-8383-874BEEC52F1A">Creating
+a JavaScript file</h1><div><p>It is recommended that you create a separate JavaScript (<code>js</code>)
+file for implementing the widget UI interaction and other operations. This
+increases clarity of the code and enables reuse of the code in other widgets.
+A widget can have as many JavaScript files as needed.</p><p>There are two ways to use an external JavaScript file through the widget's <a href="GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA.html#GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA">main
+HTML file</a>:</p><ul><li><p>Specifying a JavaScript file that is included in the widget
+package</p><p>Use the <code>&lt;script&gt;</code> tag as follows:</p><pre class="codeblock" id="GUID-B2567257-5A27-4E22-A634-A4E85CCF2710">&lt;script type='text/JavaScript' src='JavaScript.js'&gt;&lt;/script&gt;</pre></li><li><p>Specifying a JavaScript file that is stored in a remote location</p><p>In this case, the JavaScript file is not included in the widget package.
+Specify the full URL of the JavaScript source in the <code>src</code> attribute
+of the <code>script</code> tag as follows:</p><pre class="codeblock" id="GUID-0966583C-A0E5-4BF1-8B64-0165526368B2">&lt;script type='text/JavaScript' src='http://www.widget.server/JavaScript.js'&gt;&lt;/script&gt;</pre></li></ul><div class="note"><p><strong class="note_title">Note: </strong>When linking to external JavaScript files in a remote location, specify
+the <code>AllowNetworkAccess</code> key in the <a href="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B.html#GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B"><code>info.plist</code></a> file as <code>true</code> to allow the widget to connect to the network.</p></div><p>For more information on JavaScript, see the <a href="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81.html#GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81">Web
+Runtime API reference</a> and the <a href="http://www.w3schools.com/js/default.asp" target="_blank">JavaScript
+Tutorial</a> published by the World Wide Web Consortium (W3C).</p></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

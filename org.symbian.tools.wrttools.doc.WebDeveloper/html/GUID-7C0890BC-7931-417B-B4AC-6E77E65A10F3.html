@@ -1,0 +1,637 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Calendar Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3"/><title>Calendar Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3">Calendar Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571.html#GUID-AE9A928B-F938-49B5-BC9E-72CB42046571">Calendar Service</a>.
+You can download the <code>wgz</code> package for this widget from
+section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<p>For widget development and debugging purposes, this example writes its
+output to <code>c:\data\jslog_widget.log</code> using <code>console.info</code>.
+For instructions on how to enable logging in the Web browser for S60, see
+section <a href="GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html#GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript console</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-258E89D2-D435-4988-838C-D116733586E7">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;DisplayName&lt;/key&gt;
+  &lt;string&gt;CalendarSample&lt;/string&gt;
+  &lt;key&gt;Identifier&lt;/key&gt;
+  &lt;string&gt;com.nokia.widget.sapi.calendar.sample&lt;/string&gt;
+  &lt;key&gt;Version&lt;/key&gt;
+  &lt;string&gt;1.0&lt;/string&gt;
+  &lt;key&gt;MainHTML&lt;/key&gt;
+  &lt;string&gt;calendar-sample.html&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+</div>
+<div><h3>calendar-sample.html</h3>
+<pre class="codeblock" id="GUID-476FB58D-71F4-480B-8564-BA26ED2281FF">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript" src="js/common.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="js/calendar-sample.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body id='docBody' bgcolor="#ddeeff" onload="setup()" style=width:100%;height:100%;&gt;
+    &lt;form name="frm"&gt;
+      &lt;h3&gt;Calendar API Sample Widget&lt;/h3&gt;
+      &lt;input type="button" onclick="addCalendar('img1')" value="AddCalendar"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="addMeeting('img2')" value="AddMeeting"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getCalendar('img3')" value="GetCalendar"&gt;&lt;img id="img3" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getMeeting('img4')" value="GetMeeting"&gt;&lt;img id="img4" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="delCalendar('img5')" value="DeleteCalendar"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="delAllEntry('img6')" value="DeleteAllEntriesInDefaultCalendar"&gt;&lt;img id="img6" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="delAllEntryAsync('img7')" value="DeleteAllEntriesInDefaultCalendarAsync"&gt;&lt;img id="img7" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="importEntry('img8')" value="ImportCalendar"&gt;&lt;img id="img8" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="exportEntry('img9')" value="ExportCalendar"&gt;&lt;img id="img9" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="importEntryAsync('img10')" value="ImportAsync"&gt;&lt;img id="img10" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="exportEntryAsync('img11')" value="ExportAsync"&gt;&lt;img id="img11" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="requestNotification('img12')" value="RequestNotification"&gt;&lt;img id="img12" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelImportEntryAsync('img13')" value="CancelImportAsync"&gt;&lt;img id="img13" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelExportEntryAsync('img14')" value="CancelExportAsync"&gt;&lt;img id="img14" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelRequestNotification('img15')" value="CancelRequestNotification"&gt;&lt;img id="img15" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;hr&gt;
+      &lt;div class='calendarsample' id='calendarsample' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;&lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-7DD317AE-A467-4492-BA83-D9ED206473CA">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+
+  if (errCode) {
+    msg = message + "&lt;BR&gt;" + "Failed Error: " + errCode + "&lt;BR&gt;";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no");
+  } else {
+    showIMG(imgId,"yes");
+  }
+
+  //print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+
+  return errCode;
+}
+
+// Build the message by reading a iteratorable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showIterableList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try {
+    if ( typeof obj != 'object' )
+      return "" + obj + '&lt;BR/&gt;';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += '&lt;BR/&gt;';
+      }
+      txt += '&lt;BR/&gt;';
+    }
+  }
+  catch (e)
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK)
+{
+  if(imgId == null || imgId == undefined)
+    return;
+
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+
+  for (i = 0; i &lt; sText.length &amp;&amp; IsNumber == true; i++)
+  {
+    Char = sText.charAt(i);
+    if (ValidChars.indexOf(Char) == -1)
+    {
+      IsNumber = false;
+    }
+  }
+  return IsNumber;
+}</pre>
+</div>
+<div><h3>calendar-sample.js</h3>
+<pre class="codeblock" id="GUID-E22C2F7D-3052-4361-92D7-E1ACA632B0D5">// calendar-sample.js
+//
+// In this sample Calendar and Meeting event will be added, deleted, and listed
+// from default database; Meeting event will be imported and exported; The
+// notification will be send when the calendar changes; Also, async operation will
+// be canceled.
+//
+
+//SAPI Error Codes
+// 0    - Success
+// 1000 - InvalidServiceArgument
+// 1001 - UnknownArgumentName
+// 1002 - BadArgumentType
+// 1003 - MissingArgument
+// 1004 - ServiceNotSupported
+// 1005 - ServiceInUse
+// 1006 - ServiceNotReady
+// 1007 - NoMemory
+// 1008 - HardwareNotAvailable
+// 1009 - ServerBusy
+// 1010 - EntryExists
+// 1011 - AccessDenied
+// 1012 - NotFound
+// 1013 - UnknownFormat
+// 1014 - GeneralError
+// 1015 - CancelSuccess
+// 1016 - ServiceTimedOut
+// 1017 - PathNotFound
+
+// Declare the service object
+var so;
+
+// imgid for callback1 function
+var imgid_callback1;
+
+// imgid for callback2 function
+var imgid_callback2;
+
+// imgid for callback3 function
+var imgid_callback3;
+
+// id of the div used to display information
+const DIV_ID = 'calendarsample';
+
+// Called from onload()
+function setup()
+{
+  try {
+    so = device.getServiceObject("Service.Calendar", "IDataSource");
+    console.info("setup: so: %s", so);
+  }
+  catch (e) {
+    alert('&lt;setup&gt; ' +e);
+  }
+}
+
+//Add a calendar
+function addCalendar(imgId)
+{
+  var calName = prompt("Please enter the calendar name","C:myCalendar");
+  if(calName == "" || calName == null)
+    return;
+
+  var item = new Object();
+  item.CalendarName = calName;
+
+  var criteria = new Object();
+  criteria.Type = "Calendar";
+  criteria.Item = item;
+
+  try {
+    var result = so.IDataSource.Add(criteria);
+    checkError("IDataSource::addCalendar",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("addCalendar: " + e);
+  }
+}
+
+//Add a meeting
+function addMeeting(imgId)
+{
+  var startDate = new Date("January 6, 2008 19:05:00");
+  var endDate = new Date("January 7, 2008 20:05:00");
+
+  var item = new Object();
+  item.Type = "Meeting";
+  item.StartTime = startDate;
+  item.EndTime = endDate;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Item = item;
+
+  try {
+    var result = so.IDataSource.Add(criteria);
+    checkError("IDataSource::addMeeting",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("addCalendar: " + e);
+  }
+}
+
+//Get Calendar
+function getCalendar(imgId)
+{
+  // This is an optional parameter. If "DefaultCalendar" is set to true,
+  // GetList returns the list with one element (default calendar) else it
+  // returns a list of all calendars.
+  var filter = new Object();
+  filter.DefaultCalendar = false;
+
+  var criteria = new Object();
+  criteria.Type = "Calendar";
+  criteria.Filter = filter;
+
+  try {
+    imgid_callback1 = imgId;
+    var result = so.IDataSource.GetList(criteria);
+    if(!checkError("IDataSource::getCalendar",result,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getCalendar: " + e);
+  }
+}
+
+// Get Meeting
+function getMeeting(imgId)
+{
+  var filter = new Object();
+  filter.Type = "Meeting";
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Filter = filter;
+
+  try {
+    var result = so.IDataSource.GetList(criteria);
+    if(!checkError("IDataSource::getMeeting",result,DIV_ID,imgId)) {
+      var msg = "";
+      var meetingObj;
+      var meetingIt = result.ReturnValue;
+      while ((meetingObj = meetingIt.getNext()) != undefined)
+      {
+        msg = msg + "Type: " + meetingObj['Type'] + "&lt;br&gt;";
+        msg = msg + "Summary: " + meetingObj['Summary'] + "&lt;br&gt;";
+        msg = msg + "StartTime: " + meetingObj['StartTime'] + "&lt;br&gt;";
+        msg = msg + "EndTime: " + meetingObj['EndTime'] + "&lt;br&gt;";
+        msg = msg + "Id: " + meetingObj['Id'] + "&lt;br&gt;";
+        msg = msg + "LocalId: " + meetingObj['LocalId'] +"&lt;br&gt;&lt;br&gt;";
+      }
+      meetingIt.reset();
+      document.getElementById(DIV_ID).innerHTML = msg;
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getCalendar: " + e);
+  }
+}
+
+//Delete Calendar
+function delCalendar(imgId)
+{
+  var calName = prompt("Please enter the calendar name", "C:myCalendar");
+  if(calName == "" || calName == null)
+    return;
+
+  var delData = new Object();
+  delData.CalendarName = calName;
+
+  var criteria = new Object();
+  criteria.Type = "Calendar";
+  criteria.Data = delData;
+
+  try {
+    var result = so.IDataSource.Delete(criteria);
+    checkError("IDataSource::delCalendar",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("delCalendar: " + e);
+  }
+}
+
+//Delete All Entries in Default Calendar
+function delAllEntry(imgId)
+{
+  var delData = new Object();
+  delData.DeleteAll = true;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = delData;
+
+  try {
+    var result = so.IDataSource.Delete(criteria);
+    checkError("IDataSource::delAllEntry",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("delAllEntry: " + e);
+  }
+}
+
+//Delete All Entries in Default Calendar Async
+function delAllEntryAsync(imgId)
+{
+  var delData = new Object();
+  delData.DeleteAll = true;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = delData;
+
+  try {
+    imgid_callback4 = imgId;
+    var result = so.IDataSource.Delete(criteria, callback4);
+    if(!checkError("IDataSource::delAllEntryAsync",result,DIV_ID,imgId));
+      showIMG(imgId, "");
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("delAllEntryAsync: " + e);
+  }
+}
+
+// Import Entry
+function importEntry(imgId) {
+
+  var fileName = "c:\\data\\calendarFile";
+
+  var impData = new Object();
+  impData.Format = "VCal";
+  impData.FileName = fileName;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = impData;
+
+  try {
+    var result = so.IDataSource.Import(criteria);
+    checkError("IDataSource::Import",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("importEntry: " + e);
+  }
+}
+
+// Export Entry
+function exportEntry(imgId) {
+
+  var fileName = "c:\\data\\calendarFile";
+
+  var exData = new Object();
+  exData.Format = "VCal";
+  exData.FileName = fileName;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = exData;
+
+  try {
+    var result = so.IDataSource.Export(criteria);
+    checkError("IDataSource::Export",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("exportEntry: " + e);
+  }
+}
+
+// Import Entry Async
+function importEntryAsync(imgId) {
+
+  var fileName = "c:\\data\\calendarFile";
+
+  var impData = new Object();
+  impData.Format = "VCal";
+  impData.FileName = fileName;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = impData;
+
+  try {
+    imgid_callback1 = imgId;
+    var result = so.IDataSource.Import(criteria, callback1);
+    if(!checkError("IDataSource::ImportAsync",result,DIV_ID,imgId))
+      showIMG(imgId, "");
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("importEntryAsync: " + e);
+  }
+}
+
+// Export Entry Async
+function exportEntryAsync(imgId) {
+
+  var fileName = "c:\\data\\calendarFile";
+
+  var exData = new Object();
+  exData.Format = "VCal";
+  exData.FileName = fileName;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = exData;
+
+  try {
+    imgid_callback2 = imgId;
+    var result = so.IDataSource.Export(criteria, callback2);
+    if(!checkError("IDataSource::ExportAsync",result,DIV_ID,imgId))
+      showIMG(imgId, "");
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("exportEntryAsync: " + e);
+  }
+}
+
+// Cancel Import Entry Async
+function cancelImportEntryAsync(imgId) {
+
+  var fileName = "c:\\data\\calendarFile";
+
+  var impData = new Object();
+  impData.Format = "VCal";
+  impData.FileName = fileName;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = impData;
+
+  try {
+    imgid_callback1 = imgId;
+    var result = so.IDataSource.Import(criteria, callback1);
+    if(!checkError("IDataSource::CancelImportAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId, "");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var cresult = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::CancelImportAsync",cresult,DIV_ID,imgId);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("cancelImportEntryAsync: " + e);
+  }
+}
+
+// Cancel Export Entry Async
+function cancelExportEntryAsync(imgId) {
+
+  var fileName = "c:\\data\\calendarFile";
+
+  var exData = new Object();
+  exData.Format = "VCal";
+  exData.FileName = fileName;
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+  criteria.Data = exData;
+
+  try {
+    imgid_callback2 = imgId;
+    var result = so.IDataSource.Export(criteria, callback2);
+    if(!checkError("IDataSource::CancelExportAsync",result,DIV_ID,imgId)){
+      showIMG(imgId, "");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var cresult = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::CancelExportAsync",cresult,DIV_ID,imgId);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("cancelExportEntryAsync: " + e);
+  }
+}
+
+// Request Notification
+function requestNotification(imgId) {
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+
+  try {
+    imgid_callback3 = imgId;
+    var result = so.IDataSource.RequestNotification(criteria, callback3);
+    checkError("IDataSource::requestNotification",result,DIV_ID,imgId);
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("requestNotification: " + e);
+  }
+}
+
+// Cancel Request Notification
+function cancelRequestNotification(imgId) {
+
+  var criteria = new Object();
+  criteria.Type = "CalendarEntry";
+
+  try {
+    imgid_callback3 = imgId;
+    var result = so.IDataSource.RequestNotification(criteria, callback3);
+    if(!checkError("IDataSource::CancelRequestNotification",result,DIV_ID,imgId)){
+      showIMG(imgId, "");
+      var criteria2 = new Object();
+      criteria2.TransactionID = result.TransactionID;
+      var cresult = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::CancelRequestNotification",cresult,DIV_ID,imgId);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("CancelRequestNotification: " + e);
+  }
+}
+
+// This is the asynchronous callback handler
+function callback1(transId, eventCode, result)
+{
+  console.info("callback1: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::ImportAsync",result,DIV_ID,imgid_callback1);
+}
+
+// This is the asynchronous callback handler
+function callback2(transId, eventCode, result)
+{
+  console.info("callback2: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  checkError("IDataSource::ExportAsync",result,DIV_ID,imgid_callback2);
+}
+
+// This is the asynchronous callback handler
+function callback3(transId, eventCode, result)
+{
+  console.info("callback3: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::Notification",result,DIV_ID,imgid_callback3)) {
+    document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+  }
+}
+
+// This is the asynchronous callback handler
+function callback4(transId, eventCode, result)
+{
+  console.info("callback4: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::delAllEntryAsync",result,DIV_ID,imgid_callback4)) {
+    document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+  }
+}</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

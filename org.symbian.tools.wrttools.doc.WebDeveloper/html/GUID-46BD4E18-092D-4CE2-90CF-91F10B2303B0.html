@@ -1,0 +1,32 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Using multiple CSS"/><meta name="abstract" content="If the difference in screen size on the target devices is large (for example, 240 x 320 and 360 x 640), you can use separate CSS files to specify the user interface for each screen size. This also allows you take touch support into consideration. On touch devices, make buttons, text boxes, and other screen controls big enough for users to select them with fingers. On other devices, screen controls can be smaller, because users use the five way navigation pad to move between them."/><meta name="description" content="If the difference in screen size on the target devices is large (for example, 240 x 320 and 360 x 640), you can use separate CSS files to specify the user interface for each screen size. This also allows you take touch support into consideration. On touch devices, make buttons, text boxes, and other screen controls big enough for users to select them with fingers. On other devices, screen controls can be smaller, because users use the five way navigation pad to move between them."/><meta name="DC.Relation" scheme="URI" content="GUID-9EA77434-CC44-429F-BDD3-3AF4357CCF69"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-3DA126B3-12E2-44C8-A009-8D25E7B3F7E6"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-46BD4E18-092D-4CE2-90CF-91F10B2303B0"/><meta name="DC.Language" content="en"/><title>Using multiple CSS </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-46BD4E18-092D-4CE2-90CF-91F10B2303B0">Using multiple CSS</h1><div><p>If the difference in screen size on the target devices is large (for example, 240 x 320 and 360 x 640), you can use separate CSS files to specify the user interface for each screen size. This also allows you take touch support into consideration. On touch devices, make buttons, text boxes, and other screen controls big enough for users to select them with fingers. On other devices, screen controls can be smaller, because users use the five way navigation pad to move between them.</p>
+<p>Use JavaScript to determine which CSS file to select on a particular device.</p>
+<p>For an example of using multiple CSS, see <a href="GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84.html#GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84">STEW: supporting different screen sizes</a>.</p>
+<div><h3>To use multiple CSS</h3><ol>
+<li id="GUID-D95CBB3F-9AA8-4365-BFDD-443E9C9C64D2"><a name="GUID-D95CBB3F-9AA8-4365-BFDD-443E9C9C64D2"><!----></a><p>Create CSS files that specify styles for different screen sizes.</p><p>For example, <code>style.css</code> to render views on 360 x 640 screens and <code>style_small.css</code> on 240 x 320 screens.</p></li>
+<li id="GUID-FF41C6FA-3693-4F10-BBE7-9228153039AC"><a name="GUID-FF41C6FA-3693-4F10-BBE7-9228153039AC"><!----></a><p>Add references to the style sheets to the <code>main.html</code> file.</p><pre class="codeblock">&lt;link href="style.css" rel="stylesheet" type="text/css"&gt;
+&lt;link href="style_small.css" rel="stylesheet" type="text/css"&gt;
+</pre></li>
+<li id="GUID-60CFAA90-BCE9-4E10-85BD-92EEE7CFE052"><a name="GUID-60CFAA90-BCE9-4E10-85BD-92EEE7CFE052"><!----></a><p>Create JavaScript to select the style sheet according to screen size:</p><pre class="codeblock">// Set the correct stylesheet depending on whether we are running
+// on bigger or smaller screens.
+Helper.applyCorrectStyles();
+</pre><pre class="codeblock">applyCorrectStyles: function() {
+	var largeScreen = Helper.isLargeScreen();
+	
+	document.styleSheets[0].disabled = !largeScreen;
+	document.styleSheets[1].disabled = largeScreen;
+}
+</pre></li>
+<li id="GUID-484C8698-40DA-4C5F-B647-157FB560835A"><a name="GUID-484C8698-40DA-4C5F-B647-157FB560835A"><!----></a><p>Create JavaScript to determine screen size:</p><pre class="codeblock">isLargeScreen: function() {
+	var size = this.getScreenSize();
+	return ( size.height &gt; Helper.SMALL_SCREEN_TRESHOLD );
+}
+
+Helper.SMALL_SCREEN_TRESHOLD = 320;
+</pre></li>
+</ol></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

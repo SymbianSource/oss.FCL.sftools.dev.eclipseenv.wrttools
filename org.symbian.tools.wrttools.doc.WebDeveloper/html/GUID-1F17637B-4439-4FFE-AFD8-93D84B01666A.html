@@ -1,0 +1,772 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Messaging Service API error messages"/><meta name="DC.Relation" scheme="URI" content="GUID-DBF41DB5-44D7-4822-A611-FBF7DA3A8F3B"/><meta name="DC.Relation" scheme="URI" content="GUID-2EBDD073-499C-4A1E-A0DA-4FF8243A6479"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A"/><title>Messaging Service API error messages </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-1F17637B-4439-4FFE-AFD8-93D84B01666A">Messaging Service API error messages</h1><div>
+<p>This section provides information about the error messages returned
+by the Messaging Service API methods.</p>
+<p/>
+<div><h3>Generic error messages</h3>
+<p>The following table describes the error messages returned during the
+loading of the service provider.</p>
+<div class="tablenoborder"><a name="GUID-D6DA9B60-40D0-4FB1-A590-7278DC2E8563"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D6DA9B60-40D0-4FB1-A590-7278DC2E8563" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Service provider
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e61818">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e61823">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61818 ">
+<p><code>Messaging:Interface not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61823 ">
+<p>The requested interface is not supported by the service provider.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61818 ">
+<p><code>Messaging:Interface name missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61823 ">
+<p>The interface name is missing from the request.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61818 ">
+<p><code>Messaging:Command not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61823 ">
+<p>The specified command is not supported by the interface.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>GetList</h3>
+<p>The following table describes the error messages returned by <a href="GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48.html#GUID-C12C81D1-13A4-4B8C-81B9-694D414A4A48"><code>GetList</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-CDD53263-A68F-4505-BAC1-4CAA8719E465"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-CDD53263-A68F-4505-BAC1-4CAA8719E465" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetList error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e61905">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e61910">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Type Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Type Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Type</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Type Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Filter Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: SenderList Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.SenderList</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: SenderList Element Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>An item in the <code>Filter.SenderList</code> array contains
+an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: SenderList Element Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>An item in the <code>Filter.SenderList</code> array contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: MessageTypeList Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.MessageTypeList</code> property contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: MessageTypeList Element Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>An item in the <code>Filter.MessageTypeList</code> array contains
+an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: MessageTypeList Element Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>An item in the <code>Filter.MessageTypeList</code> array contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: MessageId Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.MessageId</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Subject Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.Subject</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: StartDate Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.StartDate</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: StartDate Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.StartDate</code> property contains an invalid
+value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: EndDate Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.EndDate</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: EndDate Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Filter.EndDate</code> property contains an invalid
+value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: SortOrder Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Sort</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: SortOrder Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Sort</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Key Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Sort.Key</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Order Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The <code>Sort.Order</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e61905 ">
+<p><code>Messaging:GetList: Asynchronous Operation not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e61910 ">
+<p>The method was called asynchronously. This is not supported.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Send</h3>
+<p>The following table describes the error messages returned by <a href="GUID-5295F092-004B-43F4-85DB-7C54ED14D6DB.html#GUID-5295F092-004B-43F4-85DB-7C54ED14D6DB"><code>Send</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Send</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-0329CA17-38DD-4C6B-A4A2-9FD45362BC7F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-0329CA17-38DD-4C6B-A4A2-9FD45362BC7F" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Send error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e62347">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e62352">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MessageType Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageType</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MessageType Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageType</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MessageType Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageType</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: To Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>To</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: To Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>To</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: To Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>To</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: BodyText Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>BodyText</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Subject Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>Subject</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Attachment Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>Attachment</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Attachment Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>Attachment</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MimeType Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MimeType</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MimeType Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MimeType</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MessageParam Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageParam</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: TemplateId Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageParam.TemplateId</code> property contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: LaunchEditor Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageParam.LaunchEditor</code> property contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: To Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageParam.To</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: To List Element Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>An item in the <code>MessageParam.To</code> array contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: To List Element Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>An item in the <code>MessageParam.To</code> array contains an
+invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Cc Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageParam.Cc</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Cc List Element Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>An item in the <code>MessageParam.Cc</code> array contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Cc List Element Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>An item in the <code>MessageParam.Cc</code> array contains an
+invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Bcc Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageParam.Bcc</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Bcc List Element Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>An item in the <code>MessageParam.Bcc</code> array contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: Bcc List Element Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>An item in the <code>MessageParam.Bcc</code> array contains
+an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: AttachmentList Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>The <code>MessageParam.AttachmentList</code> property contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: AttachmentList Element Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>An item in the <code>MessageParam.AttachmentList</code> array
+contains a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: FileName Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>A <code>MessageParam.AttachmentList[item].FileName</code> property
+contains a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: FileName Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>A <code>MessageParam.AttachmentList[item].FileName</code> property
+contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MimeType Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>A <code>MessageParam.AttachmentList[item].MimeType</code> property
+contains a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62347 ">
+<p><code>Messaging:Send: MimeType Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62352 ">
+<p>A <code>MessageParam.AttachmentList[item].MimeType</code> property
+contains an invalid value.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>RegisterNotification</h3>
+<p>The following table describes the error messages returned by <a href="GUID-DFEDF3BF-BA73-4418-815C-83B80B888821.html#GUID-DFEDF3BF-BA73-4418-815C-83B80B888821"><code>RegisterNotification</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>RegisterNotification</code> as part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-501C452E-A4BD-407C-9CA7-4E7DAC057270"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-501C452E-A4BD-407C-9CA7-4E7DAC057270" frame="border" border="1" rules="all"><caption><strong>Table: </strong>RegisterNotification
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e62963">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e62968">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62963 ">
+<p><code>Messaging:RegisterNotification: Type Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62968 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62963 ">
+<p><code>Messaging:RegisterNotification: Type Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62968 ">
+<p>The <code>Type</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e62963 ">
+<p><code>Messaging:RegisterNotification: Type Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62968 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e62963 ">
+<p><code>Messaging:RegisterNotification: Synchronous Operation not
+supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e62968 ">
+<p>The method was called synchronously. This is not supported.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>CancelNotification</h3>
+<p>The following table describes the error messages returned by <a href="GUID-E2FDB3FB-2B5E-430C-81B5-9C0C22C4CC04.html#GUID-E2FDB3FB-2B5E-430C-81B5-9C0C22C4CC04"><code>CancelNotification</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-11B634F2-838D-4FD8-BB39-60AAE233C261"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-11B634F2-838D-4FD8-BB39-60AAE233C261" frame="border" border="1" rules="all"><caption><strong>Table: </strong>CancelNotification
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e63075">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e63080">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63075 ">
+<p><code>Messaging:CancelNotification: Type Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63080 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63075 ">
+<p><code>Messaging:CancelNotification: Type Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63080 ">
+<p>The <code>Type</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63075 ">
+<p><code>Messaging:CancelNotification: Type Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63080 ">
+<p>The <code>Type</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63075 ">
+<p><code>Messaging:CancelNotification: Asynchronous Operation not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63080 ">
+<p>The method was called asynchronously. This is not supported.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>ChangeStatus</h3>
+<p>The following table describes the error messages returned by <a href="GUID-74A4C52A-6150-4237-81B5-A864F01FADF5.html#GUID-74A4C52A-6150-4237-81B5-A864F01FADF5"><code>ChangeStatus</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-17EDF025-8597-44A7-B584-D3F8D8B5A3EB"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-17EDF025-8597-44A7-B584-D3F8D8B5A3EB" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ChangeStatus
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e63187">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e63192">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63187 ">
+<p><code>Messaging:ChangeStatus: MessageId Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63192 ">
+<p>The <code>MessageId</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63187 ">
+<p><code>Messaging:ChangeStatus: MessageId Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63192 ">
+<p>The <code>MessageId</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63187 ">
+<p><code>Messaging:ChangeStatus: MessageId Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63192 ">
+<p>The <code>MessageId</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63187 ">
+<p><code>Messaging:ChangeStatus: Status Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63192 ">
+<p>The <code>Status</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63187 ">
+<p><code>Messaging:ChangeStatus: Status Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63192 ">
+<p>The <code>Status</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63187 ">
+<p><code>Messaging:ChangeStatus: Status Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63192 ">
+<p>The <code>Status</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63187 ">
+<p><code>Messaging:ChangeStatus: Asynchronous Operation not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63192 ">
+<p>The method was called asynchronously. This is not supported.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Delete</h3>
+<p>The following table describes the error messages returned by <a href="GUID-BE6FB5B3-020A-44F3-A4AC-DFD0FEA42B7A.html#GUID-BE6FB5B3-020A-44F3-A4AC-DFD0FEA42B7A"><code>Delete</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-A161FF27-08AD-48A9-8CD4-259221116904"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-A161FF27-08AD-48A9-8CD4-259221116904" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Delete error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e63356">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e63361">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63356 ">
+<p><code>Messaging:Delete: MessageId Type Invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63361 ">
+<p>The <code>MessageId</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63356 ">
+<p><code>Messaging:Delete: MessageId Value Incorrect</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63361 ">
+<p>The <code>MessageId</code> property contains a negative value.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63356 ">
+<p><code>Messaging:Delete: MessageId Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63361 ">
+<p>The <code>MessageId</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63356 ">
+<p><code>Messaging:Delete: Asynchronous Operation not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63361 ">
+<p>The method was called asynchronously. This is not supported.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Cancel</h3>
+<p>The following table describes the error messages returned by <a href="GUID-2EBDD073-499C-4A1E-A0DA-4FF8243A6479.html#GUID-2EBDD073-499C-4A1E-A0DA-4FF8243A6479"><code>Cancel</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-B860EA34-6E7E-4539-9EFA-09FCF4F62EA1"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-B860EA34-6E7E-4539-9EFA-09FCF4F62EA1" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Cancel error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e63468">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e63473">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e63468 ">
+<p><code>Messaging:Cancel:Invalid TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63473 ">
+<p>Either an invalid <code>TransactionID</code> was passed or an
+asynchronous call associated with this ID has already been completed.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e63468 ">
+<p><code>Messaging:Cancel:Missing TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e63473 ">
+<p>The <code>TransactionID</code> property is missing from the
+input.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

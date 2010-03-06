@@ -1,0 +1,88 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: managing user interaction"/><meta name="abstract" content="This section contains an example of how users interact with a view and how you save and load persistent data."/><meta name="description" content="This section contains an example of how users interact with a view and how you save and load persistent data."/><meta name="DC.Relation" scheme="URI" content="GUID-0FCBC574-2328-4986-99D3-7DC4BDE9C3A4"/><meta name="DC.Relation" scheme="URI" content="GUID-C6AC727B-52DC-4C7B-8689-19E98126346D"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-EB2043BB-E557-429B-BA0A-E350A6D06597"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-5906D140-663D-4EE2-B0C1-4FECA5759384"/><meta name="DC.Language" content="en"/><title>STEW: managing user interaction </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-5906D140-663D-4EE2-B0C1-4FECA5759384">STEW: managing user interaction</h1><div><p>This section contains an example of how users interact with a view and how you save and load persistent data.</p>
+<div class="figure" id="GUID-1B9E4A9F-3959-446B-9624-3768CF94AA02"><img src="GUID-38EF5741-0A6A-4A55-BDE5-4DB3F686D21E_d0e11532_href.jpg"/><p class="figure-title"><strong>Figure: </strong>STEW Login view</p></div>
+<p>The <code>LoginScreen.js</code> file implements the functionality of the STEW <span class="uicontrol">Login</span> view. For more information on how to implement the functionality of the other STEW views, see <code>UpdateScreen.js</code>, <code>SearchScreen.js</code>, and <code>SettingsScreen.js</code>.</p>
+<p>In the <code>LoginScreen</code> function, the <code>onclick</code> event handler is assigned to the <span class="uicontrol">Login</span> button and the values of the screen controls that collect user input (<span class="uicontrol">Username</span>, <span class="uicontrol">Password</span>, and <span class="uicontrol">Remember Me</span> ) are remembered.</p>
+<pre class="codeblock">function LoginScreen() {
+	// Get the login button element and assign an event handler to it.
+	var self = this;
+	var loginButton = document.getElementById( "login_button" );
+	loginButton.onclick = function() {
+		 self.onLoginClicked();
+	};
+	
+	// Get all the UI elements that we can interact with.
+	this.tbUsername = document.getElementById( "login_username" );
+	this.tbPassword = document.getElementById( "login_password" );
+	this.cbRememberMe = document.getElementById( "login_remember_me" );	
+}
+</pre>
+<div><h3>Saving persistent data</h3><p>The <code>onclick</code> event handler triggers the activation of the next view. Users can specify settings to determine which view appears after the <span class="uicontrol">Login</span> view, so the logic needs to find out which view is the default view. </p><p>If the user checks the <span class="uicontrol">Remember Me</span> check box, the credentials are stored. This is done by calling the WRT <code>widget.setPreferenceForKey</code> and <code>widget.preferenceForKey</code> API methods after reading the input for <span class="uicontrol">Username</span>, <span class="uicontrol">Password</span>, and the <span class="uicontrol">Remember Me</span> check box.</p><pre class="codeblock">LoginScreen.prototype.onLoginClicked = function() {
+	var username = this.tbUsername.value;
+	var password = this.tbPassword.value;
+	var rememberMe = this.cbRememberMe.checked;
+			
+	// Save the data to the storage if the user checked "Remember Me".
+	widget.setPreferenceForKey( rememberMe.toString(), LoginScreen.KEY_REMEMBER_ME );
+	// If "Remember Me" is unchecked, the username and password are cleared because
+	// default values for username and password values are null.
+	widget.setPreferenceForKey( rememberMe ? username : null, LoginScreen.KEY_USERNAME );
+	// REMEMBER: Never store passwords uncoded. See encryption algorithms on
+	// how to encode the password before saving it.
+	widget.setPreferenceForKey( rememberMe ? password : null, LoginScreen.KEY_PASSWORD );
+	
+	// Remember the username and password.
+	twitterService.setCredentials( username, password );
+	
+	// Check which view is the startup view.
+	var startupPage = widget.preferenceForKey( SettingsScreen.KEY_STARTUP_PAGE );
+	if ( startupPage == SettingsScreen.SEARCH_PAGE ) {
+		widgetMenu.activate( Menu.SEARCH_SCREEN );
+	} else {
+		widgetMenu.activate( Menu.UPDATE_STATUS_SCREEN );
+	} 
+}
+</pre><p>The startup view is stored into the <code>startupPage</code> variable by calling the <code>widget.preferenceForKey</code> API method. The code checks whether the <span class="uicontrol">Search</span> view is the startup view. If not, the <span class="uicontrol">Update status</span> view is displayed.</p></div>
+<div><h3>Loading persistent data</h3><p>The button menu calls the <code>onActivated</code> function to inform views that they are being activated. In the <span class="uicontrol">Login</span> view, this function is implemented and credentials are read if they were saved when users previously used the application. If the value of the key for <span class="uicontrol">Remember Me</span> check box is set to true, the function loads the username and password from the widget store using the predefined key constants <code>LoginScreen.KEY_USERNAME</code> and <code>LoginScreen.KEY_PASSWORD</code>.</p><pre class="codeblock">LoginScreen.prototype.onActivated = function() {
+	// Check if any credentials were stored - if they were, load them
+	// up and prefill the screen.
+	var rememberMe = widget.preferenceForKey( LoginScreen.KEY_REMEMBER_ME );	
+	if ( rememberMe == "true" ) {
+		// Load up the rest; username and password.
+		var username = widget.preferenceForKey( LoginScreen.KEY_USERNAME );
+		var password = widget.preferenceForKey( LoginScreen.KEY_PASSWORD );
+
+		// Assign to UI controls. Also check if username and passwords are not null;
+		// the reason for this is that the user can also check the Remember Me checkbox
+		// on the settings view.
+		if ( username != null ) {
+			this.tbUsername.value = username;	
+		}
+		if ( password != null ) {
+			this.tbPassword.value = password;
+		}		
+		this.cbRememberMe.checked = true;
+	} else {
+		this.tbUsername.value = "";	
+		this.tbPassword.value = "";
+		this.cbRememberMe.checked = false;		
+	}
+}
+</pre></div>
+<div><h3>Logging users in automatically</h3><p>If users save their credentials in STEW, they are logged into Twitter automatically when they start STEW. The following code checks that users stored valid credentials and calls the <code>onLoginClicked</code> function, which is also called when users select the <span class="uicontrol">Login</span> button.</p><pre class="codeblock">LoginScreen.prototype.loginIfPossible = function(){
+	var username = this.tbUsername.value;
+	var password = this.tbPassword.value;
+	var rememberMe = this.cbRememberMe.checked;
+
+	// If username and password are provided then login automatically.
+	if ( rememberMe &amp;&amp; username &amp;&amp; username.length &amp;&amp; password &amp;&amp; password.length ) {
+		this.onLoginClicked();
+	}	
+}
+</pre></div>
+<div><h3>Providing users with tactile feedback</h3><p>Tactile feedback is only triggered when a user interacts with a link element. To provide tactile feedback for screen controls specified as <code>div</code> elements, for example, call the <code>WrtHelper</code> <code>tactileFeedback</code> function.</p><p>For more information, see <a href="GUID-04ABC9FC-26FE-4854-9F88-63A2C4911886.html#GUID-04ABC9FC-26FE-4854-9F88-63A2C4911886">Providing tactile feedback for user actions</a>.</p></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

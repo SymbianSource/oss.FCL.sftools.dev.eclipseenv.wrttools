@@ -1,0 +1,835 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Calendar entry properties"/><meta name="DC.Relation" scheme="URI" content="GUID-2B27591B-F58B-4C6B-8C35-6F65FCF599C6"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Relation" scheme="URI" content="GUID-798E9CA0-2A46-4D10-B567-04C9567500F4"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-5D53649F-FDE2-4421-A362-25C91EE76EF4"/><title>Calendar
+entry properties </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-5D53649F-FDE2-4421-A362-25C91EE76EF4">Calendar
+entry properties</h1><div>
+<p/>
+<p>The following table describes all the possible properties for calendar
+entry objects. Each type of entry supports a different subset of these properties.
+The exact set of properties used by a given entry depends on its type and
+the optional properties specified for it. For information about which properties
+are valid for a given type, see section <a href="GUID-2B27591B-F58B-4C6B-8C35-6F65FCF599C6.html#GUID-2B27591B-F58B-4C6B-8C35-6F65FCF599C6">Properties and calendar entry types</a>.</p>
+<div class="tablenoborder"><a name="GUID-43DE6BBA-83BB-43C1-B668-1A892CEFF56B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-43DE6BBA-83BB-43C1-B668-1A892CEFF56B" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Properties for
+calendar entry objects</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e25278">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e25283">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e25288">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e25293">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the type of the entry.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Anniversary"</code></p></li>
+<li><p><code>"DayEvent"</code></p></li>
+<li><p><code>"Meeting"</code></p></li>
+<li><p><code>"Reminder"</code></p></li>
+<li><p><code>"ToDo"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>id</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the globally unique identifier of the entry. This is unique
+across all calendars on any device. Child entries share the same <code>id</code> as
+their parent entry.</p>
+<div class="note"><p><strong class="note_title">Note: </strong><code>id</code> is generated automatically when the entry is
+created. It cannot be modified. If the entry is imported to another calendar,
+the <code>id</code> remains the same.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>LocalId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the locally unique identifier of the entry. This is unique
+only within the calendar to which the entry belongs. <code>LocalId</code> is
+used to distinguish between parent and child entries that share the same <code>id</code>.</p>
+<div class="note"><p><strong class="note_title">Note: </strong><code>LocalId</code> is generated automatically when the entry
+is created. It cannot be modified. If the entry is imported to another calendar,
+a new <code>LocalId</code> is generated for it in that calendar.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>CalendarName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the calendar file that contains the entry.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p><code>&lt;DriveLetter&gt;:&lt;FileName&gt;</code></p>
+<p>For example: <code>"C:Calendar"</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Summary</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Contains the summary description for the entry.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>SeqNum</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the sequence number for the entry. This is used in group scheduling.</p>
+<p>The default value is <code>0</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>StartTime</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the start time for the entry.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>EndTime</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the end time for the entry.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>InstanceStartTime</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the start time for the entry instance.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>This property is only valid for recurring entries.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>InstanceEndTime</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the end time for the entry instance.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>This property is only valid for recurring entries.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Replication</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the replication status of the entry.</p>
+<p>The default value is <code>"Open"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Open"</code> (no restriction on access)</p>
+</li>
+<li><p><code>"Private"</code> (data is private, no access)</p>
+</li>
+<li><p><code>"Restricted"</code> (data is confidential,
+restricted access)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Description</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Contains the description for the entry.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Priority</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the priority of the entry.</p>
+<p>The default value is <code>0</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>[0, 255]</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>AlarmTime</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the alarm time for the entry. This must be before <code>StartTime</code>.
+However, for <code>ToDo</code> entries, this must be before <code>EndTime</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Location</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the name of the location for the meeting.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Status</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the status of the entry.</p>
+<p>The default value is <code>"NullStatus"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Tentative"</code> (meetings only)</p></li>
+<li><p><code>"Confirmed"</code> (meetings only)</p></li>
+<li><p><code>"TodoNeedsAction"</code> (to-dos only)</p>
+</li>
+<li><p><code>"TodoCompleted"</code> (to-dos only)</p>
+</li>
+<li><p><code>"TodoInProcess"</code> (to-dos only)</p>
+</li>
+<li><p><code>"Cancelled"</code></p></li>
+<li><p><code>"NullStatus"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>RepeatDates</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies a list of out-of-sequence dates on which the entry repeats.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>array of date objects</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>ExDates</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies a list of exception dates, that is, occurrences in the original
+schedule that have been removed and may be replaced with different occurrences.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>array of date objects</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Method</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the method for the entry.</p>
+<p>The default value is <code>"None"</code>.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>This property is only valid for iCalendar entries.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"None"</code></p></li>
+<li><p><code>"Publish"</code></p></li>
+<li><p><code>"Request"</code></p></li>
+<li><p><code>"Reply"</code></p></li>
+<li><p><code>"Add"</code></p></li>
+<li><p><code>"Cancel"</code></p></li>
+<li><p><code>"Refresh"</code></p></li>
+<li><p><code>"Counter"</code></p></li>
+<li><p><code>"DeclineCounter"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>PhoneOwner</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the phone owner.</p>
+<p>The phone owner should match the <code>Address</code> property
+of one of the attendees (see <a href="#GUID-0228435B-C460-4436-87A2-E870BBA1F25E">Table:
+Attendees properties</a>). That is, the phone owner should be an attendee.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Organizer</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies information about the meeting organizer.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>See <a href="#GUID-AEA11BE8-8EFA-408F-A56B-1CF0C939FF62">Table:
+Organizer properties</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>Attendees</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the meeting attendees.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>array of objects</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>See <a href="#GUID-0228435B-C460-4436-87A2-E870BBA1F25E">Table:
+Attendees properties</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25278 ">
+<p><code>RepeatRule</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25283 ">
+<p>Specifies the rules of recurrence for the entry.</p>
+<p>This is only valid for parent entries. Child entries cannot have their
+own <code>RepeatRule</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25288 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e25293 ">
+<p>See <a href="#GUID-5E733DC4-CE83-4279-9A39-5C6AB8C2570A">Table:
+RepeatRule properties</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the structure of <code>Organizer</code>.
+Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-AEA11BE8-8EFA-408F-A56B-1CF0C939FF62"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-AEA11BE8-8EFA-408F-A56B-1CF0C939FF62" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Organizer properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e26171">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e26176">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e26181">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e26171 ">
+<p><code>[Organizer.CommonName]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e26176 ">
+<p>Specifies the name of the organizer.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e26181 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e26171 ">
+<p><code>Organizer.Address</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e26176 ">
+<p>Specifies the address of the organizer.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e26181 ">
+<p>string</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the structure of <code>Attendees</code>.
+Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-0228435B-C460-4436-87A2-E870BBA1F25E"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-0228435B-C460-4436-87A2-E870BBA1F25E" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Attendees properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e26257">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e26262">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e26267">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e26272">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26257 ">
+<p><code>[Attendees[].CommonName]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26262 ">
+<p>Specifies the common name for group scheduling.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26267 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26272 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26257 ">
+<p><code>[Attendees[].Role]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26262 ">
+<p>Specifies the role of the attendee.</p>
+<p>The default value is <code>"Required"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26267 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26272 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Required"</code></p></li>
+<li><p><code>"Optional"</code></p></li>
+<li><p><code>"NonParticipant"</code></p></li>
+<li><p><code>"Chair"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26257 ">
+<p><code>Attendees[].Address</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26262 ">
+<p>Specifies the email address of the attendee.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26267 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26272 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26257 ">
+<p><code>[Attendees[].Status]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26262 ">
+<p>Specifies the status of the attendee.</p>
+<p>The default value is <code>"NeedsAction"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26267 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26272 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"NeedsAction"</code></p></li>
+<li><p><code>"Accepted"</code></p></li>
+<li><p><code>"Tentative"</code></p></li>
+<li><p><code>"Confirmed"</code></p></li>
+<li><p><code>"Declined"</code></p></li>
+<li><p><code>"Completed"</code></p></li>
+<li><p><code>"Delegated"</code></p></li>
+<li><p><code>"InProcess"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26257 ">
+<p><code>[Attendees[].Rsvp]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26262 ">
+<p>Specifies whether or not a response is requested from the attendee.</p>
+<p>The default value is <code>false</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26267 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26272 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>true</code></p></li>
+<li><p><code>false</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the structure of <code>RepeatRule</code>.
+Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-5E733DC4-CE83-4279-9A39-5C6AB8C2570A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-5E733DC4-CE83-4279-9A39-5C6AB8C2570A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>RepeatRule properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e26533">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e26538">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e26543">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e26548">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>RepeatRule.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the type of recurrence, that is, its frequency.</p>
+<p>For information about which <code>RepeatRule</code> properties
+to define for a given type, see <a href="#GUID-47081584-AC5B-470D-9818-C1FA4A2FB46F">Table:
+Valid RepeatRule properties per type of recurrence</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>1</code> (daily)</p></li>
+<li><p><code>2</code> (weekly)</p></li>
+<li><p><code>3</code> (monthly)</p></li>
+<li><p><code>4</code> (yearly)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.StartDate]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the start time for the recurrence. If this is not specified,
+the <code>StartTime</code> of the entry is used.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.UntilDate]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the end date for the recurrence. The entry recurs until this
+date.</p>
+<p><code>UntilDate</code> is automatically modified to match the
+start time of the last possible instance of the recurrence. For example, if
+the entry is specified to recur monthly from June 1st (<code>StartDate</code>)
+to December 30th (<code>UntilDate</code>) on the first day of every
+month, the last possible instance of recurrence is December 1st. The system
+automatically changes <code>UntilDate</code> to this value.</p>
+<p>If <code>UntilDate</code> is not specified, the entry recurs
+until the last possible date allowed by the calendar.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>date object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.Interval]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the time interval between instances of a recurring entry.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.DaysInWeek]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the days of the week on which the entry recurs.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>array of numbers</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">
+<p>Possible values for an item:</p>
+<ul>
+<li><p><code>0</code> (Monday)</p></li>
+<li><p><code>1</code> (Tuesday)</p></li>
+<li><p><code>2</code> (Wednesday)</p></li>
+<li><p><code>3</code> (Thursday)</p></li>
+<li><p><code>4</code> (Friday)</p></li>
+<li><p><code>5</code> (Saturday)</p></li>
+<li><p><code>6</code> (Sunday)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.MonthDays]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the days of the month on which the entry recurs.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>array of numbers</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">
+<p>Possible values for an item: [0, 30]</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.DaysOfMonth]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the day and week of the month on which the entry recurs.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>array of objects</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">
+<p>The properties of the object items are specified below.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.DaysOfMonth[].Day]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the day of the week on which the entry recurs.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>0</code> (Monday)</p></li>
+<li><p><code>1</code> (Tuesday)</p></li>
+<li><p><code>2</code> (Wednesday)</p></li>
+<li><p><code>3</code> (Thursday)</p></li>
+<li><p><code>4</code> (Friday)</p></li>
+<li><p><code>5</code> (Saturday)</p></li>
+<li><p><code>6</code> (Sunday)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.DaysOfMonth[].WeekNum]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the week of the month on which the entry recurs.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>1</code> (1st week)</p></li>
+<li><p><code>2</code> (2nd week)</p></li>
+<li><p><code>3</code> (3rd week)</p></li>
+<li><p><code>4</code> (4th week)</p></li>
+<li><p><code>-1</code> (last week)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26533 ">
+<p><code>[RepeatRule.Month]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26538 ">
+<p>Specifies the month for a yearly recurrence.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26543 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e26548 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>0</code> (January)</p></li>
+<li><p><code>1</code> (February)</p></li>
+<li><p><code>2</code> (March)</p></li>
+<li><p><code>3</code> (April)</p></li>
+<li><p><code>4</code> (May)</p></li>
+<li><p><code>5</code> (June)</p></li>
+<li><p><code>6</code> (July)</p></li>
+<li><p><code>7</code> (August)</p></li>
+<li><p><code>8</code> (September)</p></li>
+<li><p><code>9</code> (October)</p></li>
+<li><p><code>10</code> (November)</p></li>
+<li><p><code>11</code> (December)</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-47081584-AC5B-470D-9818-C1FA4A2FB46F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-47081584-AC5B-470D-9818-C1FA4A2FB46F" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Valid
+RepeatRule properties per type of recurrence</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e27097">
+<p>Type of recurrence</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e27102">
+<p>Valid properties</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e27107">
+<p>Notes</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27097 ">
+<p>Daily</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27102 ">
+<ul>
+<li><p><code>Type</code></p></li>
+<li><p><code>[Interval]</code></p></li>
+<li><p><code>UntilDate</code></p></li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27107 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27097 ">
+<p>Weekly</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27102 ">
+<ul>
+<li><p><code>Type</code></p></li>
+<li><p><code>[Interval]</code></p></li>
+<li><p><code>UntilDate</code></p></li>
+<li><p><code>[DaysInWeek]</code></p></li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27107 ">
+<p>If <code>DaysInWeek</code> is not specified, it is calculated
+from the <code>StartTime</code> of the entry.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27097 ">
+<p>Monthly</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27102 ">
+<ul>
+<li><p><code>Type</code></p></li>
+<li><p><code>[Interval]</code></p></li>
+<li><p><code>UntilDate</code></p></li>
+<li><p><code>[MonthDays]</code> or <code>[DaysOfMonth]</code></p>
+</li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27107 ">
+<p>If <code>MonthDays</code>/<code>DaysOfMonth</code> is
+not specified, it is calculated from the <code>StartTime</code> of
+the entry.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27097 ">
+<p>Yearly</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27102 ">
+<ul>
+<li><p><code>Type</code></p></li>
+<li><p><code>[Interval]</code></p></li>
+<li><p><code>UntilDate</code></p></li>
+<li><p><code>[DaysOfMonth]</code></p></li>
+<li><p><code>[Month]</code></p></li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e27107 ">
+<p>Only the first item of <code>DaysOfMonth</code> is used.</p>
+<p><code>DaysOfMonth</code> and <code>Month</code> should
+be specified together.</p>
+<p>If <code>DaysOfMonth</code>/<code>Month</code> is not
+specified, it is calculated from the <code>StartTime</code> of the
+entry.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

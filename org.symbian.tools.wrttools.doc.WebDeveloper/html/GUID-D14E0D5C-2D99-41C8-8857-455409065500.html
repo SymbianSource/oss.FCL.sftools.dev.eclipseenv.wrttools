@@ -1,0 +1,93 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for retrieving system attribute information"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Relation" scheme="URI" content="GUID-279A3698-D09B-44BF-8340-739E19F94727"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-D14E0D5C-2D99-41C8-8857-455409065500"/><title>Criteria for
+retrieving system attribute information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-D14E0D5C-2D99-41C8-8857-455409065500"><span>Criteria</span> for
+retrieving system attribute information</h1><div>
+<p>The <code>criteria</code> object specifies the <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">system attribute</a> about
+which to retrieve information.</p>
+<p>The <code>criteria</code> object has three properties: <code>Entity</code>, <code>Key</code>,
+and <code>SystemData</code>. These are described in the following
+table. Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-040E3B72-CB03-42D6-BBAD-11C62C4B1872"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-040E3B72-CB03-42D6-BBAD-11C62C4B1872" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e67851">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e67856">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e67861">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e67866">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67851 ">
+<p><code>criteria.Entity</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67856 ">
+<p>Specifies the entity of the system attribute.</p>
+<p>Together with <code>Key</code>, this specifies the system attribute
+to retrieve.</p>
+<p>For more information about entities, see section <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67861 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67866 ">
+<p>For a complete list of supported entities, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example: <code>"Memory"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67851 ">
+<p><code>criteria.Key</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67856 ">
+<p>Specifies the key of the system attribute. The available keys depend
+on the entity.</p>
+<p>Together with <code>Entity</code>, this specifies the system
+attribute to retrieve.</p>
+<p>For more information about keys, see section <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">System attributes</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67861 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67866 ">
+<p>For a complete list of supported keys per entity, see the <strong>Key</strong> column
+of the tables in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example: <code>"DriveInfo"</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67851 ">
+<p><code>[criteria.SystemData]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67856 ">
+<p>Specifies the value of the system attribute.</p>
+<p>Some system attributes require this property as input for <a href="GUID-279A3698-D09B-44BF-8340-739E19F94727.html#GUID-279A3698-D09B-44BF-8340-739E19F94727"><code>GetInfo</code></a>. To find out which attributes, see the <strong>Input</strong> column of the
+tables in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>The <code>SystemData</code> object has one or more properties
+that together represent the system attribute value. The exact set of properties
+depends on the system attribute (specifically, on the system data type used
+for input).</p>
+<p>For more information about system attribute values, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67861 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e67866 ">
+<p>The object properties depend on the system attribute. See the <strong>Input</strong> column
+cell for the appropriate system attribute in section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<p>For example, the <code>Memory - DriveInfo</code> system attribute
+takes <a href="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340.html#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a> information
+as input for <code>GetInfo</code>:</p>
+<p><code>SystemData.Drive = "C:\\"</code></p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

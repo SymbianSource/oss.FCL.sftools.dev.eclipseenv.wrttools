@@ -1,0 +1,134 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for launching an application"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><meta name="DC.Relation" scheme="URI" content="GUID-697AFF1F-24C7-43BD-A072-8352B3BE973C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7DD6AB91-0582-4A46-9E19-2F12DC2FE674"/><title>Criteria for
+launching an application </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7DD6AB91-0582-4A46-9E19-2F12DC2FE674"><span>Criteria</span> for
+launching an application</h1><div>
+<p>The <code>criteria</code> object specifies the application
+to launch.</p>
+<p>The <code>criteria</code> object has three main properties: <code>ApplicationID</code>, <code>CmdLine</code>,
+and <code>Options</code>. These are described in the following table.
+Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-3D39CA8F-461E-4CEF-BFC6-0B3E4EC2A738"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-3D39CA8F-461E-4CEF-BFC6-0B3E4EC2A738" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e18569">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e18574">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e18579">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e18584">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18569 ">
+<p><code>criteria.ApplicationID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18574 ">
+<p>Specifies a unique ID for the application binary (EXE or DLL).</p>
+<p>Use the <a href="GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952.html#GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952"><code>GetList</code></a> method
+to retrieve this ID.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18579 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18584 ">
+<p>For example: <code>"s60uid://0x101F857A"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18569 ">
+<p><code>[criteria.CmdLine]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18574 ">
+<p>Specifies a command line argument which is passed to the application
+being launched.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18579 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18584 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18569 ">
+<p><code>[critia.Options]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18574 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18579 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18584 ">
+<p>Object with the properties specified below.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18569 ">
+<p><code>[critia.Options.Mode]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18574 ">
+<p>Specifies whether the launched application is embedded within the application
+that called <code>LaunchApp</code> (chained) or whether the applications
+are independent of each other (stand-alone). For more information on chained
+and stand-along applications, see section <a href="GUID-E092BF10-C076-4476-9E80-87919940201B.html#GUID-E092BF10-C076-4476-9E80-87919940201B">Accessing and launching installed applications</a>.</p>
+<p>If this property is not specified, the default is <code>"Standalone"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18579 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18584 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Chained"</code> - The application is embedded
+within the application that called <code>LaunchApp</code>.</p>
+</li>
+<li><p><code>"Standalone"</code> - The applications are
+independent of each other.</p></li>
+</ul>
+<p/>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18569 ">
+<p><code>[critia.Options.Position]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18574 ">
+<p>Specifies whether a stand-alone application is launched in the background
+or foreground.</p>
+<p>This property is not valid if the <code>Mode</code> is <code>"Chained"</code> (embedded).
+Embedded applications are automatically launched in the foreground.</p>
+<p>If this property is not specified, the default is <code>"Foreground"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18579 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18584 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Background"</code> - The stand-alone application
+is launched in the background.</p></li>
+<li><p><code>"Foreground"</code> - The stand-alone application
+is launched in the foreground.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18569 ">
+<p><code>[critia.Options.DocumentPath]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18574 ">
+<p>Specifies the full path, including the file name, to the document to
+launch.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18579 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e18584 ">
+<p>For example: <code>"C:\\Data\\abc.txt"</code></p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

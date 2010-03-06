@@ -1,0 +1,116 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.Add()"/><meta name="DC.Relation" scheme="URI" content="GUID-E6FAAB7C-EE2D-4464-9D0F-B1D89E26ABCF"/><meta name="DC.Relation" scheme="URI" content="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-20D66938-A870-43D7-9515-AC7E22AEDC14"/><title>IDataSource.Add() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-20D66938-A870-43D7-9515-AC7E22AEDC14"><span>IDataSource.</span>Add()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Add</code> method adds a contact or contact group
+to a contacts database. If the contact or contact group already exists in
+the database, it is replaced with the new entry. You can thus use this method
+to both add and edit contacts and contact groups. The information is added
+to the specified database or, if no database is specified, to the default
+one. If the default database does not exist, it is created.</p>
+<p>This method can be called both synchronously and asynchronously.</p>
+<p><strong>Syntax:</strong></p>
+<p>For synchronous calls:</p>
+<pre class="codeblock" id="GUID-011A2BEC-80E5-42F3-A950-5AD015B01A1B">result = so.IDataSource.Add(criteria);</pre>
+
+<p>For asynchronous calls:</p>
+<pre class="codeblock" id="GUID-01DF7362-142F-43B6-9D97-80D7A0EEB0AC">result = so.IDataSource.Add(criteria, callback);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies what contact information to add or
+edit and for which database. For more information about the object properties
+and how to define them, see section <a href="GUID-94FAF08A-F3E3-4686-A35B-E98EEBF18824.html#GUID-94FAF08A-F3E3-4686-A35B-E98EEBF18824">Criteria for adding and editing contact information</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when an asynchronous <code>Add</code> call has results
+or status information to return. You must define this method separately. Follow
+the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+<p>This argument is used only with an asynchronous <code>Add</code> call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>If synchronous, the <code>Add</code> method returns an object
+that contains an error code and an error message.</p>
+<p>If asynchronous, the method returns an object that contains a transaction
+ID for the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> instance,
+an error code, and an error message. When the asynchronous call has completed, <code>callback</code> returns
+an object that contains an error code and an error message (see <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-E43BC9EA-3EBE-4C7F-A57E-A1C33BB01CF4">Table: Callback return value</a>).</p>
+<div class="tablenoborder"><a name="GUID-9873A8F5-70EF-42EC-ABCC-47F551890CA4"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-9873A8F5-70EF-42EC-ABCC-47F551890CA4" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for Add</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31867">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31872">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31877">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31867 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31872 ">
+<p>This is a number used as an identification to match transactions started
+with an asynchronous <code>Add</code> call to one or more calls it
+generates to <code>callback</code>.</p>
+<p>This property is only valid for asynchronous calls.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31877 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31867 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31872 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31877 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31867 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31872 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31877 ">
+<p>See <a href="GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF.html#GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF">Contacts Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p>The default contacts database is <code>cntdb://c:contacts.cdb</code>.
+The SIM card database is <code>sim://global_adn</code>.</p></li>
+<li><p>If a contact or contact group is added with its <code>id</code> property
+specified, and the database already contains an entry with that <code>id</code>,
+the existing entry is replaced by the new one. If the <code>id</code> is
+not specified, a new entry is added to the database.</p></li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1.html#GUID-B2BCD2C0-DA4D-4830-9BF3-5DA50879A3A1">the
+full example</a>.</p>
+
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

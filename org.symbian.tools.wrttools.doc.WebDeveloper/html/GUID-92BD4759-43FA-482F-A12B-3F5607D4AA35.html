@@ -1,0 +1,899 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Calendar Service API error messages"/><meta name="DC.Relation" scheme="URI" content="GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3"/><meta name="DC.Relation" scheme="URI" content="GUID-798E9CA0-2A46-4D10-B567-04C9567500F4"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35"/><title>Calendar Service API error messages </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-92BD4759-43FA-482F-A12B-3F5607D4AA35">Calendar Service API error messages</h1><div>
+<p>This section provides information about the error messages returned
+by the Calendar Service API methods.</p>
+<p/>
+<div><h3>Generic error messages</h3>
+<p>The following table describes the error messages returned during the
+loading of the service provider.</p>
+<div class="tablenoborder"><a name="GUID-EAEB65CE-ACFF-45CF-A577-F6C70BAFFBB5"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-EAEB65CE-ACFF-45CF-A577-F6C70BAFFBB5" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Service provider
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e28218">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e28223">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28218 ">
+<p><code>Calendar:Interface not supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28223 ">
+<p>The requested interface is not supported by the service provider.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28218 ">
+<p><code>Calendar:Interface name missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28223 ">
+<p>The interface name is missing from the request.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the error messages returned by asynchronous
+method calls.</p>
+<div class="tablenoborder"><a name="GUID-7B592472-A9D0-496C-95C7-E301DA39423A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-7B592472-A9D0-496C-95C7-E301DA39423A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Asynchronous
+call error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e28281">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e28286">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28281 ">
+<p><code>Calendar:Cmd:Insufficent arguments for asynchronous request</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28286 ">
+<p>The <code>Callback</code> method is missing.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>GetList</h3>
+<p>The following table describes the error messages returned by <a href="GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4.html#GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4"><code>GetList</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-67989A89-6EFE-4C24-B563-32AD28E41C1B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-67989A89-6EFE-4C24-B563-32AD28E41C1B" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetList error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e28339">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e28344">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:Type is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Type</code> property is missing from input or it contains
+an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:Filter is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:DefaultCalendar is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter.DefaultCalendar</code> property contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:Id is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter.id</code> property contains a value with an
+invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:LocalId is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter.LocalId</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:StartRange is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter.StartRange</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:EndRange is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter.EndRange</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:SearchText is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter.SearchText</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28339 ">
+<p><code>Calendar:GetList:CalendarName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28344 ">
+<p>The <code>Filter.CalendarName</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Add</h3>
+<p>The following table describes the error messages returned by <a href="GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51.html#GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51"><code>Add</code></a> as part of its return value.</p>
+<p/>
+<p/>
+<div class="tablenoborder"><a name="GUID-F4A5122A-C8E7-4791-96FE-DAAF5735E446"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-F4A5122A-C8E7-4791-96FE-DAAF5735E446" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Add error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e28557">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e28562">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Entry Type is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:InstanceStartTime is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.InstanceStartTime</code> property contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:LocalId is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.LocalId</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Summary is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Summary</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Description is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Description</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Location is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Location</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Replication is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Replication</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Status is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Status</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Method is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Method</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:SeqNum is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.SeqNum</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Priority is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Priority</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:StartTime is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.StartTime</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:EndTime is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.EndTime</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:AlarmTime is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.AlarmTime</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:PhoneOwner is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.PhoneOwner</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Organizer is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Organizer</code> property contains a value with
+an invalid type or the <code>Item.Organizer.Address</code> property
+is missing.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Attendees is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.Attendees</code> property contains a value with
+an invalid type or the <code>Address</code> property of one of the
+items is missing.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:CommonName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>CommonName</code> property for an attendee contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Address is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Address</code> property for an attendee contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Role is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Role</code> property for an attendee contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Status is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Status</code> property for an attendee contains a
+value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Rsvp is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Rsvp</code> property for an attendee contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:RepeatDates is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatDates</code> property contains a value
+with an invalid type or the values in the array are invalid.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:ExDates is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.ExDates</code> property contains a value with
+an invalid type or the values in the array are invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:RepeatRule is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Type is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.Type</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Type is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.Type</code> property is missing from
+the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:DaysInWeek is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.DaysInWeek</code> property contains
+a value with an invalid type or the values in the array are invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:UntilDate is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.UntilDate</code> property contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:RepeatRule:StartDate is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.StartDate</code> property contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Interval	is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.Interval</code> property contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:MonthDays is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.MonthDays</code> property contains
+a value with an invalid type or the values in the array are invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:DaysInWeek is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.DaysInWeek</code> property contains
+a value with an invalid type or the values in the array are invalid.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:DaysOfMonth is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.DaysOfMonth</code> property contains
+a value with an invalid type or the values in the array are invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:RepeatRule:DaysOfMonth:Day</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.DaysOfMonth.Day</code> property contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:RepeatRule:DaysOfMonth:WeekNumber</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.DaysOfMonth.WeekNum</code> property
+contains a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Month</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.RepeatRule.Month</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:Item is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e28557 ">
+<p><code>Calendar:Add:CalendarName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e28562 ">
+<p>The <code>Item.CalendarName</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Delete</h3>
+<p>The following table describes the error messages returned by <a href="GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A.html#GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A"><code>Delete</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Delete</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-61870A9C-5D98-413D-8F4C-E1CEB3007D0D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-61870A9C-5D98-413D-8F4C-E1CEB3007D0D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Delete error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e29350">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e29355">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:Type is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Type</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:CalendarName is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>For a delete call with <code>Type = "Calendar"</code>, the <code>Data.CalendarName</code> property
+is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:CalendarName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Data.CalendarName</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:StartRange is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Data.StartRange</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:EndRange is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Data.EndRange</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:DeleteAll is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Data.DeleteAll</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:IdList is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Data.IdList</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:LocalIdList is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Data.LocalIdList</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:Data is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>For a delete call with <code>Type = "CalendarEntry"</code>,
+the <code>Data</code> property contains invalid data.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29350 ">
+<p><code>Calendar:Delete:Data is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29355 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Import</h3>
+<p>The following table describes the error messages returned by <a href="GUID-D19BB894-371A-4D55-A047-3B2F97673F5F.html#GUID-D19BB894-371A-4D55-A047-3B2F97673F5F"><code>Import</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Import</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-1D4F5BD1-4DF3-4E78-A066-DBC320AB229D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-1D4F5BD1-4DF3-4E78-A066-DBC320AB229D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Import error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e29592">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e29597">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29592 ">
+<p><code>Calendar:Import:CalendarName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29597 ">
+<p>The <code>Data.CalendarName</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29592 ">
+<p><code>Calendar:Import:FileName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29597 ">
+<p>The <code>Data.FileName</code> property contains a value with
+an invalid type or the value exceeds 239 characters.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29592 ">
+<p><code>Calendar:Import:Type is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29597 ">
+<p>The <code>Type</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29592 ">
+<p><code>Calendar:Import:Data is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29597 ">
+<p>The <code>Data</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29592 ">
+<p><code>Calendar:Import:Data is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29597 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29592 ">
+<p><code>Calendar:Import:Format is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29597 ">
+<p>The <code>Data.Format</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29592 ">
+<p><code>Calendar:Import:FileName is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29597 ">
+<p>The <code>Data.FileName</code> property is missing from the
+input.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Export</h3>
+<p>The following table describes the error messages returned by <a href="GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F.html#GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F"><code>Export</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>Export</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-3CFFACD4-737D-4B99-A476-FEE08C8C4468"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-3CFFACD4-737D-4B99-A476-FEE08C8C4468" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Export error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e29771">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e29776">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:Type is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Type</code> property contains an invalid value.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:Data is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Data</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:Data is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Data</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:Format is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Data.Format</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:FileName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Data.FileName</code> property contains a value with
+an invalid type or the value exceeds 239 characters.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:IdList is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Data.IdList</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:LocalIdList is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Data.LocalIdList</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29771 ">
+<p><code>Calendar:Export:CalendarName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29776 ">
+<p>The <code>Data.CalendarName</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>RequestNotification</h3>
+<p>The following table describes the error messages returned by <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <a href="GUID-D4014B08-C48C-48EB-B3A5-1A09FF636B3C.html#GUID-D4014B08-C48C-48EB-B3A5-1A09FF636B3C"><code>RequestNotification</code></a> as
+part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-03305847-CDB5-4C64-90FA-DC4FF4B74E6A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-03305847-CDB5-4C64-90FA-DC4FF4B74E6A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>RequestNotification
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e29966">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e29971">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29966 ">
+<p><code>Calendar:RequestNotification:CalendarName is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29971 ">
+<p>The <code>Filter.CalendarName</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29966 ">
+<p><code>Calendar:RequestNotification:Type is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29971 ">
+<p>The <code>Type</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29966 ">
+<p><code>Calendar:RequestNotification:StartRange is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29971 ">
+<p>The <code>Filter.StartRange</code> property contains a value
+with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29966 ">
+<p><code>Calendar:RequestNotification:EndRange is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29971 ">
+<p>The <code>Filter.EndRange</code> property contains a value with
+an invalid type.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29966 ">
+<p><code>Calendar:RequestNotification:IncludeUndatedTodos is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29971 ">
+<p>The <code>Filter.IncludeUndatedTodos</code> property contains
+a value with an invalid type.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e29966 ">
+<p><code>Calendar:RequestNotification:LocalIdList is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29971 ">
+<p>The <code>Filter.LocalIdList</code> property contains a value
+with an invalid type or the data in the array is invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e29966 ">
+<p><code>Calendar:RequestNotification:Filter is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e29971 ">
+<p>The <code>Filter</code> property contains a value with an invalid
+type.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Cancel</h3>
+<p>The following table describes the error messages returned by <a href="GUID-0D3A1E17-C699-4A9D-9124-9CEB71E2EBBF.html#GUID-0D3A1E17-C699-4A9D-9124-9CEB71E2EBBF"><code>Cancel</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-99DC0C86-5A4B-4F94-9582-EEADD00A8802"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-99DC0C86-5A4B-4F94-9582-EEADD00A8802" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Cancel error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e30138">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e30143">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e30138 ">
+<p><code>Calendar:Cancel:TransactionID is invalid</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e30143 ">
+<p>The <code>TransactionID</code> property contains an invalid
+value or an asynchronous call associated with this ID has already been completed.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e30138 ">
+<p><code>Calendar:Cancel:TransactionID is missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e30143 ">
+<p>The <code>TransactionID</code> property is missing from the
+input.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

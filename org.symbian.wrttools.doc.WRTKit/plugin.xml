@@ -7,9 +7,6 @@
             file="toc.xml"
             primary="true">
       </toc>
-      <toc
-            file="WRT_Doc.xml">
-      </toc>
    </extension>
    <extension
          point="org.eclipse.ui.helpSupport">

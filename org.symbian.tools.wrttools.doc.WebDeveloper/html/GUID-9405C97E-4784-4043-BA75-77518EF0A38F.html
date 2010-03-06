@@ -1,0 +1,56 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: indicating progress"/><meta name="abstract" content="Retrieving data from the Internet might take some time. Provide users with visual feedback on how the operation is progressing. STEW displays a progress indicator during data retrieval from Twitter."/><meta name="description" content="Retrieving data from the Internet might take some time. Provide users with visual feedback on how the operation is progressing. STEW displays a progress indicator during data retrieval from Twitter."/><meta name="DC.Relation" scheme="URI" content="GUID-A3C4CDE4-4231-463D-B6A8-4969B91BDA0C"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-1FD5C597-43B8-402E-92B8-FE0787DB4F3B"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-9405C97E-4784-4043-BA75-77518EF0A38F"/><meta name="DC.Language" content="en"/><title>STEW: indicating progress </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-9405C97E-4784-4043-BA75-77518EF0A38F">STEW: indicating progress</h1><div><p>Retrieving data from the Internet might take some time. Provide users with visual feedback on how the operation is progressing. STEW displays a progress indicator during data retrieval from Twitter.</p>
+<p>The progress indicator is implemented in the <code>main.html</code> file.</p>
+<pre class="codeblock">&lt;!-- LOADER --&gt;
+&lt;div id="loader_popup" class="popup hidden"&gt;
+	&lt;table class="popup_window"&gt;
+		&lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;/tr&gt;
+		&lt;tr class="background"&gt;
+			&lt;td class="loader"&gt;
+				&lt;div class="title"&gt;LOADING&lt;/div&gt;
+				&lt;img src="images/loader.gif" alt="Loader"&gt;
+				&lt;div class="subtitle"&gt;Please wait while we process data...&lt;/div&gt;
+		    	&lt;/td&gt;
+		&lt;/tr&gt;                
+		&lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;/tr&gt;
+	&lt;/table&gt;
+&lt;/div&gt;</pre>
+<p>The layout of the loader pop up screen is defined in the CSS files.</p>
+<div class="figure" id="GUID-CC8EACB4-45C4-4C32-889F-F468F235899B"><img src="GUID-1D48EF4F-BD40-42D9-9E5A-3B88B948ECE0_d0e12296_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW progress indicator</p></div>
+<p>To display the screen when a request is made to the Twitter service and to hide it when a response is received, add the following function to <code>TwitterService.js</code>:</p>
+<pre class="codeblock">TwitterService.prototype.showProgress = function( show ) {
+	if (this.progressId) {
+		if (show == null) 
+			show = true;
+	
+		Helper.show( this.progressId, show );			
+		if (!show) {
+			// If we hide the progress bar, set to null here so we
+			// don't do that twice and overwrite some other manager's
+			// progress bar.
+			this.progressId = null;
+		}
+	}
+}
+</pre>
+<p>Update the functions that get triggered when a request is issued and when a response has been processed, as listed in the code snippet below:</p>
+<pre class="codeblock">TwitterService.prototype._doRequest = function( url, type ) {
+	this.showProgress();
+	...
+}
+
+TwitterService.prototype.handleSuccessResponse = function( arg ) {
+	this.showProgress( false );
+	...
+}
+
+TwitterService.prototype.handleErrorResponse = function( status ) {
+	this.showProgress( false );
+	...
+}
+</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

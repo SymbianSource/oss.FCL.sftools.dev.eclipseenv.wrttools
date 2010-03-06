@@ -1,0 +1,37 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Creating the widget HTML file"/><meta name="abstract" content="Separate the structure, content, layout, and functionality of a widget into different files. The HTML file defines the structure of the widget UI. Use external style sheets and JavaScript code files for controlling the layout of your widget and for implementing the operations and logic."/><meta name="description" content="Separate the structure, content, layout, and functionality of a widget into different files. The HTML file defines the structure of the widget UI. Use external style sheets and JavaScript code files for controlling the layout of your widget and for implementing the operations and logic."/><meta name="DC.Relation" scheme="URI" content="GUID-DD35B82F-CB1F-4F7B-A351-C0417E21D5E4"/><meta name="DC.Relation" scheme="URI" content="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-85179E6B-E915-4D96-A5D1-D17D7C7180C7"/><meta name="DC.Relation" scheme="URI" content="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA"/><title>Creating the widget HTML file </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA">Creating the widget HTML file</h1><div><p>Separate the structure, content, layout, and functionality of a widget into different files. The HTML file defines the structure of the widget UI. Use external style sheets and JavaScript code files for controlling the layout of your widget and for implementing the operations and logic.</p>
+<p>To create the main HTML file of a widget:</p>
+<ol>
+<li id="GUID-92AF675C-619B-4A61-AA2E-E94EA61CFAC7"><a name="GUID-92AF675C-619B-4A61-AA2E-E94EA61CFAC7"><!----></a><p>Create a standard HTML document for defining the structure of the widget.</p><p>It is recommended that the HTML document follow the HTML 4.01 specifications and the strict DTD.</p><p>Add references to the external style sheets and JavaScript code files that controlling the layout of the widget and implement the operations and logic through the <code>&lt;style&gt;</code> and <code>&lt;script&gt;</code> elements in the head of the HTML document. For more information on creating these files, see sections <a href="GUID-DD35B82F-CB1F-4F7B-A351-C0417E21D5E4.html#GUID-DD35B82F-CB1F-4F7B-A351-C0417E21D5E4">Creating a CSS file</a> and <a href="GUID-A942935B-ACF6-451C-8383-874BEEC52F1A.html#GUID-A942935B-ACF6-451C-8383-874BEEC52F1A">Creating a JavaScript file</a>.</p><p>The body of the HTML document defines the structure of the widget UI. The following sample code illustrates an HTML file of a widget that has two views and that uses external style sheets and JavaScript files. The views are defined using the <code>&lt;div&gt;</code> tag and <code>id</code> attribute.</p><pre class="codeblock" id="GUID-3A790195-104C-45B3-AE0D-78F160540390">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;style type="text/css"&gt;
+			@import "horoscope.css";
+  &lt;/style&gt;
+  &lt;script type="text/javascript" src="horoscope.js" /&gt;
+ &lt;/head&gt;
+ &lt;body id="body"&gt;
+    &lt;div id="mainView"&gt;
+			&lt;h2&gt;Chinese Horoscope&lt;/h2&gt;
+			&lt;label for="byear"&gt;Enter your birth year:&lt;/label&gt;
+			&lt;input type="text" id="byear" size="4" style='-wap-input-format: "4N"' /&gt;
+			&lt;input type="button" name="calc" value="Tell me"
+                               onClick="showResult();"&gt;
+			&lt;/input&gt;
+    &lt;/div&gt;
+    &lt;div id="resultView"&gt;
+			&lt;p id="output" class="output"&gt;&lt;/&gt;P
+			&lt;img id="character" src="" /&gt;
+			&lt;img id="sign" src="" /&gt;
+    &lt;/div&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</pre><p>For more information on HTML, see the <a href="http://www.w3.org/html/" target="_blank">World Wide Web Consortium (W3C)</a> pages.</p></li>
+<li id="GUID-822E3E07-8A0F-46F0-98BE-5A70198F7385"><a name="GUID-822E3E07-8A0F-46F0-98BE-5A70198F7385"><!----></a><p>Save the HTML file under the widget project root folder with the name <code>&lt;Widget name&gt;.html</code>.</p></li>
+<li id="GUID-FB505074-544B-4DE6-BBCB-BF382F605651"><a name="GUID-FB505074-544B-4DE6-BBCB-BF382F605651"><!----></a><p>Remember to define the HTML file as the value of the <code>MainHTML</code> property in the widget <a href="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B.html#GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B"><code>info.plist</code></a> file.</p></li>
+</ol>
+<p>During the runtime of a widget, the main HTML document must not be replaced by any other HTML document. In other words, after the main HTML document of a widget is loaded, widget contents can only be displayed within the main HTML context. If a widget needs to load an extra HTML page, it must do this using the Web Browser for S60 application in a stand-alone mode. For more information on loading HTML pages, see the <a href="GUID-EFCCE3CA-A1D2-4CD0-8D10-BD6320B19E5A.html#GUID-EFCCE3CA-A1D2-4CD0-8D10-BD6320B19E5A"><code>openURL()</code></a> method in the Web Runtime API reference.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

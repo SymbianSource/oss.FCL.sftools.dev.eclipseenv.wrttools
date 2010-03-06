@@ -1,0 +1,173 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="getServiceObject()"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"/><title>getServiceObject() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080">getServiceObject()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>getServiceObject</code> method creates an object that
+is used to access the services made available through a <a href="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C.html#GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C">Service
+API</a>. This object is referred to as a "service object".</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-F1580D9E-555B-4F59-95E5-3D6779BABE2E">so = device.getServiceObject(provider, interface);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>provider</code>:</p>
+
+<p>This is a text string that defines the service provider name, that is,
+the name of the type of service object to create.</p>
+
+</li>
+<li><p><code>interface</code>:</p>
+
+<p>This is a text string that defines the supported interface for the specified
+service provider.</p>
+
+</li>
+</ul>
+<div class="tablenoborder"><a name="GUID-310FC91B-219B-4105-9601-E3B04849575D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-310FC91B-219B-4105-9601-E3B04849575D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Service API providers
+and interfaces</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e16777">
+<p>Service API</p>
+</th><th class="cellrowborder" valign="top" id="d0e16782">
+<p>Provider</p>
+</th><th class="cellrowborder" valign="top" id="d0e16787">
+<p>Interface</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-2D651505-F68C-4053-B565-9FF826C5B897.html#GUID-2D651505-F68C-4053-B565-9FF826C5B897">AppManager</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.AppManager</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>IAppManager</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4.html#GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4">Calendar</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.Calendar</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>IDataSource</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18.html#GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18">Contacts</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.Contact</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>IDataSource</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F.html#GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F">Landmarks</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.Landmarks</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>IDataSource</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053.html#GUID-53CE4DE6-F065-4339-8C18-5C30A9540053">Location</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.Location</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>ILocation</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C.html#GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C">Logging</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.Logging</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>IDataSource</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-E5684FF0-28C9-4721-9421-6B9432087086.html#GUID-E5684FF0-28C9-4721-9421-6B9432087086">Media Management</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.MediaManagement</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>IDataSource</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5.html#GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5">Messaging</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.Messaging</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>IMessaging</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29.html#GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29">Sensor</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.Sensor</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>ISensor</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e16777 ">
+<p><a href="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3.html#GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3">SystemInfo</a></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16782 ">
+<p><code>Service.SysInfo</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e16787 ">
+<p><code>ISysInfo</code></p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Return value:</strong></p>
+<p>If the call succeeds, the <code>getServiceObject</code> method
+returns a service object; otherwise it returns <code>undefined</code>.</p>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li><p>The <code>getServiceObject</code> method is a factory
+method found on the <code>device</code> object.</p></li>
+<li><p>To ensure backward compatibility, always check in your JavaScript
+code that the <code>device</code> object exists before calling the <code>getServiceObject</code> method.
+For example:</p>
+
+<pre class="codeblock" id="GUID-B43A804D-CBB6-44E4-9514-E1982EA50507">if (device != "undefined")
+  device.getServiceObject("Service.MediaManagement", "IDataSource");
+</pre>
+
+</li>
+</ul>
+<p><strong>Example code:</strong></p>
+<p>The following example creates a service object for the <a href="GUID-E5684FF0-28C9-4721-9421-6B9432087086.html#GUID-E5684FF0-28C9-4721-9421-6B9432087086">Media
+Management Service API</a>:</p>
+<pre class="codeblock" id="GUID-00E9306D-0D8D-44DC-BA87-899BB4F9B000">var so = device.getServiceObject("Service.MediaManagement", "IDataSource");</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

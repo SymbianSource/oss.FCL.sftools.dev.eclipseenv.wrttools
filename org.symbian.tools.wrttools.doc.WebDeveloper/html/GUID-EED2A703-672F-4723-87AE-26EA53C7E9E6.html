@@ -1,0 +1,46 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="STEW: adding menu options"/><meta name="abstract" content="STEW is designed for the 240 x 320 (QVGA) and the 360 x 640 (nHD) screen size. The nHD screens are touch enabled and have enough space to fit a button navigation menu. However, a button menu would reserve too much space on QVGA screens, and therefore softkeys and menu items are used instead."/><meta name="description" content="STEW is designed for the 240 x 320 (QVGA) and the 360 x 640 (nHD) screen size. The nHD screens are touch enabled and have enough space to fit a button navigation menu. However, a button menu would reserve too much space on QVGA screens, and therefore softkeys and menu items are used instead."/><meta name="DC.Relation" scheme="URI" content="GUID-9F3218D9-2BEA-417C-8017-E05AC749BF84"/><meta name="DC.Relation" scheme="URI" content="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2"/><meta name="DC.Relation" scheme="URI" content="GUID-EB2043BB-E557-429B-BA0A-E350A6D06597"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-EED2A703-672F-4723-87AE-26EA53C7E9E6"/><meta name="DC.Language" content="en"/><title>STEW: adding menu options </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-EED2A703-672F-4723-87AE-26EA53C7E9E6">STEW: adding menu options</h1><div><p>STEW is designed for the 240 x 320 (QVGA) and the 360 x 640 (nHD) screen size. The nHD screens are touch enabled and have enough space to fit a button navigation menu. However, a button menu would reserve too much space on QVGA screens, and therefore softkeys and menu items are used instead.</p>
+<p>The Web Runtime (WRT) allows you to create or modify menu items dynamically and to associate them with the left softkey.  The following code in the <code>menu.js</code> file extends the <code>Menu</code> object and adds a method that detects the screen size:</p>
+<pre class="codeblock">function Menu() {
+	var self = this;	
+	// Check the screen size we are running on.
+	if ( Helper.isLargeScreen() ) {
+		// nHD code listed in previous text. 
+		...
+	} else {
+		// Create phone's softmenu.
+		this.miUpdateTwitter = new MenuItem( StringTable.Code.menuUpdateTwitter, 9000 );
+		var miUpdate = new MenuItem( StringTable.Code.menuUpdate, 9001 );
+		var miSearch = new MenuItem( StringTable.Code.menuSearch, 9002 );
+		var miSettings = new MenuItem( StringTable.Code.menuSettings, 9003 );
+		var miLogout = new MenuItem( StringTable.Code.menuLogout, 9004 );
+	
+	  	// Assign a callback function for the menu items
+	  	this.miUpdateTwitter.onSelect = function () { updateScreen.onUpdateClicked(); };
+	  	miUpdate.onSelect = function () { self.activate( Menu.UPDATE_STATUS_SCREEN ); };
+	  	miSearch.onSelect = function () { self.activate( Menu.SEARCH_SCREEN ); };
+	  	miSettings.onSelect = function () { self.activate( Menu.SETTINGS_SCREEN ); };
+		miLogout.onSelect = function () { widgetMenu.activate( Menu.LOGIN_SCREEN ); };
+		
+		// Add them to the top-level menu. Don't forget to dim out
+		// the "Update Twitter" menu item since it is only shown on the
+		// Update screen for faster navigation.
+		this.miUpdateTwitter.setDimmed( true );
+		menu.append( this.miUpdateTwitter );
+		menu.append( miUpdate );
+		menu.append( miSearch );
+		menu.append( miSettings );		
+		menu.append( miLogout );		
+	}
+	
+}
+</pre>
+<p>The <code>menu</code> object and the <code>MenuItem</code> object are used to create an <span class="uicontrol">Options</span> menu that contains the same functions as the button menu on nHD screens. The <span class="uicontrol">Options</span> menu is associated with the left softkey.</p>
+<div class="figure" id="GUID-18B05DE2-0DF9-4BF3-B198-4792A932861A"><img src="GUID-98509DF5-5035-4E43-925C-50B96CE41F07_d0e12004_href.png"/><p class="figure-title"><strong>Figure: </strong>STEW Update Status view with an Options menu</p></div>
+<p>The <code>miUpdateTwitter</code> menu item is remembered and dimmed to display it only in the <span class="uicontrol">Update Status</span> view.</p>
+<p>For more information about using softkeys and adding options to a menu, see <a href="GUID-94946735-D23B-49C6-BB65-8BE31737AE42.html#GUID-94946735-D23B-49C6-BB65-8BE31737AE42">Using softkeys</a>.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

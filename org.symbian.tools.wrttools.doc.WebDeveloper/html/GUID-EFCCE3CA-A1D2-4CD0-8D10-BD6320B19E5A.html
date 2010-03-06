@@ -1,0 +1,28 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="openURL()"/><meta name="DC.Relation" scheme="URI" content="GUID-DF4D8745-B6D4-4BC4-AF2D-0F71F28E9F27"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-EFCCE3CA-A1D2-4CD0-8D10-BD6320B19E5A"/><title>openURL() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-EFCCE3CA-A1D2-4CD0-8D10-BD6320B19E5A">openURL()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>openURL</code> method opens a specified link in the Web Browser for S60 in the stand-alone mode. The widget remains open but is sent to the background. </p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-4C74C690-4AC1-4C20-8555-46002300272D">[void] window.widget.openURL(String url) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-ACE6B9F8-C2C8-401C-B3EB-E1AC534786E4">[void] widget.openURL(String url)</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>url</code>:</p>
+
+<p>A compact string specifying a link to a resource to be opened. The URL string format is compliant with the RFC-1738 specification and must be encoded if it contains non-ASCII characters.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Remarks:</strong></p>
+<p>The WRT environment does not enforce any restrictions on the URL scheme. Supported URL schemes and restrictions (if any) are applied by the Web Browser for S60.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-6B0048C9-3A7C-43FD-9973-E4F457993FC5">var url = "http://www.S60.com/browser";
+widget.openURL(url);</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

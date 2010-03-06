@@ -1,0 +1,37 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Providing tactile feedback for user actions"/><meta name="abstract" content="Tactile feedback provides users with immediate confirmation that the touch event has been registered. It is especially useful in noisy environments. You can use vibration as tactile feedback on user actions. Tactile feedback is implemented for those common S60 UI components where it has been seen as beneficial. If you create custom components for widgets, consider providing tactile feedback for buttons, sliders, strokes, gestures, and notifications."/><meta name="description" content="Tactile feedback provides users with immediate confirmation that the touch event has been registered. It is especially useful in noisy environments. You can use vibration as tactile feedback on user actions. Tactile feedback is implemented for those common S60 UI components where it has been seen as beneficial. If you create custom components for widgets, consider providing tactile feedback for buttons, sliders, strokes, gestures, and notifications."/><meta name="DC.Relation" scheme="URI" content="GUID-AE9BB3E0-C243-476B-A236-40958A1DAED9"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-6DD2B3D2-BA3B-4936-BBC9-F61B6757B6F8"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-04ABC9FC-26FE-4854-9F88-63A2C4911886"/><meta name="DC.Language" content="en"/><title>Providing tactile feedback for user actions </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-04ABC9FC-26FE-4854-9F88-63A2C4911886">Providing tactile feedback for user actions</h1><div><p>Tactile feedback provides users with immediate confirmation that the touch event has been registered. It is especially useful in noisy environments. You can use vibration as tactile feedback on user actions. Tactile feedback is implemented for those common S60 UI components where it has been seen as beneficial. If you create custom components for widgets, consider providing tactile feedback for buttons, sliders, strokes, gestures, and notifications.</p>
+<p>For general principles on providing tactile feedback, see <a href="http://library.forum.nokia.com/topic/Design_and_User_Experience_Library/GUID-88336D00-EDE2-416B-BFD0-362ECA115191.html" target="_blank">Tactile feedback</a>.</p>
+<p>You use JavaScript SystemInfo Service API methods to provide tactile feedback. For more information, see <a href="GUID-6B348161-2ED2-498E-A166-C3B28C58BC68.html#GUID-6B348161-2ED2-498E-A166-C3B28C58BC68">Vibration information and control services</a>.</p>
+<div><h3>To provide tactile feedback for user actions</h3><ol>
+<li id="GUID-A7BFD508-233A-4290-9288-9D7E57A3BDD5"><a name="GUID-A7BFD508-233A-4290-9288-9D7E57A3BDD5"><!----></a><p>Check that vibration is enabled on a mobile device.</p><pre class="codeblock">if (sysinfo.vibrasettings==1)
+	startVibration();
+</pre></li>
+<li id="GUID-A5821AF9-F8E7-425B-B9C5-6BDBE536F07B"><a name="GUID-A5821AF9-F8E7-425B-B9C5-6BDBE536F07B"><!----></a><p>Specify settings for the intensity and duration of vibration. The following example specifies maximum intensity for maximum duration when users touch a UI component.</p><pre class="codeblock">function startVibration()
+{
+   // get the system defined maximum duration
+   var duration = sysinfo.vibramaxduration;
+   // get the system defined minimum intensity
+   var intensity = sysinfo.vibraminintensity
+   // start vibration
+   sysinfo.startvibra(duration, intensity);
+}</pre><p>You can also use the <a href="GUID-08AA357E-7499-4A8E-B756-4FCDFBEDB9FC.html#GUID-08AA357E-7499-4A8E-B756-4FCDFBEDB9FC">startvibra()</a> method of the JavaScript SystemInfo Service API setting to specify the duration and intensity of vibration. For example:</p><pre class="codeblock">getSysInfo: function() {
+	if ( !WrtHelper._sysinfo ) {
+		WrtHelper._sysinfo = document.getElementById("sysinfo");
+	
+	}
+	
+	return WrtHelper._sysinfo;
+},
+
+tactileFeedback: function() {
+	var sysinfo = WrtHelper.getSysInfo();
+	if (sysinfo.startvibra) 
+		sysinfo.startvibra(10, 10);
+},
+</pre></li>
+</ol></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

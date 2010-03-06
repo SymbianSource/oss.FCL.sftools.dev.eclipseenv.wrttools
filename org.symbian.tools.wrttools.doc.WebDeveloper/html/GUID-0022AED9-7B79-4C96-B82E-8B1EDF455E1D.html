@@ -1,0 +1,141 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.Delete()"/><meta name="DC.Relation" scheme="URI" content="GUID-894E87F7-7146-44DD-8CAF-60F7C446B0D8"/><meta name="DC.Relation" scheme="URI" content="GUID-7E53CD9F-E213-42E7-8569-02AEA1198E52"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-0022AED9-7B79-4C96-B82E-8B1EDF455E1D"/><title>IDataSource.Delete() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-0022AED9-7B79-4C96-B82E-8B1EDF455E1D"><span>IDataSource.</span>Delete()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Delete</code> method deletes an event (entry) from
+the event log database. </p>
+<p>This method can be called both synchronously and asynchronously.</p>
+<p><strong>Syntax:</strong></p>
+<p>For synchronous calls:</p>
+<pre class="codeblock" id="GUID-272D8E40-83BF-4C46-9CDF-E385832FF8A2">result = so.IDataSource.Delete(criteria);</pre>
+
+<p>For asynchronous calls:</p>
+<pre class="codeblock" id="GUID-2C3A0D6F-B710-4747-B530-D03852585034">result = so.IDataSource.Delete(criteria, callback);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies which event to delete from the log
+event database. For more information about the object properties and how to
+define them, see section <a href="GUID-59A3DC52-36FB-4A05-8D37-0305AE4B80D0.html#GUID-59A3DC52-36FB-4A05-8D37-0305AE4B80D0">Criteria for deleting an event</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when an asynchronous <code>Delete</code> call has
+results or status information to return. You must define this method separately.
+Follow the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+<p>This argument is used only with an asynchronous <code>Delete</code> call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>If synchronous, the <code>Delete</code> method returns an error
+code and an error message.</p>
+<div class="tablenoborder"><a name="GUID-BFFCB477-D669-45D8-B0BC-1338B418A80B"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-BFFCB477-D669-45D8-B0BC-1338B418A80B" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for a synchronous Delete</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e53373">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e53378">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e53383">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53373 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53378 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53383 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53373 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53378 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53383 ">
+<p>See <a href="GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6.html#GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6">Logging Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If asynchronous, the method returns an object that contains a transaction
+ID for the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> instance,
+an error code, and an error message (see the following table). When the asynchronous
+call has completed, <code>callback</code> returns an object that contains
+an error code and an error message (see <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-E43BC9EA-3EBE-4C7F-A57E-A1C33BB01CF4">Table:
+Callback return value</a>).</p>
+<div class="tablenoborder"><a name="GUID-2007806C-ED9D-4BF9-92F0-7494014B367A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-2007806C-ED9D-4BF9-92F0-7494014B367A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for an asynchronous Delete</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e53469">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e53474">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e53479">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53469 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53474 ">
+<p>This is a number used as an identification to match transactions started
+with the asynchronous <code>Delete</code> call to one or more calls
+it generates to <code>callback</code>.</p>
+<p>This property is only valid for asynchronous calls.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53479 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53469 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53474 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53479 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53469 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53474 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e53479 ">
+<p>See <a href="GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6.html#GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6">Logging Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D.html#GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D">the
+full example</a>.</p>
+
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

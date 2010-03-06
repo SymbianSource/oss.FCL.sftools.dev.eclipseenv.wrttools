@@ -1,0 +1,18 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="onhide"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD85E8A-698E-4BE2-B965-887E66E51ACC"/><meta name="DC.Relation" scheme="URI" content="GUID-F18FD3A0-9CCC-4117-8CC4-4222842E8C59"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-55F6778A-D1DA-4288-93B2-0863558D34B7"/><title>onhide </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-55F6778A-D1DA-4288-93B2-0863558D34B7">onhide</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>onhide</code> property is an event handler for the event of when a widget is switching from the foreground to the background. In other words, when a running widget loses focus, the assigned callback function will be called.</p>
+<p>This property is useful for <a href="GUID-EAE0823B-5914-49C2-9DBC-15B61DE49E60.html#GUID-EAE0823B-5914-49C2-9DBC-15B61DE49E60">managing the functionality of the widget</a> in relation to other applications on the device.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-F0A6AA4B-C97B-44E7-9518-0DD83594255D">[void] window.widget.onhide = function() { }</pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-8782A884-E85C-4F2A-AABF-6A883E9D3BED">[void] window.widget.onhide = toBackground;</pre>
+<pre class="codeblock" id="GUID-39DA1627-BA97-4138-8A6A-8435FE23C259">function toBackground()
+{
+  // ...
+}</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

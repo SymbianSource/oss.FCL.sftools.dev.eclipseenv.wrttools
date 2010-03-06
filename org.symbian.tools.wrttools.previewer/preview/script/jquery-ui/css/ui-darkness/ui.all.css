@@ -132,6 +132,7 @@
 	font-family: Segoe UI, Arial, sans-serif;
 	clear:left;
 	border-top: 1px solid #666666;
+
 /*
 	background: #000000 url(images/000000_40x100_textures_05_inset_soft_25.png) 0 bottom repeat-x;
 
@@ -205,9 +206,11 @@
 	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
 	font-family: Segoe UI, Arial, sans-serif;
 	font-size: 0.9em;
-	background: #000000 url(images/000000_40x100_textures_05_inset_soft_25.png) 0 bottom repeat-x;	
+/*	background: #000000 url(images/000000_40x100_textures_05_inset_soft_25.png) 0 bottom repeat-x;	*/
+	background: #333333 url(images/000000_40x100_textures_05_inset_soft_25.png) 0 bottom repeat-x;	
 	color: #ffffff;
-	border: 4px solid #666666;
+/*	border: 4px solid #666666; */
+    border: 4px solid #333;
 	position: relative;
 }
 .ui-resizable-handle {
@@ -281,7 +284,8 @@ body .ui-resizable-autohide .ui-resizable-handle { display: none; } /* use 'body
 	/*resets*/margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
 	padding: .5em 1.5em .5em 0.8em;
 	color: #eeeeee;
-	background: #555555 url(images/555555_40x100_textures_02_glass_20.png) 0 50% repeat-x;
+/*	background: #555555 url(images/555555_40x100_textures_02_glass_20.png) 0 50% repeat-x; */
+	background: #FF0000 url(images/555555_40x100_textures_02_glass_20.png) 0 50% repeat-x;
 	border-bottom: 1px solid #666666;
 	font-size: 0.8em;
 	font-weight: bold;

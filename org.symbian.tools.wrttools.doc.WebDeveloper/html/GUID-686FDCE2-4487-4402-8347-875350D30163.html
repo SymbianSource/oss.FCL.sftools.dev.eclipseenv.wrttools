@@ -1,0 +1,907 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Supported contact keys"/><meta name="DC.Relation" scheme="URI" content="GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF"/><meta name="DC.Relation" scheme="URI" content="GUID-231C11D4-82B3-4202-8E86-DE8A3556C9DE"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-686FDCE2-4487-4402-8347-875350D30163"/><title>Supported
+contact keys </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-686FDCE2-4487-4402-8347-875350D30163">Supported
+contact keys</h1><div>
+<p/>
+<p>The information about a contact is represented as keys. Each key corresponds
+to a specific piece of information, such as first name, last name, home phone
+number, or email address. Each contact has at least one key. The supported
+set of keys depends on the contacts database. If you try to add a key to a
+database that does not support it, the <a href="GUID-20D66938-A870-43D7-9515-AC7E22AEDC14.html#GUID-20D66938-A870-43D7-9515-AC7E22AEDC14"><code>Add</code></a> method
+returns an <a href="GUID-8722B5DB-5EA6-446D-8C1D-7A0B3D8781EF.html#GUID-366CE8CC-0149-4E96-90CC-CB5AB2C5B5C5">error message</a>.</p>
+<p>The following table lists the combined set of keys supported by databases
+compatible with S60 5th Edition:</p>
+<ul>
+<li><p>The default device database (URI: <code>cntdb://c:contacts.cdb</code>)
+supports all the listed keys.</p></li>
+<li><p>The SIM card database (URI: <code>sim://global_adn</code>)
+supports a subset of the listed keys. The supported keys are indicated in
+the <strong>Supported by SIM</strong> column.</p></li>
+</ul>
+<p>In JavaScript, keys are represented as objects, with the key name as
+the object name. For example, the <a href="GUID-CD495D49-E492-4E88-833D-29EF222B097F.html#GUID-CD495D49-E492-4E88-833D-29EF222B097F"><code>ReturnValue</code> iterator
+returned by a <code>GetList</code> call</a> might contain the following
+keys (objects) for the first contact item:</p>
+<ul>
+<li><p><code>ReturnValue[0].FirstName</code></p></li>
+<li><p><code>ReturnValue[0].LastName</code></p></li>
+<li><p><code>ReturnValue[0].LandPhoneHome</code></p>
+</li>
+<li><p><code>ReturnValue[0].EmailHome</code></p></li>
+</ul>
+<div class="note"><p><strong class="note_title">Note: </strong>The <code>SyncClass</code> key is added to a contact by default,
+with the <code>Label</code> property set to <code>"Synchronisation"</code> and
+the <code>Value</code> property to <code>"private"</code>,
+unless specified as <code>"public"</code>. Values other than <code>"private"</code> or <code>"public"</code> are
+stored as <code>"private"</code>.</p>
+</div>
+<div class="tablenoborder"><a name="GUID-776FA159-E05C-46A1-954E-E24D433A8E15"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-776FA159-E05C-46A1-954E-E24D433A8E15" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Contact keys</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e35027">
+<p>Key</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e35032">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e35037">
+<p>Maximum length</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e35042">
+<p>Supported by SIM</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>LastName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Last name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50 (14 for SIM)</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>FirstName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>First name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Prefix</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Name prefix</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>10</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Suffix</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Name suffix</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>10</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>SecondName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Second name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>LandPhoneHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home land phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>MobilePhoneHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home mobile phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>VideoNumberHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home video number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>FaxNumberHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home fax number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>VoipHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home VoIP phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>100</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>EmailHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home email address</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>150</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>URLHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home URL</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>1000</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrLabelHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address label</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>250</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrPOHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address post office</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>20</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrEXTHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address extension</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrStreetHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address street</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrLocalHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address local</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrRegionHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address region</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrPostCodeHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address postal code</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>20</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrCountryHome</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Home address country</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>JobTitle</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Job title</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>CompanyName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Company name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>LandPhoneWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work land phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>MobilePhoneWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work mobile phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>VideoNumberWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work video number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>FaxNumberWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work fax number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>VoipWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work VoIP phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>100</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>EmailWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work email address</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>150</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>URLWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work URL</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>1000</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrLabelWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address label</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>250</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrPOWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address post office</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>20</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrEXTWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address extension</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrStreetWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address street</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrLocalWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address local</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrRegionWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address region</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrPostCodeWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address postal code</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>20</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrCountryWork</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Work address country</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>LandPhoneGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General land phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>MobilePhoneGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General mobile phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">
+<p>X</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>VideoNumberGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General video number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>FaxNumberGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General fax number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>VOIPGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General VoIP phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>100</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>POC</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Push to Talk over Cellular (PoC)</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>100</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>SWIS</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>"See What I See" (SWIS)</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>100</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>SIP</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>SIP identity</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>100</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>EmailGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General email address</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>150</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>URLGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General URL</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>1000</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrLabelGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address label</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>250</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrPOGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address post office</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>20</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrExtGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address extension</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrStreetGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address street</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrLocalGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address local</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrRegionGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address region</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrPostCodeGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address postal code</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>20</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AddrCountryGen</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>General address country</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>PageNumber</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Pager number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>DTMFString</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>DTMF string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>60</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Date</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Date</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>This key is in TTime format.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Note</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Note</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>1000</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Ringtone</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Ring tone</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>256</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>MiddleName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Middle name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Department</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Department name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AsstName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Assistant name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Spouse</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Spouse name</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Children</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Children</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>AsstPhone</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Assistant phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>50</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>CarPhone</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Car phone number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>48</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>Anniversary</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Anniversary</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>This key is in TTime format.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>SyncClass</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Synchronisation</p>
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Public"</code></p></li>
+<li><p><code>"Private"</code></p></li>
+</ul>
+<p>Any other value is interpreted as <code>"Private"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>1000</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35027 ">
+<p><code>LOCPrivacy</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35032 ">
+<p>Locality privacy</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35037 ">
+<p>256</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e35042 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

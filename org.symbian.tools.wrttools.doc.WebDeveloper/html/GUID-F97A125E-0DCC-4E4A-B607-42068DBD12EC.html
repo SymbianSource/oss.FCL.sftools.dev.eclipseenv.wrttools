@@ -1,0 +1,107 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for adding and editing landmark information"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Relation" scheme="URI" content="GUID-D85C2567-F041-42A1-A2B5-650FCAAD60A9"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-F97A125E-0DCC-4E4A-B607-42068DBD12EC"/><title>Criteria for
+adding and editing landmark information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-F97A125E-0DCC-4E4A-B607-42068DBD12EC"><span>Criteria</span> for
+adding and editing landmark information</h1><div>
+<p>The <code>criteria</code> object specifies the landmark
+or landmark category to add or edit.</p>
+<p>The <code>criteria</code> object has two main properties: <code>Type</code> and <code>Data</code>.
+These are described in the following table.</p>
+<div class="tablenoborder"><a name="GUID-E07CBF21-77E4-43FB-902E-9997E8E3BEB6"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-E07CBF21-77E4-43FB-902E-9997E8E3BEB6" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e41709">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e41714">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e41719">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e41724">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41709 ">
+<p><code>criteria.Type</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41714 ">
+<p>Specifies the type of landmark information to add or edit.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41719 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41724 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Landmark"</code></p></li>
+<li><p><code>"Category"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41709 ">
+<p><code>criteria.Data</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41714 ">
+<p>Specifies the information to add or edit.</p>
+<p>The exact set of properties that need to be specified depends on the
+type of information. Moreover:</p>
+<ul>
+<li><p>To add a new landmark or landmark category, do not specify
+the <code>Data.id</code> property. The system generates the new ID
+automatically.</p></li>
+<li><p>To edit an existing landmark or landmark category, first
+retrieve the correct ID using <a href="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html#GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><code>GetList</code></a>,
+and then specify this ID as the <code>Data.id</code> property. Do
+not change the ID value.</p></li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41719 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41724 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41709 ">
+<p><code>[criteria.Data.DatabaseURI]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41714 ">
+<p>Specifies the URI of the landmark database on which the add or edit
+operation is performed.</p>
+<p>If this property is not specified, the operation is performed on the
+default database.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41719 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41724 ">
+<p>For example: <code>file://c:landmarks.ldb</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41709 ">
+<p><code>criteria.Data.&lt;property&gt;</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41714 ">
+<p>Specifies one of the properties for the landmark or landmark category
+to add or edit:</p>
+<ul>
+<li><p>For landmark properties, see section <a href="GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE.html#GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE">Landmark</a>.</p>
+</li>
+<li><p>For landmark category properties, see section <a href="GUID-40EAD781-6B30-406E-B05F-0BE932EFE86A.html#GUID-40EAD781-6B30-406E-B05F-0BE932EFE86A">Landmark category</a>.</p>
+</li>
+</ul>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41719 ">
+<p>(depends on the property)</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e41724 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

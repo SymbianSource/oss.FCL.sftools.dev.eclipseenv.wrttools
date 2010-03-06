@@ -1,0 +1,51 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="performTransition()"/><meta name="DC.Relation" scheme="URI" content="GUID-87B333A2-FDA1-4BC3-8803-C5702C5869A1"/><meta name="DC.Relation" scheme="URI" content="GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-6CD2776F-A868-4280-967F-4EB426212556"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB"/><title>performTransition()  </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-AB8ECBA0-FD4B-4A2F-8199-40C7F7CD51AB">performTransition() </h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>performTransition</code> method operates as a screen update command, which tells the widget UI framework to update the widget screen. It performs the animation while the widget's view is being changed. Currently, only fading animation mode is supported.</p>
+<p>The <code>performTransition</code> method is to be called together with the <a href="GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404.html#GUID-4AE77C0F-577E-4DC7-BC90-40A75C873404"><code>prepareForTransition</code></a> method.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-1375494A-4316-48B3-9135-5157C1506253">[void] widget.performTransition(void) </pre>
+<p>or</p>
+<pre class="codeblock" id="GUID-0220F2B1-B8DE-439F-B597-BBFEC6915EFA">[void] window.widget.performTransition(void)</pre>
+<p><strong>Arguments:</strong></p>
+<p>This method does not take any arguments.</p>
+<p><strong>Return value:</strong></p>
+<p>This method does not return a value.</p>
+<p><strong>Example code:</strong></p>
+<p><em>Example HTML code</em>:</p>
+<pre class="codeblock" id="GUID-72003A6C-9259-42B0-868C-1E1DB6A2852A">&lt;!-- Main view --&gt;
+&lt;div id='main'&gt;
+  Hello World!
+  &lt;input type="button" value="Config" onclick="toMain(0);" /&gt;
+&lt;/div&gt;
+&lt;!-- Main view ends --&gt;
+&lt;!-- Config view --&gt;
+&lt;div id='config'&gt;
+  Your world is my world!
+  &lt;input type="button" value="Main" onclick="toMain(1);" /&gt;
+&lt;/div&gt;
+&lt;!-- Settings view ends --&gt;</pre>
+<p><em>Example JavaScript code</em>:</p>
+<pre class="codeblock" id="GUID-2E747FD8-E852-43E7-B038-72736855FB76">function toMain(main) {
+  // preparing for Transition
+  widget.prepareForTransition("fade");
+  if (main) { // switching from config view to the main view
+    // hide config view
+    document.getElementById("config").style.display = 'none';
+    // show main view
+    document.getElementById("main").style.display = 'block';
+    }
+  else {  // switching from main view to config view
+    // hide main view
+    document.getElementById("main").style.display = 'none';
+    // show config view
+    document.getElementById("config").style.display = 'block';
+    }
+  // do the Transition to make the fade effect
+  widget.performTransition();
+}</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

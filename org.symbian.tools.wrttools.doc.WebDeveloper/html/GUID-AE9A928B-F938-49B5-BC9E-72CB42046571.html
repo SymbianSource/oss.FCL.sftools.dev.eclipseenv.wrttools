@@ -1,0 +1,173 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Accessing and managing calendar information"/><meta name="DC.Relation" scheme="URI" content="GUID-662F2E2E-9538-42E5-9B5A-5664F1C11A9E"/><meta name="DC.Relation" scheme="URI" content="GUID-E092BF10-C076-4476-9E80-87919940201B"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-46EABDC1-37CB-412A-ACAD-1A1A9466BB68"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571"/><title>Accessing
+and managing calendar information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-AE9A928B-F938-49B5-BC9E-72CB42046571">Accessing
+and managing calendar information</h1><div>
+<p>The <a href="GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4.html#GUID-CABB28B8-D2B1-496B-BD7E-34FF496E60B4">Calendar
+Service API</a> allows <span>widgets</span> to access, create, and manage
+calendars and calendar entries stored on a device. You can use the Calendar
+Service to create <span>widgets</span> that:</p>
+<ul>
+<li><p>Retrieve information about calendars and calendar entries</p>
+</li>
+<li><p>Create and delete calendars</p></li>
+<li><p>Create, update, and delete entries for a given calendar</p>
+</li>
+<li><p>Import and export calendar entries</p></li>
+<li><p>Notify the user when calendar entries are created, updated,
+or deleted</p></li>
+</ul>
+<p>Calendar information involves the following concepts:</p>
+<ul>
+<li><p><strong>Calendar</strong> stores calendar entries. There can be one
+or more calendars on a device, and each calendar corresponds to a single file
+in the device file system.</p></li>
+<li><p><strong>Calendar entries</strong> make up the main content of a calendar.
+Each entry belongs to one of the following categories:</p>
+
+<ul>
+<li><p>Anniversary</p></li>
+<li><p>Event</p></li>
+<li><p>Meeting</p></li>
+<li><p>Reminder</p></li>
+<li><p>To-do item</p></li>
+</ul>
+<p>For more information about calendar entries and what they contain, see
+section <a href="GUID-798E9CA0-2A46-4D10-B567-04C9567500F4.html#GUID-798E9CA0-2A46-4D10-B567-04C9567500F4">Calendar entries</a>.</p>
+
+</li>
+<li><p><strong>Recurring entry</strong> is an entry that has more than one
+occurrence. The rules of recurrence must be defined separately for each entry.
+Only meetings can be recurring.</p></li>
+<li><p><strong>Instance</strong> is a specific occurrence of a recurring entry.
+Instances are not stored separately (as a rule) but calculated dynamically
+based on the entry data and rules of recurrence. Non-recurring entries have
+only a single instance.</p>
+
+<p>For example, a weekly meeting that occurs once a week for eight weeks
+has eight instances. The meeting entry itself is stored only once in the calendar
+file, but a calendar application can show each meeting instance separately.</p>
+
+</li>
+<li><p><strong>Parent entry</strong> is any original entry. When a new entry
+is added to a calendar, the entry is stored as a parent entry. A recurring
+parent entry can have one or more child entries.</p></li>
+<li><p><strong>Child entry</strong> is a modified instance of a recurring
+parent entry. When an instance (occurrence) of a recurring entry is explicitly
+modified, so that it differs in some way from the parent data, it is stored
+as a child entry. A parent entry and its child entries share the same <code>id</code>,
+but have unique <code>LocalId</code>s. A child entry always has a
+single instance.</p>
+
+<p>For example, if one of the eight instances of the weekly meeting is
+modified to occur at a different time of day than the rest, it is stored as
+a child entry. Since it no longer fully conforms to the parent data and cannot
+be derived from it, it must be stored as a separate entry.</p>
+
+</li>
+<li><p><strong>Exception</strong> is an occurrence in the original schedule
+that has been removed and may be replaced with a different occurrence.</p>
+</li>
+</ul>
+<div><h3>Accessing the API and supported methods</h3>
+<p>To create a <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080">service
+object</a> for the Calendar Service API, use <code>Service.Calendar</code> to
+identify the service provider and <code>IDataSource</code> to identify
+the supported interface:</p>
+
+<pre class="codeblock" id="GUID-A2F34B07-1984-45C9-9AB5-72513FDB697B">var so = device.getServiceObject("Service.Calendar", "IDataSource");</pre>
+<p>The <code>IDataSource</code> interface provides the following
+methods:</p>
+<ul>
+<li><p><a href="GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4.html#GUID-C2E995C2-535C-41A2-B69D-D36009BBE8C4"><code>GetList()</code></a></p>
+
+<p>Use the <code>GetList()</code> method to retrieve information
+about calendars and calendar entries.</p>
+
+</li>
+<li><p><a href="GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51.html#GUID-4718B87C-0FFF-48EC-A47F-5C9F8C2E2A51"><code>Add()</code></a></p>
+
+<p>Use the <code>Add()</code> method to create a new calendar or
+calendar entry. You can also use this method to update an existing calendar
+entry.</p>
+
+</li>
+<li><p><a href="GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A.html#GUID-270C6C2A-5EBB-4ACC-A231-064F17E85F4A"><code>Delete()</code></a></p>
+
+<p>Use the <code>Delete()</code> method to delete a calendar or
+one or more entries in a given calendar.</p>
+
+</li>
+<li><p><a href="GUID-D19BB894-371A-4D55-A047-3B2F97673F5F.html#GUID-D19BB894-371A-4D55-A047-3B2F97673F5F"><code>Import()</code></a></p>
+
+<p>Use the <code>Import()</code> method to import entries into
+a calendar. The information must be imported from an iCal or vCal file (see
+below).</p>
+
+</li>
+<li><p><a href="GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F.html#GUID-890D2F5C-D43F-44B2-97A0-5F5B9230C85F"><code>Export()</code></a></p>
+
+<p>Use the <code>Export()</code> method to export entries from
+a calendar. The information is exported to an iCal or vCal file (see below).</p>
+
+</li>
+<li><p><a href="GUID-D4014B08-C48C-48EB-B3A5-1A09FF636B3C.html#GUID-D4014B08-C48C-48EB-B3A5-1A09FF636B3C"><code>RequestNotification()</code></a></p>
+
+<p>Use the <code>RequestNotification()</code> method to receive
+notifications when entries are created, updated, or deleted in a given calendar.</p>
+
+</li>
+<li><p><a href="GUID-0D3A1E17-C699-4A9D-9124-9CEB71E2EBBF.html#GUID-0D3A1E17-C699-4A9D-9124-9CEB71E2EBBF"><code>Cancel()</code></a></p>
+
+<p>Use the <code>Cancel()</code> method to cancel an ongoing asynchronous
+call. This method is valid for any asynchronous call made through the Calendar
+Service API.</p>
+
+</li>
+</ul>
+</div>
+<div><h3>iCal and vCal</h3>
+<p/>
+<p>iCalendar (iCal) is an RFC standard for calendar data exchange. It allows
+for the capture and exchange of information normally stored within a calendar
+or scheduling application. It allows users to send meeting requests and tasks
+to other users through email. Recipients of the iCalendar email can respond
+to the sender easily or counter-propose another meeting date and time. For
+more information, see the <a href="http://www.ietf.org/rfc/rfc2445.txt" target="_blank">iCalendar
+specification (RFC 2445)</a>.</p>
+<p>vCalendar (vCal) is the precursor of the iCalendar standard. It defines
+a format that allows for the capture of information normally stored within
+a calendar or scheduling application. The format is suitable as an interchange
+format between applications or systems and is intended to be used for exchanging
+information about event and to-do types of entities. For more information,
+see the <a href="http://www.imc.org/pdi/vcal-10.txt" target="_blank">vCalendar specification</a>.</p>
+</div>
+<div><h3>Using the service in a widget</h3>
+<p>To access and manage calendar information using the Calendar Service
+API:</p>
+<ol>
+<li id="GUID-E8ECDB2F-00C4-488F-A253-87FABDA66CA6-GENIDd0e7244"><a name="GUID-E8ECDB2F-00C4-488F-A253-87FABDA66CA6-GENIDd0e7244"><!----></a><p>Create a service
+object for the API using <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a>.</p>
+</li>
+<li id="GUID-0625B45D-A5C9-4ADA-BC21-07963F957A7C-GENIDd0e7253"><a name="GUID-0625B45D-A5C9-4ADA-BC21-07963F957A7C-GENIDd0e7253"><!----></a><p>Define the
+tasks you want to perform and choose the correct methods for them.</p>
+</li>
+<li id="GUID-DBD9997B-CD51-45F9-9ED0-38A98AF08A12-GENIDd0e7258"><a name="GUID-DBD9997B-CD51-45F9-9ED0-38A98AF08A12-GENIDd0e7258"><!----></a><p>Optionally,
+define how you want the results filtered.</p></li>
+<li id="GUID-AAB5C193-F848-4B0A-AF03-6BA7425BD10B-GENIDd0e7262"><a name="GUID-AAB5C193-F848-4B0A-AF03-6BA7425BD10B-GENIDd0e7262"><!----></a><p>Define methods
+for processing the results.</p></li>
+<li id="GUID-F0C3D20F-6F77-4C88-AF35-39DA70DE701B-GENIDd0e7266"><a name="GUID-F0C3D20F-6F77-4C88-AF35-39DA70DE701B-GENIDd0e7266"><!----></a><p>Use the methods
+defined in step 2 to perform the tasks. Use asynchronous methods together
+with <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback()</code></a>.</p>
+</li>
+<li id="GUID-0ABE0CB0-D76C-444B-AE53-0D435B3C6E74-GENIDd0e7275"><a name="GUID-0ABE0CB0-D76C-444B-AE53-0D435B3C6E74-GENIDd0e7275"><!----></a><p>Process the
+results with the methods defined in step 4.</p></li>
+</ol>
+<p>For the complete source of a sample widget that demonstrates how to
+use this service, see <a href="GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3.html#GUID-7C0890BC-7931-417B-B4AC-6E77E65A10F3">the
+full example</a>.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

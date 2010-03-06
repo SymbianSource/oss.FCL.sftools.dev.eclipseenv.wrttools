@@ -1,0 +1,38 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript Logging Service API"/><meta name="DC.Relation" scheme="URI" content="GUID-E5684FF0-28C9-4721-9421-6B9432087086"/><meta name="DC.Relation" scheme="URI" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"/><title>JavaScript Logging
+Service API </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"><span>JavaScript</span> Logging
+Service API</h1><div>
+<p>The <a href="GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7.html#GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7">Logging service</a> API
+is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.1</a>.</p>
+<p>The Logging Service API allows <span>widgets</span> to add, read, and
+delete logging events such as call logs, messaging logs, and so forth. The
+API is integrated into <span>WRT</span> through the <a href="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html#GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"><code>device</code></a> object.</p>
+<p>For an overview of the service and the API, see section <a href="GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7.html#GUID-CF55DBA3-2D4C-4FD0-8A06-862E6128F4E7">Accessing device logs</a>.</p>
+<div><h3>Using the Logging Service API</h3>
+<p>To use the Logging Service API, your <span>widget</span> must first create <span>a service object for it
+using the <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a> method</span>.
+Use <code>Service.Logging</code> to identify the service provider
+and <code>IDataSource</code> to identify the supported interface:</p>
+<pre class="codeblock" id="GUID-0581BEE4-05E3-4D5A-9537-EB9CA4F58EE0-GENIDd0e51464">var so = device.getServiceObject("Service.Logging", "IDataSource");</pre>
+<p>This service object can then be used to access the services provided
+by the API:</p>
+<ul>
+<li><p><a href="GUID-F146B956-77AE-41B5-BA17-20F48AF8DBA7.html#GUID-F146B956-77AE-41B5-BA17-20F48AF8DBA7"><code>IDataSource.Add()</code></a></p>
+</li>
+<li><p><a href="GUID-7E53CD9F-E213-42E7-8569-02AEA1198E52.html#GUID-7E53CD9F-E213-42E7-8569-02AEA1198E52"><code>IDataSource.GetList()</code></a></p>
+</li>
+<li><p><a href="GUID-0022AED9-7B79-4C96-B82E-8B1EDF455E1D.html#GUID-0022AED9-7B79-4C96-B82E-8B1EDF455E1D"><code>IDataSource.Delete()</code></a></p>
+</li>
+<li><p><a href="GUID-894E87F7-7146-44DD-8CAF-60F7C446B0D8.html#GUID-894E87F7-7146-44DD-8CAF-60F7C446B0D8"><code>IDataSource.RequestNotification()</code></a></p></li>
+<li><p><a href="GUID-043C7578-485F-4186-830F-013223A156D1.html#GUID-043C7578-485F-4186-830F-013223A156D1"><code>IDataSource.Cancel()</code></a></p></li>
+</ul>
+</div>
+<div><h3>Emulator support</h3>
+<p>The S60 5th Edition SDK emulator provides full support for the Logging
+Service API.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

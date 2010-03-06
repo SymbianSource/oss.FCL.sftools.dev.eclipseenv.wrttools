@@ -1,0 +1,787 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="System data types"/><meta name="DC.Relation" scheme="URI" content="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Relation" scheme="URI" content="GUID-B796D072-4E51-4BC7-9259-84530DB3539D"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340"/><title>System
+data types </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-4C79E511-1C1A-475D-BBBB-4F1F6D406340">System
+data types</h1><div>
+<p>System data types determine what kind of values system attributes are
+associated with. In <span>JavaScript</span> terms, the specified data type
+determines the <code>SystemData</code> (input) and <code>ReturnValue</code> (output)
+object properties that represent the value of a system attribute. Depending
+on the system data type, there can be one or more properties. Depending on
+the system attribute, the data type used for method input may differ from
+the data type used for method output.</p>
+<p/>
+<p>The <a href="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3.html#GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3">SystemInfo
+Service API</a> supports the following system data types:</p>
+<ul>
+<li><p><a href="#GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><code>Status</code></a></p></li>
+<li><p><a href="#GUID-441D3468-5504-4321-860D-A15B4CC4E278"><code>StringData</code></a></p></li>
+<li><p><a href="#GUID-493933AB-731B-46CA-A6E9-DCDF3ADC8F6A"><code>NetworkInfo</code></a></p></li>
+<li><p><a href="#GUID-95A86239-F5BC-46E7-9059-506EE37BFAEC"><code>ConnectionList</code></a></p></li>
+<li><p><a href="#GUID-02CAF5CE-6BCB-43E3-8981-39FA12DAB0AE"><code>ConnectionInfo</code></a></p></li>
+<li><p><a href="#GUID-4B4F4A06-600D-4514-8F14-ED9BE1976B1A"><code>AccessoryList</code></a></p></li>
+<li><p><a href="#GUID-32FABF97-57BF-4736-85A5-E60B401270B0"><code>AccessoryInfo</code></a></p></li>
+<li><p><a href="#GUID-DA5BB8EB-3626-4D4A-A8E6-B6C45F359777"><code>LanguageList</code></a></p></li>
+<li><p><a href="#GUID-25423780-95B5-4689-B4E1-4B29CC2CAD43"><code>Version</code></a></p></li>
+<li><p><a href="#GUID-04BCC0E2-AAA0-4F50-A554-C63A075E052D"><code>DriveList</code></a></p></li>
+<li><p><a href="#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a></p></li>
+<li><p><a href="#GUID-DF014B20-E009-4FC6-9D89-F2077B1ADE69"><code>Resolution</code></a></p></li>
+<li><p><a href="#GUID-A5C305E9-9389-4808-A508-02381F87282F"><code>StringList</code></a></p></li>
+</ul>
+<p>The following tables describes the supported system data types. To find
+out which system attribute uses which system data type, and whether the same
+data type is used for both input and output, see section <a href="GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D.html#GUID-DBB90F32-C1FA-4B0C-9BCA-89177140A60D">Supported system attributes (entities and keys)</a>.</p>
+<div class="tablenoborder"><a name="GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-EBD34604-6A55-4CEA-9F2E-8F00F681D50A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Status</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e73804">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73809">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73814">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73819">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73804 ">
+<p><code>Status</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73809 ">
+<p>Specifies status information about the system attribute.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73814 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73819 ">
+<p>For example:</p>
+<ul>
+<li><p>Battery strength (%): <code>1 - 100</code></p>
+</li>
+<li><p>Network mode: <code>0 - 2</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-441D3468-5504-4321-860D-A15B4CC4E278"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-441D3468-5504-4321-860D-A15B4CC4E278" frame="border" border="1" rules="all"><caption><strong>Table: </strong>StringData</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e73887">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73892">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73897">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73902">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73887 ">
+<p><code>StringData</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73892 ">
+<p>Specifies information about the system attribute in text string format.</p>
+<p>This can be used to indicate wallpaper path, IMEI number, phone model,
+manufacturer, and so forth.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73897 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73902 ">
+<p>For example:</p>
+<ul>
+<li><p>Phone model: <code>"N70"</code></p></li>
+<li><p>Manufacturer: <code>"Nokia"</code></p></li>
+<li><p>Wallpaper path: <code>"C://Data//Others//wallpaper.jpeg"</code></p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-493933AB-731B-46CA-A6E9-DCDF3ADC8F6A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-493933AB-731B-46CA-A6E9-DCDF3ADC8F6A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>NetworkInfo</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e73979">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73984">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73989">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e73994">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>NetworkName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies the name of the network connection of the device.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>NetworkStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies the status of the network.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>-1</code> - Unknown</p></li>
+<li><p><code>0</code> - Available: Specifies the network
+ME can register</p></li>
+<li><p><code>1</code> - Current: Specifies the currently
+registered network</p></li>
+<li><p><code>2</code> - Forbidden: Specifies that the network
+ME is not allowed registering</p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>NetworkMode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies the network technology used by the network.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>-1</code> - Unknown</p></li>
+<li><p><code>0</code> - Unregistered</p></li>
+<li><p><code>1</code> - Global System for Mobile Communications
+(GSM)</p></li>
+<li><p><code>2</code> - Advanced Mobile Phone System (AMPS)</p>
+</li>
+<li><p><code>3</code> - Code Division Multiple Access (CDMA95)</p>
+</li>
+<li><p><code>4</code> - Code Division Multiple Access (CDMA2000)</p>
+</li>
+<li><p><code>5</code> - Wideband Code Division Multiple
+Access (WCDMA)</p></li>
+<li><p><code>6</code> - Time Division, Code Division Multiple
+Access (TDCDMA)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>CountryCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies the Mobile Country Code (MCC).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>NetworkCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies the Mobile Network Code (MNC).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>LocationStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies whether the location area information is valid or not.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>true</code> - Location Area Code (LAC) and
+cell ID are valid</p></li>
+<li><p><code>false</code> - Location Area Code (LAC) and
+cell ID are invalid</p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>AreaCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies Location Area Code (LAC).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73979 ">
+<p><code>CellId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73984 ">
+<p>Specifies the cell ID.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73989 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e73994 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-95A86239-F5BC-46E7-9059-506EE37BFAEC"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-95A86239-F5BC-46E7-9059-506EE37BFAEC" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ConnectionList</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e74318">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74323">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74328">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74333">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74318 ">
+<p><code>ConnectionList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74323 ">
+<p>Specifies a list of available active data connections.</p>
+<p><a href="#GUID-02CAF5CE-6BCB-43E3-8981-39FA12DAB0AE"><code>ConnectionInfo</code></a> specifies
+a data connection.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74328 ">
+<p>iterator</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74333 ">
+<p>List of <code>ConnectionInfo</code> objects</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-02CAF5CE-6BCB-43E3-8981-39FA12DAB0AE"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-02CAF5CE-6BCB-43E3-8981-39FA12DAB0AE" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ConnectionInfo</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e74394">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74399">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74404">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74409">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74394 ">
+<p><code>ConnectionStatus</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74399 ">
+<p>Specifies the status of the data connection.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74404 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74409 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>0</code> - Disconnected</p></li>
+<li><p><code>1</code> - Connected</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74394 ">
+<p><code>IAPID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74399 ">
+<p>Specifies the access point ID for the data connection.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74404 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74409 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74394 ">
+<p><code>ConnectionType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74399 ">
+<p>Specifies the type of the data connection.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74404 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74409 ">
+<p>Possible values:</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Unsupported connection types are enclosed in brackets.</p>
+</div>
+<ul>
+<li><p><code>-1</code> - Unknown</p></li>
+<li><p><code>0</code> - (Circuit Switched Data (CSD))</p>
+</li>
+<li><p><code>1</code> - (Wideband Code Division Multiple
+Access (WCDMA))</p></li>
+<li><p><code>2</code> - Local Area Network (LAN) [Emulator]</p>
+</li>
+<li><p><code>3</code> - (Code Division Multiple Access (CDMA2000))</p>
+</li>
+<li><p><code>4</code> - (General Packet Radio Service (GPRS))</p>
+</li>
+<li><p><code>5</code> - (High Speed Circuit Switched Data
+(HSCSD))</p></li>
+<li><p><code>6</code> - Enhanced Data rates for Global Evolution
+(EDGE), Enhanced GPRS (EGPRS)</p></li>
+<li><p><code>7</code> - Wireless Local Area Network (WLAN)</p>
+</li>
+<li><p><code>8</code> - (Bluetooth)</p></li>
+<li><p><code>9</code> - (Virtual VPN)</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74394 ">
+<p><code>IAPName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74399 ">
+<p>Specifies the access point name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74404 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74409 ">
+<p>For example: <code>"www.airtelgprs.com"</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74394 ">
+<p><code>NetworkName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74399 ">
+<p>Specifies the network name applicable for WLAN networks.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74404 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74409 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74394 ">
+<p><code>IAPConnectionName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74399 ">
+<p>Specifies the access point connection name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74404 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74409 ">
+<p>For example: <code>"MobileOffice"</code>, <code>"MyGprs"</code></p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-4B4F4A06-600D-4514-8F14-ED9BE1976B1A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-4B4F4A06-600D-4514-8F14-ED9BE1976B1A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>AccessoryList</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e74695">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74700">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74705">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74710">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74695 ">
+<p><code>AccessoryList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74700 ">
+<p>Specifies a list of connected accessories.</p>
+<p><a href="#GUID-32FABF97-57BF-4736-85A5-E60B401270B0"><code>AccessoryInfo</code></a> specifies
+an accessory.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74705 ">
+<p>iterator</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74710 ">
+<p>List of <code>AccessoryInfo</code> objects</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-32FABF97-57BF-4736-85A5-E60B401270B0"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-32FABF97-57BF-4736-85A5-E60B401270B0" frame="border" border="1" rules="all"><caption><strong>Table: </strong>AccessoryInfo</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e74771">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74776">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74781">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74786">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74771 ">
+<p><code>AccessoryType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74776 ">
+<p>Specifies the type of the accessory.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74781 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74786 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>-1</code> - Unknown</p></li>
+<li><p><code>0</code> - HeadSet</p></li>
+<li><p><code>1</code> - BTHeadSet</p></li>
+<li><p><code>2</code> - CarKit</p></li>
+<li><p><code>3</code> - BTCarKit</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74771 ">
+<p><code>AccessoryState</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74776 ">
+<p>Specifies the connection state of the accessory.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74781 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74786 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>-1</code> - Unknown</p></li>
+<li><p><code>0</code> - Disconnected</p></li>
+<li><p><code>1</code> - Connected</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-DA5BB8EB-3626-4D4A-A8E6-B6C45F359777"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-DA5BB8EB-3626-4D4A-A8E6-B6C45F359777" frame="border" border="1" rules="all"><caption><strong>Table: </strong>LanguageList</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e74920">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74925">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74930">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74935">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74920 ">
+<p><code>LanguageList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74925 ">
+<p>Specifies a list of supported language enumerations as defined in the
+S60 device.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74930 ">
+<p>array of numbers </p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74935 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-25423780-95B5-4689-B4E1-4B29CC2CAD43"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-25423780-95B5-4689-B4E1-4B29CC2CAD43" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Version</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e74983">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74988">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74993">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e74998">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74983 ">
+<p><code>MajorVersion</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74988 ">
+<p>Specifies the major version number of the software in the device.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74993 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74998 ">
+<p>For example:</p>
+<ul>
+<li><p>S60 3rd Edition, Feature Pack 2 ("3.2"): <code>3</code></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74983 ">
+<p><code>MinorVersion</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74988 ">
+<p>Specifies the minor version number of the software in the device.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74993 ">
+<p>strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e74998 ">
+<p>For example:</p>
+<ul>
+<li><p>S60 3rd Edition, Feature Pack 2 ("3.2"): <code>2</code></p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-04BCC0E2-AAA0-4F50-A554-C63A075E052D"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-04BCC0E2-AAA0-4F50-A554-C63A075E052D" frame="border" border="1" rules="all"><caption><strong>Table: </strong>DriveList</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e75098">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75103">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75108">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75113">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75098 ">
+<p><code>DriveList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75103 ">
+<p>Specifies a list of drives in the device.</p>
+<p><a href="#GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><code>DriveInfo</code></a> specifies
+information about a drive.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75108 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75113 ">
+<p>For example:</p>
+<ul>
+<li><p><code>DriveList[0]</code>: <code>"C:\\"</code></p>
+</li>
+<li><p><code>DriveList[1]</code>: <code>"D:\\"</code></p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-3D531FEF-1D7D-4FAC-8208-52794A252C10" frame="border" border="1" rules="all"><caption><strong>Table: </strong>DriveInfo</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e75192">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75197">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75202">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75207">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75192 ">
+<p><code>Drive</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75197 ">
+<p>Specifies the drive.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75202 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75207 ">
+<p>For example: <code>"C:\\"</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75192 ">
+<p><code>TotalSpace</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75197 ">
+<p>Specifies the total memory space in bytes.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75202 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75207 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75192 ">
+<p><code>FreeSpace</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75197 ">
+<p>Specifies the available free memory space in bytes.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75202 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75207 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75192 ">
+<p><code>CriticalSpace</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75197 ">
+<p>Specifies the critical free memory space in bytes.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75202 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75207 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75192 ">
+<p><code>MediaType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75197 ">
+<p>Specifies the media type of the drive.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75202 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75207 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>0</code> - MediaNotPresent</p></li>
+<li><p><code>1</code> - MediaUnknown</p></li>
+<li><p><code>2</code> - MediaFloppyDisk</p></li>
+<li><p><code>3</code> - MediaHardDisk</p></li>
+<li><p><code>4</code> - MediaCdRom</p></li>
+<li><p><code>5</code> - MediaRam</p></li>
+<li><p><code>6</code> - MediaFlash</p></li>
+<li><p><code>7</code> - MediaRom</p></li>
+<li><p><code>8</code> - MediaRemote</p></li>
+<li><p><code>9</code> - MediaNANDFlash</p></li>
+<li><p><code>10</code> - MediaRotatingMedia</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75192 ">
+<p><code>BatteryState</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75197 ">
+<p>Specifies the state of the drive's own battery unit, if any.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75202 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75207 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>0</code> - BatNotSupported</p></li>
+<li><p><code>1</code> - BatGood</p></li>
+<li><p><code>2</code> - BatLow</p></li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75192 ">
+<p><code>DriveName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75197 ">
+<p>Specifies the drive name.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75202 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75207 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-DF014B20-E009-4FC6-9D89-F2077B1ADE69"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-DF014B20-E009-4FC6-9D89-F2077B1ADE69" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Resolution</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e75503">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75508">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75513">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75518">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75503 ">
+<p><code>XPixels</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75508 ">
+<p>Specifies the screen resolution of x-pixels.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75513 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75518 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75503 ">
+<p><code>YPixels</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75508 ">
+<p>Specifies the screen resolution of y-pixels.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75513 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75518 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-A5C305E9-9389-4808-A508-02381F87282F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-A5C305E9-9389-4808-A508-02381F87282F" frame="border" border="1" rules="all"><caption><strong>Table: </strong>StringList</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e75590">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75595">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75600">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e75605">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75590 ">
+<p><code>StringList</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75595 ">
+<p>Specifies a list of the available USB modes.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75600 ">
+<p>array of strings</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e75605 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

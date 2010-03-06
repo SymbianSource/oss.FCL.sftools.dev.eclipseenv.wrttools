@@ -1,0 +1,57 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Widget component files"/><meta name="abstract" content="A widget consists of several component files. In the development phase, your widget project is just a file system directory, where you create and store the component files. Some of the files are mandatory and must be found in every widget. You must store the mandatory files under the root directory of a widget project. In addition, your widget may have optional component files that you can store either directly under the root directory or in any subfolder under the root directory, except for the icon file."/><meta name="description" content="A widget consists of several component files. In the development phase, your widget project is just a file system directory, where you create and store the component files. Some of the files are mandatory and must be found in every widget. You must store the mandatory files under the root directory of a widget project. In addition, your widget may have optional component files that you can store either directly under the root directory or in any subfolder under the root directory, except for the icon file."/><meta name="DC.Relation" scheme="URI" content="GUID-E5AF6C82-3A6E-47DE-BF58-750D97AAD70E"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-85179E6B-E915-4D96-A5D1-D17D7C7180C7"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A"/><title>Widget component files </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</h1><div><p>A widget consists of several component files. In the development phase, your widget project is just a file system directory, where you create and store the component files. Some of the files are mandatory and must be found in every widget. You must store the mandatory files under the root directory of a widget project. In addition, your widget may have optional component files that you can store either directly under the root directory or in any subfolder under the root directory, except for the icon file.</p>
+<p>The following figure illustrates the component files of an example widget.</p>
+<div class="figure" id="GUID-DB7487C4-8C17-4BCA-B819-A60114E7A58B"><img src="GUID-CEE2FF9C-A78E-4B77-A1DF-E02CAECA2499_d0e5613_href.png"/><p class="figure-title"><strong>Figure: </strong>Component files of an example widget</p></div>
+<p>The following table lists the typical widget component files and describes their purpose. It also indicates whether a file is mandatory or optional.</p>
+<div class="tablenoborder"><a name="GUID-7D9DCD74-5588-4CAD-AE1B-953928849A18"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-7D9DCD74-5588-4CAD-AE1B-953928849A18" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Widget component files</caption>
+<thead align="left">
+<tr class="title ">
+<th class="cellrowborder" valign="top" width="16.915422885572138%" id="d0e5633"><p>File</p></th>
+<th class="cellrowborder" valign="top" width="16.666666666666664%" id="d0e5637"><p>Use</p></th>
+<th class="cellrowborder" valign="top" width="16.915422885572138%" id="d0e5641"><p>Location</p></th>
+<th class="cellrowborder" valign="top" width="49.50248756218905%" id="d0e5645"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5633 "><p><a href="GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B.html#GUID-BBA0299B-81B6-4508-8D5B-5627206CBF7B"><code>info.plist</code></a></p></td>
+<td class="cellrowborder" valign="top" width="16.666666666666664%" headers="d0e5637 "><p>Mandatory</p></td>
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5641 "><p>Root directory</p></td>
+<td class="cellrowborder" valign="top" width="49.50248756218905%" headers="d0e5645 "><p>An XML-formatted file that contains the property and configuration information of a widget, such as the HTML file used as well as the identifier of the widget.</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5633 "><p><a href="GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA.html#GUID-C294F32D-CAC7-499C-AD4B-701B9AB57ACA"><code>&lt;name&gt;.html</code></a></p></td>
+<td class="cellrowborder" valign="top" width="16.666666666666664%" headers="d0e5637 "><p>Mandatory</p></td>
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5641 "><p>Root directory</p></td>
+<td class="cellrowborder" valign="top" width="49.50248756218905%" headers="d0e5645 "><p>A standard HTML file that mainly contains information for structuring a widget. The name of the HTML file must be predefined within the <code>info.plist</code> properties.</p><div class="note"><p><strong class="note_title">Note: </strong>A widget package contains only one HTML file.</p></div></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5633 "><p><code>icon.png</code></p></td>
+<td class="cellrowborder" valign="top" width="16.666666666666664%" headers="d0e5637 "><p>Optional</p></td>
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5641 "><p>Root directory</p></td>
+<td class="cellrowborder" valign="top" width="49.50248756218905%" headers="d0e5645 "><p>A custom icon file that represents a widget on a mobile device when it has been installed. The icon image must be in Portable Networking Graphics (PNG) file format. The recommended size of the icon is 88 x 88 pixels. The icon is scaled automatically, based on the device screen resolution.</p><p>If the <code>icon.png</code> file is omitted from the widget installation package, the widget appears with a default S60 application icon.</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5633 "><p><a href="GUID-DD35B82F-CB1F-4F7B-A351-C0417E21D5E4.html#GUID-DD35B82F-CB1F-4F7B-A351-C0417E21D5E4"><code>*.css</code></a></p></td>
+<td class="cellrowborder" valign="top" width="16.666666666666664%" headers="d0e5637 "><p>Optional</p></td>
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5641 "><p>Root or any subfolder</p></td>
+<td class="cellrowborder" valign="top" width="49.50248756218905%" headers="d0e5645 "><p>External CSS file that defines the style and layout of widget contents. A widget can have as many individual CSS files as needed.</p><p>It is also possible to embed the style information within the <code>&lt;name&gt;.html</code> file, thereby allowing the CSS file to be omitted. However, it is strongly recommended that you keep the style information separated from the data (markup) elements.</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5633 "><p><a href="GUID-A942935B-ACF6-451C-8383-874BEEC52F1A.html#GUID-A942935B-ACF6-451C-8383-874BEEC52F1A"><code>*.js</code></a></p></td>
+<td class="cellrowborder" valign="top" width="16.666666666666664%" headers="d0e5637 "><p>Optional</p></td>
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5641 "><p>Root or any subfolder</p></td>
+<td class="cellrowborder" valign="top" width="49.50248756218905%" headers="d0e5645 "><p>External JavaScript source code that implements the logic of a widget's operations, such as the construction of the widget UI elements, UI interaction, and communication. A widget can have as many individual <code>js</code> files as needed.</p><p> It is also possible to embed JavaScript codes within the HTML file, thereby allowing the <code>js</code> file to be omitted. However, it is recommended that you keep the JavaScript codes in a separate file.</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5633 "><p><code>*.jpg/bmp/gif/png</code></p></td>
+<td class="cellrowborder" valign="top" width="16.666666666666664%" headers="d0e5637 "><p>Optional</p></td>
+<td class="cellrowborder" valign="top" width="16.915422885572138%" headers="d0e5641 "><p>Root or any subfolder</p></td>
+<td class="cellrowborder" valign="top" width="49.50248756218905%" headers="d0e5645 "><p>A custom image file that can be used in a widget. A widget can have as many individual image files as needed.</p></td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

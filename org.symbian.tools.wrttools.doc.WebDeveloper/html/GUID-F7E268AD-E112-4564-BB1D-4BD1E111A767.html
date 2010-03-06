@@ -1,0 +1,117 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Returned notification information"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-91579EE5-A608-401C-82B4-DCF1723EC7B5"/><meta name="DC.Relation" scheme="URI" content="GUID-DFEDF3BF-BA73-4418-815C-83B80B888821"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-F7E268AD-E112-4564-BB1D-4BD1E111A767"/><title>Returned
+notification information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-F7E268AD-E112-4564-BB1D-4BD1E111A767">Returned
+notification information</h1><div>
+<p>The <code>ReturnValue</code> property returned by <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> is an array of objects containing the requested notification information
+on new messages. Each item (object) in the array corresponds to one new message
+and contains the header information for that message.</p>
+<div class="tablenoborder"><a name="GUID-BFFA2069-49E0-448D-AF61-01A3F3E2D1A7"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-BFFA2069-49E0-448D-AF61-01A3F3E2D1A7" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue properties
+for notification information</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e60590">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e60595">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e60600">
+<p>Notes</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.MessageType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"SMS"</code></p></li>
+<li><p><code>"MMS"</code></p></li>
+<li><p><code>"unknown"</code></p></li>
+</ul>
+<p>The Messaging Service only supports SMS and MMS. Other types of messages
+are <code>unknown</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.Sender</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.Subject</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">
+<p>Since SMS does not support subject, this property contains the first
+few characters of <code>BodyText</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.Time</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.Priority</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Low"</code></p></li>
+<li><p><code>"Medium"</code></p></li>
+<li><p><code>"High"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.Attachment</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.Unread</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60590 ">
+<p><code>&lt;item&gt;.MessageId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60595 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e60600 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

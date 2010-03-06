@@ -1,0 +1,49 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript Landmarks Service API"/><meta name="DC.Relation" scheme="URI" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><title>JavaScript Landmarks
+Service API </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"><span>JavaScript</span> Landmarks
+Service API</h1><div>
+<p>The <a href="GUID-D581028C-06ED-422D-866E-AE6C93075084.html#GUID-D581028C-06ED-422D-866E-AE6C93075084">Landmarks
+Service</a> API is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.1</a>.</p>
+<p>The Landmarks Service API allows <span>widgets</span> to
+access and manage information about landmarks and landmark categories. This
+information is stored in one or more landmark databases on a device. The API
+is integrated into <span>WRT</span> through the <a href="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html#GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"><code>device</code></a> object.</p>
+<p>For an overview of the service and the API, see section <a href="GUID-D581028C-06ED-422D-866E-AE6C93075084.html#GUID-D581028C-06ED-422D-866E-AE6C93075084">Accessing and managing information about landmarks</a>.</p>
+<div><h3>Using the Landmarks Service API</h3>
+<p>To use the Landmarks Service API, your <span>widget</span> must
+first create <span>a service object for it
+using the <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a> method</span>.
+Use <code>Service.Landmarks</code> to identify the service provider
+and <code>IDataSource</code> to identify the supported interface:</p>
+
+<pre class="codeblock" id="GUID-84F1353D-4C82-4E45-934E-1EC67AD05CAA">var so = device.getServiceObject("Service.Landmarks", "IDataSource");</pre>
+<p>This service object can then be used to access the services provided
+by the API:</p>
+<ul>
+<li><p><a href="GUID-E138B464-2086-4E74-B356-ACF8687BBB5A.html#GUID-E138B464-2086-4E74-B356-ACF8687BBB5A"><code>IDataSource.New()</code></a></p>
+</li>
+<li><p><a href="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html#GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><code>IDataSource.GetList()</code></a></p>
+</li>
+<li><p><a href="GUID-D85C2567-F041-42A1-A2B5-650FCAAD60A9.html#GUID-D85C2567-F041-42A1-A2B5-650FCAAD60A9"><code>IDataSource.Add()</code></a></p>
+</li>
+<li><p><a href="GUID-2B13380C-37C8-473F-B0A7-564439312DA3.html#GUID-2B13380C-37C8-473F-B0A7-564439312DA3"><code>IDataSource.Delete()</code></a></p>
+</li>
+<li><p><a href="GUID-4D4E5B3E-ABC4-43CA-A7E8-027C46BD1FE6.html#GUID-4D4E5B3E-ABC4-43CA-A7E8-027C46BD1FE6"><code>IDataSource.Import()</code></a></p>
+</li>
+<li><p><a href="GUID-A9024277-4FA2-429D-9C54-A155ED658B32.html#GUID-A9024277-4FA2-429D-9C54-A155ED658B32"><code>IDataSource.Export()</code></a></p>
+</li>
+<li><p><a href="GUID-B8869924-0E95-4543-954E-5A4246922CB4.html#GUID-B8869924-0E95-4543-954E-5A4246922CB4"><code>IDataSource.Organise()</code></a></p>
+</li>
+<li><p><a href="GUID-6D7228E7-8E06-495D-85F7-A4B1716D4CDE.html#GUID-6D7228E7-8E06-495D-85F7-A4B1716D4CDE"><code>IDataSource.Cancel()</code></a></p>
+</li>
+</ul>
+</div>
+<div><h3>Emulator support</h3>
+<p>The S60 5th Edition SDK emulator provides full support for the Landmarks
+Service API.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

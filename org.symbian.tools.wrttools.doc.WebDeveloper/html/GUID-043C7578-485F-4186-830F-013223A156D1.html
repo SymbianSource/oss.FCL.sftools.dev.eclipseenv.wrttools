@@ -1,0 +1,70 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IDataSource.Cancel()"/><meta name="DC.Relation" scheme="URI" content="GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6"/><meta name="DC.Relation" scheme="URI" content="GUID-894E87F7-7146-44DD-8CAF-60F7C446B0D8"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-F003B7DD-E450-49AD-B447-C5132FE47D3C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-043C7578-485F-4186-830F-013223A156D1"/><title>IDataSource.Cancel() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-043C7578-485F-4186-830F-013223A156D1">IDataSource.Cancel()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>Cancel</code> method cancels an outstanding asynchronous
+call made with a Logging Service API method.</p>
+<p>If a cancel is sent, but the asynchronous call has already been completed,
+then <code>result.ErrorCode</code> is set to <code>0</code> (success).</p>
+<p>This is a synchronous method.</p>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-6C88D4B9-532D-4BC2-B760-D774AAA9F805-GENIDd0e54927">result = so.IDataSource.Cancel(criteria);</pre>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object with the <code>TransactionID</code> property
+(number). <code>criteria.TransactionID</code> specifies the transaction
+ID of the asynchronous call to cancel. The transaction ID is the <code>result.TransactionID</code> value
+that was returned as part of the result of the initial call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>The <code>Cancel</code> method returns an object that contains
+an error code and an error message.</p>
+<div class="tablenoborder"><a name="GUID-4648578A-555B-43B6-9B54-5DE0F249EDC7"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-4648578A-555B-43B6-9B54-5DE0F249EDC7" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for Cancel</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e54271">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e54276">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e54281">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e54271 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e54276 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e54281 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a> .</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e54271 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e54276 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e54281 ">
+<p>See <a href="GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6.html#GUID-6C3D58CA-CA4F-432B-898B-4020064E3CE6">Logging Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget that demonstrates how to
+use this Service API, see <a href="GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D.html#GUID-9C85B403-6CFC-4E17-A2B2-AD1AD2F7794D">the
+full example</a>.</p>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

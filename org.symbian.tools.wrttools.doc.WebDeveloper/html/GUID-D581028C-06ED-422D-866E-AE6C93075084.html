@@ -1,0 +1,179 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Accessing and managing information about landmarks"/><meta name="DC.Relation" scheme="URI" content="GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8"/><meta name="DC.Relation" scheme="URI" content="GUID-662F2E2E-9538-42E5-9B5A-5664F1C11A9E"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-46EABDC1-37CB-412A-ACAD-1A1A9466BB68"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-D581028C-06ED-422D-866E-AE6C93075084"/><title>Accessing
+and managing information about landmarks </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-D581028C-06ED-422D-866E-AE6C93075084">Accessing
+and managing information about landmarks</h1><div>
+<p>The <a href="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F.html#GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F">Landmarks
+Service API</a> allows <span>widgets</span> to access and manage information
+about landmarks and landmark categories. This information is stored in one
+or more landmark databases on a device. You can use the Landmarks Service
+to create <span>widgets</span> that:</p>
+<ul>
+<li><p>Retrieve information about landmarks, landmark categories,
+and landmark databases</p></li>
+<li><p>Create, edit, and delete landmarks and landmark categories</p>
+</li>
+<li><p>Import and export landmarks</p></li>
+<li><p>Organize landmarks into landmark categories</p></li>
+</ul>
+<p>The Landmarks Service involves the following concepts:</p>
+<ul>
+<li><p><strong>Landmark</strong> is defined as a location with a name. The
+location of a landmark is expressed as a set of geographical coordinates accompanied
+by either coordinate measurement accuracy information or a textual description,
+such as an address. A landmark can be used as Point of Interest (POI). Each
+landmark has a unique ID that distinguishes it from other landmarks in the
+same database. The ID is assigned when the landmark is added to the database.</p>
+
+<p>For detailed information about landmark objects, see section <a href="GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE.html#GUID-2B3FD0AF-2552-46AB-83B5-F404506D16EE">Landmark</a>.</p>
+
+</li>
+<li><p><strong>Landmark category</strong> groups landmarks according to type
+and interest. For example, a category can denote geographical or architectural
+interest, or it can relate to a particular type of attraction or activity.
+Each category has a unique name and ID that distinguish it from other categories
+in the same database. The ID is assigned when the category is added to the
+database.</p>
+
+<p>Landmark categories are further classified as follows:</p>
+
+<ul>
+<li><p><strong>Local categories</strong> are created by the user for a specific
+database. A local category is only valid for landmarks in the same database
+for which the category was created.</p></li>
+<li><p><strong>Global categories</strong> exist across all databases and have
+unique global IDs associated with them. Global categories are valid for all
+landmarks in all databases. Accommodation, Businesses, and Education, for
+example, are global categories.</p></li>
+</ul>
+ 
+<p>For detailed information about landmark category objects, see section <a href="GUID-40EAD781-6B30-406E-B05F-0BE932EFE86A.html#GUID-40EAD781-6B30-406E-B05F-0BE932EFE86A">Landmark category</a>.</p>
+
+</li>
+<li><p><strong>Landmark database</strong> stores landmarks and landmark categories.
+Each database has a unique URI that identifies the database.</p>
+
+<p>Landmark databases are further classified as follows:</p>
+
+<ul>
+<li><p><strong>Local databases</strong> reside on the device or on some device
+mapped to the device's file system. The default database is <code>file://c:eposlm.ldb</code>.
+If the device does not contain the default database, it is created when it
+is called for the first time by a service request.</p>
+
+<p>The URI of a local landmark database consists of a protocol specifier
+and the database location: <code>file://&lt;location&gt;</code>. If no
+protocol is specified, <code>file://</code> is used by default. The
+location consists of the drive and the database file name, for example <code>c:landmarks.ldb</code>.
+The path to the file cannot be specified. The extension of the database file
+name must be <code>ldb</code>.</p>
+
+</li>
+<li><p><strong>Remote databases</strong> reside in third-party servers and
+are accessed using a specific protocol. Creating or deleting remote databases
+results in adding or removing a bookmark on the device, respectively.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Remote databases and associated operations are not currently supported.</p>
+</div>
+</li>
+</ul>
+ 
+<p>For detailed information about landmark database objects, see section <a href="GUID-5A23A9AC-2BC4-4D05-82FF-980986CFF4F6.html#GUID-5A23A9AC-2BC4-4D05-82FF-980986CFF4F6">Landmark database</a>.</p>
+
+</li>
+</ul>
+<div><h3>Accessing the API and supported methods</h3>
+<p>To create a <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080">service
+object</a> for the Landmarks Service API, use <code>Service.Landmarks</code> to
+identify the service provider and <code>IDataSource</code> to identify
+the supported interface:</p>
+
+<pre class="codeblock" id="GUID-3B84DF19-5D49-49E6-9A22-A97066C3FF8C">var so = device.getServiceObject("Service.Landmarks", "IDataSource");</pre>
+
+
+
+<p/>
+<p>The <code>IDataSource</code> interface provides the following
+methods:</p>
+<ul>
+<li><p><a href="GUID-E138B464-2086-4E74-B356-ACF8687BBB5A.html#GUID-E138B464-2086-4E74-B356-ACF8687BBB5A"><code>New()</code></a></p>
+
+<p>Use the <code>New()</code> method to create an empty landmark
+or landmark category item. You can use this item as a template.</p>
+
+</li>
+<li><p><a href="GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34.html#GUID-55591BBC-49F8-407D-98F5-1D2FCD5DFB34"><code>GetList()</code></a></p>
+
+<p>Use the <code>GetList()</code> method to retrieve information
+about landmarks, landmark categories, or landmark databases.</p>
+
+</li>
+<li><p><a href="GUID-D85C2567-F041-42A1-A2B5-650FCAAD60A9.html#GUID-D85C2567-F041-42A1-A2B5-650FCAAD60A9"><code>Add()</code></a></p>
+
+<p>Use the <code>Add()</code> method to add a new landmark or landmark
+category to a landmark database. You can also use this method to edit an existing
+landmark or landmark category.</p>
+
+</li>
+<li><p><a href="GUID-2B13380C-37C8-473F-B0A7-564439312DA3.html#GUID-2B13380C-37C8-473F-B0A7-564439312DA3"><code>Delete()</code></a></p>
+
+<p>Use the <code>Delete()</code> method to delete a landmark or
+landmark category from a landmark database.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>You cannot delete landmark databases.</p>
+</div>
+
+</li>
+<li><p><a href="GUID-4D4E5B3E-ABC4-43CA-A7E8-027C46BD1FE6.html#GUID-4D4E5B3E-ABC4-43CA-A7E8-027C46BD1FE6"><code>Import()</code></a></p>
+
+<p>Use the <code>Import()</code> method to import landmarks to
+a landmark database.</p>
+
+</li>
+<li><p><a href="GUID-A9024277-4FA2-429D-9C54-A155ED658B32.html#GUID-A9024277-4FA2-429D-9C54-A155ED658B32"><code>Export()</code></a></p>
+
+<p>Use the <code>Export()</code> method to export landmarks from
+a landmark database.</p>
+
+</li>
+<li><p><a href="GUID-B8869924-0E95-4543-954E-5A4246922CB4.html#GUID-B8869924-0E95-4543-954E-5A4246922CB4"><code>Organise()</code></a></p>
+
+<p>Use the <code>Organise()</code> method to add landmarks to a
+landmark category or to remove landmarks from a landmark category.</p>
+
+</li>
+<li><p><a href="GUID-6D7228E7-8E06-495D-85F7-A4B1716D4CDE.html#GUID-6D7228E7-8E06-495D-85F7-A4B1716D4CDE"><code>Cancel()</code></a></p>
+
+<p>Use the <code>Cancel()</code> method to cancel an ongoing asynchronous
+call. This method is valid for any asynchronous call made through the Landmarks
+Service API.</p>
+
+</li>
+</ul>
+</div>
+<div><h3>Using the service in a widget</h3>
+<p>To access and manage landmark information using the Landmarks Service
+API:</p>
+<ol>
+<li id="GUID-E8ECDB2F-00C4-488F-A253-87FABDA66CA6-GENIDd0e7896"><a name="GUID-E8ECDB2F-00C4-488F-A253-87FABDA66CA6-GENIDd0e7896"><!----></a><p>Create a service
+object for the API using <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a>.</p>
+</li>
+<li id="GUID-0625B45D-A5C9-4ADA-BC21-07963F957A7C-GENIDd0e7905"><a name="GUID-0625B45D-A5C9-4ADA-BC21-07963F957A7C-GENIDd0e7905"><!----></a><p>Define the
+tasks you want to perform and choose the correct methods for them.</p>
+</li>
+<li id="GUID-DBD9997B-CD51-45F9-9ED0-38A98AF08A12-GENIDd0e7910"><a name="GUID-DBD9997B-CD51-45F9-9ED0-38A98AF08A12-GENIDd0e7910"><!----></a><p>Optionally,
+define how you want the results filtered.</p></li>
+<li id="GUID-AAB5C193-F848-4B0A-AF03-6BA7425BD10B-GENIDd0e7914"><a name="GUID-AAB5C193-F848-4B0A-AF03-6BA7425BD10B-GENIDd0e7914"><!----></a><p>Define methods
+to process the results.</p></li>
+<li id="GUID-F0C3D20F-6F77-4C88-AF35-39DA70DE701B-GENIDd0e7918"><a name="GUID-F0C3D20F-6F77-4C88-AF35-39DA70DE701B-GENIDd0e7918"><!----></a><p>Retrieve the
+results using the methods from step 2. Use asynchronous methods together with <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback()</code></a>.</p>
+</li>
+<li id="GUID-0ABE0CB0-D76C-444B-AE53-0D435B3C6E74-GENIDd0e7927"><a name="GUID-0ABE0CB0-D76C-444B-AE53-0D435B3C6E74-GENIDd0e7927"><!----></a><p>Process the
+results using the methods defined in step 4.</p></li>
+</ol>
+<p>For the complete source of a sample widget that demonstrates how to
+use this service, see <a href="GUID-11D59F76-EC4C-4297-B262-D5174E826B43.html#GUID-11D59F76-EC4C-4297-B262-D5174E826B43">the
+full example</a>.</p>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

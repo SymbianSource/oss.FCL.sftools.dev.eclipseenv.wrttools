@@ -1,0 +1,89 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Runtime Security Manager access policy"/><meta name="DC.Relation" scheme="URI" content="GUID-BDBE85E0-2A33-4AE9-92F6-85E1861256F0"/><meta name="DC.Relation" scheme="URI" content="GUID-91B65EA3-06B7-475E-9557-29EE584731E5"/><meta name="DC.Relation" scheme="URI" content="GUID-F7A8BF61-042E-4B80-9959-DEDF65BD9153"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C4C76205-55BD-4DD1-BA08-6A17B9B696C7"/><title>Runtime Security Manager access policy </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C4C76205-55BD-4DD1-BA08-6A17B9B696C7">Runtime Security Manager access policy</h1><div>
+<p>The Runtime Security Manager access policy defines:  </p>
+<ul>
+<li><p>A set of capabilities (read user data, writer user data, and so on) that are allowed automatically (user is not prompted) or granted to the mobile device user via prompts.  See below for a list of capabilities supported for WRT 1.1.</p></li>
+<li><p>The duration of access.  The durations supported for WRT 1.1 are one time (oneshot) or while the widget is launched (session). </p></li>
+</ul>
+<p>The following capabilities are supported for WRT 1.1: </p>
+<ul>
+<li><p>ReadUserData—Grants read access to data confidential to the mobile device user.  For example, contacts, messages, appointments, and notes. </p></li>
+<li><p>WriteUserData—Grants write access to data confidential to the mobile device user. </p></li>
+<li><p>Location—Grants access to mobile device user location information.</p></li>
+<li><p>NetworkServices—Grants access to remote services without regard to the mobile device location. For example, voice calls and SMS.</p></li>
+</ul>
+<p>The following table lists the capabilities defined for each SAPI by the default WRT 1.1 access policy.  All capabilities are granted for the session.</p>
+<div class="tablenoborder"><a name="GUID-45D8ACBC-BEEA-42DC-9273-4BB685CA8410"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-45D8ACBC-BEEA-42DC-9273-4BB685CA8410" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Default capabilities for WRT 1.1 widgets</caption>
+<thead align="left">
+<tr class="title ">
+<th class="cellrowborder" valign="top" id="d0e1624"><p>Javascript Service API</p></th>
+<th class="cellrowborder" valign="top" id="d0e1628"><p>Capability</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>Application Manager</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>ReadUserData</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" rowspan="2" valign="top" headers="d0e1624 "><p>Calendar</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>ReadUserData</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>WriteUserData</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>Location</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>Location</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" rowspan="2" valign="top" headers="d0e1624 "><p>Logging</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>ReadUserData</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>WriteUserData</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" rowspan="2" valign="top" headers="d0e1624 "><p>SystemInfo</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>ReadUserData</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>Location</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" rowspan="2" valign="top" headers="d0e1624 "><p>Contacts</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>ReadUserData</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>WriteUserData</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" rowspan="2" valign="top" headers="d0e1624 "><p>Landmarks</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>ReadUserData</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>WriteUserData</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>Media Management</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>None</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" rowspan="3" valign="top" headers="d0e1624 "><p>Messaging</p></td>
+<td class="cellrowborder" valign="top" headers="d0e1628 "><p>ReadUserData</p></td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>WriteUserData</p></td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e1624 "><p>NetworkServices</p></td>
+</tr>
+</tbody>
+</table></div>
+<p>For example, the security manager may prompt the mobile device user to allow a widget that was created using the Location Service API to access location information.  Access persists while the widget is launched.  The security manager prompts the user again the next time the widget is launched.</p>
+<div class="figure" id="GUID-5AE587F4-4925-4AEB-A58F-9E4BC5CCBF4C"><img src="GUID-5D647EB6-1505-4A97-931B-29D3D9ED4BA1_d0e1795_href.png"/><p class="figure-title"><strong>Figure: </strong>Accessing location information prompt</p></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

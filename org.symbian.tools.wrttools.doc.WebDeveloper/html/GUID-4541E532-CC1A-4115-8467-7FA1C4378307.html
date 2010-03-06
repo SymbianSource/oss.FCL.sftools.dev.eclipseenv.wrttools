@@ -1,0 +1,182 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for retrieving location information"/><meta name="DC.Relation" scheme="URI" content="GUID-A6C9AF19-6694-478B-A9FE-7898A2091C4B"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><meta name="DC.Relation" scheme="URI" content="GUID-150E440F-56E4-4249-8739-A5A7A2050600"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-4541E532-CC1A-4115-8467-7FA1C4378307"/><title>Criteria for
+retrieving location information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-4541E532-CC1A-4115-8467-7FA1C4378307"><span>Criteria</span> for
+retrieving location information</h1><div>
+<p/>
+<p>The <code>criteria</code> object specifies what type
+of device location information is returned and how.</p>
+<p>The Location Service supports two types of location information:</p>
+<ul>
+<li><p><strong>Basic</strong></p>
+
+<p>Basic location information includes longitude, latitude, and altitude
+estimates.</p>
+
+</li>
+<li><p><strong>Generic</strong></p>
+
+<p>Generic location information includes <a href="GUID-A6C9AF19-6694-478B-A9FE-7898A2091C4B.html#GUID-A6C9AF19-6694-478B-A9FE-7898A2091C4B">all
+possible location data</a>.</p>
+
+</li>
+</ul>
+<p>The <code>criteria</code> object has two main properties: <code>LocationInformationClass</code> and <code>Updateoptions</code>. These are described in the following table. Properties enclosed in brackets
+are optional.</p>
+<div class="tablenoborder"><a name="GUID-08CC49F0-2869-4994-82AF-B62DAC6A7934"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-08CC49F0-2869-4994-82AF-B62DAC6A7934" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e47586">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e47591">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e47596">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e47601">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47586 ">
+<p><code>[criteria.LocationInformationClass]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47591 ">
+<p>Specifies the type of location information to retrieve. It has two possible
+values:</p>
+<ul>
+<li><p><code>BasicLocationInformation</code> includes longitude,
+latitude, and altitude estimates. This is the default value for this argument.</p>
+</li>
+<li><p><code>GenericLocationInfo</code> includes all possible
+location data.</p></li>
+</ul>
+<div class="note"><p><strong class="note_title">Note: </strong>There is no guarantee that all the requested information is returned,
+whether basic or generic. The availability of specific information depends
+on the positioning system used and on other factors such as the number of
+satellites that are available when a location fix is obtained.</p>
+<p>For information on how to ensure that you get at least certain information,
+see the <code>Updateoptions.PartialUpdates</code> property.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47596 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47601 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"BasicLocationInformation"</code></p></li>
+<li><p><code>"GenericLocationInfo"</code></p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47586 ">
+<p><code>[criteria.Updateoptions]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47591 ">
+<p>Specifies the update options used while retrieving the location information.</p>
+<p>If you do not define a particular option, then its default value is
+used.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>The option values must conform to the following order of magnitude:</p>
+<p><code>UpdateTimeOut</code> &gt; <code>UpdateInterval</code> &gt; <code>UpdateMaxAge</code></p>
+<p>If this order is not maintained, the method returns the <code>SErrArgument</code> error.</p>
+</div>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47596 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47601 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47586 ">
+<p><code>[criteria.Updateoptions.UpdateInterval]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47591 ">
+<p>Specifies the time interval (in microseconds) between two consecutive
+location estimates.</p>
+<p>This is only used with <a href="GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5.html#GUID-7A0190CB-545E-48D2-BAF0-D28E03CDFCA5"><code>Trace</code></a>,
+which requests location estimates until <a href="GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56.html#GUID-7A466B60-88DD-4A3A-B64C-E7300D42DA56">cancelled</a>. <a href="GUID-150E440F-56E4-4249-8739-A5A7A2050600.html#GUID-150E440F-56E4-4249-8739-A5A7A2050600"><code>GetLocation</code></a> only
+requests the location estimate once.</p>
+<p>The default value is <code>1000000</code> (= 1 second).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47596 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47601 ">
+<p><code>0</code> or a positive integer</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47586 ">
+<p><code>[criteria.Updateoptions.UpdateTimeOut]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47591 ">
+<p>If the location server does not provide location estimates within the
+time specified in <code>UpdateTimeOut</code> (in microseconds), the
+method returns the <code>SErrTimedOut</code> error.</p>
+<p>The default value is <code>15000000</code> (= 15 seconds).</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47596 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47601 ">
+<p><code>0</code> or a positive integer</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47586 ">
+<p><code>[criteria.Updateoptions.UpdateMaxAge]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47591 ">
+<p>Specifies the expiry time for the location information cache (in microseconds).
+When a location request is made, the location information is returned from
+the cache (managed by the location server) as long as the cache is not older
+than <code>UpdateMaxAge</code>.</p>
+<p>The default value is <code>0</code>, meaning that the location
+information is never returned from the cache.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47596 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47601 ">
+<p><code>0</code> or a positive integer</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47586 ">
+<p><code>[criteria.Updateoptions.PartialUpdates]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47591 ">
+<p>Specifies whether longitude, latitude, and altitude information is always
+guaranteed.</p>
+<p>Setting <code>PartialUpdates</code> to <code>false</code> ensures
+that the user receives at least <code>BasicLocationInformation</code> (longitude,
+latitude, and altitude).</p>
+<div class="note"><p><strong class="note_title">Note: </strong>Altitude information is returned only if the positioning system supports
+it. You can change the positioning system used by an S60 device from the <strong>Settings
+&gt; General &gt; Positioning &gt; Positioning methods</strong> menu.</p>
+</div>
+<p>If you set this property to <code>true</code>, there are no
+guarantees on any specific information being returned, including longitude,
+latitude, and altitude.</p>
+<p>The default value is <code>false</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47596 ">
+<p>boolean</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e47601 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>true</code></p></li>
+<li><p><code>false</code></p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

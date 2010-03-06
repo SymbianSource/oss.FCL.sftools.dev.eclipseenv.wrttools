@@ -1,0 +1,115 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Criteria for launching an application"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><meta name="DC.Relation" scheme="URI" content="GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51"/><title>Criteria for
+launching an application </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51"><span>Criteria</span> for
+launching an application</h1><div>
+<p>The <code>criteria</code> object specifies the application
+to launch.</p>
+<p>The <code>criteria</code> object has three main properties: <code>Document</code>, <code>MimeType</code>,
+and <code>Options</code>. These are described in the following table.
+Properties enclosed in brackets are optional.</p>
+<div class="tablenoborder"><a name="GUID-12440A98-60E1-4084-938A-33AB1BCA083F"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-12440A98-60E1-4084-938A-33AB1BCA083F" frame="border" border="1" rules="all"><caption><strong>Table: </strong><span>Criteria</span> </caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e19292">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e19297">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e19302">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e19307">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19292 ">
+<p><code>criteria.Document</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19297 ">
+<p>Specifies the document to launch.</p>
+<p>If <code>MIMEType</code> is not specified, this property is
+mandatory.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19302 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19307 ">
+<p>Object with the properties specified below</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19292 ">
+<p><code>criteria.Document.DocumentPath</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19297 ">
+<p>Specifies the full path and file name of the document to launch.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19302 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19307 ">
+<p>For example, <code>"C:\\Data\\abc.txt"</code>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19292 ">
+<p><code>criteria.MIMEType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19297 ">
+<p>Specifies the MIME type of the application to launch.</p>
+<p>If <code>MIMEType</code> is specified, the application being
+launched determines whether a new document is created.</p>
+<p>If <code>Document</code> is not specified, this property is
+mandatory.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19302 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19307 ">
+<p>For example: <code>image/jpg</code>.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19292 ">
+<p><code>[criteria.Options]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19297 ">
+<p>Specifies the mode for launching the application based on the given <code>Document</code> or <code>MimeType</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19302 ">
+<p>object</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19307 ">
+<p>Object with the properties specified below.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19292 ">
+<p><code>criteria.Options.Mode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19297 ">
+<p>Specifies whether the launched application is embedded within the application
+that called <code>LaunchDoc</code> (chained) or whether the applications
+are independent of each other (stand-alone). For more information on chained
+and stand-along applications, see section <a href="GUID-E092BF10-C076-4476-9E80-87919940201B.html#GUID-E092BF10-C076-4476-9E80-87919940201B">Accessing and launching installed applications</a>.</p>
+<p>If this property is not specified, the default is <code>"Standalone"</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19302 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e19307 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>"Chained"</code> - the application is embedded
+within the application that called <code>LaunchDoc</code>.</p>
+</li>
+<li><p><code>"Standalone"</code> - the applications are
+independent of each other.</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

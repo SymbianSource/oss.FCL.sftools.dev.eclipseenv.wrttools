@@ -1,0 +1,40 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Checking for touch support"/><meta name="abstract" content="The Web Runtime (WRT) API does not provide a way to detect whether a device is touch-enabled. You can use simple but error-prone heuristics to detect it."/><meta name="description" content="The Web Runtime (WRT) API does not provide a way to detect whether a device is touch-enabled. You can use simple but error-prone heuristics to detect it."/><meta name="DC.Relation" scheme="URI" content="GUID-04ABC9FC-26FE-4854-9F88-63A2C4911886"/><meta name="DC.Relation" scheme="URI" content="GUID-13E2DE63-47E5-4E2A-85FF-C8B0CAB9D4DE"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-6DD2B3D2-BA3B-4936-BBC9-F61B6757B6F8"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-AE9BB3E0-C243-476B-A236-40958A1DAED9"/><meta name="DC.Language" content="en"/><title>Checking for touch support </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-AE9BB3E0-C243-476B-A236-40958A1DAED9">Checking for touch support</h1><div><p>The Web Runtime (WRT) API does not provide a way to detect whether a device is touch-enabled. You can use simple but error-prone heuristics to detect it.</p>
+<p>The first S60 touch UI devices have bigger screen resolution than older devices. Therefore, if the queried screen resolution is 360 x 640 (or 640 x 360 in landscape orientation), you can assume that touch UI is supported. On devices that support WRT 1.1, you can use the<code> DisplayResolution</code> attribute of the <a href="GUID-279A3698-D09B-44BF-8340-739E19F94727.html#GUID-279A3698-D09B-44BF-8340-739E19F94727"><code>ISysInfo.GetInfo()</code></a> method to determine screen resolution.</p>
+<p>You can also use the screen width and height attributes to determine screen resolution:</p>
+<pre class="codeblock">// Identifies the device by querying its resolution
+function detectResolution() {
+    var screenWidth = screen.width;
+    var screenHeight = screen.height;
+    
+    if (screenWidth == 240 &amp;&amp; screenHeight == 320) {
+        resolution = RESOLUTION_QVGA_PORTRAIT;
+    } else if (screenWidth == 320 &amp;&amp; screenHeight == 240) {
+        resolution = RESOLUTION_QVGA_LANDSCAPE;
+    } else if (screenWidth == 360 &amp;&amp; screenHeight == 640) {
+        resolution = RESOLUTION_NHD_PORTRAIT;
+    } else if (screenWidth == 640 &amp;&amp; screenHeight == 360) {
+        resolution = RESOLUTION_NHD_LANDSCAPE;
+    } else if (screenWidth == 800 &amp;&amp; screenHeight == 352) {
+        resolution = RESOLUTION_E90_LANDSCAPE;
+    } else {
+        resolution = RESOLUTION_UNDEFINED;
+    }
+}
+
+// Detects whether touch UI is supported
+function detectTouchUI() {
+		// Query the device resolution to determine whether this is a touch device.
+    if (resolution == RESOLUTION_NHD_LANDSCAPE ||
+        resolution == RESOLUTION_NHD_PORTRAIT) {
+        touchSupported = true;
+    } else {
+        touchSupported = false;
+		}
+}
+</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

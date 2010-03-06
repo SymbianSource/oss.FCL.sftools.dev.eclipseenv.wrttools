@@ -1,0 +1,593 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Landmarks Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-4ECCCBED-DE6D-4366-B037-90E874C4DF5C"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B8845FF1-D7F6-476A-8651-8B9C12D8789F"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-11D59F76-EC4C-4297-B262-D5174E826B43"/><title>Landmarks Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-11D59F76-EC4C-4297-B262-D5174E826B43">Landmarks Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-D581028C-06ED-422D-866E-AE6C93075084.html#GUID-D581028C-06ED-422D-866E-AE6C93075084">Landmarks Service</a>.
+You can download the <code>wgz</code> package for this widget from
+section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-0099622C-7424-4D2C-95E5-759BB81D32E8">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;DisplayName&lt;/key&gt;
+    &lt;string&gt;LandmarksSample&lt;/string&gt;
+    &lt;key&gt;Identifier&lt;/key&gt;
+    &lt;string&gt;com.nokia.widget.sapi.landmarks.sample&lt;/string&gt;
+    &lt;key&gt;Version&lt;/key&gt;
+    &lt;string&gt;1.0&lt;/string&gt;
+    &lt;key&gt;MainHTML&lt;/key&gt;
+    &lt;string&gt;landmarks-sample.html&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+</div>
+<div><h3>landmarks-sample.html</h3>
+<pre class="codeblock" id="GUID-31B02315-A86A-4061-822B-7F3C4F96133C">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=utf-8"&gt;
+    &lt;script type="text/javascript" src="js/landmarks-sample.js" charset="utf-8"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="js/common.js" charset="utf-8"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload='setup()' bgcolor="#ddeeff"&gt;
+    &lt;form&gt;
+        &lt;h3&gt;Landmarks Service API Sample Widget&lt;/h3&gt;
+        &lt;input type="button" onclick="addCategory('img1');" value="AddCategory"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="addLandmark('img2')" value="AddLandmark"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="getListDatabases('img3')" value="GetListDatabases"&gt;&lt;img id="img3" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="getListCategories('img4')" value="GetListCategoriesSync"&gt;&lt;img id="img4" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="getListCategoriesAsync('img5')" value="GetListCategoriesAsync"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="getListLandmarks('img6')" value="GetListLandmarksSync"&gt;&lt;img id="img6" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="getListLandmarksAsync('img7')" value="GetListLandmarksAsync"&gt;&lt;img id="img7" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="cancelCategoriesAsync('img8')" value="CancelCategoriesAsync"&gt;&lt;img id="img8" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="cancelLandmarksAsync('img9')" value="CancelLandmarksAsync"&gt;&lt;img id="img9" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="deleteCategory('img10')" value="DeleteCategory"&gt;&lt;img id="img10" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="deleteLandmark('img11')" value="DeleteLandMark"&gt;&lt;img id="img11" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="exportLandmarks('img12')" value="ExportLandmarks"&gt;&lt;img id="img12" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="importLandmarks('img13')" value="ImportLandmarks"&gt;&lt;img id="img13" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+        &lt;input type="button" onclick="organiseLandmarks('img14')" value="OrganiseLandmarks"&gt;&lt;img id="img14" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;hr&gt;
+        &lt;div class='landmarks' id='landmarks' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-A5CDC8EA-E226-45B8-8B09-4DA079530315">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+
+  if (errCode) {
+    msg = message + "&lt;BR&gt;" + "Failed Error: " + errCode + "&lt;BR&gt;";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no");
+  } else {
+    showIMG(imgId,"yes");
+  }
+
+  //print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+
+  return errCode;
+}
+
+// Build the message by reading a iteratorable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showIterableList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try {
+    if ( typeof obj != 'object' )
+      return "" + obj + '&lt;BR/&gt;';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += '&lt;BR/&gt;';
+      }
+      txt += '&lt;BR/&gt;';
+    }
+  }
+  catch (e)
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK)
+{
+  if(imgId == null || imgId == undefined)
+    return;
+
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+
+  for (i = 0; i &lt; sText.length &amp;&amp; IsNumber == true; i++)
+  {
+    Char = sText.charAt(i);
+    if (ValidChars.indexOf(Char) == -1)
+    {
+      IsNumber = false;
+    }
+  }
+  return IsNumber;
+}</pre>
+</div>
+<div><h3>landmarks-sample.js</h3>
+<pre class="codeblock" id="GUID-628E92C0-DDF4-440E-9F6B-7593E8CCC1B5">// landmarks-sample.js
+//
+// In this sample Categories will be added, deleted, and listed from default database,
+// Landmarks will be imported, exported, added, deleted, and listed from sample database
+// Also, async operation will be canceled
+
+//SAPI Error Codes
+// 0    - Success
+// 1000 - InvalidServiceArgument
+// 1001 - UnknownArgumentName
+// 1002 - BadArgumentType
+// 1003 - MissingArgument
+// 1004 - ServiceNotSupported
+// 1005 - ServiceInUse
+// 1006 - ServiceNotReady
+// 1007 - NoMemory
+// 1008 - HardwareNotAvailable
+// 1009 - ServerBusy
+// 1010 - EntryExists
+// 1011 - AccessDenied
+// 1012 - NotFound
+// 1013 - UnknownFormat
+// 1014 - GeneralError
+// 1015 - CancelSuccess
+// 1016 - ServiceTimedOut
+// 1017 - PathNotFound
+
+
+// Declare the service object
+var so;
+
+// id of the div used to display information
+const DIV_ID = 'landmarks';
+
+// imgid for callback1 function
+var imgid_callback1;
+
+// imgid for callback2 function
+var imgid_callback2;
+
+// Called from onload()
+function setup()
+{
+  try
+  {
+    so = device.getServiceObject("Service.Landmarks", "IDataSource");
+    console.info("setup: so: %s", so);
+  }
+  catch(e)
+  {
+    alert('&lt;setup&gt; ' +e);
+  }
+}
+
+// Add new Category
+// Note: Category with the CategoryName can not be added twice.
+// So, you should delete just added category first and add category after that
+function addCategory(imgId)
+{
+  // Setup input params using dot syntax
+  var category = new Object();
+  category.CategoryName = 'MyCategory';
+  var criteria = new Object();
+  criteria.Type = 'Category';
+  criteria.Data = category;
+  try
+  {
+    var resultList = so.IDataSource.Add(criteria);
+    checkError("IDataSource::addCategory",resultList,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("addCategory: " + e);
+  }
+}
+
+// Populate a Landmark Object with sample data
+function populateLandmark(landmark)
+{
+  var landmarkfields = new Object();
+  landmarkfields.Country = 'USA';
+  landmarkfields.AreaCode = '01803';
+  landmarkfields.City = 'Boston';
+  landmarkfields.District = 'Dist';
+  landmarkfields.Street = 'Wayside Rd';
+  landmarkfields.Telephone = '781-993-9393';
+
+  landmark.DatabaseURI      = 'file://c:eposlm.ldb';
+  landmark.LandmarkName     = 'NewLandmark';
+  landmark.LandmarkDesc     = 'My Landmark';
+  landmark.LandmarkFields   = landmarkfields;
+}
+
+// Add new Landmark (sync operation)
+function addLandmark(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+
+  try
+  {
+    var lm = so.IDataSource.New( criteria );
+    populateLandmark(lm);
+    var criteria1 = new Object();
+    criteria1.Type = 'Landmark';
+    criteria1.Data = lm;
+    var resultList = so.IDataSource.Add(criteria1);
+    checkError("IDataSource::addLandmark",resultList,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("addLandmark: " + e);
+  }
+}
+
+
+// Get List of all Databases (sync operation)
+function getListDatabases(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.Type = 'Database';
+  try
+  {
+    var resultList = so.IDataSource.GetList(criteria);
+    if(!checkError("IDataSource::getListDatabases",resultList,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showIterableList(resultList.ReturnValue);
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("getListDatabases: " + e);
+  }
+}
+
+// Get List of all Categories (sync operation)
+function getListCategories(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.Type = 'Category';
+  try
+  {
+    var resultList = so.IDataSource.GetList(criteria);
+    if(!checkError("IDataSource::getListCategories",resultList,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showIterableList(resultList.ReturnValue);
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("getListCategories: " + e);
+  }
+}
+
+// Get List of all Categories (Async operation)
+function getListCategoriesAsync(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.Type = 'Category';
+  try
+  {
+    imgid_callback1 = imgId;
+    var resultList = so.IDataSource.GetList(criteria, callback1);
+    if(!checkError("IDataSource::getListCategoriesAsync",resultList,DIV_ID,imgId))
+      showIMG(imgId, "");
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("addCategory: " + e);
+  }
+}
+
+// Get List of Landmarks (sync operation)
+function getListLandmarks(imgId)
+{
+  var sort = new Object();
+  sort.Key = 'LandmarkName';
+  sort.Order = 'Descending';
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+  criteria.Sort = sort;
+  try
+  {
+    var resultList = so.IDataSource.GetList(criteria);
+    if(!checkError("IDataSource::getListLandmarks",resultList,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showIterableList(resultList.ReturnValue);
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("getListLandmarks: " + e);
+  }
+}
+
+// Get List of Landmarks (Async operation)
+function getListLandmarksAsync(imgId)
+{
+  var sort = new Object();
+  sort.Key = 'LandmarkName';
+  sort.Order = 'Descending';
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+  criteria.Sort = sort;
+  try
+  {
+    imgid_callback2 = imgId;
+    var resultList = so.IDataSource.GetList(criteria, callback2);
+    if(!checkError("IDataSource::getListLandmarksAsync",resultList,DIV_ID,imgId))
+      showIMG(imgId, "");
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("getListLandmarksAsync: " + e);
+  }
+}
+
+// cancel get categories
+function cancelCategoriesAsync(imgId)
+{
+  // Setup input params using dot syntax
+  var criteria = new Object();
+  criteria.Type = 'Category';
+  try
+  {
+    imgid_callback1 = imgId;
+    var resultList = so.IDataSource.GetList(criteria, callback1);
+    if(!checkError("IDataSource::cancelCategoriesAsync",resultList,DIV_ID,imgId)) {
+      showIMG(imgId, "");
+      var criteria2 = new Object();
+      criteria2.TransactionID = resultList.TransactionID;
+      var resultList2 = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::cancelCategoriesAsync",resultList2,DIV_ID,imgId);
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("cancelCategoriesAsync: " + e);
+  }
+}
+
+// cancel get landmarks
+function cancelLandmarksAsync(imgId)
+{
+  var sort = new Object();
+  sort.Key = 'LandmarkName';
+  sort.Order = 'Descending';
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+  criteria.Sort = sort;
+  try
+  {
+    imgid_callback2 = imgId;
+    var resultList = so.IDataSource.GetList(criteria, callback2);
+    if(!checkError("IDataSource::cancelLandmarksAsync",resultList,DIV_ID,imgId)) {
+      showIMG(imgId, "");
+      var criteria2 = new Object();
+      criteria2.TransactionID = resultList.TransactionID;
+      var resultList2 = so.IDataSource.Cancel(criteria2);
+      checkError("IDataSource::cancelLandmarksAsync",resultList2,DIV_ID,imgId);
+    }
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("cancelLandmarksAsync: " + e);
+  }
+}
+
+// Delete one Category (sync operation)
+function deleteCategory(imgId)
+{
+  var landmarkIdStr = prompt("Please type the landmark id", "0");
+  if(landmarkIdStr == "" || landmarkIdStr == null)
+    return;
+
+  // Setup input params using dot syntax
+  var data = new Object();
+  data.id = parseInt(landmarkIdStr);
+  var criteria = new Object();
+  criteria.Type = 'Category';
+  criteria.Data = data;
+  try
+  {
+    var resultList = so.IDataSource.Delete(criteria);
+    checkError("IDataSource::deleteCategory",resultList,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("deleteCategory: " + e);
+  }
+}
+
+// Delete one Landmark (sync operation)
+function deleteLandmark(imgId)
+{
+  var landmarkIdStr = prompt("Please type the landmark id", "0");
+  if(landmarkIdStr == "" || landmarkIdStr == null)
+    return;
+
+  // Setup input params using dot syntax
+  var data = new Object();
+  data.id = parseInt(landmarkIdStr);
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+  criteria.Data = data;
+  try
+  {
+    var resultList = so.IDataSource.Delete(criteria);
+    checkError("IDataSource::deleteLandmark",resultList,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("deleteLandmark: " + e);
+  }
+}
+
+// Export specific Landmarks to xml file (sync operation)
+// When we export file already exist it returns an errorCode !!!
+function exportLandmarks(imgId)
+{
+  // Setup input params using dot syntax
+  var data = new Object();
+  data.DestinationFile = 'landmarks-export.xml';
+  data.MimeType = 'application/vnd.nokia.landmarkcollection+xml';
+  data.IdList = [ "3", "4" ];
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+  criteria.Data = data;
+  try
+  {
+    var resultList = so.IDataSource.Export(criteria);
+    checkError("IDataSource::exportLandmarks",resultList,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("exportLandmarks: " + e);
+  }
+}
+
+// Import Landmarks from xml file (sync operation)
+function importLandmarks(imgId)
+{
+  // Setup input params using dot syntax
+  var data = new Object();
+  data.SourceFile = 'landmarks-export.xml';
+  data.MimeType = 'application/vnd.nokia.landmarkcollection+xml';
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+  criteria.Data = data;
+  try
+  {
+    var resultList = so.IDataSource.Import(criteria);
+    checkError("IDataSource::importLandmarks",resultList,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("importLandmarks: " + e);
+  }
+}
+
+// Organise Landmarks with entered ladmark id (sync operation)
+function organiseLandmarks(imgId)
+{
+  // Setup input params using dot syntax
+  var landmarkIdStr = prompt("Please type the landmark id", "0");
+  if(landmarkIdStr == "" || landmarkIdStr == null)
+    return;
+
+  var data = new Object();
+  data.id = parseInt(landmarkIdStr);
+  data.IdList = [ "3", "4" ];
+  var criteria = new Object();
+  criteria.Type = 'Landmark';
+  criteria.Data = data;
+  criteria.OperationType = 'Associate';
+  try
+  {
+    var resultList = so.IDataSource.Organise(criteria);
+    checkError("IDataSource::organiseLandmarks",resultList,DIV_ID,imgId);
+  }
+  catch(e)
+  {
+    showIMG(imgId,"no");
+    alert ("organiseLandmarks: " + e);
+  }
+}
+
+// This is the asynchronous callback handler
+function callback1(transId, eventCode, result)
+{
+  console.info("callback1: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::getListCategoriesAsync",result,DIV_ID,imgid_callback1)) {
+    document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+  }
+}
+
+// This is the asynchronous callback handler
+function callback2(transId, eventCode, result)
+{
+  console.info("callback2: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("IDataSource::getListLandmarksAsync",result,DIV_ID,imgid_callback2)) {
+    document.getElementById(DIV_ID).innerHTML = showIterableList(result.ReturnValue);
+  }
+}</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

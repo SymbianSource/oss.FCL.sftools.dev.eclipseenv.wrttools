@@ -1,0 +1,164 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Returned application information"/><meta name="DC.Relation" scheme="URI" content="GUID-A509AD23-015E-44D9-97EB-895A75593C87"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><meta name="DC.Relation" scheme="URI" content="GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-5614CFF0-EF37-46DD-A89D-C2AD6122F6A5"/><title>Returned
+application information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-5614CFF0-EF37-46DD-A89D-C2AD6122F6A5">Returned
+application information</h1><div>
+<p>The <code>ReturnValue</code> property returned by <a href="GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952.html#GUID-4A2480A8-4D79-4F5D-9614-74A8934B8952"><code>GetList</code></a> is an iterator containing the requested application information.
+Each item (object) in the iterator corresponds to information about one mobile
+device application or user-installed application, depending on <a href="GUID-A509AD23-015E-44D9-97EB-895A75593C87.html#GUID-A509AD23-015E-44D9-97EB-895A75593C87">what
+type of application information was requested</a>.</p>
+<p>The following table describes the information returned for mobile device
+applications.</p>
+<div class="tablenoborder"><a name="GUID-62EB5572-AA6F-4436-88CD-E41EBFA67BEB"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-62EB5572-AA6F-4436-88CD-E41EBFA67BEB" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue properties
+for mobile device applications</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="24.561403508771928%" id="d0e17826">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="24.561403508771928%" id="d0e17831">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="24.561403508771928%" id="d0e17836">
+<p>Value type</p>
+</th><th class="cellrowborder" valign="top" width="26.31578947368421%" id="d0e17841">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17826 ">
+<p><code>result.Uid</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17831 ">
+<p>Contains a unique ID for the application binary (EXE or DLL).</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17836 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17841 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17826 ">
+<p><code>result.Path</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17831 ">
+<p>Contains the path of the application. For example, <code>c:\sys\bin\calculator.exe</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17836 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17841 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17826 ">
+<p><code>result.Caption</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17831 ">
+<p>Contains the title of the application.</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17836 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17841 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17826 ">
+<p><code>result.ShortCaption</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17831 ">
+<p>Contains the short title of the application. For example, the short
+caption may be displayed beneath an icon on the mobile device.</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17836 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17841 ">
+<p>string</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the information returned for user-installed
+applications.</p>
+<div class="tablenoborder"><a name="GUID-F7A80792-E820-4D05-9D80-20B89BE0E7BE"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-F7A80792-E820-4D05-9D80-20B89BE0E7BE" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue properties
+for user-installed applications</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="24.561403508771928%" id="d0e17968">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="24.561403508771928%" id="d0e17973">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="24.561403508771928%" id="d0e17978">
+<p>Value type</p>
+</th><th class="cellrowborder" valign="top" width="26.31578947368421%" id="d0e17983">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17968 ">
+<p><code>result.PackageName</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17973 ">
+<p>Contains the name of the application. For example, the package name
+may be displayed in a menu on the mobile device.</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17978 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17983 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17968 ">
+<p><code>result.Version</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17973 ">
+<p>Contains the version of the application. </p>
+<p>The version consists of two parts:</p>
+<ul>
+<li><p>Major</p></li>
+<li><p>Minor</p></li>
+</ul>
+<p>For example, 1.01, where 1 is the major part and .02 is the minor part.</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17978 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17983 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17968 ">
+<p><code>result.Uid</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17973 ">
+<p>Contains a unique ID for the application binary (EXE or DLL).</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17978 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17983 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17968 ">
+<p><code>result.Vendor</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17973 ">
+<p>Contains the vendor of the application.</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17978 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17983 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17968 ">
+<p><code>result.Drive</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17973 ">
+<p>Contains the drive where the application is installed.</p>
+</td>
+<td class="cellrowborder" valign="top" width="24.561403508771928%" headers="d0e17978 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" width="26.31578947368421%" headers="d0e17983 ">
+<p>string</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

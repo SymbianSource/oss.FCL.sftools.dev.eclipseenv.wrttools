@@ -1,0 +1,165 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript SystemInfo Service API (WRT 1.1)"/><meta name="DC.Relation" scheme="URI" content="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7"/><meta name="DC.Relation" scheme="URI" content="GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><title>JavaScript SystemInfo
+Service API (WRT 1.1) </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"><span>JavaScript</span> SystemInfo
+Service API<span> (WRT 1.1)</span></h1><div>
+<p><span>This</span> <a href="GUID-E0ED671A-BBDA-4C07-828F-BD35782D9B36.html#GUID-E0ED671A-BBDA-4C07-828F-BD35782D9B36">SystemInfo Service</a> API
+is supported since <a href="GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664.html#GUID-1A3ECAC1-3F09-4602-A1CD-82164040A664">WRT 1.1</a>.</p>
+<p>The SystemInfo Service API allows <span>widgets</span> to
+access and modify system information on a device. The API is integrated into <span>WRT</span> through
+the <a href="GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559.html#GUID-571AF37F-1E95-462A-92D2-FEA2E62F1559"><code>device</code></a> object.</p>
+<p>For an overview of the service and the API, see section <a href="GUID-E0ED671A-BBDA-4C07-828F-BD35782D9B36.html#GUID-E0ED671A-BBDA-4C07-828F-BD35782D9B36">Accessing and modifying system information</a>.</p>
+<div><h3>Using the SystemInfo Service API</h3>
+<p>To use the SystemInfo Service API, your <span>widget</span> must
+first create <span>a service object for it
+using the <a href="GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080.html#GUID-04095E9A-50E7-4E5F-BD6F-71DA281A0080"><code>device.getServiceObject()</code></a> method</span>.
+Use <code>Service.SysInfo</code> to identify the service provider
+and <code>ISysInfo</code> to identify the supported interface:</p>
+
+<pre class="codeblock" id="GUID-9F7EE91E-7245-44A9-BFAE-BF043CA4E67D-GENIDd0e67882">var so = device.getServiceObject("Service.SysInfo", "ISysInfo");</pre>
+<p>This service object can then be used to access the services provided
+by the API:</p>
+<ul>
+<li><p><a href="GUID-279A3698-D09B-44BF-8340-739E19F94727.html#GUID-279A3698-D09B-44BF-8340-739E19F94727"><code>ISysInfo.GetInfo()</code></a></p>
+</li>
+<li><p><a href="GUID-4347A7F1-1560-4B28-B4A8-DC570864F505.html#GUID-4347A7F1-1560-4B28-B4A8-DC570864F505"><code>ISysInfo.SetInfo()</code></a></p>
+</li>
+<li><p><a href="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E.html#GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"><code>ISysInfo.GetNotification()</code></a></p>
+</li>
+<li><p><a href="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B.html#GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"><code>ISysInfo.Cancel()</code></a></p>
+</li>
+</ul>
+</div>
+<div><h3>Emulator support</h3>
+<p>The S60 5th Edition SDK emulator provides partial support for system
+information. The following table lists the <a href="GUID-B796D072-4E51-4BC7-9259-84530DB3539D.html#GUID-B796D072-4E51-4BC7-9259-84530DB3539D">system
+attributes</a> supported by the emulator.</p>
+<div class="tablenoborder"><a name="GUID-9C3D4648-D3C7-4A15-BB75-144F9338B822"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-9C3D4648-D3C7-4A15-BB75-144F9338B822" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Supported system
+attributes</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e67116">
+<p>Entity</p>
+</th><th class="cellrowborder" valign="top" id="d0e67121">
+<p>Key</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">
+<p><code>Device</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>PlatformVersion</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>PhoneModel</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" colspan="2" valign="top" headers="d0e67116 d0e67121 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">
+<p><code>Display</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>ScreenSaverTimeout</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>UserInactivity</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>KeyGuardTime</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>AutoLockTime</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>AutoLockStatus</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>Wallpaper</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>LightTimeout</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>DisplayResolution</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>DisplayOrientation</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" colspan="2" valign="top" headers="d0e67116 d0e67121 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">
+<p><code>General</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>InputLanguage</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>SupportedLanguages</code></p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>PredictiveText</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" colspan="2" valign="top" headers="d0e67116 d0e67121 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">
+<p><code>Memory</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>ListDrives</code></p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e67116 ">&nbsp;</td>
+<td class="cellrowborder" valign="top" headers="d0e67121 ">
+<p><code>DriveInfo</code></p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

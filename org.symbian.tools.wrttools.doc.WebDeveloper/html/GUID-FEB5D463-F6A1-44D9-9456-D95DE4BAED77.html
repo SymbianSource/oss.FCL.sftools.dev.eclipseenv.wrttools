@@ -1,0 +1,180 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Sensor channel information"/><meta name="DC.Relation" scheme="URI" content="GUID-46FAFCDA-BCF3-41CB-B154-C17BBF7CD755"/><meta name="DC.Relation" scheme="URI" content="GUID-C2731B38-6294-419C-B7E2-AFB918F508D4"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-B77C2006-879F-4AC6-B7BF-04B25B563A29"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-FEB5D463-F6A1-44D9-9456-D95DE4BAED77"/><title>Sensor
+channel information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-FEB5D463-F6A1-44D9-9456-D95DE4BAED77">Sensor
+channel information</h1><div>
+<p>The Sensor Service API uses objects to represent sensor channels. One
+object contains the information for one sensor channel (see the following
+table). The Sensor Service API methods use these sensor channel objects as
+follows:</p>
+<ul>
+<li><p><a href="GUID-46DB749E-A388-46B2-BB13-A274385CA97C.html#GUID-46DB749E-A388-46B2-BB13-A274385CA97C"><code>FindSensorChannel</code></a></p>
+
+<p>The <code>ReturnValue</code> property of the result object is
+an <span>iterator</span> containing
+the requested sensor channel information. Each item (object) in the <span>iterator</span> corresponds
+to one sensor channel matching the <a href="GUID-A4538B4D-0D90-43F8-B1FA-72F616937760.html#GUID-A4538B4D-0D90-43F8-B1FA-72F616937760">search
+criteria</a> specified for the <code>FindSensorChannel</code> call.</p>
+
+</li>
+<li><p><a href="GUID-B4897257-F7BC-4C32-9C6C-A577FDAC5D09.html#GUID-B4897257-F7BC-4C32-9C6C-A577FDAC5D09"><code>RegisterForNotification</code></a></p>
+
+<p>The <code>criteria.ChannelInfoMap</code> property used
+for input is a sensor channel object. It specifies the channel from which
+the <code>RegisterForNotification</code> call registers to receive
+data.</p>
+
+</li>
+<li><p><a href="GUID-C2731B38-6294-419C-B7E2-AFB918F508D4.html#GUID-C2731B38-6294-419C-B7E2-AFB918F508D4"><code>GetChannelProperty</code></a></p>
+
+<p>The <code>criteria.ChannelInfoMap</code> property used
+for input is a sensor channel object. It specifies the channel of the property
+about which the <code>GetChannelProperty</code> call retrieves information.</p>
+
+</li>
+</ul>
+<div class="tablenoborder"><a name="GUID-80590C17-FB93-41B5-9A88-EFA9B29B6253"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-80590C17-FB93-41B5-9A88-EFA9B29B6253" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Sensor channel
+object properties</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="25%" id="d0e65982">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e65987">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e65992">
+<p>Type</p>
+</th><th class="cellrowborder" valign="top" width="25%" id="d0e65997">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>ChannelId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the inique identifier of the channel.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>ContextType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the context in which the channel is available.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>0</code> - Not defined</p></li>
+<li><p><code>1</code> - Ambient sensor, for example to measure
+pressure</p></li>
+<li><p><code>2</code> - Provides information on the device</p>
+</li>
+<li><p><code>3</code> - Measures user-initiated stimulus</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>Quantity</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the quantity being sensed.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">
+<p>Possible values:</p>
+<ul>
+<li><p><code>0</code> - Not defined</p></li>
+<li><p><code>10</code> - Acceleration</p></li>
+<li><p><code>11</code> - Tapping</p></li>
+<li><p><code>12</code> - Orientation</p></li>
+<li><p><code>13</code> - Rotation</p></li>
+<li><p><code>14</code> - Magnetic</p></li>
+<li><p><code>15</code> - Tilt</p></li>
+</ul>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>ChannelType</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the type of the channel. This is the unique identifier of
+the Sensor Subsystem (SSY) that provides data for this channel.</p>
+<p>Each physical sensor registers to the S60 sensor framework as a Sensor
+Subsystem that provides specific sensor data. If the physical sensor provides
+multiple types of data, it can register a separate SSY for each type. For
+example, a sensor that provides both orientation and rotation data can register
+one SSY for orientation data and another for rotation data. <code>ChannelType</code> thus
+identifies a particular SSY representing the channel.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>Location</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the location of the sensor related to the channel.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>VendorId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the vendor ID of the sensor related to the channel.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>string</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">&nbsp;</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>DataItemSize</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the data item size delivered in the channel.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65982 ">
+<p><code>ChannelDataTypeId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65987 ">
+<p>Specifies the unique data type identifier for the data being sensed.</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65992 ">
+<p>number</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="d0e65997 ">&nbsp;</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

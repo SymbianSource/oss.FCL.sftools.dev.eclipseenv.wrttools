@@ -1,0 +1,393 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Location Service API example"/><meta name="DC.Relation" scheme="URI" content="GUID-DEA4164E-5F03-4B57-97B9-4C6238481F89"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-53CE4DE6-F065-4339-8C18-5C30A9540053"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-620340F8-F844-445E-80AA-71C757320B7E"/><title>Location Service API example </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-620340F8-F844-445E-80AA-71C757320B7E">Location Service API example</h1><div>
+<p/>
+<p>This section presents the full source code of a working sample widget
+for the <a href="GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8.html#GUID-4DDE31C7-EC0D-4EEC-BC3A-A0B0351154F8">Location Service</a>.
+You can download the <code>wgz</code> package for this widget from
+section <a href="GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2.html#GUID-775005BC-2FF8-45A9-BBA6-6CED6B5780A2">Example widgets</a>.</p>
+<p>For general information about creating widgets, see section <a href="GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A.html#GUID-0E3095DB-03FF-4240-83F2-6D876AD2083A">Widget component files</a>.</p>
+<p>For widget development and debugging purposes, this example writes its
+output to <code>c:\data\jslog_widget.log</code> using <code>console.info</code>.
+For instructions on how to enable logging in the Web browser for S60, see
+section <a href="GUID-B584CA90-543B-4AED-B134-A3A616259DB9.html#GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript console</a>.</p>
+<div><h3>Info.plist</h3>
+<pre class="codeblock" id="GUID-E8B65BD0-1F31-48F9-B8BE-91706A37AAB2">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+  &lt;key&gt;DisplayName&lt;/key&gt;
+  &lt;string&gt;LocationSample&lt;/string&gt;
+  &lt;key&gt;Identifier&lt;/key&gt;
+  &lt;string&gt;com.nokia.widget.sapi.contact.sample&lt;/string&gt;
+  &lt;key&gt;Version&lt;/key&gt;
+  &lt;string&gt;1.0&lt;/string&gt;
+  &lt;key&gt;MainHTML&lt;/key&gt;
+  &lt;string&gt;location-sample.html&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</pre>
+</div>
+<div><h3>location-sample.html</h3>
+<pre class="codeblock" id="GUID-C0BCD1CE-D35B-49DC-8856-5044E548001E">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script type="text/javascript" src="js/common.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript" src="js/location-sample.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body id='docBody' bgcolor="#ddeeff" onload="setup()" style=width:100%;height:100%;&gt;
+
+    &lt;form name="frm"&gt;
+      &lt;h3&gt;Location API Sample Widget&lt;/h3&gt;
+
+      &lt;input type="button" onclick="getLocation('img1')" value="GetLocation"&gt;&lt;img id="img1" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="getLocationAsync('img2')" value="GetLocationAsync"&gt;&lt;img id="img2" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="traceLocation('img3')" value="Trace"&gt;&lt;img id="img3" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="cancelNotification('img4')" value="CancelNotification"&gt;&lt;img id="img4" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+      &lt;input type="button" onclick="calculateLocation('img5')" value="Calculate"&gt;&lt;img id="img5" src="pic/blank.png" width="25" height="25" align="center"&gt;&lt;br&gt;
+
+      &lt;hr&gt;
+
+      &lt;div class='locationsample' id='locationsample' bgcolor="#ddeeff" style=width:100%;height:100%;overflow:auto&gt;&lt;/div&gt;
+
+    &lt;/form&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div><h3>common.js</h3>
+<pre class="codeblock" id="GUID-E3179BD2-802C-4663-BCEA-2A58D50E980E">// common.js
+//
+// This file contains some utility functions
+
+// Check the error code and show the information to users
+function checkError(message, resultList, divId, imgId)
+{
+  var errCode = resultList.ErrorCode;
+  var msg = "";
+
+  if (errCode) {
+    msg = message + "&lt;BR&gt;" + "Failed Error: " + errCode + "&lt;BR&gt;";
+    if(resultList.ErrorMessage != undefined)
+      msg += "Error Message: " + resultList.ErrorMessage;
+    showIMG(imgId,"no"); 
+  } else {
+    showIMG(imgId,"yes"); 
+  }
+
+  //print error message
+  if(divId != null &amp;&amp; divId != undefined)
+    document.getElementById(divId).innerHTML = msg;
+  console.info(msg);
+
+  return errCode;
+}
+
+// Build the message by reading a iteratorable list in a recursive manner
+function showIterableList(iterator)
+{
+  var msg = "";
+  try
+  {
+    iterator.reset();
+    var item;
+    while (( item = iterator.getNext()) != undefined ){
+      msg += showObject( item );
+    }
+  }
+  catch(e)
+  {
+    alert('&lt;showIterableList&gt; ' + e);
+  }
+  return msg;
+}
+
+// Build the message by reading a JS object in a recursive manner
+function showObject( obj )
+{
+  var txt = "";
+  try { 
+    if ( typeof obj != 'object' )
+      return "" + obj + '&lt;BR/&gt;';
+    else {
+      for(var key in obj) {
+        txt +=  key + ":";
+        txt += showObject( obj[key] );
+        txt += '&lt;BR/&gt;';
+      }
+      txt += '&lt;BR/&gt;';
+    }
+  }
+  catch (e)
+  {
+    alert("showObject: " + e);
+  }
+  return txt;
+}
+
+// Show the image to indicate the test result
+function showIMG(imgId, isOK) 
+{
+  if(imgId == null || imgId == undefined)
+    return;
+
+  if(isOK == "yes")
+    document.getElementById(imgId).src = "pic/yes.png";
+  else if(isOK == "no")
+    document.getElementById(imgId).src = "pic/no.png";
+  else
+    document.getElementById(imgId).src = "pic/blank.png";
+}
+
+// Show elements in object by using 'alert'
+function testObject(obj)
+{
+  var msg = "";
+  for(var key in obj) {
+    msg = msg + ":" + key + "=" + obj[key];
+  }
+  alert(msg);
+}
+
+// Test whether the input is numeric
+function IsNumeric(sText)
+{
+  var ValidChars = "0123456789.";
+  var IsNumber=true;
+  var Char;
+
+  for (i = 0; i &lt; sText.length &amp;&amp; IsNumber == true; i++) 
+  {
+    Char = sText.charAt(i); 
+    if (ValidChars.indexOf(Char) == -1) 
+    {
+      IsNumber = false;
+    }
+  }
+  return IsNumber; 
+}
+</pre>
+</div>
+<div><h3>location-sample.js</h3>
+<pre class="codeblock" id="GUID-43A0ABBF-478C-4700-A339-DA8A5248EC59">// location-sample.js
+// 
+// In this sample Location will be listed, traced, and calculated. 
+// Also, Also, async operation will be canceled.
+//
+
+//SAPI Error Codes
+// 0  - Success
+// 1000 - InvalidServiceArgument
+// 1001 - UnknownArgumentName
+// 1002 - BadArgumentType
+// 1003 - MissingArgument
+// 1004 - ServiceNotSupported
+// 1005 - ServiceInUse
+// 1006 - ServiceNotReady
+// 1007 - NoMemory
+// 1008 - HardwareNotAvailable
+// 1009 - ServerBusy
+// 1010 - EntryExists
+// 1011 - AccessDenied
+// 1012 - NotFound
+// 1013 - UnknownFormat
+// 1014 - GeneralError
+// 1015 - CancelSuccess
+// 1016 - ServiceTimedOut
+// 1017 - PathNotFound
+
+// Declare the service object 
+var so;
+
+// imgid for callback1 function
+var imgid_callback1;
+
+// imgid for callback2 function
+var imgid_callback2;
+
+// id of the div used to display information
+const DIV_ID = 'locationsample';
+
+// Called from onload()
+function setup()
+{
+  try {
+    so = device.getServiceObject("Service.Location", "ILocation");
+    console.info("setup: so: %s", so);
+  }
+  catch (e) {
+    alert('&lt;setup&gt; ' +e);
+  }
+}
+
+// Get Location
+function getLocation(imgId) {
+
+  // This specifies update option used while retrieving location estimation. 
+  var updateoptions = new Object();
+  // Setting PartialUpdates to 'FALSE' ensures that user get atleast 
+  // BasicLocationInformation (Longitude, Lattitude, and Altitude.)
+  updateoptions.PartialUpdates = false;
+
+  var criteria = new Object();
+  criteria.LocationInformationClass = "GenericLocationInfo";
+  criteria.Updateoptions = updateoptions;
+
+  try {
+    var result = so.ILocation.GetLocation(criteria);
+    if(!checkError("ILocation::getLocation",result,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showObject(result.ReturnValue);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getLocation: " + e);
+  }
+}
+
+// Get Location Async
+function getLocationAsync(imgId) {
+
+  // This specifies update option used while retrieving location estimation. 
+  var updateoptions = new Object();
+  // Setting PartialUpdates to 'FALSE' ensures that user get atleast 
+  // BasicLocationInformation (Longitude, Lattitude, and Altitude.)
+  updateoptions.PartialUpdates = false;
+
+  var criteria = new Object();
+  criteria.LocationInformationClass = "GenericLocationInfo";
+  criteria.Updateoptions = updateoptions;
+
+  // Set image id for callback1 function
+  imgid_callback1 = imgId;
+
+  try {
+    var result = so.ILocation.GetLocation(criteria, callback1);
+    if(!checkError("ILocation::getLocationAsync",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("getLocationAsync: " + e);
+  }
+}
+
+// Trace Location
+function traceLocation(imgId) {
+
+  // This specifies update option used while retrieving location estimation. 
+  var updateoptions = new Object();
+  // Setting PartialUpdates to 'FALSE' ensures that user get atleast 
+  // BasicLocationInformation (Longitude, Lattitude, and Altitude.)
+  updateoptions.PartialUpdates = false;
+
+  var criteria = new Object();
+  criteria.LocationInformationClass = "GenericLocationInfo";
+  criteria.Updateoptions = updateoptions;
+
+  // Set image id for callback2 function
+  imgid_callback2 = imgId;
+
+  try {
+    var result = so.ILocation.Trace(criteria, callback2);
+    if(!checkError("ILocation::traceLocation",result,DIV_ID,imgId)) {
+      showIMG(imgId,"");
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("traceLocation: " + e);
+  }
+}
+
+// Cancel Notification
+function cancelNotification(imgId) {
+
+  // "TraceCancel"
+  // "GetLocCancel"
+  var msg = "Please enter the type ['GetLocCancel' or 'TraceCancel']";
+  var cancelRequestType = prompt(msg, "TraceCancel");
+
+  if(cancelRequestType == "" || cancelRequestType == null)
+    return;
+
+  var criteria = new Object();
+  criteria.CancelRequestType = cancelRequestType;
+
+  try {
+    var result = so.ILocation.CancelNotification(criteria);
+    checkError("ILocation::cancelNotification",result,DIV_ID,imgId);   
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("cancelNotification: " + e);
+  }
+}
+
+// Calculate Location
+function calculateLocation(imgId) {
+
+  // "FindDistance"
+  // "FindBearingTo"
+  // "MoveCoordinates"
+  var msg = "enter ['FindDistance' or 'FindBearingTo' or 'MoveCoordinates']";
+  var mathRequest = prompt(msg, "FindDistance");
+  
+  if(mathRequest == "" || mathRequest == null)
+    return;
+
+  var distanceSrc = new Object();
+  distanceSrc.Latitude = 40.69;
+  distanceSrc.Longitude = 74.04; 
+  distanceSrc.Altitude = 59;
+
+  var distanceDest = new Object();
+  distanceDest.Latitude = 42.48;
+  distanceDest.Longitude = 71.19;
+  distanceDest.Altitude = 2;
+
+  var criteria = new Object();
+  criteria.MathRequest = mathRequest;
+  criteria.DistanceParamSource = distanceSrc;
+  criteria.DistanceParamDestination = distanceDest;
+  // The two parameters below are applicable only for Move coordinates (not for Find Distance and Find Bearing)
+  criteria.MoveByThisDistance = 10.0;
+  criteria.MoveByThisBearing = 10.0;
+
+  try {
+    var result = so.ILocation.Calculate(criteria);
+    if(!checkError("ILocation::Calculate",result,DIV_ID,imgId)) {
+      document.getElementById(DIV_ID).innerHTML = showObject(result.ReturnValue);
+    }
+  }
+  catch (e) {
+    showIMG(imgId,"no");
+    alert ("calculateLocation: " + e);
+  }
+}
+
+// This is the asynchronous callback handler 
+function callback1(transId, eventCode, result)
+{
+  console.info("getLocationAsync: transId: %d  eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("ILocation::getLocationAsync",result,DIV_ID,imgid_callback1)) {
+    document.getElementById(DIV_ID).innerHTML = showObject(result.ReturnValue);
+  }
+}
+
+// This is the asynchronous callback handler 
+function callback2(transId, eventCode, result)
+{
+  console.info("traceLocation: transId: %d eventCode: %d result.ErrorCode: %d", transId, eventCode, result.ErrorCode);
+  if(!checkError("ILocation::traceLocation",result,DIV_ID,imgid_callback2)) {
+    document.getElementById(DIV_ID).innerHTML = showObject(result.ReturnValue);
+  }
+}
+</pre>
+</div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

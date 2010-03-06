@@ -1,0 +1,34 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="concept"/><meta name="DC.Title" content="Using focus"/><meta name="abstract" content="Placing focus points on items on screens allows users to select them. For example, users can activate text fields to type text, open lists to select items, or press buttons to execute functions. When using mobile devices, users have a shorter attention spans and are frequently distracted from the task at hand. You should not trust users to remember what they were doing on the device before they were distracted. Make the focus of the controls stand out visually by highlighting it on the screen. You can highlight items by placing a border around buttons or text fields or by using a selection bar in lists."/><meta name="description" content="Placing focus points on items on screens allows users to select them. For example, users can activate text fields to type text, open lists to select items, or press buttons to execute functions. When using mobile devices, users have a shorter attention spans and are frequently distracted from the task at hand. You should not trust users to remember what they were doing on the device before they were distracted. Make the focus of the controls stand out visually by highlighting it on the screen. You can highlight items by placing a border around buttons or text fields or by using a selection bar in lists."/><meta name="DC.Relation" scheme="URI" content="GUID-83BFFEB2-D4F5-48DF-830A-602961ACD47A"/><meta name="DC.Relation" scheme="URI" content="GUID-D54DEFE7-E878-4530-B707-A5388DFE1D9D"/><meta name="DC.Relation" scheme="URI" content="GUID-C359CC7E-B8BA-491B-A0C4-0FF1D3C4110C"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-E75BCEAE-6673-4ADF-9DC2-058F0C8C0DBB"/><meta name="DC.Language" content="en"/><title>Using focus </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-E75BCEAE-6673-4ADF-9DC2-058F0C8C0DBB">Using focus</h1><div><p>Placing focus points on items on screens allows users to select them. For example, users can activate text fields to type text, open lists to select items, or press buttons to execute functions. When using mobile devices, users have a shorter attention spans and are frequently distracted from the task at hand. You should not trust users to remember what they were doing on the device before they were distracted. Make the focus of the controls stand out visually by highlighting it on the screen. You can highlight items by placing a border around buttons or text fields or by using a selection bar in lists. </p>
+<div><h3>Specifying focus points</h3><p>Use the five point navigation key to move the focus between items on the screen. Observe the following general rules:</p><ul>
+<li><p>You can specify several focus points within a widget. You do not need to activate focus points separately.</p></li>
+<li><p>Decide which focus point the focus is on when the widget opens.</p></li>
+<li><p>On key press, move focus to the closest focus point in the selected direction.</p></li>
+<li><p>You can allow users to select focus points to open applications, perform functions, and open popup windows.</p></li>
+</ul><p>For examples of setting focus, see the <a href="http://www.forum.nokia.com/info/sw.nokia.com/id/1c27d9d7-8946-4e26-947d-2b140c454876/Web_Run-Time_AccuWidget_Example.html" target="_blank">AccuWeather Example</a> on Forum Nokia.</p></div>
+<div><h3>Using focus on touch devices</h3><p>On touch devices, users can use a finger or stylus to select items on screens. To allow users to perform their tasks fluently, enable direct manipulation of items and minimize the need to switch from touch to hardware keys. Allow users to complete their tasks using the same interaction method that they started it with.</p></div>
+<div><h3>To specify focus points within widgets</h3><p>Use the HTML Document Object Management (DOM) <code>focus()</code> method to set focus on a DOM <code>text</code> object.</p><pre class="codeblock">&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript"&gt;
+function setFocus()
+  {
+  document.getElementById('text1').focus()
+  }
+function loseFocus()
+  {
+  document.getElementById('text1').blur()
+  }
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;&lt;form&gt;
+&lt;input type="text" id="text1" /&gt;
+&lt;br /&gt;
+&lt;input type="button" onclick="setFocus()" value="Set focus" /&gt;
+&lt;input type="button" onclick="loseFocus()" value="Lose focus" /&gt;
+&lt;/form&gt;&lt;/body&gt;
+&lt;/html&gt;</pre></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

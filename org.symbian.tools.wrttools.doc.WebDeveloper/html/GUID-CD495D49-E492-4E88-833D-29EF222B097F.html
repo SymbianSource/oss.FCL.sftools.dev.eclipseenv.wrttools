@@ -1,0 +1,199 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Returned contact information"/><meta name="DC.Relation" scheme="URI" content="GUID-06C803FE-DD16-44B5-B9C7-2EC9D497D425"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-A5853293-7B83-4CCE-9C29-B2B8F0CD8A18"/><meta name="DC.Relation" scheme="URI" content="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-CD495D49-E492-4E88-833D-29EF222B097F"/><title>Returned
+contact information </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-CD495D49-E492-4E88-833D-29EF222B097F">Returned
+contact information</h1><div>
+<p>The <code>ReturnValue</code> property returned by a synchronous <a href="GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007.html#GUID-37C9E5F0-BEA9-4E0B-A40D-B953B3551007"><code>GetList</code></a> call
+and by <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for
+an asynchronous <code>GetList</code> call is an iterator containing
+the requested contact information. Each item (object) in the iterator corresponds
+to one contact, contact group, or contacts database, depending on <a href="GUID-06C803FE-DD16-44B5-B9C7-2EC9D497D425.html#GUID-06C803FE-DD16-44B5-B9C7-2EC9D497D425">what
+type of contact information was requested</a>:</p>
+<ul>
+<li><p><a href="#GUID-416686B8-301C-4D47-89B7-E22813FBF9AB">Table:
+ReturnValue properties for a contact</a> describes the information returned
+per <strong>contact</strong>. The contact details are contained in one or more keys,
+with each key representing a specific piece of information.</p></li>
+<li><p><a href="#GUID-692CB508-902B-4DF3-B31E-D4E45C901AE0">Table:
+ReturnValue properties for a contact group</a> describes the information
+returned per <strong>contact group</strong>.</p></li>
+<li><p><a href="#GUID-316C6D3D-718D-4738-9643-7AD9D585AFBF">Table:
+ReturnValue properties for a contacts database</a> describes the information
+returned per <strong>contacts database</strong>.</p></li>
+</ul>
+<div class="tablenoborder"><a name="GUID-416686B8-301C-4D47-89B7-E22813FBF9AB"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-416686B8-301C-4D47-89B7-E22813FBF9AB" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue properties
+for a contact</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31329">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31334">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31339">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31329 ">
+<p><code>&lt;item&gt;.id</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31334 ">
+<p>Unique identifier of the contact.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31339 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31329 ">
+<p><code>&lt;item&gt;.&lt;key&gt;</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31334 ">
+<p>Each key represents one piece of contact information, such as first
+name, last name, home phone number, or email address. For each contact, <code>GetList</code> returns
+as many keys as has been defined for that contact.</p>
+<p>For example:</p>
+<ul>
+<li><p><code>&lt;item&gt;.FirstName</code></p></li>
+<li><p><code>&lt;item&gt;.LastName</code></p></li>
+<li><p><code>&lt;item&gt;.LandPhoneHome</code></p></li>
+<li><p><code>&lt;item&gt;.EmailHome</code></p></li>
+</ul>
+<p>For a list of supported keys, see section <a href="GUID-686FDCE2-4487-4402-8347-875350D30163.html#GUID-686FDCE2-4487-4402-8347-875350D30163">Supported contact keys</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31339 ">
+<p>object</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31329 ">
+<p><code>&lt;item&gt;.&lt;key&gt;.Label</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31334 ">
+<p>Label that describes the key value.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31339 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31329 ">
+<p><code>&lt;item&gt;.&lt;key&gt;.Value</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31334 ">
+<p>Value defined for the key.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31339 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31329 ">
+<p><code>[&lt;item&gt;.&lt;key&gt;.Next]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31334 ">
+<p>This is an object that represents an additional value defined for the
+key. This object contains the same properties as a key: <code>Label</code>, <code>Value</code>,
+and optionally <code>Next</code>, where <code>Next</code> is
+an object identical to this one, representing yet another value defined for
+the same key.</p>
+<p>There is no limit to how many nested values a key can contain.</p>
+<p>For example, an <code>EmailHome</code> key with two values (two
+email addresses) has the following property structure:</p>
+<ul>
+<li><p><code>&lt;item&gt;.EmailHome</code></p></li>
+<li><p><code>&lt;item&gt;.EmailHome.Label</code></p></li>
+<li><p><code>&lt;item&gt;.EmailHome.Value</code></p></li>
+<li><p><code>&lt;item&gt;.EmailHome.Next</code></p></li>
+<li><p><code>&lt;item&gt;.EmailHome.Next.Label</code></p>
+</li>
+<li><p><code>&lt;item&gt;.EmailHome.Next.Value</code></p>
+</li>
+</ul>
+<p>The first email address is contained in <code>&lt;item&gt;.EmailHome.Value</code> and
+the second one in <code>&lt;item&gt;.EmailHome.Next.Value</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31339 ">
+<p>object</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-692CB508-902B-4DF3-B31E-D4E45C901AE0"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-692CB508-902B-4DF3-B31E-D4E45C901AE0" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue
+properties for a contact group</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31572">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31577">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31582">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31572 ">
+<p><code>&lt;item&gt;.id</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31577 ">
+<p>Unique identifier of the contact group.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31582 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31572 ">
+<p><code>&lt;item&gt;.GroupLabel</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31577 ">
+<p>Name of the group.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31582 ">
+<p>string</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31572 ">
+<p><code>&lt;item&gt;.Contents</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31577 ">
+<p>Contains the IDs of the contacts that belong to the group.</p>
+<p><code>Contents[0]</code> contains the ID of the first listed
+contact.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31582 ">
+<p>array of strings</p>
+</td>
+</tr>
+</tbody>
+</table></div><div class="tablenoborder"><a name="GUID-316C6D3D-718D-4738-9643-7AD9D585AFBF"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-316C6D3D-718D-4738-9643-7AD9D585AFBF" frame="border" border="1" rules="all"><caption><strong>Table: </strong>ReturnValue
+properties for a contacts database</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31677">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31682">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e31687">
+<p>Type</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31677 ">
+<p><code>&lt;item&gt;.DBUri</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31682 ">
+<p>URI of the contacts database.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e31687 ">
+<p>string</p>
+</td>
+</tr>
+</tbody>
+</table></div></div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

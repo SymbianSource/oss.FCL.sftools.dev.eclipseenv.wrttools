@@ -1,0 +1,37 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="drivefree()"/><meta name="DC.Relation" scheme="URI" content="GUID-FED41C53-03B6-44A8-BEBB-0576E037B62B"/><meta name="DC.Relation" scheme="URI" content="GUID-FD1799EE-A7AB-488C-9159-2BC315058DC0"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-1A678A11-0BDD-4F64-9F40-013F6CDB81D7"/><meta name="DC.Relation" scheme="URI" content="GUID-896164BE-C1A6-42BF-B2BD-7C63CF8C166A"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-0A0DE525-723F-45BD-9F10-76AAB4616426"/><title>drivefree() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-0A0DE525-723F-45BD-9F10-76AAB4616426">drivefree()</h1><div>
+<p><strong>Syntax:</strong></p>
+<pre class="codeblock" id="GUID-30D42D54-E708-4704-8897-3356E0EF9133">[int] sysinfo.drivefree(String drivename)</pre>
+<p><strong>Description:</strong></p>
+<p>The <code>drivefree</code> method can be used to detect the space available for memory storage on a device.</p>
+<p><strong>Argument:</strong></p>
+<ul>
+<li><p><code>drivename</code>:</p>
+
+<p>Specifies the name of a drive to be examined.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p>If the drive exists, this method returns an integer value indicating the available space on the specified drive, measured in bytes.</p>
+<p><strong>Example code:</strong></p>
+<pre class="codeblock" id="GUID-B6522445-704B-4521-9A80-DBF635EA7526">function checkDrivesInformation() {
+  var space = 0;
+  // get existing user's drives
+  var allDrives = sysinfo.drivelist;
+  var drives = allDrives.split(" ");
+  // read and print all drives’ name and information
+  for (var i=0; i&lt;drives.length; i++) {
+     space = sysinfo.drivesize(drives[i]);
+     space /=1024; // convert from bytes to kB
+     alert("Total space of drive "+drives[i]+" ="+space+"kB";
+     space = sysinfo.drivefree(drives[i]);
+     space /=1024; // convert from bytes to kB
+     alert("Free space of drive "+drives[i]+" ="+space+"kB";
+     }
+  }</pre>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

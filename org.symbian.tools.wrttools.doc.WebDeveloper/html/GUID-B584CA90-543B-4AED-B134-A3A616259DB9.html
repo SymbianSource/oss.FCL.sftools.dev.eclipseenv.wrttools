@@ -1,0 +1,124 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="JavaScript console"/><meta name="DC.Relation" scheme="URI" content="GUID-2A74FA05-A13B-4133-8E1A-03152B6B1499"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-B584CA90-543B-4AED-B134-A3A616259DB9"/><title>JavaScript
+console </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-B584CA90-543B-4AED-B134-A3A616259DB9">JavaScript
+console</h1><div>
+<p>All modern desktop browsers provide features to support developers debugging
+JavaScript.  While the browsers do not directly integrate true debugging support,
+they usually support directing JavaScript error messages and logging statements
+to either a console display or popup messages. Mozilla Firefox supports this
+feature.</p>
+<p>Consider the following trivial example of a web page with a JavaScript
+error.  It calls the method <code>document.writex()</code> which does
+not exist.</p>
+<pre class="codeblock" id="GUID-211D95D2-CA00-4EF4-9AC0-8943EEC6EA38">&lt;html&gt;
+&lt;body&gt;
+&lt;script language = "JavaScript"&gt;
+document.write('Testing1&lt;br/&gt;\n');
+document.writex('Testing2&lt;br&gt;\n');
+&lt;/script&gt;
+Test Page
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<ul>
+<li><p>SETTINGS</p></li>
+</ul>
+<p>Go to <strong> Web &gt; Settings &gt; General</strong> and select the following option</p>
+<p> •	Java/ECMA Script </p>
+<p>This option provides you support to enable/disable JavaScript.</p>
+<div class="figure" id="GUID-A03C42D5-8BE6-4322-B116-B369BD9A976D"><img src="GUID-90ECCB11-41D3-4022-9DC0-F3770195F7FE_d0e10560_href.png"/></div>
+<div class="tablenoborder"><a name="GUID-3BF9531A-3083-42C2-B550-78A95AA96793"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-3BF9531A-3083-42C2-B550-78A95AA96793" frame="border" border="1" rules="all">
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top">
+<p><strong>Enable</strong></p>
+</td>
+<td class="cellrowborder" valign="top">
+<p>Enable JavaScript Console Support</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top">
+<p><strong>Disable</strong></p>
+</td>
+<td class="cellrowborder" valign="top">
+<p>Disable JavaScript Console Support</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>•	Java/ECMA Script errors </p>
+<p>This option provides you choices to display and log errors.</p>
+<div class="figure" id="GUID-5300E803-3565-4664-A98B-AB64C9D063C1"><div><img src="GUID-6C793265-794B-49DB-BB14-B1D1F5F0CF6C_d0e10613_href.png" style="display: block"/></div></div>
+<div class="tablenoborder"><a name="GUID-8993D51E-F5AD-4EB2-AE60-2BA5FC0A0937"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-8993D51E-F5AD-4EB2-AE60-2BA5FC0A0937" frame="border" border="1" rules="all">
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top">
+<p><strong>No Notification</strong></p>
+</td>
+<td class="cellrowborder" valign="top">
+<p>Enable JavaScript Console Support</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top">
+<p><strong>Create Log file</strong></p>
+</td>
+<td class="cellrowborder" valign="top">
+<p>It will create log file to the <code>C:\Data</code> folder of SDK</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top">
+<p><strong>Show pop-up notes</strong></p>
+</td>
+<td class="cellrowborder" valign="top">
+<p>It will show pop-up notes on the emulator screen</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top">
+<p><strong>Log and pop-up notes</strong></p>
+</td>
+<td class="cellrowborder" valign="top">
+<p>It will show pop-up notes and create logs to <code>C:\Data</code> folder
+of the SDK</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><p>ERROR SCENARIO </p></li>
+</ul>
+<p>Try to run the JavaScript example that has an error. Just like an ordinary
+browser, it will display error message based on your selected criteria from
+the web settings.</p>
+<div class="figure" id="GUID-7AAA0735-CB62-4890-8D76-19A47A799E9E"><div><img src="GUID-A063B243-A746-4E10-8787-A08CD8818118_d0e10708_href.png" style="display: block"/></div></div>
+<ul>
+<li><p>HOW TO USE</p></li>
+</ul>
+<p>Below is the functional description of how this feature can be used.</p>
+<ol>
+<li id="GUID-7A345BE8-057D-414C-A539-7FB378396FD1"><a name="GUID-7A345BE8-057D-414C-A539-7FB378396FD1"><!----></a><p> An option
+for JavaScript console is added to the Browser settings. There are three options
+for this setting: <strong>Disable</strong>, <strong>Prompt</strong> and <strong>Log</strong>.</p>
+<ul>
+<li><p>	When the <strong>Disable</strong> option is selected, the JavaScript
+console for browser / widgets are disabled.</p></li>
+<li><p>When the <strong>Prompt</strong> option is selected, JavaScript errors
+and exceptions are presented in a popup dialog</p></li>
+<li><p>When the <strong>Log</strong> option is selected, JavaScript errors
+and exceptions are logged into a text file that is placed in a user accessible
+area of the device’s file system. For example, <code>C:\data</code></p>
+</li>
+</ul>
+</li>
+<li id="GUID-75FA73E5-7A82-46B1-8325-67A89952286B"><a name="GUID-75FA73E5-7A82-46B1-8325-67A89952286B"><!----></a><p>JavaScript
+console supports <code>console.log</code> for logging messages to the
+console</p></li>
+</ol>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

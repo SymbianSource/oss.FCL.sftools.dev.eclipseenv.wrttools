@@ -1,0 +1,165 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="IAppManager.LaunchDoc()"/><meta name="DC.Relation" scheme="URI" content="GUID-64CC3AB4-5444-474A-9470-818F423C5611"/><meta name="DC.Relation" scheme="URI" content="GUID-697AFF1F-24C7-43BD-A072-8352B3BE973C"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-2D651505-F68C-4053-B565-9FF826C5B897"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA"/><title>IAppManager.LaunchDoc() </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-41FAD7DA-0DB7-48E7-BD60-58D6BFD785DA"><span>IAppManager.</span>LaunchDoc()</h1><div>
+<p><strong>Description:</strong></p>
+<p>The <code>LaunchDoc</code> method launches an application based
+on a given document. This method automatically determines which application
+to launch for the specified document. </p>
+<p>The application can be launched as chained (embedded) or stand-alone.
+For more information about embedded and stand-alone applications, see section <a href="GUID-E092BF10-C076-4476-9E80-87919940201B.html#GUID-E092BF10-C076-4476-9E80-87919940201B">Accessing and launching installed applications</a>. </p>
+<p>This method can be called both synchronously and asynchronously.</p>
+<p><strong>Syntax:</strong></p>
+<p>For synchronous calls:</p>
+<pre class="codeblock" id="GUID-1AF88F9E-C308-4DCA-9695-BD8216288E16">result = so.IAppManager.LaunchDoc(criteria);</pre>
+
+<p>For asynchronous calls:</p>
+<pre class="codeblock" id="GUID-1D4D1F0D-8AEF-42A3-A3F8-ECF7F529F3A0">result = so.IAppManager.LaunchDoc(criteria, callback);</pre>
+
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><code>criteria</code>:</p>
+
+<p>This is an object that specifies which application to launch. For more
+information about the object properties and how to define them, see section <a href="GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51.html#GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51">Criteria for launching an application</a>.</p>
+
+</li>
+<li><p><code>callback</code>:</p>
+
+<p>The <code>callback</code> argument is the name of the method
+that is executed when an asynchronous <code>LaunchDoc</code> call
+has status information to return. You must define this method separately.
+Follow the instructions in section <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining the callback handler for an asynchronous method</a> to
+define the <code>callback</code> method.</p>
+<p>This argument is used only with an asynchronous <code>LaunchDoc</code> call.</p>
+
+</li>
+</ul>
+<p><strong>Return value:</strong></p>
+<p/>
+<p>If synchronous, the <code>LaunchDoc</code> method returns an
+object that contains the name of the newly created document, if applicable,
+an error code, and an error message.</p>
+<div class="tablenoborder"><a name="GUID-77A79969-6A76-434C-B4DB-BCEC081D7818"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-77A79969-6A76-434C-B4DB-BCEC081D7818" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for a synchronous LaunchDoc</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e18965">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e18970">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e18975">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18965 ">
+<p><code>[result.ReturnValue]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18970 ">
+<p>This is a string that contains the name of the newly created document,
+if any.</p>
+<p>This property is optional. A new document is created only when both
+of the following are true:</p>
+<ul>
+<li><p><code>criteria.MIMEType</code> is specified as <a href="GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51.html#GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51">input</a>.</p></li>
+<li><p>The launched application creates a new document. </p>
+</li>
+</ul>
+<p>A document name is never returned when <code>criteria.Document</code> is specified as <a href="GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51.html#GUID-7B5D75D4-33A1-43A7-84EC-51CEB1CE8D51">input</a>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18975 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18965 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18970 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18975 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18965 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18970 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e18975 ">
+<p>See <a href="GUID-50795090-A429-41CF-8CAA-EA2004D2643A.html#GUID-50795090-A429-41CF-8CAA-EA2004D2643A">AppManager Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>If asynchronous, the <code>LaunchDoc</code> method returns an
+object that contains the initial return value for the asynchronous call it
+started (see the following table). The actual result information is returned
+by the <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> method
+in the <code>ReturnValue</code> property of its result object. The
+returned information is described in the preceding table.</p>
+<div class="note"><p><strong class="note_title">Note: </strong>If <a href="GUID-64CC3AB4-5444-474A-9470-818F423C5611.html#GUID-64CC3AB4-5444-474A-9470-818F423C5611"><code>Cancel</code></a> is
+called on an ongoing asynchronous request, <code>LaunchDoc</code> does
+not return a notification when the launched application terminates.</p>
+</div>
+<div class="tablenoborder"><a name="GUID-6E7D70DD-D75A-41C0-9CC7-96448229FA08"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-6E7D70DD-D75A-41C0-9CC7-96448229FA08" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Return value
+properties for an asynchronous LaunchDoc</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e19120">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e19125">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e19130">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19120 ">
+<p><code>result.TransactionID</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19125 ">
+<p>This is a number used as an identification to match transactions started
+with the asynchronous <code>LaunchDoc</code> call to one or more calls
+it generates to <code>callback</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19130 ">&nbsp;</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19120 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19125 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19130 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19120 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19125 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e19130 ">
+<p>See <a href="GUID-50795090-A429-41CF-8CAA-EA2004D2643A.html#GUID-50795090-A429-41CF-8CAA-EA2004D2643A">AppManager Service API error messages</a>.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Example code:</strong></p>
+<p/>
+<p>For the complete source of a sample widget
+that demonstrates how to use this Service API, see <a href="GUID-2D47E7D9-199D-4D59-BD6A-592FA9F8B16A.html#GUID-2D47E7D9-199D-4D59-BD6A-592FA9F8B16A">the
+full example</a>.</p>
+
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

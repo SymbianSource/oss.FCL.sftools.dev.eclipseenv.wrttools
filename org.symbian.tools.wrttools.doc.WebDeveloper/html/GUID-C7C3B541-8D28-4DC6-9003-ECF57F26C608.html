@@ -1,0 +1,137 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="Defining the callback handler for an asynchronous method"/><meta name="DC.Relation" scheme="URI" content="GUID-E9A578AA-58C5-4902-B418-4CE44EA40D5D"/><meta name="DC.Relation" scheme="URI" content="GUID-1EFD7043-E9B8-4B4E-9EA6-A20B3EECC14A"/><meta name="DC.Relation" scheme="URI" content="GUID-46EABDC1-37CB-412A-ACAD-1A1A9466BB68"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"/><title>Defining
+the callback handler for an asynchronous method </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608">Defining
+the callback handler for an asynchronous method</h1><div>
+<p>The callback handler method is used with an asynchronous method call
+to retrieve the information requested by the call. The asynchronous call initiates
+the callback handler and then returns a <code>TransactionID</code>.
+This ID is used to map the asynchronous call to the correct callback handler
+instance and the result information it returns. You can call the result handler
+method from within the callback handler.</p>
+<p>Define a callback handler method for any <a href="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C.html#GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C">Service
+API</a> method that is called asynchronously. Use the following method
+signature:</p>
+
+
+
+<pre class="codeblock" id="GUID-A044965C-8E27-42AA-B7FE-F2F025955FB9">callback(transId, eventCode, result)</pre>
+<p>The system supplies the expected arguments:</p>
+<div class="tablenoborder"><a name="GUID-C0E6D8A6-2C30-4D8A-9572-5CF593A43C52"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-C0E6D8A6-2C30-4D8A-9572-5CF593A43C52" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Callback arguments</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e9121">
+<p>Argument</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e9126">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e9131">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9121 ">
+<p><code>transId</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9126 ">
+<p>This is a number representing the transaction that called the callback
+handler.</p>
+<p><code>TransactionID</code> was returned as part of the result
+of the initial asynchronous call.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9131 ">&nbsp;</td>
+</tr>
+
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9121 ">
+<p><code>eventCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9126 ">
+<p>This is a number representing the callback return status.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9131 ">
+<p><strong>Value - Description:</strong></p>
+<p><code>2</code> - Event completed</p>
+<p><code>4</code> - Event error</p>
+<p><code>9</code> - Event in progress</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9121 ">
+<p><code>result</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9126 ">
+<p>This is an object for holding the callback return value.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9131 ">
+<p>See the following table.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The callback handler returns an object that contains the requested information,
+an error code, and an error message:</p>
+<div class="tablenoborder"><a name="GUID-E43BC9EA-3EBE-4C7F-A57E-A1C33BB01CF4"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-E43BC9EA-3EBE-4C7F-A57E-A1C33BB01CF4" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Callback return
+value</caption>
+
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e9242">
+<p>Property</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e9247">
+<p>Description</p>
+</th><th class="cellrowborder" valign="top" width="33.33333333333333%" id="d0e9252">
+<p>Value</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9242 ">
+<p><code>[result.ReturnValue]</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9247 ">
+<p>This contains the information requested by the asynchronous call that
+initiated the callback handler.</p>
+<p>If an asynchronous call does not request any information to be returned,
+this property is not included in the callback return value. In this case,
+the callback handler only returns <code>ErrorCode</code> and <code>ErrorMessage</code>.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9252 ">
+<p>Depends on the <a href="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C.html#GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C">Service
+API</a> and the asynchronous method that was called. Not all calls return
+this property. See the appropriate method definition.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9242 ">
+<p><code>result.ErrorCode</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9247 ">
+<p>This is a number that specifies a predefined error code.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9252 ">
+<p>See <a href="GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4.html#GUID-0A215AF3-59F0-4158-842C-0D7B030E5EA4">Service API error codes</a>.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9242 ">
+<p><code>result.ErrorMessage</code></p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9247 ">
+<p>This is a text string that describes the error.</p>
+</td>
+<td class="cellrowborder" valign="top" width="33.33333333333333%" headers="d0e9252 ">
+<p>Depends on the <a href="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C.html#GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C">Service
+API</a> and the asynchronous method that was called. See the appropriate
+method definition.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p/>
+
+
+
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>

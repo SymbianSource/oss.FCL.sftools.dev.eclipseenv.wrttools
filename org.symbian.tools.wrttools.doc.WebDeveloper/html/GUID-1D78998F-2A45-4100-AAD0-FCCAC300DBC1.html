@@ -1,0 +1,259 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="copyright" content="(C) Copyright 2009"/><meta name="DC.rights.owner" content="(C) Copyright 2009"/><meta name="DC.Type" content="mobileconcept"/><meta name="DC.Title" content="SystemInfo Service API error messages"/><meta name="DC.Relation" scheme="URI" content="GUID-7C9CCFF3-A6E0-4593-8315-1A0EAAFD05AF"/><meta name="DC.Relation" scheme="URI" content="GUID-B796D072-4E51-4BC7-9259-84530DB3539D"/><meta name="DC.Relation" scheme="URI" content="GUID-7C69DDA4-16F1-4A8F-BDB2-4CB0015B4E81"/><meta name="DC.Relation" scheme="URI" content="GUID-65AAF569-D347-462B-B59A-9D7CA184AB9C"/><meta name="DC.Relation" scheme="URI" content="GUID-AEB26A58-1DE2-46CB-81EC-6DB3A477B7A3"/><meta name="DC.Format" content="XHTML"/><meta name="DC.Identifier" content="GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1"/><title>SystemInfo Service API error messages </title><script type="text/javascript">
+      function initPage() {}
+    </script><link href="../PRODUCT_PLUGIN/book.css" rel="stylesheet" type="text/css"/><link href="css/s60/style.css" rel="stylesheet" type="text/css" media="all"/></head><body onload="initPage();"><div class="body"><div class="contentLeft prTxt"><h1 class="pageHeading" id="GUID-1D78998F-2A45-4100-AAD0-FCCAC300DBC1">SystemInfo Service API error messages</h1><div>
+<p>This section provides information about the error messages returned
+by the SystemInfo Service API methods.</p>
+<div><h3>Generic error messages</h3>
+<p>The following table describes the error messages returned during the
+loading of the service provider.</p>
+<div class="tablenoborder"><a name="GUID-ED5713D6-8840-4DE7-828B-A08A43EC0873"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-ED5713D6-8840-4DE7-828B-A08A43EC0873" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Service provider
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e75687">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e75692">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e75687 ">
+<p><code>SysInfo:Requested interface not supported by the provider</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75692 ">
+<p>The requested interface is not supported by the service provider.</p>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>The following table describes the error messages returned for unsupported
+methods.</p>
+<div class="tablenoborder"><a name="GUID-299DE7C7-4697-4346-B00C-819F055217E5"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-299DE7C7-4697-4346-B00C-819F055217E5" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Unsupported method
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e75734">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e75739">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e75734 ">
+<p><code>SysInfo:&lt;XXXX&gt;: Command Not Supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75739 ">
+<p>The <code>&lt;XXXX&gt;</code> method is not supported by the service
+provider.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>GetInfo</h3>
+<p>The following table describes the error messages returned by <a href="GUID-279A3698-D09B-44BF-8340-739E19F94727.html#GUID-279A3698-D09B-44BF-8340-739E19F94727"><code>GetInfo</code></a> and <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <code>GetInfo</code> as
+part of their return value.</p>
+<div class="tablenoborder"><a name="GUID-7EBB1175-76BF-4A59-BF64-3498438C2ED1"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-7EBB1175-76BF-4A59-BF64-3498438C2ED1" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetInfo error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e75799">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e75804">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e75799 ">
+<p><code>SysInfo:GetInfo: Insufficient Arguments to process</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75804 ">
+<p>At least two input <span>criteria</span> are expected to process a <code>GetInfo</code> call.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e75799 ">
+<p><code>SysInfo:GetInfo: Entity: Input Parameter Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75804 ">
+<p>The <code>Entity</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e75799 ">
+<p><code>SysInfo:GetInfo: Key: Input Parameter Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75804 ">
+<p>The <code>Key</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e75799 ">
+<p><code>SysInfo:GetInfo: Incorrect SystemData Type, SystemData Must
+be a Map</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75804 ">
+<p>The <code>SystemData</code> property is not an object or the
+content of the object is invalid.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>SetInfo</h3>
+<p>The following table describes the error messages returned by <a href="GUID-4347A7F1-1560-4B28-B4A8-DC570864F505.html#GUID-4347A7F1-1560-4B28-B4A8-DC570864F505"><code>SetInfo</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-D2ACF44A-BE2C-444A-B090-5F7A540243AE"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D2ACF44A-BE2C-444A-B090-5F7A540243AE" frame="border" border="1" rules="all"><caption><strong>Table: </strong>SetInfo error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e75917">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e75922">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e75917 ">
+<p><code>SysInfo:SetInfo: Insufficient Arguments to process</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75922 ">
+<p>At least two input <span>criteria</span> are expected to process a <code>SetInfo</code> call.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e75917 ">
+<p><code>SysInfo:SetInfo: Entity: Input Parameter Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75922 ">
+<p>The <code>Entity</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e75917 ">
+<p><code>SysInfo:SetInfo: Key: Input Parameter Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75922 ">
+<p>The <code>Key</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e75917 ">
+<p><code>SysInfo:SetInfo: Incorrect SystemData Type, SystemData Must
+be a Map</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75922 ">
+<p>The <code>SystemData</code> property is not an object or the
+content of the object is invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e75917 ">
+<p><code>SysInfo:SetInfo: SystemData Argument Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75922 ">
+<p>The <code>SystemData</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e75917 ">
+<p><code>SysInfo:SetInfo: ASync Version Not Supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e75922 ">
+<p>The <code>SetInfo</code> method does not support asynchronous
+calls.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>GetNotification</h3>
+<p>The following table describes the error messages returned by <a href="GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608.html#GUID-C7C3B541-8D28-4DC6-9003-ECF57F26C608"><code>callback</code></a> for <a href="GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E.html#GUID-7978FAFD-5BAC-45FD-9C44-5CF7BC484A1E"><code>GetNotification</code></a> as
+part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-1E1509E0-A72D-4573-BC99-AB3D2D5C9E4A"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-1E1509E0-A72D-4573-BC99-AB3D2D5C9E4A" frame="border" border="1" rules="all"><caption><strong>Table: </strong>GetNotification
+error messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e76077">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e76082">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76077 ">
+<p><code>SysInfo:GetNotification: Insufficient Arguments to process</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76082 ">
+<p>At least two input <span>criteria</span> are expected to process a <code>GetNotification</code> call.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e76077 ">
+<p><code>SysInfo:GetNotification: Entity: Input Parameter Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76082 ">
+<p>The <code>Entity</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76077 ">
+<p><code>SysInfo:GetNotification: Key: Input Parameter Missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76082 ">
+<p>The <code>Key</code> property is missing from the input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e76077 ">
+<p><code>SysInfo:GetNotification: Incorrect SystemData Type, SystemData
+Must be a Map</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76082 ">
+<p>The <code>SystemData</code> property is not an object or the
+content of the object is invalid.</p>
+</td>
+</tr>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76077 ">
+<p><code>SysInfo:GetNotification: Sync Version Not Supported</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76082 ">
+<p>The <code>GetNotification</code> method does not support synchronous
+calls.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+<div><h3>Cancel</h3>
+<p>The following table describes the error messages returned by <a href="GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B.html#GUID-BF044B8D-C16A-47DC-84F3-9103D9DCE09B"><code>Cancel</code></a> as part of its return value.</p>
+<div class="tablenoborder"><a name="GUID-D7DE3D53-A5FC-478A-9F3E-092D287EC3D2"><!----></a><table cellpadding="4" cellspacing="0" summary="" id="GUID-D7DE3D53-A5FC-478A-9F3E-092D287EC3D2" frame="border" border="1" rules="all"><caption><strong>Table: </strong>Cancel error
+messages</caption>
+<thead align="left">
+<tr class="title "><th class="cellrowborder" valign="top" id="d0e76214">
+<p>Error message</p>
+</th><th class="cellrowborder" valign="top" id="d0e76219">
+<p>Description</p>
+</th></tr>
+</thead>
+<tbody>
+<tr class="">
+<td class="cellrowborder" valign="top" headers="d0e76214 ">
+<p><code>SysInfo:Cancel: Transaction ID missing</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76219 ">
+<p>The <code>TransactionID</code> property is missing from the
+input.</p>
+</td>
+</tr>
+<tr class="bg ">
+<td class="cellrowborder" valign="top" headers="d0e76214 ">
+<p><code>SysInfo:Cancel: Callback object not found</code></p>
+</td>
+<td class="cellrowborder" valign="top" headers="d0e76219 ">
+<p>There is no ongoing asynchronous request with the specified transaction
+ID.</p>
+</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></div></div><div class="footer"><hr/><div class="copy">© Nokia 2009.</div></div></body></html>
