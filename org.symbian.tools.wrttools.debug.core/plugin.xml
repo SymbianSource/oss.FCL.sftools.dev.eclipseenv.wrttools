@@ -10,12 +10,15 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
+            category="org.eclipse.debug.ui.DebugPreferencePage"
             class="org.symbian.tools.wrttools.debug.ui.DebugPreferencePage"
             id="org.symbian.tools.wrttools.debug"
-            name="Debug">
+            name="WebRuntime Toolkit">
          <keywordReference
                id="org.symbian.tools.wrttools.wrtwords">
+         </keywordReference>
+         <keywordReference
+               id="org.symbian.tools.wrttools.debug.page">
          </keywordReference>
       </page>
    </extension>
@@ -294,6 +297,13 @@
                 toolbarPath="debug">
           </action>
        </actionSet>
+    </extension>
+    <extension
+          point="org.eclipse.ui.keywords">
+       <keyword
+             id="org.symbian.tools.wrttools.debug.page"
+             label="chrome debug widget">
+       </keyword>
     </extension>
   
 </plugin>

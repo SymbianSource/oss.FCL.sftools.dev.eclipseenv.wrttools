@@ -631,7 +631,7 @@
        point="org.eclipse.ui.keywords">
     <keyword
           id="org.symbian.tools.wrttools.wrtwords"
-          label="wrt, webruntime, web runtime, cwrt">
+          label="wrt, webruntime, web runtime, cwrt widget">
     </keyword>
  </extension>
  <extension
