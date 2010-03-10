@@ -42,7 +42,7 @@ cat $prod_file | sed -e s#qualifier#"${ECLIPSE_TIMESTAMP}"#g > $prod_file
 
 ${ANT_CMD} -DbuildDirectory=${BUILD_DIR} -DsourceDirectory=${SOURCE_DIR}
 
-cd ${BUILD_DIR}/N.TestBuild
+cd ${BUILD_DIR}/N.WrtIde
 
 # bug 2165 - add a timestamp to filename 
 for file in *.zip
