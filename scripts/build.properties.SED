@@ -56,16 +56,9 @@ macosx, cocoa, x86
 
 #The format of the archive. By default a zip is created using antZip.
 #The list can only contain the configuration for which the desired format is different than zip.
-#archivesFormat=win32, win32, x86 - antZip& \
-#	linux, gtk, ppc - antZip &\
-#    linux, gtk, x86 - antZip& \
-#	linux, gtk, x86_64 - antZip& \
-# linux, motif, x86 - antZip& \
-#	solaris, motif, sparc - antZip& \
-#	solaris, gtk, sparc - antZip& \
-#	aix, motif, ppc - antZip& \
-#	hpux, motif, PA_RISC - antZip& \
-#	macosx, carbon, ppc - antZip
+archivesFormat=win32, win32, x86 - zip& \
+    linux, gtk, x86 - zip& \
+    macosx, cocoa, x86 - zip
 
 #Allow cycles involving at most one bundle that needs to be compiled with the rest being binary bundles.
 allowBinaryCycles = true
