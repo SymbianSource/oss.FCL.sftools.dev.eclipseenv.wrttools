@@ -109,7 +109,7 @@ buildDirectory=/home/symbian/scratch/build_dir/048/eclipse.build
 buildType=N
 
 # ID of the build.  Used in naming the build output.
-buildId=TestBuild
+buildId=WrtIde
 
 # Label for the build.  Used in naming the build output
 buildLabel=${buildType}.${buildId}
@@ -132,12 +132,12 @@ timestamp=007
 # in most RCP app or a plug-in,  the baseLocation should be the location of a previously
 # installed Eclipse against which the application or plug-in code will be compiled and the RCP delta pack.
 
-base=/usr/eclipse/JEE
+base=/usr/master/eclipse/3.5.2/jee
 baseLocation=${base}/eclipse
 
-eclipseLocation=/usr/eclipse
+eclipseLocation=/usr/master/eclipse/3.5.2/pde
 equinoxLauncherPluginVersion=1.0.201.R35x_v20090715
-pdeBuildPluginVersion=3.5.1.R35x_20090820
+pdeBuildPluginVersion=3.5.2.R35x_20100114
 
 #Folder containing repositories whose content is needed to compile against
 #repoBaseLocation=${base}/repos
