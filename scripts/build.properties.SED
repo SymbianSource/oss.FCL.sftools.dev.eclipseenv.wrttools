@@ -135,7 +135,7 @@ timestamp=007
 base=/usr/master/eclipse/3.5.2/jee
 baseLocation=${base}/eclipse
 
-eclipseLocation=/usr/master/eclipse/3.5.2/pde
+eclipseLocation=/usr/master/eclipse/3.5.2/pde/eclipse
 equinoxLauncherPluginVersion=1.0.201.R35x_v20090715
 pdeBuildPluginVersion=3.5.2.R35x_20100114
 
