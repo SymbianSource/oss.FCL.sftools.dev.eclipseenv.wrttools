@@ -75,7 +75,8 @@
 <!-- WRT Tool Integration (Package, Validate, Include, Exclude Settings)-->
         <extension	
           point="org.eclipse.ui.popupMenus">
-                <objectContribution
+<!--
+      <objectContribution
       		objectClass="org.eclipse.core.resources.IResource" 
             id="org.symbian.tools.wrttools.widget.wrttool.deployment.setttings">
      	 <filter
@@ -88,7 +89,8 @@
                label="Deployment Settings for WRT Application"
 			   menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
          </action>
-      </objectContribution>	                 
+      </objectContribution>	 
+-->                
     
       <objectContribution
             objectClass="org.eclipse.core.resources.IResource"          
