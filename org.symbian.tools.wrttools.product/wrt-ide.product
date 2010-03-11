@@ -4,7 +4,7 @@
 <product name="WebRuntime Toolkit IDE" uid="org.symbian.wrtide" id="org.symbian.tools.wrttools.product.product" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="icons/WRT_Wizard_banner.png"/>
+      <image path="icons/WRT_blurb_image.png"/>
       <text>
          %productBlurb
       </text>
@@ -24,6 +24,7 @@
    <windowImages i16="/org.symbian.tools.wrttools.product/icons/WRT_main_16.png" i32="/org.symbian.tools.wrttools.product/icons/WRT_32px_01.png" i48="eclipse48.gif" i64="eclipse.png" i128="eclipse32.png"/>
 
    <splash
+      location="org.symbian.tools.wrttools.product"
       startupProgressRect="0,280,455,15"
       startupMessageRect="7,220,441,20"
       startupForegroundColor="C8D5EA" />
@@ -34,10 +35,12 @@
       </win>
    </launcher>
 
+
    <vm>
       <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</macos>
       <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</windows>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -195,6 +198,7 @@
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.osgi.util"/>
+      <plugin id="org.eclipse.persistence.jpa.equinox.weaving" fragment="true"/>
       <plugin id="org.eclipse.platform"/>
       <plugin id="org.eclipse.platform.doc.user"/>
       <plugin id="org.eclipse.rcp"/>
