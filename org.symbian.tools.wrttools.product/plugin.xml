@@ -226,6 +226,7 @@
             productId="org.symbian.tools.wrttools.product.product">
       </introProductBinding>
    </extension>
+<!--
    <extension
          point="org.eclipse.ui.intro.config">
       <config
@@ -242,4 +243,5 @@
          </presentation>
       </config>
    </extension>
+-->
 </plugin>
