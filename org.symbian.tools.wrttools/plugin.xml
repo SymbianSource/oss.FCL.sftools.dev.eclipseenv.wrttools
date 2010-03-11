@@ -129,7 +129,7 @@
          <visibility>
             <not>
                <or>
-               <objectState name="persistentProperty" value="org.symbian.tools.wrttools.packager.exclude"/>
+               <objectState name="persistentProperty" value="org.symbian.tools.wrttools.core.packager.exclude"/>
 			   <objectState name="extension" value="plist"/>
 			   <objectClass name="org.eclipse.core.resources.IProject"/>
 			   </or>
@@ -155,7 +155,7 @@
 	        	<objectState name="extension" value="wgz"/>
 	        </not>
 	        <and>
-	        	<objectState name="persistentProperty" value="org.symbian.tools.wrttools.packager.exclude"/>
+	        	<objectState name="persistentProperty" value="org.symbian.tools.wrttools.core.packager.exclude"/>
 	        	<objectState name="projectNature" value="org.symbian.tools.wrttools.WidgetProjectNature"/>
 	        </and>
         </and>
