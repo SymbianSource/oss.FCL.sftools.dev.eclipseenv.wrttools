@@ -160,7 +160,7 @@
          </property>
          <property
                name="aboutImage"
-               value="icons/WRT_blurb_image.png">
+               value="icons/WRT_blurb_image_2.png">
          </property>
          <property
                name="startupForegroundColor"
