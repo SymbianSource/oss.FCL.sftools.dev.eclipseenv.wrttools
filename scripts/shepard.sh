@@ -30,6 +30,8 @@ cd ${SOURCE_DIR}/scripts
 # set the build directory in the build.properties files. 
 cat ${SOURCE_DIR}/scripts/build.properties.SED | sed -e s#SED_BUILD_DIR#${BUILD_DIR}#g > ${SOURCE_DIR}/scripts/build.properties
 
+cat ${SOURCE_DIR}/scripts/plugin.properties.SED | sed -e s#SED_BUILD_ID#${ECLIPSE_TIMESTAMP}#g > ${SOURCE_DIR}/org.symbian.tools.wrttools.product/plugin.properties
+
 # bug fix for 1872. [testcase: go to about box. click on installation details.  Do you see an error? ] 
 for f in `find ${SOURCE_DIR} -name MANIFEST.MF`
 do
