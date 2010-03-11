@@ -21,16 +21,19 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/org.symbian.tools.wrttools.product/icons/WRT_main_16.png" i32="/org.symbian.tools.wrttools.product/icons/WRT_32px_01.png" i48="eclipse48.gif" i64="eclipse.png" i128="eclipse32.png"/>
+   <windowImages i16="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon_16px.png" i32="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon_32px.png" i48="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon_48px.png" i64="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon_64px.png" i128="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon_128px.png"/>
 
    <splash
       location="org.symbian.tools.wrttools.product"
-      startupProgressRect="0,280,455,15"
-      startupMessageRect="7,220,441,20"
-      startupForegroundColor="C8D5EA" />
+      startupProgressRect="5,245,410,15"
+      startupMessageRect="7,220,400,20"
+      startupForegroundColor="000000" />
    <launcher name="wrtide">
+      <linux icon="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon.xpm"/>
+      <macosx icon="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon.icns"/>
       <solaris/>
-      <win useIco="false">
+      <win useIco="true">
+         <ico path="/org.symbian.tools.wrttools.product/icons/ico/WRT_main-icon.ico"/>
          <bmp/>
       </win>
    </launcher>
