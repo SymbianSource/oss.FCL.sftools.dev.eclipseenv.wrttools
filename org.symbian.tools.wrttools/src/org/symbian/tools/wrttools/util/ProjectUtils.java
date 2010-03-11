@@ -76,110 +76,105 @@ import org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage;
 
 @SuppressWarnings("restriction")
 public class ProjectUtils {
-	private static final class FocusOnProjectJob extends Job {
+    private static final class FocusOnProjectJob extends Job {
 
-		private final Display display;
-		private final IProject[] projects;
+        private final Display display;
+        private final IProject[] projects;
 
-		public FocusOnProjectJob(IProject[] projects, Display display) {
-			super("Preparing projects");
-			this.projects = projects;
-			this.display = display;
-			setRule(this.projects.length == 1 ? projects[0] : projects[0]
-					.getWorkspace().getRoot());
-			setUser(false);
-		}
+        public FocusOnProjectJob(IProject[] projects, Display display) {
+            super("Preparing projects");
+            this.projects = projects;
+            this.display = display;
+            setRule(this.projects.length == 1 ? projects[0] : projects[0].getWorkspace().getRoot());
+            setUser(false);
+        }
 
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			try {
-				final Collection<IFile> files = new HashSet<IFile>(
-						projects.length);
-				for (IProject project : projects) {
-					String file = CoreUtil.getIndexFile(project);
-					if (file != null) {
-						IFile index = project.getFile(file);
-						if (index.isAccessible()) {
-							files.add(index);
-						}
-					}
-				}
-				final IFile[] filesArray = files
-						.toArray(new IFile[files.size()]);
-				display.asyncExec(new Runnable() {
+        @Override
+        protected IStatus run(IProgressMonitor monitor) {
+            try {
+                final Collection<IFile> files = new HashSet<IFile>(projects.length);
+                for (IProject project : projects) {
+                    String file = CoreUtil.getIndexFile(project);
+                    if (file != null) {
+                        IFile index = project.getFile(file);
+                        if (index.isAccessible()) {
+                            files.add(index);
+                        }
+                    }
+                }
+                final IFile[] filesArray = files.toArray(new IFile[files.size()]);
+                if (filesArray.length > 0) {
+                    display.asyncExec(new Runnable() {
 
-					public void run() {
-						IWorkbenchPage activePage = PlatformUI.getWorkbench()
-								.getActiveWorkbenchWindow().getActivePage();
-						IViewReference reference = activePage
-								.findViewReference(Activator.NAVIGATOR_ID);
-						IWorkbenchPart part = reference.getPart(false);
-						if (part instanceof ISetSelectionTarget) {
-							StructuredSelection selection;
-							if (filesArray.length == 1) {
-								selection = new StructuredSelection(
-										filesArray[0]);
-							} else {
-								selection = new StructuredSelection(filesArray);
-							}
-							((ISetSelectionTarget) part)
-									.selectReveal(selection);
-						}
-						try {
-							IDE.openEditors(activePage, filesArray);
-							ResourcesPlugin.getWorkspace().run(
-									new TouchAllResources(projects),
-									new NullProgressMonitor());
-						} catch (CoreException e) {
-							Activator.log(e);
-						}
-					}
-				});
-			} catch (CoreException e) {
-				Activator.log(e);
-			}
-			return Status.OK_STATUS;
-		}
-	}
-	private static final class TouchAllResources implements IWorkspaceRunnable {
-		private final IProject[] projects;
+                        public void run() {
+                            IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+                                    .getActivePage();
+                            IViewReference reference = activePage.findViewReference(Activator.NAVIGATOR_ID);
+                            IWorkbenchPart part = reference.getPart(false);
+                            if (part instanceof ISetSelectionTarget) {
+                                StructuredSelection selection;
+                                if (filesArray.length == 1) {
+                                    selection = new StructuredSelection(filesArray[0]);
+                                } else {
+                                    selection = new StructuredSelection(filesArray);
+                                }
+                                ((ISetSelectionTarget) part).selectReveal(selection);
+                            }
+                            try {
+                                IDE.openEditors(activePage, filesArray);
+                                ResourcesPlugin.getWorkspace().run(new TouchAllResources(projects),
+                                        new NullProgressMonitor());
+                            } catch (CoreException e) {
+                                Activator.log(e);
+                            }
+                        }
+                    });
+                }
+            } catch (CoreException e) {
+                Activator.log(e);
+            }
+            return Status.OK_STATUS;
+        }
+    }
 
-		public TouchAllResources(IProject[] projects) {
-			this.projects = projects;
+    private static final class TouchAllResources implements IWorkspaceRunnable {
+        private final IProject[] projects;
 
-		}
+        public TouchAllResources(IProject[] projects) {
+            this.projects = projects;
 
-		public void run(IProgressMonitor monitor) throws CoreException {
-			for (IProject project : projects) {
-				project.accept(new IResourceVisitor() {
-					public boolean visit(IResource resource)
-							throws CoreException {
-						if (resource.isAccessible()
-								&& resource.getType() == IResource.FILE
-								&& resource.getFileExtension().equals("js")) {
-							resource.touch(new NullProgressMonitor());
-						}
-						return true;
-					}
-				});
-			}
-		}
-	}
-	private static final String DEFAULT_APTANA_WORKSPACE = "Aptana Studio Workspace";
-	private static final Collection<String> EXCLUDED;
+        }
 
-	public static final String PREVIEW_FOLDER = "preview";
+        public void run(IProgressMonitor monitor) throws CoreException {
+            for (IProject project : projects) {
+                project.accept(new IResourceVisitor() {
+                    public boolean visit(IResource resource) throws CoreException {
+                        if (resource.isAccessible() && resource.getType() == IResource.FILE
+                                && resource.getFileExtension().equals("js")) {
+                            resource.touch(new NullProgressMonitor());
+                        }
+                        return true;
+                    }
+                });
+            }
+        }
+    }
 
-	public static final String PREVIEW_FRAME_FILE = "wrt_preview_frame.html";
+    private static final String DEFAULT_APTANA_WORKSPACE = "Aptana Studio Workspace";
+    private static final Collection<String> EXCLUDED;
 
-	public static final String PREVIEW_MAIN_FILE = "wrt_preview_main.html";
+    public static final String PREVIEW_FOLDER = "preview";
 
-	static {
+    public static final String PREVIEW_FRAME_FILE = "wrt_preview_frame.html";
+
+    public static final String PREVIEW_MAIN_FILE = "wrt_preview_main.html";
+
+    static {
         EXCLUDED = new TreeSet<String>(Arrays.asList(".project", ProjectUtils.PREVIEW_FOLDER,
                 ProjectUtils.PREVIEW_FRAME_FILE, ProjectUtils.PREVIEW_MAIN_FILE));
     }
 
-	private static boolean accepted(Object object) {
+    private static boolean accepted(Object object) {
         final String name;
         if (object instanceof ZipEntry) {
             name = ((ZipEntry) object).getName();
@@ -194,65 +189,58 @@ public class ProjectUtils {
         return isValidProjectFile(path.lastSegment());
     }
 
-	public static void addWrtNature(IProject project) {
-		if (!hasWrtNature(project)) {
-			try {
-				IProjectDescription description = project.getDescription();
-				String[] natureIds = description.getNatureIds();
-				String[] newNatures = new String[natureIds.length + 1];
-				System.arraycopy(natureIds, 0, newNatures, 1, natureIds.length);
-				newNatures[0] = WidgetProjectNature.ID;
-				description.setNatureIds(newNatures);
+    public static void addWrtNature(IProject project) {
+        if (!hasWrtNature(project)) {
+            try {
+                IProjectDescription description = project.getDescription();
+                String[] natureIds = description.getNatureIds();
+                String[] newNatures = new String[natureIds.length + 1];
+                System.arraycopy(natureIds, 0, newNatures, 1, natureIds.length);
+                newNatures[0] = WidgetProjectNature.ID;
+                description.setNatureIds(newNatures);
 
-				ICommand[] buildSpec = description.getBuildSpec();
-				for (int i = 0; i < buildSpec.length; i++) {
-					ICommand command = buildSpec[i];
-					if (JavaScriptCore.BUILDER_ID.equals(command
-							.getBuilderName())) {
-						buildSpec[i] = buildSpec[buildSpec.length - 1];
-						buildSpec[buildSpec.length - 1] = command;
-						description.setBuildSpec(buildSpec);
-						break;
-					}
-				}
+                ICommand[] buildSpec = description.getBuildSpec();
+                for (int i = 0; i < buildSpec.length; i++) {
+                    ICommand command = buildSpec[i];
+                    if (JavaScriptCore.BUILDER_ID.equals(command.getBuilderName())) {
+                        buildSpec[i] = buildSpec[buildSpec.length - 1];
+                        buildSpec[buildSpec.length - 1] = command;
+                        description.setBuildSpec(buildSpec);
+                        break;
+                    }
+                }
 
-				project.setDescription(description, new NullProgressMonitor());
-			} catch (CoreException e) {
-				Activator.log(e);
-			}
-		}
-	}
+                project.setDescription(description, new NullProgressMonitor());
+            } catch (CoreException e) {
+                Activator.log(e);
+            }
+        }
+    }
 
-	private static void checkParent(IContainer parent) throws CoreException {
-		if (parent.getType() == IResource.FOLDER && !parent.exists()) {
-			checkParent(parent.getParent());
-			((IFolder) parent).create(false, true, new NullProgressMonitor());
-		}
-	}
+    private static void checkParent(IContainer parent) throws CoreException {
+        if (parent.getType() == IResource.FOLDER && !parent.exists()) {
+            checkParent(parent.getParent());
+            ((IFolder) parent).create(false, true, new NullProgressMonitor());
+        }
+    }
 
-	public static void copyFile(IProject project, String name,
-			ZipInputStream stream, long size, IProgressMonitor monitor)
-			throws CoreException, IOException {
-		IFile file = project.getFile(name);
-		file.create(new NonClosingStream(stream), true, new SubProgressMonitor(
-				monitor, 1));
-	}
+    public static void copyFile(IProject project, String name, ZipInputStream stream, long size,
+            IProgressMonitor monitor) throws CoreException, IOException {
+        IFile file = project.getFile(name);
+        file.create(new NonClosingStream(stream), true, new SubProgressMonitor(monitor, 1));
+    }
 
-	public static IProject createWrtProject(String name, URI uri,
-			IProgressMonitor monitor) throws CoreException {
-		uri = isDefaultProjectLocation(uri) ? null : uri;
+    public static IProject createWrtProject(String name, URI uri, IProgressMonitor monitor) throws CoreException {
+        uri = isDefaultProjectLocation(uri) ? null : uri;
         monitor.beginTask("Create project resources", 25);
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IProject project = workspace.getRoot().getProject(name);
-		BuildPathsBlock.createProject(project, uri, new SubProgressMonitor(
-				monitor, 10));
-		BuildPathsBlock.addJavaNature(project, new SubProgressMonitor(monitor,
-				10));
+        IWorkspace workspace = ResourcesPlugin.getWorkspace();
+        IProject project = workspace.getRoot().getProject(name);
+        BuildPathsBlock.createProject(project, uri, new SubProgressMonitor(monitor, 10));
+        BuildPathsBlock.addJavaNature(project, new SubProgressMonitor(monitor, 10));
 
-		ValidationFramework.getDefault().addValidationBuilder(project);
-		ValidationFramework.getDefault().applyChanges(
-				ValidationFramework.getDefault().getProjectSettings(project),
-				true);
+        ValidationFramework.getDefault().addValidationBuilder(project);
+        ValidationFramework.getDefault().applyChanges(ValidationFramework.getDefault().getProjectSettings(project),
+                true);
 
         IJavaScriptProject jsProject = JavaScriptCore.create(project);
         final IIncludePathEntry[] includepath = jsProject.getRawIncludepath();
@@ -268,13 +256,13 @@ public class ProjectUtils {
                 "Window");
         ((JavaProject) jsProject).setCommonSuperType(superType);
 
-		addWrtNature(project);
+        addWrtNature(project);
 
-		monitor.done();
-		return project;
-	}
+        monitor.done();
+        return project;
+    }
 
-	public static List<Object> filterExternalProjectEntries(List<Object> fileSystemObjects) {
+    public static List<Object> filterExternalProjectEntries(List<Object> fileSystemObjects) {
         List<Object> result = new LinkedList<Object>();
         for (Object object : fileSystemObjects) {
             if (accepted(object)) {
@@ -284,87 +272,86 @@ public class ProjectUtils {
         return result;
     }
 
-	public static void focusOn(IProject... projects) {
-		new FocusOnProjectJob(projects, Display.getCurrent()).schedule(50);
-	}
+    public static void focusOn(IProject... projects) {
+        new FocusOnProjectJob(projects, Display.getCurrent()).schedule(50);
+    }
 
-	public static String getDefaultAptanaLocation() {
-		File myDocuments = FileSystemView.getFileSystemView()
-				.getDefaultDirectory();
-		File file = new File(myDocuments, DEFAULT_APTANA_WORKSPACE); // Windows
-		if (file.exists()) {
-			return file.getAbsolutePath();
-		}
-		file = new File(myDocuments, "Documents" + File.separator
-				+ DEFAULT_APTANA_WORKSPACE); // Mac OS X
-		if (file.exists()) {
-			return file.getAbsolutePath();
-		}
-		return "";
-	}
+    public static String getDefaultAptanaLocation() {
+        File myDocuments = FileSystemView.getFileSystemView().getDefaultDirectory();
+        File file = new File(myDocuments, DEFAULT_APTANA_WORKSPACE); // Windows
+        if (file.exists()) {
+            return file.getAbsolutePath();
+        }
+        file = new File(myDocuments, "Documents" + File.separator + DEFAULT_APTANA_WORKSPACE); // Mac OS X
+        if (file.exists()) {
+            return file.getAbsolutePath();
+        }
+        return "";
+    }
 
-	public static boolean hasWrtNature(IProject project) {
-		try {
-			return project.hasNature(WidgetProjectNature.ID);
-		} catch (CoreException e) {
-			Activator.log(e);
-			return false;
-		}
-	}
+    public static boolean hasWrtNature(IProject project) {
+        try {
+            return project.hasNature(WidgetProjectNature.ID);
+        } catch (CoreException e) {
+            Activator.log(e);
+            return false;
+        }
+    }
 
     public static File isWrtProject(File[] contents) {
-		for (int i = 0; i < contents.length; i++) {
-			File file = contents[i];
+        for (int i = 0; i < contents.length; i++) {
+            File file = contents[i];
             if (file.isFile() && file.getName().equalsIgnoreCase(CoreUtil.METADATA_FILE)) {
                 return file.getParentFile();
-			}
-		}
+            }
+        }
         return null;
-	}
+    }
 
     private static boolean isDefaultProjectLocation(URI uri) {
-		if (uri == null) {
-			return true;
-		}
-		File file = new File(uri);
-		IPath project = new Path(file.getAbsolutePath());
-		IPath workspace = ResourcesPlugin.getWorkspace().getRoot()
-				.getLocation();
-		return workspace.isPrefixOf(project);
-	}
+        if (uri == null) {
+            return true;
+        }
+        File file = new File(uri);
+        IPath project = new Path(file.getAbsolutePath());
+        IPath workspace = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+        return workspace.isPrefixOf(project);
+    }
 
     public static boolean isPlist(IResource resource) {
         return resource.getType() == IResource.FILE && resource.getName().equalsIgnoreCase(CoreUtil.METADATA_FILE);
-	}
+    }
 
     private static boolean isValidProjectFile(String fileName) {
         return !EXCLUDED.contains(fileName);
     }
 
-    public static void unzip(String archiveFile, IContainer location,
-			int trimSegments, IProgressMonitor progressMonitor)
-			throws IOException, CoreException {
-		progressMonitor.beginTask(MessageFormat.format("Unpacking {0}",
-				archiveFile), IProgressMonitor.UNKNOWN);
-		ZipInputStream stream = new ZipInputStream(new FileInputStream(
-				archiveFile));
+    public static void unzip(String archiveFile, IContainer location, int trimSegments, IProgressMonitor progressMonitor)
+            throws IOException, CoreException {
+        progressMonitor.beginTask(MessageFormat.format("Unpacking {0}", archiveFile), IProgressMonitor.UNKNOWN);
+        ZipInputStream stream = new ZipInputStream(new FileInputStream(archiveFile));
 
-		try {
-			ZipEntry nextEntry;
-			while ((nextEntry = stream.getNextEntry()) != null) {
-				IPath p = new Path(nextEntry.getName())
-						.removeFirstSegments(trimSegments);
-				if (!nextEntry.isDirectory()) {
-					IFile file = location.getFile(p);
-					checkParent(file.getParent());
-					file.create(new NonClosingStream(stream), false,
-							new SubProgressMonitor(progressMonitor, 1));
-				}
-			}
-		} finally {
-			stream.close();
-		}
-		progressMonitor.done();
-	}
+        try {
+            ZipEntry nextEntry;
+            while ((nextEntry = stream.getNextEntry()) != null) {
+                IPath p = new Path(nextEntry.getName()).removeFirstSegments(trimSegments);
+                if (!isIgnored(p) && !nextEntry.isDirectory()) {
+                    IFile file = location.getFile(p);
+                    checkParent(file.getParent());
+                    file.create(new NonClosingStream(stream), false, new SubProgressMonitor(progressMonitor, 1));
+                }
+            }
+        } finally {
+            stream.close();
+        }
+        progressMonitor.done();
+    }
+
+    private static boolean isIgnored(IPath p) {
+        if (p.segmentCount() == 1) {
+            return IProjectDescription.DESCRIPTION_FILE_NAME.equals(p.lastSegment());
+        }
+        return false;
+    }
 
 }

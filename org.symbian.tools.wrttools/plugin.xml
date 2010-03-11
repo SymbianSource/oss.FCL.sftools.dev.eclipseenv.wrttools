@@ -75,7 +75,8 @@
 <!-- WRT Tool Integration (Package, Validate, Include, Exclude Settings)-->
         <extension	
           point="org.eclipse.ui.popupMenus">
-                <objectContribution
+<!--
+      <objectContribution
       		objectClass="org.eclipse.core.resources.IResource" 
             id="org.symbian.tools.wrttools.widget.wrttool.deployment.setttings">
      	 <filter
@@ -88,7 +89,8 @@
                label="Deployment Settings for WRT Application"
 			   menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
          </action>
-      </objectContribution>	                 
+      </objectContribution>	 
+-->                
     
       <objectContribution
             objectClass="org.eclipse.core.resources.IResource"          
@@ -129,7 +131,7 @@
          <visibility>
             <not>
                <or>
-               <objectState name="persistentProperty" value="org.symbian.tools.wrttools.packager.exclude"/>
+               <objectState name="persistentProperty" value="org.symbian.tools.wrttools.core.packager.exclude"/>
 			   <objectState name="extension" value="plist"/>
 			   <objectClass name="org.eclipse.core.resources.IProject"/>
 			   </or>
@@ -155,7 +157,7 @@
 	        	<objectState name="extension" value="wgz"/>
 	        </not>
 	        <and>
-	        	<objectState name="persistentProperty" value="org.symbian.tools.wrttools.packager.exclude"/>
+	        	<objectState name="persistentProperty" value="org.symbian.tools.wrttools.core.packager.exclude"/>
 	        	<objectState name="projectNature" value="org.symbian.tools.wrttools.WidgetProjectNature"/>
 	        </and>
         </and>
@@ -189,7 +191,7 @@
 	</extension>
 	 
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.symbian.tools.wrttools.core.category" name="Web Runtime(WRT)">
+		<category id="org.symbian.tools.wrttools.core.category" banner="WRT_Wizard_banner.png" name="Web Runtime(WRT)">
 		</category>
 		<wizard category="org.symbian.tools.wrttools.core.category"
 			class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
@@ -273,6 +275,7 @@
 		<wizard category="org.symbian.tools.wrttools.import"
 			class="org.symbian.tools.wrttools.wizards.projectimport.WrtProjectsImportWizard"
 			icon="icons/import_aptana_project.gif" id="org.symbian.tools.wrttools.import.projectImport"
+			banner="icons/import_wizard_banner.png"
 			name="WRT Project">
      <description>
         Import WRT project created in Aptana, Adobe Dreamweaver or WRT IDE
@@ -283,6 +286,7 @@
           class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
           icon="icons/WRTImport.gif"
           id="org.symbian.tools.wrttools.importwgz"
+          banner="icons/WRT_wizard_banner.png"
           name="Sources from WGZ File">
           <description>
              Create WRT project from deployable WGZ application archive
@@ -631,7 +635,7 @@
        point="org.eclipse.ui.keywords">
     <keyword
           id="org.symbian.tools.wrttools.wrtwords"
-          label="wrt, webruntime, web runtime, cwrt">
+          label="wrt, webruntime, web runtime, cwrt widget">
     </keyword>
  </extension>
  <extension

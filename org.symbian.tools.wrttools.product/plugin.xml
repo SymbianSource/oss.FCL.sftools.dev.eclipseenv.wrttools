@@ -19,7 +19,7 @@
                class="org.symbian.tools.wrttools.product.actions.NewCSSFileAction"
                icon="icons/newcss_wiz.gif"
                id="org.symbian.tools.wrttools.product.newCssFileAction"
-               label="%action.newcss.label"
+               label="New CSS File..."
                style="push"
                toolbarPath="wrtwizards">
          </action>
@@ -41,7 +41,7 @@
          </action>
          <action
                class="org.symbian.tools.wrttools.product.actions.NewWRTProjectAction"
-               icon="icons/newWRTproject.gif"
+               icon="icons/newWRT_app_icon_16px.png"
                id="org.symbian.tools.wrttools.product.newWRTProjectAction"
                label="New WRT Application..."
                style="push"
@@ -56,7 +56,8 @@
             name="Web">
       </category>
       <primaryWizard
-            id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
+            id="org.symbian.tools.wrttools.core.wrtwidgetwizard"
+            banner="WRT_Wizard_banner.png">
       </primaryWizard>
       <primaryWizard
             id="org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard">
@@ -159,19 +160,19 @@
          </property>
          <property
                name="aboutImage"
-               value="icons/WRT_Wizard_banner.png">
+               value="icons/WRT_blurb_image_2.png">
          </property>
          <property
                name="startupForegroundColor"
-               value="C8D5EA">
+               value="000000">
          </property>
          <property
                name="startupProgressRect"
-               value="0,280,455,15">
+               value="0,250,422,15">
          </property>
          <property
                name="startupMessageRect"
-               value="7,220,441,20">
+               value="7,230,441,20">
          </property>
          <property
                name="appName"
@@ -214,4 +215,33 @@
          </showInPart>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.ui.intro">
+      <intro
+            class="org.eclipse.ui.intro.config.CustomizableIntroPart"
+            id="org.symbian.tools.wrttools.product.intro">
+      </intro>
+      <introProductBinding
+            introId="org.symbian.tools.wrttools.product.intro"
+            productId="org.symbian.tools.wrttools.product.product">
+      </introProductBinding>
+   </extension>
+<!--
+   <extension
+         point="org.eclipse.ui.intro.config">
+      <config
+            content="introContent.xml"
+            id="org.symbian.tools.wrttools.product.introConfigId"
+            introId="org.symbian.tools.wrttools.product.intro">
+         <presentation
+               home-page-id="root">
+            <implementation
+                  kind="html"
+                  os="win32,linux,macosx"
+                  style="content/shared.css">
+            </implementation>
+         </presentation>
+      </config>
+   </extension>
+-->
 </plugin>

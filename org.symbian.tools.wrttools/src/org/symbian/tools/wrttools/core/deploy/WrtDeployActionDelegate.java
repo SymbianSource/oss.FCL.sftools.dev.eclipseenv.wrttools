@@ -107,7 +107,7 @@ public class WrtDeployActionDelegate extends ActionDelegate implements IObjectAc
 			
 		} else {
 			MessageDialog.openInformation(shell, "Deploy error",
-					" Invalid deployment preferences. Use \"Deployment Settings for WRT Application\" to set deployment preferences.");
+					" Invalid deployment preferences. Use \"Preferences\"->\"WRT\"->\"Deployment\" to set deployment preferences.");
 		}
 	}
 	

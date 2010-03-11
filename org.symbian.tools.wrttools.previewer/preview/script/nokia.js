@@ -790,7 +790,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 					return false;
 				}
 
-				NOKIA.helper.error('Unable to intialize the widget, failed to process Info.plist file. <br/>Please ensure <strong style="color:#efe352;">Info.plist</strong> file exists on the widget root folder <br/>or check the filename of <strong style="color:#efe352;">Info.plist</strong> It is case-sensitive');
+				NOKIA.helper.error('WRT Previewer: Initialization failed. Could not open Info.plist file.<br/>Please ensure <strong style="color:#efe352;">Info.plist</strong> file exists in the project root folder and that it is named properly.');
 				return false;
 			}
 			else{
