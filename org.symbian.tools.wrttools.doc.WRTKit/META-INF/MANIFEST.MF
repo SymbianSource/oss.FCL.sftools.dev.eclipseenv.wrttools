@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: WRTKit Documentation
 Bundle-SymbolicName: org.symbian.tools.wrttools.doc.WRTKit;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.symbian.tools.wrttools.doc.WRTKit.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy

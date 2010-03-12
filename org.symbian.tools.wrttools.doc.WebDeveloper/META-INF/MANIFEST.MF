@@ -4,7 +4,6 @@ Bundle-Version: 1.4.0
 Bundle-Name: Web Developer's Library 1.4
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.symbian.tools.wrttools.doc.WebDeveloper;singleton:=true
-Bundle-Activator: org.symbian.tools.wrttools.doc.WebDeveloper.Activator 
 Import-Package: org.eclipse.core.runtime,
  org.eclipse.ui.plugin,
  org.osgi.framework
