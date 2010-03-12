@@ -59,6 +59,7 @@ import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
+import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.core.libraries.IWrtIdeContainer;
 import org.symbian.tools.wrttools.util.NonClosingStream;
 import org.symbian.tools.wrttools.util.ProjectUtils;
@@ -67,12 +68,13 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 	private WizardNewProjectCreationPage resourcePage;
 	private WizardContext context;
 	private DataBindingContext bindingContext;
-	private Map<ProjectTemplate, WRTProjectDetailsWizardPage> templateDetails = new HashMap<ProjectTemplate, WRTProjectDetailsWizardPage>();
+	private final Map<ProjectTemplate, WRTProjectDetailsWizardPage> templateDetails = new HashMap<ProjectTemplate, WRTProjectDetailsWizardPage>();
 	private WRTProjectTemplateWizardPage templatesPage;
 	private WRTProjectFilesWizardPage filesPage;
 	private IConfigurationElement config;
 
 	public WrtWidgetWizard() {
+        setDefaultPageImageDescriptor(WRTImages.newWizardBanner());
 		setWindowTitle("New Web Runtime Application");
 		setNeedsProgressMonitor(true);
 	}

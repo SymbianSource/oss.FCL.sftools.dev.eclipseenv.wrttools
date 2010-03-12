@@ -12,6 +12,8 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -20,18 +22,23 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
+import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.statushandlers.StatusManager;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.core.WrtIdeCorePreferences;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-public class WgzImportWizard extends Wizard implements IImportWizard {
+public class WgzImportWizard extends Wizard implements IImportWizard, INewWizard, IExecutableExtension {
 	private IFile file;
 	private WgzImportWizardPage page;
+    private IConfigurationElement config;
 
 	public WgzImportWizard() {
 		setWindowTitle("Import WRT Application Archive");
+        setDefaultPageImageDescriptor(WRTImages.importWgzWizardBanner());
 		setNeedsProgressMonitor(true);
 	}
 
@@ -89,6 +96,7 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 				}
 			});
 			if (holder[0] != null) {
+                BasicNewProjectResourceWizard.updatePerspective(config);
                 Activator.getDefault().getPreferenceStore().setValue(WrtIdeCorePreferences.WGZ_IMPORT_PATH,
                         new File(archiveName).getParentFile().getAbsolutePath());
 				ProjectUtils.focusOn(holder[0]);
@@ -118,5 +126,10 @@ public class WgzImportWizard extends Wizard implements IImportWizard {
 			}
 		}
 	}
+
+    public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
+            throws CoreException {
+        this.config = config;
+    }
 
 }

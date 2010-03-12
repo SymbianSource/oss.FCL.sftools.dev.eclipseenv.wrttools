@@ -30,6 +30,7 @@ import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
+import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WrtProjectsImportWizard extends Wizard implements
@@ -41,7 +42,8 @@ public class WrtProjectsImportWizard extends Wizard implements
     public WrtProjectsImportWizard() {
         setWindowTitle("Import WRT Project");
 		setNeedsProgressMonitor(true);
-	}
+        setDefaultPageImageDescriptor(WRTImages.importWizardBanner());
+    }
 
 	@Override
 	public boolean performCancel() {

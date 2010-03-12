@@ -191,19 +191,32 @@
 	</extension>
 	 
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.symbian.tools.wrttools.core.category" banner="WRT_Wizard_banner.png" name="Web Runtime(WRT)">
+		<category id="org.symbian.tools.wrttools.core.category" name="Web Runtime(WRT)">
 		</category>
 		<wizard category="org.symbian.tools.wrttools.core.category"
 			class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
 			finalPerspective="org.symbian.tools.wrttools.mainPerspective"
 			hasPages="true" icon="icons/WRT_main_16.png"
-			id="org.symbian.tools.wrttools.core.wrtwidgetwizard" name="Web Runtime Application"
+			id="org.symbian.tools.wrttools.core.wrtwidgetwizard" name="Web Runtime Application Project"
 			project="true">
 			<description>
 				Creates a new Symbian WRT application project using one of the provided
 				templates
          </description>
 		</wizard>
+  <wizard
+        category="org.symbian.tools.wrttools.import"
+        class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
+        finalPerspective="org.symbian.tools.wrttools.mainPerspective"
+        hasPages="true"
+        icon="icons/import_16x16px.png"
+        id="org.symbian.tools.wrttools.importwgz"
+        name="WRT Project from WGZ Archive"
+        project="true">
+     <description>
+        Create WRT project from deployable WGZ application archive
+     </description>
+  </wizard>
 	</extension>
 	
 <!-- WRT Project Templates -->
@@ -275,23 +288,11 @@
 		<wizard category="org.symbian.tools.wrttools.import"
 			class="org.symbian.tools.wrttools.wizards.projectimport.WrtProjectsImportWizard"
 			icon="icons/import_aptana_project.gif" id="org.symbian.tools.wrttools.import.projectImport"
-			banner="icons/import_wizard_banner.png"
-			name="WRT Project">
+			name="Existing WRT Projects into Workspace">
      <description>
         Import WRT project created in Aptana, Adobe Dreamweaver or WRT IDE
      </description>
 		</wizard>
-       <wizard
-          category="org.symbian.tools.wrttools.import"
-          class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
-          icon="icons/import_16x16px.png"
-          id="org.symbian.tools.wrttools.importwgz"
-          banner="icons/import_w_banner.png"
-          name="Sources from WGZ File">
-          <description>
-             Create WRT project from deployable WGZ application archive
-          </description>
-       </wizard>
     </extension>
 	
 <!-- Problem Markers -->
@@ -323,11 +324,21 @@
 		<perspectiveExtension targetID="org.eclipse.wst.jsdt.ui.JavaPerspective">
 			<newWizardShortcut id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
 			</newWizardShortcut>
+			<newWizardShortcut id="org.symbian.tools.wrttools.importwgz">
+			</newWizardShortcut>
 		</perspectiveExtension>
 		<perspectiveExtension targetID="org.eclipse.debug.ui.DebugPerspective">
 			<newWizardShortcut id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
 			</newWizardShortcut>
+			<newWizardShortcut id="org.symbian.tools.wrttools.importwgz">
+			</newWizardShortcut>
 		</perspectiveExtension>
+  <perspectiveExtension
+        targetID="org.symbian.tools.wrttools.mainPerspective">
+     <newWizardShortcut
+           id="org.symbian.tools.wrttools.importwgz">
+     </newWizardShortcut>
+  </perspectiveExtension>
 	</extension>
 	
 <!-- Navigator Extensions -->
@@ -555,7 +566,8 @@
           </enablement>
        </commonWizard>
        <commonWizard
-             type="import"
+             menuGroupId="group.new"
+             type="new"
              wizardId="org.symbian.tools.wrttools.importwgz">
           <enablement>
              <or>

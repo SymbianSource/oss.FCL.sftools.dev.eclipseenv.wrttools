@@ -22,13 +22,13 @@ import java.io.PrintStream;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import com.intel.bluetooth.BlueCoveImpl;
-
-import org.symbian.tools.wrttools.core.deploy.PreferenceConstants;
+import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.sdt.utils.Logging;
+
+import com.intel.bluetooth.BlueCoveImpl;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -73,17 +73,11 @@ public class Activator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
-/*	
-	public void startBluetoothOperation() {
-		IPreferenceStore prefStore = getPreferenceStore();
-		if (prefStore.getBoolean(PreferenceConstants.DEBUG_ENABLED))
-			enableBlueCoveDiagnostics(true);
-	}
-	
-	public void stopBluetoothOperation() {
-		enableBlueCoveDiagnostics(false);
-	}
-*/
+
+    @Override
+    protected void initializeImageRegistry(ImageRegistry reg) {
+        WRTImages.init(reg);
+    }
 	
 	/** Toggle BlueCove logging
 	 */
