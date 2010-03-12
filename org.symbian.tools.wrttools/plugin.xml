@@ -284,9 +284,9 @@
        <wizard
           category="org.symbian.tools.wrttools.import"
           class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
-          icon="icons/WRTImport.gif"
+          icon="icons/import_16x16px.png"
           id="org.symbian.tools.wrttools.importwgz"
-          banner="icons/WRT_wizard_banner.png"
+          banner="icons/import_w_banner.png"
           name="Sources from WGZ File">
           <description>
              Create WRT project from deployable WGZ application archive
