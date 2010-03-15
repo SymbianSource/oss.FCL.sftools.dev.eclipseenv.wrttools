@@ -301,7 +301,6 @@
       <plugin id="org.symbian.tools.wrttools.debug.core"/>
       <plugin id="org.symbian.tools.wrttools.doc.WRTKit"/>
       <plugin id="org.symbian.tools.wrttools.doc.WebDeveloper"/>
-      <plugin id="org.symbian.tools.wrttools.editors"/>
       <plugin id="org.symbian.tools.wrttools.previewer"/>
       <plugin id="org.symbian.tools.wrttools.product"/>
       <plugin id="org.w3c.css"/>
