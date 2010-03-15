@@ -19,10 +19,10 @@
 
 package org.symbian.tools.wrttools.core.deploy.device;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.EOFException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.MessageFormat;
@@ -37,9 +37,6 @@ import javax.obex.ResponseCodes;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Shell;
-
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.deployer.DeployerMessages;
 import org.symbian.tools.wrttools.core.deployer.IWidgetDeployerConstants;
@@ -174,7 +171,7 @@ public class DeviceDeployer extends WidgetDeployer {
             os.close();			
 
             long elapsed = System.currentTimeMillis() - start;
-            emitStatus("elapsed time: " + (double)elapsed/1000.0 + " seconds");
+            emitStatus("elapsed time: " + elapsed/1000.0 + " seconds");
             
             int responseCode = putOperation.getResponseCode();
             if (responseCode == ResponseCodes.OBEX_HTTP_OK) {

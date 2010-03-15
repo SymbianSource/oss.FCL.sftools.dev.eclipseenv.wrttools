@@ -34,4 +34,6 @@ public interface IWRTStatusListener {
      * @param status
      */
     public void emitStatus(WRTStatus status);
+
+    public void close();
 }

@@ -3,24 +3,6 @@
 <plugin>
 
 <!-- Generic Project Builder and Project Natures  -->		
-	<extension id="PropertiesFileAuditor" name="Properties File Auditor Project Builder"
-		point="org.eclipse.core.resources.builders">
-		<builder hasNature="true">
-			<run class="org.symbian.tools.wrttools.builder.PropertiesFileAuditor">
-			</run>
-		</builder>
-	</extension>
-	<extension id="PropertiesAuditorNature" name="Properties Auditor Nature"
-		point="org.eclipse.core.resources.natures">
-		<runtime>
-			<run class="org.symbian.tools.wrttools.builder.PropertiesAuditorNature">
-			</run>
-		</runtime>
-		<requires-nature id="org.eclipse.wst.jsdt.core.jsNature" />
-		<requires-nature id="org.eclipse.pde.PluginNature" />
-		<builder id="org.symbian.tools.wrttools.PropertiesFileAuditor">
-		</builder>
-	</extension>
  	
 <!-- Widget Project Nature -->	
  <extension
@@ -59,18 +41,6 @@
           class="org.symbian.tools.wrttools.core.WrtIdeCorePreferences">
     </initializer>
  </extension>
- <extension
-       point="org.eclipse.ui.preferencePages">
-    <page
-          category="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
-          class="org.symbian.tools.wrttools.core.deploy.DeployPreferencePage"
-          id="org.symbian.tools.wrttools.core.deploy.DeployPreferencePage"
-          name="Deployment ">
-       <keywordReference
-             id="org.symbian.tools.wrttools.wrtwords">
-       </keywordReference>
-    </page>
- </extension>
 
 <!-- WRT Tool Integration (Package, Validate, Include, Exclude Settings)-->
         <extension	
@@ -92,22 +62,6 @@
       </objectContribution>	 
 -->                
     
-      <objectContribution
-            objectClass="org.eclipse.core.resources.IResource"          
-            id="org.symbian.tools.wrttools.widget.wrttool.deploy">
-     	<filter
-         	name="projectNature"
-         	value="org.symbian.tools.wrttools.WidgetProjectNature"/>
-       
-         <action
-               class="org.symbian.tools.wrttools.core.deploy.WrtDeployActionDelegate"
-               enablesFor="+"
-               icon="icons/deploy_widget.gif"
-               id="org.symbian.tools.wrttools.widget.deploy.WrtProjectDeployActionDelegate"
-               label="Deploy WRT Application"
-               menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
-         </action>
-      </objectContribution>
       
 	  <objectContribution
            objectClass="org.eclipse.core.resources.IResource" 
@@ -682,5 +636,76 @@
     <inferenceProvider
           class="org.symbian.tools.wrttools.core.libraries.PlatformServicesTypeProvider">
     </inferenceProvider>
+ </extension>
+ <extension
+       point="org.eclipse.ui.commands">
+    <category
+          id="org.symbian.tools.wrttools.commands.maincategory"
+          name="WRT Tools">
+    </category>
+    <command
+          categoryId="org.symbian.tools.wrttools.commands.maincategory"
+          description="Deploys application to phone or emulator"
+          id="org.symbian.tools.wrttools.commands.deploy"
+          name="Deploy Application">
+    </command>
+ </extension>
+ <extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          locationURI="toolbar:org.eclipse.ui.main.toolbar">
+       <toolbar
+             id="org.symbian.tools.wrttools">
+          <command
+                commandId="org.symbian.tools.wrttools.commands.deploy"
+                icon="icons/deploy_widget.gif"
+                id="org.symbian.tools.wrttools.toolbars.deploy"
+                label="Deploy"
+                tooltip="Deploy application">
+          </command>
+       </toolbar>
+    </menuContribution>
+ </extension>
+ <extension
+       point="org.eclipse.ui.handlers">
+    <handler
+          class="org.symbian.tools.wrttools.handlers.DeployHandler"
+          commandId="org.symbian.tools.wrttools.commands.deploy">
+       <enabledWhen>
+          <or>
+             <with
+                   variable="selection">
+                <and>
+                   <count
+                         value="1">
+                   </count>
+                   <iterate>
+                      <adapt
+                            type="org.eclipse.core.resources.IResource">
+                         <test
+                               property="org.eclipse.core.resources.projectNature"
+                               value="org.symbian.tools.wrttools.WidgetProjectNature">
+                         </test>
+                      </adapt>
+                   </iterate>
+                </and>
+             </with>
+             <and>
+                <with
+                      variable="activePart">
+                   <instanceof
+                         value="org.eclipse.ui.IEditorPart">
+                   </instanceof>
+                </with>
+                <with
+                      variable="activeEditorInput">
+                   <adapt
+                         type="org.eclipse.core.resources.IResource">
+                   </adapt>
+                </with>
+             </and>
+          </or>
+       </enabledWhen>
+    </handler>
  </extension>
 </plugin>

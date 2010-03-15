@@ -45,6 +45,7 @@ import org.eclipse.ui.actions.ActionDelegate;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WRTStatusListener;
 import org.symbian.tools.wrttools.core.status.IWRTConstants;
+import org.symbian.tools.wrttools.core.status.IWRTStatusListener;
 import org.symbian.tools.wrttools.core.status.WRTStatus;
 
 public class WrtPackageActionDelegate extends ActionDelegate implements
@@ -63,13 +64,14 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 		if (projectList != null && projectList.size() > 0) {
 			for (IProject project : projectList) {
 				if (project != null) {
-					packageProject( project);
+                    WRTStatusListener statusListener = new WRTStatusListener();
+                    packageProject(project, statusListener);
 				}
 			}
 		}
 	}
 
-	public boolean packageProject(IProject project) {
+    public boolean packageProject(IProject project, IWRTStatusListener statusListener) {
 		boolean packaedSucess=false;
 		if (project != null) {
 			try {
@@ -138,7 +140,6 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 				String projectPath = project.getLocation().toString();
 				String prjName = project.getName();
 				String dprojectPath = projectPath+"/"+prjName;
-				WRTStatusListener statusListener = new WRTStatusListener();
 				WidgetPackager widgetPackager = new WidgetPackager(statusListener);
 
 				try {
