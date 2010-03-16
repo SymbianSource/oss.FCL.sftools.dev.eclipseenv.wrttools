@@ -24,17 +24,17 @@ import java.net.ServerSocket;
 import org.symbian.tools.wrttools.debug.internal.Activator;
 
 public abstract class PortPolicy {
-	private static class ReuseSamePort extends PortPolicy {
-		private int port = -1;
-
-		@Override
-		protected int getPort() {
-			if (port < 0) {
-				port = getOpenPort();
-			}
-			return port;
-		}
-	}
+    //	private static class ReuseSamePort extends PortPolicy {
+    //		private int port = -1;
+    //
+    //		@Override
+    //		protected int getPort() {
+    //			if (port < 0) {
+    //				port = getOpenPort();
+    //			}
+    //			return port;
+    //		}
+    //	}
 
 	private static class NewPortEachTime extends PortPolicy {
 		@Override
