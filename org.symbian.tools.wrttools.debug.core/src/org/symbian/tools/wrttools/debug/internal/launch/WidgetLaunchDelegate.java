@@ -32,6 +32,9 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.IConstants;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
@@ -43,6 +46,18 @@ public class WidgetLaunchDelegate implements ILaunchConfigurationDelegate {
 			throws CoreException {
 		monitor.beginTask("Preparing WRT Debugger", IProgressMonitor.UNKNOWN);
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
+        final IWorkbench workbench = PlatformUI.getWorkbench();
+        final IWorkbenchWindow window = workbench.getWorkbenchWindows()[0];
+        final boolean[] retvalue = new boolean[1];
+        window.getShell().getDisplay().syncExec(new Runnable() {
+            public void run() {
+                retvalue[0] = workbench.saveAllEditors(true);
+            }
+        });
+        if (!retvalue[0]) {
+            launchManager.removeLaunch(launch);
+            return;
+        }
 		boolean debug = mode.equals(ILaunchManager.DEBUG_MODE);
 		try {
 			// 1. Load all parameters
