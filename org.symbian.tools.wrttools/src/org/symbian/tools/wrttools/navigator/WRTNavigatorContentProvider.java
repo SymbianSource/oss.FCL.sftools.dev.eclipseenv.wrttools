@@ -180,14 +180,11 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
     @Override
     public Object getParent(Object element) {
         Object parent = super.getParent(element);
-        if (element instanceof IJavaScriptElement && parent instanceof IJavaScriptElement) {
-            IJavaScriptElement jsChild = (IJavaScriptElement) element;
+        if (parent instanceof IJavaScriptElement) {
             IJavaScriptElement jsParent = (IJavaScriptElement) parent;
-
             try {
-                IResource childResource = jsChild.getCorrespondingResource();
                 IResource parentResource = jsParent.getCorrespondingResource();
-                if (childResource == null && parentResource != null) {
+                if (parentResource != null) {
                     return parentResource;
                 }
             } catch (JavaScriptModelException e) {
