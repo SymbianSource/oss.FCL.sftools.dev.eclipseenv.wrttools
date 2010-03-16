@@ -123,9 +123,8 @@ public class WrtProjectLocationWizardPage extends WizardPage implements
 		}
 	}
 
-	// constant from WizardArchiveFileResourceImportPage1
-	private static final String[] FILE_IMPORT_MASK = {
-			"*.jar;*.zip;*.tar;*.tar.gz;*.tgz", "*.*" }; //$NON-NLS-1$ //$NON-NLS-2$
+    // constant from WizardArchiveFileResourceImportPage1
+    private static final String[] FILE_IMPORT_MASK = { "*.zip;*.tar;*.tar.gz;*.tgz;*.wgz", "*.*" }; //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The name of the folder containing metadata information for the workspace.

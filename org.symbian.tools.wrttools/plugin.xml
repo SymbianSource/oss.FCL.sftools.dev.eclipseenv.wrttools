@@ -159,7 +159,7 @@
          </description>
 		</wizard>
   <wizard
-        category="org.symbian.tools.wrttools.import"
+        category="org.symbian.tools.wrttools.core.category"
         class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
         finalPerspective="org.symbian.tools.wrttools.mainPerspective"
         hasPages="true"

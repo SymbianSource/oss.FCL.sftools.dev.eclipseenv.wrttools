@@ -30,6 +30,7 @@ public interface IWRTConstants {
 	public static final String CONVERT = "Converter";
 	public static final String DEPLOY_PATH="\\epoc32\\winscw\\c\\Data\\Others";
 	public static final String DEVICES_XML_PATH = "c:/program files/common files/symbian/devices.xml";
+    public static final String DEVICES_VISTA_XML_PATH = "appdata/local/virtualstore/program files/common files/symbian/devices.xml";
 	public static final String DEVICES_TAG="devices";
 	public static final String DEVICE_TAG="device";
 	public static final String EPOC_ROOT_TAG="epocroot";

@@ -28,13 +28,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.symbian.tools.wrttools.core.IWRTConstants;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import org.symbian.tools.wrttools.core.IWRTConstants;
 
 
 
@@ -76,6 +77,11 @@ public class EmulatorListProvider{
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();			
 			File file = new File(IWRTConstants.DEVICES_XML_PATH);
+            if (!file.exists()) {
+                IPath otherPath = new Path(System.getProperty("user.home"))
+                        .append(IWRTConstants.DEVICES_VISTA_XML_PATH);
+                file = otherPath.toFile();
+            }
 			if(file.exists()){				
 				FileInputStream fin = new FileInputStream(file);
 				Document document = builder.parse(fin);
