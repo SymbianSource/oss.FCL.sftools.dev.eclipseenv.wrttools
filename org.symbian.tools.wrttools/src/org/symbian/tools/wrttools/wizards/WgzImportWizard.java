@@ -89,9 +89,13 @@ public class WgzImportWizard extends Wizard implements IImportWizard, INewWizard
 									}
 
 								}, monitor);
-					} catch (CoreException e) {
-						StatusManager.getManager().handle(e.getStatus(),
-								StatusManager.SHOW);
+                    } catch (final CoreException e) {
+                        getShell().getDisplay().asyncExec(new Runnable() {
+                            public void run() {
+                                StatusManager.getManager().handle(e.getStatus(),
+                                        StatusManager.SHOW | StatusManager.BLOCK | StatusManager.LOG);
+                            }
+                        });
 					}
 				}
 			});

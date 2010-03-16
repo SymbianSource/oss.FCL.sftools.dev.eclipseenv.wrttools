@@ -338,7 +338,12 @@ public class ProjectUtils {
                 if (!isIgnored(p) && !nextEntry.isDirectory()) {
                     IFile file = location.getFile(p);
                     checkParent(file.getParent());
-                    file.create(new NonClosingStream(stream), false, new SubProgressMonitor(progressMonitor, 1));
+                    if (file.exists()) {
+                        file.setContents(new NonClosingStream(stream), false, true, new SubProgressMonitor(
+                                progressMonitor, 1));
+                    } else {
+                        file.create(new NonClosingStream(stream), true, new SubProgressMonitor(progressMonitor, 1));
+                    }
                 }
             }
         } finally {
