@@ -7,8 +7,12 @@
  * at the URL "http://www.eclipse.org/legal/epl-v10.html".
  *
  * Initial Contributors:
- * Symbian Foundation - initial contribution.
+ * Nokia Corporation - initial contribution.
+ * 
  * Contributors:
+ * 
+ * Description:
+ * 
  */
 
 //	for console support
