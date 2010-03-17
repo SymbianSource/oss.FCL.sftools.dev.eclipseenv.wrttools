@@ -30,6 +30,7 @@ import org.chromium.debug.core.model.WorkspaceBridge;
 import org.chromium.debug.core.model.JavascriptVmEmbedder.ConnectionToRemote;
 import org.chromium.sdk.ConnectionLogger;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
@@ -122,6 +123,7 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 
 			// All OK
 			destructingGuard.discharge();
+            addResourceListenerIfNotInstalled();
 		} catch (CoreException e) {
 			DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
 			throw e;
@@ -130,4 +132,15 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 		}
 		return true;
 	}
+
+    private static boolean listenerAdded = false;
+
+    private void addResourceListenerIfNotInstalled() {
+        synchronized (DebugConnectionJob.class) {
+            if (!listenerAdded) {
+                ResourcesPlugin.getWorkspace().addResourceChangeListener(new ResourcesChangeListener());
+                listenerAdded = true;
+            }
+        }
+    }
 }
