@@ -53,7 +53,8 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static PreviewerPlugin plugin;
 
-	private HttpPreviewer previewer = new HttpPreviewer();
+    private final CommandHandlerManager handlerManager = new CommandHandlerManager();
+	private final HttpPreviewer previewer = new HttpPreviewer();
 	
 	/*
 	 * (non-Javadoc)
@@ -118,4 +119,7 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 		return previewer;
 	}
 
+    public CommandHandlerManager getCommandHandlerManager() {
+        return handlerManager;
+    }
 }

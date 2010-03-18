@@ -29,6 +29,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,6 +53,7 @@ import org.symbian.tools.wrttools.util.CoreUtil;
 public class WorkspaceResourcesServlet extends HttpServlet {
 	private static final String PREVIEW_START = "/preview/wrt_preview.html";
 	private static final String PREVIEW_PATH = "preview";
+    private static final Object COMMAND_PATH = "__sym_command";
 	private static final String STARTING_PAGE = "preview-frame.html";
 	private static final String INDEX_PAGE = "wrt_preview_main.html";
 	private static final long serialVersionUID = -3217197074249607950L;
@@ -69,7 +71,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		IPath path = new Path(req.getPathInfo());
 		InputStream contents = null;
 		try {
-			contents = getSpecialResource(path);
+            contents = getSpecialResource(path, req.getParameterMap());
 			if (contents == null) {
 				contents = getWorkspaceResourceContents(path);
 			}
@@ -92,7 +94,8 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		}
 	}
 
-	private InputStream getSpecialResource(IPath path) throws IOException,
+    @SuppressWarnings("unchecked")
+    private InputStream getSpecialResource(IPath path, Map parameters) throws IOException,
 			CoreException {
 		IPath relativePath = path.removeFirstSegments(1);
 		if (relativePath.segmentCount() == 1) {
@@ -104,6 +107,11 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 			}
 		} else if (PREVIEW_PATH.equals(relativePath.segment(0))) {
 			return getPluginResourceStream(relativePath.makeAbsolute());
+        } else if (COMMAND_PATH.equals(relativePath.segment(0))) {
+            if (path.segmentCount() == 3) {
+                PreviewerPlugin.getDefault().getCommandHandlerManager().handle(path.segment(2), path.segment(0),
+                        parameters);
+            }
 		}
 		return null;
 	}

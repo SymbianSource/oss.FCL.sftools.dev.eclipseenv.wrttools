@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="projectTemplates" name="WRT Project Templates" schema="schema/projectTemplates.exsd"/>
 
 <!-- Generic Project Builder and Project Natures  -->		
  	
@@ -127,7 +128,6 @@
    </extension>  
 
 <!-- WRT Project Templates - CSS Validator -->
-	<extension-point id="projectTemplates" name="WRT application project templates" schema="schema/projectTemplates.exsd"/>
 	<extension id="org.symbian.tools.wrttools.core.cssvalidator"
 		name="CSS Validator" point="org.eclipse.wst.validation.validatorV2">
 		<validator build="true"

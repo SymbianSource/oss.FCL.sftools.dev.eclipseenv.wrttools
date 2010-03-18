@@ -305,5 +305,12 @@
              label="chrome debug widget">
        </keyword>
     </extension>
+    <extension
+          point="org.symbian.tools.wrttools.previewer.commands">
+       <command
+             handler="org.symbian.tools.wrttools.debug.internal.session.TerminateSession"
+             name="terminateDebug">
+       </command>
+    </extension>
   
 </plugin>
