@@ -57,7 +57,7 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
 
   private WorkspaceBridge workspaceRelations = null;
 
-  private final ListenerBlock listenerBlock = new ListenerBlock();
+  private ListenerBlock listenerBlock = null;
 
   public DebugTargetImpl(ILaunch launch, WorkspaceBridge.Factory workspaceBridgeFactory) {
     super(null);
@@ -86,25 +86,30 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
       return false;
     }
     monitor.worked(1);
-    final JavascriptVmEmbedder embedder = connector.attach(embedderListener, debugEventListener);
-    // From this moment V8 may call our listeners. We block them by listenerBlock for a while.
+    this.listenerBlock = new ListenerBlock();
+    try {
+      final JavascriptVmEmbedder embedder = connector.attach(embedderListener, debugEventListener);
+      // From this moment V8 may call our listeners. We block them by listenerBlock for a while.
 
-    Destructable embedderDestructor = new Destructable() {
-      public void destruct() {
-        embedder.getJavascriptVm().detach();
-      }
-    };
+      Destructable embedderDestructor = new Destructable() {
+        public void destruct() {
+          embedder.getJavascriptVm().detach();
+        }
+      };
 
-    destructingGuard.addValue(embedderDestructor);
+      destructingGuard.addValue(embedderDestructor);
 
-    this.vmEmbedder = embedder;
+      this.vmEmbedder = embedder;
 
-    // We'd like to know when launch is removed to remove our project.
-    DebugPlugin.getDefault().getLaunchManager().addLaunchListener(launchListener);
+      // We'd like to know when launch is removed to remove our project.
+      DebugPlugin.getDefault().getLaunchManager().addLaunchListener(launchListener);
 
-    this.workspaceRelations = workspaceBridgeFactory.attachedToVm(this,
-        vmEmbedder.getJavascriptVm());
-    listenerBlock.unblock();
+      this.workspaceRelations = workspaceBridgeFactory.attachedToVm(this,
+          vmEmbedder.getJavascriptVm());
+      listenerBlock.setProperlyInitialized();
+    } finally {
+      listenerBlock.unblock();
+    }
 
     DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
     reloadScriptsAndPossiblyResume(attachCallback);
@@ -417,29 +422,26 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
   private void logExceptionFromContext(DebugContext context) {
     ExceptionData exceptionData = context.getExceptionData();
     List<? extends CallFrame> callFrames = context.getCallFrames();
+    String scriptName;
+    Object lineNumber;
     if (callFrames.size() > 0) {
       CallFrame topFrame = callFrames.get(0);
       Script script = topFrame.getScript();
-      ChromiumDebugPlugin.logError(
-          Messages.DebugTargetImpl_LogExceptionFormat,
-          exceptionData.isUncaught()
-              ? Messages.DebugTargetImpl_Uncaught
-              : Messages.DebugTargetImpl_Caught,
-          exceptionData.getExceptionMessage(),
-          script != null ? script.getName() : "<unknown>", //$NON-NLS-1$
-          topFrame.getLineNumber(),
-          trim(exceptionData.getSourceText(), 80));
+      scriptName = script != null ? script.getName() : Messages.DebugTargetImpl_Unknown;
+      lineNumber = topFrame.getLineNumber();
     } else {
-      ChromiumDebugPlugin.logError(
-          Messages.DebugTargetImpl_LogExceptionFormat,
-          exceptionData.isUncaught()
-              ? Messages.DebugTargetImpl_Uncaught
-              : Messages.DebugTargetImpl_Caught,
-          exceptionData.getExceptionMessage(),
-          "<unknown>", //$NON-NLS-1$
-          "<unknown>",
-          trim(exceptionData.getSourceText(), 80));
+      scriptName = Messages.DebugTargetImpl_Unknown;
+      lineNumber = Messages.DebugTargetImpl_Unknown;
     }
+    ChromiumDebugPlugin.logError(
+        Messages.DebugTargetImpl_LogExceptionFormat,
+        exceptionData.isUncaught()
+            ? Messages.DebugTargetImpl_Uncaught
+            : Messages.DebugTargetImpl_Caught,
+        exceptionData.getExceptionMessage(),
+        scriptName,
+        lineNumber,
+        trim(exceptionData.getSourceText(), 80));
   }
 
   private final JavascriptVmEmbedder.Listener embedderListener =
@@ -489,33 +491,39 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
   public WorkspaceBridge.JsLabelProvider getLabelProvider() {
     return workspaceBridgeFactory.getLabelProvider();
   }
+  
+  public int getLineNumber(CallFrame stackFrame) {
+    return workspaceRelations.getLineNumber(stackFrame);
+  }
 
   private static class ListenerBlock {
     private volatile boolean isBlocked = true;
+    private volatile boolean hasBeenProperlyInitialized = false;
     private final Object monitor = new Object();
     void waitUntilReady() {
       if (isBlocked) {
-        return;
-      }
-      synchronized (monitor) {
-        while (isBlocked) {
-          try {
-            monitor.wait();
-          } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        synchronized (monitor) {
+          while (isBlocked) {
+            try {
+              monitor.wait();
+            } catch (InterruptedException e) {
+              throw new RuntimeException(e);
+            }
           }
         }
       }
+      if (!hasBeenProperlyInitialized) {
+        throw new RuntimeException("DebugTarget has not been properly initialized"); //$NON-NLS-1$
+      }
+    }
+    void setProperlyInitialized() {
+      hasBeenProperlyInitialized = true;
     }
     void unblock() {
-      isBlocked = true;
+      isBlocked = false;
       synchronized (monitor) {
         monitor.notifyAll();
       }
     }
   }
-
-	public int getLineNumber(CallFrame stackFrame) {
-		return workspaceRelations.getLineNumber(stackFrame);
-	}
 }

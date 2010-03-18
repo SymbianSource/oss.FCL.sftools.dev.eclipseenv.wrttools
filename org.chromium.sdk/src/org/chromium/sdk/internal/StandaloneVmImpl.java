@@ -12,7 +12,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.chromium.sdk.ChromiumIOException;
 import org.chromium.sdk.DebugEventListener;
 import org.chromium.sdk.StandaloneVm;
 import org.chromium.sdk.UnsupportedVersionException;
@@ -122,9 +121,9 @@ class StandaloneVmImpl extends JavascriptVmImpl implements StandaloneVm {
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     } catch (ExecutionException e) {
-      throw new ChromiumIOException("Failed to get version", e);
+      throw newIOException("Failed to get version", e);
     } catch (TimeoutException e) {
-      throw new ChromiumIOException("Timed out waiting for version", e);
+      throw newIOException("Timed out waiting for version", e);
     }
 
     String versionString = remoteInfo.getProtocolVersion();

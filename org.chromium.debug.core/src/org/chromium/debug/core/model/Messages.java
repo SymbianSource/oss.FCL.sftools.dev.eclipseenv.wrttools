@@ -41,6 +41,8 @@ public class Messages extends NLS {
 
   public static String DebugTargetImpl_Uncaught;
 
+  public static String DebugTargetImpl_Unknown;
+
   public static String JavascriptVmEmbedderFactory_TargetName0;
 
   public static String JavascriptVmEmbedderFactory_Terminated;

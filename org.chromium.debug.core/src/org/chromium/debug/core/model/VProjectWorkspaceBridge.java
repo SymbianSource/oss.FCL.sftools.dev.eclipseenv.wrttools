@@ -233,7 +233,8 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
   };
 
   public int getLineNumber(CallFrame stackFrame) {
-	  return stackFrame.getLineNumber() + 1;
+    // convert 0-based to 1-based
+    return stackFrame.getLineNumber() + 1;
   }
   
   /**
@@ -267,13 +268,22 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
 
     public String getThreadLabel(JavascriptThread thread) {
       String url = thread.getDebugTarget().getJavascriptEmbedder().getThreadName();
-      return NLS.bind(Messages.JsThread_ThreadLabelFormat, getThreadStateLabel(thread), (url.length() > 0
-          ? (" : " + url) : "")); //$NON-NLS-1$ //$NON-NLS-2$
+      return NLS.bind(Messages.JsThread_ThreadLabelFormat,
+          getThreadStateLabel(thread),
+          (url.length() > 0 ? (" : " + url) : "")); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     private String getThreadStateLabel(JavascriptThread thread) {
+      DebugContext context;
       if (thread.isSuspended()) {
-        DebugContext context = thread.getDebugTarget().getDebugContext();
+        // Theoretically the context may be null.
+        context = thread.getDebugTarget().getDebugContext();
+      } else {
+        context = null;
+      }
+      if (context == null) {
+        return Messages.JsThread_ThreadLabelRunning;
+      } else {
         ExceptionData exceptionData = context.getExceptionData();
         if (exceptionData != null) {
           return NLS.bind(Messages.JsThread_ThreadLabelSuspendedExceptionFormat,
@@ -281,8 +291,6 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
         } else {
           return Messages.JsThread_ThreadLabelSuspended;
         }
-      } else {
-        return Messages.JsThread_ThreadLabelRunning;
       }
     }
 

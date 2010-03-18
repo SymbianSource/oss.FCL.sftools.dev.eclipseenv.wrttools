@@ -8,7 +8,6 @@ import java.io.IOException;
 
 import org.chromium.sdk.Browser;
 import org.chromium.sdk.BrowserTab;
-import org.chromium.sdk.ChromiumIOException;
 import org.chromium.sdk.DebugEventListener;
 import org.chromium.sdk.TabDebugEventListener;
 import org.chromium.sdk.internal.tools.ToolHandler;
@@ -90,7 +89,7 @@ public class BrowserTabImpl extends JavascriptVmImpl implements BrowserTab {
       try {
         result = devToolSessionManager.attachToTab();
       } catch (AttachmentFailureException e) {
-        throw new ChromiumIOException(e);
+        throw newIOException(null, e);
       }
       if (Result.OK != result) {
         throw new IOException("Failed to attach with result: " + result);

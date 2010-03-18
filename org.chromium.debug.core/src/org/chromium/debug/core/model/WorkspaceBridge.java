@@ -119,5 +119,4 @@ public interface WorkspaceBridge {
      */
     String getStackFrameLabel(StackFrame stackFrame) throws DebugException;
   }
-
 }
