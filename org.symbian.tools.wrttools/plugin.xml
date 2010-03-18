@@ -464,7 +464,22 @@
              suppressedExtensionId="org.eclipse.ui.navigator.resourceContent">
        </override>
        <commonWizard
-             menuGroupId="group.new"
+             menuGroupId="group.new.z"
+             type="new"
+             wizardId="org.symbian.tools.wrttools.importwgz">
+          <enablement>
+             <or>
+                <adapt
+                      type="org.eclipse.core.resources.IResource">
+                </adapt>
+                <adapt
+                      type="java.util.Collection">
+                </adapt>
+             </or>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             menuGroupId="group.new.z"
              type="new"
              wizardId="org.symbian.tools.wrttools.core.wrtwidgetwizard">
           <enablement>
@@ -481,6 +496,26 @@
        <commonWizard
              type="new"
              wizardId="org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard">
+          <enablement>
+             <adapt
+                   type="org.eclipse.core.resources.IResource">
+             </adapt>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             menuGroupId="group.new.generic"
+             type="new"
+             wizardId="org.eclipse.ui.wizards.new.folder">
+          <enablement>
+             <adapt
+                   type="org.eclipse.core.resources.IResource">
+             </adapt>
+          </enablement>
+       </commonWizard>
+       <commonWizard
+             menuGroupId="group.new.generic"
+             type="new"
+             wizardId="org.eclipse.ui.wizards.new.file">
           <enablement>
              <adapt
                    type="org.eclipse.core.resources.IResource">
@@ -508,21 +543,6 @@
        <commonWizard
              type="import"
              wizardId="org.symbian.tools.wrttools.import.projectImport">
-          <enablement>
-             <or>
-                <adapt
-                      type="org.eclipse.core.resources.IResource">
-                </adapt>
-                <adapt
-                      type="java.util.Collection">
-                </adapt>
-             </or>
-          </enablement>
-       </commonWizard>
-       <commonWizard
-             menuGroupId="group.new"
-             type="new"
-             wizardId="org.symbian.tools.wrttools.importwgz">
           <enablement>
              <or>
                 <adapt

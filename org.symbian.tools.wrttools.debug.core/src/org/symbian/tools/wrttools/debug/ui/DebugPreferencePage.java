@@ -50,7 +50,7 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
         check.setText("Show warning dialog when resources in the debugged project were changed");
         check.setLayoutData(new GridData(GridData.BEGINNING, GridData.END, false, false, 3, 1));
 
-        check.setSelection(MessageDialogWithToggle.ALWAYS.equals(getPreferenceStore().getString(
+        check.setSelection(!MessageDialogWithToggle.ALWAYS.equals(getPreferenceStore().getString(
                 IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR)));
 	}
 
@@ -63,9 +63,9 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
     @Override
     public boolean performOk() {
         if (check.getSelection()) {
-            getPreferenceStore().setValue(IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR, MessageDialogWithToggle.ALWAYS);
-        } else {
             getPreferenceStore().setToDefault(IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR);
+        } else {
+            getPreferenceStore().setValue(IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR, MessageDialogWithToggle.ALWAYS);
         }
         return super.performOk();
     }

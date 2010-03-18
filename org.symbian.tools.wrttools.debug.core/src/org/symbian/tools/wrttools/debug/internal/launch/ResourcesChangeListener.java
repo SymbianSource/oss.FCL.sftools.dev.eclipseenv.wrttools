@@ -22,7 +22,6 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
@@ -43,7 +42,10 @@ public class ResourcesChangeListener implements IResourceChangeListener {
         private final ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 
         public boolean visit(IResourceDelta delta) throws CoreException {
-            if (delta.getResource().getType() == IResource.PROJECT) {
+            int d = delta.getFlags()
+                    & (IResourceDelta.CONTENT | IResourceDelta.OPEN | IResourceDelta.MOVED_TO
+                            | IResourceDelta.MOVED_FROM | IResourceDelta.SYNC | IResourceDelta.REPLACED);
+            if (delta.getKind() != IResourceDelta.CHANGED || d != 0) {
                 IProject project = delta.getResource().getProject();
                 if (DebugUtil.isProjectDebugged(project, launchManager, null)) {
                     projects.add(project);
