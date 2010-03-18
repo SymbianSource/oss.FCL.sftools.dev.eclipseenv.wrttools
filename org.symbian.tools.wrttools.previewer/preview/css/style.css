@@ -24,6 +24,11 @@ body {
 .hide{
 	display:none;
 }
+.shortcut{
+	display:none;
+	font-weight: bold;
+	color: gray;
+}
 .show{
 	display:block;
 }

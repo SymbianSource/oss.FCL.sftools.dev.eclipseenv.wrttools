@@ -614,6 +614,11 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			if (/chrome/.test( navigator.userAgent.toLowerCase())) {
 				$("#InspectorBtn").show();
 			}
+			if (/mac/.test( navigator.userAgent.toLowerCase())) {
+				$("#MacShortcut").show();
+			} else {
+				$("#UniversalShortcut").show();
+			}
 		},
 		
 		setWidgetStyle : function()
