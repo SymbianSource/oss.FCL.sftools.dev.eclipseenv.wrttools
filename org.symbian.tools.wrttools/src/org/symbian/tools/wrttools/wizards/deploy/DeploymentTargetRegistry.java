@@ -55,7 +55,10 @@ public class DeploymentTargetRegistry {
         }
     }
 
+    private boolean didLookup = false;
+
     public synchronized void doSearch(IProgressMonitor monitor) throws CoreException {
+        didLookup = true;
         monitor.beginTask("Bluetooth search", IProgressMonitor.UNKNOWN);
         if (DeviceListProvider.isBloothToothConnected()) {
             loadDevices(monitor);
@@ -117,6 +120,10 @@ public class DeploymentTargetRegistry {
             return target;
         }
         return null;
+    }
+
+    public boolean didBluetoothLookup() {
+        return didLookup;
     }
 
 }

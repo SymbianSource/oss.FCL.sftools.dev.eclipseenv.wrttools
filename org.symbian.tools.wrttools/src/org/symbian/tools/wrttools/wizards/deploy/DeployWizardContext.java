@@ -26,6 +26,7 @@ import org.symbian.tools.wrttools.WRTProject;
 public class DeployWizardContext {
     private DeploymentTarget target;
     private final WRTProject project;
+    private boolean logging;
 
     public DeployWizardContext(WRTProject project) {
         this.project = project;
@@ -49,5 +50,17 @@ public class DeployWizardContext {
 
     public void doSearch(SubProgressMonitor monitor) throws CoreException {
         DeploymentTargetRegistry.getRegistry().doSearch(monitor);
+    }
+
+    public boolean didBluetoothLookup() {
+        return DeploymentTargetRegistry.getRegistry().didBluetoothLookup();
+    }
+
+    public void setLogging(boolean logging) {
+        this.logging = logging;
+    }
+
+    public boolean isLogging() {
+        return logging;
     }
 }

@@ -23,6 +23,7 @@ import java.text.MessageFormat;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.util.Policy;
@@ -55,6 +56,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.core.WRTImages;
 
 public class DeploymentTargetWizardPage extends WizardPage {
     public class EmulatorBluetoothLabelProvider extends LabelProvider implements ILabelProvider, IColorProvider {
@@ -85,7 +87,6 @@ public class DeploymentTargetWizardPage extends WizardPage {
     private final DeployWizardContext context;
     private TableViewer list;
     private Text description;
-    private Button enableLogging;
     private final DeploymentTarget prev;
 
     public DeploymentTargetWizardPage(DeployWizardContext context, DeploymentTarget prev) {
@@ -134,15 +135,16 @@ public class DeploymentTargetWizardPage extends WizardPage {
                 doBluetoothSearch(search);
             }
         });
-        search.setText("Search");
+        search.setText("Discover");
+        search.setImage(WRTImages.getBluetoothImage());
 
         description = new Text(root, SWT.BORDER | SWT.READ_ONLY);
-        enableLogging = new Button(root, SWT.CHECK);
+        final Button enableLogging = new Button(root, SWT.CHECK);
         enableLogging.setText("Enable diagnostic logging");
         enableLogging.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                toggleLogging();
+                toggleLogging(enableLogging.getSelection());
             }
         });
 
@@ -177,12 +179,15 @@ public class DeploymentTargetWizardPage extends WizardPage {
             list.setSelection(new StructuredSelection(prev));
         }
 
+        if (!context.didBluetoothLookup()) {
+            setMessage("Press \"Discover\" to find Bluetooth-enabled devices", IStatus.WARNING);
+        }
+
         setControl(root);
     }
 
-    protected void toggleLogging() {
-        // TODO Auto-generated method stub
-
+    protected void toggleLogging(boolean logging) {
+        context.setLogging(logging);
     }
 
     protected void doBluetoothSearch(final Button search) {
@@ -222,12 +227,14 @@ public class DeploymentTargetWizardPage extends WizardPage {
             context.setTarget(target);
             String desc = target.getDescription();
             this.description.setText(desc);
+            setMessage(null);
             setErrorMessage(null);
             setPageComplete(true);
         } else {
             context.setTarget(null);
             description.setText("");
             setPageComplete(false);
+            setMessage(null);
             setErrorMessage("Select device or emulator to deploy the application");
         }
     }
