@@ -1071,22 +1071,9 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				buttons : {
 				"Close" : function(){
 				$("#InspectorTab").dialog('close');
-				
-				//	Hack for Mac firefox
-				if(/Mac/i.test(navigator.userAgent))
-				{
-					$("#WidgetArea iframe").css({overflow:'auto'});
-				}
-			},			
+				},			
 				"Disconnect Debugger" : function(){
 				$.ajax({url : "__sym_command/terminateDebug"});
-				$("#InspectorTab").dialog('close');
-				
-				//	Hack for Mac firefox
-				if(/Mac/i.test(navigator.userAgent))
-				{
-					$("#WidgetArea iframe").css({overflow:'auto'});
-				}
 			}}
 			});
 				
