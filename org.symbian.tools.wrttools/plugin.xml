@@ -64,22 +64,6 @@
 -->                
     
       
-	  <objectContribution
-           objectClass="org.eclipse.core.resources.IResource" 
-		   adaptable="true"         
-           id="org.symbian.tools.wrttools.widget.wrttool">
-	 	   <filter
-	     	name="projectNature"
-	     	value="org.symbian.tools.wrttools.WidgetProjectNature"/>
-	       <action
-	             class="org.symbian.tools.wrttools.core.packager.WrtPackageActionDelegate"
-	             enablesFor="+"
-	             icon="icons/package_widget.gif"
-	             id="org.symbian.tools.wrttools.widget.package.WrtPackageActionDelegate"
-	             label="Package WRT Application"
-	             menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
-	       </action>
-      </objectContribution> 
       <objectContribution
             objectClass="org.eclipse.core.resources.IResource"            
             id="org.symbian.tools.wrttools.widget.wrttool.packageoptions">
@@ -665,9 +649,15 @@
     </category>
     <command
           categoryId="org.symbian.tools.wrttools.commands.maincategory"
-          description="Deploys application to phone or emulator"
+          description="Deploys an application to phone or emulator"
           id="org.symbian.tools.wrttools.commands.deploy"
           name="Deploy Application">
+    </command>
+    <command
+          categoryId="org.symbian.tools.wrttools.commands.maincategory"
+          description="Packages an application for distribution or deployment"
+          id="org.symbian.tools.wrttools.commands.package"
+          name="Package Application">
     </command>
  </extension>
  <extension
@@ -679,11 +669,84 @@
           <command
                 commandId="org.symbian.tools.wrttools.commands.deploy"
                 icon="icons/deploy_widget.gif"
-                id="org.symbian.tools.wrttools.toolbars.deploy"
-                label="Deploy"
-                tooltip="Deploy application">
+                id="org.symbian.tools.wrttools.toolbars.deploy">
+          </command>
+          <command
+                commandId="org.symbian.tools.wrttools.commands.package"
+                icon="icons/package_widget.gif"
+                id="org.symbian.tools.wrttools.toolbars.package">
           </command>
        </toolbar>
+    </menuContribution>
+    <menuContribution
+          locationURI="menu:project?after=additions">
+       <separator
+             name="org.symbian.tools.wrttools.beginwert"
+             visible="true">
+       </separator>
+       <command
+             commandId="org.symbian.tools.wrttools.commands.deploy"
+             icon="icons/deploy_widget.gif"
+             id="org.symbian.tools.wrttools.toolbars.deploy">
+       </command>
+       <command
+             commandId="org.symbian.tools.wrttools.commands.package"
+             icon="icons/package_widget.gif"
+             id="org.symbian.tools.wrttools.toolbars.package">
+       </command>
+       <separator
+             name="org.symbian.tools.wrttools.endwrt"
+             visible="true">
+       </separator>
+    </menuContribution>
+    <menuContribution
+          locationURI="popup:org.eclipse.ui.popup.any?after=sourceMenuId">
+       <separator
+             name="org.symbian.tools.wrttools.beginwert"
+             visible="true">
+       </separator>
+       <command
+             commandId="org.symbian.tools.wrttools.commands.deploy"
+             icon="icons/deploy_widget.gif"
+             id="org.symbian.tools.wrttools.toolbars.deploy">
+          <visibleWhen>
+             <and>
+                <iterate
+                      ifEmpty="false"
+                      operator="and">
+                   <adapt
+                         type="org.eclipse.core.resources.IProject">
+                   </adapt>
+                </iterate>
+                <count
+                      value="1">
+                </count>
+             </and>
+          </visibleWhen>
+       </command>
+       <command
+             commandId="org.symbian.tools.wrttools.commands.package"
+             icon="icons/package_widget.gif"
+             id="org.symbian.tools.wrttools.toolbars.package">
+          <visibleWhen>
+             <and>
+                <iterate
+                      ifEmpty="false"
+                      operator="and">
+                   <adapt
+                         type="org.eclipse.core.resources.IProject">
+                   </adapt>
+                </iterate>
+                <count
+                      value="1">
+                </count>
+             </and>
+          </visibleWhen>
+       </command>
+       <separator
+             name="org.symbian.tools.wrttools.endwrt"
+             visible="true">
+       </separator>
     </menuContribution>
  </extension>
  <extension
@@ -692,6 +755,25 @@
           class="org.symbian.tools.wrttools.handlers.DeployHandler"
           commandId="org.symbian.tools.wrttools.commands.deploy">
        <enabledWhen>
+          <reference
+                definitionId="org.symbian.tools.wrttools.symbianproject">
+          </reference>
+       </enabledWhen>
+    </handler>
+    <handler
+          class="org.symbian.tools.wrttools.handlers.PackageApplicationHandler"
+          commandId="org.symbian.tools.wrttools.commands.package">
+       <enabledWhen>
+          <reference
+                definitionId="org.symbian.tools.wrttools.symbianproject">
+          </reference>
+       </enabledWhen>
+    </handler>
+ </extension>
+ <extension
+       point="org.eclipse.core.expressions.definitions">
+    <definition
+          id="org.symbian.tools.wrttools.symbianproject">
           <or>
              <with
                    variable="selection">
@@ -725,7 +807,6 @@
                 </with>
              </and>
           </or>
-       </enabledWhen>
-    </handler>
+    </definition>
  </extension>
 </plugin>
