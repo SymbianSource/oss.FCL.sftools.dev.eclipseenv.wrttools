@@ -26,13 +26,6 @@
         
 <!-- Validator Marker -->
    
-        <extension
-           id="org.symbian.tools.wrttools.core.validator.marker"
-           name="Validator Marker"
-           point="org.eclipse.core.resources.markers">
-                 <super type="org.eclipse.core.resources.problemmarker"/>
-                 <persistent value ="true"/>
-        </extension>
         
 <!-- Web Runtime Preferences --> 
  <extension
@@ -808,5 +801,27 @@
              </and>
           </or>
     </definition>
+ </extension>
+ <extension
+       point="org.eclipse.ui.decorators">
+    <decorator
+          adaptable="true"
+          class="org.symbian.tools.wrttools.navigator.PackagingInformationDecorator"
+          icon="icons/main16.gif"
+          id="org.symbian.tools.wrttools.packagingDeclarator"
+          label="WebRuntime Packaging Information"
+          lightweight="true"
+          location="TOP_RIGHT"
+          objectClass="org.eclipse.core.resources.IResource"
+          state="true">
+    </decorator>
+ </extension>
+ <extension
+       id="org.symbian.tools.wrttools.excluded"
+       name="Excluded from WRT packaging marker"
+       point="org.eclipse.core.resources.markers">
+    <persistent
+          value="true">
+    </persistent>
  </extension>
 </plugin>

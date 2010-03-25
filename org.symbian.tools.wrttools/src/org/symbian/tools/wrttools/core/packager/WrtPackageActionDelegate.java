@@ -47,6 +47,7 @@ import org.symbian.tools.wrttools.WRTStatusListener;
 import org.symbian.tools.wrttools.core.status.IWRTConstants;
 import org.symbian.tools.wrttools.core.status.IWRTStatusListener;
 import org.symbian.tools.wrttools.core.status.WRTStatus;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WrtPackageActionDelegate extends ActionDelegate implements
 		IObjectActionDelegate {
@@ -105,8 +106,8 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 							IFile file = (IFile) resource;
 							boolean add = true;
 							// skip user-excluded and automatically-excluded files
-							String value = file.getPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY);
-							if (value != null) {
+                            boolean value = ProjectUtils.isExcluded(file);
+                            if (value) {
 								add = false;
 							}
 							String name = file.getName();
@@ -134,6 +135,7 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 						}		
 						return true;
 					}
+
 				});
 				//<<--<<
 
@@ -156,7 +158,7 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 					project.refreshLocal(IResource.DEPTH_ONE, pm);
 					wgz = project.getFile(wgzPath);
 					if (wgz.exists()) {
-						wgz.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, Boolean.TRUE.toString());
+                        ProjectUtils.exclude(wgz);
 					}
 					
 				} catch (PackageException e) {
@@ -171,10 +173,11 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 		}	
 		return packaedSucess;
 	}
-	/**
-	 * Reporting status
-	 * @param statusMessage
-	 */
+
+    /**
+     * Reporting status
+     * @param statusMessage
+     */
 	private void reportStatus(String statusMessage) {
 		WRTStatus status = new WRTStatus();
 		WRTStatusListener statusListener = new WRTStatusListener();

@@ -35,13 +35,13 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
-
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class ExcludeFileAction implements IObjectActionDelegate {
 	
-	private List<IFile> selectedFiles = new ArrayList<IFile>();
-	private List<IFolder> selectedFolders = new ArrayList<IFolder>();
+	private final List<IFile> selectedFiles = new ArrayList<IFile>();
+	private final List<IFolder> selectedFolders = new ArrayList<IFolder>();
 	public ExcludeFileAction() {
 		super();
 	}
@@ -51,16 +51,12 @@ public class ExcludeFileAction implements IObjectActionDelegate {
 
 	public void run(IAction action) {
 		for (IFile file : selectedFiles) {
-			try {
-				file.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, Boolean.TRUE.toString());
-			} catch (CoreException x) {
-				Activator.log(IStatus.ERROR, "error setting exclude property on file: "+file.getName(), x);
-			}
+            ProjectUtils.exclude(file);
 		}
 		
 		for(IFolder folder : selectedFolders){
 			try{
-				folder.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, Boolean.TRUE.toString());
+                ProjectUtils.exclude(folder);
 				excludeFolder( folder);
 			}
 			catch (CoreException x) {
@@ -71,7 +67,8 @@ public class ExcludeFileAction implements IObjectActionDelegate {
 		PlatformUI.getWorkbench().getDecoratorManager().update("org.symbian.tools.wrttools.decorator"); 
 	}
 	
-	public void selectionChanged(IAction action, ISelection selection) {
+    @SuppressWarnings("unchecked")
+    public void selectionChanged(IAction action, ISelection selection) {
 		selectedFiles.clear();
 		selectedFolders.clear();
 		if (selection instanceof IStructuredSelection) {
@@ -105,11 +102,11 @@ public class ExcludeFileAction implements IObjectActionDelegate {
 			public boolean visit(IResource resource)throws CoreException {
 				if (resource instanceof IFile) {
 					IFile file = (IFile) resource;
-					file.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, Boolean.TRUE.toString());
+                    ProjectUtils.exclude(file);
 				}
 				else if (resource instanceof IFolder) {
 					IFolder folder = (IFolder) resource;
-					folder.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, Boolean.TRUE.toString());	
+                    ProjectUtils.exclude(folder);
 				}
 				return true;
 			}

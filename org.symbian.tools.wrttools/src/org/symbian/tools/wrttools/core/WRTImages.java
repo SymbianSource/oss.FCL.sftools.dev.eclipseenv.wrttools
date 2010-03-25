@@ -29,6 +29,7 @@ public class WRTImages {
     private static final String IMAGE_NEW_WIZARD_BANNER = "WRT_wizard_banner.png";
     private static final String IMAGE_EMULATOR = "deploy_widget.gif";
     private static final String IMAGE_BLUETOOTH = "bluetooth.gif";
+    private static final String IMAGE_EXCLUDED = "excluded.gif";
 
     public static void init(ImageRegistry reg) {
         add(reg, IMAGE_IMPORT_WIZARD_BANNER);
@@ -36,6 +37,7 @@ public class WRTImages {
         add(reg, IMAGE_NEW_WIZARD_BANNER);
         add(reg, IMAGE_EMULATOR);
         add(reg, IMAGE_BLUETOOTH);
+        add(reg, IMAGE_EXCLUDED);
     }
 
     private static void add(ImageRegistry reg, String key) {
@@ -60,6 +62,14 @@ public class WRTImages {
 
     public static Image getBluetoothImage() {
         return Activator.getDefault().getImageRegistry().get(IMAGE_BLUETOOTH);
+    }
+
+    public static Image getExcludedImage() {
+        return Activator.getDefault().getImageRegistry().get(IMAGE_EXCLUDED);
+    }
+
+    public static ImageDescriptor getExcludedImageDescriptor() {
+        return Activator.getDefault().getImageRegistry().getDescriptor(IMAGE_EXCLUDED);
     }
 
 }

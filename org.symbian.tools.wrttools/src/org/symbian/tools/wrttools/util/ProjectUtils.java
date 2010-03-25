@@ -39,6 +39,7 @@ import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
@@ -78,10 +79,13 @@ import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WidgetProjectNature;
+import org.symbian.tools.wrttools.core.packager.WRTPackagerConstants;
 import org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage;
 
 @SuppressWarnings("restriction")
 public class ProjectUtils {
+    private static final String EXCLUDE_MARKER_ID = "org.symbian.tools.wrttools.excluded";
+
     private static final class FocusOnProjectJob extends Job {
 
         private final Display display;
@@ -386,6 +390,40 @@ public class ProjectUtils {
             }
         }
         return null;
+    }
+
+    public static boolean isExcluded(IResource resource) {
+        try {
+            IMarker[] markers = resource
+                    .findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
+            return markers.length != 0;
+        } catch (CoreException e) {
+            Activator.log(e);
+            return false;
+        }
+
+    }
+
+    public static void exclude(IResource resource) {
+        try {
+            resource.createMarker(EXCLUDE_MARKER_ID);
+            resource.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, Boolean.TRUE.toString());
+        } catch (CoreException e) {
+            Activator.log(e);
+        }
+    }
+
+    public static void include(IResource resource) {
+        try {
+            IMarker[] markers = resource
+                    .findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
+            resource.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, null);
+            for (IMarker marker : markers) {
+                marker.delete();
+            }
+        } catch (CoreException e) {
+            Activator.log(e);
+        }
     }
 
 }
