@@ -268,8 +268,38 @@ public class ProjectUtils {
 
         addWrtNature(project);
 
+        excludeResources(project);
+
         monitor.done();
         return project;
+    }
+
+    private static void excludeResources(IProject project) {
+        IFile file = project.getFile(IProjectDescription.DESCRIPTION_FILE_NAME);
+        if (file.exists()) {
+            exclude(file);
+        }
+        IFolder settings = project.getFolder(".settings");
+        if (settings.exists()) {
+            excludeFolder(settings);
+            exclude(settings);
+        }
+    }
+
+    private static void excludeFolder(IFolder folder) {
+        exclude(folder);
+        try {
+            IResource[] members = folder.members();
+            for (IResource resource : members) {
+                if (resource.getType() == IResource.FOLDER) {
+                    excludeFolder((IFolder) resource);
+                } else {
+                    exclude(resource);
+                }
+            }
+        } catch (CoreException e) {
+            Activator.log(e);
+        }
     }
 
     public static List<Object> filterExternalProjectEntries(List<Object> fileSystemObjects) {
