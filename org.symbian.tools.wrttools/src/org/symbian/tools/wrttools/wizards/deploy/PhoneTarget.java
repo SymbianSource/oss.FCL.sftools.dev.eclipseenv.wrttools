@@ -47,7 +47,7 @@ public class PhoneTarget extends DeploymentTarget {
         if (isResolved()) {
             return MessageFormat.format("Bluetooth address: {0}", getAddr());
         } else {
-            return "This deviced was used in the previous session and might not be available";
+            return "This device was used in the previous session and might not be available";
         }
     }
 
