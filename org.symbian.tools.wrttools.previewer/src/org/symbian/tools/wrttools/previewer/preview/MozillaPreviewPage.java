@@ -12,6 +12,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.Composite;
+import org.mozilla.interfaces.nsIIOService;
+import org.mozilla.interfaces.nsIIOService2;
 import org.mozilla.interfaces.nsIPrefBranch;
 import org.mozilla.interfaces.nsIServiceManager;
 import org.mozilla.xpcom.Mozilla;
@@ -97,6 +99,7 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
 				// Mozilla. We don't want to pollute the error log with this
 				return;
 			}
+
 			
 			mozillaPrefs = (nsIPrefBranch) servMgr.getServiceByContractID(
 											"@mozilla.org/preferences-service;1", 
@@ -137,6 +140,14 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
 			String location = "http://" + WebappManager.getHost() + ":" + WebappManager.getPort();
 			mozillaPrefs.setCharPref("capability.principal.codebase.p0.id", location);
 			mozillaPrefs.setBoolPref("security.fileuri.strict_origin_policy", 0);
+			// start JavaXPCOM section
+			nsIIOService ioService =
+				(nsIIOService)servMgr.getServiceByContractID("@mozilla.org/network/io-service;1", nsIIOService.NS_IIOSERVICE_IID);
+			nsIIOService2 ioService2 =
+				(nsIIOService2)ioService.queryInterface(nsIIOService2.NS_IIOSERVICE2_IID);
+			ioService2.setManageOfflineStatus(false);
+			ioService.setOffline(false);
+			// end JavaXPCOM section
 		} catch (Exception e) {
 			PreviewerPlugin.log("Error getting preferences", e);
 		}
