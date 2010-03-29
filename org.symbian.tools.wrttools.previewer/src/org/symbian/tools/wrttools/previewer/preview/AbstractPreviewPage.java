@@ -33,7 +33,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 		};
 	};
 
-	private final IProject project;
+    protected final IProject project;
 	private Browser browser;
 	private boolean toggleState = true;
 	private final PreviewView previewView;
@@ -137,6 +137,9 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 	public void init(IPageSite pageSite) {
 		super.init(pageSite);
 		IToolBarManager toolBar = pageSite.getActionBars().getToolBarManager();
+
+        contributeToToolbar(toolBar);
+
 		refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.GREEN_SYNC));
 		refreshAction.setToolTipText("Refresh the preview browser");
 		toolBar.add(refreshAction);
@@ -152,7 +155,11 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 		getSite().setSelectionProvider(this);
 	}
 
-	private String getToggleActionTooltip() {
+    protected void contributeToToolbar(IToolBarManager toolBar) {
+        // Do nothing here
+    }
+
+    private String getToggleActionTooltip() {
 		return toggleState ? "Disable preview autorefresh" : "Enable preview autorefresh";
 	}
 

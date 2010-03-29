@@ -79,6 +79,7 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 		addImage(reg, Images.GREEN_SYNC);
 		addImage(reg, Images.RED_SYNC);
 		addImage(reg, Images.YELLOW_SYNC);
+        addImage(reg, Images.CLEAR_PREFS);
 	}
 	
 	private void addImage(ImageRegistry reg, String path) {
