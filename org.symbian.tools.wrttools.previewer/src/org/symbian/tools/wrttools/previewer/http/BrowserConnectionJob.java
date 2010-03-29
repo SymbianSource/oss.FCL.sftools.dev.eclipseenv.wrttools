@@ -17,7 +17,7 @@ public class BrowserConnectionJob extends Job {
 	private boolean success = false;
 
 	public BrowserConnectionJob(IPreviewStartupListener listener, URI uri) {
-		super("Connecting to WRT preview browser");
+		super("Connecting to WRT debugger browser");
 		this.listener = listener;
 		this.uri = uri;
 		setUser(false);
