@@ -38,7 +38,7 @@ do
 	cat $f | sed -e s#qualifier#"${ECLIPSE_TIMESTAMP}"#g > ${f}
 done
 
-# wrt-ide.product has the orginal reference to 1.0.0.qualifier. Try deleting .qualifier 
+# wrt-ide.product has the orginal reference to 1.0.0.qualifier. 
 prod_file=${SOURCE_DIR}/org.symbian.tools.wrttools.product/wrt-ide.product
 cat $prod_file | sed -e s#qualifier#"${ECLIPSE_TIMESTAMP}"#g > $prod_file
 
