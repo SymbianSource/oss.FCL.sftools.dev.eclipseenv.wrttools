@@ -582,7 +582,7 @@ div#slider-value-panel span{
 }
 #preview-ui-bottom-header{
 	background-color: #aeaeae;
-	background-image: url(../images/console-icon.gif);
+	background-image: url(../images/console-icon.png);
 	background-repeat: repeat-x;
 	background-position: 0px -28px;
 }
@@ -597,7 +597,7 @@ span#Console-Toggle-Button{
 
 span#Console-Toggle-Button.open{
 	background-position: 0px 0px;
-	background-image: url(../images/console-close-icon.gif);
+	background-image: url(../images/console-close-icon.png);
 }
 
 span#Console-Toggle-Button.open:hover{
@@ -611,7 +611,7 @@ span#Console-Toggle-Button.open:active{
 
 span#Console-Toggle-Button.close{
 	background-position: 0px 0px;
-	background-image: url(../images/console-open-icon.gif);
+	background-image: url(../images/console-open-icon.png);
 }
 
 span#Console-Toggle-Button.close:hover{
@@ -627,7 +627,7 @@ span#Console-Clear-Button{
 	height: 16px;
 	width: 39px;
 	float: right;
-	background-image: url(../images/console-clear-button.gif);
+	background-image: url(../images/console-clear-button.png);
 	background-repeat: no-repeat;
 	margin : 10px 10px 0px 0px;
 	cursor: hand;

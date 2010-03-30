@@ -5,7 +5,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.symbian.tools.wrttools.product.perspective.WRTPerspective"
-            icon="icons/WRT_perspective.gif"
+            icon="icons/WRT_perspective.png"
             id="org.symbian.tools.wrttools.mainPerspective"
             name="WebRuntime">
       </perspective>
