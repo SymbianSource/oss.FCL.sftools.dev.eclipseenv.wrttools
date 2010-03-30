@@ -1061,6 +1061,10 @@ public class WrtProjectLocationWizardPage extends WizardPage implements
 
 		Path path = new Path(pathString);
 
+        if (path.segmentCount() > 1 && ".settings".equals(path.segment(1))) {
+            return NO;
+        }
+
 		String messageString;
 		// Break the message up if there is a file name and a directory
 		// and there are at least 2 segments.
