@@ -23,7 +23,7 @@ mkdir -p ${WS_DIR}
 
 # check out the code.
 cd ${WS_DIR}
-${HG_CMD} clone http://sym-mrswitch:8000 wrttools 
+${HG_CMD} clone http://developer.symbian.org/oss/MCL/sftools/dev/eclipseenv/wrttools/ 
 
 cd ${SOURCE_DIR}/scripts
 
