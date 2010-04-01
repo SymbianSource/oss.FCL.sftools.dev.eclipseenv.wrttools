@@ -43,6 +43,7 @@ public class ChromeInstancesManager {
             "--disable-web-security", // Widgets can use network now
             "--disable-extenions", // Use standard UI, should also improve speed and stability
             "--disable-plugins", // Run faster!
+            "--activate-on-launch", // Bring to front on Mac
             "--always-enable-dev-tools", "--no-default-browser-check", // Our users don't need this nagging
             "--no-first-run", // We don't care
             "--app=%s" // Here we will have widget URI as --app argument
