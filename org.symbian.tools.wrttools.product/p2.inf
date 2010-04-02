@@ -18,7 +18,7 @@ units.1.provides.1.version=1.0.0
 units.1.filter=(osgi.os=win32)
 units.1.touchpoint.id=org.eclipse.equinox.p2.osgi
 units.1.touchpoint.version=1.0.0
-units.1.instructions.configure=setProgramProperty(propName:osgi.instance.area.default,propValue:@user.home/My Documents/WRT Workspace);
+units.1.instructions.configure=setProgramProperty(propName:osgi.instance.area.default,propValue:@user.home/My Documents/WrtWorkspace);
 units.1.instructions.unconfigure=setProgramProperty(propName:osgi.instance.area.default,propValue:);
 
 units.2.id=toolingorg.eclipse.configuration
@@ -29,5 +29,5 @@ units.2.provides.1.version=1.0.0
 units.2.filter=(!(osgi.os=win32))
 units.2.touchpoint.id=org.eclipse.equinox.p2.osgi
 units.2.touchpoint.version=1.0.0
-units.2.instructions.configure=setProgramProperty(propName:osgi.instance.area.default,propValue:@user.home/Documents/WRT Workspace);
+units.2.instructions.configure=setProgramProperty(propName:osgi.instance.area.default,propValue:@user.home/Documents/WrtWorkspace);
 units.2.instructions.unconfigure=setProgramProperty(propName:osgi.instance.area.default,propValue:);
