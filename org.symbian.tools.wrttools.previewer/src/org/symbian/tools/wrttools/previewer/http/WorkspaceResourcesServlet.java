@@ -31,6 +31,7 @@ import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,6 +62,28 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 	private static final Pattern HEAD_TAG_PATTERN = Pattern.compile("<head(\\s*\\w*=\"(^\")*\")*\\s*>", Pattern.CASE_INSENSITIVE);
 	private static final String SCRIPT = "<script language=\"JavaScript\" type=\"text/javascript\" src=\"preview/script/lib/loader.js\"></script>";
 
+    private static final Map<String, String> EXTENSION_CONTENT_TYPE = new TreeMap<String, String>();
+    static {
+        EXTENSION_CONTENT_TYPE.put("htm", "text/html");
+        EXTENSION_CONTENT_TYPE.put("html", "text/html");
+        EXTENSION_CONTENT_TYPE.put("xml", "text/xml");
+        EXTENSION_CONTENT_TYPE.put("plist", "application/octet-stream");
+        EXTENSION_CONTENT_TYPE.put("gif", "image/gif");
+        EXTENSION_CONTENT_TYPE.put("jpg", "image/jpeg");
+        EXTENSION_CONTENT_TYPE.put("jpeg", "image/jpeg");
+        EXTENSION_CONTENT_TYPE.put("png", "application/octet-stream");
+        EXTENSION_CONTENT_TYPE.put("css", "text/css");
+        EXTENSION_CONTENT_TYPE.put("js", "application/x-javascript");
+    }
+
+    public static String getMimeTypeByExtension(String extension) {
+        if (extension != null) {
+            return EXTENSION_CONTENT_TYPE.get(extension.toLowerCase());
+        } else {
+            return null;
+        }
+    }
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -73,8 +96,15 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		try {
             contents = getSpecialResource(path, req.getParameterMap());
 			if (contents == null) {
-				contents = getWorkspaceResourceContents(path);
+                IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+                if (file.isAccessible()) {
+                    contents = file.getContents();
+                }
 			}
+            String mimeType = getMimeTypeByExtension(path.getFileExtension());
+            if (mimeType != null) {
+                resp.setContentType(mimeType);
+            }
 			if (contents != null) {
 				copyData(contents, resp.getOutputStream());
 			} else {
@@ -154,16 +184,6 @@ public class WorkspaceResourcesServlet extends HttpServlet {
 		while ((i = contents.read(buf)) >= 0) {
 			ouput.write(buf, 0, i);
 		}
-	}
-
-	private InputStream getWorkspaceResourceContents(IPath path)
-			throws CoreException {
-		InputStream contents = null;
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		if (file.isAccessible()) {
-			contents = file.getContents();
-		}
-		return contents;
 	}
 
 	public static String getHttpUrl(IResource file) {
