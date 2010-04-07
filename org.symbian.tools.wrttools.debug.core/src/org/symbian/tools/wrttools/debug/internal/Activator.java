@@ -18,6 +18,9 @@
  *******************************************************************************/
 package org.symbian.tools.wrttools.debug.internal;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -58,6 +61,7 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+        Logger.getLogger("org.chromium.sdk").setLevel(Level.WARNING);
 		plugin = this;
 	}
 
