@@ -50,6 +50,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.CoreUtil;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WorkspaceResourcesServlet extends HttpServlet {
 	private static final String PREVIEW_START = "/preview/wrt_preview.html";
@@ -97,7 +98,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
             contents = getSpecialResource(path, req.getParameterMap());
 			if (contents == null) {
                 IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-                if (file.isAccessible()) {
+                if (file.isAccessible() && !ProjectUtils.isExcluded(file)) {
                     contents = file.getContents();
                 }
 			}

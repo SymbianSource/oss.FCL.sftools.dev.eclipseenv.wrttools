@@ -23,21 +23,40 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.PlatformUI;
 import org.symbian.tools.wrttools.WRTStatusListener;
 import org.symbian.tools.wrttools.core.packager.WrtPackageActionDelegate;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PackageApplicationHandler extends AbstractHandler implements IHandler {
+    private final class JobExtension extends Job {
+        private final IProject project;
+
+        private JobExtension(IProject project) {
+            super(String.format("Package %s", project.getName()));
+            setRule(ResourcesPlugin.getWorkspace().getRoot());
+            this.project = project;
+        }
+
+        @Override
+        protected IStatus run(IProgressMonitor monitor) {
+            WRTStatusListener statusListener = new WRTStatusListener();
+            new WrtPackageActionDelegate().packageProject(project, statusListener);
+            return Status.OK_STATUS;
+        }
+    }
 
     public Object execute(ExecutionEvent event) throws ExecutionException {
-        IProject project = ProjectUtils.getProjectFromCommandContext(event);
-
+        final IProject project = ProjectUtils.getProjectFromCommandContext(event);
         if (project != null) {
             PlatformUI.getWorkbench().saveAllEditors(true);
             if (project != null) {
-                WRTStatusListener statusListener = new WRTStatusListener();
-                new WrtPackageActionDelegate().packageProject(project, statusListener);
+                new JobExtension(project).schedule();
             }
         }
         return null;

@@ -84,7 +84,7 @@ import org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage;
 
 @SuppressWarnings("restriction")
 public class ProjectUtils {
-    private static final String EXCLUDE_MARKER_ID = "org.symbian.tools.wrttools.excluded";
+    public static final String EXCLUDE_MARKER_ID = "org.symbian.tools.wrttools.excluded";
 
     private static final class FocusOnProjectJob extends Job {
 

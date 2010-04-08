@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
@@ -19,11 +18,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
@@ -41,45 +37,15 @@ import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PreviewView extends PageBookView {
-	private static final class ChangedResourcesCollector implements
-			IResourceDeltaVisitor {
-		public final Collection<IFile> files = new HashSet<IFile>();
-
-		public boolean visit(IResourceDelta delta) throws CoreException {
-			if (isRelevantResource(delta.getResource())) {
-				if ((delta.getFlags() & (IResourceDelta.CONTENT
-						| IResourceDelta.COPIED_FROM | IResourceDelta.ENCODING
-						| IResourceDelta.LOCAL_CHANGED
-						| IResourceDelta.MOVED_FROM | IResourceDelta.MOVED_TO
-						| IResourceDelta.MOVED_FROM | IResourceDelta.REPLACED | IResourceDelta.SYNC)) != 0) {
-					files.add((IFile) delta.getResource());
-				}
-			}
-			return true;
-		}
-	}
-
-	public static boolean isRelevantResource(IResource resource) {
-		return resource.getType() == IResource.FILE
-				&& !resource.getFullPath().segment(1).equalsIgnoreCase(
-						"preview");
-	}
-
 	private final IResourceChangeListener resourceListener = new IResourceChangeListener() {
 		public void resourceChanged(IResourceChangeEvent event) {
 			if (event.getDelta() != null) {
-				ChangedResourcesCollector visitor = new ChangedResourcesCollector();
-				try {
-					event.getDelta().accept(visitor);
-				} catch (CoreException e) {
-					PreviewerPlugin.log(e);
-				}
-				refreshPages(visitor.files);
+                new RefreshJob(event.getDelta(), PreviewView.this).schedule();
 			}
 		}
 	};
 
-	private Map<IProject, IPreviewPage> projectToPage = new HashMap<IProject, IPreviewPage>();
+	private final Map<IProject, IPreviewPage> projectToPage = new HashMap<IProject, IPreviewPage>();
 	private boolean preferencesLoaded = false;
 	private final Map<IProject, Boolean> autorefresh = new HashMap<IProject, Boolean>();
 
