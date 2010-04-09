@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
@@ -257,5 +258,13 @@ public class PreviewView extends PageBookView {
 		}
 		return toggle;
 	}
+
+    public synchronized void projectRenamed(IProject project, IPath newPath) {
+        IPreviewPage page = projectToPage.remove(project);
+        Boolean refresh = autorefresh.remove(project);
+        page.projectRenamed(newPath);
+        projectToPage.put(page.getProject(), page);
+        autorefresh.put(page.getProject(), refresh);
+    }
 
 }

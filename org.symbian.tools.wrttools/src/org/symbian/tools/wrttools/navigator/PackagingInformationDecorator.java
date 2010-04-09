@@ -35,7 +35,7 @@ public class PackagingInformationDecorator implements ILightweightLabelDecorator
         } else if (element instanceof IAdaptable) {
             resource = (IResource) ((IAdaptable) element).getAdapter(IResource.class);
         }
-        if (resource != null && ProjectUtils.isExcluded(resource)) {
+        if (resource != null && resource.isAccessible() && ProjectUtils.isExcluded(resource)) {
             decoration.addOverlay(WRTImages.getExcludedImageDescriptor(), IDecoration.TOP_RIGHT);
         }
     }
