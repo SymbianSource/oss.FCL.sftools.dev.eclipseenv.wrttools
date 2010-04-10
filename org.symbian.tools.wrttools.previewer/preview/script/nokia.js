@@ -814,15 +814,9 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				// do some cheating here
 				xmlString = xmlString.replace(/<\s*true\s*\/>/gi, "<string>true</string>");
 				xmlString = xmlString.replace(/<\s*false\s*\/>/gi, "<string>false</string>");
-	
-			/*
-			 * 	DomParser Logic
-				var appXml = new DOMParser();
-				var xmlobject = appXml.parseFromString(xmlString, "text/xml");
-			 */
-			
+				xmlString = xmlString.replace(/[\n\r]/gi, "");
 				//	return the JSON Object
-				NOKIA.helper.validate(xml2json.parser(xmlString));
+				NOKIA.helper.validate(xmlString);
 			}
 			
 		},
@@ -846,49 +840,19 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 		validate : function(xmlObject)
 		{
-			window.xmlObject = xmlObject;
-			
-			//	<plist>
-			if(typeof xmlObject.plist != 'object' || xmlObject.plist == 'undefined')
+			var values = xmlObject.match(/.*<plist.*?(<dict.*?>\s*(<key[^>]*?>[^<]*?<\/key>\s*<string[^>]*?>[^<]*?<\/string>)*\s*<\/dict>)\s*<\/plist>/)[1];
+			if(values == null || values == undefined)
 			{
 				NOKIA.helper.error('Corrupted Info.plist file');
 				return false;
 			}
-			//	<dict>
-			xmlObject = xmlObject.plist;
-			if(typeof xmlObject.dict != 'object' || xmlObject.dict == 'undefined')
-			{
+			values = values.replace(/<dict.*?(<key.*?>\s*.*\s*<\/string>)\s*<\/dict>/, "{ $1 }");
+			values = values.replace(/\s*<key.*?>\s*(.*?)\s*<\/key>\s*<string.*?>\s*(.*?)\s*<\/string>\s*/g, "\"$1\" : \"$2\", ");
+			try {
+				NOKIA.emulator.plist = JSON.parse(values);
+			} catch (exception) {
 				NOKIA.helper.error('Corrupted Info.plist file');
 				return false;
-			}
-
-			//	<key>
-			xmlObject = xmlObject.dict;
-			if(typeof xmlObject.key != 'object' || xmlObject.key == 'undefined')
-			{
-				NOKIA.helper.error('Corrupted Info.plist file');
-				return false;
-			}
-
-			//	<string>
-			if(typeof xmlObject.string != 'object' || xmlObject.string == 'undefined')
-			{
-				NOKIA.helper.error('Corrupted Info.plist file');
-				return false;
-			}
-
-			//	num of <key> = num of <string>
-			if(xmlObject.key.length != xmlObject.string.length)
-			{
-				NOKIA.helper.error('Corrupted Info.plist file');
-				return false;
-			}
-
-			for(var val in xmlObject.key)
-			{
-				if(NOKIA.emulator.plist[xmlObject.key[val]] != 'undefined'){
-					NOKIA.emulator.plist[xmlObject.key[val]] = xmlObject.string[val].toString(); 
-				}
 			}
 
 			try {
