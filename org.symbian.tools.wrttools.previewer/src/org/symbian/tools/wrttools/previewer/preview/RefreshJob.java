@@ -82,7 +82,8 @@ public class RefreshJob extends Job {
 
     public static boolean isRelevantResource(IResource resource) {
         return resource.getType() == IResource.FILE && !resource.getFullPath().segment(1).equalsIgnoreCase("preview")
-                && !"wgz".equalsIgnoreCase(resource.getFileExtension());
+                && !"wgz".equalsIgnoreCase(resource.getFileExtension())
+                && !(PreviewerPlugin.PLUGIN_ID + ".xml").equals(resource.getName());
     }
 
     private final IResourceDelta delta;

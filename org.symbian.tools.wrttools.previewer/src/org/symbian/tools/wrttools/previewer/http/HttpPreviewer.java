@@ -35,9 +35,8 @@ public class HttpPreviewer {
 		}
 	}
 
-	public File getLocalFile(String name) {
-		return WorkspaceResourcesServlet.getPreviewerResource(name);
-		
-	}
+    public File getLocalFile(String name) {
+        return WorkspaceResourcesServlet.getPreviewerResource(name);
+    }
 
 }

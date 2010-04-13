@@ -63,7 +63,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 * @return {String} Value
 	 */
 	widget.preferenceForKey = function(name){
-		return _BRIDGE_REF.nokia.helper.readCookie(name);
+		return _BRIDGE_REF.nokia.helper.getPreference(name);
 	}
 	
 	
@@ -75,7 +75,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 * @return {Void}
 	 */
 	widget.setPreferenceForKey = function(preference, key){
-		_BRIDGE_REF.nokia.helper.createCookie(key, preference);
+		_BRIDGE_REF.nokia.helper.setPreference(key, preference);
 	}
 	
 	

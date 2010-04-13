@@ -3,10 +3,14 @@ package org.symbian.tools.wrttools.previewer.preview;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.core.net.proxy.IProxyData;
 import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.Action;
@@ -54,6 +58,7 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
     }
 
     public void clearPreferences() {
+        boolean needsRefresh = false;
         nsIServiceManager servMgr = null;
         try {
             servMgr = Mozilla.getInstance().getServiceManager();
@@ -63,16 +68,10 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
                         "@mozilla.org/cookiemanager;1", nsICookieManager.NS_ICOOKIEMANAGER_IID);
                 nsISimpleEnumerator enumerator = cookieManager.getEnumerator();
 
-                boolean needsRefresh = false;
                 while (enumerator.hasMoreElements()) {
                     nsICookie cookie = (nsICookie) enumerator.getNext().queryInterface(nsICookie.NS_ICOOKIE_IID);
-                    if (isRelevantPreference(cookie.getName())) {
-                        cookieManager.remove(cookie.getHost(), cookie.getName(), cookie.getPath(), false);
-                        needsRefresh = true;
-                    }
-                }
-                if (needsRefresh) {
-                    refresh(true);
+                    cookieManager.remove(cookie.getHost(), cookie.getName(), cookie.getPath(), false);
+                    needsRefresh = true;
                 }
             }
         } catch (Exception x) {
@@ -81,15 +80,26 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
             // Mozilla. We don't want to pollute the error log with this
             return;
         }
-    }
-
-    private boolean isRelevantPreference(String path) {
-        if (path != null && path.matches("Nokia_WRT#/preview/.*/preview-frame.html#.*")) {
-            String key = path.substring(path.lastIndexOf("#") + 1);
-            return !"_WRT_VERSION".equals(key) && !"NOKIA_EMULATOR_DEVICE_MODE".equals(key)
-                    && !"NOKIA_EMULATOR_DEVICE".equals(key);
+        try {
+            Properties properties = ProjectPreferencesManager.getProjectProperties(project);
+            for (Iterator<Map.Entry<Object, Object>> i = properties.entrySet().iterator(); i.hasNext();) {
+                Map.Entry<Object, Object> entry = i.next();
+                if (entry.getKey() == null || !entry.getKey().toString().startsWith("__SYM_")) {
+                    i.remove();
+                    needsRefresh = true;
+                }
+            }
+            if (needsRefresh) {
+                ProjectPreferencesManager.setProjectProperties(project, properties);
+            }
+        } catch (IOException e) {
+            PreviewerPlugin.log(e);
+        } catch (CoreException e) {
+            PreviewerPlugin.log(e);
         }
-        return false;
+        if (needsRefresh) {
+            refresh(true);
+        }
     }
 
     private synchronized void initMozilla() {

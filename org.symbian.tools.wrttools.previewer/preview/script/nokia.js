@@ -53,7 +53,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		NOKIA.emulator.is_browserReady = (/MSIE/i.test(navigator.userAgent));
 		if(NOKIA.emulator.is_browserReady)
 		{
-			var notSupportedBrowser = NOKIA.helper.readCookie('NOKIA_NOT_SUPPORTED_BROWSER');
+			var notSupportedBrowser = NOKIA.helper.getPreference('__SYM_NOKIA_NOT_SUPPORTED_BROWSER');
 			if (notSupportedBrowser != 1) {
 				$("#NotificationDiv")[0].className = 'show';
 				$("#NotificationDiv").dialog({
@@ -70,7 +70,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 						},
 						Continue: function(){
 							$("#NotificationDiv").dialog('close');
-							NOKIA.helper.createCookie('NOKIA_NOT_SUPPORTED_BROWSER', 1);
+							NOKIA.helper.setPreference('__SYM_NOKIA_NOT_SUPPORTED_BROWSER', 1);
 							NOKIA.init();
 						}
 					}
@@ -525,18 +525,18 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				return false;
 				
 			//	load the saved device Info
-			var device = NOKIA.helper.readCookie('NOKIA_EMULATOR_DEVICE');
+			var device = NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_DEVICE');
 			NOKIA.currentDevice = device || NOKIA.currentDevice;
 
 
 			//	load the saved device mode
-			var mode = NOKIA.helper.readCookie('NOKIA_EMULATOR_DEVICE_MODE');
+			var mode = NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE');
 			if(mode != null)
 				NOKIA.mode = mode;
 
 			//	SAVE the device DATA
-			NOKIA.helper.createCookie('NOKIA_EMULATOR_DEVICE', NOKIA.currentDevice);
-			NOKIA.helper.createCookie('NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
+			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE', NOKIA.currentDevice);
+			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
 			
 			this.loaded = true;
 			
@@ -563,7 +563,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			NOKIA.mode = mode;
 
 			//	SAVE the device DATA
-			NOKIA.helper.createCookie('NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
+			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
 
 			NOKIA.emulator.render();
 		},
@@ -938,30 +938,17 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			$("#Dialog").dialog('open');
 		},
 
-		createCookie : function(name,value) 
+		setPreference : function(name,value) 
 		{
-			var days = 240000;
-		    if (days) {
-				var date = new Date();
-				date.setTime(date.getTime()+(days*24*60*60*1000));
-				var expires = "; expires="+date.toGMTString();
+			if (NOKIA.emulator.prefs[name] != value) {
+				NOKIA.emulator.prefs[name] = value;
+				$.post("preview/preferences.js", JSON.stringify({ "key" : name, "value" : value }), undefined, "json");
 			}
-			else var expires = "";
-			document.cookie = "Nokia_WRT#" + NOKIA.helper.path + "#" + name + "=" + value + expires + "; path=/";
 		},
 		
-		readCookie : function(name) 
+		getPreference : function(name) 
 		{
-			var nameEQ = "Nokia_WRT#" + NOKIA.helper.path + "#" + name + "=";
-			var ca = document.cookie.split(';');
-			for(var i=0;i < ca.length;i++) {
-				var c = ca[i];
-				while (c.charAt(0)==' ') c = c.substring(1,c.length);
-				if (c.indexOf(nameEQ) == 0) {
-					return c.substring(nameEQ.length,c.length);
-				}
-			}
-			return undefined;
+			return NOKIA.emulator.prefs[name];
 		},
 
 		toggle : function(ele)
@@ -984,7 +971,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		{
 			if (confirm('Would you like to reload the widget to apply the changes on the Version settings?')) 
 			{
-				NOKIA.helper.createCookie('_WRT_VERSION', ele.value);
+				NOKIA.helper.setPreference('__SYM_WRT_VERSION', ele.value);
 				$("#loaderDiv").html("Applying the " + ele.value + ", please wait...");
 				$("#loaderDiv").show();
 				$("#loaderDiv")[0].className = 'green';
@@ -1076,7 +1063,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				$("#resSupportLink")[0].href = ele.value;
 		
 				//	SAVE the device DATA
-				NOKIA.helper.createCookie('NOKIA_EMULATOR_DEVICE', NOKIA.currentDevice);
+				NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE', NOKIA.currentDevice);
 		
 				NOKIA.emulator.render();
 				NOKIA.helper.loadPreferences();

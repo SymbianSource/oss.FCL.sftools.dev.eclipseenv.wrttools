@@ -98,10 +98,10 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 
 	//	Inject SAPI scripts	
 	if (_BRIDGE_REF.nokia) {
-		var wrtVersion = _BRIDGE_REF.nokia.helper.readCookie('_WRT_VERSION');
+		var wrtVersion = _BRIDGE_REF.nokia.helper.getPreference('__SYM_WRT_VERSION');
 		if ((typeof wrtVersion == 'undefined') || (wrtVersion == 'WRT 1.1')) {
 			_BRIDGE_REF.nokia.version = 'WRT 1.1';
-			_BRIDGE_REF.nokia.helper.createCookie('_WRT_VERSION', 'WRT 1.1');
+			_BRIDGE_REF.nokia.helper.setPreference('__SYM_WRT_VERSION', 'WRT 1.1');
 			_BRIDGE_REF.helper.loadScript("preview/script/lib/device.js");
 		}
 		else {
