@@ -70,7 +70,7 @@ public class WebAppInterface {
 	}
 
 	public static String getUrl(String widget, String id) {
-		return getInstance().complete(widget, id);
+        return getInstance().complete(widget, id).toASCIIString();
 	}
 
 	public static boolean isConnected(String widget, String id) {
@@ -97,7 +97,7 @@ public class WebAppInterface {
 		}
 	}
 
-	private synchronized String complete(String widget, String id) {
+    private synchronized URI complete(String widget, String id) {
 		return WorkspaceResourcesServlet.getPreviewerStartingPage(widget);
 	}
 

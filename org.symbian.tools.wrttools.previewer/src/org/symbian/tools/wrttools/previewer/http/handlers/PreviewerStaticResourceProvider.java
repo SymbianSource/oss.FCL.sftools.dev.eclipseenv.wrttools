@@ -32,17 +32,18 @@ import org.json.simple.JSONObject;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 public class PreviewerStaticResourceProvider implements ResourceProvider {
-    public static final String STARTING_PAGE = "preview-frame.html";
+    public static final String PREVIEW_STARTING_PAGE = "preview-frame.html";
+    public static final String DEBUG_STARTING_PAGE = "debug-frame.html";
     public static final String PREVIEW_PATH = "preview";
     public static final String PREVIEW_START = "/preview/wrt_preview.html";
 
     public String[] getPaths() {
-        return new String[] { STARTING_PAGE, PREVIEW_PATH };
+        return new String[] { PREVIEW_STARTING_PAGE, PREVIEW_PATH, DEBUG_STARTING_PAGE };
     }
 
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String> parameters)
             throws IOException {
-        if (STARTING_PAGE.equals(resource.toString())) {
+        if (PREVIEW_STARTING_PAGE.equals(resource.toString()) || DEBUG_STARTING_PAGE.equals(resource.toString())) {
             resource = new Path(PREVIEW_START);
         }
         URL url = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), resource, null);

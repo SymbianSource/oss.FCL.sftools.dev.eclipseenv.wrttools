@@ -24,6 +24,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -107,7 +109,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
     }
 
     public static String getHttpUrl(IResource file) {
-        String uri = getServerURIForResource(file != null ? file.getFullPath().toString() : "/");
+        String uri = getServerURIForResource(file != null ? file.getFullPath().toString() : "/").toASCIIString();
         if (uri != null) {
             return uri;
         } else {
@@ -127,7 +129,8 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         try {
             IPath path = getProjectRelativePath(name);
             if (path != null) {
-                if (path.segmentCount() == 2 && PreviewerStaticResourceProvider.STARTING_PAGE.equals(path.segment(1))) {
+                if (path.segmentCount() == 2
+                        && PreviewerStaticResourceProvider.PREVIEW_STARTING_PAGE.equals(path.segment(1))) {
                     path = new Path(PreviewerStaticResourceProvider.PREVIEW_START);
                 } else if (path.segmentCount() > 2
                         && PreviewerStaticResourceProvider.PREVIEW_PATH.equals(path.segment(1))) {
@@ -149,8 +152,8 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         return null;
     }
 
-    public static String getPreviewerStartingPage(String widget) {
-        return getServerURIForResource(new Path(widget).append(PreviewerStaticResourceProvider.STARTING_PAGE)
+    public static URI getPreviewerStartingPage(String widget) {
+        return getServerURIForResource(new Path(widget).append(PreviewerStaticResourceProvider.PREVIEW_STARTING_PAGE)
                 .makeAbsolute().toString());
     }
 
@@ -185,7 +188,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         }
     }
 
-    private static String getServerURIForResource(String resourcePath) {
+    private static URI getServerURIForResource(String resourcePath) {
         Path p = new Path(resourcePath);
         if (p.segmentCount() > 1) {
             IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(p.segment(0));
@@ -206,7 +209,11 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         } catch (MalformedURLException e) {
             uri = null;
         }
-        return uri;
+        try {
+            return new URI(uri);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private final Providers providers = new Providers();

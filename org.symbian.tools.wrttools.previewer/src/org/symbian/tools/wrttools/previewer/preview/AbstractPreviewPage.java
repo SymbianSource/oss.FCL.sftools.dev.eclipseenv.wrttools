@@ -80,7 +80,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
     protected abstract Browser createBrowser(Composite parent);
 
     private URI getURI() {
-        return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project);
+        return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project, null);
     }
 
     @Override

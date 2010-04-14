@@ -78,11 +78,10 @@ public class WidgetLaunchDelegate implements ILaunchConfigurationDelegate {
 	}
 
     private URI prepareDebugger(IProject project, boolean debug, final ILaunch launch, final int port) {
+        DebugConnectionJob job = null;
 		if (debug) {
-			final DebugConnectionJob job = new DebugConnectionJob(project, port, launch);
-			return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project, job);
-		} else {
-			return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project);
+            job = new DebugConnectionJob(project, port, launch);
 		}
+        return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project, job);
 	}
 }
