@@ -28,12 +28,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
 
-public class WorkspaceResourceProvider implements ResourceProvider {
+public class WorkspaceResourceProvider implements IResourceProvider {
     public String[] getPaths() {
         return null;
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException, CoreException {
         IFile file = project.getFile(resource);
         if (file.isAccessible()) {
@@ -43,7 +43,7 @@ public class WorkspaceResourceProvider implements ResourceProvider {
         }
     }
 
-    public void post(IProject project, IPath resource, Map<String, String> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
             throws IOException, CoreException {
         // Do nothing
     }

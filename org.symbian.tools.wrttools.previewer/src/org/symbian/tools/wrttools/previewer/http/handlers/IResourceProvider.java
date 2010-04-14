@@ -27,10 +27,11 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
 
-public interface ResourceProvider {
+public interface IResourceProvider {
     String[] getPaths();
-    InputStream getResourceStream(IProject project, IPath resource, Map<String, String> parameters) throws IOException,
+    InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+            throws IOException,
             CoreException;
-    void post(IProject project, IPath resource, Map<String, String> parameterMap, JSONObject object)
+    void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
             throws IOException, CoreException;
 }

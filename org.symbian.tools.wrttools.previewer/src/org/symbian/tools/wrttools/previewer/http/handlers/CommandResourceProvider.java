@@ -28,13 +28,13 @@ import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
-public class CommandResourceProvider implements ResourceProvider {
+public class CommandResourceProvider implements IResourceProvider {
 
     public String[] getPaths() {
         return new String[] { "__sym_command" };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException, CoreException {
         if (resource.segmentCount() == 2) {
             PreviewerPlugin.getDefault().getCommandHandlerManager().handle(resource.segment(1), project.getName(),
@@ -43,7 +43,7 @@ public class CommandResourceProvider implements ResourceProvider {
         return null;
     }
 
-    public void post(IProject project, IPath resource, Map<String, String> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
             throws IOException, CoreException {
         // Do nothing
     }

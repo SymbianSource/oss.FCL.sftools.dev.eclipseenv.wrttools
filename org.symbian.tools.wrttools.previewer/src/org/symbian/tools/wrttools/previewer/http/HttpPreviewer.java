@@ -26,6 +26,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 
 public class HttpPreviewer {
+    public static final String PREVIEW_STARTING_PAGE = "preview-frame.html";
+    public static final String DEBUG_STARTING_PAGE = "debug-frame.html";
+
     public IFile getFileFromUrl(String name) {
         return WorkspaceResourcesServlet.getFileFromUrl(name);
     }

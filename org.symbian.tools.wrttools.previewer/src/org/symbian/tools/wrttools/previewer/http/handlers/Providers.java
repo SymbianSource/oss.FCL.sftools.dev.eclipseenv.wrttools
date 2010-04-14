@@ -44,25 +44,26 @@ import org.symbian.tools.wrttools.previewer.PreviewerException;
  * All other URLs return workspace resources.
  */
 public class Providers {
-    private final Map<String, ResourceProvider> HANDLERS = new TreeMap<String, ResourceProvider>();
-    private final ResourceProvider defaultHandler = new WorkspaceResourceProvider();
+    private final Map<String, IResourceProvider> HANDLERS = new TreeMap<String, IResourceProvider>();
+    private final IResourceProvider defaultHandler = new WorkspaceResourceProvider();
     public Providers() {
         addPaths(new PreviewerStaticResourceProvider());
         addPaths(new PreferencesResourceProvider());
         addPaths(new ProjectIndexResourceProvider());
         addPaths(new CommandResourceProvider());
+        addPaths(new DebuggerResourceProvider());
     }
 
-    private void addPaths(ResourceProvider handler) {
+    private void addPaths(IResourceProvider handler) {
         for (String path : handler.getPaths()) {
             HANDLERS.put(path, handler);
         }
     }
 
-    public InputStream get(String url, Map<String, String> parameters) throws PreviewerException {
+    public InputStream get(String url, Map<String, String[]> parameters) throws PreviewerException {
         final IProject project = getProject(url);
         final IPath resource = new Path(url).removeFirstSegments(1);
-        final ResourceProvider provider = getHandlerForPath(resource);
+        final IResourceProvider provider = getHandlerForPath(resource);
         try {
             return provider.getResourceStream(project, resource, parameters);
         } catch (IOException e) {
@@ -72,8 +73,8 @@ public class Providers {
         }
     }
 
-    private ResourceProvider getHandlerForPath(IPath resource) {
-        ResourceProvider provider = null;
+    private IResourceProvider getHandlerForPath(IPath resource) {
+        IResourceProvider provider = null;
         IPath mapping = resource;
         while (mapping.segmentCount() > 0) {
             provider = HANDLERS.get(mapping.toString());
@@ -100,14 +101,14 @@ public class Providers {
         return project;
     }
 
-    public ResourceProvider getHandlerForPostPath(String url) {
+    public IResourceProvider getHandlerForPostPath(String url) {
         return null;
     }
 
-    public void post(String url, Map<String, String> parameterMap, JSONObject object) throws PreviewerException {
+    public void post(String url, Map<String, String[]> parameterMap, JSONObject object) throws PreviewerException {
         final IProject project = getProject(url);
         final IPath resource = new Path(url).removeFirstSegments(1);
-        final ResourceProvider provider = getHandlerForPath(resource);
+        final IResourceProvider provider = getHandlerForPath(resource);
         try {
             provider.post(project, resource, parameterMap, object);
         } catch (IOException e) {

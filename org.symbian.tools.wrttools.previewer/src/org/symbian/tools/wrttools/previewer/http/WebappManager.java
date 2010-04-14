@@ -26,7 +26,6 @@ import java.util.logging.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.http.jetty.JettyConfigurator;
-import org.eclipse.equinox.jsp.jasper.JspServlet;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.InvalidSyntaxException;
@@ -57,7 +56,6 @@ public class WebappManager {
 		d.put("http.port", new Integer(getPortParameter())); //$NON-NLS-1$
 
 		// set the base URL
-//		d.put("context.path", "/wrtdebugger"); //$NON-NLS-1$ //$NON-NLS-2$
 		d.put("other.info", "org.symbian.wst.debugger"); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		// suppress Jetty INFO/DEBUG messages to stderr
@@ -68,9 +66,7 @@ public class WebappManager {
 		Bundle bundle = PreviewerPlugin.getDefault().getBundle();
 		HttpService service = (HttpService) bundle.getBundleContext().getService(getServiceReference());
 		HttpContext httpContext = service.createDefaultHttpContext();
-		service.registerResources(STATIC_RESOURCES_CONTEXT, WEB_CONTENT_ROOT, httpContext);
 		service.registerServlet(WORKSPACE_RESOURCES_CONTEXT, new WorkspaceResourcesServlet(), new Hashtable(), httpContext);
-		service.registerServlet(STATIC_RESOURCES_CONTEXT + "/*.jsp", new JspServlet(bundle, WEB_CONTENT_ROOT, STATIC_RESOURCES_CONTEXT + "*.jsp"), new Hashtable(), httpContext);
 	}
 	
 	/*

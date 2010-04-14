@@ -30,20 +30,20 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.json.simple.JSONObject;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
+import org.symbian.tools.wrttools.previewer.http.HttpPreviewer;
 
-public class PreviewerStaticResourceProvider implements ResourceProvider {
-    public static final String PREVIEW_STARTING_PAGE = "preview-frame.html";
-    public static final String DEBUG_STARTING_PAGE = "debug-frame.html";
+public class PreviewerStaticResourceProvider implements IResourceProvider {
     public static final String PREVIEW_PATH = "preview";
     public static final String PREVIEW_START = "/preview/wrt_preview.html";
 
     public String[] getPaths() {
-        return new String[] { PREVIEW_STARTING_PAGE, PREVIEW_PATH, DEBUG_STARTING_PAGE };
+        return new String[] { HttpPreviewer.PREVIEW_STARTING_PAGE, PREVIEW_PATH };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException {
-        if (PREVIEW_STARTING_PAGE.equals(resource.toString()) || DEBUG_STARTING_PAGE.equals(resource.toString())) {
+        if (HttpPreviewer.PREVIEW_STARTING_PAGE.equals(resource.toString())
+                || HttpPreviewer.DEBUG_STARTING_PAGE.equals(resource.toString())) {
             resource = new Path(PREVIEW_START);
         }
         URL url = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), resource, null);
@@ -54,7 +54,7 @@ public class PreviewerStaticResourceProvider implements ResourceProvider {
         }
     }
 
-    public void post(IProject project, IPath resource, Map<String, String> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
             throws IOException, CoreException {
         // Do nothing
     }

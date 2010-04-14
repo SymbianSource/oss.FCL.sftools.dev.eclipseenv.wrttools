@@ -32,12 +32,12 @@ import org.json.simple.JSONObject;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.preview.ProjectPreferencesManager;
 
-public class PreferencesResourceProvider implements ResourceProvider {
+public class PreferencesResourceProvider implements IResourceProvider {
     public String[] getPaths() {
         return new String[] { "preview/preferences.js" };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException, CoreException {
         Properties projectPreferences = ProjectPreferencesManager.getProjectProperties(project);
         String js = getJS(projectPreferences);
@@ -58,7 +58,7 @@ public class PreferencesResourceProvider implements ResourceProvider {
         return builder.toString();
     }
 
-    public void post(IProject project, IPath resource, Map<String, String> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
             throws IOException, CoreException {
         String key = (String) object.get("key");
         String value = (String) object.get("value");

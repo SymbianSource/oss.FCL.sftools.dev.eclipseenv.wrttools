@@ -53,6 +53,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.symbian.tools.wrttools.previewer.PreviewerException;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
+import org.symbian.tools.wrttools.previewer.http.handlers.DebuggerResourceProvider;
 import org.symbian.tools.wrttools.previewer.http.handlers.PreviewerStaticResourceProvider;
 import org.symbian.tools.wrttools.previewer.http.handlers.ProjectIndexResourceProvider;
 import org.symbian.tools.wrttools.previewer.http.handlers.Providers;
@@ -109,7 +110,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
     }
 
     public static String getHttpUrl(IResource file) {
-        String uri = getServerURIForResource(file != null ? file.getFullPath().toString() : "/").toASCIIString();
+        String uri = getServerURIForResource(file != null ? file.getFullPath().toString() : "/", null).toASCIIString();
         if (uri != null) {
             return uri;
         } else {
@@ -129,8 +130,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         try {
             IPath path = getProjectRelativePath(name);
             if (path != null) {
-                if (path.segmentCount() == 2
-                        && PreviewerStaticResourceProvider.PREVIEW_STARTING_PAGE.equals(path.segment(1))) {
+                if (path.segmentCount() == 2 && HttpPreviewer.PREVIEW_STARTING_PAGE.equals(path.segment(1))) {
                     path = new Path(PreviewerStaticResourceProvider.PREVIEW_START);
                 } else if (path.segmentCount() > 2
                         && PreviewerStaticResourceProvider.PREVIEW_PATH.equals(path.segment(1))) {
@@ -153,8 +153,8 @@ public class WorkspaceResourcesServlet extends HttpServlet {
     }
 
     public static URI getPreviewerStartingPage(String widget) {
-        return getServerURIForResource(new Path(widget).append(PreviewerStaticResourceProvider.PREVIEW_STARTING_PAGE)
-                .makeAbsolute().toString());
+        return getServerURIForResource(new Path(widget).append(HttpPreviewer.PREVIEW_STARTING_PAGE).makeAbsolute()
+                .toString(), null);
     }
 
     private static IPath getProjectRelativePath(String uri) {
@@ -188,32 +188,31 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         }
     }
 
-    private static URI getServerURIForResource(String resourcePath) {
+    private static URI getServerURIForResource(String resourcePath, String debugSessionId) {
         Path p = new Path(resourcePath);
         if (p.segmentCount() > 1) {
             IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(p.segment(0));
             try {
                 if (p.removeFirstSegments(1).toString().equals(CoreUtil.getIndexFile(project))) {
                     return getServerURIForResource(new Path(p.segment(0)).append(ProjectIndexResourceProvider.INDEX)
-                            .makeAbsolute().toString());
+                            .makeAbsolute().toString(), debugSessionId);
                 }
             } catch (Exception e1) {
                 PreviewerPlugin.log(e1);
             }
         }
-        String uri = null;
         try {
-            String path = WebappManager.WORKSPACE_RESOURCES_CONTEXT + resourcePath;
-            URL url = new URL("http", WebappManager.getHost(), WebappManager.getPort(), encode(path));
-            uri = url.toString();
+            String path = encode(WebappManager.WORKSPACE_RESOURCES_CONTEXT + resourcePath);
+            path += debugSessionId == null ? "" : (String.format("?%s=%s",
+                    DebuggerResourceProvider.DEBUG_SESSION_ID_PARAMETER, debugSessionId));
+            URL url = new URL("http", WebappManager.getHost(), WebappManager.getPort(), path);
+            return url.toURI();
         } catch (MalformedURLException e) {
-            uri = null;
-        }
-        try {
-            return new URI(uri);
+            PreviewerPlugin.log(e);
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            PreviewerPlugin.log(e);
         }
+        return null;
     }
 
     private final Providers providers = new Providers();
@@ -284,5 +283,10 @@ public class WorkspaceResourcesServlet extends HttpServlet {
             throw new ServletException(e);
         }
         resp.setStatus(HttpServletResponse.SC_OK);
+    }
+
+    public static URI getDebugStartingPage(String project, String session) {
+        return getServerURIForResource(new Path(project).append(HttpPreviewer.DEBUG_STARTING_PAGE).makeAbsolute()
+                .toString(), session);
     }
 }

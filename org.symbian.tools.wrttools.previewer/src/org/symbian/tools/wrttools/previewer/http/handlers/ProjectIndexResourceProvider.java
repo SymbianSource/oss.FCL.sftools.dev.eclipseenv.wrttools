@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
 import org.symbian.tools.wrttools.util.CoreUtil;
 
-public class ProjectIndexResourceProvider implements ResourceProvider {
+public class ProjectIndexResourceProvider implements IResourceProvider {
     public static final String INDEX = "wrt_preview_main.html";
     private static final Pattern HEAD_TAG_PATTERN = Pattern.compile("<head(\\s*\\w*=\"(^\")*\")*\\s*>",
             Pattern.CASE_INSENSITIVE);
@@ -42,7 +42,7 @@ public class ProjectIndexResourceProvider implements ResourceProvider {
         return new String[] { INDEX };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException, CoreException {
         return getProjectIndexPage(project.getName());
     }
@@ -65,7 +65,7 @@ public class ProjectIndexResourceProvider implements ResourceProvider {
         return null;
     }
 
-    public void post(IProject project, IPath resource, Map<String, String> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
             throws IOException, CoreException {
         // Do nothing
     }

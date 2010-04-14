@@ -30,125 +30,119 @@ import org.eclipse.core.resources.IProject;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 public class WebAppInterface {
-	private static WebAppInterface INSTANCE;
+    private static WebAppInterface INSTANCE;
 
-	public static void connectDebugger(String widget, String id) {
-		if (PreviewerPlugin.TRACE_WEBAPP) {
-			System.out.println("Connecting debugger");
-		}
-		getInstance().connect(widget, id);
-	}
+    public static void connectDebugger(String widget, String id) {
+        if (PreviewerPlugin.TRACE_WEBAPP) {
+            System.out.println("Connecting debugger");
+        }
+        getInstance().connect(widget, id);
+    }
 
-	public static String decode(String value) {
-		try {
-			return URLDecoder.decode(value, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public static String decode(String value) {
+        try {
+            return URLDecoder.decode(value, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public static String encode(String project) {
-		try {
-			return URLEncoder.encode(project, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public static String encode(String project) {
+        try {
+            return URLEncoder.encode(project, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public static String getAjaxUri(String widget, String id) {
-		if (PreviewerPlugin.TRACE_WEBAPP) {
-			System.out.println("getAjaxUri");
-		}
-		return getInstance().createAjaxUri(widget, id).toASCIIString();
-	}
+    public static String getAjaxUri(String widget, String id) {
+        if (PreviewerPlugin.TRACE_WEBAPP) {
+            System.out.println("getAjaxUri");
+        }
+        return getInstance().createAjaxUri(widget, id).toASCIIString();
+    }
 
-	public synchronized static WebAppInterface getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new WebAppInterface();
-		}
-		return INSTANCE;
-	}
+    public synchronized static WebAppInterface getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new WebAppInterface();
+        }
+        return INSTANCE;
+    }
 
-	public static String getUrl(String widget, String id) {
+    public static String getUrl(String widget, String id) {
         return getInstance().complete(widget, id).toASCIIString();
-	}
+    }
 
-	public static boolean isConnected(String widget, String id) {
-		if (PreviewerPlugin.TRACE_WEBAPP) {
-			System.out.println("isConnected");
-		}
-		return getInstance().isJobComplete(widget, id);
-	}
+    public static boolean isConnected(String widget, String id) {
+        if (PreviewerPlugin.TRACE_WEBAPP) {
+            System.out.println("isConnected");
+        }
+        return getInstance().isJobComplete(widget, id);
+    }
 
-	public static boolean isSuccessful(String widget, String id) {
-		if (PreviewerPlugin.TRACE_WEBAPP) {
-			System.out.println("isSuccessful");
-		}
-		return getInstance().isConnectionSuccessful(widget, id);
-	}
+    public static boolean isSuccessful(String widget, String id) {
+        if (PreviewerPlugin.TRACE_WEBAPP) {
+            System.out.println("isSuccessful");
+        }
+        return getInstance().isConnectionSuccessful(widget, id);
+    }
 
-	private final Map<String, BrowserConnectionJob> debuggerJobs = new TreeMap<String, BrowserConnectionJob>();
+    private final Map<String, BrowserConnectionJob> debuggerJobs = new TreeMap<String, BrowserConnectionJob>();
 
-	private WebAppInterface() {
-		try {
-			WebappManager.start("wrtbrowser");
-		} catch (Exception e) {
-			PreviewerPlugin.log(e);
-		}
-	}
+    private WebAppInterface() {
+        try {
+            WebappManager.start("wrtbrowser");
+        } catch (Exception e) {
+            PreviewerPlugin.log(e);
+        }
+    }
 
     private synchronized URI complete(String widget, String id) {
-		return WorkspaceResourcesServlet.getPreviewerStartingPage(widget);
-	}
+        return WorkspaceResourcesServlet.getPreviewerStartingPage(widget);
+    }
 
-	private synchronized void connect(String widget, String id) {
-		BrowserConnectionJob listener = debuggerJobs.get(getId(widget, id));
-		listener.schedule();
-	}
+    private synchronized void connect(String widget, String id) {
+        if (!isConnected(widget, id)) {
+            BrowserConnectionJob listener = debuggerJobs.get(getId(widget, id));
+            listener.schedule(50);
+        }
+    }
 
-	private URI createAjaxUri(String widget, String id) {
-		try {
-			return createUri("connectionTest.jsp", widget, id);
-		} catch (URISyntaxException e) {
-			PreviewerPlugin.log(e);
-			return null;
-		}
-	}
+    private URI createAjaxUri(String widget, String id) {
+        try {
+            return createUri("connectionTest.jsp", widget, id);
+        } catch (URISyntaxException e) {
+            PreviewerPlugin.log(e);
+            return null;
+        }
+    }
 
-	private URI createUri(String page, String project, String session)
-			throws URISyntaxException {
-		URI uri = new URI("http", null, WebappManager.getHost(), WebappManager
-				.getPort(), "/wrtdebugger/" + page, "widget=" + encode(project)
-				+ "&session=" + session, null);
-		return uri;
-	}
+    private URI createUri(String page, String project, String session) throws URISyntaxException {
+        URI uri = new URI("http", null, WebappManager.getHost(), WebappManager.getPort(), "/wrtdebugger/" + page,
+                "widget=" + encode(project) + "&session=" + session, null);
+        return uri;
+    }
 
-	private String getId(String name, String session) {
-		return name + "$" + session;
-	}
+    private String getId(String name, String session) {
+        return name + "$" + session;
+    }
 
-	private boolean isJobComplete(String widget, String id) {
-		BrowserConnectionJob job = debuggerJobs.get(getId(widget, id));
-		return job.isReady();
-	}
-	
-	private boolean isConnectionSuccessful(String widget, String id) {
-		BrowserConnectionJob job = debuggerJobs.get(getId(widget, id));
-		return job.isSuccess();
-	}
+    private boolean isJobComplete(String widget, String id) {
+        BrowserConnectionJob job = debuggerJobs.get(getId(widget, id));
+        return job.isReady();
+    }
 
-	public synchronized URI prepareDebugger(IProject project,
-			IPreviewStartupListener listener) {
-		try {
-			String session = Long.toHexString(System.currentTimeMillis());
-			URI uri = createUri("debugger.jsp", project.getName(), session);
-			if (listener != null) {
-				debuggerJobs.put(getId(project.getName(), session), new BrowserConnectionJob(listener, uri));
-			}
-			return uri;
-		} catch (URISyntaxException e) {
-			PreviewerPlugin.log(e);
-		}
-		return null;
-	}
+    private boolean isConnectionSuccessful(String widget, String id) {
+        BrowserConnectionJob job = debuggerJobs.get(getId(widget, id));
+        return job.isSuccess();
+    }
+
+    public synchronized URI prepareDebugger(IProject project, IPreviewStartupListener listener) {
+        String session = Long.toHexString(System.currentTimeMillis());
+        URI uri = WorkspaceResourcesServlet.getDebugStartingPage(project.getName(), session);
+        if (listener != null) {
+            debuggerJobs.put(getId(project.getName(), session), new BrowserConnectionJob(listener, uri));
+        }
+        return uri;
+    }
 }

@@ -82,7 +82,12 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			}
 		}
 	
-		$('iframe')[0].src = "wrt_preview_main.html";
+		var src = "wrt_preview_main.html";
+		if (window.location.href.match(/debug\-frame\.html/gi)) {
+			src = "__sym-debug/index.html" + window.location.search;
+		}
+			
+		$('iframe')[0].src = src;
 
 		NOKIA.data.load(deviceResolutionList);
 		
