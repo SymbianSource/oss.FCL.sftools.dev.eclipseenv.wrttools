@@ -21,16 +21,17 @@ package org.symbian.tools.wrttools;
 
 import java.io.IOException;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.ui.console.MessageConsoleStream;
-
 import org.symbian.tools.wrttools.core.status.IWRTStatusListener;
 import org.symbian.tools.wrttools.core.status.WRTStatus;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WRTStatusListener implements IWRTStatusListener {
 	
-	private MessageConsoleStream consoleStream;
-	private boolean activateOnFirstStatus = true;
+	private final MessageConsoleStream consoleStream;
+	private final boolean activateOnFirstStatus = true;
 	private int statusCount;
 
 	public WRTStatusListener() {
@@ -60,5 +61,9 @@ public class WRTStatusListener implements IWRTStatusListener {
 	public boolean isStatusHandled(WRTStatus status) {
 		return true;
 	}
+
+    public boolean canPackageWithErrors(IProject project) {
+        return ProjectUtils.canPackageWithErrors(project);
+    }
 
 }

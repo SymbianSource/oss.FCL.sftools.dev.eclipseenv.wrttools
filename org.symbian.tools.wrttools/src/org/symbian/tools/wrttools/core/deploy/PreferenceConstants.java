@@ -43,4 +43,6 @@ public class PreferenceConstants {
 	public static final String SELECTED_EMULATOR_NAME = "selectedEmulatorDeviceName";
 	
 	public static final String DEBUG_ENABLED = "debugEnabled";
+
+    public static final String PACKAGE_WITH_ERRORS = "packageWithErrors";
 }

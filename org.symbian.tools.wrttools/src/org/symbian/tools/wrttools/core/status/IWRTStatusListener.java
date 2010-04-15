@@ -19,6 +19,8 @@
 
 package org.symbian.tools.wrttools.core.status;
 
+import org.eclipse.core.resources.IProject;
+
 public interface IWRTStatusListener {
 	/**
 	 * Tell if the status should be emitted by this listener,
@@ -36,4 +38,6 @@ public interface IWRTStatusListener {
     public void emitStatus(WRTStatus status);
 
     public void close();
+
+    public boolean canPackageWithErrors(IProject project);
 }

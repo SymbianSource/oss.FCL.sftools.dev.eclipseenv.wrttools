@@ -74,7 +74,7 @@ public class PreviewerUtil {
     }
 
     public static boolean isRelevantResource(IResource resource) {
-        if (resource.getType() == IResource.FILE) {
+        if (resource.exists() && resource.getType() == IResource.FILE) {
             return !resource.getFullPath().segment(1).equalsIgnoreCase("preview")
                     && !"wgz".equalsIgnoreCase(resource.getFileExtension())
                     && !(PreviewerPlugin.PLUGIN_ID + ".xml").equals(resource.getName());

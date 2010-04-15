@@ -20,8 +20,8 @@
 package org.symbian.tools.wrttools.core.deploy;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
+import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.preference.IPreferenceStore;
-
 import org.symbian.tools.wrttools.Activator;
 
 /**
@@ -36,10 +36,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();		
-		store.setDefault(PreferenceConstants.WRT_DEPLOY_CHOICE, PreferenceConstants.WRT_DEPLOY_CHOICE_DEVICE);
-		store.setDefault(PreferenceConstants.WRT_DEPLOY_CHOICE, PreferenceConstants.WRT_DEPLOY_CHOICE_EMULATOR);
-//		store.setDefault(PreferenceConstants.WRT_EMULATOR_PATH, "none");	
-		
+
+        store.setDefault(PreferenceConstants.PACKAGE_WITH_ERRORS, MessageDialogWithToggle.PROMPT);
 	}
 
 }

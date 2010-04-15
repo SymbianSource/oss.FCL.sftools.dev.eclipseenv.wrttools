@@ -39,6 +39,7 @@ import org.symbian.tools.wrttools.core.packager.WrtPackageActionDelegate;
 import org.symbian.tools.wrttools.core.status.IWRTStatusListener;
 import org.symbian.tools.wrttools.core.status.WRTStatus;
 import org.symbian.tools.wrttools.sdt.utils.Logging;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class DeployWizard extends Wizard {
     public class PagePrinter implements IWRTStatusListener {
@@ -58,6 +59,10 @@ public class DeployWizard extends Wizard {
 
         public void close() {
             // Do nothing
+        }
+
+        public boolean canPackageWithErrors(IProject project) {
+            return ProjectUtils.canPackageWithErrors(project);
         }
 
     }

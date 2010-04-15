@@ -86,7 +86,7 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 						break;
 					}
 				}
-				if(hasErrors) {
+                if (hasErrors && !statusListener.canPackageWithErrors(project)) {
 					reportStatus("For the project "+ project.getLocation());
 					reportStatus(WRTPackagerConstants.STA_PKG_FAILED);
 					reportStatus("See errors from the Problems View for more details...");
