@@ -22,10 +22,15 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.net.URI;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.symbian.tools.wrttools.core.ProjectTemplate;
+import org.symbian.tools.wrttools.core.libraries.JSLibrary;
 import org.symbian.tools.wrttools.util.Util;
 
 public class WizardContext {
@@ -38,18 +43,20 @@ public class WizardContext {
 	public static final String WIDGET_ID = "widgetId";
 	public static final String WIDGET_NAME = "widgetName";
 	public static final String HOME_SCREEN = "homeScreen";
+    public static final String LIBRARIES = "libraries";
 
 	private String cssFile;
 	private String htmlFile;
 	private String jsFile;
 	private String projectName;
-	private PropertyChangeSupport propertySupport = new PropertyChangeSupport(this);
+	private final PropertyChangeSupport propertySupport = new PropertyChangeSupport(this);
 	private ProjectTemplate template;
 	private String widgetId;
 	private String widgetName;
 	private Map<String, String> extensions = new TreeMap<String, String>();
 	private URI projectUri;
 	private boolean homeScreen;
+    private Set<JSLibrary> libraries = new HashSet<JSLibrary>();
 
 	public void addPropertyChangeListener(PropertyChangeListener arg0) {
 		propertySupport.addPropertyChangeListener(arg0);
@@ -187,6 +194,9 @@ public class WizardContext {
 		if (cssFile == null) {
 			propertySupport.firePropertyChange(CSS_FILE, getCssFile(), css);
 		}
+        if (cssFile == null) {
+            propertySupport.firePropertyChange(LIBRARIES, getCssFile(), css);
+        }
 	}
 
 	public void setWidgetId(String widgetId) {
@@ -275,4 +285,26 @@ public class WizardContext {
 		}
 		return fileName;
 	}
+
+    public boolean isRequiredLibrary(JSLibrary element) {
+        return template != null && template.requires(element);
+    }
+
+    public Set<JSLibrary> getLibraries() {
+        final Set<JSLibrary> set = new HashSet<JSLibrary>(libraries);
+        if (template != null) {
+            set.addAll(Arrays.asList(template.getRequiredLibraries()));
+        }
+        return set;
+    }
+
+    public void setLibraries(Set<JSLibrary> libraries) {
+        Set<JSLibrary> prev = this.libraries;
+        this.libraries = libraries;
+        propertySupport.firePropertyChange(LIBRARIES, prev, libraries);
+    }
+
+    public Map<String, String> getLibraryParameters(JSLibrary library) {
+        return Collections.emptyMap();
+    }
 }

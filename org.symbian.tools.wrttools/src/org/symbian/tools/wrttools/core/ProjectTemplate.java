@@ -19,6 +19,10 @@
 package org.symbian.tools.wrttools.core;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.runtime.CoreException;
@@ -28,13 +32,15 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
+import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.core.libraries.JSLibrary;
 import org.symbian.tools.wrttools.wizards.IWizardPageFactory;
 import org.symbian.tools.wrttools.wizards.WRTProjectDetailsWizardPage;
 import org.symbian.tools.wrttools.wizards.WizardContext;
-import org.symbian.tools.wrttools.Activator;
 
 public class ProjectTemplate {
 	private static ProjectTemplate[] templates;
+
 	private final IConfigurationElement element;
 
 	private Image icon;
@@ -70,7 +76,7 @@ public class ProjectTemplate {
 		}
 	}
 	
-	public String[] getLibraryIds() {
+    private String[] getLibraryIds() {
 		IConfigurationElement[] elements = element.getChildren("requires-library");
 		String[] ids = new String[elements.length];
 		for (int i = 0; i < elements.length; i++) {
@@ -140,4 +146,25 @@ public class ProjectTemplate {
 		}
 		return null;
 	}
+
+    public boolean requires(JSLibrary library) {
+        for (String id : getLibraryIds()) {
+            if (library.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public JSLibrary[] getRequiredLibraries() {
+        Set<String> ids = new TreeSet<String>(Arrays.asList(getLibraryIds()));
+        Set<JSLibrary> libraries = new HashSet<JSLibrary>();
+        JSLibrary[] jsLibraries = Activator.getJSLibraries();
+        for (JSLibrary jsLibrary : jsLibraries) {
+            if (ids.contains(jsLibrary.getId())) {
+                libraries.add(jsLibrary);
+            }
+        }
+        return libraries.toArray(new JSLibrary[libraries.size()]);
+    }
 }

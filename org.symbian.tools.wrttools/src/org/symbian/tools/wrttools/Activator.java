@@ -26,6 +26,8 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.symbian.tools.wrttools.core.WRTImages;
+import org.symbian.tools.wrttools.core.libraries.JSLibrary;
+import org.symbian.tools.wrttools.core.libraries.LibraryManager;
 import org.symbian.tools.wrttools.sdt.utils.Logging;
 
 import com.intel.bluetooth.BlueCoveImpl;
@@ -45,6 +47,8 @@ public class Activator extends AbstractUIPlugin {
 	
 	private static PrintStream savedSysOut;
 	
+    private final LibraryManager manager = new LibraryManager();
+
 	/**
 	 * The constructor
 	 */
@@ -113,5 +117,9 @@ public class Activator extends AbstractUIPlugin {
 		IStatus status = new Status(severity, PLUGIN_ID, 0, message, x);
 		Logging.log(getDefault(), status);
 	}
+
+    public static JSLibrary[] getJSLibraries() {
+        return getDefault().manager.getLibraries();
+    }
 
 }

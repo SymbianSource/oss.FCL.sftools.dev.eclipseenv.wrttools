@@ -21,6 +21,7 @@ package org.symbian.tools.wrttools.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -372,8 +373,13 @@ public class ProjectUtils {
 
     public static void unzip(String archiveFile, IContainer location, int trimSegments, IProgressMonitor progressMonitor)
             throws IOException, CoreException {
-        progressMonitor.beginTask(MessageFormat.format("Unpacking {0}", archiveFile), IProgressMonitor.UNKNOWN);
-        ZipInputStream stream = new ZipInputStream(new FileInputStream(archiveFile));
+        unzip(new FileInputStream(archiveFile), location, trimSegments, archiveFile, progressMonitor);
+    }
+
+    public static void unzip(InputStream in, IContainer location, int trimSegments, String label,
+            IProgressMonitor progressMonitor) throws IOException, CoreException {
+        progressMonitor.beginTask(MessageFormat.format("Unpacking {0}", label), IProgressMonitor.UNKNOWN);
+        ZipInputStream stream = new ZipInputStream(in);
 
         try {
             ZipEntry nextEntry;
