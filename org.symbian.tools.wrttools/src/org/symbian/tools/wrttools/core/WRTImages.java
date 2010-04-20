@@ -77,5 +77,4 @@ public class WRTImages {
     public static Image getWrtKitIcon() {
         return Activator.getDefault().getImageRegistry().get(IMAGE_WRTKIT);
     }
-
 }

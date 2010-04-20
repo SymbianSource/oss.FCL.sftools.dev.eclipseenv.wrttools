@@ -16,17 +16,20 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.wrttools.core.libraries;
+package org.symbian.tools.wrttools.wizards.libraries;
 
-import java.io.IOException;
-import java.util.Map;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.swt.graphics.Image;
+import org.symbian.tools.wrttools.core.libraries.JSLibrary;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
+public final class LibraryLabelProvider extends LabelProvider {
+    @Override
+    public String getText(Object element) {
+        return ((JSLibrary) element).getName();
+    }
 
-public interface IJSLibraryInstaller {
-    void install(IProject project, Map<String, String> parameters, IProgressMonitor monitor) throws CoreException,
-            IOException;
-    boolean isInstalled(IProject project);
+    @Override
+    public Image getImage(Object element) {
+        return ((JSLibrary) element).getImage();
+    }
 }

@@ -22,49 +22,51 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
-import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.symbian.tools.wrttools.Activator;
-import org.symbian.tools.wrttools.util.ProjectUtils;
 
-public class WRTKitInstaller implements IJSLibraryInstaller {
-    private static final String JS_PATH = "WRTKit/WRTKit.js";
+public class PhoneGapInstaller implements IJSLibraryInstaller {
+    private static final String PHONEGAP_JS = "phonegap.js";
 
     public void install(IProject project, Map<String, String> parameters, IProgressMonitor monitor)
             throws CoreException, IOException {
-        monitor.beginTask("Installing WRTKit library", 15);
-
-        IFolder folder = project.getFolder("WRTKit");
-        
-        if (folder != null && !folder.exists()) {
-            folder.create(false, true, new SubProgressMonitor(monitor, 1));
+        String folderName = "script";
+        monitor.beginTask("Installing PhoneGap library", 10);
+        IFolder folder = project.getFolder(folderName);
+        if (!folder.isAccessible()) {
+            folder.create(false, true, new SubProgressMonitor(monitor, 2));
         }
-        InputStream zip = FileLocator.openStream(Activator.getDefault().getBundle(), new Path("/libraries/wrtkit.zip"),
-                true);
-        ProjectUtils.unzip(zip, folder, 0, "WRTKit", new SubProgressMonitor(monitor, 10));
-        
-        LibrariesUtils.addJSToHtml(project, "Adding WRTKit Library", new String[] { JS_PATH }, null);
+        IFile file = folder.getFile(PHONEGAP_JS);
+        if (!file.isAccessible()) {
+            InputStream stream = FileLocator.openStream(Activator.getDefault().getBundle(), new Path("libraries")
+                    .append(PHONEGAP_JS), true);
+            file.create(stream, false, new SubProgressMonitor(monitor, 3));
+        }
+        IPath path = new Path(folderName).append(PHONEGAP_JS);
+        LibrariesUtils.addJSToHtml(project, "Adding PhoneGap", new String[] { path.toString() }, null);
         monitor.done();
     }
 
     public boolean isInstalled(IProject project) {
         IJavaScriptProject jsProject = JavaScriptCore.create(project);
         try {
-            IType npopup = jsProject.findType("NotificationPopup");
-            IType uimanager = jsProject.findType("UIManager");
-            return npopup != null && uimanager != null;
+            return jsProject.findType("Accelerometer") != null && jsProject.findType("Camera") != null
+                    && jsProject.findType("Geolocation") != null;
         } catch (JavaScriptModelException e) {
             Activator.log(e);
-            return false;
         }
+        return false;
     }
+
 }

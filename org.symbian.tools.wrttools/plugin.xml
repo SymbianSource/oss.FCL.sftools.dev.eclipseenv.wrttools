@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="projectTemplates" name="WRT Project Templates" schema="schema/projectTemplates.exsd"/>
+   <extension-point id="jsLibraries" name="JavaScript Libraries" schema="schema/jsLibraries.exsd"/>
 
 <!-- Generic Project Builder and Project Natures  -->		
  	
@@ -643,6 +644,13 @@
           id="org.symbian.tools.wrttools.commands.package"
           name="Package Application">
     </command>
+    <command
+          categoryId="org.symbian.tools.wrttools.commands.maincategory"
+          defaultHandler="org.symbian.tools.wrttools.handlers.AddJSLibrary"
+          description="Adds JavaScript libraries to WRT projects"
+          id="org.symbian.tools.wrttools.addlibrary"
+          name="Add JavaScript Libraries...">
+    </command>
  </extension>
  <extension
        point="org.eclipse.ui.menus">
@@ -666,6 +674,15 @@
           locationURI="menu:project?after=additions">
        <separator
              name="org.symbian.tools.wrttools.beginwert"
+             visible="true">
+       </separator>
+       <command
+             commandId="org.symbian.tools.wrttools.addlibrary"
+             id="org.symbian.tools.wrttools.toolbars.addlibrary"
+             style="push">
+       </command>
+       <separator
+             name="org.symbian.tools.wrttools.deploypackage"
              visible="true">
        </separator>
        <command
@@ -729,6 +746,35 @@
        </command>
        <separator
              name="org.symbian.tools.wrttools.endwrt"
+             visible="true">
+       </separator>
+    </menuContribution>
+    <menuContribution
+          locationURI="popup:org.eclipse.ui.popup.any?after=group.build">
+       <dynamic
+             class="org.symbian.tools.wrttools.core.libraries.AddLibraryPopupMenu$LibrariesPopupMenu"
+             id="org.symbian.tools.wrttools.addlibrary">
+          <visibleWhen>
+             <and>
+                <iterate
+                      ifEmpty="false"
+                      operator="and">
+                   <adapt
+                         type="org.eclipse.core.resources.IProject">
+                      <test
+                            property="org.eclipse.core.resources.projectNature"
+                            value="org.symbian.tools.wrttools.WidgetProjectNature">
+                      </test>
+                   </adapt>
+                </iterate>
+                <count
+                      value="1">
+                </count>
+             </and>
+          </visibleWhen>
+       </dynamic>
+       <separator
+             name="org.symbian.tools.wrttools.libs"
              visible="true">
        </separator>
     </menuContribution>
@@ -814,5 +860,20 @@
     <persistent
           value="true">
     </persistent>
+ </extension>
+ <extension
+       point="org.symbian.tools.wrttools.jsLibraries">
+    <library
+          icon="icons/main16_prev.gif"
+          id="org.symbian.wrtkit"
+          installer="org.symbian.tools.wrttools.core.libraries.WRTKitInstaller"
+          name="WRTKit">
+    </library>
+    <library
+          icon="icons/phonegap.png"
+          id="phonegap"
+          installer="org.symbian.tools.wrttools.core.libraries.PhoneGapInstaller"
+          name="PhoneGap">
+    </library>
  </extension>
 </plugin>

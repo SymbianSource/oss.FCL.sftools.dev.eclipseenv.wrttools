@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.wrttools.wizards;
+package org.symbian.tools.wrttools.wizards.libraries;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.BeansObservables;
@@ -27,13 +27,12 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ICheckStateListener;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.libraries.JSLibrary;
+import org.symbian.tools.wrttools.wizards.WizardContext;
 
 public class WRTProjectLibraryWizardPage extends WizardPage {
     public static final class LibraryCheckStateListener implements ICheckStateListener {
@@ -49,17 +48,6 @@ public class WRTProjectLibraryWizardPage extends WizardPage {
             }
         }
 
-    }
-    private static final class LibraryLabelProvider extends LabelProvider {
-        @Override
-        public String getText(Object element) {
-            return ((JSLibrary) element).getName();
-        }
-
-        @Override
-        public Image getImage(Object element) {
-            return ((JSLibrary) element).getImage();
-        }
     }
     private CheckboxTableViewer list;
     private final WizardContext context;

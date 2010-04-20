@@ -62,6 +62,7 @@ import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.core.libraries.JSLibrary;
 import org.symbian.tools.wrttools.util.NonClosingStream;
 import org.symbian.tools.wrttools.util.ProjectUtils;
+import org.symbian.tools.wrttools.wizards.libraries.WRTProjectLibraryWizardPage;
 
 public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableExtension {
     private WizardNewProjectCreationPage resourcePage;

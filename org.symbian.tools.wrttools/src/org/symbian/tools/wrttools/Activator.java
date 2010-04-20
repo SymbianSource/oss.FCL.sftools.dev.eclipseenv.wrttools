@@ -19,7 +19,12 @@
 package org.symbian.tools.wrttools;
 
 import java.io.PrintStream;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.TreeSet;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -29,6 +34,7 @@ import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.core.libraries.JSLibrary;
 import org.symbian.tools.wrttools.core.libraries.LibraryManager;
 import org.symbian.tools.wrttools.sdt.utils.Logging;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 import com.intel.bluetooth.BlueCoveImpl;
 
@@ -120,6 +126,29 @@ public class Activator extends AbstractUIPlugin {
 
     public static JSLibrary[] getJSLibraries() {
         return getDefault().manager.getLibraries();
+    }
+
+    public static IProject[] getWrtProjects() {
+        IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+        Collection<IProject> prjs = new TreeSet<IProject>(new Comparator<IProject>() {
+            public int compare(IProject o1, IProject o2) {
+                if (o1 == o2) {
+                    return 0;
+                } else if (o1 == null) {
+                    return -1;
+                } else if (o2 == null) {
+                    return 1;
+                } else {
+                    return o1.getName().compareTo(o2.getName());
+                }
+            }
+        });
+        for (IProject project : projects) {
+            if (ProjectUtils.hasWrtNature(project)) {
+                prjs.add(project);
+            }
+        }
+        return prjs.toArray(new IProject[prjs.size()]);
     }
 
 }
