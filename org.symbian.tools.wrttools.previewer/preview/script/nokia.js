@@ -853,6 +853,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			}
 			values = values.replace(/<dict.*?(<key.*?>\s*.*\s*<\/string>)\s*<\/dict>/, "{ $1 }");
 			values = values.replace(/\s*<key.*?>\s*(.*?)\s*<\/key>\s*<string.*?>\s*(.*?)\s*<\/string>\s*/g, "\"$1\" : \"$2\", ");
+			values = values.replace(/"\s*?,\s*?}/g, "\" }");
 			try {
 				NOKIA.emulator.plist = JSON.parse(values);
 			} catch (exception) {
