@@ -1,0 +1,264 @@
+diff -r 42f09aa2b24a org.chromium.debug.core/src/org/chromium/debug/core/model/DebugTargetImpl.java
+--- a/org.chromium.debug.core/src/org/chromium/debug/core/model/DebugTargetImpl.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.debug.core/src/org/chromium/debug/core/model/DebugTargetImpl.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -187,7 +187,17 @@
+   }
+ 
+   public void terminate() throws DebugException {
+-    disconnect();
++    if (workspaceBridgeFactory.canCloseTab()) {
++      closeTab();
++    } else {
++      disconnect();
++    }
++  }
++
++  private void closeTab() {
++    if (!vmEmbedder.getJavascriptVm().close()) {
++      ChromiumDebugPlugin.logWarning(Messages.DebugTargetImpl_BadResultWhileDisconnecting);
++    }
+   }
+ 
+   public boolean canResume() {
+diff -r 42f09aa2b24a org.chromium.debug.core/src/org/chromium/debug/core/model/VProjectWorkspaceBridge.java
+--- a/org.chromium.debug.core/src/org/chromium/debug/core/model/VProjectWorkspaceBridge.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.debug.core/src/org/chromium/debug/core/model/VProjectWorkspaceBridge.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -56,6 +56,10 @@
+     public JsLabelProvider getLabelProvider() {
+       return LABEL_PROVIDER;
+     }
++
++    public boolean canCloseTab() {
++      return false;
++    }
+   }
+ 
+   private final IProject debugProject;
+diff -r 42f09aa2b24a org.chromium.debug.core/src/org/chromium/debug/core/model/WorkspaceBridge.java
+--- a/org.chromium.debug.core/src/org/chromium/debug/core/model/WorkspaceBridge.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.debug.core/src/org/chromium/debug/core/model/WorkspaceBridge.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -46,6 +46,11 @@
+      * User may cache value of this method.
+      */
+     JsLabelProvider getLabelProvider();
++
++    /**
++     * Returns <code>true</code> if debugger is allowed to close tab. 
++     */
++    boolean canCloseTab();
+   }
+ 
+   /**
+@@ -100,6 +105,7 @@
+     void breakpointsHit(Collection<? extends Breakpoint> breakpointsHit);
+   }
+ 
++  
+   /**
+    * Label provider for several debug elements. This object should be stateless.
+    */
+diff -r 42f09aa2b24a org.chromium.sdk/src/logging.properties
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/org.chromium.sdk/src/logging.properties	Wed Apr 21 09:29:57 2010 -0700
+@@ -0,0 +1,2 @@
++.level=WARNING
++
+diff -r 42f09aa2b24a org.chromium.sdk/src/org/chromium/sdk/JavascriptVm.java
+--- a/org.chromium.sdk/src/org/chromium/sdk/JavascriptVm.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.sdk/src/org/chromium/sdk/JavascriptVm.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -58,6 +58,13 @@
+   boolean detach();
+ 
+   /**
++   * Closes associated tab
++   *
++   * @return whether the operation succeeded
++   */
++  boolean close();
++
++  /**
+    * @return whether the tab is currently attached
+    */
+   boolean isAttached();
+diff -r 42f09aa2b24a org.chromium.sdk/src/org/chromium/sdk/internal/BrowserTabImpl.java
+--- a/org.chromium.sdk/src/org/chromium/sdk/internal/BrowserTabImpl.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.sdk/src/org/chromium/sdk/internal/BrowserTabImpl.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -107,6 +107,11 @@
+     return Result.OK == result;
+   }
+ 
++  public boolean close() {
++      Result result = devToolSessionManager.closeTab();
++      return Result.OK == result;
++  }
++
+   public boolean isAttached() {
+     return devToolSessionManager.isAttachedForUi();
+   }
+diff -r 42f09aa2b24a org.chromium.sdk/src/org/chromium/sdk/internal/StandaloneVmImpl.java
+--- a/org.chromium.sdk/src/org/chromium/sdk/internal/StandaloneVmImpl.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.sdk/src/org/chromium/sdk/internal/StandaloneVmImpl.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -149,6 +149,10 @@
+     connection.close();
+     return true;
+   }
++  
++  public boolean close() {
++    return detach();
++  }
+ 
+   public boolean isAttached() {
+     return connectionState == ConnectionState.CONNECTED;
+diff -r 42f09aa2b24a org.chromium.sdk/src/org/chromium/sdk/internal/tools/v8/ChromeDevToolSessionManager.java
+--- a/org.chromium.sdk/src/org/chromium/sdk/internal/tools/v8/ChromeDevToolSessionManager.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.sdk/src/org/chromium/sdk/internal/tools/v8/ChromeDevToolSessionManager.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -161,6 +161,7 @@
+           processAttach(json);
+           break;
+         case DETACH:
++        case TERMINATE:
+           processDetach(json);
+           break;
+         case DEBUGGER_COMMAND:
+@@ -172,6 +173,9 @@
+         case CLOSED:
+           processClosed(json);
+           break;
++        default:
++          System.out.println(message.getContent());
++          return;
+       }
+       return;
+     }
+@@ -264,6 +268,30 @@
+     return result;
+   }
+ 
++  /**
++   * Closes associated browser tab.
++   * @return terminate request result
++   */
++  public Result closeTab() {
++      if (attachState.get() != AttachState.NORMAL) {
++          toolHandler.onDebuggerDetached();
++          return Result.ILLEGAL_TAB_STATE;
++      }
++      
++      String command = V8DebuggerToolMessageFactory.terminate();
++      Result result;
++      try {
++          result = sendSimpleCommandSync(detachCallback, command);
++      } catch (AttachmentFailureException e) {
++          result = null;
++      } finally {
++          // Make sure line is cut
++          cutTheLineMyself();
++      }
++      
++      return result;
++  }
++
+   private Result sendSimpleCommandSync(AtomicReference<ResultAwareCallback> callbackReference,
+       String command) throws AttachmentFailureException {
+     final Semaphore sem = new Semaphore(0);
+@@ -448,6 +476,10 @@
+       return createDebuggerMessage(DebuggerToolCommand.DETACH, null);
+     }
+ 
++    static String terminate() {
++        return createDebuggerMessage(DebuggerToolCommand.TERMINATE, null);
++    }
++
+     public static String debuggerCommand(String json) {
+       return createDebuggerMessage(DebuggerToolCommand.DEBUGGER_COMMAND, json);
+     }
+diff -r 42f09aa2b24a org.chromium.sdk/src/org/chromium/sdk/internal/tools/v8/DebuggerToolCommand.java
+--- a/org.chromium.sdk/src/org/chromium/sdk/internal/tools/v8/DebuggerToolCommand.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.chromium.sdk/src/org/chromium/sdk/internal/tools/v8/DebuggerToolCommand.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -13,6 +13,8 @@
+ public enum DebuggerToolCommand {
+   ATTACH("attach"),
+   DETACH("detach"),
++  TERMINATE("terminate"),
++  DISPATCH("dispatch"),
+   DEBUGGER_COMMAND("debugger_command"),
+   EVALUATE_JAVASCRIPT("evaluate_javascript"),
+ 
+diff -r 42f09aa2b24a org.symbian.tools.wrttools.debug.core/my.txt
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/org.symbian.tools.wrttools.debug.core/my.txt	Wed Apr 21 09:29:57 2010 -0700
+@@ -0,0 +1,8 @@
++This is a patch to close tab on debugger request. I also have a patch for Chrome
++Developer Tools that I will submit later.
++
++Is there any documentation on Chrome APIs? I really doubt I used correct one to 
++close the tab.
++
++This is my first attempt to submit patch to Chromium so I would be greateful for
++any feedback.
+\ No newline at end of file
+diff -r 42f09aa2b24a org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/ChromeDebugUtils.java
+--- a/org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/ChromeDebugUtils.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/ChromeDebugUtils.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -30,10 +30,25 @@
+ 			if (chromeExecutable.isFile()) {
+ 				return chromeExecutable.getAbsolutePath();
+ 			}
++			chromeExecutable = new File(file, getChromiumExecutable());
++			if (chromeExecutable.isFile()) {
++				return chromeExecutable.getAbsolutePath();
++			}
+ 		}
+ 		return null;
+ 	}
+ 
++	private static String getChromiumExecutable() {
++		// Add more ifs as we add support for new platforms
++		if (CoreUtil.isMac()) {
++			return "Chromium.app/Contents/MacOS/Chromium";
++		} else if (CoreUtil.isLinux()) {
++			return "chromium";
++		} else {
++			return "chromium.exe";
++		}
++	}
++
+ 	private static String getExecutable() {
+ 		// Add more ifs as we add support for new platforms
+ 		if (CoreUtil.isMac()) {
+diff -r 42f09aa2b24a org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/launch/ChromeInstancesManager.java
+--- a/org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/launch/ChromeInstancesManager.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/launch/ChromeInstancesManager.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -44,7 +44,8 @@
+             "--disable-extenions", // Use standard UI, should also improve speed and stability
+             "--disable-plugins", // Run faster!
+             "--activate-on-launch", // Bring to front on Mac
+-            "--always-enable-dev-tools", "--no-default-browser-check", // Our users don't need this nagging
++            "--exit-on-no-windows", // Bring to front on Mac
++            "--no-default-browser-check", // Our users don't need this nagging
+             "--no-first-run", // We don't care
+             "--app=%s" // Here we will have widget URI as --app argument
+     };
+diff -r 42f09aa2b24a org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/launch/WRTProjectWorkspaceBridge.java
+--- a/org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/launch/WRTProjectWorkspaceBridge.java	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.symbian.tools.wrttools.debug.core/src/org/symbian/tools/wrttools/debug/internal/launch/WRTProjectWorkspaceBridge.java	Wed Apr 21 09:29:57 2010 -0700
+@@ -49,6 +49,10 @@
+ 			return new WrtLabelProvider();
+ 		}
+ 
++		public boolean canCloseTab() {
++			return true;
++		}
++
+ 	}
+ 
+ //	public final static String DEBUG_MODEL_ID = VProjectWorkspaceBridge.DEBUG_MODEL_ID;
+diff -r 42f09aa2b24a org.symbian.tools.wrttools.product/launch/WRT IDE Product (Mac OS X).launch
+--- a/org.symbian.tools.wrttools.product/launch/WRT IDE Product (Mac OS X).launch	Mon Apr 19 15:00:57 2010 -0700
++++ b/org.symbian.tools.wrttools.product/launch/WRT IDE Product (Mac OS X).launch	Wed Apr 21 09:29:57 2010 -0700
+@@ -1,4 +1,4 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<?xml version="1.0" encoding="UTF-8"?>
+ <launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
+ <booleanAttribute key="append.args" value="true"/>
+ <booleanAttribute key="askclear" value="true"/>
