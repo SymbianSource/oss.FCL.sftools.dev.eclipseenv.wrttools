@@ -49,8 +49,8 @@ public class WebappManager {
 	private static int port = -1;
 	private static final int AUTO_SELECT_JETTY_PORT = 0;
 	
-	@SuppressWarnings("unchecked")
-	public static void start(String webappName) throws Exception {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static void start(String webappName) throws Exception {
 		Dictionary d = new Hashtable();
 		
 		d.put("http.port", new Integer(getPortParameter())); //$NON-NLS-1$

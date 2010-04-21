@@ -23,9 +23,9 @@ import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
 import org.eclipse.ui.IEditorPart;
 
+@SuppressWarnings("rawtypes")
 public class BreakpointAdapterFactory implements IAdapterFactory {
 
-	@SuppressWarnings("unchecked")
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adaptableObject instanceof IEditorPart) {
 			IResource resource = (IResource) ((IEditorPart) adaptableObject)
@@ -37,8 +37,7 @@ public class BreakpointAdapterFactory implements IAdapterFactory {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Class[] getAdapterList() {
+    public Class[] getAdapterList() {
 		return new Class[] { IToggleBreakpointsTarget.class };
 	}
 

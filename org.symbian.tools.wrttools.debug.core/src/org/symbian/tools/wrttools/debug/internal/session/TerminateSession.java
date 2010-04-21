@@ -31,7 +31,7 @@ import org.symbian.tools.wrttools.debug.internal.launch.WidgetLaunchDelegate;
 import org.symbian.tools.wrttools.previewer.IPreviewerCommandHandler;
 
 public class TerminateSession implements IPreviewerCommandHandler {
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public void handle(String commandName, String projectName, Map parameters) {
         ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
         for (ILaunch launch : launchManager.getLaunches()) {

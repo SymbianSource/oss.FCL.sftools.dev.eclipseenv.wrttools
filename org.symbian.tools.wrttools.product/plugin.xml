@@ -56,8 +56,7 @@
             name="Web">
       </category>
       <primaryWizard
-            id="org.symbian.tools.wrttools.core.wrtwidgetwizard"
-            banner="WRT_Wizard_banner.png">
+            id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
       </primaryWizard>
       <primaryWizard
             id="org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard">
@@ -152,7 +151,7 @@
             name="WebRuntime Toolkit IDE">
          <property
                name="windowImages"
-               value="icons/WRT_main_16.png,icons/WRT_32px_01.png,eclipse48.gif,eclipse.png,eclipse32.png">
+               value="icons/ico/WRT_main-icon_16px.png,icons/ico/WRT_main-icon_32px.png,icons/ico/WRT_main-icon_48px.png,icons/ico/WRT_main-icon_64px.png,icons/ico/WRT_main-icon_128px.png">
          </property>
          <property
                name="aboutText"
@@ -160,7 +159,7 @@
          </property>
          <property
                name="aboutImage"
-               value="icons/WRT_blurb_image_2.png">
+               value="icons/WRT_blurb_image.png">
          </property>
          <property
                name="startupForegroundColor"
@@ -168,11 +167,11 @@
          </property>
          <property
                name="startupProgressRect"
-               value="0,260,422,5">
+               value="5,245,410,15">
          </property>
          <property
                name="startupMessageRect"
-               value="0,240,441,20">
+               value="7,220,400,20">
          </property>
          <property
                name="appName"

@@ -21,6 +21,5 @@ package org.symbian.tools.wrttools.previewer;
 import java.util.Map;
 
 public interface IPreviewerCommandHandler {
-    @SuppressWarnings("unchecked")
-    void handle(String commandName, String projectName, Map parameters);
+    void handle(String commandName, String projectName, Map<String, String[]> parameters);
 }

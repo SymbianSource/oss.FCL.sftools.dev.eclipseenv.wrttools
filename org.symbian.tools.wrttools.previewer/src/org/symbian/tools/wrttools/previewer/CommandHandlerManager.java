@@ -31,8 +31,7 @@ public class CommandHandlerManager {
 
     private Map<String, IPreviewerCommandHandler> handlers = null;
 
-    @SuppressWarnings("unchecked")
-    public void handle(String commandName, String projectName, Map parameters) {
+    public void handle(String commandName, String projectName, Map<String, String[]> parameters) {
         final IPreviewerCommandHandler commandHandler = getCommandMap().get(commandName);
         if (commandHandler == null) {
             PreviewerPlugin.log(MessageFormat.format("Command {0} is not handled", commandName), null);

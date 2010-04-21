@@ -1,7 +1,5 @@
 package org.symbian.tools.wrttools.navigator;
 
-import java.util.Collection;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
@@ -9,7 +7,6 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -18,14 +15,13 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.wst.jsdt.core.IJavaScriptElement;
-import org.eclipse.wst.jsdt.core.IJavaScriptModel;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorContentProvider;
 import org.symbian.tools.wrttools.Activator;
 
-@SuppressWarnings({"restriction", "unchecked"})
+@SuppressWarnings("restriction")
 public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 		implements ITreeContentProvider {
 	private static final class RootResourceFinder implements
@@ -121,40 +117,6 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 		}
 		this.viewer = viewer;
 		super.inputChanged(viewer, oldInput, newInput);
-	}
-	//	
-	// @SuppressWarnings("unchecked")
-	// @Override
-	// protected void postAdd(final Object parent, final Object element,
-	// Collection runnables) {
-	// final Object p;
-	// if (element instanceof IProject) {
-	// p = null;
-	// } else {
-	// p = parent;
-	// }
-	// runnables.add(new Runnable() {
-	// @Override
-	// public void run() {
-	// if (p != null) {
-	// ((TreeViewer) viewer).refresh(p);
-	// } else {
-	// ((TreeViewer) viewer).refresh();
-	// }
-	// }
-	// });
-	// }
-
-	@Override
-	protected void postAdd(Object parent, Object element, Collection runnables) {
-		if (parent instanceof IWorkspace) {
-			super.postAdd(((IWorkspace) parent).getRoot(), element, runnables);
-		} else if (parent instanceof IJavaScriptModel) {
-			super.postAdd(((IJavaScriptModel) parent).getWorkspace().getRoot(),
-					element, runnables);
-		} else {
-			super.postAdd(parent, element, runnables);
-		}
 	}
 
 	protected void refreshViewer(final IResource resource) {
