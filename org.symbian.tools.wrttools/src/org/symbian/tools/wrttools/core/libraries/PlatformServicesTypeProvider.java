@@ -41,7 +41,7 @@ public class PlatformServicesTypeProvider implements InferrenceProvider {
                 if (file.exists()) {
                     IProject project = file.getProject();
                     if (ProjectUtils.hasWrtNature(project)) {
-                        return InferrenceProvider.ONLY_THIS;
+                        return InferrenceProvider.MAYBE_THIS;
                     }
                 }
             }

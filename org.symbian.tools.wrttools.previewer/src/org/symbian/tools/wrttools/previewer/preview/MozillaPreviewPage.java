@@ -168,7 +168,6 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
                 // Mozilla. We don't want to pollute the error log with this
                 return;
             }
-
             mozillaPrefs = (nsIPrefBranch) servMgr.getServiceByContractID("@mozilla.org/preferences-service;1",
                     nsIPrefBranch.NS_IPREFBRANCH_IID);
 
@@ -208,6 +207,8 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
             String location = "http://" + WebappManager.getHost() + ":" + WebappManager.getPort();
             mozillaPrefs.setCharPref("capability.principal.codebase.p0.id", location);
             mozillaPrefs.setBoolPref("security.fileuri.strict_origin_policy", 0);
+
+            mozillaPrefs.setBoolPref("geo.enabled", 1);
             // start JavaXPCOM section
             nsIIOService ioService = (nsIIOService) servMgr.getServiceByContractID("@mozilla.org/network/io-service;1",
                     nsIIOService.NS_IIOSERVICE_IID);

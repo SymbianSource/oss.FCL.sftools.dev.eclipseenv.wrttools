@@ -98,7 +98,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
     private boolean refreshScheduled = false;
 
     public synchronized void process(Collection<IFile> files) {
-        if (!refreshScheduled && needsRefresh(files)) {
+        if (!isDisposed() && !refreshScheduled && needsRefresh(files)) {
             asyncExec(new Runnable() {
                 public void run() {
                     refreshBrowser();

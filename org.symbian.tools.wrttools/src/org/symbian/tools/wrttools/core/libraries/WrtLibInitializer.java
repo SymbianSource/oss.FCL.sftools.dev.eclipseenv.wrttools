@@ -51,8 +51,8 @@ public class WrtLibInitializer extends JsGlobalScopeContainerInitializer {
 			return set.toArray(new String[set.size()]);
 		}
 
-		@SuppressWarnings("unchecked")
-		private Set<String> getEntries(Bundle bundle, String p) {
+        @SuppressWarnings("rawtypes")
+        private Set<String> getEntries(Bundle bundle, String p) {
 			final Set<String> set = new TreeSet<String>();
 			Enumeration entries = bundle.getEntryPaths(p);
 			while (entries.hasMoreElements()) {

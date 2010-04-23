@@ -876,4 +876,12 @@
           name="PhoneGap">
     </library>
  </extension>
+ <extension
+       id="org.symbian.tools.wrttools.phonegap"
+       name="PhoneGap Library Support"
+       point="org.eclipse.wst.jsdt.core.inferrenceSupport">
+    <inferenceProvider
+          class="org.symbian.tools.wrttools.core.libraries.jsdt.PhoneGapInferrenceProvider">
+    </inferenceProvider>
+ </extension>
 </plugin>
