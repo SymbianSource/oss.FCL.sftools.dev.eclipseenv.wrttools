@@ -62,7 +62,7 @@ public class DebuggerResourceProvider implements IResourceProvider {
                 }
             } else if ("testConnection".equals(resource.segment(1))) {
                 String[] sessionId = parameters.get(DEBUG_SESSION_ID_PARAMETER);
-                if (sessionId != null & sessionId.length == 1) {
+                if (sessionId != null && sessionId.length > 1) {
                     if (!WebAppInterface.isConnected(project.getName(), sessionId[0])) {
                         return null;
                     }
