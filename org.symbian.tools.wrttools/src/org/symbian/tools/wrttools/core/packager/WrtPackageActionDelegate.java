@@ -93,9 +93,9 @@ public class WrtPackageActionDelegate extends ActionDelegate implements
 					return packaedSucess;
 				}
 			} catch (CoreException e1) {
+                // Proofing from coding exceptions in JSDT
 				Activator.log(e1);
-				return false;
-			}
+            }
 
 			try {
 				final List<String> fileList = new ArrayList<String>();
