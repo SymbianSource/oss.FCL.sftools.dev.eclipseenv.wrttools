@@ -44,6 +44,7 @@ public class ChromeInstancesManager {
             "--disable-extenions", // Use standard UI, should also improve speed and stability
             "--disable-plugins", // Run faster!
             "--activate-on-launch", // Bring to front on Mac
+            "--disable-geolocation", // Use our own Geolocation (needed to emulate Geolocation in phonegap) 
             "--always-enable-dev-tools", "--no-default-browser-check", // Our users don't need this nagging
             "--no-first-run", // We don't care
             "--app=%s" // Here we will have widget URI as --app argument

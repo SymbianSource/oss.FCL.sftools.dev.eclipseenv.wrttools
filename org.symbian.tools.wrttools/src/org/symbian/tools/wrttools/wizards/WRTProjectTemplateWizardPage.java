@@ -92,7 +92,7 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		
 		templates = new TableViewer(composite, SWT.BORDER | SWT.SINGLE);
 		FormData templatesData = new FormData();
-		templatesData.top = new FormAttachment(label);
+		templatesData.top = new FormAttachment(label, 5);
 		templatesData.left = new FormAttachment(0, 0);
 		templatesData.right = new FormAttachment(100, 0);
 		templatesData.bottom = new FormAttachment(70, 0);
