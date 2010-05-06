@@ -22,61 +22,73 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.TreeSet;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.wst.jsdt.core.IJavaScriptUnit;
+import org.eclipse.wst.jsdt.core.IType;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.core.infer.IInferenceFile;
 import org.eclipse.wst.jsdt.core.infer.InferEngine;
 import org.eclipse.wst.jsdt.core.infer.InferrenceProvider;
 import org.eclipse.wst.jsdt.core.infer.RefactoringSupport;
 import org.eclipse.wst.jsdt.core.infer.ResolutionConfiguration;
+import org.symbian.tools.wrttools.Activator;
 
 public class PhoneGapInferrenceProvider implements InferrenceProvider {
-    public static final String ID = "org.symbian.tools.wrttools.phonegap";
-    private static final Collection<String> PHONEGAP_TYPES = new TreeSet<String>(Arrays.asList("Acceleration",
-            "AccelerationOptions", "Accelerometer", "Camera", "DeviceError", "Contacts", "Contact", "Geolocation",
-            "PositionOptions", "Coordinates", "Media", "Notification", "Orientation", "Position", "PositionError",
-            "Sms", "Storage"));
+	public static final String ID = "org.symbian.tools.wrttools.phonegap";
+	private static final Collection<String> PHONEGAP_TYPES = new TreeSet<String>(
+			Arrays.asList("Acceleration", "AccelerationOptions",
+					"Accelerometer", "Camera", "DeviceError", "Contacts",
+					"Contact", "Geolocation", "PositionOptions", "Coordinates",
+					"Media", "Notification", "Orientation", "Position",
+					"PositionError", "Sms", "Storage"));
 
-    public int applysTo(IInferenceFile scriptFile) {
-        //        String path = String.valueOf(scriptFile.getFileName());
-        //
-        //        IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
-        //        if (file != null && file.isAccessible()) {
-        //            IJavaScriptUnit unit = (IJavaScriptUnit) JavaScriptCore.create(file);
-        //            try {
-        //                IType[] types = unit.getAllTypes();
-        //                int typeCount = 0;
-        //                for (IType type : types) {
-        //                    if (PHONEGAP_TYPES.contains(type.getElementName())) {
-        //                        typeCount += 1;
-        //                    }
-        //                }
-        //                if (typeCount > 1) {
-        //                    return ONLY_THIS;
-        //                }
-        //            } catch (JavaScriptModelException e) {
-        //                Activator.log(e);
-        //            }
-        //        }
-        return NOT_THIS;
-    }
+	public int applysTo(IInferenceFile scriptFile) {
+		String path = String.valueOf(scriptFile.getFileName());
 
-    public String getID() {
-        return ID;
-    }
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
+				new Path(path));
+		if (file != null && file.isAccessible()) {
+			IJavaScriptUnit unit = (IJavaScriptUnit) JavaScriptCore
+					.create(file);
+			try {
+				IType[] types = unit.getAllTypes();
+				int typeCount = 0;
+				for (IType type : types) {
+					if (PHONEGAP_TYPES.contains(type.getElementName())) {
+						typeCount += 1;
+					}
+				}
+				if (typeCount > 1) {
+					return MAYBE_THIS;
+				}
+			} catch (JavaScriptModelException e) {
+				Activator.log(e);
+			}
+		}
+		return NOT_THIS;
+	}
 
-    public InferEngine getInferEngine() {
-        final InferEngine engine = new PhoneGapInferEngine();
-        engine.inferenceProvider = this;
-        return engine;
-    }
+	public String getID() {
+		return ID;
+	}
 
-    public RefactoringSupport getRefactoringSupport() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	public InferEngine getInferEngine() {
+		final InferEngine engine = new PhoneGapInferEngine();
+		engine.inferenceProvider = this;
+		return engine;
+	}
 
-    public ResolutionConfiguration getResolutionConfiguration() {
-        final ResolutionConfiguration configuration = new ResolutionConfiguration();
-        return configuration;
-    }
+	public RefactoringSupport getRefactoringSupport() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ResolutionConfiguration getResolutionConfiguration() {
+		final ResolutionConfiguration configuration = new ResolutionConfiguration();
+		return configuration;
+	}
 
 }
