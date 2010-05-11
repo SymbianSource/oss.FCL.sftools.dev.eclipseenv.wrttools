@@ -132,12 +132,14 @@ timestamp=007
 # in most RCP app or a plug-in,  the baseLocation should be the location of a previously
 # installed Eclipse against which the application or plug-in code will be compiled and the RCP delta pack.
 
-base=/usr/master/eclipse/3.5.2/jee
+base=/usr/master/eclipse/3.6m6/jee
 baseLocation=${base}/eclipse
 
-eclipseLocation=/usr/master/eclipse/3.5.2/pde/eclipse
-equinoxLauncherPluginVersion=1.0.201.R35x_v20090715
-pdeBuildPluginVersion=3.5.2.R35x_20100114
+eclipseLocation=/usr/master/eclipse/3.6m6/pde/eclipse
+# equinoxLauncherPluginVersion=1.0.201.R35x_v20090715
+equinoxLauncherPluginVersion=1.1.0.v20100307
+# pdeBuildPluginVersion=3.5.2.R35x_20100114
+pdeBuildPluginVersion=3.6.0.v20100311-1400
 
 #Folder containing repositories whose content is needed to compile against
 #repoBaseLocation=${base}/repos
