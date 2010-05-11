@@ -62,7 +62,7 @@ public class PhoneGapInferrenceProvider implements InferrenceProvider {
 					}
 				}
 				if (typeCount > 1) {
-					return MAYBE_THIS;
+                    return ONLY_THIS;
 				}
 			} catch (JavaScriptModelException e) {
 				Activator.log(e);
