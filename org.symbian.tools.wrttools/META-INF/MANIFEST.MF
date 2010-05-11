@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Symbian Web Runtime Tools
 Bundle-SymbolicName: org.symbian.tools.wrttools;singleton:=true
-Bundle-Version: 0.9.0.qualifier
+Bundle-Version: 0.9.1.qualifier
 Bundle-Activator: org.symbian.tools.wrttools.Activator
 Bundle-Vendor: Symbian Foundation
 Require-Bundle: org.eclipse.ui,

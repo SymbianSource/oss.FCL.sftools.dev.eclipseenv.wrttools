@@ -2,7 +2,7 @@
 <feature
       id="org.symbian.tools.wrttools"
       label="WRT Tools Feature"
-      version="1.0.0.qualifier"
+      version="0.9.1.qualifier"
       provider-name="Symbian Foundation">
 
    <description url="http://www.example.com/description">
