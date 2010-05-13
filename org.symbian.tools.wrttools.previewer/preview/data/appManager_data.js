@@ -109,4 +109,4 @@
 	device.implementation.loadData('Service.AppManager', 'Application', data_apps);
 	device.implementation.loadData('Service.AppManager', 'UserInstalledPackage', data_packages);
 
-})()
+})();

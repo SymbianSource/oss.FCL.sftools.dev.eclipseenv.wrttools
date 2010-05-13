@@ -90,11 +90,6 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 	/*
 	 Load Scripts
 	 */
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/widget.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/systeminfo.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/menu.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/menuItem.js");
-	_BRIDGE_REF.helper.loadScript("preview/script/lib/console.js");
 
 	//	Inject SAPI scripts	
 	if (_BRIDGE_REF.nokia) {

@@ -47,6 +47,7 @@ public class Providers {
     private final Map<String, IResourceProvider> HANDLERS = new TreeMap<String, IResourceProvider>();
     private final IResourceProvider defaultHandler = new WorkspaceResourceProvider();
     public Providers() {
+        addPaths(new MasterScriptProvider());
         addPaths(new PreviewerStaticResourceProvider());
         addPaths(new PreferencesResourceProvider());
         addPaths(new ProjectIndexResourceProvider());

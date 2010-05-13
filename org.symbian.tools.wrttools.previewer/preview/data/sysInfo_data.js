@@ -355,4 +355,4 @@ var data_5800 = {
 	 */
 	device.implementation.loadData('Service.SysInfo', '', data_5800);
 
-})()
+})();

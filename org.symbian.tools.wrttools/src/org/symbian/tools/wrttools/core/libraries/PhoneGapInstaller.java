@@ -32,6 +32,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
+import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.symbian.tools.wrttools.Activator;
@@ -61,8 +62,10 @@ public class PhoneGapInstaller implements IJSLibraryInstaller {
     public boolean isInstalled(IProject project) {
         IJavaScriptProject jsProject = JavaScriptCore.create(project);
         try {
-            return jsProject.findType("Accelerometer") != null && jsProject.findType("Camera") != null
-                    && jsProject.findType("Geolocation") != null;
+            final IType accel = jsProject.findType("Accelerometer");
+            final IType camera = jsProject.findType("Camera");
+            final IType geo = jsProject.findType("Geolocation");
+            return accel != null && camera != null && geo != null;
         } catch (JavaScriptModelException e) {
             Activator.log(e);
         }

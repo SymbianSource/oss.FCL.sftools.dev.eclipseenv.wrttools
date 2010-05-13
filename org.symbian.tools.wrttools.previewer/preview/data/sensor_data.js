@@ -478,5 +478,5 @@ var dataRet_rotation = [{
     device.implementation.loadData('Service.Sensor', 'OrientationRet', dataRet_orientation);
     device.implementation.loadData('Service.Sensor', 'RotationRet', dataRet_rotation);*/
 
-})()
+})();
 	

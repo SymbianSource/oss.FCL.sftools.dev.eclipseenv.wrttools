@@ -48,5 +48,5 @@ var data_genericLocationInfo = {
     device.implementation.loadData('Service.Location', 'BasicLocationInformation', data_basicLocationInformation);
     device.implementation.loadData('Service.Location', 'GenericLocationInfo', data_genericLocationInfo);
 
-})()
+})();
 	

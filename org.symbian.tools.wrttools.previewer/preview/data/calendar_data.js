@@ -146,4 +146,4 @@ var data2 = [];
 	device.implementation.loadData('Service.Calendar', 'C:Calendar', data_entries);
 	device.implementation.loadData('Service.Calendar', 'C:MyCalendar', data2);
 
-})()
+})();

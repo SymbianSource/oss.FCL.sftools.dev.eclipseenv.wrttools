@@ -386,5 +386,5 @@
      */
     device.implementation.loadData('Service.Logging', 'Log', logging_data);
 
-})()
+})();
 	

@@ -202,5 +202,5 @@ var data_messaging = [{
      */
     device.implementation.loadData('Service.Messaging', 'Inbox', data_messaging);
 
-})()
+})();
 	

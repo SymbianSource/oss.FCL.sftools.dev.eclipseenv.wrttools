@@ -263,4 +263,4 @@
 		msgChannelInfoMapInvalid	: '%s:%s:ChannelInfoMap Type Invalid'
 	};
 
-}) ()
+}) ();

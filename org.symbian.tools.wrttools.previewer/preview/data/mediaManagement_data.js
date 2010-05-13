@@ -242,5 +242,5 @@
     device.implementation.loadData('Service.MediaManagement', 'Video', video_data);
     device.implementation.loadData('Service.MediaManagement', 'StreamingURL', streaming_data);
 
-})()
+})();
 	

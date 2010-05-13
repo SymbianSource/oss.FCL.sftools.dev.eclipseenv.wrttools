@@ -348,5 +348,5 @@
     device.implementation.loadData('Service.Landmarks', 'Category', data_category);
     device.implementation.loadData('Service.Landmarks', 'Database', data_database);
 
-})()
+})();
 	

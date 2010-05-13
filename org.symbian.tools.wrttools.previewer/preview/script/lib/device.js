@@ -82,28 +82,28 @@ device.implementation = function(version){
 		var path = path || (libpath + "sapi/");
 		
 		// load API
-		loadScript(path + "AppManager.js");
-		loadScript(path + "Calendar.js");
-		loadScript(path + "Contact.js");
-		loadScript(path + "Landmarks.js");
-		loadScript(path + "Location.js");
-		loadScript(path + "Logging.js");
-		loadScript(path + "MediaManagement.js");
-		loadScript(path + "Messaging.js");
-		loadScript(path + "Sensor.js");
-		loadScript(path + "SysInfo.js");
+//		loadScript(path + "AppManager.js");
+//		loadScript(path + "Calendar.js");
+//		loadScript(path + "Contact.js");
+//		loadScript(path + "Landmarks.js");
+//		loadScript(path + "Location.js");
+//		loadScript(path + "Logging.js");
+//		loadScript(path + "MediaManagement.js");
+//		loadScript(path + "Messaging.js");
+//		loadScript(path + "Sensor.js");
+//		loadScript(path + "SysInfo.js");
 		
 		// load sample data
-		loadScript(datapath + "appManager_data.js");
-		loadScript(datapath + "calendar_data.js");
-		loadScript(datapath + "contact_data.js");
-		loadScript(datapath + "landmarks_data.js");
-		loadScript(datapath + "location_data.js");
-		loadScript(datapath + "logging_data.js");
-		loadScript(datapath + "mediaManagement_data.js");
-		loadScript(datapath + "messaging_data.js");
-		loadScript(datapath + "sensor_data.js");
-		loadScript(datapath + "sysInfo_data.js");
+//		loadScript(datapath + "appManager_data.js");
+//		loadScript(datapath + "calendar_data.js");
+//		loadScript(datapath + "contact_data.js");
+//		loadScript(datapath + "landmarks_data.js");
+//		loadScript(datapath + "location_data.js");
+//		loadScript(datapath + "logging_data.js");
+//		loadScript(datapath + "mediaManagement_data.js");
+//		loadScript(datapath + "messaging_data.js");
+//		loadScript(datapath + "sensor_data.js");
+//		loadScript(datapath + "sysInfo_data.js");
 	}
 	
 	function loadScript(src){

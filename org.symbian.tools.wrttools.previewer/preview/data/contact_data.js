@@ -168,4 +168,4 @@
     device.implementation.loadData('Service.Contact', 'Group', data_groups);
     device.implementation.loadData('Service.Contact', 'Database', data_database);
     
-})()
+})();
