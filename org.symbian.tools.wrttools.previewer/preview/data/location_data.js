@@ -22,7 +22,7 @@ var data_basicLocationInformation = {
 			"Longitude":77.694589331833,
 			"Latitude":12.942209068513,
 			"Altitude":836.5
-		}
+		};
 		
 var data_genericLocationInfo = {
 			"Longitude":77.694546416505,

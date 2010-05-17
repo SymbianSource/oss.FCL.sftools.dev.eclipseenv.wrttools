@@ -61,7 +61,7 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 					obj["e" + type + fn] = fn;
 					obj[type + fn] = function(){
 						obj["e" + type + fn](window.event);
-					}
+					};
 					obj.attachEvent("on" + type, obj[type + fn]);
 				}
 		},
@@ -97,14 +97,10 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 		if ((typeof wrtVersion == 'undefined') || (wrtVersion == 'WRT 1.1')) {
 			_BRIDGE_REF.nokia.version = 'WRT 1.1';
 			_BRIDGE_REF.nokia.helper.setPreference('__SYM_WRT_VERSION', 'WRT 1.1');
-			_BRIDGE_REF.helper.loadScript("preview/script/lib/device.js");
 		}
 		else {
 			_BRIDGE_REF.nokia.version = 'WRT 1.0';
 		}
-	}
-	else {
-		_BRIDGE_REF.helper.loadScript("preview/script/lib/device.js");
 	}
 
 	/*
@@ -123,7 +119,7 @@ if (typeof _BRIDGE_REF == "undefined" || !_BRIDGE_REF) {
 		
 		//	prompt
 		window.prompt = function(msg, str){
-			return window.parent.prompt(msg, str)
+			return window.parent.prompt(msg, str);
 		};
 	}
 

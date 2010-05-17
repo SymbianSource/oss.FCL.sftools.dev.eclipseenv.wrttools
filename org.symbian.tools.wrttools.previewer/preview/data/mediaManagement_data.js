@@ -124,7 +124,7 @@
 		"MimeType":"audio/mpeg",
 		"MediaType":1,
 		"FileDate":"Friday, 13 February, 2009 12:01:24 am",
-		"FileSize":1002794,
+		"FileSize":1002794
 	},{
 		"FileNameAndPath": "E:\\Sounds\\Simple\\Rooster.mp3",
 		"Type": "Media",
@@ -134,7 +134,7 @@
 		"MimeType": "audio/mpeg",
 		"MediaType": 1,
 		"FileDate": "Friday, 13 February, 2009 12:01:24 am",
-		"FileSize": 911000,
+		"FileSize": 911000
 	
 	}];
 	var image_data = [{

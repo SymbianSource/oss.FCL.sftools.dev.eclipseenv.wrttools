@@ -53,23 +53,13 @@ public class MasterScriptProvider implements IResourceProvider {
 
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException, CoreException {
-        if (resource.equals(new Path(PATH_LOADER_JS))) {
-            synchronized (this) {
-                if (WRT10 == null) {
-                    loadCoreAPI();
-                }
+        synchronized (this) {
+            if (WRT10 == null) {
+                loadCoreAPI();
+                loadWRT11Services();
             }
-            return new ByteArrayInputStream((WRT10).getBytes("utf8"));
-        } else if (resource.equals(new Path(PATH_DEVICE_JS))) {
-            synchronized (this) {
-                if (WRT11_SERVICES == null) {
-                    loadWRT11Services();
-                }
-            }
-            return new ByteArrayInputStream((WRT11_SERVICES).getBytes("utf8"));
-        } else {
-            return null;
         }
+        return new ByteArrayInputStream((WRT10 + WRT11_SERVICES).getBytes("utf8"));
     }
 
     private void load(String base, String jsfile, StringBuilder builder) throws IOException {
