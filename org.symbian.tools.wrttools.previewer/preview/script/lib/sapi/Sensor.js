@@ -36,7 +36,7 @@
 		this.RegisterForNotification	= __RegisterForNotification;
 		this.Cancel						= __Cancel;
 		this.GetChannelProperty			= __GetChannelProperty;		
-	}
+	};
 
 	device.implementation.extend(provider, Interface, new SensorService() );
 
@@ -219,7 +219,7 @@
 		var returnValue = property[channel][criteria.PropertyId];
 		if(typeof returnValue == 'undefined')
 			return context.ErrorResult(device.implementation.ERR_NOT_FOUND);
-		return context.Result(returnValue,0)
+		return context.Result(returnValue,0);
 	}
 
 	/**

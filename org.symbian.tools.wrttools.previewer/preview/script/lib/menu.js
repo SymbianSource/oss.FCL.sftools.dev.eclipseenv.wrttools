@@ -33,7 +33,7 @@ if (typeof window.menu == "undefined" || !window.menu)
 			
 		//	Event triggers
 		onShow : null,
-		onRightSoftKeySelect : null,
+		onRightSoftKeySelect : null
 	};
 	
 	

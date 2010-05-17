@@ -87,7 +87,7 @@
 			"availableusbmodes":{"GetInfo":true,"SetInfo":false,"GetNotification":false,"GetInfoModeSync":true},
 			"activeusbmode":{"GetInfo":true,"SetInfo":false,"GetNotification":false,"GetInfoModeSync":true},
 			"flipstatus":{"GetInfo":true,"SetInfo":false,"GetNotification":true,"GetInfoModeSync":true},
-			"gripstatus":{"GetInfo":true,"SetInfo":false,"GetNotification":true,"GetInfoModeSync":true},
+			"gripstatus":{"GetInfo":true,"SetInfo":false,"GetNotification":true,"GetInfoModeSync":true}
 			
 		},
       	"memory":{
@@ -114,7 +114,7 @@
 		this.SetInfo 			= __SetInfo;
 		this.GetNotification 	= __GetNotification;
 		this.Cancel 			= __Cancel;
-	}
+	};
 
 	device.implementation.extend(provider, Interface, new SysInfoService() );
 

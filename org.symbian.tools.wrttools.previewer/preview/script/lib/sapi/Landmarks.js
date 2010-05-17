@@ -563,7 +563,7 @@
 		missingIdList		: '%s%s : Id list is Missing',
 		missingTID 			: '%s%s : TransactionID is missing',
 		invalidMime			: '%s%s : MimeType is missing',
-		msgNoMsg			: '',
+		msgNoMsg			: ''
 		
 	};
 		

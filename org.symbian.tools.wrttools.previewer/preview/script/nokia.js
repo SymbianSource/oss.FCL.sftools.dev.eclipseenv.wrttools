@@ -25,6 +25,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		version : 'WRT 1.1',
 		currentDevice : '240x320',
 		mode : 'portrait',
+		orientation : 0,
 		resolution : ['240x320', '320x240', '360x640', '800x352'],
 		scriptsLoaded : {
 			loader : false,
@@ -693,7 +694,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			if(/dreamweaver/i.test(navigator.userAgent))
 			{
 				$("#dwDeviceHelp")[0].className = '';
-				$("#resSupportLink")[0].className = 'hide';
+//				$("#resSupportLink")[0].className = 'hide';
 			}
 			//	Selecting Resoltion
 			var resOptions = $("#resOptions")[0];
@@ -702,34 +703,33 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				if(NOKIA.resolution[i] == NOKIA.currentDevice)
 				{
 					resOptions.options[i].selected = true;
-					$("#resSupportLink")[0].href = resOptions.options[i].value;
 					break;
 				}				
 			}
 			
-			//	Selecting Orientation
-			if(NOKIA.mode == 'portrait')
-				$('#input_portrait')[0].checked = true;
-			else
-				$('#input_landscape')[0].checked = true;
+//			//	Selecting Orientation
+//			if(NOKIA.mode == 'portrait')
+//				$('#input_portrait')[0].checked = true;
+//			else
+//				$('#input_landscape')[0].checked = true;
 
-			if (!NOKIA.emulator.orientationSupports()) {
-				if (NOKIA.mode == 'portrait') 
-					$("#input_landscape")[0].disabled = true;
-				else 
-					$("#input_portrait")[0].disabled = true;
-					
-				$("#Orientation_Info").html("Not supported");
-				$("#Orientation_Info").show();
-				$("#Orientation_Controls").hide();
-			}
-			else {
-				$("#input_landscape")[0].disabled = false;
-				$("#input_portrait")[0].disabled = false;
-
-				$("#Orientation_Info").hide();
-				$("#Orientation_Controls").show();
-			}
+//			if (!NOKIA.emulator.orientationSupports()) {
+//				if (NOKIA.mode == 'portrait') 
+//					$("#input_landscape")[0].disabled = true;
+//				else 
+//					$("#input_portrait")[0].disabled = true;
+//					
+//				$("#Orientation_Info").html("Not supported");
+//				$("#Orientation_Info").show();
+//				$("#Orientation_Controls").hide();
+//			}
+//			else {
+//				$("#input_landscape")[0].disabled = false;
+//				$("#input_portrait")[0].disabled = false;
+//
+//				$("#Orientation_Info").hide();
+//				$("#Orientation_Controls").show();
+//			}
 			
 			//	Selecting Version
 			if(NOKIA.version == 'WRT 1.0')
@@ -957,20 +957,39 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			return NOKIA.emulator.prefs[name];
 		},
 
-		toggle : function(ele)
+		rotateCW : function() {
+			if (NOKIA.orientation == 0) {
+				this.toggle(90);
+			} else if (NOKIA.orientation == 90) {
+				this.toggle(180);
+			} else if (NOKIA.orientation == 180) {
+				this.toggle(-90);
+			} else {
+				this.toggle(0);
+			}
+		},
+		rotateCCW : function() {
+			if (NOKIA.orientation == 0) {
+				this.toggle(-90);
+			} else if (NOKIA.orientation == -90) {
+				this.toggle(180);
+			} else if (NOKIA.orientation == 180) {
+				this.toggle(90);
+			} else {
+				this.toggle(0);
+			}
+		},
+		
+		toggle : function(o)
 		{
-			if (NOKIA.emulator.orientationSupports()) {
-//				var mode = (NOKIA.mode == 'portrait') ? 'landscape' : 'portrait';
-				NOKIA.emulator.setMode(ele.value);
+			if (NOKIA.emulator.orientationSupports() && (o == 0 || o == -90)) {
+				NOKIA.emulator.setMode(o == 0 ? 'portrait' : 'landscape');
 			}
-			else
-			{	
-				ele.checked = false;
-				if(ele.value == 'portrait')
-					$("#input_landscape")[0].checked = true;
-				else
-					$("#input_portrait")[0].checked = true;
-			}
+			NOKIA.orientation = o;
+			var or = (NOKIA.mode == 'portrait') ? o : (o + 90);
+			var val = "rotate(" + or + "deg)";
+			$("#preview-ui-top").css("-moz-transform", val);
+			$("#preview-ui-top").css("-webkit-transform", val);
 		},
 
 		version : function(ele)
@@ -1054,19 +1073,16 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				}
 			});
 			
-			$('#input_portrait').change(function(){
-				NOKIA.helper.toggle(this);
+			$('#rotateCW').click(function(){
+				NOKIA.helper.rotateCW();
 			});
-
-			$('#input_landscape').change(function(){
-				NOKIA.helper.toggle(this);
+			$('#rotateCCW').click(function(){
+				NOKIA.helper.rotateCCW();
 			});
-
 			$('#resOptions').change(function(ele){
 				ele = ele.target || this;
 				
 				NOKIA.currentDevice = ele.options[ele.selectedIndex].text;
-				$("#resSupportLink")[0].href = ele.value;
 		
 				//	SAVE the device DATA
 				NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE', NOKIA.currentDevice);

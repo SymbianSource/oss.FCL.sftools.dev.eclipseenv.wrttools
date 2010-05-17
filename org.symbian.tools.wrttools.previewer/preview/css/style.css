@@ -295,9 +295,38 @@ p.highlight span{
 	padding: 3px;
 }
 
+div#rotateCW{
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-image: url(../images/rotate-right.png);
+	height: 32px;
+	width: 32px;
+	cursor: pointer;
+}
+div#rotateCCW{
+	position:absolute;
+	right: 0;
+	top: 0;
+	background-image: url(../images/rotate-left.png);
+	height: 32px;
+	width: 32px;
+	cursor: pointer;
+}
+
 /*
 	preferences CSS
 */
+
+div#TopToolbar{
+	background-color: olive;
+	position: absolute;
+	left: 85px;
+	right: 85px;
+	top: 0;
+	height: 32px;
+	text-align: center;
+}
 
 div#PreferencesBtn{
 	width: 75px;
@@ -320,7 +349,6 @@ div#PreferencesBtn:hover{
 div#InspectorBtn{
 	width: 75px;
 	height: 85px;
-/*  background-image: url(../images/settings-icon.png); */
 	background-image: url(../images/inspector.png); 
 	position: absolute;
 	top: 10px;

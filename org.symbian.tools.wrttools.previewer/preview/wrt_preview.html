@@ -66,34 +66,6 @@
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 				<th>
-					Resolution
-				</th>
-				<td>
-					<select id="resOptions">
-						<option selected="selected" value="http://www.forum.nokia.com/devices/matrix_240x320_1.html">240x320</option>
-						<option value="http://www.forum.nokia.com/devices/matrix_320x240_1.html">320x240</option>
-						<option value="http://www.forum.nokia.com/devices/matrix_360x640_1.html">360x640</option>
-						<option value="http://www.forum.nokia.com/devices/E90_Communicator">800x352</option>
-					</select>&nbsp; 
-					<a class="link" target="_blank" href="http://www.forum.nokia.com/devices/matrix_240x320_1.html" id="resSupportLink">Device matrix featuring this resolution</a>
-					<span id="dwDeviceHelp" class="hide" >See WRT Help for device specifications</span>
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Orientation					
-				</th>
-				<td>
-					<div id="Orientation_Controls" class="hide">
-						<label><input type="radio" name="input_orientation" id="input_portrait" value="portrait"/> Portrait</label>	
-						<label><input type="radio" name="input_orientation" id="input_landscape" value="landscape"/> Landscape</label>	
-					</div>
-					<div id="Orientation_Info" class="hide">
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>
 					WRT Version
 				</th>
 				<td>
@@ -227,6 +199,16 @@
 		<div style="clear:left;"></div>
 		<div id="preview-ui-bottom-body">
 		</div>
+	</div>
+	<div id="TopToolbar">
+		<div id="rotateCW"></div>
+		<select id="resOptions">
+			<option selected="selected" value="http://www.forum.nokia.com/devices/matrix_240x320_1.html">240x320</option>
+			<option value="http://www.forum.nokia.com/devices/matrix_320x240_1.html">320x240</option>
+			<option value="http://www.forum.nokia.com/devices/matrix_360x640_1.html">360x640</option>
+			<option value="http://www.forum.nokia.com/devices/E90_Communicator">800x352</option>
+		</select>
+		<div id="rotateCCW"></div>
 	</div>
 	<div id="PreferencesBtn" class="hide"></div>
 	<div id="InspectorBtn" class="hide"></div>
