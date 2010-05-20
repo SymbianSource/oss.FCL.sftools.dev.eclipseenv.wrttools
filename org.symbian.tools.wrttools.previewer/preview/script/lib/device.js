@@ -39,7 +39,7 @@ var device = {
 	getServiceObject: function(provider, Interface){
 
 		if (!device.implementation.context)
-			throw 'device implementation object not instantiated!'
+			throw 'device implementation object not instantiated!';
 
 		if (device.implementation.options.enabled) 
 			return device.implementation.getInterface(provider, Interface);
@@ -60,60 +60,10 @@ var device = {
  * @constructor 		
  */
 device.implementation = function(version){
-
 	this.version = version || '';
 	
 	// set context to current object
 	device.implementation.context = this;	
-
-	var libpath = 'preview/script/lib/',
-		datapath = 'preview/data/';
-	
-	// load implementation files
-	// this is done async by the browser engine, so be aware of sync conditions!!
-	if (version == '1')
-		loadSAPI(libpath + 'sapi1/');
-	else if (!version)
-		loadSAPI();
-	else
-		throw 'unsuppported SAPI version!';
-	
-	function loadSAPI(path){
-		var path = path || (libpath + "sapi/");
-		
-		// load API
-//		loadScript(path + "AppManager.js");
-//		loadScript(path + "Calendar.js");
-//		loadScript(path + "Contact.js");
-//		loadScript(path + "Landmarks.js");
-//		loadScript(path + "Location.js");
-//		loadScript(path + "Logging.js");
-//		loadScript(path + "MediaManagement.js");
-//		loadScript(path + "Messaging.js");
-//		loadScript(path + "Sensor.js");
-//		loadScript(path + "SysInfo.js");
-		
-		// load sample data
-//		loadScript(datapath + "appManager_data.js");
-//		loadScript(datapath + "calendar_data.js");
-//		loadScript(datapath + "contact_data.js");
-//		loadScript(datapath + "landmarks_data.js");
-//		loadScript(datapath + "location_data.js");
-//		loadScript(datapath + "logging_data.js");
-//		loadScript(datapath + "mediaManagement_data.js");
-//		loadScript(datapath + "messaging_data.js");
-//		loadScript(datapath + "sensor_data.js");
-//		loadScript(datapath + "sysInfo_data.js");
-	}
-	
-	function loadScript(src){
-		var head = document.getElementsByTagName("head")[0] || document.documentElement, 
-			script = document.createElement("script");
-		
-		script.type = "text/javascript";
-		script.src = src;
-		head.appendChild(script);
-	}
 };
 
 (function(){
@@ -192,7 +142,7 @@ device.implementation.prototype = {
 			getNext : function(){
 				return index < data.length ? data[index++] : undefined;
 			}
-		}
+		};
 	},
 	
 	
@@ -320,7 +270,7 @@ device.implementation.prototype = {
 		
 		str = typeof str != 'undefined' ? String(str) : '';
 		return new StringEx(str);
-	}		
+	}
 };
 
 	/**
@@ -526,9 +476,7 @@ device.implementation.triggerListener = function(provider, eventType, data){
 
 	// call the provider's handler
 	listener.handler(listener.transactionID, listener.criteria, listener.callback, data);
-}
-
-
+};
 
 /*
  * ERROR CODES

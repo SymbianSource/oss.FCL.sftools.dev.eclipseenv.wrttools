@@ -43,6 +43,8 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 	public static final boolean TRACE_SERVLET = DEBUG
 			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID
 					+ "/servlet"));
+    public static final boolean DONT_CACHE_SCRIPT = DEBUG
+            && Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID + "/dontScriptCaching"));
 	public static final boolean TRACE_MAPPING = DEBUG
 			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID
 					+ "/mapping"));

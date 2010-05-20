@@ -61,7 +61,10 @@ public class PreferencesResourceProvider implements IResourceProvider {
     public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
             throws IOException, CoreException {
         String key = (String) object.get("key");
-        String value = (String) object.get("value");
+        Object value = object.get("value");
+        if (value != null) {
+            value = value.toString();
+        }
         Properties projectPreferences = ProjectPreferencesManager.getProjectProperties(project);
         String oldValue = (String) projectPreferences.get(key);
         if (oldValue != value && (oldValue == null || !oldValue.equals(value))) {

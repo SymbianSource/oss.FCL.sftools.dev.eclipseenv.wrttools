@@ -24,10 +24,24 @@
  */
 
 (function(){
+	var CHANNEL_ACCEL = 7;
+	var CHANNEL_ACCELDT = 8;
+	var CHANNEL_ORIENTATION = 10;
+	var CHANNEL_ROTATION = 11;
 
+	var transactionToCallback = new Object();
+	var nextTransactionId = 2123148; // Random seed number! (Actual number doesn't matter)
+
+	var AccelerometerAxis			= new Array();
+	var AccelerometerDoubleTapping	= new Array();
+	var Orientation					= new Array();
+	var Rotation					= new Array();
+	var xyOrientation = 0;
+	var zOrientation = 0;
+	
 	var provider = 'Service.Sensor',
 		Interface = 'ISensor';
-	var transID = new Array();
+
 	/**
 	 * Sensor service
 	 */
@@ -35,7 +49,7 @@
 		this.FindSensorChannel 			= __FindSensorChannel;
 		this.RegisterForNotification	= __RegisterForNotification;
 		this.Cancel						= __Cancel;
-		this.GetChannelProperty			= __GetChannelProperty;		
+		this.GetChannelProperty			= __GetChannelProperty;
 	};
 
 	device.implementation.extend(provider, Interface, new SensorService() );
@@ -50,7 +64,39 @@
 		result = false,
 		DBase = null;
 
+	device.implementation.setOrientation = function(xy, z) {
+		xyOrientation = xy;
+		zOrientation = z;
+		
+		for (var i = 0; i < Orientation.length; i++) {
+			notifyOrientationChangeListener(Orientation[i]);
+		}
+	};
 
+	function notifyOrientationChangeListener(callback) {
+		var orientation;
+		if (xyOrientation > -45 && xyOrientation <= 45) {
+			orientation = "DisplayUp";
+		} else if (xyOrientation > 45 && xyOrientation <= 135) {
+			orientation = "DisplayLeftUp";
+		} else if (xyOrientation > 135 || xyOrientation <= -135) {
+			orientation = "DisplayDown";
+		} else if (xyOrientation > -135 && xyOrientation <= -45) {
+			orientation = "DisplayRightUp";
+		}
+		callback(getTransactionId(callback), 9, context.Result( {
+			DeviceOrientation : orientation
+		}));
+	}
+	
+	function getTransactionId(callback) {
+		for ( var tId in transactionToCallback) {
+			if (transactionToCallback[tId] == callback) {
+				return tId;
+			}
+		}
+	}
+	
 	/**
 	 * Sensor: FindSensorChannel
 	 * @param {Object} criteria
@@ -118,19 +164,36 @@
 		if(!(criteria.ListeningType== "ChannelData" ))
 		 	return error(device.implementation.ERR_INVALID_SERVICE_ARGUMENT, msg.msgOutofRange);
 
-		if(typeof callback == 'function')
-		{
-			var result = context.callAsync(this, arguments.callee, criteria, callback);
-			transID.push(result.TransactionID);
-			return result;
+		if (typeof callback == 'function') {
+			var channels = criteria.ChannelInfoMap;
+			// for ( var channel in channels) {
+			var notify = null;
+			switch (channels.ChannelId) {
+			case CHANNEL_ACCEL:
+				AccelerometerAxis.push(callback);
+				break;
+			case CHANNEL_ACCELDT:
+				AccelerometerDoubleTapping.push(callback);
+				break;
+			case CHANNEL_ORIENTATION:
+				Orientation.push(callback);
+				notify = notifyOrientationChangeListener;
+				break;
+			case CHANNEL_ROTATION:
+				Rotation.push(callback);
+				break;
+			}
+			// }
+			var tID = nextTransactionId++;
+			transactionToCallback[tID] = callback;
+			setTimeout(notify, 20, callback);
+//			var result = context.callAsync(this, arguments.callee, criteria, callback);
+			return context.AsyncResult(tID);
 		}
-		if(flag)
-			transID.shift();
 				
 		return context.ErrorResult();
 	}
-
-
+	
 	/**
 	 * Sensor: Cancel
 	 * @param {Object} criteria
@@ -147,20 +210,32 @@
 		if (criteria.TransactionID == Infinity || criteria.TransactionID == -Infinity) 
 			return error(device.implementation.ERR_BAD_ARGUMENT_TYPE, msg.msgTransIDMissing);
 		
-		if (typeof criteria.TransactionID != 'number') 
-			return error(device.implementation.ERR_BAD_ARGUMENT_TYPE, msg.msgIncorrectTransID);		
+		if (typeof criteria.TransactionID != 'number')
+			return error(device.implementation.ERR_BAD_ARGUMENT_TYPE, msg.msgIncorrectTransID);
 
-		for (var i=0; i<transID.length; i++) {
-			if (criteria.TransactionID == transID[i]){
-				clearTimeout(criteria.TransactionID);
-				return context.ErrorResult();
-			}
-		};
-		
-		return error(device.implementation.ERR_INVALID_SERVICE_ARGUMENT, msg.msgInvalidTransID);
-
+		var callback = transactionToCallback[criteria.TransactionID];
+		if (typeof callback == 'function') {
+			removeCallback(callback, AccelerometerAxis);
+			removeCallback(callback, AccelerometerDoubleTapping);
+			removeCallback(callback, Orientation);
+			removeCallback(callback, Rotation);
+			return context.ErrorResult();
+		}
+		return error(device.implementation.ERR_INVALID_SERVICE_ARGUMENT,
+				msg.msgInvalidTransID);
 	}
 
+	
+	function removeCallback(callback, array) {
+		var i = 0;
+		for (i = 0; i < array.length; i++) {
+			var el = array[i];
+			if (el == callback) {
+				array.splice(i, 1);
+				return;
+			}
+		}
+	}
 
 	/**
 	 * Sensor: GetChannelProperty

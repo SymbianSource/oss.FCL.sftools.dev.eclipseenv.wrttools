@@ -137,7 +137,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 	NOKIA.data.load = function(data){
 		NOKIA.deviceList = data;
-	}
+	};
 
 
 
@@ -313,7 +313,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			if(NOKIA.emulator.plist.DisplayName.length <= 12)
 				p.innerHTML = NOKIA.emulator.plist.DisplayName; 
 			else
-				p.innerHTML = NOKIA.emulator.plist.DisplayName.substr(0, 11) + '...' 
+				p.innerHTML = NOKIA.emulator.plist.DisplayName.substr(0, 11) + '...';
 
 			div.className = 'IconFile';
 			div.style.marginTop = parseInt(parseInt(style['widget']['height']/2)-80) + 'px';
@@ -461,24 +461,24 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			{	
 				lsk.onclick = function(){
 					$("#LskLabel > a").trigger('click');
-				}
+				};
 				a[0].appendChild(lsk);
 
 				rsk.onclick = function(){
 					$("#RskLabel > a").trigger('click');
-				}
+				};
 				a[1].appendChild(rsk);
 
 			}else{
 
 				rsk.onclick = function(){
 					$("#RskLabel > a").trigger('click');
-				}
+				};
 				a[0].appendChild(rsk);
 
 				lsk.onclick = function(){
 					$("#LskLabel > a").trigger('click');
-				}
+				};
 				a[1].appendChild(lsk);
 			}
 			
@@ -540,9 +540,14 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			if(mode != null)
 				NOKIA.mode = mode;
 
+			var orientation = Number(NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_ORIENTATION'));
+			if (typeof orientation == "number" && orientation >= -90 && orientation <= 180)
+				NOKIA.orientation = orientation;
+			
 			//	SAVE the device DATA
 			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE', NOKIA.currentDevice);
 			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
+			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_ORIENTATION', NOKIA.orientation);
 			
 			this.loaded = true;
 			
@@ -562,6 +567,10 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			}
 			
 			this.setStyle();
+			var or = (NOKIA.mode == 'portrait') ? NOKIA.orientation : (NOKIA.orientation + 90);
+			var val = "rotate(" + or + "deg)";
+			$("#preview-ui-top").css("-moz-transform", val);
+			$("#preview-ui-top").css("-webkit-transform", val);
 		},
 		
 		setMode : function(mode)
@@ -572,6 +581,18 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
 
 			NOKIA.emulator.render();
+		},
+		
+		toggle : function(o)
+		{
+			NOKIA.orientation = o;
+			NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_ORIENTATION', NOKIA.orientation);
+			NOKIA.emulator.child.device.implementation.setOrientation(o, 0);
+			if (NOKIA.emulator.orientationSupports() && (o == 0 || o == -90)) {
+				NOKIA.emulator.setMode(o == 0 ? 'portrait' : 'landscape');
+			} else {
+				NOKIA.emulator.render();
+			}
 		},
 		
 		orientationSupports : function()
@@ -958,38 +979,12 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		},
 
 		rotateCW : function() {
-			if (NOKIA.orientation == 0) {
-				this.toggle(90);
-			} else if (NOKIA.orientation == 90) {
-				this.toggle(180);
-			} else if (NOKIA.orientation == 180) {
-				this.toggle(-90);
-			} else {
-				this.toggle(0);
-			}
+			var newOrient = NOKIA.orientation + 90;
+			NOKIA.emulator.toggle(newOrient - (newOrient > 180 ? 360 : 0));
 		},
 		rotateCCW : function() {
-			if (NOKIA.orientation == 0) {
-				this.toggle(-90);
-			} else if (NOKIA.orientation == -90) {
-				this.toggle(180);
-			} else if (NOKIA.orientation == 180) {
-				this.toggle(90);
-			} else {
-				this.toggle(0);
-			}
-		},
-		
-		toggle : function(o)
-		{
-			if (NOKIA.emulator.orientationSupports() && (o == 0 || o == -90)) {
-				NOKIA.emulator.setMode(o == 0 ? 'portrait' : 'landscape');
-			}
-			NOKIA.orientation = o;
-			var or = (NOKIA.mode == 'portrait') ? o : (o + 90);
-			var val = "rotate(" + or + "deg)";
-			$("#preview-ui-top").css("-moz-transform", val);
-			$("#preview-ui-top").css("-webkit-transform", val);
+			var newOrient = NOKIA.orientation - 90;
+			NOKIA.emulator.toggle(newOrient + (newOrient <= -180 ? 360 : 0));
 		},
 
 		version : function(ele)

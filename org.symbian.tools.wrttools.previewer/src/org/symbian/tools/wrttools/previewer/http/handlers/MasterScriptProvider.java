@@ -54,7 +54,7 @@ public class MasterScriptProvider implements IResourceProvider {
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException, CoreException {
         synchronized (this) {
-            if (WRT10 == null) {
+            if (WRT10 == null || PreviewerPlugin.DONT_CACHE_SCRIPT) {
                 loadCoreAPI();
                 loadWRT11Services();
             }

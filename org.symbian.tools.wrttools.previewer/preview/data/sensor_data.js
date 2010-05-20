@@ -236,8 +236,14 @@ var property = {
 		}
 	}
 };
+
+var CHANNEL_ACCEL = 7;
+var CHANNEL_ACCELDT = 8;
+var CHANNEL_ORIENTATION = 10;
+var CHANNEL_ROTATION = 11;
+
 var data_all =[{
-		"ChannelId":7,
+		"ChannelId":CHANNEL_ACCEL,
 		"ContextType":2,
 		"Quantity":10,
 		"ChannelType":270553214,
@@ -247,7 +253,7 @@ var data_all =[{
 		"ChannelDataTypeId":270553214
 		},
 		{
-		"ChannelId":8,
+		"ChannelId":CHANNEL_ACCELDT,
 		"ContextType":2,
 		"Quantity":11,
 		"ChannelType":270553217,
@@ -257,7 +263,7 @@ var data_all =[{
 		"ChannelDataTypeId":270553215
 		},
 		{
-		"ChannelId":10,
+		"ChannelId":CHANNEL_ORIENTATION,
 		"ContextType":3,
 		"Quantity":12,
 		"ChannelType":270553224,
@@ -267,7 +273,7 @@ var data_all =[{
 		"ChannelDataTypeId":270553224
 		},
 		{
-		"ChannelId":11,
+		"ChannelId":CHANNEL_ROTATION,
 		"ContextType":3,
 		"Quantity":13,
 		"ChannelType":270553225,
@@ -278,7 +284,7 @@ var data_all =[{
 		}];
 		
 var data_accelerometerAxis = [{
-		"ChannelId":7,
+		"ChannelId":CHANNEL_ACCEL,
 		"ContextType":2,
 		"Quantity":10,
 		"ChannelType":270553214,
@@ -289,7 +295,7 @@ var data_accelerometerAxis = [{
 		}];
 		
 var data_accelerometerDoubleTapping = [{
-		"ChannelId":8,
+		"ChannelId":CHANNEL_ACCELDT,
 		"ContextType":2,
 		"Quantity":11,
 		"ChannelType":270553217,
@@ -300,7 +306,7 @@ var data_accelerometerDoubleTapping = [{
 		}];
 		
 var data_orientation = [{
-		"ChannelId":10,
+		"ChannelId":CHANNEL_ORIENTATION,
 		"ContextType":3,
 		"Quantity":12,
 		"ChannelType":270553224,
@@ -311,7 +317,7 @@ var data_orientation = [{
 		}];
 		
 var data_rotation = [{
-		"ChannelId":11,
+		"ChannelId":CHANNEL_ROTATION,
 		"ContextType":3,
 		"Quantity":13,
 		"ChannelType":270553225,

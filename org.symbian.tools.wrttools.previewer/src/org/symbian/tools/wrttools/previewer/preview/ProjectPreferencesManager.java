@@ -26,6 +26,7 @@ import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -39,6 +40,9 @@ public class ProjectPreferencesManager {
     public static synchronized Properties getProjectProperties(IProject project) throws IOException, CoreException {
         Properties projectPreferences = new Properties();
         IFile xml = getPreferencesXml(project);
+        if (!xml.isSynchronized(IResource.DEPTH_ZERO)) {
+            xml.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
+        }
         if (xml.isAccessible()) {
             InputStream contents = null;
             try {
