@@ -556,7 +556,17 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		render : function()
 		{
 			this.load();
-			
+			//	Selecting Resoltion
+			var resOptions = $("#resOptions")[0];
+			for(var i=0; i<NOKIA.resolution.length; i++)
+			{
+				if(NOKIA.resolution[i] == NOKIA.currentDevice)
+				{
+					resOptions.options[i].selected = true;
+					break;
+				}				
+			}
+
 			if(!NOKIA.emulator.orientationSupports())
 				NOKIA.mode = NOKIA.deviceList[NOKIA.currentDevice]['default'];
 			
@@ -569,8 +579,8 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			this.setStyle();
 			var or = (NOKIA.mode == 'portrait') ? NOKIA.orientation : (NOKIA.orientation + 90);
 			var val = "rotate(" + or + "deg)";
-			$("#preview-ui-top").css("-moz-transform", val);
-			$("#preview-ui-top").css("-webkit-transform", val);
+			$("#DeviceDisplayLayout").css("-moz-transform", val);
+			$("#DeviceDisplayLayout").css("-webkit-transform", val);
 		},
 		
 		setMode : function(mode)
@@ -1141,7 +1151,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 					clearInterval(NOKIA.helper.intervalId);
 
 				NOKIA.helper.intervalId = setTimeout(function(){
-					NOKIA.menu.cancel()
+					NOKIA.menu.cancel();
 				}, 500);
 			});
 

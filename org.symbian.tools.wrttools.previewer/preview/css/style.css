@@ -286,8 +286,6 @@ div.IconFile p{
 	margin: 0px;
 }
 
-
-
 p.highlight span{
 	background-color: #fbf7a2;
 	font-weight: normal;
@@ -312,20 +310,25 @@ div#rotateCCW{
 	height: 32px;
 	width: 32px;
 	cursor: pointer;
+	opacity: 0.8;
 }
 
 /*
 	preferences CSS
 */
-
 div#TopToolbar{
-	background-color: olive;
-	position: absolute;
-	left: 85px;
-	right: 85px;
+	left: 20%;
+	right: 20%;
+	background-color: gray;
+	opacity: 0.7;
 	top: 0;
 	height: 32px;
 	text-align: center;
+	min-width: 150px;
+	position: absolute;
+}
+div#TopToolbar:hover{
+	opacity: 0.9;
 }
 
 div#PreferencesBtn{
