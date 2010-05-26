@@ -998,25 +998,36 @@ Contact.prototype.displayName = function()
 
 Contacts.prototype.find = function(filter, successCallback, errorCallback, options) {
 	try {
-		
 		this.contactsService = device.getServiceObject("Service.Contact", "IDataSource");
-		this.options = options;
+		if (typeof options == 'object')
+			this.options = options;
+		else
+			this.options = {};
 		
 		var criteria = new Object();
 		criteria.Type = "Contact";
-		if (filter && filter.name)
-			criteria.Filter = { SearchVal: filter.name };
+		if (filter && filter.name) {
+			var searchTerm = '';
+			if (filter.name.givenName && filter.name.givenName.length > 0) {
+				searchTerm += filter.name.givenName;
+			}
+			if (filter.name.familyName && filter.name.familyName.length > 0) {
+				searchTerm += searchTerm.length > 0 ? ' ' + filter.name.familyName : filter.name.familyName;
+			}
+			if (!filter.name.familyName && !filter.name.givenName && filter.name.formatted) {
+				searchTerm = filter.name.formatted;
+			}
+			criteria.Filter = { SearchVal: searchTerm };
+		}
 		
 		if (typeof(successCallback) != 'function') 
 			successCallback = function(){};
 		if (typeof(errorCallback) != 'function') 
 			errorCallback = function(){};
-		if (typeof options == 'object'){
-			if (isNaN(this.options.limit))
-				this.options.limit = 200;
-			if (isNaN(this.options.page))
-				this.options.page = 1;
-		}
+		if (isNaN(this.options.limit))
+			this.options.limit = 200;
+		if (isNaN(this.options.page))
+			this.options.page = 1;
 		
 		//need a closure here to bind this method to this instance of the Contacts object
 		this.global_success = successCallback;
@@ -1028,11 +1039,13 @@ Contacts.prototype.find = function(filter, successCallback, errorCallback, optio
 		});
 	} 
 	catch (ex) {
+		alert(ex.name + ": " + ex.message);
 		errorCallback(ex);
 	}
 };
 
 Contacts.prototype.success_callback = function(contacts_iterator) {
+	try {
 	var gapContacts = new Array();
 	contacts_iterator.reset();
     var contact;
@@ -1059,6 +1072,7 @@ Contacts.prototype.success_callback = function(contacts_iterator) {
 	}
 	this.contacts = gapContacts;
 	this.global_success(gapContacts);
+	} catch (ex) { alert(ex.name + ": " + ex.message); }
 };
 
 Contacts.getEmailsList = function(contact) {
@@ -1741,7 +1755,6 @@ if (typeof navigator.sms == "undefined") navigator.sms = new Sms();/**
  */
 
 function Storage() {
-	this.length = null;
 	this.available = true;
 	this.serialized = null;
 	this.items = null;
@@ -1760,9 +1773,7 @@ function Storage() {
 		window.widget.setPreferenceForKey(this.serialized, Storage.PREFERENCE_KEY);
 	} else {
 		this.serialized = pref;'({"store_test": { "key": "store_test", "data": "asdfasdfs" },})';
-
 		this.items = eval(this.serialized);
-
 	}
 }
 
@@ -1781,9 +1792,7 @@ Storage.prototype.getItem = function (key) {
 };
 
 Storage.prototype.setItem = function (key, data) {
-	
-	if (!this.items[key])
-		this.length++;
+
 	this.items[key] = {
 		"key": key,
 		"data": data
@@ -1793,17 +1802,17 @@ Storage.prototype.setItem = function (key, data) {
 };
 
 Storage.prototype.removeItem = function (key) {
+
 	if (this.items[key]) {
 		this.items[key] = undefined;
-		this.length--;
 	}
 	this.serialize();
 };
 
 Storage.prototype.clear = function () {
-	this.length = 0;
 	this.serialized = "({})";
 	this.items = {};
+	this.serialize();
 };
 
 Storage.prototype.serialize = function() {
@@ -1811,10 +1820,13 @@ Storage.prototype.serialize = function() {
 	
 	for (key in this.items) {
 		var item = this.items[key];
-		json += "\"" + item.key + "\": { \"key\": \"" + item.key + "\", \"data\": \"" + item.data + "\" }, ";
+		if (typeof item != "undefined") {
+			json += "\"" + item.key + "\": { \"key\": \"" + item.key + "\", \"data\": \"" + item.data + "\" }, ";
+		}
 	}
+	this.serialized = "({" + json + "})";
 
-	window.widget.setPreferenceForKey( "({" + json + "})", Storage.PREFERENCE_KEY);
+	window.widget.setPreferenceForKey( this.serialized, Storage.PREFERENCE_KEY);
 };
 
 if (typeof navigator.storage == "undefined" ) navigator.storage = new Storage();
@@ -1831,9 +1843,7 @@ function Telephony() {
  * @param {Integer} number The number to be called.
  */
 Telephony.prototype.send = function(number) {
-	var err = "Telephony API not available for symbian.wrt";
-	debug.log(err);
-	return { name: "TelephonyError", message: err };
+	widget.openURL('tel:+' + number);
 };
 
 if (typeof navigator.telephony == "undefined") navigator.telephony = new Telephony();
