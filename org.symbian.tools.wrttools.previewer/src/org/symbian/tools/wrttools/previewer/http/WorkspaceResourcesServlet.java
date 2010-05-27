@@ -72,7 +72,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         EXTENSION_CONTENT_TYPE.put("gif", "image/gif");
         EXTENSION_CONTENT_TYPE.put("jpg", "image/jpeg");
         EXTENSION_CONTENT_TYPE.put("jpeg", "image/jpeg");
-        EXTENSION_CONTENT_TYPE.put("png", "application/octet-stream");
+        EXTENSION_CONTENT_TYPE.put("png", "image/png");
         EXTENSION_CONTENT_TYPE.put("css", "text/css");
         EXTENSION_CONTENT_TYPE.put("js", "application/x-javascript");
         EXTENSION_CONTENT_TYPE.put("mp3", "audio/x-mpeg");
