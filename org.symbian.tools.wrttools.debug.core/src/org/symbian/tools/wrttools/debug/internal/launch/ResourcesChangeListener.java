@@ -18,10 +18,18 @@
  */
 package org.symbian.tools.wrttools.debug.internal.launch;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
@@ -35,7 +43,7 @@ public class ResourcesChangeListener implements IResourceChangeListener {
                 && !MessageDialogWithToggle.ALWAYS.equals(Activator.getDefault().getPreferenceStore().getString(
                         IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR))) {
             IFile[] changes = PreviewerUtil.getWebChanges(event.getDelta());
-            if (changes.length > 0) {
+            if (changes.length > 0 && isWrtResourceChanges(changes)) {
                 Display.getDefault().asyncExec(new Runnable() {
                     public void run() {
                         String message = "Debug browser is not updated when the files are updated. You may notice discrepancies between your workspace contents and debug session. You should either refresh the browser or restart debugging session to see the latest changes made to the workspace.";
@@ -48,6 +56,33 @@ public class ResourcesChangeListener implements IResourceChangeListener {
                 });
             }
         }
+    }
+
+    private boolean isWrtResourceChanges(IFile[] changes) {
+        Collection<IProject> projects = new HashSet<IProject>();
+        ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
+        for (ILaunch launch : launches) {
+            if (!launch.isTerminated()) {
+                final ILaunchConfiguration config = launch.getLaunchConfiguration();
+                try {
+                    if (WidgetLaunchDelegate.ID.equals(config.getType().getIdentifier())) {
+                        String projectName = config.getAttribute(IConstants.PROP_PROJECT_NAME, (String) null);
+                        if (projectName != null && projectName.trim().length() > 0) {
+                            IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+                            projects.add(project);
+                        }
+                    }
+                } catch (CoreException e) {
+                    Activator.log(e);
+                }
+            }
+        }
+        for (IFile file : changes) {
+            if (projects.contains(file.getProject())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
