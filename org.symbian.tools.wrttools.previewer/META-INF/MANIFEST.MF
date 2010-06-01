@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.wst.jsdt.core;bundle-version="1.0.200",
  org.eclipse.wst.jsdt.ui;bundle-version="1.0.200",
  org.symbian.tools.wrttools;bundle-version="0.9.0",
- org.mozilla.xulrunner;bundle-version="1.9.1";resolution:=optional
+ org.mozilla.xulrunner;bundle-version="1.9.1";resolution:=optional,
+ org.eclipse.ui.console;bundle-version="3.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.symbian.tools.wrttools.previewer,

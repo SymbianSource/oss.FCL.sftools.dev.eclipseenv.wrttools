@@ -46,6 +46,7 @@ import org.symbian.tools.wrttools.previewer.PreviewerException;
 public class Providers {
     private final Map<String, IResourceProvider> HANDLERS = new TreeMap<String, IResourceProvider>();
     private final IResourceProvider defaultHandler = new WorkspaceResourceProvider();
+
     public Providers() {
         addPaths(new MasterScriptProvider());
         addPaths(new PreviewerStaticResourceProvider());
@@ -61,12 +62,12 @@ public class Providers {
         }
     }
 
-    public InputStream get(String url, Map<String, String[]> parameters) throws PreviewerException {
+    public InputStream get(String url, Map<String, String[]> parameters, String sessionId) throws PreviewerException {
         final IProject project = getProject(url);
         final IPath resource = new Path(url).removeFirstSegments(1);
         final IResourceProvider provider = getHandlerForPath(resource);
         try {
-            return provider.getResourceStream(project, resource, parameters);
+            return provider.getResourceStream(project, resource, parameters, sessionId);
         } catch (IOException e) {
             throw new PreviewerException(e);
         } catch (CoreException e) {
@@ -106,12 +107,13 @@ public class Providers {
         return null;
     }
 
-    public void post(String url, Map<String, String[]> parameterMap, JSONObject object) throws PreviewerException {
+    public void post(String url, Map<String, String[]> parameterMap, JSONObject object, String sessionId)
+            throws PreviewerException {
         final IProject project = getProject(url);
         final IPath resource = new Path(url).removeFirstSegments(1);
         final IResourceProvider provider = getHandlerForPath(resource);
         try {
-            provider.post(project, resource, parameterMap, object);
+            provider.post(project, resource, parameterMap, object, sessionId);
         } catch (IOException e) {
             throw new PreviewerException(e);
         } catch (CoreException e) {

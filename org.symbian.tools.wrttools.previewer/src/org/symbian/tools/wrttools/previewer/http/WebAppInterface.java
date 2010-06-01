@@ -32,11 +32,11 @@ import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 public class WebAppInterface {
     private static WebAppInterface INSTANCE;
 
-    public static void connectDebugger(String widget, String id) {
+    public static void connectDebugger(String widget, String id, String sId) {
         if (PreviewerPlugin.TRACE_WEBAPP) {
             System.out.println("Connecting debugger");
         }
-        getInstance().connect(widget, id);
+        getInstance().connect(widget, id, sId);
     }
 
     public static String decode(String value) {
@@ -101,9 +101,10 @@ public class WebAppInterface {
         return WorkspaceResourcesServlet.getPreviewerStartingPage(widget);
     }
 
-    private synchronized void connect(String widget, String id) {
+    private synchronized void connect(String widget, String id, String sId) {
         if (!isConnected(widget, id)) {
             BrowserConnectionJob listener = debuggerJobs.get(getId(widget, id));
+            listener.setSessionId(sId);
             listener.schedule(50);
         }
     }

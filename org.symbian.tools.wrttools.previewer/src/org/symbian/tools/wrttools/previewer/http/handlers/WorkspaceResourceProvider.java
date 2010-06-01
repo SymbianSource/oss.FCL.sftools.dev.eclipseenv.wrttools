@@ -26,7 +26,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.ui.console.MessageConsole;
 import org.json.simple.JSONObject;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WorkspaceResourceProvider implements IResourceProvider {
@@ -34,17 +36,24 @@ public class WorkspaceResourceProvider implements IResourceProvider {
         return null;
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
+            String sessionId)
             throws IOException, CoreException {
         IFile file = project.getFile(resource);
         if (file.isAccessible() && !ProjectUtils.isExcluded(file)) {
             return file.getContents();
         } else {
+            MessageConsole console = PreviewerPlugin.getDefault().getConsole();
+            console.activate();
+            console.newMessageStream().write(
+                    String.format("%s was not found in the workspace. It was requested by the previewer.\n", file
+                            .getFullPath().toString()));
             return null;
         }
     }
 
-    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
+            String sessionId)
             throws IOException, CoreException {
         // Do nothing
     }

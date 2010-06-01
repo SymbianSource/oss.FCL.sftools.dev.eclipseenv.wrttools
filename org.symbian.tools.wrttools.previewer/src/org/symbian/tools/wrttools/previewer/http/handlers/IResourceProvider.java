@@ -29,9 +29,11 @@ import org.json.simple.JSONObject;
 
 public interface IResourceProvider {
     String[] getPaths();
-    InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+
+    InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters, String sessionId)
             throws IOException,
             CoreException;
-    void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
+
+    void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object, String sessionId)
             throws IOException, CoreException;
 }

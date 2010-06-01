@@ -15,6 +15,7 @@ public class BrowserConnectionJob extends Job {
 	
 	private boolean ready = false;
 	private boolean success = false;
+    private String sId = null;
 
 	public BrowserConnectionJob(IPreviewStartupListener listener, URI uri) {
 		super("Connecting to WRT debugger browser");
@@ -26,7 +27,7 @@ public class BrowserConnectionJob extends Job {
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		try {
-			listener.browserRunning(uri);
+            listener.browserRunning(uri, sId);
 			synchronized (this) {
 				success = true;
 			}
@@ -50,4 +51,8 @@ public class BrowserConnectionJob extends Job {
 	public synchronized boolean isSuccess() {
 		return success;
 	}
+
+    public void setSessionId(String sId) {
+        this.sId = sId;
+    }
 }

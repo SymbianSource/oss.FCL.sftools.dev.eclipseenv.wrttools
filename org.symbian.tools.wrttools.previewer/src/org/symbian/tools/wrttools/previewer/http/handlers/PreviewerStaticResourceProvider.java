@@ -40,7 +40,8 @@ public class PreviewerStaticResourceProvider implements IResourceProvider {
         return new String[] { HttpPreviewer.PREVIEW_STARTING_PAGE, PREVIEW_PATH };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
+            String sessionId)
             throws IOException {
         if (HttpPreviewer.PREVIEW_STARTING_PAGE.equals(resource.toString())
                 || HttpPreviewer.DEBUG_STARTING_PAGE.equals(resource.toString())) {
@@ -54,7 +55,8 @@ public class PreviewerStaticResourceProvider implements IResourceProvider {
         }
     }
 
-    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
+            String sessionId)
             throws IOException, CoreException {
         // Do nothing
     }

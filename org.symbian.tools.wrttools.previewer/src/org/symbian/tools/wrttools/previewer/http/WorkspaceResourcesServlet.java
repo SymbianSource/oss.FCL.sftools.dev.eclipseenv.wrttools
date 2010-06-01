@@ -234,7 +234,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
             time = System.currentTimeMillis();
         }
         try {
-            InputStream stream = providers.get(req.getPathInfo(), req.getParameterMap());
+            InputStream stream = providers.get(req.getPathInfo(), req.getParameterMap(), req.getSession().getId());
             String mimeType = getMimeTypeByExtension(new Path(req.getPathInfo()).getFileExtension());
             if (mimeType != null) {
                 resp.setContentType(mimeType);
@@ -279,7 +279,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
             throw new ServletException(e);
         }
         try {
-            providers.post(req.getPathInfo(), req.getParameterMap(), object);
+            providers.post(req.getPathInfo(), req.getParameterMap(), object, req.getSession().getId());
         } catch (PreviewerException e) {
             throw new ServletException(e);
         }

@@ -37,7 +37,8 @@ public class PreferencesResourceProvider implements IResourceProvider {
         return new String[] { "preview/preferences.js" };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
+            String sessionId)
             throws IOException, CoreException {
         Properties projectPreferences = ProjectPreferencesManager.getProjectProperties(project);
         String js = getJS(projectPreferences);
@@ -58,7 +59,8 @@ public class PreferencesResourceProvider implements IResourceProvider {
         return builder.toString();
     }
 
-    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
+            String sessionId)
             throws IOException, CoreException {
         String key = (String) object.get("key");
         Object value = object.get("value");

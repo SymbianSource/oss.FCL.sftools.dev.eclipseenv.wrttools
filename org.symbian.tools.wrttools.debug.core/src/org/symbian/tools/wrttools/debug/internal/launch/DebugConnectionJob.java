@@ -24,10 +24,10 @@ import org.chromium.debug.core.model.DebugTargetImpl;
 import org.chromium.debug.core.model.Destructable;
 import org.chromium.debug.core.model.DestructingGuard;
 import org.chromium.debug.core.model.JavascriptVmEmbedder;
+import org.chromium.debug.core.model.JavascriptVmEmbedder.ConnectionToRemote;
 import org.chromium.debug.core.model.JavascriptVmEmbedderFactory;
 import org.chromium.debug.core.model.NamedConnectionLoggerFactory;
 import org.chromium.debug.core.model.WorkspaceBridge;
-import org.chromium.debug.core.model.JavascriptVmEmbedder.ConnectionToRemote;
 import org.chromium.sdk.ConnectionLogger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -70,7 +70,7 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 		target.fireTerminateEvent();
 	}
 
-	public boolean browserRunning(URI uri) throws CoreException {
+    public boolean browserRunning(URI uri, String sId) throws CoreException {
 		if (Activator.DEBUG_CONNECTION) {
 			System.out.println("Browser running, connecting @" + hashCode());
 		}
@@ -120,7 +120,7 @@ public class DebugConnectionJob implements IPreviewStartupListener {
 			}
 
 			launch.addDebugTarget(target);
-
+            launch.setAttribute("http.service.id", sId);
 			// All OK
 			destructingGuard.discharge();
             addResourceListenerIfNotInstalled();

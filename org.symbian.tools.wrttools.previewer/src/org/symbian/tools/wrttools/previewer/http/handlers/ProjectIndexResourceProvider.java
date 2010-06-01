@@ -42,7 +42,8 @@ public class ProjectIndexResourceProvider implements IResourceProvider {
         return new String[] { INDEX };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
+            String sessionId)
             throws IOException, CoreException {
         return getProjectIndexPage(project.getName());
     }
@@ -65,7 +66,8 @@ public class ProjectIndexResourceProvider implements IResourceProvider {
         return null;
     }
 
-    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
+            String sessionId)
             throws IOException, CoreException {
         // Do nothing
     }

@@ -51,7 +51,8 @@ public class MasterScriptProvider implements IResourceProvider {
         return new String[] { PATH_LOADER_JS, PATH_DEVICE_JS };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
+            String sessionId)
             throws IOException, CoreException {
         synchronized (this) {
             if (WRT10 == null || PreviewerPlugin.DONT_CACHE_SCRIPT) {
@@ -111,7 +112,8 @@ public class MasterScriptProvider implements IResourceProvider {
         WRT11_SERVICES = builder.toString();
     }
 
-    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
+            String sessionId)
             throws IOException, CoreException {
         // Nothing to do
     }

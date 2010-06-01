@@ -24,6 +24,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -57,6 +60,7 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 
     private final CommandHandlerManager handlerManager = new CommandHandlerManager();
 	private final HttpPreviewer previewer = new HttpPreviewer();
+    private MessageConsole console;
 	
 	/*
 	 * (non-Javadoc)
@@ -124,5 +128,13 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 
     public CommandHandlerManager getCommandHandlerManager() {
         return handlerManager;
+    }
+
+    public MessageConsole getConsole() {
+        if (console == null) {
+            console = new MessageConsole("WebRuntime Console", null);
+            ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { console });
+        }
+        return console;
     }
 }

@@ -41,7 +41,7 @@ public class DebuggerResourceProvider implements IResourceProvider {
         return new String[] { HttpPreviewer.DEBUG_STARTING_PAGE, "__sym-debug" };
     }
 
-    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
+    public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters, String sId)
             throws IOException, CoreException {
         if (resource.toString().equals(HttpPreviewer.DEBUG_STARTING_PAGE)) {
             URL url = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), new Path(
@@ -53,7 +53,7 @@ public class DebuggerResourceProvider implements IResourceProvider {
             if ("index.html".equals(resource.segment(1))) {
                 String[] sessionId = parameters.get(DEBUG_SESSION_ID_PARAMETER);
                 if (sessionId != null && sessionId.length == 1) {
-                    WebAppInterface.connectDebugger(project.getName(), sessionId[0]);
+                    WebAppInterface.connectDebugger(project.getName(), sessionId[0], sId);
                 }
                 URL url = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), new Path(
                         "http-content/wrtdebugger/debugger.htm"), null);
@@ -73,8 +73,8 @@ public class DebuggerResourceProvider implements IResourceProvider {
         return null;
     }
 
-    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object)
-            throws IOException, CoreException {
+    public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
+            String sessionId) throws IOException, CoreException {
         // TODO Auto-generated method stub
 
     }
