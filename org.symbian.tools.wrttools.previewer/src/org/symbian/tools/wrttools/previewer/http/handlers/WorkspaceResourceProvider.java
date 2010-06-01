@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WorkspaceResourceProvider implements IResourceProvider {
     public String[] getPaths() {
@@ -36,7 +37,7 @@ public class WorkspaceResourceProvider implements IResourceProvider {
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters)
             throws IOException, CoreException {
         IFile file = project.getFile(resource);
-        if (file.isAccessible()) {
+        if (file.isAccessible() && !ProjectUtils.isExcluded(file)) {
             return file.getContents();
         } else {
             return null;
