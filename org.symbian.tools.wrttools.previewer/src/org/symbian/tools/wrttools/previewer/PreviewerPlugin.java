@@ -18,6 +18,8 @@
  */
 package org.symbian.tools.wrttools.previewer;
 
+import java.io.IOException;
+
 import org.eclipse.core.net.proxy.IProxyService;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
@@ -136,5 +138,12 @@ public class PreviewerPlugin extends AbstractUIPlugin {
             ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { console });
         }
         return console;
+    }
+
+    public static void print(String message) throws IOException {
+        MessageConsole console = getDefault().getConsole();
+        console.activate();
+        console.newMessageStream().write(
+                message);
     }
 }

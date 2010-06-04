@@ -26,7 +26,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.ui.console.MessageConsole;
 import org.json.simple.JSONObject;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.ProjectUtils;
@@ -43,11 +42,8 @@ public class WorkspaceResourceProvider implements IResourceProvider {
         if (file.isAccessible() && !ProjectUtils.isExcluded(file)) {
             return file.getContents();
         } else {
-            MessageConsole console = PreviewerPlugin.getDefault().getConsole();
-            console.activate();
-            console.newMessageStream().write(
-                    String.format("%s was not found in the workspace. It was requested by the previewer.\n", file
-                            .getFullPath().toString()));
+            PreviewerPlugin.print(String.format("%s was not found in the workspace. It was requested by the previewer.\n", file
+                    .getFullPath().toString()));
             return null;
         }
     }

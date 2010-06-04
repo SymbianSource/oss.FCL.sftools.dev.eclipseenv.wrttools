@@ -25,12 +25,15 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.util.CoreUtil;
+import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class ProjectIndexResourceProvider implements IResourceProvider {
     public static final String INDEX = "wrt_preview_main.html";
@@ -43,8 +46,7 @@ public class ProjectIndexResourceProvider implements IResourceProvider {
     }
 
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
-            String sessionId)
-            throws IOException, CoreException {
+            String sessionId) throws IOException, CoreException {
         return getProjectIndexPage(project.getName());
     }
 
@@ -53,22 +55,26 @@ public class ProjectIndexResourceProvider implements IResourceProvider {
         if (project.isAccessible()) {
             String indexFileName = CoreUtil.getIndexFile(project);
             if (indexFileName != null) {
-                String string = CoreUtil.readFile(project, CoreUtil.getFile(project, indexFileName));
-                if (string != null) {
-                    Matcher matcher = HEAD_TAG_PATTERN.matcher(string);
-                    if (matcher.find()) {
-                        string = matcher.replaceFirst(matcher.group() + SCRIPT);
+                final IFile file = CoreUtil.getFile(project, indexFileName);
+                if (!ProjectUtils.isExcluded(file)) {
+                    String string = CoreUtil.readFile(project, file);
+                    if (string != null) {
+                        Matcher matcher = HEAD_TAG_PATTERN.matcher(string);
+                        if (matcher.find()) {
+                            string = matcher.replaceFirst(matcher.group() + SCRIPT);
+                        }
+                        return new ByteArrayInputStream(string.getBytes("UTF-8"));
                     }
-                    return new ByteArrayInputStream(string.getBytes("UTF-8"));
                 }
             }
+            PreviewerPlugin.print(String.format("Can not find main page (%s) in project %s.\n", indexFileName,
+                    project.getName()));
         }
         return null;
     }
 
     public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
-            String sessionId)
-            throws IOException, CoreException {
+            String sessionId) throws IOException, CoreException {
         // Do nothing
     }
 
