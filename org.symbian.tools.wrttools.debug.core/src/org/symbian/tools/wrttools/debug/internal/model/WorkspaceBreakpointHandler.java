@@ -70,22 +70,19 @@ public final class WorkspaceBreakpointHandler implements BreakpointHandler {
 		if (!supportsBreakpoint(breakpoint)) {
 			return;
 		}
-		try {
-			if (breakpoint.isEnabled()) {
-				// Class cast is ensured by the supportsBreakpoint
-				// implementation
-				final ChromiumLineBreakpoint lineBreakpoint = (ChromiumLineBreakpoint) breakpoint;
-				IFile file = (IFile) breakpoint.getMarker().getResource();
-				if (!resourceManager.isAddingFile(file)) {
-					final String script = resourceManager.translateResourceToScript(file);
-					if (script != null) {
-						registerBreakpoint(lineBreakpoint, script);
-					}
-				}
-			}
-		} catch (CoreException e) {
-			Activator.log(e);
-		}
+        try {
+            // Class cast is ensured by the supportsBreakpoint implementation
+            final ChromiumLineBreakpoint lineBreakpoint = (ChromiumLineBreakpoint) breakpoint;
+            IFile file = (IFile) breakpoint.getMarker().getResource();
+            if (!resourceManager.isAddingFile(file)) {
+                final String script = resourceManager.translateResourceToScript(file);
+                if (script != null) {
+                    registerBreakpoint(lineBreakpoint, script);
+                }
+            }
+        } catch (CoreException e) {
+            Activator.log(e);
+        }
 	}
 
 	public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
