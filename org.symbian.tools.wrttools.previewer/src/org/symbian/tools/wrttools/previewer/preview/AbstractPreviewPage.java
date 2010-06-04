@@ -132,7 +132,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
         try {
             if (!isDisposed()) {
                 final Control focusControl = browser.getDisplay().getFocusControl();
-                browser.refresh();
+                browser.setUrl(browser.getUrl());
                 refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.GREEN_SYNC));
                 if (!manual && focusControl != null) {
                     asyncExec(new Runnable() {
