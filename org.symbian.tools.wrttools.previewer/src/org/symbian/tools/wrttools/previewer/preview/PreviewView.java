@@ -10,8 +10,8 @@ import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -261,10 +261,12 @@ public class PreviewView extends PageBookView {
 
     public synchronized void projectRenamed(IProject project, IPath newPath) {
         IPreviewPage page = projectToPage.remove(project);
-        Boolean refresh = autorefresh.remove(project);
-        page.projectRenamed(newPath);
-        projectToPage.put(page.getProject(), page);
-        autorefresh.put(page.getProject(), refresh);
+        if (page != null) {
+            Boolean refresh = autorefresh.remove(project);
+            page.projectRenamed(newPath);
+            projectToPage.put(page.getProject(), page);
+            autorefresh.put(page.getProject(), refresh);
+        }
     }
 
 }

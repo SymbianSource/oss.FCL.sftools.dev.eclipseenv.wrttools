@@ -884,4 +884,26 @@
           class="org.symbian.tools.wrttools.core.libraries.jsdt.PhoneGapInferrenceProvider">
     </inferenceProvider>
  </extension>
+ <extension
+       point="org.eclipse.ltk.core.refactoring.renameParticipants">
+    <renameParticipant
+          class="org.symbian.tools.wrttools.core.project.ProjectRenameParticipant"
+          id="org.symbian.tools.wrttools.renameParticipant1"
+          name="WRT Projects Rename Participant">
+    <enablement>
+      <with variable="affectedNatures">
+        <iterate operator="or">
+          <equals value="org.symbian.tools.wrttools.WidgetProjectNature"/>
+        </iterate>
+      </with>
+      <with variable="element">
+         <adapt
+               type="org.eclipse.core.resources.IProject">
+         </adapt>
+        
+      </with>
+    </enablement>
+          
+    </renameParticipant>
+ </extension>
 </plugin>

@@ -242,10 +242,8 @@ public class WorkspaceResourcesServlet extends HttpServlet {
             if (stream != null) {
                 copyData(stream, resp.getOutputStream());
             } else {
-                PreviewerPlugin.log(String.format("Resource %s was not found", req.getPathInfo()), null);
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
-
         } catch (PreviewerException e) {
             PreviewerPlugin.log(e);
             throw new ServletException(e);

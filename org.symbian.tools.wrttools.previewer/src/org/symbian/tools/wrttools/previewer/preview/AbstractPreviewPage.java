@@ -217,12 +217,14 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
     }
 
     public synchronized void projectRenamed(IPath newPath) {
-        project = ResourcesPlugin.getWorkspace().getRoot().getProject(newPath.lastSegment());
-        asyncExec(new Runnable() {
-            public void run() {
-                browser.dispose();
-                addBrowser();
-            }
-        });
+        if (!isDisposed()) {
+            project = ResourcesPlugin.getWorkspace().getRoot().getProject(newPath.lastSegment());
+            asyncExec(new Runnable() {
+                public void run() {
+                    browser.dispose();
+                    addBrowser();
+                }
+            });
+        }
     }
 }
