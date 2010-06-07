@@ -439,7 +439,8 @@ public class ProjectUtils {
         try {
             IMarker[] markers = resource
                     .findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
-            return markers.length != 0;
+            IPath path = resource.getProjectRelativePath();
+            return markers.length != 0 || (path.segmentCount() > 1 && ".settings".equals(path.segment(0)));
         } catch (CoreException e) {
             Activator.log(e);
             return false;
