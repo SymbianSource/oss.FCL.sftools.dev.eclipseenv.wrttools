@@ -1,8 +1,12 @@
 package org.symbian.tools.wrttools.wizards;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.text.MessageFormat;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -40,6 +44,7 @@ import org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea;
 import org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea.IErrorMessageReporter;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.WrtIdeCorePreferences;
+import org.symbian.tools.wrttools.util.CoreUtil;
 
 @SuppressWarnings("restriction")
 public class WgzImportWizardPage extends WizardPage {
@@ -400,7 +405,7 @@ public class WgzImportWizardPage extends WizardPage {
 		}
 		
 		File f = new File(archive);
-		if (!f.isFile()) {
+        if (!isValidArchive(f)) {
 			setErrorMessage(MessageFormat.format("{0} is not a valid WRT archive", archive));
 			return false;
 		}
@@ -440,5 +445,23 @@ public class WgzImportWizardPage extends WizardPage {
 		setMessage(null);
 		return true;
 	}
+
+    private boolean isValidArchive(File f) {
+        if (f.isFile()) {
+            try {
+                final ZipInputStream stream = new ZipInputStream(new FileInputStream(f));
+                ZipEntry entry;
+                while ((entry = stream.getNextEntry()) != null) {
+                    final IPath path = new Path(entry.getName());
+                    if (path.segmentCount() == 2 && CoreUtil.METADATA_FILE.equals(path.segment(1))) {
+                        return true;
+                    }
+                }
+            } catch (IOException e) {
+                // Not a valid archive
+            }
+        }
+        return false;
+    }
 
 }

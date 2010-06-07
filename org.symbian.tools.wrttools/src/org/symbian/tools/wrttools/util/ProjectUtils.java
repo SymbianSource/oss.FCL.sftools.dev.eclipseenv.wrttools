@@ -380,10 +380,11 @@ public class ProjectUtils {
             IProgressMonitor progressMonitor) throws IOException, CoreException {
         progressMonitor.beginTask(MessageFormat.format("Unpacking {0}", label), IProgressMonitor.UNKNOWN);
         ZipInputStream stream = new ZipInputStream(in);
-
         try {
             ZipEntry nextEntry;
+            int count = 0;
             while ((nextEntry = stream.getNextEntry()) != null) {
+                count++;
                 IPath p = new Path(nextEntry.getName()).removeFirstSegments(trimSegments);
                 if (!isIgnored(p) && !nextEntry.isDirectory()) {
                     IFile file = location.getFile(p);
@@ -395,6 +396,10 @@ public class ProjectUtils {
                         file.create(new NonClosingStream(stream), true, new SubProgressMonitor(progressMonitor, 1));
                     }
                 }
+            }
+            if (count == 0) {
+                throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+                        "Selected archive file does not contain application files"));
             }
         } finally {
             stream.close();

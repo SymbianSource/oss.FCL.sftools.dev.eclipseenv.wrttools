@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -56,12 +57,18 @@ public class WgzImportWizard extends Wizard implements IImportWizard, INewWizard
 				new SubProgressMonitor(monitor, 10));
 
 		// 2. Unpack archive
+        boolean success = false;
 		try {
 			ProjectUtils.unzip(archiveName, project, 1, new SubProgressMonitor(
 					monitor, 40));
+            success = true;
 		} catch (IOException e) {
-			new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
 					"Archive unpacking failed", e));
+        } finally {
+            if (!success) {
+                project.delete(true, true, new NullProgressMonitor());
+            }
 		}
 		monitor.done();
 		return project;
