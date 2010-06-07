@@ -181,7 +181,7 @@
             </or>
          </enablement>
          <action
-               class="org.eclipse.debug.internal.ui.actions.DebugLastAction"
+               class="org.symbian.tools.wrttools.debug.ui.actions.DebugAction"
                enablesFor="+"
                icon="icons/debug_exc.gif"
                id="org.eclipse.debug.ui.contextualLaunch.debug.submenu"
@@ -288,11 +288,12 @@
              id="org.symbian.tools.wrttools.debug.core.mainActions"
              label="WRT Debug">
           <action
-                class="org.eclipse.debug.internal.ui.actions.DebugLastAction"
+                class="org.symbian.tools.wrttools.debug.ui.actions.DebugAction"
                 helpContextId="debug_last_action_context"
                 icon="icons/debug_exc.gif"
                 id="org.symbian.tools.wrttools.debug.core.debug"
                 label="Debug"
+                menubarPath="org.eclipse.ui.run/relaunchGroup"
                 style="push"
                 toolbarPath="debug">
           </action>

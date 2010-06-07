@@ -81,6 +81,42 @@
       </activityPatternBinding>
       <activityPatternBinding
             activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.launchActionSet">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.actions\.DebugLast">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.actions\.RunLast">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.actions\.OpenDebugConfigurations">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.actions\.OpenRunConfigurations">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.internal\.ui\.actions\.DebugHistoryMenuAction">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.internal\.ui\.actions\.RunHistoryMenuAction">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.internal\.ui\.actions\.RunWithConfigurationAction">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
+            pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.internal\.ui\.actions\.DebugWithConfigurationAction">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.wtp"
             pattern="org\.eclipse\.wst\.xml\.ui/org\.eclipse\.wst\.xml\.ui\.XMLExampleProjectCreationWizard">
       </activityPatternBinding>
       <activityPatternBinding
