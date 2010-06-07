@@ -7,6 +7,8 @@ package org.chromium.debug.core.model;
 import java.util.Collection;
 
 import org.chromium.debug.core.ChromiumDebugPlugin;
+import org.chromium.debug.core.ChromiumSourceDirector;
+import org.chromium.debug.core.model.BreakpointSynchronizer.Callback;
 import org.chromium.debug.core.util.ChromiumDebugPluginUtil;
 import org.chromium.sdk.Breakpoint;
 import org.chromium.sdk.CallFrame;
@@ -14,19 +16,15 @@ import org.chromium.sdk.DebugContext;
 import org.chromium.sdk.ExceptionData;
 import org.chromium.sdk.JavascriptVm;
 import org.chromium.sdk.Script;
-import org.chromium.sdk.JavascriptVm.BreakpointCallback;
+import org.chromium.sdk.SyncCallback;
 import org.chromium.sdk.JavascriptVm.ScriptsCallback;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IBreakpoint;
-import org.eclipse.debug.core.model.ISourceLocator;
-import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -61,17 +59,28 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
   private final IProject debugProject;
   private final JavascriptVm javascriptVm;
   private final ResourceManager resourceManager;
-  private final BreakpointRegistry breakpointRegistry = new BreakpointRegistry();
   private final DebugTargetImpl debugTargetImpl;
+  private final BreakpointMap.InTargetMap breakpointInTargetMap = new BreakpointMap.InTargetMap();
+  private final ChromiumSourceDirector sourceDirector;
 
   public VProjectWorkspaceBridge(String projectName, DebugTargetImpl debugTargetImpl,
       JavascriptVm javascriptVm) {
     this.debugTargetImpl = debugTargetImpl;
     this.javascriptVm = javascriptVm;
     this.debugProject = ChromiumDebugPluginUtil.createEmptyProject(projectName);
-    this.resourceManager = new ResourceManager(debugProject, breakpointRegistry);
+    this.resourceManager = new ResourceManager(debugProject);
+
     ILaunch launch = debugTargetImpl.getLaunch();
-    launch.setSourceLocator(sourceLocator);
+
+    sourceDirector = (ChromiumSourceDirector) launch.getSourceLocator();
+    sourceDirector.initializeVProjectContainers(debugProject, resourceManager);
+  }
+
+  public void synchronizeBreakpoints(BreakpointSynchronizer.Direction direction,
+      Callback callback) {
+    BreakpointSynchronizer synchronizer = new BreakpointSynchronizer(javascriptVm,
+        breakpointInTargetMap, sourceDirector, breakpointHandler, DEBUG_MODEL_ID);
+    synchronizer.syncBreakpoints(direction, callback);
   }
 
   public void launchRemoved() {
@@ -81,21 +90,6 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
   }
 
   public void beforeDetach() {
-    IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
-    IBreakpoint[] breakpoints =
-        breakpointManager.getBreakpoints(DEBUG_MODEL_ID);
-    for (IBreakpoint bp : breakpoints) {
-      ChromiumLineBreakpoint clb = (ChromiumLineBreakpoint) bp;
-      if (clb.getBrowserBreakpoint() != null &&
-          clb.getBrowserBreakpoint().getId() != Breakpoint.INVALID_ID) {
-        clb.getBrowserBreakpoint().clear(null);
-      }
-    }
-    try {
-      breakpointManager.removeBreakpoints(breakpoints, true);
-    } catch (CoreException e) {
-      ChromiumDebugPlugin.log(e);
-    }
   }
 
   public void handleVmResetEvent() {
@@ -123,139 +117,183 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
     });
   }
 
-  public IFile getScriptResource(Script script) {
-    return resourceManager.getResource(script);
+  public VmResource findVmResourceFromWorkspaceFile(IFile resource) throws CoreException {
+    VmResourceId id = findVmResourceIdFromWorkspaceFile(resource);
+    if (id == null) {
+      return null;
+    }
+    return resourceManager.getVmResource(id);
+  }
+
+  private VmResourceId findVmResourceIdFromWorkspaceFile(IFile resource) throws CoreException {
+    return sourceDirector.getReverseSourceLookup().findVmResource(resource);
+  }
+
+  public void reloadScript(Script script) {
+    resourceManager.reloadScript(script);
   }
 
   public BreakpointHandler getBreakpointHandler() {
     return breakpointHandler;
   }
 
-  private final BreakpointHandler breakpointHandler = new BreakpointHandler() {
+  private final BreakpointHandlerImpl breakpointHandler = new BreakpointHandlerImpl();
+
+  private class BreakpointHandlerImpl implements BreakpointHandler,
+      BreakpointSynchronizer.BreakpointHelper {
     public boolean supportsBreakpoint(IBreakpoint breakpoint) {
       return DEBUG_MODEL_ID.equals(breakpoint.getModelIdentifier()) &&
           !debugTargetImpl.isDisconnected();
     }
-    public void breakpointAdded(IBreakpoint breakpoint) {
+
+    public ChromiumLineBreakpoint tryCastBreakpoint(IBreakpoint breakpoint) {
       if (!supportsBreakpoint(breakpoint)) {
+        return null;
+      }
+      if (breakpoint instanceof ChromiumLineBreakpoint == false) {
+        return null;
+      }
+      return (ChromiumLineBreakpoint) breakpoint;
+    }
+
+    public void breakpointAdded(IBreakpoint breakpoint) {
+      ChromiumLineBreakpoint lineBreakpoint = tryCastBreakpoint(breakpoint);
+      if (lineBreakpoint == null) {
         return;
       }
+      if (ChromiumLineBreakpoint.getIgnoreList().contains(breakpoint)) {
+        return;
+      }
+      if (!lineBreakpoint.isEnabled()) {
+        return;
+      }
+      IFile file = (IFile) lineBreakpoint.getMarker().getResource();
+      VmResourceId vmResourceId;
       try {
-        if (breakpoint.isEnabled()) {
-          // Class cast is ensured by the supportsBreakpoint implementation
-          final ChromiumLineBreakpoint lineBreakpoint = (ChromiumLineBreakpoint) breakpoint;
-          IFile file = (IFile) breakpoint.getMarker().getResource();
-          if (resourceManager.isAddingFile(file)) {
-            return; // restoring breakpoints in progress
-          }
-          final Script script = resourceManager.getScript(file);
-          if (script == null) {
-            // Might be a script from a different debug target
-            return;
-          }
-          // ILineBreakpoint lines are 1-based while V8 lines are 0-based
-          final int line = (lineBreakpoint.getLineNumber() - 1) + script.getStartLine();
-          BreakpointCallback callback = new BreakpointCallback() {
-            public void success(Breakpoint breakpoint) {
-              lineBreakpoint.setBreakpoint(breakpoint);
-              breakpointRegistry.add(script, line, breakpoint);
-            }
-
-            public void failure(String errorMessage) {
-              ChromiumDebugPlugin.logError(errorMessage);
-            }
-          };
-          if (script.getName() != null) {
-            javascriptVm.setBreakpoint(Breakpoint.Type.SCRIPT_NAME,
-                script.getName(),
-                line,
-                Breakpoint.EMPTY_VALUE,
-                breakpoint.isEnabled(),
-                lineBreakpoint.getCondition(),
-                lineBreakpoint.getIgnoreCount(),
-                callback);
-          } else {
-            javascriptVm.setBreakpoint(Breakpoint.Type.SCRIPT_ID,
-                String.valueOf(script.getId()),
-                line,
-                Breakpoint.EMPTY_VALUE,
-                breakpoint.isEnabled(),
-                lineBreakpoint.getCondition(),
-                lineBreakpoint.getIgnoreCount(),
-                callback);
-          }
-        }
+        vmResourceId = findVmResourceIdFromWorkspaceFile(file);
       } catch (CoreException e) {
-        ChromiumDebugPlugin.log(e);
+        ChromiumDebugPlugin.log(
+            new Exception("Failed to resolve script for the file " + file, e)); //$NON-NLS-1$
+        return;
+      }
+      if (vmResourceId == null) {
+        // Might be a script from a different debug target
+        return;
+      }
+
+      createBreakpointOnRemote(lineBreakpoint, vmResourceId, null, null);
+    }
+
+    public void createBreakpointOnRemote(final ChromiumLineBreakpoint lineBreakpoint,
+        final VmResourceId vmResourceId,
+        final CreateCallback createCallback, SyncCallback syncCallback) {
+      try {
+        ChromiumLineBreakpoint.Helper.CreateOnRemoveCallback callback =
+            new ChromiumLineBreakpoint.Helper.CreateOnRemoveCallback() {
+          public void success(Breakpoint breakpoint) {
+            breakpointInTargetMap.add(breakpoint, lineBreakpoint);
+            if (createCallback != null) {
+              createCallback.success();
+            }
+          }
+          public void failure(String errorMessage) {
+            if (createCallback == null) {
+              ChromiumDebugPlugin.logError(errorMessage);
+            } else {
+              createCallback.failure(new Exception(errorMessage));
+            }
+          }
+        };
+
+        ChromiumLineBreakpoint.Helper.createOnRemote(lineBreakpoint, vmResourceId, debugTargetImpl,
+            callback, syncCallback);
+      } catch (CoreException e) {
+        ChromiumDebugPlugin.log(new Exception("Failed to create breakpoint in " + //$NON-NLS-1$
+            getTargetNameSafe(), e));
       }
     }
 
     public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
-      if (!supportsBreakpoint(breakpoint)) {
+      ChromiumLineBreakpoint lineBreakpoint = tryCastBreakpoint(breakpoint);
+      if (lineBreakpoint == null) {
         return;
       }
-      // Class cast is ensured by the supportsBreakpoint implementation
-      ((ChromiumLineBreakpoint) breakpoint).changed();
+      if (ChromiumLineBreakpoint.getIgnoreList().contains(lineBreakpoint)) {
+        return;
+      }
+      Breakpoint sdkBreakpoint = breakpointInTargetMap.getSdkBreakpoint(lineBreakpoint);
+      if (sdkBreakpoint == null) {
+        return;
+      }
+
+      try {
+        ChromiumLineBreakpoint.Helper.updateOnRemote(sdkBreakpoint, lineBreakpoint);
+      } catch (RuntimeException e) {
+        ChromiumDebugPlugin.log(new Exception("Failed to change breakpoint in " + //$NON-NLS-1$
+            getTargetNameSafe(), e));
+      }
+
     }
 
     public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) {
-      if (!supportsBreakpoint(breakpoint)) {
+      ChromiumLineBreakpoint lineBreakpoint = tryCastBreakpoint(breakpoint);
+      if (lineBreakpoint == null) {
         return;
       }
+      if (ChromiumLineBreakpoint.getIgnoreList().contains(lineBreakpoint)) {
+        return;
+      }
+
+      Breakpoint sdkBreakpoint = breakpointInTargetMap.getSdkBreakpoint(lineBreakpoint);
+      if (sdkBreakpoint == null) {
+        return;
+      }
+
       try {
-        if (breakpoint.isEnabled()) {
-          // Class cast is ensured by the supportsBreakpoint implementation
-          ChromiumLineBreakpoint lineBreakpoint = (ChromiumLineBreakpoint) breakpoint;
-          lineBreakpoint.clear();
-          breakpointRegistry.remove(
-              resourceManager.getScript((IFile) breakpoint.getMarker().getResource()),
-              lineBreakpoint.getLineNumber() - 1,
-              lineBreakpoint.getBrowserBreakpoint());
+        if (!breakpoint.isEnabled()) {
+          return;
         }
       } catch (CoreException e) {
         ChromiumDebugPlugin.log(e);
+        return;
       }
+      JavascriptVm.BreakpointCallback callback = new JavascriptVm.BreakpointCallback() {
+        public void failure(String errorMessage) {
+          ChromiumDebugPlugin.log(new Exception("Failed to remove breakpoint in " + //$NON-NLS-1$
+              getTargetNameSafe() + ": " + errorMessage)); //$NON-NLS-1$
+        }
+        public void success(Breakpoint breakpoint) {
+        }
+      };
+      try {
+        sdkBreakpoint.clear(callback, null);
+      } catch (RuntimeException e) {
+        ChromiumDebugPlugin.log(new Exception("Failed to remove breakpoint in " + //$NON-NLS-1$
+            getTargetNameSafe(), e));
+      }
+      breakpointInTargetMap.remove(lineBreakpoint);
     }
 
     public void breakpointsHit(Collection<? extends Breakpoint> breakpointsHit) {
       if (breakpointsHit.isEmpty()) {
         return;
       }
-      IBreakpoint[] breakpoints =
-          DebugPlugin.getDefault().getBreakpointManager().getBreakpoints(DEBUG_MODEL_ID);
-      for (IBreakpoint breakpoint : breakpoints) {
-        ChromiumLineBreakpoint jsBreakpoint = (ChromiumLineBreakpoint) breakpoint;
-        if (breakpointsHit.contains(jsBreakpoint.getBrowserBreakpoint())) {
-          jsBreakpoint.setIgnoreCount(-1); // reset ignore count as we've hit it
+
+      for (Breakpoint sdkBreakpoint : breakpointsHit) {
+        ChromiumLineBreakpoint uiBreakpoint = breakpointInTargetMap.getUiBreakpoint(sdkBreakpoint);
+        if (uiBreakpoint != null) {
+          uiBreakpoint.setIgnoreCount(-1); // reset ignore count as we've hit it
         }
       }
     }
-  };
-
-  public int getLineNumber(CallFrame stackFrame) {
-    // convert 0-based to 1-based
-    return stackFrame.getLineNumber() + 1;
-  }
-  
-  /**
-   * This very simple source locator works because we provide our own source files.
-   * We'll have to try harder, once we link with resource js files.
-   */
-  private final ISourceLocator sourceLocator = new ISourceLocator() {
-    public Object getSourceElement(IStackFrame stackFrame) {
-      if (stackFrame instanceof StackFrame == false) {
-        return null;
+    private String getTargetNameSafe() {
+      try {
+        return debugTargetImpl.getLaunch().getLaunchConfiguration().getName();
+      } catch (RuntimeException e) {
+        return "<unknown>"; //$NON-NLS-1$
       }
-      StackFrame jsStackFrame = (StackFrame) stackFrame;
-
-      Script script = jsStackFrame.getCallFrame().getScript();
-      if (script == null) {
-        return null;
-      }
-
-      return resourceManager.getResource(script);
     }
-  };
+  }
 
   private final static JsLabelProvider LABEL_PROVIDER = new JsLabelProvider() {
     public String getTargetLabel(DebugTargetImpl debugTarget) {
@@ -298,16 +336,18 @@ public class VProjectWorkspaceBridge implements WorkspaceBridge {
       CallFrame callFrame = stackFrame.getCallFrame();
       String name = callFrame.getFunctionName();
       Script script = callFrame.getScript();
+      String scriptName;
       if (script == null) {
-        return Messages.StackFrame_UnknownScriptName;
+        scriptName = Messages.StackFrame_UnknownScriptName;
+      } else {
+        scriptName = VmResourceId.forScript(script).getEclipseSourceName();
       }
-      int line = script.getStartLine() + stackFrame.getLineNumber();
+      int line = stackFrame.getLineNumber();
       if (line != -1) {
         name = NLS.bind(Messages.StackFrame_NameFormat,
-            new Object[] {name, script.getName(), line});
+            new Object[] {name, scriptName, line});
       }
       return name;
     }
   };
-
 }

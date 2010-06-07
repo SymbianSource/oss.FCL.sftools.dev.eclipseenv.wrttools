@@ -7,7 +7,7 @@ package org.chromium.sdk;
 /**
  * A breakpoint in the browser JavaScript virtual machine. The {@code set*}
  * method invocations will not take effect until
- * {@link #flush(org.chromium.sdk.BrowserTab.BreakpointCallback)} is called.
+ * {@link #flush(org.chromium.sdk.JavascriptVm.BreakpointCallback)} is called.
  */
 public interface Breakpoint {
 
@@ -25,7 +25,7 @@ public interface Breakpoint {
    *
    * @see #getIgnoreCount()
    * @see #setIgnoreCount(int)
-   * @see BrowserTab#setBreakpoint(Type, String, int, int, boolean, String, int, org.chromium.sdk.BrowserTab.BreakpointCallback)
+   * @see JavascriptVm#setBreakpoint
    */
   int EMPTY_VALUE = -1;
 
@@ -44,6 +44,26 @@ public interface Breakpoint {
    * @return the breakpoint ID as reported by the JavaScript VM debugger
    */
   long getId();
+
+  /**
+   * @return scriptName as reported by the JavaScript VM debugger; may be null
+   */
+  String getScriptName();
+
+  /**
+   * @return scriptId as reported by the JavaScript VM debugger; may be null
+   */
+  Long getScriptId();
+
+  /**
+   * Returns line number of the breakpoint. As source is changed (typically with LiveEdit feature,
+   * and particularly by calling {@link UpdatableScript#setSourceOnRemote}) this value
+   * may become stale. It gets updated when {@link JavascriptVm#listBreakpoints} asynchronous
+   * method completes.
+   *
+   * @return 1-based line number in script source
+   */
+  long getLineNumber();
 
   /**
    * @return whether this breakpoint is enabled
@@ -88,7 +108,7 @@ public interface Breakpoint {
    *
    * @param callback to invoke once the operation result is available
    */
-  void clear(BrowserTab.BreakpointCallback callback);
+  void clear(JavascriptVm.BreakpointCallback callback, SyncCallback syncCallback);
 
   /**
    * Flushes the breakpoint parameter changes (set* methods) into the browser
@@ -97,5 +117,5 @@ public interface Breakpoint {
    *
    * @param callback to invoke once the operation result is available
    */
-  void flush(BrowserTab.BreakpointCallback callback);
+  void flush(JavascriptVm.BreakpointCallback callback, SyncCallback syncCallback);
 }

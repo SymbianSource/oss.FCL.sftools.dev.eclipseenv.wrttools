@@ -4,6 +4,7 @@
 
 package org.chromium.debug.core.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.chromium.debug.core.ChromiumDebugPlugin;
@@ -12,7 +13,9 @@ import org.chromium.sdk.DebugContext;
 import org.chromium.sdk.DebugEventListener;
 import org.chromium.sdk.ExceptionData;
 import org.chromium.sdk.JavascriptVm;
+import org.chromium.sdk.LiveEditDebugEventListener;
 import org.chromium.sdk.Script;
+import org.chromium.sdk.UpdatableScript;
 import org.chromium.sdk.DebugContext.State;
 import org.chromium.sdk.DebugContext.StepAction;
 import org.eclipse.core.resources.IFile;
@@ -338,8 +341,8 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
     return super.getAdapter(adapter);
   }
 
-  public IFile getScriptResource(Script script) {
-    return workspaceRelations.getScriptResource(script);
+  public VmResource getVmResource(IFile resource) throws CoreException {
+    return workspaceRelations.findVmResourceFromWorkspaceFile(resource);
   }
 
   public JavascriptThread getThread() {
@@ -361,7 +364,7 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
 
   private final DebugEventListenerImpl debugEventListener = new DebugEventListenerImpl();
 
-  class DebugEventListenerImpl implements DebugEventListener {
+  class DebugEventListenerImpl implements DebugEventListener, LiveEditDebugEventListener {
     // Synchronizes calls from ReaderThread of Connection and one call from some worker thread
     private final Object suspendResumeMonitor = new Object();
     private boolean alreadyResumedOrSuspended = false;
@@ -396,6 +399,11 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
       workspaceRelations.scriptLoaded(newScript);
     }
 
+    public void scriptContentChanged(UpdatableScript newScript) {
+      listenerBlock.waitUntilReady();
+      workspaceRelations.reloadScript(newScript);
+    }
+
     public void suspended(DebugContext context) {
       listenerBlock.waitUntilReady();
       synchronized (suspendResumeMonitor) {
@@ -418,6 +426,12 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
       }
     }
   }
+
+  public void synchronizeBreakpoints(BreakpointSynchronizer.Direction direction,
+      BreakpointSynchronizer.Callback callback) {
+    workspaceRelations.synchronizeBreakpoints(direction, callback);
+  }
+
 
   private void logExceptionFromContext(DebugContext context) {
     ExceptionData exceptionData = context.getExceptionData();
@@ -491,9 +505,18 @@ public class DebugTargetImpl extends DebugElementImpl implements IDebugTarget {
   public WorkspaceBridge.JsLabelProvider getLabelProvider() {
     return workspaceBridgeFactory.getLabelProvider();
   }
-  
-  public int getLineNumber(CallFrame stackFrame) {
-    return workspaceRelations.getLineNumber(stackFrame);
+
+  public static List<DebugTargetImpl> getAllDebugTargetImpls() {
+    IDebugTarget[] array = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+    List<DebugTargetImpl> result = new ArrayList<DebugTargetImpl>(array.length);
+    for (IDebugTarget target : array) {
+      if (target instanceof DebugTargetImpl == false) {
+        continue;
+      }
+      DebugTargetImpl debugTargetImpl = (DebugTargetImpl) target;
+      result.add(debugTargetImpl);
+    }
+    return result;
   }
 
   private static class ListenerBlock {

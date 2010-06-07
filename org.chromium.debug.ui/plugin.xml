@@ -29,7 +29,9 @@
         modes="debug"
         name="%chromiumLaunchName"
         delegateName="Debug Chromium JavaScript"
-        delegateDescription="JavaScript debugger for Chromium">
+        delegateDescription="JavaScript debugger for Chromium"
+        sourceLocatorId="org.chromium.debug.core.ChromiumSourceDirector"
+        sourcePathComputerId="org.chromium.debug.core.ChromiumSourceComputer">
     </launchConfigurationType>
     <launchConfigurationType
         id="org.chromium.debug.ui.LaunchType$StandaloneV8"
@@ -37,7 +39,9 @@
         modes="debug"
         name="%standaloneV8LaunchName"
         delegateName="Debug Standalone V8 JavaScript"
-        delegateDescription="JavaScript debugger for Standalone V8">
+        delegateDescription="JavaScript debugger for Standalone V8"
+        sourceLocatorId="org.chromium.debug.core.ChromiumSourceDirector"
+        sourcePathComputerId="org.chromium.debug.core.ChromiumSourceComputer">
     </launchConfigurationType>
     <launchConfigurationType
         id="org.chromium.debug.ui.ConsolePseudoConfigurationType"
@@ -185,9 +189,9 @@
             id="org.chromium.debug.ui.actions.EnableDisableBreakpointAction"/>
         <action
             label="Breakpoint Properties..."
-            class="org.chromium.debug.ui.actions.JsBreakpointPropertiesRulerActionDelegate"
+            class="org.chromium.debug.ui.actions.JsBreakpointPropertiesRulerAction$Delegate"
             menubarPath="group.properties"
-            id="org.chromium.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate">
+            id="org.chromium.debug.ui.actions.JavaBreakpointPropertiesRulerAction$Delegate">
         </action>
         <action
             label="Toggle Enablement"
@@ -200,17 +204,111 @@
   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
+            objectClass="org.chromium.debug.core.model.ChromiumLineBreakpoint"
+            id="org.chromium.debug.core.model.ChromiumLineBreakpoint.object_actions">
+        <action
+            label="Breakpoint Properties..."
+            class="org.chromium.debug.ui.actions.JsBreakpointPropertiesAction"
+            menubarPath="group.properties"
+            id="org.chromium.debug.ui.actions.JsBreakpointPropertiesAction">
+        </action>
+      </objectContribution>
+         
+      <objectContribution
             objectClass="org.chromium.debug.core.model.Variable"
             id="org.chromium.debug.ui.ChromiumVariableActions">
          <action
                label="%OpenFunctionAction.label"
-               class="org.chromium.debug.ui.actions.OpenFunctionAction"
+               class="org.chromium.debug.ui.actions.OpenFunctionAction$ForVariable"
                menubarPath="emptyNavigationGroup"
                enablesFor="1"
-               id="org.chromium.debug.ui.actions.OpenFunctionAction">
+               id="org.chromium.debug.ui.actions.OpenFunctionAction$ForVariable">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.debug.core.model.IWatchExpression"
+            id="org.chromium.debug.ui.ChromiumExpressionActions">
+         <action
+               label="%OpenFunctionAction.label"
+               class="org.chromium.debug.ui.actions.OpenFunctionAction$ForExpression"
+               menubarPath="emptyNavigationGroup"
+               enablesFor="1"
+               id="org.chromium.debug.ui.actions.OpenFunctionAction$ForExpression">
+         </action>
+      </objectContribution>
+      <!-- Experimental actions, temporary disabled. -->
+      <objectContribution
+            objectClass="org.eclipse.core.resources.mapping.ResourceMapping"
+            adaptable="true"
+            id="org.chromium.debug.ui.ChromiumSourceFileActionsId">
+         <menu id="org.chromium.debug.ui.ChromiumSourceFileActionsId.MenuId"
+               label="V8 Debugging"
+         >
+            <separator
+                  name="group0">
+            </separator>
+         </menu>
+         <action
+               label="Compare with VM Source"
+               class="org.chromium.debug.ui.actions.CompareChangesAction"
+               menubarPath="org.chromium.debug.ui.ChromiumSourceFileActionsId.MenuId/group0"
+               enablesFor="1"
+               id="org.chromium.debug.ui.actions.CompareChangesAction">
+         </action>
+         <action
+               label="Push Changes to VM"
+               class="org.chromium.debug.ui.actions.PushChangesAction"
+               menubarPath="org.chromium.debug.ui.ChromiumSourceFileActionsId.MenuId/group0"
+               enablesFor="1"
+               id="org.chromium.debug.ui.actions.PushChangesAction">
          </action>
       </objectContribution>
   </extension>
+
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.debug.ui.DebugPerspective">
+         <actionSet
+               id="org.chromium.debug.ui.ChromiumDebugActionSet">
+         </actionSet>
+      </perspectiveExtension>
+  </extension>
+
+  <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.debug.core.ILaunch"
+            id="org.chromium.debug.ui.actions.actions-for-launch">
+         <menu id="org.chromium.debug.ui.actions.SynchronizeBreakpoints.MenuId"
+               label="Synchronize JavaScript Breakpoints"
+               path="launchGroup"
+         >
+            <separator
+                  name="group0">
+            </separator>
+         </menu>
+         <action
+               label="Reset on Remote"
+               class="org.chromium.debug.ui.actions.SynchronizeBreakpoints$ResetRemote"
+               menubarPath="org.chromium.debug.ui.actions.SynchronizeBreakpoints.MenuId/group0"
+               id="org.chromium.debug.ui.actions.SynchronizeBreakpoints$ResetRemote.forLaunch">
+         </action>
+         <action
+               label="Reset on Local"
+               class="org.chromium.debug.ui.actions.SynchronizeBreakpoints$ResetLocal"
+               menubarPath="org.chromium.debug.ui.actions.SynchronizeBreakpoints.MenuId/group0"
+               id="org.chromium.debug.ui.actions.SynchronizeBreakpoints$ResetLocal.forLaunch">
+         </action>
+         <action
+               label="Merge Remote and Local"
+               class="org.chromium.debug.ui.actions.SynchronizeBreakpoints$Merge"
+               menubarPath="org.chromium.debug.ui.actions.SynchronizeBreakpoints.MenuId/group0"
+               id="org.chromium.debug.ui.actions.SynchronizeBreakpoints$Merge.forLaunch">
+         </action>
+      </objectContribution>
+  </extension>
+
   <extension
          point="org.eclipse.ui.propertyPages">
     <page
@@ -228,5 +326,15 @@
         </or>
       </enabledWhen>
     </page>
+  </extension>
+  
+
+  <extension point="org.eclipse.debug.ui.sourceContainerPresentations">
+      <sourceContainerPresentation
+            browserClass="org.chromium.debug.ui.source.SourceNameMapperContainerPresentation"
+            containerTypeID="org.chromium.debug.core.SourceNameMapperContainer.type"
+            icon="res/standalone_v8_16.png"
+            id="org.chromium.debug.ui.SourceNameMapperContainerPresentation">
+      </sourceContainerPresentation>
   </extension>
 </plugin>
