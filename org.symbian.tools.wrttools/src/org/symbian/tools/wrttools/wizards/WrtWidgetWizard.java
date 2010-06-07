@@ -54,7 +54,6 @@ import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
@@ -65,7 +64,6 @@ import org.symbian.tools.wrttools.util.ProjectUtils;
 import org.symbian.tools.wrttools.wizards.libraries.WRTProjectLibraryWizardPage;
 
 public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableExtension {
-    private WizardNewProjectCreationPage resourcePage;
     private WizardContext context;
     private DataBindingContext bindingContext;
     private final Map<ProjectTemplate, WRTProjectDetailsWizardPage> templateDetails = new HashMap<ProjectTemplate, WRTProjectDetailsWizardPage>();
@@ -215,11 +213,6 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 
     @Override
     public void addPages() {
-        resourcePage = new WizardNewProjectCreationPage("Resource");
-        resourcePage.setDescription("Create a Web Runtime application project in the workspace or other location");
-        resourcePage.setTitle("Create a New Web Runtime Application Project");
-        addPage(resourcePage);
-
         templatesPage = new WRTProjectTemplateWizardPage(context, bindingContext);
         addPage(templatesPage);
 
@@ -243,11 +236,9 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 
     @Override
     public IWizardPage getNextPage(IWizardPage page) {
-        if (page == resourcePage) {
-            context.setProjectName(resourcePage.getProjectName());
-            context.setProjectUri(resourcePage.getLocationURI());
-        }
         if (page == templatesPage) {
+            context.setProjectName(templatesPage.getProjectName());
+            context.setProjectUri(templatesPage.getLocationURI());
             ProjectTemplate template = context.getTemplate();
             if (template != null) {
                 WRTProjectDetailsWizardPage activePage = templateDetails.get(template);

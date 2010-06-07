@@ -32,19 +32,19 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.wizard.IWizardPage;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
 
-public class WRTProjectTemplateWizardPage extends WizardPage {
+public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
 
 	public class ProjectTemplateLabelProvider extends LabelProvider {
 
@@ -65,37 +65,33 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 	private final DataBindingContext bindingContext;
 
 	public WRTProjectTemplateWizardPage(WizardContext context, DataBindingContext bindingContext) {
-		super("WRTTemplate", "Application Template Selection", null);
+        super("Create a New Mobile Web Application");
+        setTitle("Create a New Mobile Web Application");
 		this.context = context;
 		this.bindingContext = bindingContext;
-		setDescription("Select template that will be used to populate your new project");
+        setDescription("Select project name and template that will be used to populate");
 	}
 	
-	public void createControl(Composite parent) {
+    public void createControl(Composite parent) {
+        super.createControl(parent);
+        final Composite root = (Composite) getControl();
 		ProjectTemplate[] allTemplates = ProjectTemplate.getAllTemplates();
 
 		if (allTemplates.length == 1) {
 			context.setTemplate(allTemplates[0]);
 		}
-		
-		Composite composite = new Composite(parent, SWT.NONE);
+        Composite composite = new Composite(root, SWT.NONE);
+        composite.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		FormLayout layout = new FormLayout();
 		layout.marginWidth = 5;
 		composite.setLayout(layout);
-		
-		Label label = new Label(composite, SWT.NONE);
-		label.setText("Choose a template");
-		FormData data = new FormData();
-		data.left = new FormAttachment(0, 0);
-		data.top = new FormAttachment(0, 0);
-		label.setLayoutData(data);
-		
+
 		templates = new TableViewer(composite, SWT.BORDER | SWT.SINGLE);
 		FormData templatesData = new FormData();
-		templatesData.top = new FormAttachment(label, 5);
+        templatesData.top = new FormAttachment(0, 8);
 		templatesData.left = new FormAttachment(0, 0);
-		templatesData.right = new FormAttachment(100, 0);
-		templatesData.bottom = new FormAttachment(70, 0);
+        templatesData.right = new FormAttachment(40, -2);
+        templatesData.bottom = new FormAttachment(100, 0);
 		templates.getControl().setLayoutData(templatesData);
 		templates.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -113,9 +109,9 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		
 		description = new Text(composite, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT .READ_ONLY);
 		FormData descriptionData = new FormData();
-		descriptionData.top = new FormAttachment(templates.getControl(), 10);
+        descriptionData.top = new FormAttachment(0, 8);
 		descriptionData.bottom = new FormAttachment(100, 0);
-		descriptionData.left = new FormAttachment(0, 0);
+        descriptionData.left = new FormAttachment(templates.getControl(), 5);
 		descriptionData.right = new FormAttachment(100, 0);
 		description.setLayoutData(descriptionData);
 		
@@ -123,7 +119,6 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 		templates.setLabelProvider(new ProjectTemplateLabelProvider());
 		templates.setInput(allTemplates);
 		
-		setControl(composite);
 		setPageComplete(false);
 
 		IViewerObservableValue selection = ViewersObservables.observeSingleSelection(templates);
@@ -150,15 +145,29 @@ public class WRTProjectTemplateWizardPage extends WizardPage {
 
 	protected void refreshSelection(ProjectTemplate template) {
 		if (template != null) {
-			setErrorMessage(null);
-			setPageComplete(true);
 			description.setText(template.getDescription());
 		} else {
-			setErrorMessage("Project template is not selected");
-			setPageComplete(false);
 			description.setText("");
 		}
+        validatePage();
 	}
+
+    @Override
+    protected boolean validatePage() {
+        if (super.validatePage()) {
+            if (templates.getSelection().isEmpty()) {
+                setErrorMessage("Project template is not selected");
+                setPageComplete(false);
+                return false;
+            } else {
+                setErrorMessage(null);
+                setPageComplete(true);
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
 
 	public ProjectTemplate getSelectedProjectTemplate() {
 		IStructuredSelection selection = (IStructuredSelection) templates.getSelection();

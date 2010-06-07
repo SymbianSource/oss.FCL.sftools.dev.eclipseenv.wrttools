@@ -155,7 +155,7 @@
 	<extension point="org.symbian.tools.wrttools.projectTemplates">
 
       <projectTemplate
-		name="Basic Widget Project"
+		name="Basic Project"
         archive="projecttemplates/basic.zip"
         default-css-name="basic"
         default-html-name="index"
@@ -168,7 +168,7 @@
 	  </projectTemplate> 
 
       <projectTemplate
-            name="Hello Application Project with WRTKit Support"
+            name="Advanced Project"
             archive="projecttemplates/helloWithWRTKit.zip"
             default-css-name="HelloWithWRTKit"
             default-html-name="index"
@@ -183,7 +183,7 @@
       </projectTemplate>
 
       <projectTemplate
-            name="Flickr Application Project"
+            name="Flickr Project"
             archive="projecttemplates/flickr.zip"
             default-css-name="Flickr"
             default-html-name="index"
@@ -198,7 +198,7 @@
       </projectTemplate>
 
       <projectTemplate
-            name="RSS Reader Application Project"
+            name="RSS Reader Project"
             archive="projecttemplates/rssreader.zip"
             default-css-name="RSSReader"
             default-html-name="index"

@@ -195,7 +195,7 @@ public class WizardContext {
 			propertySupport.firePropertyChange(CSS_FILE, getCssFile(), css);
 		}
         if (cssFile == null) {
-            propertySupport.firePropertyChange(LIBRARIES, getCssFile(), css);
+            propertySupport.firePropertyChange(LIBRARIES, getLibraries(), libraries);
         }
 	}
 
