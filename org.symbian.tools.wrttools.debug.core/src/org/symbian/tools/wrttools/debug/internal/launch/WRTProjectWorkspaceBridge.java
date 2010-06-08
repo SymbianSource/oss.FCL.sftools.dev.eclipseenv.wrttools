@@ -4,14 +4,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.chromium.debug.core.model.BreakpointSynchronizer.Callback;
+import org.chromium.debug.core.model.BreakpointSynchronizer.Direction;
 import org.chromium.debug.core.model.ChromiumLineBreakpoint;
 import org.chromium.debug.core.model.DebugTargetImpl;
 import org.chromium.debug.core.model.StackFrame;
+import org.chromium.debug.core.model.VmResource;
 import org.chromium.debug.core.model.WorkspaceBridge;
 import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.JavascriptVm;
-import org.chromium.sdk.Script;
 import org.chromium.sdk.JavascriptVm.ScriptsCallback;
+import org.chromium.sdk.Script;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -51,7 +54,6 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 
 	}
 
-//	public final static String DEBUG_MODEL_ID = VProjectWorkspaceBridge.DEBUG_MODEL_ID;
 	public final static String DEBUG_MODEL_ID = "org.symbian.debug";
 
 	private final BreakpointHandler breakpointHandler;
@@ -63,9 +65,8 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 			JavascriptVm javascriptVm, IProject project) {
 		this.javascriptVm = javascriptVm;
 		this.project = project;
-		this.resourceManager = new ResourceManager();
-		breakpointHandler = new WorkspaceBreakpointHandler(debugTargetImpl,
-				javascriptVm, resourceManager);
+        this.resourceManager = new ResourceManager();
+        breakpointHandler = new WorkspaceBreakpointHandler(debugTargetImpl, resourceManager);
 		ILaunch launch = debugTargetImpl.getLaunch();
 		launch.setSourceLocator(sourceLocator);
 	}
@@ -76,10 +77,6 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 
 	public BreakpointHandler getBreakpointHandler() {
 		return breakpointHandler;
-	}
-
-	public IFile getScriptResource(Script script) {
-		return resourceManager.getResource(script);
 	}
 
 	public void handleVmResetEvent() {
@@ -174,5 +171,20 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 			return null;
 		}
 	};
+
+    public VmResource findVmResourceFromWorkspaceFile(IFile resource) throws CoreException {
+        System.out.println(resource);
+        return null;
+    }
+
+    public void reloadScript(Script script) {
+        System.out.println(script);
+
+    }
+
+    public void synchronizeBreakpoints(Direction direction, Callback callback) {
+        System.out.println(direction);
+
+    }
 
 }

@@ -7,10 +7,10 @@ package org.chromium.debug.core.model;
 import java.util.Collection;
 
 import org.chromium.sdk.Breakpoint;
-import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.JavascriptVm;
 import org.chromium.sdk.Script;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.IBreakpointListener;
 import org.eclipse.debug.core.model.IBreakpoint;
@@ -48,10 +48,12 @@ public interface WorkspaceBridge {
     JsLabelProvider getLabelProvider();
   }
 
+  VmResource findVmResourceFromWorkspaceFile(IFile resource) throws CoreException;
+
   /**
-   * Helps UI actions to map from script to resource.
+   * Initiates script reloading from remote VM.
    */
-  IFile getScriptResource(Script script);
+  void reloadScript(Script script);
 
   /**
    * Called at starting period of time, requires all scripts to be (re)loaded.
@@ -87,12 +89,6 @@ public interface WorkspaceBridge {
   BreakpointHandler getBreakpointHandler();
 
   /**
-   * Returns editor line number for the provided call stack frame applying all required 
-   * editor-specific translations.
-   */
-  int getLineNumber(CallFrame stackFrame);
-
-  /**
    * Breakpoint-related aspect of {@link WorkspaceBridge} interface.
    */
   interface BreakpointHandler extends IBreakpointListener {
@@ -119,4 +115,12 @@ public interface WorkspaceBridge {
      */
     String getStackFrameLabel(StackFrame stackFrame) throws DebugException;
   }
+
+  /**
+   * Performs breakpoint synchronization between remote VM and Eclipse IDE. This operation is
+   * partially asynchronous: it blocks for reading breakpoints, but returns before all remote
+   * changes are performed. When operations is fully complete, callback gets invoked.
+   */
+  void synchronizeBreakpoints(BreakpointSynchronizer.Direction direction,
+      BreakpointSynchronizer.Callback callback);
 }

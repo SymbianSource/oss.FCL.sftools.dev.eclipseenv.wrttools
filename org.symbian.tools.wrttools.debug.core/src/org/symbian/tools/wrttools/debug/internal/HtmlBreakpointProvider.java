@@ -14,6 +14,7 @@ import org.eclipse.wst.html.core.text.IHTMLPartitions;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingTextTools;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.breakpoint.IBreakpointProvider;
+import org.symbian.tools.wrttools.debug.internal.launch.WRTProjectWorkspaceBridge;
 
 @SuppressWarnings("restriction")
 public class HtmlBreakpointProvider implements IBreakpointProvider {
@@ -23,7 +24,8 @@ public class HtmlBreakpointProvider implements IBreakpointProvider {
 		boolean hasScript = hasJavaScript(document, lineNumber);
 
 		if (hasScript) {
-			ChromiumLineBreakpoint breakpoint = new ChromiumLineBreakpoint(getResource(input), lineNumber);
+            ChromiumLineBreakpoint breakpoint = new ChromiumLineBreakpoint(getResource(input), lineNumber,
+                    WRTProjectWorkspaceBridge.DEBUG_MODEL_ID);
 			DebugPlugin.getDefault().getBreakpointManager().addBreakpoint(breakpoint);
 		}
 		return Status.OK_STATUS;

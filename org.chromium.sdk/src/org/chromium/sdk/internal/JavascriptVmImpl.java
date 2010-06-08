@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.chromium.sdk.Breakpoint;
 import org.chromium.sdk.CallbackSemaphore;
 import org.chromium.sdk.JavascriptVm;
+import org.chromium.sdk.SyncCallback;
 import org.chromium.sdk.internal.tools.v8.MethodIsBlockingException;
 
 /**
@@ -35,9 +36,14 @@ public abstract class JavascriptVmImpl implements JavascriptVm {
 
   public void setBreakpoint(Breakpoint.Type type, String target, int line,
       int position, boolean enabled, String condition, int ignoreCount,
-      BreakpointCallback callback) {
+      BreakpointCallback callback, SyncCallback syncCallback) {
     getDebugSession().getBreakpointManager()
-        .setBreakpoint(type, target, line, position, enabled, condition, ignoreCount, callback);
+        .setBreakpoint(type, target, line, position, enabled, condition, ignoreCount, callback,
+        syncCallback);
+  }
+
+  public void listBreakpoints(final ListBreakpointsCallback callback, SyncCallback syncCallback) {
+    getDebugSession().getBreakpointManager().reloadBreakpoints(callback, syncCallback);
   }
 
   protected abstract DebugSession getDebugSession();

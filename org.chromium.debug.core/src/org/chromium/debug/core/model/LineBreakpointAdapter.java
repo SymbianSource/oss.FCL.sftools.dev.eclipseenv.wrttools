@@ -28,7 +28,7 @@ public abstract class LineBreakpointAdapter implements IToggleBreakpointsTarget 
         ITextEditor editorPart = (ITextEditor) part;
         IResource resource = (IResource) editorPart.getEditorInput().getAdapter(IResource.class);
         if (resource != null &&
-            ChromiumDebugPluginUtil.CHROMIUM_EXTENSION.equals(resource.getFileExtension())) {
+            ChromiumDebugPluginUtil.SUPPORTED_EXTENSIONS.contains(resource.getFileExtension())) {
           return editorPart;
         }
       }
@@ -62,7 +62,8 @@ public abstract class LineBreakpointAdapter implements IToggleBreakpointsTarget 
       }
 
       // Line numbers start with 0 in V8, with 1 in Eclipse.
-      ChromiumLineBreakpoint lineBreakpoint = new ChromiumLineBreakpoint(resource, lineNumber + 1);
+      ChromiumLineBreakpoint lineBreakpoint = new ChromiumLineBreakpoint(resource, lineNumber + 1,
+          getDebugModelId());
       DebugPlugin.getDefault().getBreakpointManager().addBreakpoint(lineBreakpoint);
     }
   }

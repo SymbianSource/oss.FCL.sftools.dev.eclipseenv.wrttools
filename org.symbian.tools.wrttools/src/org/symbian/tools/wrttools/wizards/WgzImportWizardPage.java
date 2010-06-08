@@ -453,7 +453,7 @@ public class WgzImportWizardPage extends WizardPage {
                 ZipEntry entry;
                 while ((entry = stream.getNextEntry()) != null) {
                     final IPath path = new Path(entry.getName());
-                    if (path.segmentCount() == 2 && CoreUtil.METADATA_FILE.equals(path.segment(1))) {
+                    if (path.segmentCount() == 2 && CoreUtil.METADATA_FILE.equalsIgnoreCase(path.segment(1))) {
                         return true;
                     }
                 }
