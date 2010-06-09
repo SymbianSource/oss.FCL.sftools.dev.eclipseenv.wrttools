@@ -65,4 +65,8 @@ public class ResourceManager {
         Script script = resourceToScript.get(resource);
         return script != null ? VmResourceId.forScript(script) : null;
     }
+
+    public Script getScript(IFile file) {
+        return resourceToScript.get(file);
+    }
 }

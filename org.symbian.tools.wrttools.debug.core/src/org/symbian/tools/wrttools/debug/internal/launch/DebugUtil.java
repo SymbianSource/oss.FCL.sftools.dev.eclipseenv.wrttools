@@ -36,7 +36,28 @@ public class DebugUtil {
         return new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, exeption));
     }
 
+    public static IProject getProject(ILaunch configuration) {
+        try {
+            if (WidgetLaunchDelegate.ID.equals(configuration.getLaunchConfiguration().getType().getIdentifier())) {
+                String projectName = configuration.getLaunchConfiguration().getAttribute(IConstants.PROP_PROJECT_NAME,
+                        (String) null);
+                if (projectName != null) {
+                    IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+                    if (project.isAccessible()) {
+                        return project;
+                    }
+                }
+            }
+        } catch (CoreException e) {
+            Activator.log(e);
+        }
+        return null;
+    }
+
     public static IProject getProject(ILaunchConfiguration configuration) throws CoreException {
+        if (!WidgetLaunchDelegate.ID.equals(configuration.getType().getIdentifier())) {
+            return null;
+        }
         String projectName = configuration.getAttribute(IConstants.PROP_PROJECT_NAME, (String) null);
         if (projectName == null) {
             throw createCoreException("Project is not selected", null);

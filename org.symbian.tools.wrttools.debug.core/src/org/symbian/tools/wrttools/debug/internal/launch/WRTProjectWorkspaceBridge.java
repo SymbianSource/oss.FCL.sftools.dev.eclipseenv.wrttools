@@ -8,6 +8,7 @@ import org.chromium.debug.core.model.BreakpointSynchronizer.Direction;
 import org.chromium.debug.core.model.ChromiumLineBreakpoint;
 import org.chromium.debug.core.model.DebugTargetImpl;
 import org.chromium.debug.core.model.VmResource;
+import org.chromium.debug.core.model.VmResourceId;
 import org.chromium.debug.core.model.WorkspaceBridge;
 import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.JavascriptVm;
@@ -139,9 +140,34 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
 
     private final ISourceLookupDirector sourceLocator;
 
-    public VmResource findVmResourceFromWorkspaceFile(IFile resource) throws CoreException {
-        System.out.println(resource);
-        return null;
+    public VmResource findVmResourceFromWorkspaceFile(IFile file) throws CoreException {
+        return new VmResourceImpl(resourceManager.findVmResource(file), resourceManager.getScript(file), file.getName());
+    }
+
+    private static final class VmResourceImpl implements VmResource {
+        private final String name;
+        private final Script script;
+        private final VmResourceId id;
+
+        public VmResourceImpl(VmResourceId id, Script script, String name) {
+            super();
+            this.id = id;
+            this.script = script;
+            this.name = name;
+        }
+
+        public VmResourceId getId() {
+            return id;
+        }
+
+        public Script getScript() {
+            return script;
+        }
+
+        public String getFileName() {
+            return name;
+        }
+
     }
 
     public void reloadScript(Script script) {

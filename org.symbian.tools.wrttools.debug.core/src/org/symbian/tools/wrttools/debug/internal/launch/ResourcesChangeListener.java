@@ -85,4 +85,150 @@ public class ResourcesChangeListener implements IResourceChangeListener {
         return false;
     }
 
+    //    // TODO Progress indicator - ... files updated of ...
+    //
+    //    public void resourceChanged(IResourceChangeEvent event) {
+    //        try {
+    //            if (event.getDelta() != null) {
+    //
+    //                processDelta(event.getDelta());
+    //            } else {
+    //                // TODO Can't refresh
+    //            }
+    //        } catch (CoreException e) {
+    //            Activator.log(e);
+    //        }
+    //
+    //    }
+    //
+    //    private static final class DeltaProcessor implements IResourceDeltaVisitor {
+    //        private final Map<IProject, DebugTargetImpl> targets;
+    //        private final Map<IFile, Script> updateList = new HashMap<IFile, Script>();
+    //        private boolean hasUnupdatables = false;
+    //
+    //        public DeltaProcessor(Map<IProject, DebugTargetImpl> targets) {
+    //            this.targets = targets;
+    //        }
+    //
+    //        public boolean visit(IResourceDelta delta) throws CoreException {
+    //            final IResource resource = delta.getResource();
+    //            switch (resource.getType()) {
+    //            case IResource.PROJECT:
+    //                return targets.containsKey(resource);
+    //            case IResource.FILE:
+    //                processFile((IFile) resource, targets.get(resource.getProject()));
+    //                return false;
+    //            default:
+    //                return true;
+    //            }
+    //        }
+    //
+    //        private void processFile(final IFile resource, final DebugTargetImpl debugTargetImpl) throws CoreException {
+    //            if (!ProjectUtils.isExcluded(resource)) {
+    //                final VmResource vmResource = debugTargetImpl.getVmResource(resource);
+    //                if (vmResource != null) {
+    //                    updateList.put(resource, vmResource.getScript());
+    //                } else {
+    //                    if (!JavaScriptCore.isJavaScriptLikeFileName(resource.getName())) {
+    //                        hasUnupdatables = true;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //
+    //        public Map<IFile, Script> getUpdateList() {
+    //            return updateList;
+    //        }
+    //
+    //        public boolean hasUnupdatables() {
+    //            return hasUnupdatables;
+    //        }
+    //    }
+    //
+    //    private void processDelta(final IResourceDelta delta) throws CoreException {
+    //        final ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
+    //        final Map<IProject, DebugTargetImpl> targets = new HashMap<IProject, DebugTargetImpl>();
+    //        for (ILaunch launch : launches) {
+    //            final IDebugTarget target = launch.getDebugTarget();
+    //            if (!launch.isTerminated() && target instanceof DebugTargetImpl) {
+    //                IProject project = DebugUtil.getProject(launch);
+    //                if (project != null) {
+    //                    targets.put(project, (DebugTargetImpl) target);
+    //                }
+    //            }
+    //        }
+    //
+    //        DeltaProcessor processor = new DeltaProcessor(targets);
+    //        delta.accept(processor);
+    //
+    //        if (processor.getUpdateList().size() > 0) {
+    //            final Collection<IStatus> statuses = new LinkedList<IStatus>();
+    //            for (Entry<IFile, Script> entry : processor.getUpdateList().entrySet()) {
+    //                statuses.add(updateScript(entry.getValue(), entry.getKey()));
+    //            }
+    //        } else if (processor.hasUnupdatables()) {
+    //
+    //        }
+    //    }
+    //
+    //    private IStatus updateScript(Script script, final IFile file) {
+    //        UpdatableScript updatableScript = LiveEditExtension.castToUpdatableScript(script);
+    //
+    //        if (updatableScript == null) {
+    //            throw new RuntimeException();
+    //        }
+    //
+    //        byte[] fileData;
+    //        try {
+    //            fileData = readFileContents(file);
+    //        } catch (IOException e) {
+    //            throw new RuntimeException(e);
+    //        } catch (CoreException e) {
+    //            throw new RuntimeException(e);
+    //        }
+    //        final IStatus[] res = new IStatus[1];
+    //        // We are using default charset here like usually.
+    //        String newSource = new String(fileData);
+    //
+    //        UpdatableScript.UpdateCallback callback = new UpdatableScript.UpdateCallback() {
+    //            public void success(Object report) {
+    //                res[0] = new Status(
+    //                        IStatus.OK,
+    //                        ChromiumDebugPlugin.PLUGIN_ID,
+    //                        String.format(
+    //                                "Script %s was successfully updated on remote: %s", file.getProjectRelativePath().toString(), report)); //$NON-NLS-1$
+    //            }
+    //
+    //            public void failure(String message) {
+    //                res[0] = new Status(IStatus.ERROR, ChromiumDebugPlugin.PLUGIN_ID, String.format(
+    //                        "Script %s cannot be updated: %s", file.getProjectRelativePath().toString(), message)); //$NON-NLS-1$
+    //            }
+    //        };
+    //
+    //        updatableScript.setSourceOnRemote(newSource, callback, null);
+    //        return res[0];
+    //    }
+    //
+    //    private static byte[] readFileContents(IFile file) throws IOException, CoreException {
+    //        InputStream inputStream = file.getContents();
+    //        try {
+    //            return readBytes(inputStream);
+    //        } finally {
+    //            inputStream.close();
+    //        }
+    //    }
+    //
+    //    private static byte[] readBytes(InputStream inputStream) throws IOException {
+    //        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+    //        byte[] array = new byte[1024];
+    //        while (true) {
+    //            int len = inputStream.read(array);
+    //            if (len == -1) {
+    //                break;
+    //            }
+    //            buffer.write(array, 0, len);
+    //        }
+    //        return buffer.toByteArray();
+    //    }
+
 }
