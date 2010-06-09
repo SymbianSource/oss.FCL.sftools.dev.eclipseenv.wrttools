@@ -214,7 +214,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 					clearInterval(NOKIA.helper.intervalId);
 				}
 				NOKIA.helper.intervalId = setTimeout(function(){
-					NOKIA.menu.cancel()
+					NOKIA.menu.cancel();
 				}, 500);
 			});
 
@@ -793,7 +793,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 							}
 						}
 	
-				}
+				};
 				xhr.send(null);
 			} catch (e) {
 				if (e.name == 'NS_ERROR_FILE_NOT_FOUND') {
@@ -915,7 +915,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 									//	call the native XmlHttpRequest.open method
 									this._open(method, url, flag);
 								}
-							}
+							};
 						}
 					}
 					catch(e)
@@ -1410,7 +1410,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			var p = document.createElement('p');
 			p.className = type;
 			p.innerHTML = msg;
-			var divBody = $('#preview-ui-bottom-body')
+			var divBody = $('#preview-ui-bottom-body');
 			divBody.append(p);
 			divBody[0].scrollTop = divBody[0].scrollHeight;
 		},
