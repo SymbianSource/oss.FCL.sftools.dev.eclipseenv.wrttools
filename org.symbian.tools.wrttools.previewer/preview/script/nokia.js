@@ -738,30 +738,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				}				
 			}
 			
-//			//	Selecting Orientation
-//			if(NOKIA.mode == 'portrait')
-//				$('#input_portrait')[0].checked = true;
-//			else
-//				$('#input_landscape')[0].checked = true;
-
-//			if (!NOKIA.emulator.orientationSupports()) {
-//				if (NOKIA.mode == 'portrait') 
-//					$("#input_landscape")[0].disabled = true;
-//				else 
-//					$("#input_portrait")[0].disabled = true;
-//					
-//				$("#Orientation_Info").html("Not supported");
-//				$("#Orientation_Info").show();
-//				$("#Orientation_Controls").hide();
-//			}
-//			else {
-//				$("#input_landscape")[0].disabled = false;
-//				$("#input_portrait")[0].disabled = false;
-//
-//				$("#Orientation_Info").hide();
-//				$("#Orientation_Controls").show();
-//			}
-			
 			//	Selecting Version
 			if(NOKIA.version == 'WRT 1.0')
 				$('#wrt_version_1_0')[0].checked = true;
@@ -848,6 +824,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				var xmlString = xhr.responseText;
 				
 				// do some cheating here
+				xmlString = xmlString.replace(/<!--(.|[\n\r])*?-->/gm, "");
 				xmlString = xmlString.replace(/<\s*true\s*\/>/gi, "<string>true</string>");
 				xmlString = xmlString.replace(/<\s*false\s*\/>/gi, "<string>false</string>");
 				xmlString = xmlString.replace(/[\n\r]/gi, "");
