@@ -38,26 +38,8 @@
  </extension>
 
 <!-- WRT Tool Integration (Package, Validate, Include, Exclude Settings)-->
-        <extension	
+ <extension	
           point="org.eclipse.ui.popupMenus">
-<!--
-      <objectContribution
-      		objectClass="org.eclipse.core.resources.IResource" 
-            id="org.symbian.tools.wrttools.widget.wrttool.deployment.setttings">
-     	 <filter
-         	name="projectNature"
-         	value="org.symbian.tools.wrttools.WidgetProjectNature"/>
-         <action
-               class="org.symbian.tools.wrttools.core.deploy.WrtDeploymentSettingsActionDelegate"
-               icon="icons/deploy_settings.gif"
-               id="org.symbian.tools.wrttools.core.deploy.WrtDeploymentSettingsActionDelegate"
-               label="Deployment Settings for WRT Application"
-			   menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker">
-         </action>
-      </objectContribution>	 
--->                
-    
-      
       <objectContribution
             objectClass="org.eclipse.core.resources.IResource"            
             id="org.symbian.tools.wrttools.widget.wrttool.packageoptions">
@@ -142,26 +124,28 @@
 	<extension point="org.symbian.tools.wrttools.projectTemplates">
 
       <projectTemplate
-		name="Basic Project"
-        archive="projecttemplates/basic.zip"
-        default-css-name="basic"
-        default-html-name="index"
-        default-js-name="basic"
-        icon="icons/main16.gif"
-        id-pattern="com.{0}.basic.widget">
+            archive="projecttemplates/basic.zip"
+            default-css-name="basic"
+            default-html-name="index"
+            default-js-name="basic"
+            icon="icons/main16.gif"
+            id-pattern="com.{0}.basic.widget"
+            name="Minimal Project"
+            order="4">
 			<description>
 				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
          </description>
 	  </projectTemplate> 
 
       <projectTemplate
-            name="Advanced Project"
             archive="projecttemplates/helloWithWRTKit.zip"
             default-css-name="HelloWithWRTKit"
             default-html-name="index"
             default-js-name="HelloWithWRTKit"
             icon="icons/WRT_main_16.png"
             id-pattern="com.{0}.helloWithWRTKit.widget"
+            name="Hello World Project"
+            order="1"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.HelloWithWRTKitProjectDetailsWizardPage$Factory">
          <description>
             This wizard generates a basic Hello project with a minimal Info.plist, html,css and js along with WRTKit.
@@ -170,13 +154,14 @@
       </projectTemplate>
 
       <projectTemplate
-            name="Flickr Project"
             archive="projecttemplates/flickr.zip"
             default-css-name="Flickr"
             default-html-name="index"
             default-js-name="Flickr"
             icon="icons/flickr.gif"
             id-pattern="com.{0}.flickr.widget"
+            name="Flickr Project"
+            order="2"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.FlickrProjectDetailsWizardPage$Factory">
          <description>
             This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.
@@ -185,13 +170,14 @@
       </projectTemplate>
 
       <projectTemplate
-            name="RSS Reader Project"
             archive="projecttemplates/rssreader.zip"
             default-css-name="RSSReader"
             default-html-name="index"
             default-js-name="RSSReader"
             icon="icons/rss.gif"
             id-pattern="com.{0}.rssreader.widget"
+            name="RSS Reader Project"
+            order="3"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.RssReaderProjectDetailsWizardPage$Factory">
          <description>
             This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.

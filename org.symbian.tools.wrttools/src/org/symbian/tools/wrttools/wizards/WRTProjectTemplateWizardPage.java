@@ -31,6 +31,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -41,7 +42,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
 
 public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
@@ -72,15 +72,14 @@ public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
         setDescription("Select project name and template that will be used to populate");
 	}
 	
-    public void createControl(Composite parent) {
-        super.createControl(parent);
-        final Composite root = (Composite) getControl();
+    @Override
+    protected void createChildControls(Composite c) {
 		ProjectTemplate[] allTemplates = ProjectTemplate.getAllTemplates();
 
 		if (allTemplates.length == 1) {
 			context.setTemplate(allTemplates[0]);
 		}
-        Composite composite = new Composite(root, SWT.NONE);
+        Composite composite = new Composite(c, SWT.NONE);
         composite.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		FormLayout layout = new FormLayout();
 		layout.marginWidth = 5;
@@ -88,10 +87,10 @@ public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
 
 		templates = new TableViewer(composite, SWT.BORDER | SWT.SINGLE);
 		FormData templatesData = new FormData();
-        templatesData.top = new FormAttachment(0, 8);
+        templatesData.top = new FormAttachment(0, 0);
 		templatesData.left = new FormAttachment(0, 0);
         templatesData.right = new FormAttachment(40, -2);
-        templatesData.bottom = new FormAttachment(100, 0);
+        templatesData.bottom = new FormAttachment(100, -8);
 		templates.getControl().setLayoutData(templatesData);
 		templates.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -109,14 +108,20 @@ public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
 		
 		description = new Text(composite, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT .READ_ONLY);
 		FormData descriptionData = new FormData();
-        descriptionData.top = new FormAttachment(0, 8);
-		descriptionData.bottom = new FormAttachment(100, 0);
+        descriptionData.top = new FormAttachment(0, 0);
+        descriptionData.bottom = new FormAttachment(100, -8);
         descriptionData.left = new FormAttachment(templates.getControl(), 5);
 		descriptionData.right = new FormAttachment(100, 0);
 		description.setLayoutData(descriptionData);
 		
 		templates.setContentProvider(new ArrayContentProvider());
 		templates.setLabelProvider(new ProjectTemplateLabelProvider());
+        templates.setSorter(new ViewerSorter() {
+            @Override
+            public int category(Object element) {
+                return Integer.valueOf(((ProjectTemplate) element).getOrder());
+            }
+        });
 		templates.setInput(allTemplates);
 		
 		setPageComplete(false);

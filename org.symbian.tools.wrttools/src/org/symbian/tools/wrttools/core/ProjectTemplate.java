@@ -167,4 +167,12 @@ public class ProjectTemplate {
         }
         return libraries.toArray(new JSLibrary[libraries.size()]);
     }
+
+    public int getOrder() {
+        String attribute = element.getAttribute("order");
+        if (attribute != null) {
+            return Integer.parseInt(attribute);
+        }
+        return Integer.MAX_VALUE;
+    }
 }
