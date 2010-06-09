@@ -21,7 +21,6 @@ package org.symbian.tools.wrttools.core.deployer;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-
 import org.symbian.tools.wrttools.core.status.IWRTStatusListener;
 
 /**
@@ -51,5 +50,7 @@ public interface IWidgetDeployer {
 	 * @param statusListener the status listner to be associated.
 	 */
 	public void setStatusListener(IWRTStatusListener statusListener);
+
+    public boolean needsReport();
 
 }

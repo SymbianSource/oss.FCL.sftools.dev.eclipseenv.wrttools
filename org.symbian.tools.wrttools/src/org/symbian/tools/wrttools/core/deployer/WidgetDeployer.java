@@ -39,8 +39,6 @@ public abstract class WidgetDeployer implements IWidgetDeployer{
 	
 	IWRTStatusListener statusListener;
 	
-	protected String[] exceptionCodes  = new String[] {"OBEX_HTTP_UNSUPPORTED_TYPE", "OBEX_HTTP_FORBIDDEN"}; //$NON-NLS-1$ //$NON-NLS-2$
-	
 	public WidgetDeployer() {
 		setStatus();
 	}
@@ -105,20 +103,8 @@ public abstract class WidgetDeployer implements IWidgetDeployer{
 		status.setStatusDescription(statusDescription);		
 		getStatusListener().emitStatus(status);
 	}
-	
-	/**
-	 * Returns the customized methods from the exception error code. If it
-	 * matches it returns the customized message else returns the exception itself
-	 * @param message exception message
-	 * @return the customized message
-	 */
-	protected String getExceptionMessage(String message) {
-		
-		if(message.contains(exceptionCodes[0])){
-			return DeployerMessages.getString("Deployer.device.notsupport.err.msg"); //$NON-NLS-1$
-		} else if (message.contains(exceptionCodes[1])){
-			return DeployerMessages.getString("Deployer.device.rejected.err.msg"); //$NON-NLS-1$
-		}		
-		return message;
-	}
+
+    public boolean needsReport() {
+        return true;
+    }
 }
