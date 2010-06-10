@@ -18,13 +18,22 @@
  */
 package org.symbian.tools.wrttools.debug.internal.launch;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.chromium.debug.core.model.StackFrame;
 import org.chromium.sdk.Script;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.model.ISourceLocator;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.sourcelookup.AbstractSourceLookupDirector;
@@ -34,13 +43,17 @@ import org.eclipse.debug.core.sourcelookup.ISourceLookupParticipant;
 import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.model.ResourceManager;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
+import org.symbian.tools.wrttools.previewer.http.WebappManager;
 
 public final class WebApplicationSourceLocator extends AbstractSourceLookupDirector implements ISourceLocator,
         ISourceLookupDirector {
     public static final class WebApplicationSourceLookupParticipant extends AbstractSourceLookupParticipant {
         private final ResourceManager resourceManager;
+        private final WebApplicationSourceLocator locator;
 
-        public WebApplicationSourceLookupParticipant(ResourceManager resourceManager) {
+        public WebApplicationSourceLookupParticipant(WebApplicationSourceLocator locator,
+                ResourceManager resourceManager) {
+            this.locator = locator;
             this.resourceManager = resourceManager;
         }
 
@@ -57,6 +70,8 @@ public final class WebApplicationSourceLocator extends AbstractSourceLookupDirec
                 IFile resource = resourceManager.getResource(script);
                 if (resource != null) {
                     return resource.getProjectRelativePath().toString();
+                } else {
+                    return locator.fileUrl(script);
                 }
             }
             return null;
@@ -67,6 +82,35 @@ public final class WebApplicationSourceLocator extends AbstractSourceLookupDirec
 
     public WebApplicationSourceLocator(ResourceManager resourceManager) {
         this.resourceManager = resourceManager;
+    }
+
+    public String fileUrl(Script script) throws CoreException {
+        String name = script.getName();
+        try {
+            URI uri = new URI(name);
+            if ("http".equals(uri.getScheme()) && WebappManager.getHost().equals(uri.getHost())
+                    && WebappManager.getPort() == uri.getPort()) {
+                final IPath stateLocation = Activator.getDefault().getStateLocation();
+                final IPath path = stateLocation.append("systemlibraries")
+                        .append(new Path(uri.getPath()).lastSegment());
+                final File file = path.toFile();
+                file.getParentFile().mkdirs();
+                final String source = script.getSource();
+                final BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                try {
+                    writer.write(source);
+                } finally {
+                    writer.close();
+                }
+                return new Path(file.getParentFile().getName()).append(file.getName()).toString();
+            }
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+                    "Cannot load web runtime system libraries", e));
+        }
+        return null;
     }
 
     public Object getSourceElement(IStackFrame stackFrame) {
@@ -97,6 +141,7 @@ public final class WebApplicationSourceLocator extends AbstractSourceLookupDirec
 	}
 
     public void initializeParticipants() {
-        addParticipants(new ISourceLookupParticipant[] { new WebApplicationSourceLookupParticipant(resourceManager) });
+        addParticipants(new ISourceLookupParticipant[] { new WebApplicationSourceLookupParticipant(this,
+                resourceManager) });
     }
 }

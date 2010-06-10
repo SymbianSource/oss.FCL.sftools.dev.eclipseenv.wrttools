@@ -23,6 +23,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.sourcelookup.ISourceContainer;
 import org.eclipse.debug.core.sourcelookup.ISourceLookupDirector;
+import org.eclipse.debug.core.sourcelookup.containers.DirectorySourceContainer;
 import org.eclipse.debug.core.sourcelookup.containers.ProjectSourceContainer;
 import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.model.ResourceManager;
@@ -65,7 +66,8 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
         ILaunch launch = debugTargetImpl.getLaunch();
         try {
             sourceLocator.initializeDefaults(launch.getLaunchConfiguration());
-            sourceLocator.setSourceContainers(new ISourceContainer[] { new ProjectSourceContainer(project, false) });
+            sourceLocator.setSourceContainers(new ISourceContainer[] { new ProjectSourceContainer(project, false),
+                    new DirectorySourceContainer(Activator.getDefault().getStateLocation(), true) });
         } catch (CoreException e) {
             throw new RuntimeException(e);
         }

@@ -9,6 +9,7 @@ import org.chromium.sdk.CallFrame;
 import org.chromium.sdk.DebugContext;
 import org.chromium.sdk.ExceptionData;
 import org.chromium.sdk.Script;
+import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.osgi.util.NLS;
@@ -31,6 +32,8 @@ public class WrtLabelProvider implements JsLabelProvider {
                         .getName();
                 name = NLS.bind("{0} [{1}:{2}]", new Object[] { name, resourcePath, line });
             }
+        } else if (element instanceof IFileStore) {
+            return "(WRT System Library)";
         }
         return name;
     }
