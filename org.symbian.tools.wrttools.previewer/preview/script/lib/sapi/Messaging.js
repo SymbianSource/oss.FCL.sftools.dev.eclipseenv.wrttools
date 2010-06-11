@@ -121,7 +121,7 @@
 		if (typeof callback == 'function') {
 			return context.callAsync(this, arguments.callee, criteria, callback);
 		}
-		var message = _t('Sent %s message \"%s\" to %s').arg(criteria.MessageType, criteria.BodyText, criteria.To)
+		var message = _t('Sent %s message \"%s\" to %s').arg(criteria.MessageType, criteria.BodyText, criteria.To);
 		context.notify(message);
 		window.alert(message);
 
