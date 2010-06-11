@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+/**
+ * Copyright (c) 2009, 2010 Symbian Foundation and/or its subsidiary(-ies). 
+ * All rights reserved. * This component and the accompanying materials are	made available
+ * under the terms of the License "Eclipse Public License v1.0" 
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html". 
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ * Description:
+ * Overview:
+ * Details:
+ * Platforms/Drives/Compatibility: 
+ * Assumptions/Requirement/Pre-requisites:
+ * Failures and causes:
+ */
+-->
+
+<templates>
+	<template name="appmanager" description="Access WRT 1.1 application manager. This API allows widgets to access and launch applications."
+		id="org.symbian.tools.wrttools.templates.appmanager" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${appManager} = device.getServiceObject("Service.AppManager", "IAppManager");
+	</template>
+	<template name="calendar" description="Access WRT 1.1 calendar service. This API allows widgets to access, create, and manage calendars and calendar entries."
+		id="org.symbian.tools.wrttools.templates.calendar" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${calendarService} = device.getServiceObject("Service.Calendar", "IDataSource");
+	</template>
+	<template name="contact" description="Access WRT 1.1 contacts service. This API allows widgets to access and manage information about contacts."
+		id="org.symbian.tools.wrttools.templates.contacts" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${contactService} = device.getServiceObject("Service.Contact", "IDataSource");
+	</template>
+	<template name="landmarks" description="Access WRT 1.1 landmarks service. This API allows widgets to access and manage information about landmarks and landmark categories. The information is stored in one or more landmark databases on a device."
+		id="org.symbian.tools.wrttools.templates.landmarks" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${landmarksService} = device.getServiceObject("Service.Landmarks", "IDataSource");
+	</template>
+	<template name="location" description="Access WRT 1.1 location service. This API allows widgets to retrieve information about the geographic location of the device and to perform location-based calculations."
+		id="org.symbian.tools.wrttools.templates.location" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${locationService} = device.getServiceObject("Service.Location", "ILocation");
+	</template>
+	<template name="logging" description="Access WRT 1.1 logging service. This API allows widgets to access and manage logging events such as call logs, messaging logs, and data logs."
+		id="org.symbian.tools.wrttools.templates.calendar" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${loggingService} = device.getServiceObject("Service.Logging", "IDataSource");
+	</template>
+	<template name="media" description="Access WRT 1.1 media management service. This API allows widgets to retrieve information about the media files stored in the device's public folders."
+		id="org.symbian.tools.wrttools.templates.media" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${mediaService} = device.getServiceObject("Service.MediaManagement", "IDataSource");
+	</template>
+	<template name="messaging" description="Access WRT 1.1 messaging service. This API allows widgets to send, retrieve, and manage messages using the Message Store."
+		id="org.symbian.tools.wrttools.templates.messaging" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${messaging} = device.getServiceObject("Service.Messaging", "IMessaging");
+	</template>
+	<template name="sensor" description="Access WRT 1.1 sensors API. This API allows widgets to access data provided by the physical sensors of the device."
+		id="org.symbian.tools.wrttools.templates.calendar" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${sensors} = device.getServiceObject("Service.Sensor", "ISensor");
+	</template>
+
+</templates>
