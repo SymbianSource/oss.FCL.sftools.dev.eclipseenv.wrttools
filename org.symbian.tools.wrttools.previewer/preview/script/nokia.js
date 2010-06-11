@@ -1239,6 +1239,8 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				}
 				});
 
+			var cc = $("#close-camera");
+			cc.click(NOKIA.helper.hideCamera);
 			//	Bind Buttons to trigger values to WRT 1.0 / 1.1 bindings
 			
 			$("#connect-charger").click(NOKIA.helper.triggerEvents);
@@ -1250,6 +1252,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 			$("#connect-memory-card").click(NOKIA.helper.triggerEvents);
 			$("#disconnect-memory-card").click(NOKIA.helper.triggerEvents);
+			
 			
 		},
 		
@@ -1295,6 +1298,16 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			
 			return count;
 		},
+		
+		showCamera : function() {
+			$("#camera").show();
+			$("#WidgetArea").hide();
+		},		
+
+		hideCamera : function() {
+			$("#camera").hide();
+			$("#WidgetArea").show();
+		},		
 		
 		triggerEvents : function(event)
 		{

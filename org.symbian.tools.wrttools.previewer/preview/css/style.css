@@ -655,7 +655,7 @@ span#Console-Toggle-Button.close:active{
 
 
 span#Console-Clear-Button{
-	height: 16px;
+	height: 17px;
 	width: 39px;
 	float: right;
 	background-image: url(../images/console-clear-button.png);
@@ -664,7 +664,7 @@ span#Console-Clear-Button{
 	cursor: hand;
 }
 span#Console-Clear-Button:hover{
-	background-position: -0px -16px;
+	background-position: -0px -17px;
 }
 
 #preview-ui-bottom-body{
@@ -727,3 +727,10 @@ span#wrt-help{
 span#wrt-help:hover{
 	background-position: -28px 0px;
 }
+
+#camera {
+	position : relative;
+	top: 30%;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;

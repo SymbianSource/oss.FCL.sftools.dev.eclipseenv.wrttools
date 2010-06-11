@@ -53,7 +53,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 		if (url) {
 			window.open(url, "New Widget Window", 'height=200 width=250');
 		}
-	}
+	};
 	
 	
 	/**
@@ -64,7 +64,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 */
 	widget.preferenceForKey = function(name){
 		return _BRIDGE_REF.nokia.helper.getPreference(name);
-	}
+	};
 	
 	
 	/**
@@ -76,7 +76,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 */
 	widget.setPreferenceForKey = function(preference, key){
 		_BRIDGE_REF.nokia.helper.setPreference(key, preference);
-	}
+	};
 	
 	
 	
@@ -88,7 +88,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 */
 	widget.setNavigationEnabled = function(bool){
 		//This function can not be used on preview browser
-	}
+	};
 	
 	
 	
@@ -100,8 +100,13 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 * @return {Void}
 	 */
 	widget.openApplication = function(Uid, param){
-		alert("openApplication function won't be simulated in this application");
-	}
+		if (Uid == 270501242) { // Camera
+			var help = _BRIDGE_REF.nokia.helper;
+			help.showCamera();
+		} else {
+			alert("openApplication function won't be simulated in this application");
+		}
+	};
 	
 	
 	
@@ -114,7 +119,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	widget.prepareForTransition = function(transitionState){
 		this.isFront = ("" + transitionState).toLowerCase() != "toback";
 		window.document.getElementsByTagName("body")[0].style.opacity = "0.3";
-	}
+	};
 	
 	
 	
@@ -141,7 +146,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 			//do nothing
 		}, 50);
 		//do nothing
-	}
+	};
 	
 	
 	
@@ -163,7 +168,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 		} 
 		catch (e) {
 		}
-	}
+	};
 	
 	
 	
@@ -184,7 +189,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 		} 
 		catch (e) {
 		}
-	}
+	};
 	
 	/**
 	 * Allows the definition of a function to be called
@@ -195,7 +200,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 */
 	widget.onshow = function(){
 		// to be implemented
-	}
+	};
 	
 	
 	
@@ -209,7 +214,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 */
 	widget.onhide = function(){
 		// to be implemented
-	}
+	};
 	
 	
 	
@@ -242,7 +247,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 		catch (e) {
 			alert('Error in attachSysInfo: ' + e);
 		}
-	}
+	};
 	
 	/**
 	 * 
@@ -276,7 +281,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 		}else{
 			console.info("System API-1.0 Notice -- no listeners defined for eventType:"+eventType);
 		}
-	}
+	};
 	
 	//	make TRUE widget.js script loaded
 	window.parent.NOKIA.scriptsLoaded.widget = true;
@@ -300,4 +305,4 @@ if (typeof window.widget == "undefined" || !window.widget) {
 		_BRIDGE_REF.nokia.emulator.child = window;
 		_BRIDGE_REF.nokia.menu.init();
 	}	
-})()
+})();
