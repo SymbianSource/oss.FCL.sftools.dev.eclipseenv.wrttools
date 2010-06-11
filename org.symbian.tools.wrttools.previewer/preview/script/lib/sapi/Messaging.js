@@ -39,7 +39,7 @@
 		this.ChangeStatus 			= __ChangeStatus;
 		this.Delete					= __Delete;
 		this.Cancel 				= __Cancel;
-	}
+	};
 
 	device.implementation.extend(provider, Interface, new MessagingService() );
 
@@ -121,8 +121,9 @@
 		if (typeof callback == 'function') {
 			return context.callAsync(this, arguments.callee, criteria, callback);
 		}
-
-		context.notify(_t('%s:: Send : message sent!').arg(provider));
+		var message = _t('Sent %s message \"%s\" to %s').arg(criteria.MessageType, criteria.BodyText, criteria.To)
+		context.notify(message);
+		window.alert(message);
 
 		// return success
 		return error(device.implementation.ERR_SUCCESS);
