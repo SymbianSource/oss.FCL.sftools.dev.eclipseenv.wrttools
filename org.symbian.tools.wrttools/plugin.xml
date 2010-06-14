@@ -246,9 +246,6 @@
 			<newWizardShortcut id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
 			</newWizardShortcut>
 		</perspectiveExtension>
-  <perspectiveExtension
-        targetID="org.symbian.tools.wrttools.mainPerspective">
-  </perspectiveExtension>
 	</extension>
 	
 <!-- Navigator Extensions -->
@@ -888,5 +885,140 @@
     <include
           file="templates/default-templates.xml">
     </include>
+ </extension>
+ <extension
+       point="org.eclipse.wst.common.snippets.SnippetContributions">
+    <category
+          description="WRT-specific JavaScript snippets"
+          id="org.symbian.tools.wrttools.wrtsnippets"
+          label="Symbian Web Runtime"
+          smallicon="icons/main16.gif"
+          contenttypes="org.eclipse.wst.jsdt.core.jsSource">
+       <item
+             description="This function can be used as a callback in GetLocation and Trace calls to location service."
+             id="org.symbian.tools.wrttools.location"
+             label="Location callback">
+          <content>
+function locationUpdated(transactionId, code, result) {
+	if (result.ErrorCode == 0) {
+		var longitude = result.ReturnValue.Longitude; // Longitude estimate in degrees. The value range is [+180, -180].
+		var latitude = result.ReturnValue.Latitude; // Latitude estimate in degrees. The value range is [+90, -90].
+		var altitude = result.ReturnValue.Altitude; // Elevation estimate in meters relative to the WGS 84 datum.
+		var satelliteNumView = result.ReturnValue.SatelliteNumView; // Number of satellites currently in view.
+		var satelliteNumViewUsed = result.ReturnValue.SatelliteNumViewUsed; // Number of satellites used to obtain the location fix.
+		var horizontalSpeed = result.ReturnValue.HorizontalSpeed; // Horizontal speed estimate in meters per second. This is the speed of the device at the time the location fix was obtained.
+		var horizontalSpeedError = result.ReturnValue.HorizontalSpeedError; // Horizontal speed error in meters per second.
+		var trueCourse = result.ReturnValue.TrueCourse; // Current direction of movement in degrees in relation to true north.
+		var trueCourseError = result.ReturnValue.TrueCourseError; // TrueCourse error in degrees.
+		var magneticHeading = result.ReturnValue.MagneticHeading; // Current direction of movement in degrees in relation to magnetic north.
+		var magneticHeadingError = result.ReturnValue.MagneticHeadingError; // MagneticHeading error in degrees.
+		var heading = result.ReturnValue.Heading; // Current instantaneous direction of movement in degrees in relation to true north.
+		var headingError = result.ReturnValue.HeadingError; // Heading error in degrees.
+		var magneticCourse = result.ReturnValue.MagneticCourse; // Current instantaneous direction of movement in degrees in relation to magnetic north.
+		var magneticCourseError = result.ReturnValue.MagneticCourseError; // MagneticCourse error in degrees
+		// TODO Location information was received
+	} else {
+		var errorCode = result.ErrorCode;
+		var errorMessage = result.ErrorMessage;
+		// TODO Failed to retrieve location information
+	}
+}          </content>
+       </item>
+       <item
+             description="Retrieves list of the contacts"
+             id="org.symbian.tools.wrttools.contacts"
+             label="Get contacts">
+          <content>
+var contactService = device.getServiceObject("Service.Contact",
+			"IDataSource");
+	var result = contactService.IDataSource.GetList(
+			{ Type : "Contact", Sort : { Order : "Ascending" } }
+			);
+	if (result.ErrorCode == 0) {
+		var contacts = result.ReturnValue;
+		for ( var contact = contacts.getNext(); contact != null; contact = contacts.getNext()) {
+			var firstName = contact.FirstName;
+			var lastName = contact.LastName;
+			var mobile = contact.MobilePhoneGen;
+			var landPhone = contact.LandPhoneGen;
+			var jobTitle = contact.JobTitle;
+			// Consult WRT documentation for possible values
+			// TODO Process contact information
+		}
+	} else {
+		var errorCode = result.ErrorCode;
+		var errorMessage = result.ErrorMessage;
+		// TODO Cannot retrieve contacts list
+	}
+          </content>
+       </item>
+       <item
+             description="Sends SMS message"
+             id="org.symbian.tools.wrttools.contacts"
+             label="Send SMS message">
+          <content>
+var phoneNumber = "+6505551214";
+	var text = "Sent from WRT application";
+	var messaging = device.getServiceObject("Service.Messaging", "IMessaging");
+	var result = messaging.IMessaging.Send({ MessageType : "SMS", To : phoneNumber, BodyText : text });
+	if (result.ErrorCode != null) {
+		var errorCode = result.ErrorCode;
+		var errorMessage = result.ErrorMessage;
+	}
+          </content>
+       </item>
+       <item
+             description="Adds callback that will be notified of orientation chnages"
+             id="org.symbian.tools.wrttools.contacts"
+             label="Add orientation callback">
+          <content>
+var sensors = device.getServiceObject("Service.Sensor", "ISensor");
+	var SensorParams = {
+		SearchCriterion : "Orientation"
+	};
+	var result = sensors.ISensor.FindSensorChannel(SensorParams);
+
+	if (result.ErrorCode == 0) {
+		var result2 = sensors.ISensor.RegisterForNotification({ ChannelInfoMap : result.ReturnValue[0], ListeningType : "ChannelData" }, ${orientationCallback});
+		if (result.ErrorCode == 0) {
+			var transactionId = result.TransactionID;
+			// TODO Use this transaction ID to cancel notifications when watching orientation is no longer needed
+		} else {
+			var errorCode = result.ErrorCode;
+			var errorMessage = result.ErrorMessage;
+			// TODO Handle error
+		}
+	} else {
+		var errorCode = result.ErrorCode;
+		var errorMessage = result.ErrorMessage;
+		// TODO Handle error
+	}
+         </content>
+       </item>
+       <item
+             description="Function that processes notifications from the orientation sensor"
+             id="org.symbian.tools.wrttools.contacts"
+             label="Orientation callback">
+          <content>
+function orientationCallback(transactionId, code, result) {
+	if (result.ErrorCode == 0) {
+		var orientation = result.ReturnValue.DeviceOrientation;
+		// TODO Possible values:
+		// "Undefined"
+		// "DisplayUp"
+		// "DisplayDown"
+		// "DisplayLeftUp"
+		// "DisplayRightUp"
+		// "DisplayUpwards"
+		// "DisplayDownwards"
+	} else {
+		var errorCode = result.ErrorCode;
+		var errorMessage = result.ErrorMessage;
+		// TODO Handle error
+	}
+}
+         </content>
+       </item>
+    </category>
  </extension>
 </plugin>

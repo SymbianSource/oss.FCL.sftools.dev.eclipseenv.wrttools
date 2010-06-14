@@ -19,6 +19,9 @@ public class WRTPerspective implements IPerspectiveFactory {
 		IFolderLayout folder= layout.createFolder("left", IPageLayout.LEFT, (float)0.15, editorArea); //$NON-NLS-1$
 		folder.addView(Activator.NAVIGATOR_ID);
 		folder.addView(JavaScriptUI.ID_TYPE_HIERARCHY);
+
+        IFolderLayout snippetsFolder = layout.createFolder("snippets", IPageLayout.BOTTOM, (float) 0.5, "left"); //$NON-NLS-1$
+        snippetsFolder.addView("org.eclipse.wst.common.snippets.internal.ui.SnippetsView");
 		
 		IFolderLayout outputfolder= layout.createFolder("bottom", IPageLayout.BOTTOM, (float)0.75, editorArea); //$NON-NLS-1$
 		outputfolder.addView(IPageLayout.ID_PROBLEM_VIEW);
@@ -54,6 +57,7 @@ public class WRTPerspective implements IPerspectiveFactory {
 		layout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
 		layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
 		layout.addShowViewShortcut(PreviewerPlugin.PREVIEW_VIEW);
+        layout.addShowViewShortcut("org.eclipse.wst.common.snippets.internal.ui.SnippetsView");
 				
 		// new actions - Java project creation wizard
 		layout.addNewWizardShortcut("org.symbian.tools.wrttools.core.wrtwidgetwizard"); //$NON-NLS-1$

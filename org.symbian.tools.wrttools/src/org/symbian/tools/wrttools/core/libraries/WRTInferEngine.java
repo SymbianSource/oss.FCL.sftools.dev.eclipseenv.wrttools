@@ -27,6 +27,7 @@ import org.eclipse.wst.jsdt.core.ast.IFunctionCall;
 import org.eclipse.wst.jsdt.core.ast.IFunctionDeclaration;
 import org.eclipse.wst.jsdt.core.infer.InferEngine;
 import org.eclipse.wst.jsdt.core.infer.InferredType;
+import org.eclipse.wst.jsdt.internal.compiler.ast.LocalDeclaration;
 import org.eclipse.wst.jsdt.internal.compiler.ast.SingleNameReference;
 import org.eclipse.wst.jsdt.internal.compiler.ast.StringLiteral;
 
@@ -45,6 +46,14 @@ public class WRTInferEngine extends InferEngine {
         serviceIdToType.put("Service.Messaging:IMessaging", "Messaging".toCharArray());
         serviceIdToType.put("Service.Sensor:ISensor", "Sensor".toCharArray());
         serviceIdToType.put("Service.SysInfo:ISysInfo", "SysInfo".toCharArray());
+    }
+
+    @Override
+    protected boolean handleFunctionCall(IFunctionCall messageSend, LocalDeclaration assignmentExpression) {
+        if (assignmentExpression != null) {
+            assignmentExpression.setInferredType(getTypeOf(messageSend));
+        }
+        return super.handleFunctionCall(messageSend, assignmentExpression);
     }
 
     @Override

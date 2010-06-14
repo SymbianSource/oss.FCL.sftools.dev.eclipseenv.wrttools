@@ -248,6 +248,9 @@
          <showInPart
                id="org.symbian.tools.wrttools.wrtnavigator">
          </showInPart>
+         <perspectiveShortcut
+               id="org.symbian.tools.wrttools.mainPerspective">
+         </perspectiveShortcut>
       </perspectiveExtension>
    </extension>
 </plugin>

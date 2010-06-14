@@ -47,7 +47,7 @@
 		var ${locationService} = device.getServiceObject("Service.Location", "ILocation");
 	</template>
 	<template name="logging" description="Access WRT 1.1 logging service. This API allows widgets to access and manage logging events such as call logs, messaging logs, and data logs."
-		id="org.symbian.tools.wrttools.templates.calendar" context="javaScript"
+		id="org.symbian.tools.wrttools.templates.logging" context="javaScript"
 		enabled="true" autoinsert="false">
 		var ${loggingService} = device.getServiceObject("Service.Logging", "IDataSource");
 	</template>
@@ -62,7 +62,7 @@
 		var ${messaging} = device.getServiceObject("Service.Messaging", "IMessaging");
 	</template>
 	<template name="sensor" description="Access WRT 1.1 sensors API. This API allows widgets to access data provided by the physical sensors of the device."
-		id="org.symbian.tools.wrttools.templates.calendar" context="javaScript"
+		id="org.symbian.tools.wrttools.templates.sensor" context="javaScript"
 		enabled="true" autoinsert="false">
 		var ${sensors} = device.getServiceObject("Service.Sensor", "ISensor");
 	</template>
