@@ -50,7 +50,7 @@ public class BluetoothDeploymentJob extends Job {
     protected String[] exceptionCodes = new String[] { "OBEX_HTTP_UNSUPPORTED_TYPE", "OBEX_HTTP_FORBIDDEN" }; //$NON-NLS-1$ //$NON-NLS-2$
 
     private final Collection<IStatus> statuses = new LinkedList<IStatus>();
-    private String message = "Deployment was successful";
+    private String message = "Deployment was successful. Please follow on-screen instructions to complete application deployment on your device.";
     private final File inputWidget;
     private final String device;
 

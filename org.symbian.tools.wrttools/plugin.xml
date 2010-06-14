@@ -942,7 +942,7 @@ var contactService = device.getServiceObject("Service.Contact",
 			var mobile = contact.MobilePhoneGen;
 			var landPhone = contact.LandPhoneGen;
 			var jobTitle = contact.JobTitle;
-			// Consult WRT documentation for possible values
+			// Consult WRT documentation for other possible fields
 			// TODO Process contact information
 		}
 	} else {
@@ -964,6 +964,7 @@ var phoneNumber = "+6505551214";
 	if (result.ErrorCode != null) {
 		var errorCode = result.ErrorCode;
 		var errorMessage = result.ErrorMessage;
+		// TODO Cannot send SMS message
 	}
           </content>
        </item>
@@ -979,7 +980,7 @@ var sensors = device.getServiceObject("Service.Sensor", "ISensor");
 	var result = sensors.ISensor.FindSensorChannel(SensorParams);
 
 	if (result.ErrorCode == 0) {
-		var result2 = sensors.ISensor.RegisterForNotification({ ChannelInfoMap : result.ReturnValue[0], ListeningType : "ChannelData" }, ${orientationCallback});
+		var result2 = sensors.ISensor.RegisterForNotification({ ChannelInfoMap : result.ReturnValue[0], ListeningType : "ChannelData" }, orientationCallback);
 		if (result.ErrorCode == 0) {
 			var transactionId = result.TransactionID;
 			// TODO Use this transaction ID to cancel notifications when watching orientation is no longer needed
