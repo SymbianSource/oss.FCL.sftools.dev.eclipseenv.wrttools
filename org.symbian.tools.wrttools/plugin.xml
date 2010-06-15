@@ -25,9 +25,6 @@
            </image>
         </extension>
         
-<!-- Validator Marker -->
-   
-        
 <!-- Web Runtime Preferences --> 
  <extension
     point="org.eclipse.core.runtime.preferences">
@@ -87,7 +84,7 @@
     </objectContribution>
    </extension>  
 
-<!-- WRT Project Templates - CSS Validator -->
+<!-- CSS Validator -->
 	<extension id="org.symbian.tools.wrttools.core.cssvalidator"
 		name="CSS Validator" point="org.eclipse.wst.validation.validatorV2">
 		<validator build="true"
@@ -211,22 +208,6 @@
       </wizard>
 		
     </extension>
-	
-<!-- Problem Markers -->
-	<extension id="org.symbian.tools.wrt.xmlProblem" name="XML Problem"
-		point="org.eclipse.core.resources.markers">
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<persistent value="true">
-		</persistent>
-	</extension>
-	<extension id="org.symbian.tools.wrt.jsProblem" name="JSProblem"
-		point="org.eclipse.core.resources.markers">
-		<super type="org.eclipse.core.resources.problemmarker">
-		</super>
-		<persistent value="true">
-		</persistent>
-	</extension>
 	
 <!-- WRT Content Descriptor (.plist) file -->
 	<extension point="org.eclipse.core.contenttype.contentTypes">
