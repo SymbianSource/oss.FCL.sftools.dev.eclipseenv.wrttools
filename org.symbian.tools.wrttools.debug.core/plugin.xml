@@ -190,6 +190,17 @@
                style="push">
          </action>
       </objectContribution>
+      <viewerContribution
+            id="org.symbian.tools.wrttools.debug.core.watch"
+            targetID="#JavaScriptEditorContext">
+         <action
+               class="org.symbian.tools.wrttools.debug.ui.actions.WatchExpression"
+               icon="icons/watch.gif"
+               id="org.symbian.tools.wrttools.debug.core.watchExpression"
+               label="Watch"
+               menubarPath="group.edit">
+         </action>
+      </viewerContribution>
    </extension>
    <extension
          point="org.eclipse.core.runtime.adapters">

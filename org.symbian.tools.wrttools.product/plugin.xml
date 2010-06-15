@@ -178,6 +178,14 @@
             activityId="org.symbian.tools.wrttools.product.chdtact"
             pattern="org\.chromium\.debug\.ui/org\.chromium\.debug\.ui\.LaunchType.*">
       </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.chdtact"
+            pattern="org\.chromium\.debug\.ui/org\.chromium\.debug\.ui\.actions\.CompareChangesAction">
+      </activityPatternBinding>
+      <activityPatternBinding
+            activityId="org.symbian.tools.wrttools.product.chdtact"
+            pattern="org\.chromium\.debug\.ui/org\.chromium\.debug\.ui\.actions\.PushChangesAction">
+      </activityPatternBinding>
    </extension>
    <extension
          id="product"
