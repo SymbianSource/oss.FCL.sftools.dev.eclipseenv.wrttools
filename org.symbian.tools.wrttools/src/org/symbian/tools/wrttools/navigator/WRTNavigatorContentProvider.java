@@ -122,7 +122,9 @@ public class WRTNavigatorContentProvider extends JavaNavigatorContentProvider
 	protected void refreshViewer(final IResource resource) {
 		viewer.getControl().getDisplay().asyncExec(new Runnable() {
 			public void run() {
-				((TreeViewer) viewer).refresh(resource);
+                if (!viewer.getControl().isDisposed()) {
+                    ((TreeViewer) viewer).refresh(resource);
+                }
 			}
 		});
 	}
