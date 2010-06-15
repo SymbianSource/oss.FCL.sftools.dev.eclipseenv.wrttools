@@ -54,9 +54,9 @@ if (typeof window.widget == "undefined" || !window.widget) {
 			if (url.substring(0, 4) == "tel:") {
 				var sz = "Number " + url.substring(4) + " was dialed";
 				window.alert(sz);
+			} else {
+				window.open(url, "New Widget Window", 'height=200 width=250');
 			}
-
-			window.open(url, "New Widget Window", 'height=200 width=250');
 		}
 	};
 	
