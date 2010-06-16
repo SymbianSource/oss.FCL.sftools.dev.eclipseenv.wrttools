@@ -42,7 +42,7 @@ public class PhoneGapInstaller implements IJSLibraryInstaller {
 
     public void install(IProject project, Map<String, String> parameters, IProgressMonitor monitor)
             throws CoreException, IOException {
-        String folderName = "script";
+        final String folderName = "phonegap";
         monitor.beginTask("Installing PhoneGap library", 10);
         IFolder folder = project.getFolder(folderName);
         if (!folder.isAccessible()) {
