@@ -105,7 +105,7 @@ public class WebAppInterface {
         if (!isConnected(widget, id)) {
             BrowserConnectionJob listener = debuggerJobs.get(getId(widget, id));
             listener.setSessionId(sId);
-            listener.schedule(50);
+            listener.schedule(250);
         }
     }
 
