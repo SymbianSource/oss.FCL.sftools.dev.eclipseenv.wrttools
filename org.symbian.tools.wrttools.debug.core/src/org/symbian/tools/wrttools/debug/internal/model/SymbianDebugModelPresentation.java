@@ -1,6 +1,10 @@
 package org.symbian.tools.wrttools.debug.internal.model;
 
+import java.util.Collection;
+
 import org.chromium.debug.core.model.Value;
+import org.chromium.sdk.JsValue;
+import org.chromium.sdk.JsVariable;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -22,8 +26,10 @@ import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.internal.ui.javaeditor.JarEntryEditorInput;
 import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 
+@SuppressWarnings("restriction")
 public class SymbianDebugModelPresentation extends LabelProvider implements
 		IDebugModelPresentation {
+    private static final int DETAILS_DEPTH = 2;
 
 	public void setAttribute(String attribute, Object value) {
 	}
@@ -40,23 +46,71 @@ public class SymbianDebugModelPresentation extends LabelProvider implements
 		return null;
 	}
 
-	public void computeDetail(IValue value, IValueDetailListener listener) {
-		String detail = ""; //$NON-NLS-1$
-		if (value instanceof Value) {
-			// Avoid quoting string JavaScript values by getting the value
-			// string
-			// from the underlying JsValue.
-			detail = ((Value) value).getJsValue().getValueString();
-		}
+    public void computeDetail(IValue value, IValueDetailListener listener) {
+        String detail = ""; //$NON-NLS-1$
+        if (value instanceof Value) {
+            // Avoid quoting string JavaScript values by getting the value
+            // string
+            // from the underlying JsValue.
+            final JsValue jsValue = ((Value) value).getJsValue();
+            detail = printJSON(jsValue, 0);
+        }
 
-		listener.detailComputed(value, detail);
-	}
+        listener.detailComputed(value, detail);
+    }
 
-	public IEditorInput getEditorInput(Object element) {
+    private String printJSON(final JsValue value, int depth) {
+        if (depth < DETAILS_DEPTH) {
+            switch (value.getType()) {
+            case TYPE_OBJECT:
+                return printObject(value, depth);
+            case TYPE_ARRAY:
+                return printArray(value, depth);
+            }
+        }
+        if (depth > 0) {
+            if (value.getType() == JsValue.Type.TYPE_STRING) {
+                return "\"" + value.getValueString() + "\"";
+            }
+        }
+        return value.getValueString();
+    }
+
+    private String printArray(JsValue value, int depth) {
+        final StringBuilder builder = new StringBuilder("{ ");
+        String sep = "";
+
+        Collection<? extends JsVariable> properties = value.asObject().asArray().toSparseArray().values();
+
+        for (JsVariable jsVariable : properties) {
+            builder.append(sep).append(printJSON(jsVariable.getValue(), depth + 1));
+            sep = ", ";
+        }
+
+        builder.append(" }");
+        return builder.toString();
+    }
+
+    private String printObject(final JsValue value, final int depth) {
+        final StringBuilder builder = new StringBuilder("{ ");
+
+        String sep = "";
+
+        Collection<? extends JsVariable> properties = value.asObject().getProperties();
+        for (JsVariable jsVariable : properties) {
+            builder.append(sep).append(jsVariable.getName()).append(" : ");
+            builder.append(printJSON(jsVariable.getValue(), depth + 1));
+            sep = ", ";
+        }
+
+        builder.append(" }");
+        return builder.toString();
+    }
+
+    public IEditorInput getEditorInput(Object element) {
 		return toEditorInput(element);
 	}
 
-    @SuppressWarnings("restriction")
     public static IEditorInput toEditorInput(Object element) {
 		if (element instanceof IFile) {
 			return new FileEditorInput((IFile) element);
