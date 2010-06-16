@@ -42,8 +42,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
 
+@SuppressWarnings("restriction")
 public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
 
 	public class ProjectTemplateLabelProvider extends LabelProvider {
@@ -76,9 +78,7 @@ public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
     protected void createChildControls(Composite c) {
 		ProjectTemplate[] allTemplates = ProjectTemplate.getAllTemplates();
 
-		if (allTemplates.length == 1) {
-			context.setTemplate(allTemplates[0]);
-		}
+        context.setTemplate(getFirstTemplate(allTemplates));
         Composite composite = new Composite(c, SWT.NONE);
         composite.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
 		FormLayout layout = new FormLayout();
@@ -136,7 +136,17 @@ public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
 		setErrorMessage(null);
 	}
 
-	protected void switchWizardPage() {
+    private ProjectTemplate getFirstTemplate(ProjectTemplate[] allTemplates) {
+        ProjectTemplate template = null;
+        for (ProjectTemplate projectTemplate : allTemplates) {
+            if (template == null || template.getOrder() > projectTemplate.getOrder()) {
+                template = projectTemplate;
+            }
+        }
+        return template;
+    }
+
+    protected void switchWizardPage() {
 		Display display = getShell().getDisplay();
 		display.asyncExec(new Runnable() {
 			public void run() {
@@ -159,7 +169,12 @@ public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
 
     @Override
     protected boolean validatePage() {
-        if (super.validatePage()) {
+        boolean parentValidation = super.validatePage();
+        if (!parentValidation && getProjectName().trim().length() == 0) {
+            setMessage(null);
+            setErrorMessage(IDEWorkbenchMessages.WizardNewProjectCreationPage_projectNameEmpty);
+            return false;
+        } else if (parentValidation) {
             if (templates.getSelection().isEmpty()) {
                 setErrorMessage("Project template is not selected");
                 setPageComplete(false);
