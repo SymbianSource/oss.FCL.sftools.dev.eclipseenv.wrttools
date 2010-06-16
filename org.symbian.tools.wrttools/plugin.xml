@@ -128,7 +128,7 @@
             icon="icons/main16.gif"
             id-pattern="com.{0}.basic.widget"
             name="Minimal Project"
-            order="4">
+            order="10">
 			<description>
 				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
          </description>
@@ -180,6 +180,19 @@
             This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.
          </description>
          <requires-library>org.symbian.wrtkit</requires-library>
+      </projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/highendtemplate.zip"
+            default-css-name="basic"
+            default-html-name="index"
+            default-js-name="basic"
+            icon="icons/main16.gif"
+            id-pattern="com.{0}.basic.widget"
+            order="4"
+            name="Example Project Using Templates for High-End Devices">
+         <description>
+            Includes templates for high-end devices from Forum.Nokia.
+         </description>
       </projectTemplate>
 	</extension>
 	
