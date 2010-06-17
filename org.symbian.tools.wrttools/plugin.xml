@@ -889,6 +889,7 @@
           smallicon="icons/main16.gif"
           contenttypes="org.eclipse.wst.jsdt.core.jsSource">
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Retrieves list of the contacts"
              id="org.symbian.tools.wrttools.contacts"
              label="Get contacts">
@@ -917,6 +918,7 @@ var contactService = device.getServiceObject("Service.Contact",
           </content>
        </item>
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Sends SMS message"
              id="org.symbian.tools.wrttools.contacts"
              label="Send SMS message">
@@ -933,6 +935,7 @@ var phoneNumber = "+6505551214";
           </content>
        </item>
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Adds callback that will be notified of orientation chnages"
              id="org.symbian.tools.wrttools.contacts"
              label="Register orientation callback">
@@ -962,6 +965,7 @@ var sensors = device.getServiceObject("Service.Sensor", "ISensor");
          </content>
        </item>
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="This function can be used as a callback in GetLocation and Trace calls to location service."
              id="org.symbian.tools.wrttools.location"
              label="Location callback">
@@ -994,6 +998,7 @@ function locationUpdated(transactionId, code, result) {
 }          </content>
        </item>
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Function that processes notifications from the orientation sensor"
              id="org.symbian.tools.wrttools.contacts"
              label="Orientation callback">
@@ -1026,6 +1031,7 @@ function orientationCallback(transactionId, code, result) {
           label="PhoneGap"
           smallicon="icons/phonegap.png">
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Accepts accerelometer data"
              id="org.symbian.tools.wrttools.phonegap.accererometer"
              label="Accelerometer callback">
@@ -1042,6 +1048,7 @@ function updateAcceleration(accel) {
           </content>
        </item>
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Accepts contacts data"
              id="org.symbian.tools.wrttools.phonegap.contacts"
              label="Contacts callback">
@@ -1061,6 +1068,7 @@ function displayContacts(contacts) {
           </content>
        </item>
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Accepts location data"
              id="org.symbian.tools.wrttools.phonegap.location"
              label="Location callback">
@@ -1080,6 +1088,7 @@ function updateLocation(position) {
           </content>
        </item>
        <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Accepts orientation data"
              id="org.symbian.tools.wrttools.phonegap.orientation"
              label="Orientation callback">
