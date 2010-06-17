@@ -944,6 +944,7 @@ var sensors = device.getServiceObject("Service.Sensor", "ISensor");
 	var result = sensors.ISensor.FindSensorChannel(SensorParams);
 
 	if (result.ErrorCode == 0) {
+	    // TODO Function named "orientationCallback" will be called when device orientation changes. This function should be created. 
 		var result2 = sensors.ISensor.RegisterForNotification({ ChannelInfoMap : result.ReturnValue[0], ListeningType : "ChannelData" }, orientationCallback);
 		if (result.ErrorCode == 0) {
 			var transactionId = result.TransactionID;
@@ -965,6 +966,8 @@ var sensors = device.getServiceObject("Service.Sensor", "ISensor");
              id="org.symbian.tools.wrttools.location"
              label="Location callback">
           <content>
+// This function can be passed as a callback to locationService.ILocation
+// GetLocation or Trace method
 function locationUpdated(transactionId, code, result) {
 	if (result.ErrorCode == 0) {
 		var longitude = result.ReturnValue.Longitude; // Longitude estimate in degrees. The value range is [+180, -180].
@@ -995,6 +998,8 @@ function locationUpdated(transactionId, code, result) {
              id="org.symbian.tools.wrttools.contacts"
              label="Orientation callback">
           <content>
+// This function can be passed as callback to locationService.ILocation.GetLocation 
+// or locationService.ILocation.Trace method
 function orientationCallback(transactionId, code, result) {
 	if (result.ErrorCode == 0) {
 		var orientation = result.ReturnValue.DeviceOrientation;
@@ -1025,6 +1030,8 @@ function orientationCallback(transactionId, code, result) {
              id="org.symbian.tools.wrttools.phonegap.accererometer"
              label="Accelerometer callback">
           <content>
+// This callback can be passed as a successCallback argument to  
+// navigator.accelerometer getCurrentAcceleration and watchAcceleration methods
 function updateAcceleration(accel) {
 	var x = accel.x;
 	var y = accel.y;
@@ -1039,6 +1046,8 @@ function updateAcceleration(accel) {
              id="org.symbian.tools.wrttools.phonegap.contacts"
              label="Contacts callback">
           <content>
+// This method can be passed as a successCallback argument to
+// navigator.contacts.find method
 function displayContacts(contacts) {
 	for (var i=0; i &lt; contacts.length; i++) {
 		var contact = contacts[i];
@@ -1056,6 +1065,8 @@ function displayContacts(contacts) {
              id="org.symbian.tools.wrttools.phonegap.location"
              label="Location callback">
           <content>
+// This method can be passed as a successCallback argument to 
+// navigator.geolocation getCurrentPosition or watchPosition methods
 function updateLocation(position) {
 	var pt = position.coords;
 	var latitude = pt.latitude;
@@ -1073,6 +1084,8 @@ function updateLocation(position) {
              id="org.symbian.tools.wrttools.phonegap.orientation"
              label="Orientation callback">
           <content>
+// This method can be passed as a successCallback argument to 
+// navigator.orientation getCurrentOrientation or watchOrientation methods
 function updateOrientation(orientation) {
 	switch (orientation) {
 		case DisplayOrientation.PORTRAIT: break;
