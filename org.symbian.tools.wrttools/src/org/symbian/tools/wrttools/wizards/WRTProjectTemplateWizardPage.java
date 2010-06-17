@@ -112,6 +112,7 @@ public class WRTProjectTemplateWizardPage extends WizardNewProjectCreationPage {
         descriptionData.bottom = new FormAttachment(100, -8);
         descriptionData.left = new FormAttachment(templates.getControl(), 5);
 		descriptionData.right = new FormAttachment(100, 0);
+        descriptionData.width = 50;
 		description.setLayoutData(descriptionData);
 		
 		templates.setContentProvider(new ArrayContentProvider());
