@@ -182,7 +182,7 @@
          <requires-library>org.symbian.wrtkit</requires-library>
       </projectTemplate>
       <projectTemplate
-            archive="projecttemplates/highendtemplate.zip"
+            archive="projecttemplates/uitemplate.zip"
             default-css-name="basic"
             default-html-name="index"
             default-js-name="basic"
