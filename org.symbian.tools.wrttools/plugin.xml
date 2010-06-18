@@ -969,40 +969,12 @@ var phoneNumber = "+6505551214";
        </item>
        <item
              class="org.symbian.tools.wrttools.util.SnippetInsertion"
-             description="Function that processes notifications from the sensors"
-             id="org.symbian.tools.wrttools.contacts"
-             label="Sensor callback">
-          <content>
-// This function can be passed as callback to 
-// sensors.ISensor.RegisterForNotification method
-function sensorCallback(transactionId, code, result) {
-	if (result.ErrorCode == 0) {
-		// TODO Process notification
-		var dataType = result.ReturnValue.DataType; // One of: "AxisData", "DoubleTappingData", "OrientationData" or "RotationData"
-		// var xAxis = result.ReturnValue.XAxisData; // Accelerometer
-		// var yAxis = result.ReturnValue.YAxisData; // Accelerometer
-		// var zAxis = result.ReturnValue.ZAxisData; // Accelerometer
-		// var direction = result.ReturnValue.DeviceDirection; // Accelerometer double tapping
-		// var orientation = result.ReturnValue.DeviceOrientation; // Orientation
-		// var xRotation = result.ReturnValue.XRotation; // Rotation
-		// var yRotation = result.ReturnValue.YRotation; // Rotation
-		// var zRotation = result.ReturnValue.ZRotation; // Rotation
-	} else {
-		var errorCode = result.ErrorCode;
-		var errorMessage = result.ErrorMessage;
-		// TODO Handle error
-	}
-}
-         </content>
-       </item>
-       <item
-             class="org.symbian.tools.wrttools.util.SnippetInsertion"
-             description="Use this method to track acceleration, orientation or rotation changes"
+             description="Use this code to track acceleration, orientation or rotation changes"
              id="org.symbian.tools.wrttools.contacts"
              label="Watch sensor notifications">
           <content>
 // Call this function to add a callback that will be notified of orientation changes
-function watchSensorNotifications(sensorCallback) {
+function watchSensorNotifications() {
 	var sensors = device.getServiceObject("Service.Sensor", "ISensor");
 	var SensorParams = {
 		SearchCriterion : "Orientation" // TODO Possible values (one of):
@@ -1019,7 +991,7 @@ function watchSensorNotifications(sensorCallback) {
 		// TODO Handle error
 		return null;
 	}
-    // TODO Function named "orientationCallback" will be called when device orientation changes. This function should be created. 
+    // TODO Function named "sensorCallback" will be called when device orientation changes. This function should be created. 
 	var result2 = sensors.ISensor.RegisterForNotification(
 			{ ChannelInfoMap : result.ReturnValue[0], 
 				ListeningType : "ChannelData" }, sensorCallback);
@@ -1034,6 +1006,28 @@ function watchSensorNotifications(sensorCallback) {
 		return null;
 	}
 }
+
+// This function can be passed as callback to 
+// sensors.ISensor.RegisterForNotification method
+function sensorCallback(transactionId, code, result) {
+	if (result.ErrorCode == 0) {
+		// TODO Process notification
+		var dataType = result.ReturnValue.DataType; // One of: "AxisData", "DoubleTappingData", "OrientationData" or "RotationData"
+		var orientation = result.ReturnValue.DeviceOrientation; // Orientation
+		// var xAxis = result.ReturnValue.XAxisData; // Accelerometer
+		// var yAxis = result.ReturnValue.YAxisData; // Accelerometer
+		// var zAxis = result.ReturnValue.ZAxisData; // Accelerometer
+		// var direction = result.ReturnValue.DeviceDirection; // Accelerometer double tapping
+		// var xRotation = result.ReturnValue.XRotation; // Rotation
+		// var yRotation = result.ReturnValue.YRotation; // Rotation
+		// var zRotation = result.ReturnValue.ZRotation; // Rotation
+	} else {
+		var errorCode = result.ErrorCode;
+		var errorMessage = result.ErrorMessage;
+		// TODO Handle error
+	}
+}
+
          </content>
        </item>
     </category>
