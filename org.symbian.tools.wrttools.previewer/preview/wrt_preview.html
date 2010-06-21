@@ -62,14 +62,32 @@
 				</div>
 			</div>
 		<div id="Dialog" title="Notification window"></div>
-	<div id="PreferencesTab" class="hide">
-	<div id="tabs">
-		<ul>
+	<div id="InspectorTab" class="hide">
+		<div>To open Web Inspector you need to:
+			<ol>
+				<li>Disconnect debugger from Chrome browser.</li>
+				<li>Press <span id="UniversalShortcut" class="shortcut">Ctrl+Shift+I</span><span id="MacShortcut" class="shortcut">Command+Option+I</span> to open inspector.</li>
+			</ol>
+		</div>
+	</div>
+	</div>
+	<div id="preview-ui-bottom">
+		<div id="preview-ui-bottom-header">
+			<div>Simulation Controls</div>
+			<span class="open" id="Console-Toggle-Button"></span>
+		</div>
+		<div id="tabs" class="tabs-bottom">
+		<ul id="tabs-header">
+			<li><a href="#console">Console</a></li>
 			<li><a href="#event-battery-info">Battery</a></li>
-			<li><a href="#event-messaging-info">Message</a></li>
-			<li><a href="#event-memory-info">Memory</a></li>
+			<li><a href="#event-messaging-info">Events</a></li>
 			<li><a href="#settings-view">Preferences</a></li>
 		</ul>
+		<div id="console" class="hide" style="height: 100%">
+			<span id="Console-Clear-Button"></span>
+			<div style="clear:left;"></div>
+			<div id="preview-ui-bottom-body" style="height: 100%"></div>
+		</div>
 		<div id="event-battery-info" class="hide">
 			<table cellpadding='0' cellspacing='0' width="100%">
 				<tr>
@@ -97,10 +115,6 @@
 						<a class="ui-button-fixed" id="send-mms">Trigger new MMS</a>
 					</td>
 				</tr>
-			</table>
-		</div>
-		<div id="event-memory-info" class="hide">
-			<table cellpadding='0' cellspacing='0' width="100%">
 				<tr>
 					<th>Memory Card</th>
 					<td>
@@ -133,7 +147,6 @@
 				</tr>
 			</table>
 		</div>
-	
 		<div id="mini-view-info" class="hide">
 			<div class="ui-panel">
 				<a class="ui-button" id="mini-view-back">Back</a>
@@ -153,25 +166,6 @@
 				</tr>
 			</table>
 		</div>
-	</div>
-</div>
-	<div id="InspectorTab" class="hide">
-		<div>To open Web Inspector you need to:
-			<ol>
-				<li>Disconnect debugger from Chrome browser.</li>
-				<li>Press <span id="UniversalShortcut" class="shortcut">Ctrl+Shift+I</span><span id="MacShortcut" class="shortcut">Command+Option+I</span> to open inspector.</li>
-			</ol>
-		</div>
-	</div>
-	</div>
-	<div id="preview-ui-bottom">
-		<div id="preview-ui-bottom-header">
-			<div>Console window</div>
-			<span class="open" id="Console-Toggle-Button"></span>
-			<span id="Console-Clear-Button"></span>
-		</div>
-		<div style="clear:left;"></div>
-		<div id="preview-ui-bottom-body">
 		</div>
 	</div>
 	<div id="TopToolbar">

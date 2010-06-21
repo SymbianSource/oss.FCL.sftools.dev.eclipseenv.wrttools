@@ -344,9 +344,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 			NOKIA.menu.is_dimmed = true;
 			
-			$("#PreferencesBtn").hide();
-			$("#PreferencesTab").dialog('close');
-			
 		},
 		
 		setLsk : function(func)
@@ -643,11 +640,8 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			NOKIA.menu.createSFKArea();
 			
 			$("#DeviceDisplayLayout").show();
-			$("#PreferencesTab").show();
 			$("#InspectorTab").show();
 			
-			if(!NOKIA.menu.is_dimmed)
-				$("#PreferencesBtn").show();
 			if (/chrome/.test( navigator.userAgent.toLowerCase())) {
 				$("#InspectorBtn").show();
 			}
@@ -983,8 +977,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				$("#loaderDiv").show();
 				$("#loaderDiv")[0].className = 'green';
 				
-				$("#PreferencesTab").dialog('close');
-				
 				window.setTimeout(function(){
 					document.location = document.location;
 				}, 3000);
@@ -1001,26 +993,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 		addListeners : function()
 		{
-			/*
-			 * Render Emulator for Interaction
-			 */
-			NOKIA.helper.prefDailog = $("#PreferencesTab").dialog({
-					width: 550,	minWidth: 550, minHeight: 350, height: 350, autoOpen: false, position : top, title : '&nbsp;',
-					buttons : {
-						Close : function(){
-							$("#PreferencesTab").dialog('close');
-
-							//	Hack for Mac firefox
-							if(/Mac/i.test(navigator.userAgent))
-							{
-								$("#WidgetArea iframe").css({overflow:'auto'});
-							}
-							
-							//	select index : 0 tab selected
-							$('#tabs').tabs( 'select' , 0);
-						}
-					}
-				});
+			NOKIA.helper.loadPreferences();
 			/*
 			 * Render Emulator for Interaction
 			 */
@@ -1035,17 +1008,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			}}
 			});
 				
-			$('#PreferencesBtn').click(function(){
-				//	Load preferences
-				NOKIA.helper.loadPreferences();
-				$('#PreferencesTab').dialog('open');
-
-				//	Hack for Mac firefox
-				if(/Mac/i.test(navigator.userAgent))
-				{
-					$("#WidgetArea iframe").css({overflow:'hidden'});
-				}
-			});
 			$('#InspectorBtn').click(function(){
 				$('#InspectorTab').dialog('open');
 				//	Hack for Mac firefox
@@ -1099,8 +1061,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 
 			$("#iframeMask").click(function(){
-
-				$("#PreferencesBtn").show();
 				$("#orientationIcon").hide();
 				$("#iframeMask").hide();
 				$("#loaderDiv").hide();
@@ -1152,7 +1112,9 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 //					
 //				}}
 			});
-
+			$(".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *") 
+	 			.removeClass("ui-corner-all ui-corner-top") 
+	 			.addClass("ui-corner-bottom");
 			
 			/*	
 			 * 	Event triggering
@@ -1274,9 +1236,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 						$("#iframeMask").show();
 						$("#orientationIcon").show();
-						$("#PreferencesBtn").hide();
 
-						$("#PreferencesTab").dialog('close');
 						return true;
 					}
 				}
@@ -1386,8 +1346,9 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 	NOKIA.layout = {
 		_console_minimized : true,
 		_console_enabled : false,
-		_consoleWindowHeight : 200,
+		_consoleWindowHeight : 290,
 		_consoleHeaderHeight : 31,
+		_tabHeight : 27,
 
 		init : function(){
 			
@@ -1455,8 +1416,15 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 					height: NOKIA.layout._consoleHeaderHeight + 'px'
 				});
 
-				$('#preview-ui-bottom-body').css({
+				$('#tabs').css({
 					height: parseInt(NOKIA.layout._consoleWindowHeight - NOKIA.layout._consoleHeaderHeight) + 'px',
+					display : 'block'
+				});
+				$('#console').css({
+					height : parseInt(NOKIA.layout._consoleWindowHeight
+									- NOKIA.layout._consoleHeaderHeight
+									- NOKIA.layout._tabHeight * 2)
+									+ 'px',
 					display : 'block'
 				});
 				
@@ -1483,10 +1451,10 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 					height: NOKIA.layout._consoleHeaderHeight + 'px',
 					display : 'block'
 				});
-
-				$('#preview-ui-bottom-body').css({
-					display : 'none'
-				});
+// TODO
+//				$('#preview-ui-bottom-body').css({
+//					display : 'none'
+//				});
 			}
 		}
 		
