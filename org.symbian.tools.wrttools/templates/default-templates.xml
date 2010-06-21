@@ -66,5 +66,10 @@
 		enabled="true" autoinsert="false">
 		var ${sensors} = device.getServiceObject("Service.Sensor", "ISensor");
 	</template>
+	<template name="sensor" description="Access WRT 1.1 system information API. This API allows widgets to access system data like battery, connectivity, device, display, features, general, memory, network"
+		id="org.symbian.tools.wrttools.templates.sysinfo" context="javaScript"
+		enabled="true" autoinsert="false">
+		var ${sysInfo} = device.getServiceObject("Service.SysInfo", "ISysInfo");
+	</template>
 
 </templates>

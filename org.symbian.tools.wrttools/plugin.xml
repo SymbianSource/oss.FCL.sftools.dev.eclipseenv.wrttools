@@ -953,7 +953,7 @@ function locationUpdated(transactionId, code, result) {
        <item
              class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Sends SMS message"
-             id="org.symbian.tools.wrttools.contacts"
+             id="org.symbian.tools.wrttools.dial"
              label="Send SMS message">
           <content>
 var phoneNumber = "+6505551214";
@@ -967,10 +967,43 @@ var phoneNumber = "+6505551214";
 	}
           </content>
        </item>
+       
+       <item
+             class="org.symbian.tools.wrttools.util.SnippetInsertion"
+             description="Use this code to track battery status"
+             id="org.symbian.tools.wrttools.battery"
+             label="Watch battery status">
+          <content>
+function watchBatteryNotifications() {
+	var sysInfo = device.getServiceObject("Service.SysInfo", "ISysInfo");
+	var result = sysInfo.ISysInfo.GetNotification( {
+		Entity : "Battery",
+		Key : "BatteryStrength"
+	}, batteryUpdated);
+	if (result.ErrorCode == 0) {
+		var transactionId = result.TransactionID;
+		// TODO Use this ID to cancel notifications
+	} else {
+		var message = result.ErrorMessage;
+		// TODO Process error
+	}
+}
+
+function batteryUpdated(tId, code, result) {
+	if (result.ErrorCode == 0) {
+		var batteryStatus = result.ReturnValue.Status;
+		// TODO Process battery charge level
+	} else {
+		var message = result.ErrorMessage;
+		// TODO Process error
+	}
+}
+          </content>
+       </item>
        <item
              class="org.symbian.tools.wrttools.util.SnippetInsertion"
              description="Use this code to track acceleration, orientation or rotation changes"
-             id="org.symbian.tools.wrttools.contacts"
+             id="org.symbian.tools.wrttools.sensor"
              label="Watch sensor notifications">
           <content>
 // Call this function to add a callback that will be notified of orientation changes
