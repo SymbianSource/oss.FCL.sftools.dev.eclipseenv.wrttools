@@ -526,11 +526,10 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		{
 			if(this.loaded)
 				return false;
-				
+			NOKIA.layout._console_minimized = (NOKIA.helper.getPreference('__SYM_NOKIA_CONSOLE_OPEN') != "true");
 			//	load the saved device Info
 			var device = NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_DEVICE');
 			NOKIA.currentDevice = device || NOKIA.currentDevice;
-
 
 			//	load the saved device mode
 			var mode = NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE');
@@ -1357,6 +1356,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 				
 				NOKIA.layout._console_minimized = (NOKIA.layout._console_minimized) ? false : true;
 				NOKIA.layout.render();
+				NOKIA.helper.setPreference("__SYM_NOKIA_CONSOLE_OPEN", !NOKIA.layout._console_minimized);
 			});
 			
 			// clear Log
