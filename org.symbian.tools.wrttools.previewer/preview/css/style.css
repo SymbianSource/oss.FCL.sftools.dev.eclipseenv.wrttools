@@ -20,6 +20,7 @@ body {
 	font-family: "Nokia Sans", "Nokia Sans SemiBold", "Arial Narrow";
 	padding: 0px;
 	overflow: hidden;
+	font-size: 11px;
 }
 .hide{
 	display:none;
@@ -566,7 +567,6 @@ a.ui-button, a.ui-button-fixed {
 	border:1px solid #666666;
 	color:#EEEEEE;
 	cursor:pointer;
-	font-size:0.9em;
 	font-weight:bolder;
 	line-height:1.4em;
 	margin:0.5em 8px 0.5em 0;
@@ -583,7 +583,8 @@ a.ui-button-fixed{
 	float: left;
 	padding: 0.4em 0.6em 0.8em;
 	text-align: center;
-	width: 145px !important;
+	vertical-align: middle;
+	width: 100px !important;
 }
 
 div#slider-value-panel{

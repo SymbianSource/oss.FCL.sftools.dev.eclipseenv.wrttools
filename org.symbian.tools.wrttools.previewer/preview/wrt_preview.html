@@ -18,9 +18,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>WRT Debugger</title>
 	<!-- jQuery-ui Begins -->
-		<link type="text/css" rel="stylesheet"  href="preview/script/jquery-ui/css/ui-darkness/ui.all.css"/>	
-		<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-1.2.6.min.js"></script>
-		<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-ui-1.6.custom.min.js"></script>
+		<link type="text/css" rel="stylesheet"  href="preview/script/jquery-ui/css/ui-darkness/jquery-ui-1.8.2.custom.css"/>	
+		<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-ui-1.8.2.custom.min.js"></script>
 	<!-- jQuery-ui Ends -->	
 	<script type="text/javascript" language="JavaScript" src="preview/script/nokia.js"></script>
 	<script type="text/javascript" language="JavaScript" src="preview/script/resolution.js"></script>
@@ -65,126 +65,93 @@
 	<div id="PreferencesTab" class="hide">
 	<div id="tabs">
 		<ul>
-			<li><a href="#tabs-1">Preferences</a></li>
-			<li><a href="#tabs-2">Event Triggers</a></li>
+			<li><a href="#event-battery-info">Battery</a></li>
+			<li><a href="#event-messaging-info">Message</a></li>
+			<li><a href="#event-memory-info">Memory</a></li>
+			<li><a href="#settings-view">Preferences</a></li>
 		</ul>
-		<div id="tabs-1">
-			<div id="settings-view">
-		<table width="100%" cellpadding="0" cellspacing="0">
-			<tr>
-				<th>
-					WRT Version
-				</th>
-				<td>
-					<label><input type="radio" name="wrt_version" id="wrt_version_1_0" value="WRT 1.0"/> WRT 1.0</label>	
-					<label><input type="radio" name="wrt_version" id="wrt_version_1_1" value="WRT 1.1"/> WRT 1.1</label>	
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Home Screen view
-				</th>
-				<td>
-					<div id="HS_Control_Info">
-						Hello
-					</div>
-				</td>
-			</tr>
-		</table>
+		<div id="event-battery-info" class="hide">
+			<table cellpadding='0' cellspacing='0' width="100%">
+				<tr>
+					<th>Charging status</th>
+					<td>
+						<a class="ui-button-fixed" id="connect-charger">Connect charger</a>
+						<a class="ui-button-fixed" id="disconnect-charger">Disconnect charger</a>
+					</td>
+				</tr>
+				<tr>
+					<th>Battery Strength</th>
+					<td>
+						<div id="slider"></div>
+						<div id="slider-value-panel"><span>0</span></div>
+					</td>
+				</tr>
+			</table>
 		</div>
-		
-			<div id="mini-view-info" class="hide">
-				<div class="ui-panel">
-					<a class="ui-button" id="mini-view-back">Back</a>
-				</div>
-				<table cellpadding='0' cellspacing='0' width="100%">
-					<tr>
-						<th>To enable Mini view support for HomeScreen widget </th>
-					</tr>
-					<tr>
-						<td>
-							Add this line in Info.plist file
-							<code>&lt;key&gt;MiniViewEnabled&lt;/key&gt;<br/>&lt;true/&gt;</code>
-							and optionally add the following to the MainHTML file
-							<code>&lt;div id="miniView"&gt; &lt;--  Define your Home Screen view here  --&gt; &lt;/div&gt;</code><br/>
-							See Web Developer's Library for <a class="link" href="http://library.forum.nokia.com/index.jsp?topic=/Web_Developers_Library/GUID-63F4E17E-8895-4054-82AD-762B90610B30.html" target="_blank">more details</a>
-						</td>
-					</tr>
-				</table>
-			</div>
-		
-		
+		<div id="event-messaging-info" class="hide">
+			<table cellpadding='0' cellspacing='0' width="100%">
+				<tr>
+					<th>New message</th>
+					<td>
+						<a class="ui-button-fixed" id="send-sms">Trigger new SMS</a>
+						<a class="ui-button-fixed" id="send-mms">Trigger new MMS</a>
+					</td>
+				</tr>
+			</table>
 		</div>
-		<div id="tabs-2">
-			
-			<div id="event-icons">
-				<div id="event-battery"></div>
-				<div id="event-messaging"></div>
-				<div id="event-memory"></div>
+		<div id="event-memory-info" class="hide">
+			<table cellpadding='0' cellspacing='0' width="100%">
+				<tr>
+					<th>Memory Card</th>
+					<td>
+						<a class="ui-button-fixed" id="connect-memory-card">Connect</a>
+						<a class="ui-button-fixed" id="disconnect-memory-card">Disconnect</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="settings-view" class="hide">
+			<table width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+					<th>
+						WRT Version
+					</th>
+					<td>
+						<label><input type="radio" name="wrt_version" id="wrt_version_1_0" value="WRT 1.0"/> WRT 1.0</label>	
+						<label><input type="radio" name="wrt_version" id="wrt_version_1_1" value="WRT 1.1"/> WRT 1.1</label>	
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Home Screen view
+					</th>
+					<td>
+						<div id="HS_Control_Info">
+							Hello
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	
+		<div id="mini-view-info" class="hide">
+			<div class="ui-panel">
+				<a class="ui-button" id="mini-view-back">Back</a>
 			</div>
-
-			<div id="event-battery-info" class="hide">
-				<div class="ui-panel">
-					<a class="ui-button" id="event-battery-back">Back</a>
-				</div>
-				<table cellpadding='0' cellspacing='0' width="100%">
-					<tr>
-						<th colspan="2">Battery Triggers</th>
-					</tr>
-					<tr>
-						<td>Charging status</td>
-						<td>
-							<a class="ui-button-fixed" id="connect-charger">Connect charger</a>
-							<a class="ui-button-fixed" id="disconnect-charger">Disconnect charger</a>
-						</td>
-					</tr>
-					<tr>
-						<td>Battery Strength</td>
-						<td>
-							<div id="slider"></div>
-							<div id="slider-value-panel"><span>0</span></div>
-							<div><a class="ui-button-fixed" id="update-batter-strength">Update</a></div>
-						</td>
-					</tr>
-				</table>
-			</div>
-
-			<div id="event-messaging-info" class="hide">
-				<div class="ui-panel">
-					<a class="ui-button" id="event-messaging-back">Back</a>
-				</div>
-				<table cellpadding='0' cellspacing='0' width="100%">
-					<tr>
-						<th colspan="2">Message Triggers</th>
-					</tr>
-					<tr>
-						<td>New message</td>
-						<td>
-							<a class="ui-button-fixed" id="send-sms">Trigger new SMS</a>
-							<a class="ui-button-fixed" id="send-mms">Trigger new MMS</a>
-						</td>
-					</tr>
-				</table>
-			</div>
-
-			<div id="event-memory-info" class="hide">
-				<div class="ui-panel">
-					<a class="ui-button" id="event-memory-back">Back</a>
-				</div>
-				<table cellpadding='0' cellspacing='0' width="100%">
-					<tr>
-						<th colspan="2">Memory Triggers</th>
-					</tr>
-					<tr>
-						<td>Memory Card</td>
-						<td>
-							<a class="ui-button-fixed" id="connect-memory-card">Connect</a>
-							<a class="ui-button-fixed" id="disconnect-memory-card">Disconnect</a>
-						</td>
-					</tr>
-				</table>
-			</div>
-			
+			<table cellpadding='0' cellspacing='0' width="100%">
+				<tr>
+					<th>To enable Mini view support for HomeScreen widget </th>
+				</tr>
+				<tr>
+					<td>
+						Add this line in Info.plist file
+						<code>&lt;key&gt;MiniViewEnabled&lt;/key&gt;<br/>&lt;true/&gt;</code>
+						and optionally add the following to the MainHTML file
+						<code>&lt;div id="miniView"&gt; &lt;--  Define your Home Screen view here  --&gt; &lt;/div&gt;</code><br/>
+						See Web Developer's Library for <a class="link" href="http://library.forum.nokia.com/index.jsp?topic=/Web_Developers_Library/GUID-63F4E17E-8895-4054-82AD-762B90610B30.html" target="_blank">more details</a>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>

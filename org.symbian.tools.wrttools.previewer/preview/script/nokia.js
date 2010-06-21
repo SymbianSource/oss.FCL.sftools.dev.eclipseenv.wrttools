@@ -1135,31 +1135,22 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 			// Tabs
 			$('#tabs').tabs({
-				select : function(event, ui){
-					if(parseInt(ui.index) == 1)
-					{
-						$("#event-icons").show();
-						$("#event-battery-info").hide();
-						$("#event-messaging-info").hide();
-						$("#event-memory-info").hide();
-						
-						//	WRT versionn check
-						if(NOKIA.version == 'WRT 1.1')
-						{
-							$("#event-messaging")[0].className = 'active';
-							$("#event-memory")[0].className = 'active';
-						}else
-						{
-							$("#event-messaging")[0].className = 'inactive';
-							$("#event-memory")[0].className = 'inactive';
-						}
-						$("#event-battery")[0].className = 'active';
-					}else if(parseInt(ui.index) == 0)
-					{
-						$("#settings-view").show();
-						$("#mini-view-info").hide();
-					}
-				}
+//				select : function(event, ui){
+//					switch (ui.index) {
+//					case 1:
+//						$("event-battery-info").show();
+//						break;
+//					case 2:
+//						$("event-messaging-info").show();
+//						break;
+//					case 3:
+//						$("event-memory-info").show();
+//						break;
+//					case 4:
+//						$("settings-view").show();
+//						break;
+//					
+//				}}
 			});
 
 			
@@ -1228,16 +1219,22 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 			// Slider
 			$('#slider').slider({
-				range: true,
 				min : 0,
 				max : 100,
 				step : 1,
 				value : 10,
 				animate: true,
 				slide: function(event, ui) {
-					$("#slider-value-panel > span").html(ui.value.toString());
+					$("#slider-value-panel > span").html(ui.value.toString() + "%");
+				},
+				change: function(event, ui) {
+					var chargeValue = ui.value;
+					NOKIA.helper.trigger("power", "chargelevel", chargeValue);
+					if(NOKIA.version == 'WRT 1.1')
+						NOKIA.helper.triggerSapi("Service.SysInfo", "Battery.BatteryStrength", {Status: chargeValue});
 				}
 				});
+			$("#slider-value-panel > span").html("10%");
 
 			var cc = $("#close-camera");
 			cc.click(NOKIA.helper.hideCamera);
@@ -1245,7 +1242,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 			
 			$("#connect-charger").click(NOKIA.helper.triggerEvents);
 			$("#disconnect-charger").click(NOKIA.helper.triggerEvents);
-			$("#update-batter-strength").click(NOKIA.helper.triggerEvents);
 
 			$("#send-sms").click(NOKIA.helper.triggerEvents);
 			$("#send-mms").click(NOKIA.helper.triggerEvents);
@@ -1327,13 +1323,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 										NOKIA.helper.trigger("power", "chargerconnected", 0);
 										if(NOKIA.version == 'WRT 1.1')
 											NOKIA.helper.triggerSapi("Service.SysInfo", "Battery.ChargingStatus", {Status: 0});
-										break;
-
-				case 'update-batter-strength': 
-										var chargeValue = parseInt($('#slider').slider('value'));
-										NOKIA.helper.trigger("power", "chargelevel", chargeValue);
-										if(NOKIA.version == 'WRT 1.1')
-											NOKIA.helper.triggerSapi("Service.SysInfo", "Battery.BatteryStrength", {Status: chargeValue});
 										break;
 
 				//	for messaging
