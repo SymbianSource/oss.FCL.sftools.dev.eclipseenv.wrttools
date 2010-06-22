@@ -1352,8 +1352,7 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		init : function(){
 			
 			//	Toggle console window
-			$('#Console-Toggle-Button').click(function(){
-				
+			$('#preview-ui-bottom-header').click(function(){
 				NOKIA.layout._console_minimized = (NOKIA.layout._console_minimized) ? false : true;
 				NOKIA.layout.render();
 				NOKIA.helper.setPreference("__SYM_NOKIA_CONSOLE_OPEN", !NOKIA.layout._console_minimized);
