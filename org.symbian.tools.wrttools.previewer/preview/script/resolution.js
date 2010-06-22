@@ -28,7 +28,7 @@ var deviceResolutionList = {
 			'style'	:	{
 				'layout'	:	{
 					'backgroundImage'	: 'url(preview/images/device/240x320/Portrait.png)',
-					'width'				: '600px',
+					'width'				: '320px',
 					'height'			: '536px'
 					},
 				'display':	{
@@ -65,7 +65,7 @@ var deviceResolutionList = {
 			'style'	:	{
 				'layout'	:	{
 					'backgroundImage'	: 'url(preview/images/device/240x320/Landscape.png)',
-					'width'				: '848px',
+					'width'				: '520px',
 					'height'			: '408px'
 					},
 				'display':	{
@@ -109,14 +109,14 @@ var deviceResolutionList = {
 			'style'	:	{
 				'layout'	:	{
 					'backgroundImage'	: 'url(preview/images/device/320x240/Portrait.png)',
-					'width'				: '640px',
+					'width'				: '400px',
 					'height'			: '472px'
 					},
 				'display':	{
 					'width'		:	'320px',
 					'height'	:	'240px',
 					'paddingTop':	'113px',
-					'marginLeft': 	'163px'				
+					'marginLeft': 	'39px'				
 					},
 				'widget':	{
 					'width'		:	320,
@@ -146,14 +146,14 @@ var deviceResolutionList = {
 			'style'	:	{
 				'layout'	:	{
 					'backgroundImage'	: 'url(preview/images/device/320x240/Landscape.png)',
-					'width'				: '680px',
+					'width'				: '400px',
 					'height'			: '472px'
 					},
 				'display':	{
 					'width'		:	'240px',
 					'height'	:	'320px',
 					'paddingTop':	'76px',
-					'marginLeft': 	'223px'				
+					'marginLeft': 	'77px'				
 					},
 				'widget':	{
 					'width'		:	240,
@@ -190,14 +190,14 @@ var deviceResolutionList = {
 			'style'	:	{
 				'layout'	:	{
 					'backgroundImage'	: 'url(preview/images/device/360x640/Portrait.png)',
-					'width'				: '678px',
+					'width'				: '450px',
 					'height'			: '838px'
 					},
 				'display':	{
 					'width'		:	'360px',
 					'height'	:	'640px',
 					'paddingTop':	'89px',
-					'marginLeft': 	'158px'				
+					'marginLeft': 	'45px'				
 					},
 				'widget':	{
 					'width'		:	360,
@@ -232,14 +232,14 @@ var deviceResolutionList = {
 			'style'	:	{
 				'layout'	:	{
 					'backgroundImage'	: 'url(preview/images/device/360x640/Landscape.png)',
-					'width'				: '1054px',
+					'width'				: '815px',
 					'height'			: '572px'
 					},
 				'display':	{
 					'width'		:	'640px',
 					'height'	:	'360px',
 					'paddingTop':	'104px',
-					'marginLeft': 	'206px'				
+					'marginLeft': 	'84px'				
 					},
 				'widget':	{
 					'width'		:	640,
@@ -281,14 +281,14 @@ var deviceResolutionList = {
 			'style'	:	{
 				'layout'	:	{
 					'backgroundImage'	: 'url(preview/images/device/800x352/Landscape.png)',
-					'width'				: '1180px',
+					'width'				: '1000px',
 					'height'			: '572px'
 					},
 				'display':	{
 					'width'		:	'800px',
 					'height'	:	'352px',
 					'paddingTop':	'108px',
-					'marginLeft': 	'190px'				
+					'marginLeft': 	'100px'				
 					},
 				'widget':	{
 					'width'		:	800,

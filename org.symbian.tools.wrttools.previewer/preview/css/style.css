@@ -23,6 +23,7 @@ body {
 /*  background-image: url(../images/Gradient0Background.png); */
 	background-image: url(../images/Gradient0Background_2.png);
 	background-repeat: repeat-x;
+	background-color: gray;
 	margin: 0px;
 	font-family: "Nokia Sans", "Nokia Sans SemiBold", "Arial Narrow";
 	padding: 0px;
