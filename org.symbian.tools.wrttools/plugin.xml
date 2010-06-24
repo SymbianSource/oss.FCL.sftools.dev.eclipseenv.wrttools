@@ -246,10 +246,10 @@
 	<extension point="org.eclipse.ui.views">
 		<view allowMultiple="false" category="org.symbian.tools.wrttools.views"
 			class="org.eclipse.ui.navigator.CommonNavigator" icon="icons/main16.gif"
-			id="org.symbian.tools.wrttools.wrtnavigator" name="WRT Navigator"
+			id="org.symbian.tools.wrttools.wrtnavigator" name="TMW Navigator"
 			restorable="true">
 		</view>
-		<category id="org.symbian.tools.wrttools.views" name="WRT Tools">
+		<category id="org.symbian.tools.wrttools.views" name="TMW Tools">
 		</category>
 	</extension>
 	<extension point="org.eclipse.ui.navigator.viewer">
@@ -530,7 +530,7 @@
  <extension
         point="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
     <JsGlobalScopeContainerPage
-            name="WebRuntime Toolkit"
+            name="Tools for Mobile Web"
             class="org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage"
             id="org.symbian.wrt">
     </JsGlobalScopeContainerPage>    
@@ -598,7 +598,7 @@
        point="org.eclipse.ui.commands">
     <category
           id="org.symbian.tools.wrttools.commands.maincategory"
-          name="WRT Tools">
+          name="TMW Tools">
     </category>
     <command
           categoryId="org.symbian.tools.wrttools.commands.maincategory"
@@ -615,7 +615,7 @@
     <command
           categoryId="org.symbian.tools.wrttools.commands.maincategory"
           defaultHandler="org.symbian.tools.wrttools.handlers.AddJSLibrary"
-          description="Adds JavaScript libraries to WRT projects"
+          description="Adds JavaScript libraries to TMW projects"
           id="org.symbian.tools.wrttools.addlibrary"
           name="Add JavaScript Libraries...">
     </command>
@@ -823,7 +823,7 @@
  </extension>
  <extension
        id="org.symbian.tools.wrttools.excluded"
-       name="Excluded from WRT packaging marker"
+       name="Excluded from TMW packaging marker"
        point="org.eclipse.core.resources.markers">
     <persistent
           value="true">

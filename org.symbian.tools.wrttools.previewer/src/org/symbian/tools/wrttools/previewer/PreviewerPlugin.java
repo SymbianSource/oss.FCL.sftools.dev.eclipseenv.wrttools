@@ -134,7 +134,7 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 
     public MessageConsole getConsole() {
         if (console == null) {
-            console = new MessageConsole("WebRuntime Console", null);
+            console = new MessageConsole("TMW Console", null);
             ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { console });
         }
         return console;

@@ -46,7 +46,7 @@ public class ConsoleFactory implements IConsoleFactory {
 	
 	private synchronized static MessageConsole getConsole() {
 		if (console == null) {
-			console = new MessageConsole("Web Runtime Console", null, true);
+			console = new MessageConsole("TMW Console", null, true);
 			IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
 			consoleManager.addConsoles(new IConsole[]{console});
 		}

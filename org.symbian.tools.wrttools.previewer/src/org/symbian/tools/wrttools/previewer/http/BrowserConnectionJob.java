@@ -18,7 +18,7 @@ public class BrowserConnectionJob extends Job {
     private String sId = null;
 
 	public BrowserConnectionJob(IPreviewStartupListener listener, URI uri) {
-		super("Connecting to WRT debugger browser");
+		super("Connecting to TMW debugger browser");
 		this.listener = listener;
 		this.uri = uri;
 		setUser(false);

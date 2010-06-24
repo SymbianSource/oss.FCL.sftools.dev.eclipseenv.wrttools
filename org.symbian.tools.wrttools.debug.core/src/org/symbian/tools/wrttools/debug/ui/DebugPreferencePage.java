@@ -37,7 +37,7 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
     public DebugPreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("WRT debugger settings");
+		setDescription("TMW debugger settings");
 	}
 
 	@Override
