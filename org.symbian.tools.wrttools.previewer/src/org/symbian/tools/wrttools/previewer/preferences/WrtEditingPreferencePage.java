@@ -53,7 +53,7 @@ public class WrtEditingPreferencePage
 				{ "Prompt", MessageDialogWithToggle.PROMPT } };
 		enableAutorefresh = new RadioGroupFieldEditor(
 				IWrtEditingPreferences.PREF_AUTO_REFRESH,
-				"Initial auto-refresh setting for WRT Preview window",
+				"Initial auto-refresh setting for TMW Preview window",
 				namesAndValues.length, namesAndValues, projectComposite, true);
 		enableAutorefresh.setPreferenceStore(getPreferenceStore());
 		enableAutorefresh.setPage(this);

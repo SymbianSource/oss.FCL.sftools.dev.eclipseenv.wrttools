@@ -48,7 +48,7 @@ public class ResourcesChangeListener implements IResourceChangeListener {
                     public void run() {
                         String message = "Debug browser is not updated when the files are updated. You may notice discrepancies between your workspace contents and debug session. You should either refresh the browser or restart debugging session to see the latest changes made to the workspace.";
                         MessageDialogWithToggle.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-                                .getShell(), "WebRuntime Debugger", message,
+                                .getShell(), "TMW Debugger", message,
                                 "Do not show this warning on code changes", false, Activator.getDefault()
                                         .getPreferenceStore(), IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR);
                         ResourcesPlugin.getWorkspace().removeResourceChangeListener(ResourcesChangeListener.this);

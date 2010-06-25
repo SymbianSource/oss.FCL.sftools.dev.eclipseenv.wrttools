@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.symbian.tools.wrttools"
-      label="WRT Tools Feature"
-      version="0.9.1.qualifier"
+      label="TMW Tools Feature"
+      version="1.0.0.qualifier"
       provider-name="Symbian Foundation">
 
    <description url="http://www.example.com/description">

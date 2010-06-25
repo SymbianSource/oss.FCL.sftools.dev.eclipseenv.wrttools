@@ -13,7 +13,7 @@
             category="org.eclipse.debug.ui.DebugPreferencePage"
             class="org.symbian.tools.wrttools.debug.ui.DebugPreferencePage"
             id="org.symbian.tools.wrttools.debug"
-            name="WebRuntime Toolkit">
+            name="Tools for Mobile Web">
          <keywordReference
                id="org.symbian.tools.wrttools.wrtwords">
          </keywordReference>
@@ -28,7 +28,7 @@
             delegate="org.symbian.tools.wrttools.debug.internal.launch.WidgetLaunchDelegate"
             id="org.symbian.tools.wrttools.debug.widget"
             modes="debug,run"
-            name="WRT Application"
+            name="TMW Application"
             public="true">
       </launchConfigurationType>
    </extension>
@@ -36,7 +36,7 @@
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchConfigurationTabGroup"
-            description="WRT Application"
+            description="TMW Application"
             id="org.symbian.tools.wrttools.debug.wrtTabGroup"
             type="org.symbian.tools.wrttools.debug.widget">
       </launchConfigurationTabGroup>
@@ -55,7 +55,7 @@
             class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchShortcut"
             icon="icons/main16.gif"
             id="org.symbian.tools.wrttools.debug.wrtshortcut"
-            label="WRT Application"
+            label="TMW Application"
             modes="run, debug">
          <configurationType
                id="org.symbian.tools.wrttools.debug.widget">
@@ -79,11 +79,11 @@
             </with>
          </enablement>
             <contextLabel
-                  label="WRT Application"
+                  label="TMW Application"
                   mode="run">
             </contextLabel>
             <contextLabel
-                  label="WRT Application"
+                  label="TMW Application"
                   mode="debug">
             </contextLabel></contextualLaunch>
       </shortcut>
@@ -295,9 +295,9 @@
     <extension
           point="org.eclipse.ui.actionSets">
        <actionSet
-             description="Actions for WRT debugging"
+             description="Actions for TMW debugging"
              id="org.symbian.tools.wrttools.debug.core.mainActions"
-             label="WRT Debug">
+             label="TMW Debug">
           <action
                 class="org.symbian.tools.wrttools.debug.ui.actions.DebugAction"
                 helpContextId="debug_last_action_context"

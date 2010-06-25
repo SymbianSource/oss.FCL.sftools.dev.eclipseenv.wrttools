@@ -73,7 +73,7 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 
     public WrtWidgetWizard() {
         setDefaultPageImageDescriptor(WRTImages.newWizardBanner());
-        setWindowTitle("New Web Runtime Application");
+        setWindowTitle("New Mobile Web Application");
         setNeedsProgressMonitor(true);
     }
 

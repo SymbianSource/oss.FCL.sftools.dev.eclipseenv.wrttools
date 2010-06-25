@@ -38,7 +38,7 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
         public ClearPreferencesAction() {
             setText("Clear");
             setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.CLEAR_PREFS));
-            setDescription("Forget all WRT application preference values");
+            setDescription("Forget all TMW application preference values");
             setToolTipText(getDescription());
         }
 
