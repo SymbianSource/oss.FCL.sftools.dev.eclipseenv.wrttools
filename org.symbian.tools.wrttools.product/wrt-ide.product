@@ -39,8 +39,8 @@
    </launcher>
 
    <vm>
-      <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</macos>
-      <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</windows>
+      <macos include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5</macos>
+      <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</windows>
    </vm>
 
    <plugins>
@@ -50,11 +50,12 @@
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
       <plugin id="javax.xml"/>
+      <plugin id="org.apache.ant"/>
       <plugin id="org.apache.bcel"/>
       <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.collections"/>
       <plugin id="org.apache.commons.el"/>
-      <plugin id="org.apache.commons.httpclient"/>
+      <plugin id="org.apache.commons.httpclient" version="3.1.0.v201005080502"/>
       <plugin id="org.apache.commons.lang" version="2.3.0.v200803061910"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.jasper"/>

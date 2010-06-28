@@ -192,7 +192,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.ui.ide.workbench"
-            name="Tools for Mobile Web">
+            name="WebRuntime Toolkit IDE">
          <property
                name="windowImages"
                value="icons/ico/WRT_main-icon_16px.png,icons/ico/WRT_main-icon_32px.png,icons/ico/WRT_main-icon_48px.png,icons/ico/WRT_main-icon_64px.png,icons/ico/WRT_main-icon_128px.png">
@@ -219,7 +219,7 @@
          </property>
          <property
                name="appName"
-               value="Tools for Mobile Web">
+               value="WebRuntime Toolkit IDE">
          </property>
          <property
                name="preferenceCustomization"
