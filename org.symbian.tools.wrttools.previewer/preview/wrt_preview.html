@@ -18,13 +18,18 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>TMW Debugger</title>
 	<!-- jQuery-ui Begins -->
-		<link type="text/css" rel="stylesheet"  href="preview/script/jquery-ui/css/ui-darkness/jquery-ui-1.8.2.custom.css"/>	
-		<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-1.4.2.min.js"></script>
-		<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-ui-1.8.2.custom.min.js"></script>
+	<link type="text/css" rel="stylesheet"  href="preview/script/jquery-ui/css/ui-darkness/jquery-ui-1.8.2.custom.css"/>	
+	<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="preview/script/jquery-ui/js/jquery-ui-1.8.2.custom.min.js"></script>
 	<!-- jQuery-ui Ends -->	
+	<script type="text/javascript" language="JavaScript" src="preview/script/emulator.js"></script>
+	<script type="text/javascript" language="JavaScript" src="preview/script/helper.js"></script>
+	<script type="text/javascript" language="JavaScript" src="preview/script/layout.js"></script>
+	<script type="text/javascript" language="JavaScript" src="preview/script/menu.js"></script>
 	<script type="text/javascript" language="JavaScript" src="preview/script/nokia.js"></script>
 	<script type="text/javascript" language="JavaScript" src="preview/script/resolution.js"></script>
 	<script type="text/javascript" language="JavaScript" src="preview/preferences.js"></script>
+	<script type="text/javascript" language="JavaScript" src="preview/script/accelerometer.js"></script>
 	<link type="text/css" rel="stylesheet"  href="preview/css/style.css"/>
 	<link rel="icon" type="image/gif" href="preview/favicon.gif" />
 </head>
@@ -79,6 +84,7 @@
 		<div id="tabs" class="tabs-bottom">
 		<ul id="tabs-header">
 			<li><a href="#console">Console</a></li>
+			<li><a href="#event-acceleration">Acceleration</a></li>
 			<li><a href="#event-battery-info">Battery</a></li>
 			<li><a href="#event-messaging-info">Events</a></li>
 			<li><a href="#settings-view">Preferences</a></li>
@@ -87,6 +93,29 @@
 			<span id="Console-Clear-Button"></span>
 			<div style="clear:left;"></div>
 			<div id="preview-ui-bottom-body" style="height: 100%"></div>
+		</div>
+		<div id="event-acceleration" class="hide">
+			<div style="width: 100%">
+				<div style="margin-left: auto; margin-right: auto; width: 250px">
+					<canvas width="140px" height="120px" id="phoneposition" >No canvas available</canvas>
+					<div id="accel-data">
+						<div>X Axis: <span id="xaxis" class="readonly-field">0000</span></div>
+						<div>Y Axis: <span id="yaxis" class="readonly-field">0</span></div>
+						<div>Z Axis: <span id="zaxis" class="readonly-field">0</span></div>
+					</div>
+				</div>
+				<div id="accel-sliders">
+					<div style="height: 15px">
+						<div id="sliderY"></div>
+					</div>
+					<div style="height: 15px">
+						<div id="sliderZ"></div>
+					</div>
+					<div style="height: 15px">
+						<div id="sliderX"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div id="event-battery-info" class="hide">
 			<table cellpadding='0' cellspacing='0' width="100%">
@@ -101,7 +130,7 @@
 					<th>Battery Strength</th>
 					<td>
 						<div id="slider"></div>
-						<div id="slider-value-panel"><span>0</span></div>
+						<div id="slider-value-panel"><span class="readonly-field">0</span></div>
 					</td>
 				</tr>
 			</table>

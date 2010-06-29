@@ -41,7 +41,7 @@
 		this.Export		= __Export;
 		this.Organise	= __Organise;
 		this.Cancel		= __Cancel;				
-	}
+	};
 
 	device.implementation.extend(provider, Interface, new LandmarkService() );
 

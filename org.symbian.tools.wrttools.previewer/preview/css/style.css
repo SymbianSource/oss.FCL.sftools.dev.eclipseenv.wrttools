@@ -20,10 +20,9 @@
 
 
 body {
-/*  background-image: url(../images/Gradient0Background.png); */
-	background-image: url(../images/Gradient0Background_2.png);
+/*	background-image: url(../images/Gradient0Background_2.png);*/
 	background-repeat: repeat-x;
-	background-color: gray;
+	background-color: AppWorkspace;
 	margin: 0px;
 	font-family: "Nokia Sans", "Nokia Sans SemiBold", "Arial Narrow";
 	padding: 0px;
@@ -582,14 +581,14 @@ div#slider-value-panel{
 	margin-top: 10px;
 }
 
-div#slider-value-panel span{
+span.readonly-field {
 	padding: 3px;
 	background:#0078A3 url(../script/jquery-ui/css/ui-darkness/images/0078a3_40x100_textures_02_glass_40.png) repeat-x scroll 0 50%;
 	border:1px solid #4bd94b;
 	color:#FFFFFF;
 	font-weight: bolder;
+	width: 30px
 }
-
 
 /*
 	Console UI
@@ -726,3 +725,24 @@ span#wrt-help:hover{
 	height: 100%;
 	text-align: center;
 	vertical-align: middle;
+}
+	
+#accel-data {
+	float: left;
+	margin-top: 15px;	
+}
+
+#phoneposition {
+	float:left
+}
+
+#accel-data div {
+	margin-top: 10px;
+}
+	
+#accel-sliders {
+	position: relative;
+	left: 0;
+	width: 100%;
+	top: 130px	
+}

@@ -36,8 +36,8 @@
 	var AccelerometerDoubleTapping	= new Array();
 	var Orientation					= new Array();
 	var Rotation					= new Array();
-	var xyOrientation = 0;
-	var zOrientation = 0;
+	var orientation;
+	var xaxis = 0, yaxis = 0, zaxis = 0;
 	
 	var provider = 'Service.Sensor',
 		Interface = 'ISensor';
@@ -64,31 +64,50 @@
 		result = false,
 		DBase = null;
 
-	device.implementation.setOrientation = function(xy, z) {
-		xyOrientation = xy;
-		zOrientation = z;
-		
-		for (var i = 0; i < Orientation.length; i++) {
-			notifyOrientationChangeListener(Orientation[i]);
-		}
-	};
+	function notifyAcceleration(x, y, z, o) {
+		xaxis = Math.round(x);
+		yaxis = Math.round(y);
+		zaxis = Math.round(z);
 
-	function notifyOrientationChangeListener(callback) {
-		var orientation;
-		if (xyOrientation > -45 && xyOrientation <= 45) {
-			orientation = "DisplayUp";
-		} else if (xyOrientation > 45 && xyOrientation <= 135) {
-			orientation = "DisplayLeftUp";
-		} else if (xyOrientation > 135 || xyOrientation <= -135) {
-			orientation = "DisplayDown";
-		} else if (xyOrientation > -135 && xyOrientation <= -45) {
-			orientation = "DisplayRightUp";
+		var res = createAccelerationResult();
+
+		window.setTimeout(function() {
+			for ( var i = 0; i < AccelerometerAxis.length; i++) {
+				var callback = AccelerometerAxis[i];
+				callback(getTransactionId(callback), 9, res);
+			}
+		}, 5);
+		
+		if (orientation != o) {
+			orientation = o;
+			var orRes = createOrientationResult();
+			window.setTimeout(function() {
+				for ( var i = 0; i < Orientation.length; i++) {
+					var callback = Orientation[i];
+					callback(getTransactionId(callback), 9, orRes);
+				}
+			}, 5);
 		}
-		callback(getTransactionId(callback), 9, context.Result( {
-			DeviceOrientation : orientation
-		}));
 	}
-	
+
+	function createAccelerationResult() {
+		return context.Result( {
+			DataType : "AxisData",
+			TimeStamp : new Date().getTime(),
+			XAxisData : xaxis,
+			YAxisData : yaxis,
+			ZAxisData : zaxis
+		});
+	}
+
+	function createOrientationResult() {
+		return context.Result( {
+			DataType : "AxisData",
+			TimeStamp : new Date().getTime(),
+			DeviceOrientation : orientation
+		});
+	}
+		
 	function getTransactionId(callback) {
 		for ( var tId in transactionToCallback) {
 			if (transactionToCallback[tId] == callback) {
@@ -137,7 +156,6 @@
 	function __RegisterForNotification(criteria, callback, flag){
 		flag = flag || false;
 		method = 'RegisterForNotification';
-		context.notify(_t('%s:: RegisterForNotification not implemented in preview').arg(provider));
 		
 		if(arguments.length >2 && (typeof flag != "undefined" && typeof flag != "boolean"))
 			return error(device.implementation.ERR_INVALID_SERVICE_ARGUMENT, msg.msgCriteriaMissing);
@@ -167,17 +185,18 @@
 		if (typeof callback == 'function') {
 			var channels = criteria.ChannelInfoMap;
 			// for ( var channel in channels) {
-			var notify = null;
+			var result = false;
 			switch (channels.ChannelId) {
 			case CHANNEL_ACCEL:
 				AccelerometerAxis.push(callback);
+				result = createAccelerationResult();
 				break;
 			case CHANNEL_ACCELDT:
 				AccelerometerDoubleTapping.push(callback);
 				break;
 			case CHANNEL_ORIENTATION:
 				Orientation.push(callback);
-				notify = notifyOrientationChangeListener;
+				result = createOrientationResult();
 				break;
 			case CHANNEL_ROTATION:
 				Rotation.push(callback);
@@ -186,7 +205,9 @@
 			// }
 			var tID = nextTransactionId++;
 			transactionToCallback[tID] = callback;
-			setTimeout(notify, 20, callback);
+			if (result) {
+				setTimeout(function() {callback(tID, 9, result);}, 20, callback);
+			}
 //			var result = context.callAsync(this, arguments.callee, criteria, callback);
 			return context.AsyncResult(tID);
 		}
@@ -337,5 +358,6 @@
 		msgChannelNotSupported		: '%s:%s:Channel property not supported',
 		msgChannelInfoMapInvalid	: '%s:%s:ChannelInfoMap Type Invalid'
 	};
-
+	
+	_BRIDGE_REF.nokia.emulator.setAccelerationCallback(notifyAcceleration);
 }) ();
