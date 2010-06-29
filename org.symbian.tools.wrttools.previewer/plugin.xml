@@ -10,7 +10,7 @@
             class="org.symbian.tools.wrttools.previewer.preview.PreviewView"
             icon="icons/obj16/preview_view.gif"
             id="org.symbian.tools.wrttools.editing.wrtpreview"
-            name="TMW Preview"
+            name="Preview"
             restorable="true">
       </view>
    </extension>
@@ -19,7 +19,7 @@
       <page
             class="org.symbian.tools.wrttools.previewer.preferences.WrtEditingPreferencePage"
             id="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
-            name="TMW">
+            name="Tools for Mobile Web">
          <keywordReference
                id="org.symbian.tools.wrttools.wrtwords">
          </keywordReference>

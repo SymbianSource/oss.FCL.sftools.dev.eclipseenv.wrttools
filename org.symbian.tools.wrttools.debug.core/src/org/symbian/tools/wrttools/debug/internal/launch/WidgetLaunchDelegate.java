@@ -40,7 +40,7 @@ public class WidgetLaunchDelegate implements ILaunchConfigurationDelegate {
 
 	public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
-		monitor.beginTask("Preparing TMW Debugger", IProgressMonitor.UNKNOWN);
+		monitor.beginTask("Preparing Mobile Web Debugger", IProgressMonitor.UNKNOWN);
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
         final IWorkbench workbench = PlatformUI.getWorkbench();
         final IWorkbenchWindow window = workbench.getWorkbenchWindows()[0];
