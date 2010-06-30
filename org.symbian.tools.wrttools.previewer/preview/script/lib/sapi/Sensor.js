@@ -102,7 +102,7 @@
 
 	function createOrientationResult() {
 		return context.Result( {
-			DataType : "AxisData",
+			DataType : "OrientationData",
 			TimeStamp : new Date().getTime(),
 			DeviceOrientation : orientation
 		});
