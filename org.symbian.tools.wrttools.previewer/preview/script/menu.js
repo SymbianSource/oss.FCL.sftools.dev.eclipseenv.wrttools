@@ -170,7 +170,7 @@ EmulatorMenu.prototype.exit = function() {
 		NOKIA.layout._console_enabled = false;
 		NOKIA.layout.render();
 
-		$("#loaderDiv").html("Widget is loading. Please wait...");
+		$("#loaderDiv").html("Application is loading. Please wait...");
 		$("#loaderDiv")[0].className = 'green';
 		$("#loaderDiv").show();
 		window.setTimeout(function() {
@@ -181,7 +181,7 @@ EmulatorMenu.prototype.exit = function() {
 
 	div.appendChild(p);
 
-	$("#loaderDiv").html("Click on Icon to Launch Widget");
+	$("#loaderDiv").html("Click on Icon to Launch Application");
 	$("#loaderDiv").show();
 	$("#loaderDiv")[0].className = 'yellow';
 
