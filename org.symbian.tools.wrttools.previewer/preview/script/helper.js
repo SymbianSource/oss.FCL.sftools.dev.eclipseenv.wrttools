@@ -351,7 +351,7 @@ EmulatorHelper.prototype.addListeners = function() {
 
 		NOKIA.helper.intervalId = setTimeout(function() {
 			NOKIA.menu.cancel();
-		}, 500);
+		}, 10000);
 	});
 
 	// Tabs
