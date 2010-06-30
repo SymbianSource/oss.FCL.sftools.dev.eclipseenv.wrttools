@@ -246,10 +246,10 @@
 	<extension point="org.eclipse.ui.views">
 		<view allowMultiple="false" category="org.symbian.tools.wrttools.views"
 			class="org.eclipse.ui.navigator.CommonNavigator" icon="icons/main16.gif"
-			id="org.symbian.tools.wrttools.wrtnavigator" name="TMW Navigator"
+			id="org.symbian.tools.wrttools.wrtnavigator" name="Projects"
 			restorable="true">
 		</view>
-		<category id="org.symbian.tools.wrttools.views" name="TMW Tools">
+		<category id="org.symbian.tools.wrttools.views" name="Tools for Mobile Web">
 		</category>
 	</extension>
 	<extension point="org.eclipse.ui.navigator.viewer">
@@ -598,7 +598,7 @@
        point="org.eclipse.ui.commands">
     <category
           id="org.symbian.tools.wrttools.commands.maincategory"
-          name="TMW Tools">
+          name="Tools for Mobile Web">
     </category>
     <command
           categoryId="org.symbian.tools.wrttools.commands.maincategory"
@@ -615,7 +615,7 @@
     <command
           categoryId="org.symbian.tools.wrttools.commands.maincategory"
           defaultHandler="org.symbian.tools.wrttools.handlers.AddJSLibrary"
-          description="Adds JavaScript libraries to TMW projects"
+          description="Adds JavaScript libraries to Mobile Web projects"
           id="org.symbian.tools.wrttools.addlibrary"
           name="Add JavaScript Libraries...">
     </command>
@@ -823,7 +823,7 @@
  </extension>
  <extension
        id="org.symbian.tools.wrttools.excluded"
-       name="Excluded from TMW packaging marker"
+       name="Excluded from Mobile Web packaging marker"
        point="org.eclipse.core.resources.markers">
     <persistent
           value="true">

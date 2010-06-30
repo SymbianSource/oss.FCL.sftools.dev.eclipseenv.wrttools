@@ -241,16 +241,6 @@ EmulatorHelper.prototype.getPreference = function(name) {
 	return NOKIA.emulator.prefs[name];
 };
 
-EmulatorHelper.prototype.rotateCW = function() {
-	var newOrient = NOKIA.orientation + 90;
-	NOKIA.emulator.toggle(newOrient - (newOrient > 180 ? 360 : 0));
-};
-
-EmulatorHelper.prototype.rotateCCW = function() {
-	var newOrient = NOKIA.orientation - 90;
-	NOKIA.emulator.toggle(newOrient + (newOrient <= -180 ? 360 : 0));
-};
-
 EmulatorHelper.prototype.version = function(ele) {
 	if (confirm('Would you like to reload the widget to apply the changes on the Version settings?')) {
 		NOKIA.helper.setPreference('__SYM_WRT_VERSION', ele.value);
@@ -304,13 +294,6 @@ EmulatorHelper.prototype.addListeners = function() {
 			});
 		}
 	});
-
-	$('#rotateCW').click(function() {
-		NOKIA.helper.rotateCW();
-	});
-	$('#rotateCCW').click(function() {
-		NOKIA.helper.rotateCCW();
-	});
 	$('#resOptions').change(
 			function(ele) {
 				ele = ele.target || this;
@@ -341,12 +324,6 @@ EmulatorHelper.prototype.addListeners = function() {
 		NOKIA.helper.version(this);
 	});
 
-	$("#orientationIcon").click(function() {
-		var mode = (NOKIA.mode == 'portrait') ? 'landscape' : 'portrait';
-		NOKIA.emulator.setMode(mode);
-		$("#WidgetArea")[0].className = 'hs_' + NOKIA.mode;
-	});
-
 	$("#iframeMask").click(function() {
 		$("#orientationIcon").hide();
 		$("#iframeMask").hide();
@@ -358,7 +335,6 @@ EmulatorHelper.prototype.addListeners = function() {
 
 		NOKIA.menu.softkeys_visibility = true;
 		NOKIA.menu.showSoftKeys();
-
 	});
 
 	// MenuItems DIV events

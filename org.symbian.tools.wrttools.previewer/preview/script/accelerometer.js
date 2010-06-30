@@ -3,40 +3,99 @@ function RotationSupport(accelerationCallback) {
 }
 
 function RotationControls(accelCallback) {
-	var width = 50, height = 100, depth = 10;
-	var margin = 5, bottomMargin = 15;
-	var angleX = 180;
-	var angleY = 180;
-	var angleZ = 180;
-	var accelerationCallback = accelCallback;
+	this.angleX = 180;
+	this.angleY = 180;
+	this.angleZ = 180;
+	var control = this;
+	this.accelerationCallback = accelCallback;
 
 	$("#sliderX").slider( {
 		slide : updateAngleX,
 		animate : true,
 		max : 360,
 		min : 0,
-		value : angleX
+		value : this.angleX
 	});
 	$("#sliderY").slider( {
 		slide : updateAngleY,
 		animate : true,
 		max : 360,
 		min : 0,
-		value : angleY
+		value : this.angleY
 	});
 	$("#sliderZ").slider( {
 		slide : updateAngleZ,
 		animate : true,
 		max : 360,
 		min : 0,
-		value : angleZ
+		value : this.angleZ
 	});
-	renderUI();
+	this.paint();
 
+	function updateAngleX(event, ui) {
+		control.angleX = ui.value;
+		control.paint();
+	}
+
+	function updateAngleY(event, ui) {
+		control.angleY = ui.value;
+		control.paint();
+	}
+
+	function updateAngleZ(event, ui) {
+		control.angleZ = ui.value;
+		control.paint();
+	}
+}
+
+RotationControls.prototype.paint = function(ignoreListeners) {
+	var width = 50, height = 100, depth = 10;
+	var margin = 5, bottomMargin = 15;
+
+	var canvas = document.getElementById("phoneposition");
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var r = 62;
+
+	var xy = (180 - this.angleX) * Math.PI / 180;
+	var yz = (this.angleY - 180) * Math.PI / 180;
+	var xz = (180 - this.angleZ) * Math.PI / 180 + Math.PI / 2;
+
+	var back = translateBack(xy, xz, yz);
+	if ((back[0].z + back[2].z) / 2 < 0) {
+		paint(canvas, ctx, back);
+	} else {
+		paint(canvas, ctx, translateFace(xy, xz, yz));
+		paintScreen(canvas, ctx, translateScreen(xy, xz, yz));
+	}
+
+	var dz = 0;
+	if (back[0].z > back[3].z) {
+		var bottom = translateBottom(xy, xz, yz);
+		paint(canvas, ctx, bottom);
+		dz = bottom[1].y - bottom[0].y;
+	} else if (back[0].z != back[3].z) {
+		var top = translateTop(xy, xz, yz);
+		paint(canvas, ctx, top);
+		dz = top[1].y - top[0].y;
+	}
+
+	if (back[1].z > back[0].z) {
+		paint(canvas, ctx, translateLeft(xy, xz, yz));
+	} else if (back[1].z != back[0].z) {
+		paint(canvas, ctx, translateRight(xy, xz, yz));
+	}
+	if (!ignoreListeners) {
+		var accelX = (back[1].y - back[0].y) / width;
+		var accelY = (back[0].y - back[3].y) / height;
+		var accelZ = dz / depth;
+		notifyAcceleration(accelX, accelY, accelZ);
+	}
 	function translateFace(xy, xz, yz) {
 		var px = width / 2;
 		var py = height / 2;
-		var pz = depth/2;
+		var pz = depth / 2;
 		var points = [ {
 			x : px,
 			y : py,
@@ -56,11 +115,11 @@ function RotationControls(accelCallback) {
 		} ];
 		return rotate(points, xy, xz, yz);
 	}
-	
+
 	function translateScreen(xy, xz, yz) {
 		var px = width / 2;
 		var py = height / 2;
-		var pz = depth/2;
+		var pz = depth / 2;
 		var points = [ {
 			x : px - margin,
 			y : py - bottomMargin,
@@ -80,11 +139,11 @@ function RotationControls(accelCallback) {
 		} ];
 		return rotate(points, xy, xz, yz);
 	}
-	
+
 	function translateBack(xy, xz, yz) {
 		var px = width / 2;
 		var py = height / 2;
-		var pz = -depth/2;
+		var pz = -depth / 2;
 		var points = [ {
 			x : px,
 			y : py,
@@ -104,11 +163,11 @@ function RotationControls(accelCallback) {
 		} ];
 		return rotate(points, xy, xz, yz);
 	}
-	
+
 	function translateTop(xy, xz, yz) {
 		var px = width / 2;
 		var py = height / 2;
-		var pz = depth/2;
+		var pz = depth / 2;
 		var points = [ {
 			x : px,
 			y : -py,
@@ -128,11 +187,11 @@ function RotationControls(accelCallback) {
 		} ];
 		return rotate(points, xy, xz, yz);
 	}
-	
+
 	function translateBottom(xy, xz, yz) {
 		var px = -width / 2;
 		var py = height / 2;
-		var pz = depth/2;
+		var pz = depth / 2;
 		var points = [ {
 			x : px,
 			y : -py,
@@ -152,11 +211,11 @@ function RotationControls(accelCallback) {
 		} ];
 		return rotate(points, xy, xz, yz);
 	}
-	
+
 	function translateLeft(xy, xz, yz) {
 		var px = width / 2;
 		var py = height / 2;
-		var pz = depth/2;
+		var pz = depth / 2;
 		var points = [ {
 			x : px,
 			y : py,
@@ -176,11 +235,11 @@ function RotationControls(accelCallback) {
 		} ];
 		return rotate(points, xy, xz, yz);
 	}
-	
+
 	function translateRight(xy, xz, yz) {
 		var px = width / 2;
 		var py = -height / 2;
-		var pz = depth/2;
+		var pz = depth / 2;
 		var points = [ {
 			x : px,
 			y : py,
@@ -199,49 +258,6 @@ function RotationControls(accelCallback) {
 			z : pz
 		} ];
 		return rotate(points, xy, xz, yz);
-	}
-	
-	
-	function renderUI() {
-		var canvas = document.getElementById("phoneposition");
-		var ctx = canvas.getContext("2d");
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		var r = 62;
-
-		var xy = (180 - angleX) * Math.PI / 180;
-		var yz = (angleY - 180) * Math.PI / 180;
-		var xz = (180 - angleZ) * Math.PI / 180 + Math.PI / 2;
-
-		var back = translateBack(xy, xz, yz);
-		if ((back[0].z + back[2].z)/2 < 0) {
-			paint(canvas, ctx, back);
-		} else {
-			paint(canvas, ctx, translateFace(xy, xz, yz));
-			paintScreen(canvas, ctx, translateScreen(xy, xz, yz));
-		}
-
-		var dz = 0;
-		if (back[0].z > back[3].z) {
-			var bottom = translateBottom(xy, xz, yz);
-			paint(canvas, ctx, bottom);
-			dz = bottom[1].y - bottom[0].y;
-		} else if (back[0].z != back[3].z) {
-			var top = translateTop(xy, xz, yz);
-			paint(canvas, ctx, top);
-			dz = top[1].y - top[0].y;
-		}
-		
-		if (back[1].z > back[0].z) {
-			paint(canvas, ctx, translateLeft(xy, xz, yz));
-		} else if (back[1].z != back[0].z) {
-			paint(canvas, ctx, translateRight(xy, xz, yz));
-		}
-		var accelX = (back[1].y - back[0].y) / width;
-		var accelY = (back[0].y - back[3].y) / height;
-		var accelZ = dz / depth;
-		
-		notifyAcceleration(accelX, accelY, accelZ);	
 	}
 
 	function rotate(points, xy, xz, yz) {
@@ -280,21 +296,6 @@ function RotationControls(accelCallback) {
 		return res;
 	}
 
-	function updateAngleX(event, ui) {
-		angleX = ui.value;
-		renderUI();
-	}
-
-	function updateAngleY(event, ui) {
-		angleY = ui.value;
-		renderUI();
-	}
-
-	function updateAngleZ(event, ui) {
-		angleZ = ui.value;
-		renderUI();
-	}
-
 	function paint(canvas, ctx, points) {
 		var xcoord = canvas.width / 2;
 		var ycoord = canvas.height / 2;
@@ -327,8 +328,24 @@ function RotationControls(accelCallback) {
 		}
 		ctx.fill();
 	}
-	
+
 	function notifyAcceleration(x, y, z) {
 		accelerationCallback(x, y, z);
 	}
-}
+};
+
+RotationSupport.prototype.setAngles = function(x, y, z) {
+	this.controls.angleX = x;
+	this.controls.angleY = z; // It is extremly messy - this UI was developed separately from the rest and follows 
+	this.controls.angleZ = y; // different conventions
+	$("#sliderX").slider( {
+		value : x
+	});
+	$("#sliderY").slider( {
+		value : z
+	});
+	$("#sliderZ").slider( {
+		value : y
+	});
+	this.controls.paint(true);
+};

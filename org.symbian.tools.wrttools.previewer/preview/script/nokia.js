@@ -25,8 +25,8 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 		version : 'WRT 1.1',
 		currentDevice : '240x320',
 		mode : 'portrait',
-		orientation : 0,
 		resolution : ['240x320', '320x240', '360x640', '800x352'],
+		rotationSupport : false,
 		scriptsLoaded : {
 			loader : false,
 			widget : false,
@@ -50,6 +50,8 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 	
 	NOKIA.init = function()
 	{
+		this.rotationSupport = new RotationSupport(accelerationCallback);
+
 		// Not-Supported Browser check
 		NOKIA.emulator.is_browserReady = (/MSIE/i.test(navigator.userAgent));
 		if(NOKIA.emulator.is_browserReady)
@@ -128,8 +130,6 @@ if(typeof NOKIA == "undefined" || !NOKIA)
 
 		//	For getting Icon.png
 		this.helper.getInfo('Icon.png', NOKIA.helper.getIconCallback);
-		
-		new RotationSupport(accelerationCallback);
 	};
 
 	/*

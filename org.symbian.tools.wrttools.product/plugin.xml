@@ -14,7 +14,7 @@
          point="org.eclipse.ui.actionSets">
       <actionSet
             id="org.symbian.tools.wrttools.product.creationActionSet"
-            label="TMW Element Creation">
+            label="Mobile Web Element Creation">
          <action
                class="org.symbian.tools.wrttools.product.actions.NewCSSFileAction"
                icon="icons/newcss_wiz.gif"
@@ -43,7 +43,7 @@
                class="org.symbian.tools.wrttools.product.actions.NewWRTProjectAction"
                icon="icons/newWRT_app_icon_16px.png"
                id="org.symbian.tools.wrttools.product.newWRTProjectAction"
-               label="New TMW Application..."
+               label="New Mobile Web Application..."
                style="push"
                toolbarPath="wrtwizards">
          </action>
@@ -71,7 +71,7 @@
    <extension
          point="org.eclipse.ui.activities">
       <activity
-            description="WTP functionality not used in TMW IDE"
+            description="WTP functionality not used in Mobile Web IDE"
             id="org.symbian.tools.wrttools.product.wtp"
             name="Web Tools Platform (WTP)">
       </activity>
@@ -152,7 +152,7 @@
             pattern="org\.eclipse\.debug\.ui/org\.eclipse\.debug\.ui\.contextualLaunch\.debug\.submenu">
       </activityPatternBinding>
       <category
-            description="WTP UI elements that are not compatible with TMW app development"
+            description="WTP UI elements that are not compatible with Mobile Web app development"
             id="org.symbian.tools.wrttools.product.wtp"
             name="Web Tools Platform (WTP)">
       </category>
@@ -192,7 +192,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="org.eclipse.ui.ide.workbench"
-            name="WebRuntime Toolkit IDE">
+            name="Mobile Web IDE">
          <property
                name="windowImages"
                value="icons/ico/WRT_main-icon_16px.png,icons/ico/WRT_main-icon_32px.png,icons/ico/WRT_main-icon_48px.png,icons/ico/WRT_main-icon_64px.png,icons/ico/WRT_main-icon_128px.png">
@@ -219,7 +219,7 @@
          </property>
          <property
                name="appName"
-               value="WebRuntime Toolkit IDE">
+               value="Mobile Web IDE">
          </property>
          <property
                name="preferenceCustomization"

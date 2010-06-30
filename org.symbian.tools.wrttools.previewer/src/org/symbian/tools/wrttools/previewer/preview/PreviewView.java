@@ -53,7 +53,7 @@ public class PreviewView extends PageBookView {
 	@Override
 	protected IPage createDefaultPage(PageBook book) {
 		MessagePage messagePage = new MessagePage();
-		messagePage.setMessage("Open an editor to preview TMW widget");
+		messagePage.setMessage("Open an editor to preview Mobile Web App");
 		initPage(messagePage);
 		messagePage.createControl(book);
 		return messagePage;
@@ -243,7 +243,7 @@ public class PreviewView extends PageBookView {
 							.open(
 									MessageDialogWithToggle.QUESTION,
 									getSite().getShell(),
-									"TMW Preview",
+									"Preview",
 									"The preview window can refresh (reinitialize and restart) whenever a project file is saved.\n" +
 									"This setting for each project can be toggled from the preview toolbar.\n\n" +
 									"Do you want to enable automatic refresh for this project?",
