@@ -32,32 +32,7 @@ EmulatorHelper.prototype.loadPreferences = function() {
 		}
 	}
 
-	// Selecting Version
-	if (NOKIA.version == 'WRT 1.0')
-		$('#wrt_version_1_0')[0].checked = true;
-	else
-		$('#wrt_version_1_1')[0].checked = true;
-
-	// HomeScreen Support
-	if (NOKIA.deviceList[NOKIA.currentDevice].homeScreenSupport) {
-		if (typeof NOKIA.emulator.plist.MiniViewEnabled != 'undefined') {
-			if (NOKIA.emulator.plist.MiniViewEnabled == 'false')
-				$('#HS_Control_Info')
-						.html(
-								"<span id='wrt-help' onclick='javascipt:NOKIA.helper.showMiniviewHelp();'></span><strong>Not Enabled</strong><br/><small>Click on help to read more about enabling Mini view support</small>");
-			else
-				$('#HS_Control_Info').html("Supported");
-		} else
-			$('#HS_Control_Info').html(
-					"<span id='wrt-help'></span>Not Supported");
-
-		$('#HS_Control_Info').show();
-
-	} else {
-		$('#HS_Control_Info').html(
-				"Not Supported for the selected Device resolution");
-		$('#HS_Control_Info').show();
-	}
+	NOKIA.version = "1.1";
 };
 
 EmulatorHelper.prototype.getInfo = function(url, callback) {
@@ -241,25 +216,6 @@ EmulatorHelper.prototype.getPreference = function(name) {
 	return NOKIA.emulator.prefs[name];
 };
 
-EmulatorHelper.prototype.version = function(ele) {
-	if (confirm('Would you like to reload the widget to apply the changes on the Version settings?')) {
-		NOKIA.helper.setPreference('__SYM_WRT_VERSION', ele.value);
-		$("#loaderDiv").html("Applying the " + ele.value + ", please wait...");
-		$("#loaderDiv").show();
-		$("#loaderDiv")[0].className = 'green';
-
-		window.setTimeout(function() {
-			document.location = document.location;
-		}, 3000);
-	} else {
-		ele.checked = false;
-		if (ele.value != 'WRT 1.0')
-			$("#wrt_version_1_0")[0].checked = true;
-		else
-			$("#wrt_version_1_1")[0].checked = true;
-	}
-};
-
 EmulatorHelper.prototype.addListeners = function() {
 	NOKIA.helper.loadPreferences();
 	/*
@@ -315,15 +271,6 @@ EmulatorHelper.prototype.addListeners = function() {
 		}
 	}
 
-	// WRT Version controls
-	$('#wrt_version_1_0').change(function() {
-		NOKIA.helper.version(this);
-	});
-
-	$('#wrt_version_1_1').change(function() {
-		NOKIA.helper.version(this);
-	});
-
 	$("#iframeMask").click(function() {
 		$("#orientationIcon").hide();
 		$("#iframeMask").hide();
@@ -368,14 +315,49 @@ EmulatorHelper.prototype.addListeners = function() {
 	// $("event-memory-info").show();
 	// break;
 	// case 4:
-	// $("settings-view").show();
-	// break;
 	//					
 	// }}
 	});
 	$(".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *").removeClass(
 			"ui-corner-all ui-corner-top").addClass("ui-corner-bottom");
 
+	$("#xleft").button( {
+		icons : {
+			primary : 'ui-icon-triangle-1-w'
+		},
+		text : false
+	});
+	$("#xright").button( {
+		icons : {
+		primary : 'ui-icon-triangle-1-e'
+	},
+	text : false
+	});
+	$("#yleft").button( {
+		icons : {
+		primary : 'ui-icon-triangle-1-w'
+	},
+	text : false
+	});
+	$("#yright").button( {
+		icons : {
+		primary : 'ui-icon-triangle-1-e'
+	},
+	text : false
+	});
+	$("#zleft").button( {
+		icons : {
+		primary : 'ui-icon-triangle-1-w'
+	},
+	text : false
+	});
+	$("#zright").button( {
+		icons : {
+		primary : 'ui-icon-triangle-1-e'
+	},
+	text : false
+	});
+	
 	/*
 	 * Event triggering
 	 */
@@ -425,12 +407,6 @@ EmulatorHelper.prototype.addListeners = function() {
 	$("#event-memory-back").click(function(event) {
 		$("#event-icons").show();
 		$("#event-memory-info").hide();
-	});
-
-	// for minView more info
-	$("#mini-view-back").click(function(event) {
-		$("#settings-view").show();
-		$("#mini-view-info").hide();
 	});
 
 	// Slider
@@ -580,11 +556,6 @@ EmulatorHelper.prototype.triggerSapi = function(provider, eventType, data) {
 
 EmulatorHelper.prototype.trigger = function(provider, eventType, data) {
 	NOKIA.emulator.child.widget.triggerListener(provider, eventType, data);
-};
-
-EmulatorHelper.prototype.showMiniviewHelp = function() {
-	$("#settings-view").hide();
-	$("#mini-view-info").show();
 };
 
 EmulatorHelper.prototype.checkDependencies = function() {

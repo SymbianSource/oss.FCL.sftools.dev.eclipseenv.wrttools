@@ -97,8 +97,8 @@ Emulator.prototype.accelerationChanged = function(x, y, z) {
 Emulator.prototype.setAccelerationValues = function(x, y, z) {
 	window.setTimeout(function() {
 		NOKIA.emulator.accelerationChanged(x, y, z);
-		NOKIA.rotationSupport.setAngles(180 - x * 90, y * 90 + 180,
-				180 + z * 90);
+		NOKIA.rotationSupport.setAngles(x * 90, y * 90,
+				z * 90);
 	}, 5);
 };
 
@@ -110,6 +110,11 @@ Emulator.prototype.load = function() {
 	// load the saved device Info
 	var device = NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_DEVICE');
 	NOKIA.currentDevice = device || NOKIA.currentDevice;
+
+	// load the saved device mode
+	var mode = NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE');
+	if (mode != null)
+		NOKIA.mode = mode;
 
 	var orientation = NOKIA.helper.getPreference("__SYM_DEVICE_ORIENTATION");
 	if (orientation != null) {
@@ -128,18 +133,13 @@ Emulator.prototype.load = function() {
 			this.setAccelerationValues(-1, 0, 0);
 			break;
 		case ORIENTATIONS.DisplayUpwards:
-			this.setAccelerationValues(0, 0, 1);
+			this.setAccelerationValues(NOKIA.mode == 'portrait' ? 0 : 1, 0, 1);
 			break;
 		case ORIENTATIONS.DisplayDownwards:
-			this.setAccelerationValues(0, 0, -1);
+			this.setAccelerationValues(NOKIA.mode == 'portrait' ? 0 : 1, 0, -1);
 			break;
 		}
 	}
-
-	// load the saved device mode
-	var mode = NOKIA.helper.getPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE');
-	if (mode != null)
-		NOKIA.mode = mode;
 
 	// SAVE the device DATA
 	NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE',
@@ -189,6 +189,7 @@ Emulator.prototype.render = function() {
 			NOKIA.mode = 'landscape';
 		}
 	}
+	NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
 
 	if (!NOKIA.emulator.orientationSupports())
 		NOKIA.mode = NOKIA.deviceList[NOKIA.currentDevice]['default'];

@@ -3,47 +3,88 @@ function RotationSupport(accelerationCallback) {
 }
 
 function RotationControls(accelCallback) {
-	this.angleX = 180;
-	this.angleY = 180;
-	this.angleZ = 180;
+	this.angleX = 0;
+	this.angleY = 0;
+	this.angleZ = 0;
 	var control = this;
 	this.accelerationCallback = accelCallback;
 
-	$("#sliderX").slider( {
-		slide : updateAngleX,
-		animate : true,
-		max : 360,
-		min : 0,
-		value : this.angleX
-	});
-	$("#sliderY").slider( {
-		slide : updateAngleY,
-		animate : true,
-		max : 360,
-		min : 0,
-		value : this.angleY
-	});
-	$("#sliderZ").slider( {
-		slide : updateAngleZ,
-		animate : true,
-		max : 360,
-		min : 0,
-		value : this.angleZ
-	});
-	this.paint();
+	setupListeners("xaxis", "xleft", "xright", updateAngleX, this.angleX);
+	setupListeners("yaxis", "yleft", "yright", updateAngleY, this.angleY);
+	setupListeners("zaxis", "zleft", "zright", updateAngleZ, this.angleZ);
 
-	function updateAngleX(event, ui) {
-		control.angleX = ui.value;
+	window.setTimeout(function() {
+		this.paint();
+	}, 50);
+
+	function setupListeners(inputId, leftArrow, rightArrow, fn, initial) {
+		var input = $("#" + inputId);
+		input.numeric();
+		input.val(initial);
+		input.change(function() {
+			adjust(input, fn, 0);
+		});
+		handleButton(leftArrow, input, fn, -1);
+		handleButton(rightArrow, input, fn, 1);
+	}
+
+	function handleButton(buttonId, input, fn, increment) {
+		var id = false;
+		var timeout = false;
+		var stop = function() {
+			if (timeout) {
+				window.clearTimeout(timeout);
+				timeout = false;
+				adjust(input, fn, increment);
+			}
+			if (id) {
+				window.clearInterval(id);
+				id = false;
+			}
+		};
+
+		$("#" + buttonId).mousedown(function() {
+			timeout = window.setTimeout(function() {
+				id = window.setInterval(function() {
+					timeout = false;
+					adjust(input, fn, increment);
+				}, 10);
+			}, 250);
+		}).mouseup(stop).focusout(stop).blur(stop).mouseleave(stop);
+	}
+
+	function adjust(input, callback, increment) {
+		var n = parseInt(input.val());
+		if (isNaN(n)) {
+			n = 0;
+		}
+		var val = fix(n + increment);
+		input.val(val);
+		callback(val);
+	}
+
+	function fix(n) {
+		while (n < -180) {
+			n = n + 360;
+		}
+		while (n >= 180) {
+			n = n - 360;
+		}
+		return n;
+	}
+
+	function updateAngleX(angle) {
+		control.angleX = angle;
 		control.paint();
 	}
 
-	function updateAngleY(event, ui) {
-		control.angleY = ui.value;
+	function updateAngleY(angle) {
+		control.angleY = angle;
 		control.paint();
 	}
 
-	function updateAngleZ(event, ui) {
-		control.angleZ = ui.value;
+	function updateAngleZ(angle) {
+		control.angleZ = angle;
 		control.paint();
 	}
 }
@@ -58,7 +99,7 @@ RotationControls.prototype.paint = function(ignoreListeners) {
 
 	var r = 62;
 
-	var xy = (180 - this.angleX) * Math.PI / 180;
+	var xy = (this.angleX - 180) * Math.PI / 180;
 	var yz = (this.angleY - 180) * Math.PI / 180;
 	var xz = (180 - this.angleZ) * Math.PI / 180 + Math.PI / 2;
 
@@ -336,16 +377,13 @@ RotationControls.prototype.paint = function(ignoreListeners) {
 
 RotationSupport.prototype.setAngles = function(x, y, z) {
 	this.controls.angleX = x;
-	this.controls.angleY = z; // It is extremly messy - this UI was developed separately from the rest and follows 
+	this.controls.angleY = z; // It is extremly messy - this UI was developed
+	// separately from the rest and follows
 	this.controls.angleZ = y; // different conventions
-	$("#sliderX").slider( {
-		value : x
-	});
-	$("#sliderY").slider( {
-		value : z
-	});
-	$("#sliderZ").slider( {
-		value : y
-	});
+
+	$("#xaxis").val(this.controls.angleX);
+	$("#yaxis").val(this.controls.angleY);
+	$("#zaxis").val(this.controls.angleZ);
+
 	this.controls.paint(true);
 };
