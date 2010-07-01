@@ -172,3 +172,7 @@ $(document).ready(function () {
 });
 
 window.onresize = NOKIA.layout.render;
+
+var EmulatorPreferences = {
+		SELECTED_TAB:"__SYM_SELECTED_CONTROLS_TAB"
+};

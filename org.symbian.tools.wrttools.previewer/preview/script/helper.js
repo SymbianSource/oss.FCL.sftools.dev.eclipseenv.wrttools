@@ -295,22 +295,14 @@ EmulatorHelper.prototype.addListeners = function() {
 	});
 
 	// Tabs
-	$('#tabs').tabs( {
-	// select : function(event, ui){
-	// switch (ui.index) {
-	// case 1:
-	// $("event-battery-info").show();
-	// break;
-	// case 2:
-	// $("event-messaging-info").show();
-	// break;
-	// case 3:
-	// $("event-memory-info").show();
-	// break;
-	// case 4:
-	//					
-	// }}
-	});
+	$('#tabs').tabs(
+			{
+				select : function(event, ui) {
+					var selectedTab = ui.index;
+					NOKIA.helper.setPreference(EmulatorPreferences.SELECTED_TAB,
+							selectedTab);
+				}, selected:NOKIA.helper.getPreference(EmulatorPreferences.SELECTED_TAB)
+			});
 	$(".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *").removeClass(
 			"ui-corner-all ui-corner-top").addClass("ui-corner-bottom");
 
@@ -322,35 +314,35 @@ EmulatorHelper.prototype.addListeners = function() {
 	});
 	$("#xright").button( {
 		icons : {
-		primary : 'ui-icon-triangle-1-e'
-	},
-	text : false
+			primary : 'ui-icon-triangle-1-e'
+		},
+		text : false
 	});
 	$("#yleft").button( {
 		icons : {
-		primary : 'ui-icon-triangle-1-w'
-	},
-	text : false
+			primary : 'ui-icon-triangle-1-w'
+		},
+		text : false
 	});
 	$("#yright").button( {
 		icons : {
-		primary : 'ui-icon-triangle-1-e'
-	},
-	text : false
+			primary : 'ui-icon-triangle-1-e'
+		},
+		text : false
 	});
 	$("#zleft").button( {
 		icons : {
-		primary : 'ui-icon-triangle-1-w'
-	},
-	text : false
+			primary : 'ui-icon-triangle-1-w'
+		},
+		text : false
 	});
 	$("#zright").button( {
 		icons : {
-		primary : 'ui-icon-triangle-1-e'
-	},
-	text : false
+			primary : 'ui-icon-triangle-1-e'
+		},
+		text : false
 	});
-	
+
 	/*
 	 * Event triggering
 	 */
