@@ -43,7 +43,6 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
     private boolean toggleState = true;
     private final PreviewView previewView;
     private boolean needsRefresh = false;
-    private Composite pane;
 
     public AbstractPreviewPage(IProject project, PreviewView previewView) {
         this.project = project;
@@ -62,19 +61,9 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 
     @Override
     public void createControl(Composite parent) {
-        pane = new Composite(parent, SWT.EMBEDDED);
-        GridLayout layout = new GridLayout();
-        layout.marginWidth = 0;
-        layout.marginHeight = 0;
-        pane.setLayout(layout);
-        addBrowser();
-    }
-
-    private void addBrowser() {
-        browser = createBrowser(pane);
+        browser = createBrowser(parent);
         browser.setLayoutData(new GridData(GridData.FILL_BOTH));
         browser.setUrl(getURI().toASCIIString());
-        pane.layout();
     }
 
     protected abstract Browser createBrowser(Composite parent);
@@ -85,7 +74,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
 
     @Override
     public Control getControl() {
-        return pane;
+        return browser;
     }
 
     @Override
@@ -132,7 +121,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
         try {
             if (!isDisposed()) {
                 final Control focusControl = browser.getDisplay().getFocusControl();
-                browser.setUrl(browser.getUrl());
+                browser.setUrl(getURI().toASCIIString());
                 refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.GREEN_SYNC));
                 if (!manual && focusControl != null) {
                     asyncExec(new Runnable() {
@@ -219,12 +208,6 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
     public synchronized void projectRenamed(IPath newPath) {
         if (!isDisposed()) {
             project = ResourcesPlugin.getWorkspace().getRoot().getProject(newPath.lastSegment());
-            asyncExec(new Runnable() {
-                public void run() {
-                    browser.dispose();
-                    addBrowser();
-                }
-            });
         }
     }
 }
