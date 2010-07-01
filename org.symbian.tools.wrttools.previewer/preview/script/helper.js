@@ -264,13 +264,6 @@ EmulatorHelper.prototype.addListeners = function() {
 				NOKIA.helper.loadPreferences();
 			});
 
-	// Hack for Mac firefox
-	if (/Mac/i.test(navigator.userAgent)) {
-		if (!(/AppleWebKit/i.test(navigator.userAgent))) {
-			$("#resOptions")[0].size = '4';
-		}
-	}
-
 	$("#iframeMask").click(function() {
 		$("#orientationIcon").hide();
 		$("#iframeMask").hide();
