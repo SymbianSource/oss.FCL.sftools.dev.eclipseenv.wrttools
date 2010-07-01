@@ -44,13 +44,16 @@ function RotationControls(accelCallback) {
 		};
 
 		$("#" + buttonId).mousedown(function() {
-			timeout = window.setTimeout(function() {
-				id = window.setInterval(function() {
-					timeout = false;
-					adjust(input, fn, increment);
-				}, 10);
-			}, 250);
-		}).mouseup(stop).focusout(stop).blur(stop).mouseleave(stop);
+			if (!timeout && !id) {
+				timeout = window.setTimeout(function() {
+					id = window.setInterval(function() {
+						timeout = false;
+						adjust(input, fn, increment);
+					}, 10);
+				}, 250);
+			}
+		}).mouseup(stop).focusout(stop).blur(stop).mouseleave(stop).dblclick(
+				stop);
 	}
 
 	function adjust(input, callback, increment) {
