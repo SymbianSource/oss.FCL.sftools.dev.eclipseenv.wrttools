@@ -56,7 +56,7 @@
              class="org.symbian.tools.wrttools.core.packager.ExcludeFileAction"
              icon="icons/exclude_archive.gif"
              id="org.symbian.tools.wrttools.widget.wrttool.packageoptions.ExcludeFileAction"
-             label="Exclude From WRT Archive"
+             label="Exclude From Archive"
              menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker"> 
          </action>  
       </objectContribution>    
@@ -78,7 +78,7 @@
              class="org.symbian.tools.wrttools.core.packager.IncludeFileAction"
              icon="icons/include_archive.gif"
              id="org.symbian.tools.wrttools.widget.wrttool.packageoptions.IncludeFileAction"
-             label="Include in WRT Archive"
+             label="Include in Archive"
              menubarPath="org.symbian.tools.wrttools.contextMenuGroupMarker"> 
       </action>  
     </objectContribution>
@@ -102,13 +102,13 @@
 	</extension>
 	 
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.symbian.tools.wrttools.core.category" name="Web Runtime(WRT)">
+		<category id="org.symbian.tools.wrttools.core.category" name="Mobile Web Tools">
 		</category>
 		<wizard category="org.symbian.tools.wrttools.core.category"
 			class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
 			finalPerspective="org.symbian.tools.wrttools.mainPerspective"
 			hasPages="true" icon="icons/WRT_main_16.png"
-			id="org.symbian.tools.wrttools.core.wrtwidgetwizard" name="Web Runtime Application Project"
+			id="org.symbian.tools.wrttools.core.wrtwidgetwizard" name="Mobile Web Application Project"
 			project="true">
 			<description>
 				Creates a new Symbian WRT application project using one of the provided
@@ -198,12 +198,12 @@
 	
 <!-- Import Wizard -->
 	<extension point="org.eclipse.ui.importWizards">
-		<category id="org.symbian.tools.wrttools.import" name="Web Runtime (WRT)">
+		<category id="org.symbian.tools.wrttools.import" name="Mobile Web Tools">
 		</category>
 		<wizard category="org.symbian.tools.wrttools.import"
 			class="org.symbian.tools.wrttools.wizards.projectimport.WrtProjectsImportWizard"
 			icon="icons/import_aptana_project.gif" id="org.symbian.tools.wrttools.import.projectImport"
-			name="Existing WRT Projects into Workspace">
+			name="Existing Mobile Web Projects into Workspace">
      <description>
         Import WRT project created in Aptana, Adobe Dreamweaver or WRT IDE
      </description>
@@ -305,7 +305,7 @@
           icon="icons/main16.gif"
           id="org.symbian.tools.wrttools.navigatorcontent"
           labelProvider="org.eclipse.wst.jsdt.internal.ui.navigator.JavaNavigatorLabelProvider"
-          name="WRT Elements"
+          name="Mobile Web"
           priority="high"
           providesSaveables="false">
        <triggerPoints>
@@ -814,7 +814,7 @@
           class="org.symbian.tools.wrttools.navigator.PackagingInformationDecorator"
           icon="icons/main16.gif"
           id="org.symbian.tools.wrttools.packagingDeclarator"
-          label="WebRuntime Packaging Information"
+          label="Mobile Web Packaging Information"
           lightweight="true"
           location="TOP_RIGHT"
           objectClass="org.eclipse.core.resources.IResource"
