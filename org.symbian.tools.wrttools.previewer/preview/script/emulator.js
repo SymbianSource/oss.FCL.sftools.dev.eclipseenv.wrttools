@@ -20,6 +20,10 @@ var ORIENTATIONS = {
 	DisplayUpwards : "DisplayUpwards",
 	DisplayDownwards : "DisplayDownwards"
 };
+var MODES = {
+	portrait : "portrait",
+	landscape : "landscape"
+};
 
 function Emulator() {
 	this.child = false;
@@ -84,7 +88,7 @@ Emulator.prototype.accelerationChanged = function(x, y, z) {
 
 	if (orientation != this.orientation) {
 		this.orientation = orientation;
-		NOKIA.helper.setPreference("__SYM_DEVICE_ORIENTATION", orientation);
+		NOKIA.helper.setPreference(EmulatorPreferences.ORIENTATION, orientation);
 		NOKIA.emulator.render();
 	}
 
@@ -96,10 +100,36 @@ Emulator.prototype.accelerationChanged = function(x, y, z) {
 
 Emulator.prototype.setAccelerationValues = function(x, y, z) {
 	window.setTimeout(function() {
-		NOKIA.emulator.accelerationChanged(x, y, z);
-		NOKIA.rotationSupport.setAngles(x * 90, y * 90,
-				z * 90);
+		NOKIA.rotationSupport.setAngles(x * 90, y * 90, z * 90);
 	}, 5);
+};
+
+Emulator.prototype.showOrientationAngles = function(orientation) {
+	switch (orientation) {
+	case ORIENTATIONS.DisplayUp:
+		this.setAccelerationValues(0, 0, 0);
+		break;
+	case ORIENTATIONS.DisplayDown:
+		this.setAccelerationValues(2, 0, 0);
+		break;
+	case ORIENTATIONS.DisplayRightUp:
+		this.setAccelerationValues(-1, 0, 0);
+		break;
+	case ORIENTATIONS.DisplayLeftUp:
+		this.setAccelerationValues(1, 0, 0);
+		break;
+	case ORIENTATIONS.DisplayUpwards:
+		this.setAccelerationValues(NOKIA.mode == 'portrait' ? 0 : 1, 0, 1);
+		break;
+	case ORIENTATIONS.DisplayDownwards:
+		this.setAccelerationValues(NOKIA.mode == 'portrait' ? 0 : 1, 0, -1);
+		break;
+	}
+	this.orientation = orientation;
+	NOKIA.helper.setPreference(EmulatorPreferences.ORIENTATION, orientation);
+	window.setTimeout(function() {
+		NOKIA.emulator.render();
+	}, 50);
 };
 
 Emulator.prototype.load = function() {
@@ -116,29 +146,10 @@ Emulator.prototype.load = function() {
 	if (mode != null)
 		NOKIA.mode = mode;
 
-	var orientation = NOKIA.helper.getPreference("__SYM_DEVICE_ORIENTATION");
+	var orientation = NOKIA.helper.getPreference(EmulatorPreferences.ORIENTATION);
 	if (orientation != null) {
 		this.orientation = orientation;
-		switch (orientation) {
-		case ORIENTATIONS.DisplayUp:
-			this.setAccelerationValues(0, 0, 0);
-			break;
-		case ORIENTATIONS.DisplayDown:
-			this.setAccelerationValues(2, 0, 0);
-			break;
-		case ORIENTATIONS.DisplayRightUp:
-			this.setAccelerationValues(1, 0, 0);
-			break;
-		case ORIENTATIONS.DisplayLeftUp:
-			this.setAccelerationValues(-1, 0, 0);
-			break;
-		case ORIENTATIONS.DisplayUpwards:
-			this.setAccelerationValues(NOKIA.mode == 'portrait' ? 0 : 1, 0, 1);
-			break;
-		case ORIENTATIONS.DisplayDownwards:
-			this.setAccelerationValues(NOKIA.mode == 'portrait' ? 0 : 1, 0, -1);
-			break;
-		}
+		this.showOrientationAngles(orientation);
 	}
 
 	// SAVE the device DATA
@@ -297,6 +308,58 @@ Emulator.prototype.setMenuItemsStyle = function() {
 						+ 'px',
 				'position' : 'relative'
 			});
+};
+
+Emulator.prototype.turn = function(direction) {
+	var newOrientation = ORIENTATIONS.DisplayUp;
+	if (direction > 0) { // Clockwise
+		switch (this.orientation) {
+		case ORIENTATIONS.DisplayUp:
+			newOrientation = ORIENTATIONS.DisplayLeftUp;
+			break;
+		case ORIENTATIONS.DisplayLeftUp:
+			newOrientation = ORIENTATIONS.DisplayDown;
+			break;
+		case ORIENTATIONS.DisplayDown:
+			newOrientation = ORIENTATIONS.DisplayRightUp;
+			break;
+		case ORIENTATIONS.DisplayRightUp:
+			newOrientation = ORIENTATIONS.DisplayUp;
+			break;
+		default:
+			if (this.mode == MODES.portrait) {
+				newOrientation = ORIENTATIONS.DisplayRightUp;
+			} else {
+				newOrientation = ORIENTATIONS.DisplayUp;
+			}
+			break;
+		}
+	} else {
+		switch (this.orientation) {
+		case ORIENTATIONS.DisplayUp:
+			newOrientation = ORIENTATIONS.DisplayRightUp;
+			break;
+		case ORIENTATIONS.DisplayLeftUp:
+			newOrientation = ORIENTATIONS.DisplayUp;
+			break;
+		case ORIENTATIONS.DisplayDown:
+			newOrientation = ORIENTATIONS.DisplayLeftUp;
+			break;
+		case ORIENTATIONS.DisplayRightUp:
+			newOrientation = ORIENTATIONS.DisplayDown;
+			break;
+		default:
+			if (this.mode == MODES.portrait) {
+				newOrientation = ORIENTATIONS.DisplayRightUp;
+			} else {
+				newOrientation = ORIENTATIONS.DisplayUp;
+			}
+			break;
+		}
+	}
+	this.orientation = newOrientation;
+	this.showOrientationAngles(newOrientation);
+	this.render();
 };
 
 function EmulatorState(x, y, z, orientation) {

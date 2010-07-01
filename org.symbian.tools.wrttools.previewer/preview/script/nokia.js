@@ -174,5 +174,6 @@ $(document).ready(function () {
 window.onresize = NOKIA.layout.render;
 
 var EmulatorPreferences = {
-		SELECTED_TAB:"__SYM_SELECTED_CONTROLS_TAB"
+		SELECTED_TAB: "__SYM_SELECTED_CONTROLS_TAB",
+		ORIENTATION: "__SYM_DEVICE_ORIENTATION"
 };

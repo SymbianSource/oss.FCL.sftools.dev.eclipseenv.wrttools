@@ -99,12 +99,14 @@
 			<tr>
 				<th>Screen Resolution:</th>
 				<td>
+					<div id="clockwise" title="Rotate Clockwise">&nbsp;</div>
 					<select id="resOptions" size="1">
 						<option selected="selected" value="http://www.forum.nokia.com/devices/matrix_240x320_1.html">240x320</option>
 						<option value="http://www.forum.nokia.com/devices/matrix_320x240_1.html">320x240</option>
 						<option value="http://www.forum.nokia.com/devices/matrix_360x640_1.html">360x640</option>
 						<option value="http://www.forum.nokia.com/devices/E90_Communicator">800x352</option>
 					</select>
+					<div id="cclockwise" title="Rotate Counterclockwise">&nbsp;</div>
 				</td>
 			</tr>
 			<tr>
@@ -112,9 +114,9 @@
 					<canvas width="140px" height="120px" id="phoneposition" >No canvas available</canvas>
 				</th>
 				<td>
-					<div><button id="xleft"></button><input id="xaxis" class="ui-widget axis-entry"/><button id="xright"></button></div>
-					<div><button id="yleft"></button><input id="yaxis" class="ui-widget axis-entry"/><button id="yright"></button></div>
-					<div><button id="zleft"></button><input id="zaxis" class="ui-widget axis-entry"/><button id="zright"></button></div>
+					<div><div id="xleft">&nbsp;</div><input id="xaxis" class="ui-widget axis-entry"/><div id="xright">&nbsp;</div></div>
+					<div><div id="yleft">&nbsp;</div><input id="yaxis" class="ui-widget axis-entry"/><div id="yright">&nbsp;</div></div>
+					<div><div id="zleft">&nbsp;</div><input id="zaxis" class="ui-widget axis-entry"/><div id="zright">&nbsp;</div></div>
 				</td>
 			</tr>
 			</table>

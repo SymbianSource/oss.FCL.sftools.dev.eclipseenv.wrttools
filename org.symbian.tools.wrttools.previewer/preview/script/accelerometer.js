@@ -14,7 +14,7 @@ function RotationControls(accelCallback) {
 	setupListeners("zaxis", "zleft", "zright", updateAngleZ, this.angleZ);
 
 	window.setTimeout(function() {
-		control.paint();
+		control.paint(true);
 	}, 50);
 
 	function setupListeners(inputId, leftArrow, rightArrow, fn, initial) {
@@ -99,7 +99,7 @@ RotationControls.prototype.paint = function(ignoreListeners) {
 
 	var r = 62;
 
-	var xy = (this.angleX - 180) * Math.PI / 180;
+	var xy = (180 - this.angleX) * Math.PI / 180;
 	var yz = (this.angleY - 180) * Math.PI / 180;
 	var xz = (180 - this.angleZ) * Math.PI / 180 + Math.PI / 2;
 

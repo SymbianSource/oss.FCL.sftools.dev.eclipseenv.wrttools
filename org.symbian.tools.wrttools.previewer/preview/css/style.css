@@ -730,3 +730,16 @@ input.axis-entry {
 	text-align: center;
 	width: 6ex;
 }
+
+.button-clockwise {
+	background: url("../images/rotate-buttons.png") !important;
+}
+
+.button-cclockwise {
+	background: url("../images/rotate-buttons.png") !important;
+	background-attachment: scroll !important;
+	background-position: 16px 0 !important;
+}
+
+
+

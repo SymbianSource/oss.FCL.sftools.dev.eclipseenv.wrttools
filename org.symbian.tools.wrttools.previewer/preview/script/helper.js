@@ -306,6 +306,19 @@ EmulatorHelper.prototype.addListeners = function() {
 	$(".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *").removeClass(
 			"ui-corner-all ui-corner-top").addClass("ui-corner-bottom");
 
+	$("#clockwise").button( {
+		icons : {
+			primary : "button-clockwise"
+		},
+		text : null
+	}).click(function() {NOKIA.emulator.turn(1);});
+	$("#cclockwise").button( {
+		icons : {
+			primary : "button-cclockwise"
+		},
+		text : null
+	}).click(function() {NOKIA.emulator.turn(-1);});
+	
 	$("#xleft").button( {
 		icons : {
 			primary : 'ui-icon-triangle-1-w'
