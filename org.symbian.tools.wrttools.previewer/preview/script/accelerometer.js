@@ -344,7 +344,7 @@ RotationControls.prototype.paint = function(ignoreListeners) {
 		var xcoord = canvas.width / 2;
 		var ycoord = canvas.height / 2;
 
-		ctx.fillStyle = "yellow";
+		ctx.fillStyle = "#FAC82F";
 		ctx.strokeStyle = "black";
 		ctx.beginPath();
 		ctx.moveTo(xcoord + points[3].x, ycoord + points[3].y);

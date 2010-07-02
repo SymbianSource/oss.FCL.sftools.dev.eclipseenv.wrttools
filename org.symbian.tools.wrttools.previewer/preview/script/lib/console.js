@@ -16,12 +16,13 @@
  */
 
 //	for console support
-if ((typeof window.parent.console == 'undefined') || ( (/AppleWebKit/i.test(navigator.userAgent)) && !(/Version/i.test(navigator.userAgent))) ){
 	window.console = {
 	
 			sprintf: function(args){
 				if (typeof args == 'undefined') {
 					return null;
+				} else if (typeof args == 'string') {
+					return args;
 				}
 				
 				if (args.length < 1) {
@@ -29,7 +30,7 @@ if ((typeof window.parent.console == 'undefined') || ( (/AppleWebKit/i.test(navi
 				};
 				
 				if (typeof args[0] != 'string') {
-					return null;
+					return this.sprintf(String(args[0]));
 				}
 				
 				if (typeof RegExp == 'undefined') {
@@ -126,13 +127,12 @@ if ((typeof window.parent.console == 'undefined') || ( (/AppleWebKit/i.test(navi
 				//	@todo
 			}
 		}
-	}
+	};
 	
 	//	enable the Console.
 	_BRIDGE_REF.nokia.layout._console_enabled = true;
 	_BRIDGE_REF.nokia.layout.render();
 
-}
 
 //	make TRUE console.js script loaded
 window.parent.NOKIA.scriptsLoaded.console = true;

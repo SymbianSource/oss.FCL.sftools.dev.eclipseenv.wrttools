@@ -34,7 +34,8 @@ EmulatorLayout.prototype.init = function() {
 
 	// clear Log
 	$("#Console-Clear-Button").click(function() {
-		$("#preview-ui-bottom-body")[0].innerHTML = '';
+		$("#preview-ui-bottom-body > *").not("p#hint").remove();
+		$("p#hint").show();
 	});
 
 	$('#preview-ui-bottom').show();
@@ -42,6 +43,7 @@ EmulatorLayout.prototype.init = function() {
 };
 
 EmulatorLayout.prototype.log = function(type, msg) {
+	$("p#hint").hide();
 	var p = document.createElement('p');
 	p.className = type;
 	p.innerHTML = msg;
