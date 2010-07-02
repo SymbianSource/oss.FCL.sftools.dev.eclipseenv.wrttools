@@ -32,10 +32,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
-import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
-import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class PhoneGapInstaller implements IJSLibraryInstaller {
     private static final String PHONEGAP_JS = "phonegap.js";
@@ -50,8 +49,8 @@ public class PhoneGapInstaller implements IJSLibraryInstaller {
         }
         IFile file = folder.getFile(PHONEGAP_JS);
         if (!file.isAccessible()) {
-            InputStream stream = FileLocator.openStream(Activator.getDefault().getBundle(), new Path("libraries")
-                    .append(PHONEGAP_JS), true);
+            InputStream stream = FileLocator.openStream(Activator.getDefault().getBundle(),
+                    new Path("libraries").append(PHONEGAP_JS), true);
             file.create(stream, false, new SubProgressMonitor(monitor, 3));
         }
         IPath path = new Path(folderName).append(PHONEGAP_JS);
@@ -60,16 +59,9 @@ public class PhoneGapInstaller implements IJSLibraryInstaller {
     }
 
     public boolean isInstalled(IProject project) {
-        IJavaScriptProject jsProject = JavaScriptCore.create(project);
-        try {
-            final IType accel = jsProject.findType("Accelerometer");
-            final IType camera = jsProject.findType("Camera");
-            final IType geo = jsProject.findType("Geolocation");
-            return accel != null && camera != null && geo != null;
-        } catch (JavaScriptModelException e) {
-            Activator.log(e);
-        }
-        return false;
+        final IJavaScriptProject jsProject = JavaScriptCore.create(project);
+        return CoreUtil.hasType(jsProject, "Accelerometer") && CoreUtil.hasType(jsProject, "Camera")
+                && CoreUtil.hasType(jsProject, "Geolocation");
     }
 
 }

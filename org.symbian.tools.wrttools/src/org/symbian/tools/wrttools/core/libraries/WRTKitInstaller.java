@@ -30,10 +30,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
-import org.eclipse.wst.jsdt.core.IType;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
-import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WRTKitInstaller implements IJSLibraryInstaller {
@@ -44,27 +43,20 @@ public class WRTKitInstaller implements IJSLibraryInstaller {
         monitor.beginTask("Installing WRTKit library", 15);
 
         IFolder folder = project.getFolder("WRTKit");
-        
+
         if (folder != null && !folder.exists()) {
             folder.create(false, true, new SubProgressMonitor(monitor, 1));
         }
         InputStream zip = FileLocator.openStream(Activator.getDefault().getBundle(), new Path("/libraries/wrtkit.zip"),
                 true);
         ProjectUtils.unzip(zip, folder, 0, "WRTKit", new SubProgressMonitor(monitor, 10));
-        
+
         LibrariesUtils.addJSToHtml(project, "Adding WRTKit Library", new String[] { JS_PATH }, null);
         monitor.done();
     }
 
     public boolean isInstalled(IProject project) {
-        IJavaScriptProject jsProject = JavaScriptCore.create(project);
-        try {
-            IType npopup = jsProject.findType("NotificationPopup");
-            IType uimanager = jsProject.findType("UIManager");
-            return npopup != null && uimanager != null;
-        } catch (JavaScriptModelException e) {
-            Activator.log(e);
-            return false;
-        }
+        final IJavaScriptProject jsProject = JavaScriptCore.create(project);
+        return CoreUtil.hasType(jsProject, "NotificationPopup") && CoreUtil.hasType(jsProject, "UIManager");
     }
 }
