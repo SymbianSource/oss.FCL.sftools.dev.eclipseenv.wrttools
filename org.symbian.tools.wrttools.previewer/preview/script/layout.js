@@ -18,6 +18,7 @@ function EmulatorLayout() {
 	this._consoleWindowHeight = 290;
 	this._consoleHeaderHeight = 31;
 	this._tabHeight = 27;
+	this.currentTab = 0;
 }
 
 EmulatorLayout.prototype.init = function() {
@@ -43,6 +44,9 @@ EmulatorLayout.prototype.init = function() {
 };
 
 EmulatorLayout.prototype.log = function(type, msg) {
+	if (this.currentTab != 0 || this._console_minimized) {
+		$('#Console-Notification').show();
+	}
 	$("p#hint").hide();
 	var p = document.createElement('p');
 	p.className = type;

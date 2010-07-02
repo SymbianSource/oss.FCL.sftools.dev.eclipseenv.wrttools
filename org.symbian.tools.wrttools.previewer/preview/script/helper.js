@@ -294,31 +294,52 @@ EmulatorHelper.prototype.addListeners = function() {
 		}, 10000);
 	});
 
+	NOKIA.layout.currentTab = NOKIA.helper
+			.getPreference(EmulatorPreferences.SELECTED_TAB);
+	if (NOKIA.layout.currentTab == undefined) {
+		NOKIA.layout.currentTab = 0;
+	}
 	// Tabs
 	$('#tabs').tabs(
 			{
 				select : function(event, ui) {
 					var selectedTab = ui.index;
-					NOKIA.helper.setPreference(EmulatorPreferences.SELECTED_TAB,
-							selectedTab);
-				}, selected:NOKIA.helper.getPreference(EmulatorPreferences.SELECTED_TAB)
+					NOKIA.helper.setPreference(
+							EmulatorPreferences.SELECTED_TAB, selectedTab);
+					NOKIA.layout.currentTab = selectedTab;
+					if (selectedTab == 0) {
+						$('#Console-Notification').hide();
+					} 
+				},
+				selected : NOKIA.layout.currentTab
 			});
 	$(".tabs-bottom .ui-tabs-nav, .tabs-bottom .ui-tabs-nav > *").removeClass(
 			"ui-corner-all ui-corner-top").addClass("ui-corner-bottom");
 
+	$('#Console-Notification').click(function() {
+		$('#tabs').tabs( {
+			selected : 0
+		});
+		$(this).hide();
+		$('Console-Toggle-Button').animate({scrollTop: $('#Console-Toggle-Button')[0].attr("scrollHeight")});
+		return NOKIA.layout._console_minimized;
+	});
 	$("#clockwise").button( {
 		icons : {
 			primary : "button-clockwise"
 		},
 		text : null
-	}).click(function() {NOKIA.emulator.turn(1);});
+	}).click(function() {
+		NOKIA.emulator.turn(1);
+	});
 	$("#cclockwise").button( {
 		icons : {
 			primary : "button-cclockwise"
 		},
 		text : null
-	}).click(function() {NOKIA.emulator.turn(-1);});
-	
+	}).click(function() {
+		NOKIA.emulator.turn(-1);
+	});
 	$("#xleft").button( {
 		icons : {
 			primary : 'ui-icon-triangle-1-w'
