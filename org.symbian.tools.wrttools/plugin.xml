@@ -149,6 +149,20 @@
          </description>
          <requires-library>org.symbian.wrtkit</requires-library>
       </projectTemplate>
+      <projectTemplate
+            archive="projecttemplates/phonegap.zip"
+            default-css-name="css"
+            default-html-name="index"
+            default-js-name="main"
+            icon="icons/phonegap.png"
+            id-pattern="com.{0}.widget"
+            name="PhoneGap Application"
+            order="2">
+         <description>
+            This wizard generates a project based on the PhoneGap library that showcases PhoneGap API usage.
+         </description>
+         <requires-library>phonegap</requires-library>
+      </projectTemplate>
 
       <projectTemplate
             archive="projecttemplates/flickr.zip"
@@ -158,7 +172,7 @@
             icon="icons/flickr.gif"
             id-pattern="com.{0}.flickr.widget"
             name="Flickr Project"
-            order="2"
+            order="3"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.FlickrProjectDetailsWizardPage$Factory">
          <description>
             This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.
@@ -174,7 +188,7 @@
             icon="icons/rss.gif"
             id-pattern="com.{0}.rssreader.widget"
             name="RSS Reader Project"
-            order="3"
+            order="4"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.RssReaderProjectDetailsWizardPage$Factory">
          <description>
             This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.
@@ -188,7 +202,7 @@
             default-js-name="basic"
             icon="icons/main16.gif"
             id-pattern="com.{0}.basic.widget"
-            order="4"
+            order="5"
             name="Various UI Templates">
          <description>
             Includes templates for high-end devices from Forum.Nokia.
