@@ -321,7 +321,11 @@ EmulatorHelper.prototype.addListeners = function() {
 			selected : 0
 		});
 		$(this).hide();
-		$('Console-Toggle-Button').animate({scrollTop: $('#Console-Toggle-Button')[0].attr("scrollHeight")});
+		window
+		.setTimeout(
+				function() {
+					$('#preview-ui-bottom-body')[0].scrollTop = $('#preview-ui-bottom-body')[0].scrollHeight;
+				}, 300);
 		return NOKIA.layout._console_minimized;
 	});
 	$("#clockwise").button( {
