@@ -10,6 +10,10 @@ function EmulatorMenu() {
 	this.rsk_label = '';
 	this.rsk_event = false;
 	this.highlighted_item = null;
+	
+	this.lskCallback = null;
+	this.innerLskCallback = null;
+	this.rskCallback = null;
 }
 
 EmulatorMenu.prototype.hide = function() {
@@ -71,11 +75,11 @@ EmulatorMenu.prototype.show = function() {
 
 	// Change the label "Options" to "Select" to LSK
 	$("#LskLabel > a")[0].innerHTML = "Select";
-	NOKIA.menu.setLsk(NOKIA.menu.selectMenu);
+	NOKIA.menu.setInnerLsk(NOKIA.menu.selectMenu);
 
 	// Change the label "Exit" to "Cancel" to RSK
 	$("#RskLabel > a")[0].innerHTML = 'Cancel';
-	NOKIA.menu.setRsk(NOKIA.menu.cancel);
+	NOKIA.menu.setInnerRsk(NOKIA.menu.cancel);
 
 	NOKIA.emulator.setMenuItemsStyle();
 
@@ -103,15 +107,15 @@ EmulatorMenu.prototype.cancel = function() {
 
 	// Reset the "OPTION" label to LSK
 	$("#LskLabel > a")[0].innerHTML = 'Options';
-	NOKIA.menu.setLsk(NOKIA.emulator.child.menu.show);
+	NOKIA.menu.setInnerLsk(NOKIA.emulator.child.menu.show);
 
 	// Change the label "CANCEL" to "EXIT" to RSK
 	if (!NOKIA.menu.is_rsk_overridden) {
 		$("#RskLabel > a")[0].innerHTML = 'Exit';
-		NOKIA.menu.setRsk(NOKIA.menu.exit);
+		NOKIA.menu.setInnerRsk(NOKIA.menu.exit);
 	} else {
 		$("#RskLabel > a")[0].innerHTML = NOKIA.menu.rsk_label;
-		NOKIA.menu.setRsk(NOKIA.menu.rsk_event);
+		NOKIA.menu.setInnerRsk(NOKIA.menu.rsk_event);
 	}
 
 };
@@ -131,9 +135,9 @@ EmulatorMenu.prototype.exit = function() {
 
 	// Hide Widget DIV
 	NOKIA.menu.hideSoftKeys();
-	NOKIA.menu.setLsk(function() {
+	NOKIA.menu.setInnerLsk(function() {
 	});
-	NOKIA.menu.setRsk(function() {
+	NOKIA.menu.setInnerRsk(function() {
 	});
 
 	$("#WidgetArea").hide();
@@ -192,65 +196,68 @@ EmulatorMenu.prototype.exit = function() {
 
 };
 
-EmulatorMenu.prototype.setLsk = function(func) {
+EmulatorMenu.prototype.initLsk = function() {
 	// for RSK
 	$('#LskArea')[0].onclick = function() {
-		if (!NOKIA.menu.is_dimmed)
-			func();
+		NOKIA.menu.lsk();
 	};
-
+	
 	$('#LskLabel > a')[0].onclick = function() {
-		if (!NOKIA.menu.is_dimmed)
-			func();
+		NOKIA.menu.lsk();
 	};
+	return true;
+};
 
+EmulatorMenu.prototype.initRsk = function() {
+	// for RSK
+	$('#RskArea')[0].onclick = function() {
+		NOKIA.menu.rsk();
+	};
+	
+	$('#RskLabel > a')[0].onclick = function() {
+		NOKIA.menu.rsk();
+	};
+	return true;
+};
+
+EmulatorMenu.prototype.lsk = function() {
+	if (!this.is_dimmed)
+		if (this.lskCallback != null) {
+			window.setTimeout(this.lskCallback, 10);
+		} else {
+			this.innerLskCallback();
+		}
+};
+
+EmulatorMenu.prototype.rsk = function() {
+	if (!this.is_dimmed)
+		if (this.rskCallback != null) {
+			window.setTimeout(this.rskCallback, 10);
+		} else {
+			this.innerRskCallback();
+		}
+};
+
+EmulatorMenu.prototype.setInnerLsk = function(func) {
+	this.innerLskCallback = func;
+	this.initLsk();
+	return true;
+};
+
+EmulatorMenu.prototype.setLsk = function(func) {
+	this.lskCallback = func;
+	return true;
+};
+
+EmulatorMenu.prototype.setInnerRsk = function(func) {
+	this.innerRskCallback = func;
+	this.initRsk();
 	return true;
 };
 
 EmulatorMenu.prototype.setRsk = function(func) {
-	// for RSK
-	$('#RskArea')[0].onclick = function() {
-		if (!NOKIA.menu.is_dimmed)
-			func();
-	};
-
-	$('#RskLabel > a')[0].onclick = function() {
-		if (!NOKIA.menu.is_dimmed)
-			func();
-	};
-
+	this.rskCallback = func;
 	return true;
-};
-
-EmulatorMenu.prototype.triggerLsk = function(event) {
-	var callback;
-	if (NOKIA.mode == 'portrait')
-		callback = NOKIA.menu.lsk_event;
-	else if ((NOKIA.mode == 'landscape') && (event.id == 'LskLabel'))
-		callback = NOKIA.menu.lsk_event;
-	else
-		callback = NOKIA.menu.rsk_event;
-
-	if (typeof callback == 'function' && !NOKIA.menu.is_dimmed) {
-		callback();
-	}
-};
-
-EmulatorMenu.prototype.triggerRsk = function(event) {
-	var callback;
-	if (NOKIA.mode == 'portrait')
-		callback = NOKIA.menu.rsk_event;
-	else if ((NOKIA.mode == 'landscape') && (event.id == 'RskLabel'))
-		callback = NOKIA.menu.rsk_event;
-	else
-		callback = NOKIA.menu.lsk_event;
-
-	if (typeof callback == 'function') {
-		if (!NOKIA.menu.is_dimmed) {
-			callback();
-			NOKIA.menu.cancel();
-		}
-	}
 };
 
 EmulatorMenu.prototype.render = function() {

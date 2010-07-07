@@ -588,15 +588,7 @@ EmulatorHelper.prototype.checkDependencies = function() {
 			return false;
 	}
 
-	// for LSK
-	NOKIA.menu.setLsk(NOKIA.emulator.child.menu.show);
-
-	// for RSK
-	NOKIA.menu.setRsk(NOKIA.menu.exit);
-
+	NOKIA.menu.setInnerLsk(NOKIA.emulator.child.menu.show);
+	NOKIA.menu.setInnerRsk(NOKIA.menu.exit);
 	return true;
 };
-
-function accelerationCallback(x, y, z) {
-	NOKIA.emulator.accelerationChanged(x, y, z);
-}
