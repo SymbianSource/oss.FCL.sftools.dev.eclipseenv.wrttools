@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WRT Preview Support
 Bundle-SymbolicName: org.symbian.tools.wrttools.previewer;singleton:=true
-Bundle-Version: 0.9.1.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.symbian.tools.wrttools.previewer.PreviewerPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
