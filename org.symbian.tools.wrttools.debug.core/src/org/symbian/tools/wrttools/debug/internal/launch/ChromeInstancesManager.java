@@ -47,6 +47,7 @@ public class ChromeInstancesManager {
             "--disable-local-storage", // Disable local storage (needed to emulate Geolocation in phonegap) 
             "--disable-session-storage", // Disable local storage (needed to emulate Geolocation in phonegap) 
             "--no-default-browser-check", // Our users don't need this nagging
+            "--disable-hang-monitor", // Fix for Bug 2682 - The debugger should disable "unresponsive" error message from chrome
             "--no-first-run", // We don't care
             "--app=%s" // Here we will have widget URI as --app argument
     };
