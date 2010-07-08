@@ -28,6 +28,9 @@ EmulatorLayout.prototype.init = function() {
 					function() {
 						NOKIA.layout._console_minimized = (NOKIA.layout._console_minimized) ? false
 								: true;
+						if (NOKIA.layout.currentTab == 0) {
+							$("#Console-Notification").hide();
+						}
 						NOKIA.layout.render();
 						NOKIA.helper.setPreference("__SYM_NOKIA_CONSOLE_OPEN",
 								!NOKIA.layout._console_minimized);
