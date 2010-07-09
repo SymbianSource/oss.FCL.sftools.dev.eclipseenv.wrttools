@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.wst.jsdt.web.core.javascript.search.JsIndexManager;
 import org.osgi.framework.BundleContext;
 import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.core.libraries.JSLibrary;
@@ -73,6 +74,7 @@ public class Activator extends AbstractUIPlugin {
 		String param = Integer.toString(65*1024);
 		System.setProperty("bluecove.obex.mtu", param);
 		BlueCoveImpl.setConfigProperty("bluecove.obex.mtu", param);
+        JsIndexManager.getInstance();
 	}
 
 	/*

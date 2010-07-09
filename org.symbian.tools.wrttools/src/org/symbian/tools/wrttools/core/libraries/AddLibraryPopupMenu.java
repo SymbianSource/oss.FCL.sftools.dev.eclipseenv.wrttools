@@ -23,8 +23,11 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
@@ -136,12 +139,20 @@ public class AddLibraryPopupMenu extends Action implements IMenuCreator, MenuLis
         item.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                Map<String, String> empty = Collections.emptyMap();
                 try {
-                    jsLibrary.install(jsProject.getProject(), empty, new NullProgressMonitor());
+                    ResourcesPlugin.getWorkspace().run(new IWorkspaceRunnable() {
+                        public void run(IProgressMonitor arg0) throws CoreException {
+                            Map<String, String> empty = Collections.emptyMap();
+                            try {
+                                jsLibrary.install(jsProject.getProject(), empty, new NullProgressMonitor());
+                            } catch (CoreException e1) {
+                                Activator.log(e1);
+                            } catch (IOException e1) {
+                                Activator.log(e1);
+                            }
+                        }
+                    }, new NullProgressMonitor());
                 } catch (CoreException e1) {
-                    Activator.log(e1);
-                } catch (IOException e1) {
                     Activator.log(e1);
                 }
             }
