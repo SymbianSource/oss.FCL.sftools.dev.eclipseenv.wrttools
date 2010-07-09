@@ -28,9 +28,6 @@ function systemAPI(sysObject)
 	 */
 	sysObject.language = 'EN';
 
-
-
-
 	/*
 	 * 	Power information services
 	 */
@@ -43,14 +40,12 @@ function systemAPI(sysObject)
 	sysObject.onchargelevel = null;
 	sysObject.onchargerconnected = null;
 
-
-
 	/*
 	 * 	Beep tone control services
 	 */	
-	sysObject.beep = function(frequency, duration){	}
-
-
+	sysObject.beep = function(frequency, duration){	
+		alert("Beep is not implemented in the previewer.");
+	};
 
 	/*
 	 * 	Network Information services
@@ -63,8 +58,6 @@ function systemAPI(sysObject)
 
 	//	value range between: {0-7}
 	sysObject.networkregistrationstatus = 0;
-	
-
 
 	/*
 	 * 	Display and keypad illumination information and control services
@@ -87,8 +80,6 @@ function systemAPI(sysObject)
 	sysObject.lightblink	= function(lighttarget, duration, onduration, offduration, intensity){ 	}
 	sysObject.lightoff	= function(lighttarget, duration, fadeout){ 	}
 
-
-
 	/*
 	 * 	Vibration information and control services
 	 */
@@ -99,12 +90,13 @@ function systemAPI(sysObject)
 	//	Vibration setting in the user profile is off.
 	sysObject.vibrasettings = 2; 
 
-	sysObject.startvibra	= function(duration, intensity){	}
+	sysObject.startvibra	= function(duration, intensity){ 
+		alert("Vibrate is not implemented in the previewer.");
+	};
 
-	sysObject.stopvibra	= function(){	}
-
-
-
+	sysObject.stopvibra	= function(){	
+		alert("Vibrate is not implemented in the previewer.");
+	};
 
 	/*
 	 * 	Memory and file system information services
