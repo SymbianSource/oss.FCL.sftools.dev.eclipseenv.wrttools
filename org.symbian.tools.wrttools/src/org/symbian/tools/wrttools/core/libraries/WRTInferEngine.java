@@ -25,6 +25,7 @@ import org.eclipse.wst.jsdt.core.ast.IASTNode;
 import org.eclipse.wst.jsdt.core.ast.IExpression;
 import org.eclipse.wst.jsdt.core.ast.IFunctionCall;
 import org.eclipse.wst.jsdt.core.ast.IFunctionDeclaration;
+import org.eclipse.wst.jsdt.core.ast.ISingleNameReference;
 import org.eclipse.wst.jsdt.core.infer.InferEngine;
 import org.eclipse.wst.jsdt.core.infer.InferredType;
 import org.eclipse.wst.jsdt.internal.compiler.ast.LocalDeclaration;
@@ -34,6 +35,7 @@ import org.eclipse.wst.jsdt.internal.compiler.ast.StringLiteral;
 @SuppressWarnings("restriction")
 public class WRTInferEngine extends InferEngine {
     private final Map<String, char[]> serviceIdToType = new TreeMap<String, char[]>();
+    private static final char[] NAVIGATOR_TYPE = "Navigator".toCharArray();
 
     public WRTInferEngine() {
         serviceIdToType.put("Service.AppManager:IAppManager", "AppManager".toCharArray());
@@ -84,5 +86,16 @@ public class WRTInferEngine extends InferEngine {
             }
         }
         return super.getTypeOf(expression);
+    }
+
+    @Override
+    protected InferredType getInferredType2(IExpression fieldReceiver) {
+        if (fieldReceiver.getASTType() == IASTNode.SINGLE_NAME_REFERENCE) {
+            ISingleNameReference nameReference = (ISingleNameReference) fieldReceiver;
+            if ("navigator".equals(String.valueOf(nameReference.getToken()))) {
+                return addType(NAVIGATOR_TYPE, true);
+            }
+        }
+        return super.getInferredType2(fieldReceiver);
     }
 }

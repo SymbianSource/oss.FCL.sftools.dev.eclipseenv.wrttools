@@ -18,7 +18,6 @@ public class WRTPerspective implements IPerspectiveFactory {
 		
 		IFolderLayout folder= layout.createFolder("left", IPageLayout.LEFT, (float)0.15, editorArea); //$NON-NLS-1$
 		folder.addView(Activator.NAVIGATOR_ID);
-		folder.addView(JavaScriptUI.ID_TYPE_HIERARCHY);
 
         IFolderLayout snippetsFolder = layout.createFolder("snippets", IPageLayout.BOTTOM, (float) 0.5, "left"); //$NON-NLS-1$
         snippetsFolder.addView("org.eclipse.wst.common.snippets.internal.ui.SnippetsView");
