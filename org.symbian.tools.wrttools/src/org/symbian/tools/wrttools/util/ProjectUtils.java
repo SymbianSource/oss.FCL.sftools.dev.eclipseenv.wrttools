@@ -247,7 +247,7 @@ public class ProjectUtils {
 
     public static IProject createWrtProject(String name, URI uri, IProgressMonitor monitor) throws CoreException {
         uri = isDefaultProjectLocation(uri) ? null : uri;
-        monitor.beginTask("Create project resources", 25);
+        monitor.beginTask("Create project resources", 30);
         IWorkspace workspace = ResourcesPlugin.getWorkspace();
         IProject project = workspace.getRoot().getProject(name);
         BuildPathsBlock.createProject(project, uri, new SubProgressMonitor(monitor, 10));
@@ -258,6 +258,7 @@ public class ProjectUtils {
                 true);
 
         IJavaScriptProject jsProject = JavaScriptCore.create(project);
+        jsProject.setRawIncludepath(null, new SubProgressMonitor(monitor, 5)); // See bug 3037
         final IIncludePathEntry[] includepath = jsProject.getRawIncludepath();
         final IIncludePathEntry[] newIncludePath = new IIncludePathEntry[includepath.length + 1];
 
