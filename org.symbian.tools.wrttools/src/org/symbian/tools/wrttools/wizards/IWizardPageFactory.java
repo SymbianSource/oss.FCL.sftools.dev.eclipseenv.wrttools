@@ -21,5 +21,6 @@ package org.symbian.tools.wrttools.wizards;
 import org.eclipse.core.databinding.DataBindingContext;
 
 public interface IWizardPageFactory {
-	WRTProjectDetailsWizardPage createPage(WizardContext context, DataBindingContext bindingContext);
+    WRTProjectFilesWizardPage createPage(WizardContext context,
+            DataBindingContext bindingContext);
 }

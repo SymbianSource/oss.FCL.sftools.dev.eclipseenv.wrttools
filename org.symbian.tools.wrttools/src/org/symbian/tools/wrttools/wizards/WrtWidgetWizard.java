@@ -26,6 +26,7 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,13 +64,15 @@ import org.symbian.tools.wrttools.util.NonClosingStream;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 import org.symbian.tools.wrttools.wizards.libraries.WRTProjectLibraryWizardPage;
 
-public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableExtension {
+public class WrtWidgetWizard extends Wizard implements INewWizard,
+        IExecutableExtension {
     private WizardContext context;
     private DataBindingContext bindingContext;
-    private final Map<ProjectTemplate, WRTProjectDetailsWizardPage> templateDetails = new HashMap<ProjectTemplate, WRTProjectDetailsWizardPage>();
+    private final Map<ProjectTemplate, WRTProjectFilesWizardPage> templateDetails = new HashMap<ProjectTemplate, WRTProjectFilesWizardPage>();
     private WRTProjectTemplateWizardPage templatesPage;
-    private WRTProjectFilesWizardPage filesPage;
+    private WRTProjectDetailsWizardPage detailsPage;
     private IConfigurationElement config;
+    private WRTProjectLibraryWizardPage librariesPage;
 
     public WrtWidgetWizard() {
         setDefaultPageImageDescriptor(WRTImages.newWizardBanner());
@@ -79,10 +82,12 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 
     public boolean performFinish() {
         final IProject[] holder = new IProject[1];
+        final URI locationURI = detailsPage.getLocationURI();
         try {
             getContainer().run(true, true, new IRunnableWithProgress() {
-                public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-                    holder[0] = action(monitor);
+                public void run(IProgressMonitor monitor)
+                        throws InvocationTargetException, InterruptedException {
+                    holder[0] = action(locationURI, monitor);
                 }
             });
         } catch (InvocationTargetException e) {
@@ -97,12 +102,12 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
         return true;
     }
 
-    protected IProject action(IProgressMonitor monitor) {
+    protected IProject action(final URI locationURI, IProgressMonitor monitor) {
         final IProject[] holder = new IProject[1];
         try {
             ResourcesPlugin.getWorkspace().run(new IWorkspaceRunnable() {
                 public void run(IProgressMonitor monitor) throws CoreException {
-                    holder[0] = createAndInitProject(monitor);
+                    holder[0] = createAndInitProject(locationURI, monitor);
                 }
             }, monitor);
         } catch (CoreException e) {
@@ -111,36 +116,41 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
         return holder[0];
     }
 
-    protected IProject createAndInitProject(IProgressMonitor monitor) throws CoreException {
+    protected IProject createAndInitProject(URI locationURI,
+            IProgressMonitor monitor) throws CoreException {
         monitor.beginTask("Creating project", 100);
-        IProject project = ProjectUtils.createWrtProject(context.getProjectName(), context.getProjectUri(),
-                new SubProgressMonitor(monitor, 30));
+        final IProject project = ProjectUtils.createWrtProject(context
+                .getProjectName(), locationURI, new SubProgressMonitor(monitor,
+                30));
         populateProject(project, new SubProgressMonitor(monitor, 30));
         try {
-            initLibraries(project, context.getLibraries(), new SubProgressMonitor(monitor, 40));
+            initLibraries(project, context.getLibraries(),
+                    new SubProgressMonitor(monitor, 40));
         } catch (IOException e) {
-            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Failed to setup libraries", e));
+            throw new CoreException(new Status(IStatus.ERROR,
+                    Activator.PLUGIN_ID, "Failed to setup libraries", e));
         }
         monitor.done();
         return project;
     }
 
-    private void initLibraries(IProject project, Set<JSLibrary> set, IProgressMonitor progressMonitor)
-            throws IOException, CoreException {
+    private void initLibraries(IProject project, Set<JSLibrary> set,
+            IProgressMonitor progressMonitor) throws IOException, CoreException {
         if (set.isEmpty()) {
             progressMonitor.done();
             return;
         }
         progressMonitor.beginTask("Installing JS libraries", 100);
         int perContainer = 90 / set.size();
-        for (JSLibrary library: set) {
-            library.install(project, context.getLibraryParameters(library), new SubProgressMonitor(progressMonitor,
-                    perContainer));
+        for (JSLibrary library : set) {
+            library.install(project, context.getLibraryParameters(library),
+                    new SubProgressMonitor(progressMonitor, perContainer));
         }
         progressMonitor.done();
     }
 
-    private void populateProject(IProject project, IProgressMonitor monitor) throws CoreException {
+    private void populateProject(IProject project, IProgressMonitor monitor)
+            throws CoreException {
         URL projectContents = context.getTemplate().getProjectContents();
         Map<String, String> vars = context.getTemplateVars();
 
@@ -149,34 +159,44 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
             Velocity.init();
             VelocityContext ctx = new VelocityContext(vars);
             stream = new ZipInputStream(projectContents.openStream());
-            monitor.beginTask("Generating project contents", IProgressMonitor.UNKNOWN);
+            monitor.beginTask("Generating project contents",
+                    IProgressMonitor.UNKNOWN);
             ZipEntry entry;
-            while ((entry = stream.getNextEntry()) != null && !monitor.isCanceled()) {
+            while ((entry = stream.getNextEntry()) != null
+                    && !monitor.isCanceled()) {
                 String name = entry.getName();
                 boolean isVelocity = name.endsWith(".velocitytemplate");
                 if (isVelocity) {
-                    name = name.substring(0, name.length() - ".velocitytemplate".length());
+                    name = name.substring(0, name.length()
+                            - ".velocitytemplate".length());
                 }
                 if (name.startsWith("$")) {
                     int dotLocation = name.indexOf(".");
-                    String template = name.substring(1, dotLocation > 1 ? dotLocation : name.length());
+                    String template = name.substring(1,
+                            dotLocation > 1 ? dotLocation : name.length());
                     if (vars.containsKey(template)) {
-                        name = vars.get(template) + name.substring(dotLocation > 1 ? dotLocation : name.length());
+                        name = vars.get(template)
+                                + name.substring(dotLocation > 1 ? dotLocation
+                                        : name.length());
                     }
                 }
                 if (entry.isDirectory()) {
                     IFolder folder = project.getFolder(entry.getName());
-                    folder.create(false, true, new SubProgressMonitor(monitor, 1));
+                    folder.create(false, true, new SubProgressMonitor(monitor,
+                            1));
                 } else if (isVelocity) {
-                    copyTemplate(project, name, stream, (int) entry.getSize(), ctx, monitor);
+                    copyTemplate(project, name, stream, (int) entry.getSize(),
+                            ctx, monitor);
                 } else {
-                    ProjectUtils.copyFile(project, name, stream, entry.getSize(), monitor);
+                    ProjectUtils.copyFile(project, name, stream,
+                            entry.getSize(), monitor);
                 }
                 stream.closeEntry();
             }
             monitor.done();
         } catch (Exception e) {
-            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Project creation failed", e));
+            throw new CoreException(new Status(IStatus.ERROR,
+                    Activator.PLUGIN_ID, "Project creation failed", e));
         } finally {
             if (stream != null) {
                 try {
@@ -188,7 +208,8 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
         }
     }
 
-    private void copyTemplate(IProject project, String name, ZipInputStream stream, int size, VelocityContext ctx,
+    private void copyTemplate(IProject project, String name,
+            ZipInputStream stream, int size, VelocityContext ctx,
             IProgressMonitor monitor) throws IOException, CoreException {
         // Templates will not be more then a few megs - we can afford the memory
         ByteArrayOutputStream file = new ByteArrayOutputStream();
@@ -201,7 +222,8 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
         reader.close();
         writer.close();
 
-        ByteArrayInputStream contents = new ByteArrayInputStream(file.toByteArray());
+        ByteArrayInputStream contents = new ByteArrayInputStream(
+                file.toByteArray());
         IFile f = project.getFile(name);
         f.create(contents, true, new SubProgressMonitor(monitor, 1));
     }
@@ -213,50 +235,54 @@ public class WrtWidgetWizard extends Wizard implements INewWizard, IExecutableEx
 
     @Override
     public void addPages() {
-        templatesPage = new WRTProjectTemplateWizardPage(context, bindingContext);
+        detailsPage = new WRTProjectDetailsWizardPage(context, bindingContext);
+        addPage(detailsPage);
+
+        templatesPage = new WRTProjectTemplateWizardPage(context,
+                bindingContext);
         addPage(templatesPage);
 
         ProjectTemplate[] templates = ProjectTemplate.getAllTemplates();
         for (ProjectTemplate projectTemplate : templates) {
-            WRTProjectDetailsWizardPage page = projectTemplate.createWizardPage(context, bindingContext);
+            final WRTProjectFilesWizardPage page = projectTemplate
+                    .createWizardPage(context, bindingContext);
             addPage(page);
             templateDetails.put(projectTemplate, page);
         }
 
-        filesPage = new WRTProjectFilesWizardPage(context, bindingContext);
-        addPage(filesPage);
-
-        addPage(new WRTProjectLibraryWizardPage(context, bindingContext));
+        librariesPage = new WRTProjectLibraryWizardPage(context, bindingContext);
+        addPage(librariesPage);
     }
 
     @Override
     public boolean canFinish() {
-        return super.canFinish() && getContainer().getCurrentPage() == getPages()[getPageCount() - 1];
+        return super.canFinish()
+                && getContainer().getCurrentPage() == getPages()[getPageCount() - 1];
     }
 
     @Override
     public IWizardPage getNextPage(IWizardPage page) {
         if (page == templatesPage) {
-            context.setProjectName(templatesPage.getProjectName());
-            context.setProjectUri(templatesPage.getLocationURI());
             ProjectTemplate template = context.getTemplate();
             if (template != null) {
-                WRTProjectDetailsWizardPage activePage = templateDetails.get(template);
-                for (WRTProjectDetailsWizardPage wizardPage : templateDetails.values()) {
+                WRTProjectFilesWizardPage activePage = templateDetails
+                        .get(template);
+                for (WRTProjectFilesWizardPage wizardPage : templateDetails
+                        .values()) {
                     wizardPage.setActive(wizardPage == activePage);
                 }
                 bindingContext.updateModels();
                 return activePage;
             }
         }
-        if (page instanceof WRTProjectDetailsWizardPage) {
-            return filesPage;
+        if (page instanceof WRTProjectFilesWizardPage) {
+            return librariesPage;
         }
         return super.getNextPage(page);
     }
 
-    public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
-            throws CoreException {
+    public void setInitializationData(IConfigurationElement config,
+            String propertyName, Object data) throws CoreException {
         this.config = config;
     }
 }

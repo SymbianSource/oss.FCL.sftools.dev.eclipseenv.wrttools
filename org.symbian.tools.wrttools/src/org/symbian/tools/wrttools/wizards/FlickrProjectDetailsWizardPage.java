@@ -21,27 +21,29 @@ package org.symbian.tools.wrttools.wizards;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.swt.widgets.Composite;
 
-public class FlickrProjectDetailsWizardPage extends WRTProjectDetailsWizardPage {
+public class FlickrProjectDetailsWizardPage extends WRTProjectFilesWizardPage {
 
-	public FlickrProjectDetailsWizardPage(WizardContext context,
-			DataBindingContext bindingContext) {
-		super(context, bindingContext);
-	}
-	
-	@Override
-	protected void addTemplateControls(Composite root) {
-		context.getExtensions().put("flickrUrl", "http://flickr.com/photos/symbianfoundation");
-		createLabel(root, "Flickr URL:");
-		createTextForExt(root, "flickrUrl", "Flickr URL");
-		createLabel(root, "");
-		createLabel(root, "");
-		
-	}
+    public FlickrProjectDetailsWizardPage(WizardContext context,
+            DataBindingContext bindingContext) {
+        super(context, bindingContext);
+    }
 
-	public static final class Factory implements IWizardPageFactory { 
-		public WRTProjectDetailsWizardPage createPage(WizardContext context,
-				DataBindingContext bindingContext) {
-			return new FlickrProjectDetailsWizardPage(context, bindingContext);
-		}
-	}
+    @Override
+    protected void addTemplateControls(Composite root) {
+        context.getExtensions().put("flickrUrl",
+                "http://flickr.com/photos/symbianfoundation");
+        context.createLabel(root, "Flickr URL:");
+        context.createTextForExt(root, "flickrUrl", "Flickr URL",
+                bindingContext, this);
+        context.createLabel(root, "");
+        context.createLabel(root, "");
+
+    }
+
+    public static final class Factory implements IWizardPageFactory {
+        public WRTProjectFilesWizardPage createPage(WizardContext context,
+                DataBindingContext bindingContext) {
+            return new FlickrProjectDetailsWizardPage(context, bindingContext);
+        }
+    }
 }

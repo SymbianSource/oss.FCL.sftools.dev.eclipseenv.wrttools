@@ -85,13 +85,6 @@
                </appinfo>
             </annotation>
          </attribute>
-         <attribute name="id-pattern" type="string">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
          <attribute name="default-html-name" type="string">
             <annotation>
                <documentation>

@@ -21,7 +21,7 @@ package org.symbian.tools.wrttools.util;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.symbian.tools.wrttools.wizards.AbstractDataBindingPage.NonEmptyStringValidator;
+import org.symbian.tools.wrttools.wizards.NonEmptyStringValidator;
 
 
 public class CompoundValidator implements IValidator {

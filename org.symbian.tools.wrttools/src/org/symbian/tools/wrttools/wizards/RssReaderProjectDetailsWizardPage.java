@@ -24,33 +24,35 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.swt.widgets.Composite;
 
 public class RssReaderProjectDetailsWizardPage extends
-		WRTProjectDetailsWizardPage {
+        WRTProjectFilesWizardPage {
 
 	public RssReaderProjectDetailsWizardPage(WizardContext context,
 			DataBindingContext bindingContext) {
 		super(context, bindingContext);
 	}
-	
+
 	@Override
 	protected void addTemplateControls(Composite root) {
 		Map<String, String> extensions = context.getExtensions();
 		extensions.put("feedUrl", "http://twitter.com/statuses/user_timeline/21138778.rss");
 		extensions.put("feedName", "Symbian Twitter");
-		
-		createLabel(root, "Feed URL:");
-		createTextForExt(root, "feedUrl", "feed URL");
-		createLabel(root, "Feed Name:");
-		createTextForExt(root, "feedName", "feed name");
-		createLabel(root, "");
-		createLabel(root, "");
+
+        context.createLabel(root, "Feed URL:");
+        context.createTextForExt(root, "feedUrl", "feed URL", bindingContext,
+                this);
+        context.createLabel(root, "Feed Name:");
+        context.createTextForExt(root, "feedName", "feed name", bindingContext,
+                this);
+        context.createLabel(root, "");
+        context.createLabel(root, "");
 	}
-	
+
 	public static final class Factory implements IWizardPageFactory {
-		public WRTProjectDetailsWizardPage createPage(WizardContext context,
+        public WRTProjectFilesWizardPage createPage(WizardContext context,
 				DataBindingContext bindingContext) {
 			return new RssReaderProjectDetailsWizardPage(context, bindingContext);
 		}
-		
+
 	}
 
 }

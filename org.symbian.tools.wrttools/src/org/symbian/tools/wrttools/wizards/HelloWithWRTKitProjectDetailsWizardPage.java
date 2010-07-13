@@ -21,21 +21,23 @@ package org.symbian.tools.wrttools.wizards;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.swt.widgets.Composite;
 
-public class HelloWithWRTKitProjectDetailsWizardPage extends WRTProjectDetailsWizardPage {
+public class HelloWithWRTKitProjectDetailsWizardPage extends
+        WRTProjectFilesWizardPage {
 
-	public HelloWithWRTKitProjectDetailsWizardPage(WizardContext context,
-			DataBindingContext bindingContext) {
-		super(context, bindingContext);
-	}
-	
-	@Override
-	protected void addTemplateControls(Composite root) {
-	}
+    public HelloWithWRTKitProjectDetailsWizardPage(WizardContext context,
+            DataBindingContext bindingContext) {
+        super(context, bindingContext);
+    }
 
-	public static final class Factory implements IWizardPageFactory { 
-		public WRTProjectDetailsWizardPage createPage(WizardContext context,
-				DataBindingContext bindingContext) {
-			return new HelloWithWRTKitProjectDetailsWizardPage(context, bindingContext);
-		}
-	}
+    @Override
+    protected void addTemplateControls(Composite root) {
+    }
+
+    public static final class Factory implements IWizardPageFactory {
+        public WRTProjectFilesWizardPage createPage(WizardContext context,
+                DataBindingContext bindingContext) {
+            return new HelloWithWRTKitProjectDetailsWizardPage(context,
+                    bindingContext);
+        }
+    }
 }
