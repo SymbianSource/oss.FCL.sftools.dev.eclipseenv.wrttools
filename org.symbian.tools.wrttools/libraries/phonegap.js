@@ -1047,27 +1047,29 @@ Contacts.prototype.find = function(filter, successCallback, errorCallback, optio
 Contacts.prototype.success_callback = function(contacts_iterator) {
 	try {
 	var gapContacts = new Array();
-	contacts_iterator.reset();
-    var contact;
-	var i = 0;
-	var end = this.options.page * this.options.limit;
-	var start = end - this.options.limit;
-	while ((contact = contacts_iterator.getNext()) != undefined && i < end) {
-		try {
-			if (i >= start) {
-				var gapContact = new Contact();
-				gapContact.name.givenName = Contacts.GetValue(contact, "FirstName");
-				gapContact.name.familyName = Contacts.GetValue(contact, "LastName");
-				gapContact.name.formatted = gapContact.name.givenName + " " + gapContact.name.familyName;
-				gapContact.emails = Contacts.getEmailsList(contact);
-				gapContact.phones = Contacts.getPhonesList(contact);
-				gapContact.address = Contacts.getAddress(contact);
-				gapContact.id = Contacts.GetValue(contact, "id");
-				gapContacts.push(gapContact);
+	if (contacts_iterator) {
+		contacts_iterator.reset();
+		var contact;
+		var i = 0;
+		var end = this.options.page * this.options.limit;
+		var start = end - this.options.limit;
+		while ((contact = contacts_iterator.getNext()) != undefined && i < end) {
+			try {
+				if (i >= start) {
+					var gapContact = new Contact();
+					gapContact.name.givenName = Contacts.GetValue(contact, "FirstName");
+					gapContact.name.familyName = Contacts.GetValue(contact, "LastName");
+					gapContact.name.formatted = gapContact.name.givenName + " " + gapContact.name.familyName;
+					gapContact.emails = Contacts.getEmailsList(contact);
+					gapContact.phones = Contacts.getPhonesList(contact);
+					gapContact.address = Contacts.getAddress(contact);
+					gapContact.id = Contacts.GetValue(contact, "id");
+					gapContacts.push(gapContact);
+				}
+				i++;
+			} catch (e) {
+				alert("ContactsError (" + e.name + ": " + e.message + ")");
 			}
-			i++;
-		} catch (e) {
-			alert("ContactsError (" + e.name + ": " + e.message + ")");
 		}
 	}
 	this.contacts = gapContacts;
@@ -1144,6 +1146,7 @@ DebugConsole.prototype.log = function(message) {
  * @param {Object|String} message Message or object to print to the console
  */
 DebugConsole.prototype.warn = function(message) {
+	console.log(message);
 };
 
 /**
@@ -1151,6 +1154,7 @@ DebugConsole.prototype.warn = function(message) {
  * @param {Object|String} message Message or object to print to the console
  */
 DebugConsole.prototype.error = function(message) {
+	console.log(message);
 };
 
 if (typeof window.debug == "undefined") window.debug = new DebugConsole();
@@ -1363,7 +1367,42 @@ Map.prototype.show = function(positions) {
 };
 
 if (typeof navigator.map == "undefined") navigator.map = new Map();
+function Network() {
+    /**
+     * The last known Network status.
+     */
+	this.lastReachability = null;
+};
 
+Network.prototype.isReachable = function(hostName, successCallback, options) {
+	var req = new XMLHttpRequest();  
+   	req.open('GET', hostName, true);  
+   	req.onreadystatechange = function (aEvt) {  
+     	if (req.readyState == 4) {  
+        	if(req.status == 200)  
+        		successCallback(NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK);
+         	else  
+          		successCallback(NetworkStatus.NOT_REACHABLE);
+ 		}  
+  	};  
+  	req.send(null);
+
+};
+
+/**
+ * This class contains information about any NetworkStatus.
+ * @constructor
+ */
+function NetworkStatus() {
+	this.code = null;
+	this.message = "";
+}
+
+NetworkStatus.NOT_REACHABLE = 0;
+NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK = 1;
+NetworkStatus.REACHABLE_VIA_WIFI_NETWORK = 2;
+
+if (typeof navigator.network == "undefined") navigator.network = new Network();
 /**
  * This class provides access to notifications on the device.
  */

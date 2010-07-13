@@ -104,7 +104,7 @@ public final class WRTProjectDetailsWizardPage extends WizardPage {
         context.createText(root, WizardContext.WIDGET_ID, "applicatoin identifier", bindingContext, null,
                 new RegexpValidator("[\\w]*(\\.\\w[\\w]*)*", "{0} is not a valid applicatoin ID", true));
         context.createLabel(root, "");
-        context.createLabel(root, "This id should be unique for succesful installation of application on the device");
+        context.createLabel(root, "This id should be unique for successful installation of application on the device");
 
         context.createLabel(root, "");
         context.createLabel(root, "");
