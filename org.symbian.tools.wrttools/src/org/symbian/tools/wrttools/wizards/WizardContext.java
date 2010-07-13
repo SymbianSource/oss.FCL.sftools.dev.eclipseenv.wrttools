@@ -59,7 +59,7 @@ public class WizardContext {
     public static final String PROJECT_NAME = "projectName";
 
     private String cssFile;
-    private String projectName;
+    private String projectName = "";
     private String htmlFile;
     private String jsFile;
     private final PropertyChangeSupport propertySupport = new PropertyChangeSupport(
@@ -97,21 +97,21 @@ public class WizardContext {
     }
 
     public String getProjectName() {
-        return (projectName == null ? getDefaultProjectName() : projectName);
-    }
-
-    private String getDefaultProjectName() {
-        return Util.toProjectName(getWidgetName());
+        return projectName;
     }
 
     public void setProjectName(String projectName) {
         String prev = getProjectName();
-        if (projectName.equals(getDefaultProjectName())) {
-            this.projectName = null;
-        } else {
-            this.projectName = projectName;
+        String prevId = getWidgetId();
+        String prevName = getWidgetName();
+        this.projectName = projectName;
+        propertySupport.firePropertyChange(PROJECT_NAME, getProjectName(), prev);
+        if (widgetName == null) {
+            propertySupport.firePropertyChange(WIDGET_NAME, getWidgetName(), prevName);
+            if (widgetId == null) {
+                propertySupport.firePropertyChange(WIDGET_ID, getWidgetId(), prevId);
+            }
         }
-        propertySupport.firePropertyChange(PROJECT_NAME, projectName, prev);
     }
 
     public String getCssFile() {
@@ -159,7 +159,7 @@ public class WizardContext {
     }
 
     public String getWidgetName() {
-        return widgetName;
+        return widgetName == null ? getProjectName() : widgetName;
     }
 
     public void removePropertyChangeListener(PropertyChangeListener arg0) {
@@ -230,18 +230,17 @@ public class WizardContext {
     }
 
     public void setWidgetName(String widgetName) {
-        String prevPn = getProjectName();
         String prevId = getWidgetId();
         String prev = getWidgetName();
-        this.widgetName = widgetName;
-        propertySupport.firePropertyChange(WIDGET_NAME, widgetName, prev);
+        if (widgetName == getProjectName()) {
+            this.widgetName = null;
+        } else {
+            this.widgetName = widgetName;
+        }
+        propertySupport.firePropertyChange(WIDGET_NAME, getWidgetName(), prev);
         if (widgetId == null) {
             propertySupport
                     .firePropertyChange(WIDGET_ID, getWidgetId(), prevId);
-        }
-        if (projectName == null) {
-            propertySupport.firePropertyChange(PROJECT_NAME, getProjectName(),
-                    prevPn);
         }
     }
 

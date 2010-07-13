@@ -58,18 +58,14 @@ public final class WRTProjectDetailsWizardPage extends WizardPage {
             IWorkspace workspace = IDEWorkbenchPlugin.getPluginWorkspace();
 
             String projectFieldContents = (String) value;
-            IStatus nameStatus = workspace.validateName(projectFieldContents,
-                    IResource.PROJECT);
+            IStatus nameStatus = workspace.validateName(projectFieldContents, IResource.PROJECT);
             if (!nameStatus.isOK()) {
                 return nameStatus;
             }
 
-            IProject handle = ResourcesPlugin.getWorkspace().getRoot()
-                    .getProject(projectFieldContents);
+            IProject handle = ResourcesPlugin.getWorkspace().getRoot().getProject(projectFieldContents);
             if (handle.exists()) {
-                return new Status(
-                        IStatus.ERROR,
-                        Activator.PLUGIN_ID,
+                return new Status(IStatus.ERROR, Activator.PLUGIN_ID,
                         IDEWorkbenchMessages.WizardNewProjectCreationPage_projectExistsMessage);
             }
             return Status.OK_STATUS;
@@ -81,8 +77,7 @@ public final class WRTProjectDetailsWizardPage extends WizardPage {
     private final DataBindingContext bindingContext;
     private final WizardContext context;
 
-    public WRTProjectDetailsWizardPage(WizardContext context,
-            DataBindingContext bindingContext) {
+    public WRTProjectDetailsWizardPage(WizardContext context, DataBindingContext bindingContext) {
         super("WRTApp");
         setImageDescriptor(null);
         setTitle("Application Details");
@@ -96,48 +91,40 @@ public final class WRTProjectDetailsWizardPage extends WizardPage {
 
         initializeDialogUnits(parent);
 
-        PlatformUI.getWorkbench().getHelpSystem()
-                .setHelp(root, IIDEHelpContextIds.NEW_PROJECT_WIZARD_PAGE);
+        PlatformUI.getWorkbench().getHelpSystem().setHelp(root, IIDEHelpContextIds.NEW_PROJECT_WIZARD_PAGE);
 
         WizardPageSupport.create(this, bindingContext);
         root.setLayout(new GridLayout(2, false));
+        createProjectNameGroup(root);
+
+        context.createLabel(root, "");
+        context.createLabel(root, "");
+        context.createLabel(root, "Application identifier:");
+
+        context.createText(root, WizardContext.WIDGET_ID, "applicatoin identifier", bindingContext, null,
+                new RegexpValidator("[\\w]*(\\.\\w[\\w]*)*", "{0} is not a valid applicatoin ID", true));
+        context.createLabel(root, "");
+        context.createLabel(root, "This id should be unique for succesful installation of application on the device");
+
+        context.createLabel(root, "");
+        context.createLabel(root, "");
+
         context.createLabel(root, "Application name:");
 
-        context.createText(root, WizardContext.WIDGET_NAME, "application name",
-                bindingContext, null, new RegexpValidator("[^\\w\\. ]",
-                        "Application name cannot contain {0} character", false));
+        context.createText(root, WizardContext.WIDGET_NAME, "application name", bindingContext, null,
+                new RegexpValidator("[^\\w\\. ]", "Application name cannot contain {0} character", false));
 
         context.createLabel(root, "");
-        context.createLabel(root,
-                "This will be the application display name on the device");
-        context.createLabel(root, "");
-        context.createLabel(root, "");
-        context.createLabel(root, "Widget identifier:");
-
-        context.createText(root, WizardContext.WIDGET_ID,
-                "applicatoin identifier", bindingContext, null,
-                new RegexpValidator("[\\w]*(\\.\\w[\\w]*)*",
-                        "{0} is not a valid applicatoin ID", true));
-        context.createLabel(root, "");
-        context.createLabel(
-                root,
-                "This id should be unique for succesful installation of application on the device");
-        context.createLabel(root, "");
-        context.createLabel(root, "");
-
-        createProjectNameGroup(root);
+        context.createLabel(root, "This will be the application display name on the device");
 
         Composite composite = new Composite(root, SWT.NONE);
         GridLayout gridLayout = new GridLayout(1, false);
         gridLayout.marginWidth = 0;
         composite.setLayout(gridLayout);
-        composite.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING,
-                true, true, 2, 1));
+        composite.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING, true, true, 2, 1));
 
-        locationArea = new ProjectContentsLocationArea(getErrorReporter(),
-                composite);
-        if (context.getProjectName() != null
-                && context.getProjectName().trim().length() > 0) {
+        locationArea = new ProjectContentsLocationArea(getErrorReporter(), composite);
+        if (context.getProjectName() != null && context.getProjectName().trim().length() > 0) {
             locationArea.updateProjectName(context.getProjectName());
         }
 
@@ -161,12 +148,10 @@ public final class WRTProjectDetailsWizardPage extends WizardPage {
     private final void createProjectNameGroup(Composite parent) {
         // new project label
         Label projectLabel = new Label(parent, SWT.NONE);
-        projectLabel
-                .setText(IDEWorkbenchMessages.WizardNewProjectCreationPage_nameLabel);
+        projectLabel.setText(IDEWorkbenchMessages.WizardNewProjectCreationPage_nameLabel);
         projectLabel.setFont(parent.getFont());
 
-        Text projectNameField = context.createText(parent,
-                WizardContext.PROJECT_NAME, "project name", bindingContext,
+        Text projectNameField = context.createText(parent, WizardContext.PROJECT_NAME, "project name", bindingContext,
                 null, new ProjectNameValidator());
 
         projectNameField.setFont(parent.getFont());
@@ -255,8 +240,7 @@ public final class WRTProjectDetailsWizardPage extends WizardPage {
             return false;
         }
         String projectName = context.getProjectName();
-        IProject project = ResourcesPlugin.getWorkspace().getRoot()
-                .getProject(projectName);
+        IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
         locationArea.setExistingProject(project);
 
         String validLocationMessage = locationArea.checkValidLocation();
