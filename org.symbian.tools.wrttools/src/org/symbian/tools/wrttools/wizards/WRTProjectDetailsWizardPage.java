@@ -18,6 +18,7 @@
  */
 package org.symbian.tools.wrttools.wizards;
 
+import java.io.File;
 import java.net.URI;
 
 import org.eclipse.core.databinding.DataBindingContext;
@@ -247,6 +248,14 @@ public final class WRTProjectDetailsWizardPage extends WizardPage {
         if (validLocationMessage != null) { // there is no destination location
                                             // given
             setErrorMessage(validLocationMessage);
+            return false;
+        }
+        File file = new File(locationArea.getProjectLocationURI());
+        if (file.isFile()) {
+            setErrorMessage(String.format("%s is an existing file", file));
+            return false;
+        } else if (file.isDirectory() && file.listFiles().length > 0) {
+            setErrorMessage(String.format("%s is a non-empty folder", file));
             return false;
         }
 
