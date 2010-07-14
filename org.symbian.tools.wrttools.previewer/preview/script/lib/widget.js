@@ -39,7 +39,17 @@ if (typeof window.widget == "undefined" || !window.widget) {
 		interval: 20,
 		isFront: false,
 		preferenceArray: [],
-		preferenceKey: 0
+		preferenceKey: 0,
+		wrt : {
+			version : "1.1",
+			platform : {
+				id : "S60",
+				romVersion : "V 31.0.101 16-09-2009 RM-356 (C) NMP",
+				manufacturer : "Nokia",
+				packageVersion : "7.00(0)",
+				model : "5800 XpressMusic"
+			}
+		}
 	};
 	
 	

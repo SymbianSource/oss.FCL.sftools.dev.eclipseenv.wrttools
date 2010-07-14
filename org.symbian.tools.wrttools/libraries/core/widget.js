@@ -32,6 +32,7 @@ Window.prototype.device = new Device();
  */
 Window.prototype.console = new Console();
 
+
 /**
  * Property menu
  * 
@@ -180,6 +181,20 @@ Widget.prototype.setDisplayLandscape = function() {
  * @return {Void}
  */
 Widget.prototype.setDisplayPortrait = function() {
+};
+
+/**
+ * WRT1.1 system properties
+ */
+Widget.prototype.wrt = {
+	version : "1.1",
+	platform : {
+		id : "S60",
+		romVersion : "V 31.0.101 16-09-2009 RM-356 (C) NMP",
+		manufacturer : "Nokia",
+		packageVersion : "7.00(0)",
+		model : "5800 XpressMusic"
+	}
 };
 
 /**

@@ -126,7 +126,6 @@
             default-html-name="index"
             default-js-name="basic"
             icon="icons/main16.gif"
-            id-pattern="com.{0}.basic.widget"
             name="Minimal Project"
             order="10">
 			<description>
@@ -140,7 +139,6 @@
             default-html-name="index"
             default-js-name="HelloWithWRTKit"
             icon="icons/WRT_main_16.png"
-            id-pattern="com.{0}.helloWithWRTKit.widget"
             name="Hello World Project"
             order="1"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.HelloWithWRTKitProjectDetailsWizardPage$Factory">
@@ -155,11 +153,10 @@
             default-html-name="index"
             default-js-name="main"
             icon="icons/phonegap.png"
-            id-pattern="com.{0}.widget"
             name="PhoneGap Application"
             order="2">
          <description>
-            This wizard generates a project based on the PhoneGap library that showcases PhoneGap API usage.
+            This wizard generates a project based on the PhoneGap library that showcases PhoneGap API usage. PhoneGap applications require WRT 1.1 or newer.
          </description>
          <requires-library>phonegap</requires-library>
       </projectTemplate>
@@ -170,7 +167,6 @@
             default-html-name="index"
             default-js-name="Flickr"
             icon="icons/flickr.gif"
-            id-pattern="com.{0}.flickr.widget"
             name="Flickr Project"
             order="3"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.FlickrProjectDetailsWizardPage$Factory">
@@ -186,7 +182,6 @@
             default-html-name="index"
             default-js-name="RSSReader"
             icon="icons/rss.gif"
-            id-pattern="com.{0}.rssreader.widget"
             name="RSS Reader Project"
             order="4"
             wizard-page-factory="org.symbian.tools.wrttools.wizards.RssReaderProjectDetailsWizardPage$Factory">
@@ -201,7 +196,6 @@
             default-html-name="index"
             default-js-name="basic"
             icon="icons/main16.gif"
-            id-pattern="com.{0}.basic.widget"
             order="5"
             name="Various UI Templates">
          <description>
