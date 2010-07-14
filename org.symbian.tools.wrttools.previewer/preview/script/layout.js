@@ -143,3 +143,29 @@ EmulatorLayout.prototype.render = function() {
 		});
 	}
 };
+
+EmulatorLayout.prototype.openApplication = function(icon, message) {
+	var iconDiv = $("#external-app-icon");
+	if (icon && icon != null) {
+		iconDiv.css("background-image", "url('" + icon + "')");
+		iconDiv.show();
+	} else {
+		iconDiv.hide();
+	}
+	var messageDiv = $("#external-app-description");
+	if (message && message != null) {
+		messageDiv.html(message);
+		messageDiv.show();
+	} else {
+		messageDiv.hide();
+	}
+	$("#externalapp").show();
+	$("#WidgetArea").hide();
+	$("#SoftKeysArea").hide();
+};
+
+EmulatorLayout.prototype.closeApplication = function() {
+	$("#externalapp").hide();
+	$("#WidgetArea").show();
+	$("#SoftKeysArea").show();
+};

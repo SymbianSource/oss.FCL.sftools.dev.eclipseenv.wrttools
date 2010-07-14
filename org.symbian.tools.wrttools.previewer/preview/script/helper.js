@@ -456,8 +456,7 @@ EmulatorHelper.prototype.addListeners = function() {
 			});
 	$("#slider-value-panel > span").html("10%");
 
-	var cc = $("#close-camera");
-	cc.click(NOKIA.helper.hideCamera);
+	$("#external-app-close").button().click(NOKIA.layout.closeApplication);
 	// Bind Buttons to trigger values to WRT 1.0 / 1.1 bindings
 
 	$("#connect-charger").click(NOKIA.helper.triggerEvents);
@@ -506,16 +505,6 @@ EmulatorHelper.prototype.getElementsLengthInObject = function(items) {
 	}
 
 	return count;
-};
-
-EmulatorHelper.prototype.showCamera = function() {
-	$("#camera").show();
-	$("#WidgetArea").hide();
-};
-
-EmulatorHelper.prototype.hideCamera = function() {
-	$("#camera").hide();
-	$("#WidgetArea").show();
 };
 
 EmulatorHelper.prototype.triggerEvents = function(event) {

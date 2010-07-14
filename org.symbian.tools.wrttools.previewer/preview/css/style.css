@@ -796,3 +796,11 @@ input.axis-entry {
 #Console-Notification:HOVER {
 	background-image: url(../script/jquery-ui/css/ui-darkness/images/ui-icons_ffffff_256x240.png);
 }
+
+#external-app-icon {
+	margin-top: 20%;
+	height: 80px;
+	background-repeat: no-repeat;
+	background-position: center;	
+}
+

@@ -106,10 +106,9 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	 */
 	widget.openApplication = function(Uid, param){
 		if (Uid == 270501242) { // Camera
-			var help = _BRIDGE_REF.nokia.helper;
-			help.showCamera();
+			_BRIDGE_REF.nokia.layout.openApplication("preview/images/camera.png");
 		} else {
-			alert("openApplication function won't be simulated in this application");
+			_BRIDGE_REF.nokia.layout.openApplication("Application UID: " + Uid + "Parameters are: " + param);
 		}
 	};
 	
