@@ -804,3 +804,7 @@ input.axis-entry {
 	background-position: center;	
 }
 
+#tabs > div {
+	overflow: visible !important;
+}
+
