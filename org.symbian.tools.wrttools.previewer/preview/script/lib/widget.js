@@ -55,7 +55,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 				var sz = "Number " + url.substring(4) + " was dialed";
 				window.alert(sz);
 			} else {
-				window.open(url, "New Widget Window", 'height=200 width=250');
+				_BRIDGE_REF.nokia.layout.openApplication("preview/images/webbrowser.png", url);
 			}
 		}
 	};
