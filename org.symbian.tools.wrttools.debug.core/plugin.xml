@@ -197,7 +197,7 @@
                class="org.symbian.tools.wrttools.debug.ui.actions.WatchExpression"
                icon="icons/watch.gif"
                id="org.symbian.tools.wrttools.debug.core.watchExpression"
-               label="Watch"
+               label="Add to Expressions View"
                menubarPath="group.edit">
          </action>
       </viewerContribution>
