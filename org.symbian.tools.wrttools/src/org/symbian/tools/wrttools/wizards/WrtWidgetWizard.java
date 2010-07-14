@@ -57,6 +57,7 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.symbian.tools.wrttools.Activator;
+import org.symbian.tools.wrttools.WRTProject;
 import org.symbian.tools.wrttools.core.ProjectTemplate;
 import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.core.libraries.JSLibrary;
@@ -151,7 +152,9 @@ public class WrtWidgetWizard extends Wizard implements INewWizard,
 
     private void populateProject(IProject project, IProgressMonitor monitor)
             throws CoreException {
-        URL projectContents = context.getTemplate().getProjectContents();
+        ProjectTemplate t = context.getTemplate();
+        new WRTProject(project).setPreferredScreenSize(t.getScreenSize());
+        URL projectContents = t.getProjectContents();
         Map<String, String> vars = context.getTemplateVars();
 
         ZipInputStream stream = null;

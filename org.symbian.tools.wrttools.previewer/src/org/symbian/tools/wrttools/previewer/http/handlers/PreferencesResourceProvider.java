@@ -29,6 +29,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
+import org.symbian.tools.wrttools.WRTProject;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.preview.ProjectPreferencesManager;
 
@@ -41,6 +42,12 @@ public class PreferencesResourceProvider implements IResourceProvider {
             String sessionId)
             throws IOException, CoreException {
         Properties projectPreferences = ProjectPreferencesManager.getProjectProperties(project);
+        if (!projectPreferences.containsKey("__SYM_NOKIA_EMULATOR_DEVICE")) {
+            String resolution = new WRTProject(project).getPreferredScreenSize();
+            if (resolution != null) {
+                projectPreferences.put("__SYM_NOKIA_EMULATOR_DEVICE", resolution);
+            }
+        }
         String js = getJS(projectPreferences);
         try {
             return new ByteArrayInputStream(js.getBytes("UTF-8"));

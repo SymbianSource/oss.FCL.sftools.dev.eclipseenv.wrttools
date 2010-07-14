@@ -116,6 +116,13 @@
                </appinfo>
             </annotation>
          </attribute>
+         <attribute name="screen-size" type="string">
+            <annotation>
+               <documentation>
+                  This template is for touch devices
+               </documentation>
+            </annotation>
+         </attribute>
          <attribute name="order" type="string">
             <annotation>
                <documentation>

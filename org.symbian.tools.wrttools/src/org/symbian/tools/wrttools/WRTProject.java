@@ -39,6 +39,7 @@ public class WRTProject {
     private static final IPath PROPERTIES_FILE = new Path(".settings").append(Activator.PLUGIN_ID + ".properties");
     private static final String PROP_DEPLOYMENT_TARGET_NAME = "deployment.target.name";
     private static final String PROP_DEPLOYMENT_TARGET_TYPE = "deployment.target.type";
+    private static final String PROP_PREFERED_SCREEN = "preferred.screen.size";
     private final IProject project;
 
     public WRTProject(IProject project) {
@@ -103,9 +104,7 @@ public class WRTProject {
             if (!file.exists()) {
                 file.create(new ByteArrayInputStream(stream.toByteArray()), false, new NullProgressMonitor());
             } else {
-                file
-                        .setContents(new ByteArrayInputStream(stream.toByteArray()), false, true,
-                                new NullProgressMonitor());
+                file.setContents(new ByteArrayInputStream(stream.toByteArray()), false, true, new NullProgressMonitor());
             }
         } catch (IOException e) {
             Activator.log(e);
@@ -116,5 +115,19 @@ public class WRTProject {
 
     public IProject getProject() {
         return project;
+    }
+
+    public void setPreferredScreenSize(String screenSize) {
+        Properties props = getProps();
+        if (screenSize != null) {
+            props.put(PROP_PREFERED_SCREEN, screenSize);
+        } else {
+            props.remove(PROP_PREFERED_SCREEN);
+        }
+        saveProperties(props);
+    }
+
+    public String getPreferredScreenSize() {
+        return getProps().getProperty(PROP_PREFERED_SCREEN);
     }
 }

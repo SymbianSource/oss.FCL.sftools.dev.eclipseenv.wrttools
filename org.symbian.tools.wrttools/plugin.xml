@@ -154,7 +154,8 @@
             default-js-name="main"
             icon="icons/phonegap.png"
             name="PhoneGap Application"
-            order="2">
+            order="2"
+            screen-size="360x640">
          <description>
             This wizard generates a project based on the PhoneGap library that showcases PhoneGap API usage. PhoneGap applications require WRT 1.1 or newer.
          </description>
@@ -196,8 +197,9 @@
             default-html-name="index"
             default-js-name="basic"
             icon="icons/main16.gif"
+            name="Various UI Templates"
             order="5"
-            name="Various UI Templates">
+            screen-size="360x640">
          <description>
             Includes templates for high-end devices from Forum.Nokia.
          </description>

@@ -40,9 +40,7 @@ import org.symbian.tools.wrttools.wizards.WizardContext;
 
 public class ProjectTemplate {
     private static ProjectTemplate[] templates;
-
     private final IConfigurationElement element;
-
     private Image icon;
 
     public ProjectTemplate(IConfigurationElement element) {
@@ -54,8 +52,7 @@ public class ProjectTemplate {
             String path = element.getAttribute("icon");
             final ImageDescriptor imageDescriptor;
             if (path != null) {
-                imageDescriptor = Activator.imageDescriptorFromPlugin(
-                        element.getNamespaceIdentifier(), path);
+                imageDescriptor = Activator.imageDescriptorFromPlugin(element.getNamespaceIdentifier(), path);
             } else {
                 imageDescriptor = ImageDescriptor.getMissingImageDescriptor();
             }
@@ -78,8 +75,7 @@ public class ProjectTemplate {
     }
 
     private String[] getLibraryIds() {
-        IConfigurationElement[] elements = element
-                .getChildren("requires-library");
+        IConfigurationElement[] elements = element.getChildren("requires-library");
         String[] ids = new String[elements.length];
         for (int i = 0; i < elements.length; i++) {
             IConfigurationElement element = elements[i];
@@ -90,8 +86,8 @@ public class ProjectTemplate {
 
     public static ProjectTemplate[] getAllTemplates() {
         if (templates == null) {
-            IExtensionPoint point = Platform.getExtensionRegistry()
-                    .getExtensionPoint(Activator.PLUGIN_ID, "projectTemplates");
+            IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID,
+                    "projectTemplates");
             IConfigurationElement[] elements = point.getConfigurationElements();
             templates = new ProjectTemplate[elements.length];
             for (int i = 0; i < elements.length; i++) {
@@ -117,8 +113,7 @@ public class ProjectTemplate {
         return file != null ? file : "index";
     }
 
-    public WRTProjectFilesWizardPage createWizardPage(WizardContext context,
-            DataBindingContext bindingContext) {
+    public WRTProjectFilesWizardPage createWizardPage(WizardContext context, DataBindingContext bindingContext) {
         try {
             if (element.getAttribute("wizard-page-factory") != null) {
                 IWizardPageFactory factory = (IWizardPageFactory) element
@@ -139,8 +134,7 @@ public class ProjectTemplate {
     public URL getProjectContents() {
         String uri = element.getAttribute("archive");
         if (uri != null) {
-            Bundle bundle = Platform.getBundle(element.getContributor()
-                    .getName());
+            Bundle bundle = Platform.getBundle(element.getContributor().getName());
             URL resource = bundle.getResource(uri);
             return resource;
         }
@@ -174,5 +168,9 @@ public class ProjectTemplate {
             return Integer.parseInt(attribute);
         }
         return Integer.MAX_VALUE;
+    }
+
+    public String getScreenSize() {
+        return element.getAttribute("screen-size");
     }
 }
