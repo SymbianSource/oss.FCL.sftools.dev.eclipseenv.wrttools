@@ -29,7 +29,13 @@ public final class ChromeDebugUtils {
 			File chromeExecutable = new File(file, getExecutable());
 			if (chromeExecutable.isFile()) {
 				return chromeExecutable.getAbsolutePath();
+            } else if (CoreUtil.isMac() && file.getName().equals("Google Chrome.app")) {
+                return getExecutablePath(file.getParent());
 			}
+        } else if (file.isFile()) {
+            if (file.getName().equalsIgnoreCase(getExecutable())) {
+                return file.getAbsolutePath();
+            }
 		}
 		return null;
 	}

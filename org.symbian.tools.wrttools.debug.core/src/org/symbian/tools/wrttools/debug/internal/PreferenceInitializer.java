@@ -45,6 +45,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		}
 		String property = System.getProperty("user.home");
 		File folder = new File(property, DEFAULT_CHROME_LOCATION);
+        if (!folder.exists()) {
+            folder = new File("C:/Program Files/Google/Chrome/Application/");
+        }
 		return folder;
 	}
 

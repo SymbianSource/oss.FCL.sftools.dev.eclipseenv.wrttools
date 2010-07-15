@@ -18,15 +18,19 @@
  *******************************************************************************/
 package org.symbian.tools.wrttools.debug.ui;
 
+import java.io.File;
+
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.symbian.tools.wrttools.debug.internal.Activator;
+import org.symbian.tools.wrttools.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.wrttools.debug.internal.IConstants;
 
 public class DebugPreferencePage extends FieldEditorPreferencePage implements
@@ -42,8 +46,22 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
 
 	@Override
 	protected void createFieldEditors() {
-		DirectoryFieldEditor editor = new DirectoryFieldEditor("chrome", "Chrome Install Location:", getFieldEditorParent());
-		editor.setPreferenceName(IConstants.PREF_NAME_CHROME_LOCATION);
+        DirectoryFieldEditor editor = new DirectoryFieldEditor(IConstants.PREF_NAME_CHROME_LOCATION,
+                "Chrome Install Location:",
+                getFieldEditorParent()) {
+            @Override
+            protected boolean doCheckState() {
+                if (super.doCheckState()) {
+                    String message = validate(getStringValue());
+                    setErrorMessage(message);
+                    return message == null;
+                } else {
+                    return false;
+                }
+            }
+        };
+        editor.setValidateStrategy(StringFieldEditor.VALIDATE_ON_KEY_STROKE);
+        editor.setEmptyStringAllowed(false);
 		addField(editor);
 
         check = new Button(getFieldEditorParent(), SWT.CHECK);
@@ -53,6 +71,19 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
         check.setSelection(!MessageDialogWithToggle.ALWAYS.equals(getPreferenceStore().getString(
                 IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR)));
 	}
+
+
+    protected String validate(String newValue) {
+        String error = null;
+        if (newValue == null || newValue.trim().length() == 0) {
+            error = "Chrome install location is not specified";
+        } else if (!new File(newValue).exists()) {
+            error = String.format("%s does not exist", newValue);
+        } else if (ChromeDebugUtils.getExecutablePath(newValue) == null) {
+            error = String.format("%s does not contain Chrome executable", newValue);
+        }
+        return error;
+    }
 
     @Override
     protected void performDefaults() {
