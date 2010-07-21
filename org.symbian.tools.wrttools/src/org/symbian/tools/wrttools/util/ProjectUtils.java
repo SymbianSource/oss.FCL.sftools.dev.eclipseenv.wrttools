@@ -66,6 +66,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
@@ -124,7 +125,7 @@ public class ProjectUtils {
                         public void run() {
                             IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
                                     .getActivePage();
-                            IViewReference reference = activePage.findViewReference(Activator.NAVIGATOR_ID);
+                            IViewReference reference = activePage.findViewReference(IPageLayout.ID_PROJECT_EXPLORER);
                             IWorkbenchPart part = reference.getPart(false);
                             if (part instanceof ISetSelectionTarget) {
                                 StructuredSelection selection;

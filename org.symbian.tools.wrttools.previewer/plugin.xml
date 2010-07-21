@@ -6,7 +6,7 @@
          point="org.eclipse.ui.views">
       <view
             allowMultiple="false"
-            category="org.symbian.tools.wrttools.views"
+            category="org.symbian.tools.mtw"
             class="org.symbian.tools.wrttools.previewer.preview.PreviewView"
             icon="icons/obj16/preview_view.gif"
             id="org.symbian.tools.wrttools.editing.wrtpreview"

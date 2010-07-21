@@ -1,4 +1,22 @@
-package org.symbian.tools.wrttools.navigator;
+/**
+ * Copyright (c) 2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ * Description:
+ * Overview:
+ * Details:
+ * Platforms/Drives/Compatibility:
+ * Assumptions/Requirement/Pre-requisites:
+ * Failures and causes:
+ */
+package org.symbian.tools.mtw.ui.navigator;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,7 +45,7 @@ public class RenameMoveActionProvider extends CommonActionProvider {
  	private SelectionDispatchAction fMoveAction;
 	private SelectionDispatchAction fRenameAction;
 	
-	private Collection<IAction> fActions = new HashSet<IAction>();
+	private final Collection<IAction> fActions = new HashSet<IAction>();
 
 	public void fillActionBars(IActionBars actionBars) {
 		if (fActions.size() > 0) {
@@ -48,8 +66,9 @@ public class RenameMoveActionProvider extends CommonActionProvider {
 
 	public void init(ICommonActionExtensionSite site) {
 		ICommonViewerWorkbenchSite workbenchSite= null;
-		if (site.getViewSite() instanceof ICommonViewerWorkbenchSite)
-			workbenchSite= (ICommonViewerWorkbenchSite) site.getViewSite();
+		if (site.getViewSite() instanceof ICommonViewerWorkbenchSite) {
+            workbenchSite= (ICommonViewerWorkbenchSite) site.getViewSite();
+        }
 
 		// we only initialize the refactor group when in a view part 
 		// (required for the constructor)
@@ -69,8 +88,9 @@ public class RenameMoveActionProvider extends CommonActionProvider {
 	private void initUpdatingAction(SelectionDispatchAction action, ISelectionProvider provider, ISelection selection, String actionDefinitionId){
 		action.setActionDefinitionId(actionDefinitionId);
 		action.update(selection);
-		if (provider != null)
-			provider.addSelectionChangedListener(action);
+		if (provider != null) {
+            provider.addSelectionChangedListener(action);
+        }
 		fActions.add(action);
 	}
 

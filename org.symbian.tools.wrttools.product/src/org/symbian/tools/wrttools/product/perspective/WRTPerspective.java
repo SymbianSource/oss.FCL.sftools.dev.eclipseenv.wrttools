@@ -8,7 +8,6 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.eclipse.wst.jsdt.ui.JavaScriptUI;
-import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 public class WRTPerspective implements IPerspectiveFactory {
@@ -17,7 +16,7 @@ public class WRTPerspective implements IPerspectiveFactory {
  		String editorArea = layout.getEditorArea();
 		
 		IFolderLayout folder= layout.createFolder("left", IPageLayout.LEFT, (float)0.15, editorArea); //$NON-NLS-1$
-		folder.addView(Activator.NAVIGATOR_ID);
+        folder.addView(IPageLayout.ID_PROJECT_EXPLORER);
 
         IFolderLayout snippetsFolder = layout.createFolder("snippets", IPageLayout.BOTTOM, (float) 0.5, "left"); //$NON-NLS-1$
         snippetsFolder.addView("org.eclipse.wst.common.snippets.internal.ui.SnippetsView");
@@ -42,6 +41,7 @@ public class WRTPerspective implements IPerspectiveFactory {
 		
 		// views - java
 		layout.addShowViewShortcut(JavaScriptUI.ID_TYPE_HIERARCHY);
+        layout.addShowViewShortcut(IPageLayout.ID_PROJECT_EXPLORER);
 		layout.addShowViewShortcut(JavaScriptUI.ID_SOURCE_VIEW);
 		layout.addShowViewShortcut(JavaScriptUI.ID_JAVADOC_VIEW);
 		layout.addShowViewShortcut("org.symbian.tools.wrttools.wrtnavigator");

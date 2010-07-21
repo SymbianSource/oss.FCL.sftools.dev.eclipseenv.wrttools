@@ -278,6 +278,7 @@
       <plugin id="org.mozilla.xulrunner.win32.win32.x86" fragment="true"/>
       <plugin id="org.sat4j.core"/>
       <plugin id="org.sat4j.pb"/>
+      <plugin id="org.symbian.tools.mtw.ui"/>
       <plugin id="org.symbian.tools.wrttools"/>
       <plugin id="org.symbian.tools.wrttools.debug.core"/>
       <plugin id="org.symbian.tools.wrttools.doc.WRTKit"/>

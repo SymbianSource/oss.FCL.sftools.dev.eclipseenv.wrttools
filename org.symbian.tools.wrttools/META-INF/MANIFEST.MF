@@ -51,6 +51,7 @@ Import-Package: org.apache.velocity;version="1.5.0",
  org.eclipse.ui.internal.ide.dialogs,
  org.eclipse.ui.wizards.newresource
 Export-Package: org.symbian.tools.wrttools,
+ org.symbian.tools.wrttools.core,
  org.symbian.tools.wrttools.util,
  org.symbian.tools.wrttools.wizards
 Bundle-ClassPath: .,
