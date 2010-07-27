@@ -3,6 +3,7 @@
 set -x 
 
 SCRIPTS_DIR=/home/symbian/wrttools/scripts
+LOCAL_REPO_DIR=/home/symbian/local-repo/wrttools
 BASE_DIR=/home/symbian/scratch/build_dir
 ECLIPSE_TIMESTAMP=`date +%Y%m%d%H%M%S`-${BUILD_NUMBER:-NO_BUILD_NUMBER}
 HG_CMD=/usr/local/bin/hg
@@ -21,9 +22,14 @@ date
 
 mkdir -p ${WS_DIR}
 
+# synchronize local cache with http://developer.symbian.org/oss/MCL/sftools/dev/eclipseenv/wrttools/ 
+cd ${LOCAL_REPO_DIR}
+${HG_CMD} pull
+${HG_CMD} update 
+
 # check out the code.
 cd ${WS_DIR}
-${HG_CMD} clone http://developer.symbian.org/oss/MCL/sftools/dev/eclipseenv/wrttools/ 
+${HG_CMD} clone ${LOCAL_REPO_DIR}
 
 cd ${SOURCE_DIR}/scripts
 
