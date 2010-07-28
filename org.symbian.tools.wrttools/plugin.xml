@@ -315,12 +315,6 @@
     </command>
     <command
           categoryId="org.symbian.tools.wrttools.commands.maincategory"
-          description="Packages an application for distribution or deployment"
-          id="org.symbian.tools.wrttools.commands.package"
-          name="Package Application">
-    </command>
-    <command
-          categoryId="org.symbian.tools.wrttools.commands.maincategory"
           defaultHandler="org.symbian.tools.wrttools.handlers.AddJSLibrary"
           description="Adds JavaScript libraries to Mobile Web projects"
           id="org.symbian.tools.wrttools.addlibrary"
@@ -337,11 +331,6 @@
                 commandId="org.symbian.tools.wrttools.commands.deploy"
                 icon="icons/deploy_widget.gif"
                 id="org.symbian.tools.wrttools.toolbars.deploy">
-          </command>
-          <command
-                commandId="org.symbian.tools.wrttools.commands.package"
-                icon="icons/package_widget.gif"
-                id="org.symbian.tools.wrttools.toolbars.package">
           </command>
        </toolbar>
     </menuContribution>
@@ -365,11 +354,6 @@
              icon="icons/deploy_widget.gif"
              id="org.symbian.tools.wrttools.toolbars.deploy">
        </command>
-       <command
-             commandId="org.symbian.tools.wrttools.commands.package"
-             icon="icons/package_widget.gif"
-             id="org.symbian.tools.wrttools.toolbars.package">
-       </command>
        <separator
              name="org.symbian.tools.wrttools.endwrt"
              visible="true">
@@ -385,25 +369,6 @@
              commandId="org.symbian.tools.wrttools.commands.deploy"
              icon="icons/deploy_widget.gif"
              id="org.symbian.tools.wrttools.toolbars.deploy">
-          <visibleWhen>
-             <and>
-                <iterate
-                      ifEmpty="false"
-                      operator="and">
-                   <adapt
-                         type="org.eclipse.core.resources.IProject">
-                   </adapt>
-                </iterate>
-                <count
-                      value="1">
-                </count>
-             </and>
-          </visibleWhen>
-       </command>
-       <command
-             commandId="org.symbian.tools.wrttools.commands.package"
-             icon="icons/package_widget.gif"
-             id="org.symbian.tools.wrttools.toolbars.package">
           <visibleWhen>
              <and>
                 <iterate
@@ -453,27 +418,6 @@
              visible="true">
        </separator>
     </menuContribution>
- </extension>
- <extension
-       point="org.eclipse.ui.handlers">
-    <handler
-          class="org.symbian.tools.wrttools.handlers.DeployHandler"
-          commandId="org.symbian.tools.wrttools.commands.deploy">
-       <enabledWhen>
-          <reference
-                definitionId="org.symbian.tools.wrttools.symbianproject">
-          </reference>
-       </enabledWhen>
-    </handler>
-    <handler
-          class="org.symbian.tools.wrttools.handlers.PackageApplicationHandler"
-          commandId="org.symbian.tools.wrttools.commands.package">
-       <enabledWhen>
-          <reference
-                definitionId="org.symbian.tools.wrttools.symbianproject">
-          </reference>
-       </enabledWhen>
-    </handler>
  </extension>
  <extension
        point="org.eclipse.core.expressions.definitions">
@@ -853,4 +797,34 @@ function updateOrientation(orientation) {
        </item>
     </category>
  </extension>
+ <extension
+       point="org.symbian.tools.mtw.core.projectProvider">
+    <projectProvider
+          class="org.symbian.tools.wrttools.core.project.WRTIDEProjectProvider">
+       <enablement>
+          <adapt
+                type="org.eclipse.core.resources.IProject">
+             <test
+                   property="org.eclipse.core.resources.projectNature"
+                   value="org.symbian.tools.wrttools.WidgetProjectNature">
+             </test>
+          </adapt>
+       </enablement>
+    </projectProvider>
+ </extension>
+   <extension
+        point="org.symbian.tools.mtw.core.runtimes">
+     <runtime
+           id="org.symbian.wrt11"
+           name="Symbian WRT 1.1">
+     </runtime>
+  </extension>
+   <extension
+         point="org.symbian.tools.mtw.core.packagers">
+      <packager
+            class="org.symbian.tools.wrttools.core.packager.WrtPackager"
+            targetRuntime="org.symbian.wrt11">
+      </packager>
+   </extension>
+ 
 </plugin>

@@ -18,7 +18,6 @@
  */
 package org.symbian.tools.wrttools;
 
-import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.TreeSet;
@@ -37,8 +36,6 @@ import org.symbian.tools.wrttools.core.libraries.LibraryManager;
 import org.symbian.tools.wrttools.sdt.utils.Logging;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-import com.intel.bluetooth.BlueCoveImpl;
-
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -49,8 +46,6 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
-	private static PrintStream savedSysOut;
 	
     private final LibraryManager manager = new LibraryManager();
 
@@ -68,10 +63,6 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		
-		// set parameters for BlueCove
-		String param = Integer.toString(65*1024);
-		System.setProperty("bluecove.obex.mtu", param);
-		BlueCoveImpl.setConfigProperty("bluecove.obex.mtu", param);
         JsIndexManager.getInstance();
 	}
 
@@ -88,18 +79,7 @@ public class Activator extends AbstractUIPlugin {
     protected void initializeImageRegistry(ImageRegistry reg) {
         WRTImages.init(reg);
     }
-	
-	/** Toggle BlueCove logging
-	 */
-	public static void enableBlueCoveDiagnostics(boolean enable) {
-		System.setProperty("bluecove.debug", Boolean.valueOf(enable).toString());
-		BlueCoveImpl.instance().enableNativeDebug(enable);
-		if (enable) {
-			System.setOut(new PrintStream(ConsoleFactory.createStream()));
-		} else {
-			System.setOut(savedSysOut);
-		}
-	}
+
 
 
 	/**

@@ -23,8 +23,10 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
-import org.symbian.tools.wrttools.core.WRTImages;
-import org.symbian.tools.wrttools.util.ProjectUtils;
+import org.symbian.tools.mtw.core.MTWCore;
+import org.symbian.tools.mtw.core.projects.IMTWProject;
+import org.symbian.tools.mtw.core.runtimes.IPackager;
+import org.symbian.tools.mtw.ui.MTWCoreUI;
 
 public class PackagingInformationDecorator implements ILightweightLabelDecorator {
 
@@ -35,8 +37,14 @@ public class PackagingInformationDecorator implements ILightweightLabelDecorator
         } else if (element instanceof IAdaptable) {
             resource = (IResource) ((IAdaptable) element).getAdapter(IResource.class);
         }
-        if (resource != null && resource.isAccessible() && ProjectUtils.isExcluded(resource)) {
-            decoration.addOverlay(WRTImages.getExcludedImageDescriptor(), IDecoration.TOP_RIGHT);
+        if (resource != null && resource.isAccessible()) {
+            IMTWProject project = MTWCore.getDefault().create(resource.getProject());
+            if (project != null) {
+                IPackager packager = MTWCore.getDefault().getRuntimesManager().getPackager(project);
+                if (packager.getPathInPackage(resource) != null) {
+                    decoration.addOverlay(MTWCoreUI.getImages().getExcludedIconDescriptor(), IDecoration.TOP_RIGHT);
+                }
+            }
         }
     }
 

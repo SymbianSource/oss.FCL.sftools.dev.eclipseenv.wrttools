@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="runtimes" name="Mobile Web Runtimes" schema="schema/runtimes.exsd"/>
+   <extension-point id="packagers" name="Application Packagers" schema="schema/packagers.exsd"/>
+   <extension-point id="projectProvider" name="Project provider" schema="schema/projectProvider.exsd"/>
+
+</plugin>

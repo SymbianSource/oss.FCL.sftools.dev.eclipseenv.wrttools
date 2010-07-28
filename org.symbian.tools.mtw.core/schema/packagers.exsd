@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.symbian.tools.mtw.core" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.symbian.tools.mtw.core" id="packagers" name="Application Packagers"/>
+      </appinfo>
+      <documentation>
+         Packagers can package given application for specified runtime
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="packager"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="packager">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.core.runtimes.IPackager"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="targetRuntime" type="string" use="required">
+            <annotation>
+               <documentation>
+                  ID of the runtime that the application will be deployed to.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier" basedOn="org.symbian.tools.mtw.core.runtimes/runtime/@id"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="sourceRuntime" type="string">
+            <annotation>
+               <documentation>
+                  ID of the runtime that the project should support so it could be deployed to targetRuntime. If this attribute is empty then the project should target the targetRuntime directly
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier" basedOn="org.symbian.tools.mtw.core.runtimes/runtime/@id"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         [Enter the first release in which this extension point appears.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         [Enter extension point usage example here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>

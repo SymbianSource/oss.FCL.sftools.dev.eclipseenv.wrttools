@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="deploymentTargetsProvider" name="Provides targets for project deployments" schema="schema/deploymentTargetsProvider.exsd"/>
 	<!-- Navigator Extensions -->
 	<extension point="org.eclipse.ui.navigator.viewer">
 	  <viewerActionBinding
@@ -119,6 +120,27 @@
            id="org.symbian.tools.mtw"
            name="Tools for Mobile Web">
      </category>
+  </extension>
+  <extension
+        point="org.eclipse.ui.handlers">
+    <handler
+          class="org.symbian.tools.mtw.ui.commands.DeployHandler"
+          commandId="org.symbian.tools.wrttools.commands.deploy">
+       <enabledWhen>
+          <reference
+                definitionId="org.symbian.tools.wrttools.symbianproject">
+          </reference>
+       </enabledWhen>
+    </handler>
+  </extension>
+  <extension
+        point="org.symbian.tools.mtw.ui.deploymentTargetsProvider">
+     <deployment-target-platform
+           class="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothProvider"
+           icon="icons/full/obj16/bluetooth.gif"
+           id="org.symbian.tools.mtw.bluetooth"
+           priority="10">
+     </deployment-target-platform>
   </extension>
 
 </plugin>

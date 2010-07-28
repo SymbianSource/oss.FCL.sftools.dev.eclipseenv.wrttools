@@ -40,79 +40,77 @@ import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class IncludeFileAction implements IObjectActionDelegate {
-	
-	private final List<IFile> selectedFiles = new ArrayList<IFile>();
-	private final List<IFolder> selectedFolders = new ArrayList<IFolder>();
+
+    private final List<IFile> selectedFiles = new ArrayList<IFile>();
+    private final List<IFolder> selectedFolders = new ArrayList<IFolder>();
 
 
 	public IncludeFileAction() {
-		super();
-	}
+        super();
+    }
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
+    }
 
 	public void run(IAction action) {
-		for (IFile file : selectedFiles) {			
+        for (IFile file : selectedFiles) {
             ProjectUtils.include(file);
-		}
-		
-		for(IFolder folder : selectedFolders){
-			try{
+        }
+
+        for (IFolder folder : selectedFolders) {
+            try {
                 ProjectUtils.include(folder);
-				includeFolder( folder);				
-			}
-			catch (CoreException x) {
-				Activator.log(IStatus.ERROR, "error setting exclude property on folder: "+folder.getName(), x);
-			}
-		}
-		/*Refresh project tree when property is changed */ 
-		PlatformUI.getWorkbench().getDecoratorManager().update("org.symbian.tools.wrttools.decorator"); 
-	}
-	
-	/**
-	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
-	 */
-    @SuppressWarnings("unchecked")
+                includeFolder(folder);
+            } catch (CoreException x) {
+                Activator.log(IStatus.ERROR, "error setting exclude property on folder: " + folder.getName(), x);
+            }
+        }
+        /*Refresh project tree when property is changed */
+        PlatformUI.getWorkbench().getDecoratorManager().update("org.symbian.tools.wrttools.decorator");
+    }
+
+    /**
+     * @see IActionDelegate#selectionChanged(IAction, ISelection)
+     */
+    @SuppressWarnings({ "rawtypes" })
     public void selectionChanged(IAction action, ISelection selection) {
-		selectedFiles.clear();
-		selectedFolders.clear();
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			for (Iterator iter = ss.iterator(); iter.hasNext();) {
-				Object obj = iter.next();
-				if (obj instanceof IFile) {
-					IFile file = (IFile) obj;
-					selectedFiles.add(file);
-				}
-				
-				if(obj instanceof IFolder){
-					IFolder folder = (IFolder) obj;
-					selectedFolders.add(folder);
-				}
-			}
-		}		
-	}	
-	
-	/**
-	 * 
-	 * @param folder
-	 * @throws CoreException
-	 */
-	
-	private void includeFolder(IFolder folder) throws CoreException{
-		folder.accept(new IResourceVisitor() {
-			public boolean visit(IResource resource)	throws CoreException {
-				if (resource instanceof IFile) {
-					IFile file = (IFile) resource;
+        selectedFiles.clear();
+        selectedFolders.clear();
+        if (selection instanceof IStructuredSelection) {
+            IStructuredSelection ss = (IStructuredSelection) selection;
+            for (Iterator iter = ss.iterator(); iter.hasNext();) {
+                Object obj = iter.next();
+                if (obj instanceof IFile) {
+                    IFile file = (IFile) obj;
+                    selectedFiles.add(file);
+                }
+
+                if (obj instanceof IFolder) {
+                    IFolder folder = (IFolder) obj;
+                    selectedFolders.add(folder);
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param folder
+     * @throws CoreException
+     */
+
+    private void includeFolder(IFolder folder) throws CoreException {
+        folder.accept(new IResourceVisitor() {
+            public boolean visit(IResource resource) throws CoreException {
+                if (resource instanceof IFile) {
+                    IFile file = (IFile) resource;
                     ProjectUtils.include(file);
-				}
-				else if (resource instanceof IFolder) {
-					IFolder folder = (IFolder) resource;
+                } else if (resource instanceof IFolder) {
+                    IFolder folder = (IFolder) resource;
                     ProjectUtils.include(folder);
-				}
-				return true;
-			}
-		});
-	}
+                }
+                return true;
+            }
+        });
+    }
 }

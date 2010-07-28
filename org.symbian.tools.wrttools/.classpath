@@ -4,6 +4,5 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/jtidy-8.0-20060801.131059-3.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.bluecove_2.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

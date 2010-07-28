@@ -28,7 +28,7 @@ public class WRTImages {
     private static final String IMAGE_IMPORT_WGZ_BANNER = "import_w_banner.png";
     private static final String IMAGE_NEW_WIZARD_BANNER = "WRT_wizard_banner.png";
     private static final String IMAGE_EMULATOR = "deploy_widget.gif";
-    private static final String IMAGE_BLUETOOTH = "bluetooth.gif";
+    //    private static final String IMAGE_BLUETOOTH = "bluetooth.gif";
     private static final String IMAGE_EXCLUDED = "excluded.gif";
     private static final String IMAGE_WRTKIT = "main16.gif";
 
@@ -37,7 +37,7 @@ public class WRTImages {
         add(reg, IMAGE_IMPORT_WGZ_BANNER);
         add(reg, IMAGE_NEW_WIZARD_BANNER);
         add(reg, IMAGE_EMULATOR);
-        add(reg, IMAGE_BLUETOOTH);
+        //        add(reg, IMAGE_BLUETOOTH);
         add(reg, IMAGE_EXCLUDED);
         add(reg, IMAGE_WRTKIT);
     }
@@ -62,9 +62,9 @@ public class WRTImages {
         return Activator.getDefault().getImageRegistry().get(IMAGE_EMULATOR);
     }
 
-    public static Image getBluetoothImage() {
-        return Activator.getDefault().getImageRegistry().get(IMAGE_BLUETOOTH);
-    }
+    //    public static Image getBluetoothImage() {
+    //        return Activator.getDefault().getImageRegistry().get(IMAGE_BLUETOOTH);
+    //    }
 
     public static Image getExcludedImage() {
         return Activator.getDefault().getImageRegistry().get(IMAGE_EXCLUDED);

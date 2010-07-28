@@ -26,24 +26,62 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.symbian.tools.mtw.core.MTWCore;
+import org.symbian.tools.mtw.core.projects.IMTWProject;
+import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.wrttools.wizards.deploy.DeploymentTarget;
-import org.symbian.tools.wrttools.wizards.deploy.DeploymentTargetRegistry;
 
-public class WRTProject {
-    private static final IPath PROPERTIES_FILE = new Path(".settings").append(Activator.PLUGIN_ID + ".properties");
+public class WRTProject implements IMTWProject {
     private static final String PROP_DEPLOYMENT_TARGET_NAME = "deployment.target.name";
+
     private static final String PROP_DEPLOYMENT_TARGET_TYPE = "deployment.target.type";
     private static final String PROP_PREFERED_SCREEN = "preferred.screen.size";
+    private static final IPath PROPERTIES_FILE = new Path(".settings").append(Activator.PLUGIN_ID + ".properties");
+    public static final String WRT11_RUNTIME = "org.symbian.wrt11";
     private final IProject project;
 
     public WRTProject(IProject project) {
         this.project = project;
+    }
+
+    public String getName() {
+        return getProject().getName();
+    }
+
+    public String getPreferredScreenSize() {
+        return getProps().getProperty(PROP_PREFERED_SCREEN);
+    }
+
+    //    public DeploymentTarget getDeploymentTarget() {
+    //        Properties props = getProps();
+    //        String property = props.getProperty(PROP_DEPLOYMENT_TARGET_NAME);
+    //        if (property != null) {
+    //            return DeploymentTargetRegistry.getRegistry().findTarget(property,
+    //                    props.getProperty(PROP_DEPLOYMENT_TARGET_TYPE));
+    //        } else {
+    //            IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+    //            String name = store.getString(PROP_DEPLOYMENT_TARGET_NAME);
+    //            if (name != null) {
+    //                return DeploymentTargetRegistry.getRegistry().findTarget(name,
+    //                        store.getString(PROP_DEPLOYMENT_TARGET_TYPE));
+    //            }
+    //
+    //        }
+    //        return null;
+    //    }
+
+    public IProject getProject() {
+        return project;
     }
 
     private Properties getProps() {
@@ -68,32 +106,8 @@ public class WRTProject {
         return props;
     }
 
-    public void setDeploymentTarget(DeploymentTarget target) {
-        Properties props = getProps();
-        props.setProperty(PROP_DEPLOYMENT_TARGET_NAME, target.getName());
-        props.setProperty(PROP_DEPLOYMENT_TARGET_TYPE, target.getType());
-        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-        store.setValue(PROP_DEPLOYMENT_TARGET_NAME, target.getName());
-        store.setValue(PROP_DEPLOYMENT_TARGET_TYPE, target.getType());
-        saveProperties(props);
-    }
-
-    public DeploymentTarget getDeploymentTarget() {
-        Properties props = getProps();
-        String property = props.getProperty(PROP_DEPLOYMENT_TARGET_NAME);
-        if (property != null) {
-            return DeploymentTargetRegistry.getRegistry().findTarget(property,
-                    props.getProperty(PROP_DEPLOYMENT_TARGET_TYPE));
-        } else {
-            IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-            String name = store.getString(PROP_DEPLOYMENT_TARGET_NAME);
-            if (name != null) {
-                return DeploymentTargetRegistry.getRegistry().findTarget(name,
-                        store.getString(PROP_DEPLOYMENT_TARGET_TYPE));
-            }
-
-        }
-        return null;
+    public IMobileWebRuntime getTargetRuntime() {
+        return MTWCore.getDefault().getRuntimesManager().getRuntime(WRT11_RUNTIME);
     }
 
     private void saveProperties(Properties props) {
@@ -113,8 +127,14 @@ public class WRTProject {
         }
     }
 
-    public IProject getProject() {
-        return project;
+    public void setDeploymentTarget(DeploymentTarget target) {
+        Properties props = getProps();
+        props.setProperty(PROP_DEPLOYMENT_TARGET_NAME, target.getName());
+        props.setProperty(PROP_DEPLOYMENT_TARGET_TYPE, target.getType());
+        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+        store.setValue(PROP_DEPLOYMENT_TARGET_NAME, target.getName());
+        store.setValue(PROP_DEPLOYMENT_TARGET_TYPE, target.getType());
+        saveProperties(props);
     }
 
     public void setPreferredScreenSize(String screenSize) {
@@ -127,7 +147,23 @@ public class WRTProject {
         saveProperties(props);
     }
 
-    public String getPreferredScreenSize() {
-        return getProps().getProperty(PROP_PREFERED_SCREEN);
+    public boolean validate(IProgressMonitor monitor) {
+        try {
+            project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+            IMarker[] markers = project.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+
+            boolean hasErrors = false;
+            for (IMarker marker : markers) {
+                if (marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO) == IMarker.SEVERITY_ERROR) {
+                    hasErrors = true;
+                    break;
+                }
+            }
+            return !hasErrors;
+        } catch (CoreException e1) {
+            // Proofing from coding exceptions in JSDT
+            Activator.log(e1);
+        }
+        return false;
     }
 }

@@ -67,7 +67,7 @@ public class ExcludeFileAction implements IObjectActionDelegate {
 		PlatformUI.getWorkbench().getDecoratorManager().update("org.symbian.tools.wrttools.decorator"); 
 	}
 	
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public void selectionChanged(IAction action, ISelection selection) {
 		selectedFiles.clear();
 		selectedFolders.clear();

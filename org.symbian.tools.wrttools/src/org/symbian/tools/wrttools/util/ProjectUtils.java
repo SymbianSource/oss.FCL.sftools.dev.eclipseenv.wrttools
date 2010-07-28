@@ -35,7 +35,6 @@ import java.util.zip.ZipInputStream;
 
 import javax.swing.filechooser.FileSystemView;
 
-import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -49,7 +48,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -60,18 +58,14 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.wizards.datatransfer.TarEntry;
 import org.eclipse.ui.part.ISetSelectionTarget;
@@ -414,29 +408,6 @@ public class ProjectUtils {
             return IProjectDescription.DESCRIPTION_FILE_NAME.equals(p.lastSegment());
         }
         return false;
-    }
-
-    public static IProject getProjectFromCommandContext(ExecutionEvent event) {
-        IResource resource = null;
-        IWorkbenchPart activePart = HandlerUtil.getActivePart(event);
-        if (activePart instanceof IEditorPart) {
-            resource = (IResource) ((IEditorPart) activePart).getEditorInput().getAdapter(IResource.class);
-        } else {
-            ISelection selection = HandlerUtil.getCurrentSelection(event);
-            if (!selection.isEmpty() && selection instanceof IStructuredSelection) {
-                Object[] array = ((IStructuredSelection) selection).toArray();
-                if (array.length == 1 && array[0] instanceof IAdaptable) {
-                    resource = (IResource) ((IAdaptable) array[0]).getAdapter(IResource.class);
-                }
-            }
-        }
-        if (resource != null) {
-            IProject project = resource.getProject();
-            if (hasWrtNature(project)) {
-                return project;
-            }
-        }
-        return null;
     }
 
     public static boolean isExcluded(IResource resource) {
