@@ -10,12 +10,15 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
+import org.symbian.tools.mtw.internal.deployment.DeploymentTargetPresentationsManager;
+import org.symbian.tools.mtw.internal.deployment.DeploymentTargetTypesRegistry;
 
 /**
  * The activator class controls the plug-in life cycle
  */
 public class MTWCoreUI extends AbstractUIPlugin {
     private final Map<IProject, ProjectMemo> MEMOS = new WeakHashMap<IProject, ProjectMemo>();
+    private final DeploymentTargetTypesRegistry typesRegistry = new DeploymentTargetTypesRegistry();
 
     // The plug-in ID
     public static final String PLUGIN_ID = "org.symbian.tools.mtw.ui"; //$NON-NLS-1$
@@ -23,6 +26,7 @@ public class MTWCoreUI extends AbstractUIPlugin {
     // The shared instance
     private static MTWCoreUI plugin;
     private Images images;
+    private final DeploymentTargetPresentationsManager presentations = new DeploymentTargetPresentationsManager();
 
     /**
      * The constructor
@@ -66,6 +70,10 @@ public class MTWCoreUI extends AbstractUIPlugin {
         getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, message, e));
     }
 
+    public static void log(String message, Object... args) {
+        log(String.format(message, args), (Exception) null);
+    }
+
     public static void log(Exception e) {
         log(null, e);
     }
@@ -83,10 +91,18 @@ public class MTWCoreUI extends AbstractUIPlugin {
         return memo;
     }
 
+    public DeploymentTargetTypesRegistry getDeploymentTypesRegistry() {
+        return typesRegistry;
+    }
+
     public static Images getImages() {
         if (getDefault().images == null) {
             getDefault().images = new Images(getDefault().getImageRegistry());
         }
         return getDefault().images;
+    }
+
+    public DeploymentTargetPresentationsManager getPresentations() {
+        return presentations;
     }
 }

@@ -161,4 +161,8 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
     public IDeploymentTarget getActualTarget() {
         return target;
     }
+
+    public String getDescription() {
+        return target.getDescription();
+    }
 }

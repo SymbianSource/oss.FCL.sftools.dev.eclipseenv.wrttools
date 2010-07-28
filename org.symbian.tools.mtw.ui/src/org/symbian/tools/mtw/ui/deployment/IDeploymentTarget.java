@@ -60,6 +60,12 @@ public interface IDeploymentTarget extends IAdaptable {
     String getName();
 
     /**
+     * Provides more details about target. This information is only displayed 
+     * to the user and is not important for the application.
+     */
+    String getDescription();
+
+    /**
      * Deploy application to this target.
      * 
      * @param project project to deploy to the target

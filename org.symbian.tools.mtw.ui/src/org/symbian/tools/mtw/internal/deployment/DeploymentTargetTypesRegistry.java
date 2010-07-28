@@ -24,11 +24,9 @@ import org.symbian.tools.mtw.ui.MTWCoreUI;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
 public class DeploymentTargetTypesRegistry {
-    private static DeploymentTargetTypesRegistry INSTANCE;
-
     private DeploymentTargetTypeDescriptor[] descriptors;
 
-    private DeploymentTargetTypesRegistry() {
+    public DeploymentTargetTypesRegistry() {
         readExtensions();
     }
 
@@ -41,18 +39,11 @@ public class DeploymentTargetTypesRegistry {
         }
     }
 
-    public static synchronized DeploymentTargetTypesRegistry getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new DeploymentTargetTypesRegistry();
-        }
-        return INSTANCE;
-    }
-
     public DeploymentTargetTypeDescriptor[] getProviders() {
         return descriptors;
     }
 
-    public IDeploymentTargetType getProvider(String id) {
+    public IDeploymentTargetType getType(String id) {
         DeploymentTargetTypeDescriptor[] providers = getProviders();
         for (DeploymentTargetTypeDescriptor descriptor : providers) {
             if (descriptor.getId().equals(id)) {

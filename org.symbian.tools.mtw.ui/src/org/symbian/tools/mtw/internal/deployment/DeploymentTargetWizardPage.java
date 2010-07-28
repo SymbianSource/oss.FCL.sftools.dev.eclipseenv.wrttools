@@ -20,6 +20,8 @@ package org.symbian.tools.mtw.internal.deployment;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -48,17 +50,22 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipse.ui.part.PageBook;
 import org.symbian.tools.mtw.ui.MTWCoreUI;
 import org.symbian.tools.mtw.ui.ProjectMemo;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
+import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
+import org.symbian.tools.mtw.ui.deployment.ITargetDetailsPane;
 
 public class DeploymentTargetWizardPage extends WizardPage {
     private final DeployWizardContext context;
     private TableViewer list;
-    private Text description;
     private final IDeploymentTarget prev;
+    private PageBook descriptions;
+    private final Map<IDeploymentTargetType, ITargetDetailsPane> panes = new HashMap<IDeploymentTargetType, ITargetDetailsPane>();
+    private Control emptyness;
 
     public DeploymentTargetWizardPage(DeployWizardContext context, ProjectMemo memo) {
         super("TargetPage", "Select Deployment Target", null);
@@ -109,26 +116,15 @@ public class DeploymentTargetWizardPage extends WizardPage {
         search.setText("Discover");
         search.setImage(MTWCoreUI.getImages().getDiscoverButtonIcon());
 
-        description = new Text(root, SWT.BORDER | SWT.READ_ONLY);
-        final Button enableLogging = new Button(root, SWT.CHECK);
-        enableLogging.setText("Enable diagnostic logging");
-        enableLogging.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                toggleLogging(enableLogging.getSelection());
-            }
-        });
+        descriptions = new PageBook(root, SWT.BORDER);
+        emptyness = new Composite(descriptions, SWT.NONE);
 
         FormData data = new FormData();
-        data.bottom = new FormAttachment(100, -5);
-        data.left = new FormAttachment(0, 5);
-        enableLogging.setLayoutData(data);
-
-        data = new FormData();
         data.left = new FormAttachment(0, 5);
         data.right = new FormAttachment(100, -5);
-        data.bottom = new FormAttachment(enableLogging, -20);
-        description.setLayoutData(data);
+        data.bottom = new FormAttachment(100, -5);
+        data.height = 50;
+        descriptions.setLayoutData(data);
 
         data = new FormData();
         data.top = new FormAttachment(0, 5);
@@ -138,7 +134,7 @@ public class DeploymentTargetWizardPage extends WizardPage {
         data = new FormData();
         data.left = new FormAttachment(0, 5);
         data.top = new FormAttachment(0, 5);
-        data.bottom = new FormAttachment(description, -10);
+        data.bottom = new FormAttachment(descriptions, -10);
         data.right = new FormAttachment(search, -10);
 
         list.getControl().setLayoutData(data);
@@ -196,14 +192,23 @@ public class DeploymentTargetWizardPage extends WizardPage {
     protected void selectDeploymentTarget(DeploymentTargetWrapper target) {
         if (target != null) {
             context.setTarget(target);
-            //            String desc = target.getDescription();
-            //            this.description.setText(desc);
             setMessage(null);
             setErrorMessage(null);
             setPageComplete(true);
+
+            IDeploymentTargetType type = target.getType();
+            ITargetDetailsPane pane = panes.get(type);
+            if (pane == null) {
+                pane = MTWCoreUI.getDefault().getPresentations().createDetailsPane(type);
+                pane.createControl(descriptions);
+                pane.init(this);
+                panes.put(type, pane);
+            }
+            pane.setTarget(target.getActualTarget());
+            descriptions.showPage(pane.getControl());
         } else {
+            descriptions.showPage(emptyness);
             context.setTarget(null);
-            //            description.setText("");
             setPageComplete(false);
             setMessage(null);
             setErrorMessage("Select device or emulator to deploy the application");

@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
+import org.symbian.tools.mtw.ui.MTWCoreUI;
 
 public class DeployWizardContext {
     private DeploymentTargetWrapper target;
@@ -49,7 +50,7 @@ public class DeployWizardContext {
     }
 
     public DeploymentTargetWrapper[] getDeploymentTargets() {
-        final DeploymentTargetTypeDescriptor[] providers = DeploymentTargetTypesRegistry.getInstance()
+        final DeploymentTargetTypeDescriptor[] providers = MTWCoreUI.getDefault().getDeploymentTypesRegistry()
                 .getProviders();
         Collection<DeploymentTargetWrapper> targets = new HashSet<DeploymentTargetWrapper>();
 
@@ -62,7 +63,7 @@ public class DeployWizardContext {
     }
 
     public void doSearch(IProgressMonitor monitor) throws CoreException {
-        final DeploymentTargetTypeDescriptor[] providers = DeploymentTargetTypesRegistry.getInstance()
+        final DeploymentTargetTypeDescriptor[] providers = MTWCoreUI.getDefault().getDeploymentTypesRegistry()
                 .getProviders();
         monitor.beginTask("Discovering deployment targets", providers.length * 10);
         for (DeploymentTargetTypeDescriptor descriptor : providers) {
@@ -72,7 +73,7 @@ public class DeployWizardContext {
     }
 
     public boolean areTargetsReady() {
-        final DeploymentTargetTypeDescriptor[] providers = DeploymentTargetTypesRegistry.getInstance()
+        final DeploymentTargetTypeDescriptor[] providers = MTWCoreUI.getDefault().getDeploymentTypesRegistry()
                 .getProviders();
         for (DeploymentTargetTypeDescriptor descriptor : providers) {
             if (!descriptor.targetsDiscovered()) {

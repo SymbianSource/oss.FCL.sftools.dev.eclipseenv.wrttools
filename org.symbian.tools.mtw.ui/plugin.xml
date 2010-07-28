@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="deploymentTargetType" name="Provides targets for project deployments" schema="schema/deploymentTargetType.exsd"/>
+   <extension-point id="targetPresentation" name="Deployment Target Presentation" schema="schema/targetPresentation.exsd"/>
 	<!-- Navigator Extensions -->
 	<extension point="org.eclipse.ui.navigator.viewer">
 	  <viewerActionBinding

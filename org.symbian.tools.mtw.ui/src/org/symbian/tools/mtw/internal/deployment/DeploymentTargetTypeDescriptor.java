@@ -122,8 +122,7 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
             try {
                 return Integer.parseInt(attribute);
             } catch (NumberFormatException e) {
-                MTWCoreUI.log(String.format("%s is not a valid priority value for %s provider", attribute, getId()),
-                        null);
+                MTWCoreUI.log("%s is not a valid priority value for %s provider", attribute, getId());
             }
         }
         return 0;
@@ -143,6 +142,36 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
 
     public ISchedulingRule getSchedulingRule(IDeploymentTarget target) {
         return type.getSchedulingRule(target);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        DeploymentTargetTypeDescriptor other = (DeploymentTargetTypeDescriptor) obj;
+        if (getId() == null) {
+            if (other.getId() != null) {
+                return false;
+            }
+        } else if (!getId().equals(other.getId())) {
+            return false;
+        }
+        return true;
     }
 
 }

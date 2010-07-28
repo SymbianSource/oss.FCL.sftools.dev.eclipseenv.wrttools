@@ -314,4 +314,9 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
     public boolean isDiscovered() {
         return device != null;
     }
+
+    public String getDescription() {
+        return device == null ? "This device was remembered from past sessions and may not be available" : String
+                .format("Remote device with address %s", device.getBluetoothAddress());
+    }
 }
