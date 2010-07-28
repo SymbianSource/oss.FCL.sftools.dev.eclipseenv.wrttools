@@ -20,40 +20,41 @@ package org.symbian.tools.mtw.internal.deployment;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetProvider;
+import org.symbian.tools.mtw.ui.MTWCoreUI;
+import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
-public class DeploymentTargetProviderRegistry {
-    private static DeploymentTargetProviderRegistry INSTANCE;
+public class DeploymentTargetTypesRegistry {
+    private static DeploymentTargetTypesRegistry INSTANCE;
 
-    private DeploymentTargetProviderDescriptor[] descriptors;
+    private DeploymentTargetTypeDescriptor[] descriptors;
 
-    private DeploymentTargetProviderRegistry() {
+    private DeploymentTargetTypesRegistry() {
         readExtensions();
     }
 
     private void readExtensions() {
         final IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
-                "org.symbian.tools.mtw.ui.deploymentTargetsProvider");
-        descriptors = new DeploymentTargetProviderDescriptor[elements.length];
+                MTWCoreUI.PLUGIN_ID, "deploymentTargetType");
+        descriptors = new DeploymentTargetTypeDescriptor[elements.length];
         for (int i = 0; i < elements.length; i++) {
-            descriptors[i] = new DeploymentTargetProviderDescriptor(elements[i]);
+            descriptors[i] = new DeploymentTargetTypeDescriptor(elements[i]);
         }
     }
 
-    public static synchronized DeploymentTargetProviderRegistry getInstance() {
+    public static synchronized DeploymentTargetTypesRegistry getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new DeploymentTargetProviderRegistry();
+            INSTANCE = new DeploymentTargetTypesRegistry();
         }
         return INSTANCE;
     }
 
-    public DeploymentTargetProviderDescriptor[] getProviders() {
+    public DeploymentTargetTypeDescriptor[] getProviders() {
         return descriptors;
     }
 
-    public IDeploymentTargetProvider getProvider(String id) {
-        DeploymentTargetProviderDescriptor[] providers = getProviders();
-        for (DeploymentTargetProviderDescriptor descriptor : providers) {
+    public IDeploymentTargetType getProvider(String id) {
+        DeploymentTargetTypeDescriptor[] providers = getProviders();
+        for (DeploymentTargetTypeDescriptor descriptor : providers) {
             if (descriptor.getId().equals(id)) {
                 return descriptor;
             }

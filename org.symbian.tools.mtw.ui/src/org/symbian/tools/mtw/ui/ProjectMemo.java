@@ -32,9 +32,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.internal.deployment.DeploymentTargetProviderRegistry;
+import org.symbian.tools.mtw.internal.deployment.DeploymentTargetTypesRegistry;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
-import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetProvider;
+import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
 public class ProjectMemo {
     private static final String DEPLOYMENT_PROVIDER = "providerId";
@@ -96,7 +96,7 @@ public class ProjectMemo {
             checkMemento();
             String type = memento.getString(DEPLOYMENT_PROVIDER);
             if (type != null) {
-                final IDeploymentTargetProvider provider = DeploymentTargetProviderRegistry.getInstance().getProvider(
+                final IDeploymentTargetType provider = DeploymentTargetTypesRegistry.getInstance().getProvider(
                         type);
                 if (provider != null) {
                     IDeploymentTarget target = provider.findTarget(project, memento.getString(TARGET));

@@ -3,7 +3,7 @@
 <schema targetNamespace="org.symbian.tools.mtw.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.symbian.tools.mtw.ui" id="deploymentTargetsProvider" name="Provides targets for project deployments"/>
+         <meta.schema plugin="org.symbian.tools.mtw.ui" id="deploymentTargetType" name="Provides targets for project deployments"/>
       </appinfo>
       <documentation>
          MTW extenders can provide deployment targets - these include bluetooth devices, device emulators etc.
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="deployment-target-platform"/>
+            <element ref="deployment-target-type"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,7 +47,7 @@
       </complexType>
    </element>
 
-   <element name="deployment-target-platform">
+   <element name="deployment-target-type">
       <complexType>
          <attribute name="id" type="string" use="required">
             <annotation>
@@ -62,7 +62,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.ui.deployment.IDeploymentTargetProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType"/>
                </appinfo>
             </annotation>
          </attribute>

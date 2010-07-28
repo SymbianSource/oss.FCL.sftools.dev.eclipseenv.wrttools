@@ -22,33 +22,66 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.model.IWorkbenchAdapter;
-import org.eclipse.ui.model.WorkbenchAdapter;
+import org.eclipse.ui.model.IWorkbenchAdapter2;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
 import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
-import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetProvider;
+import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
 public class DeploymentTargetWrapper implements IDeploymentTarget {
-    public class TargetWorkbenchAdapter extends WorkbenchAdapter {
-        @Override
-        public String getLabel(Object object) {
-            return getName();
+    public class WorkbenchAdapter2Wrapper implements IWorkbenchAdapter2 {
+        private final IWorkbenchAdapter2 adapter;
+
+        public WorkbenchAdapter2Wrapper(IWorkbenchAdapter2 adapter) {
+            this.adapter = adapter;
         }
 
-        @Override
-        public ImageDescriptor getImageDescriptor(Object object) {
-            return provider.getImageDescriptor();
+        public RGB getForeground(Object element) {
+            return adapter.getForeground(((DeploymentTargetWrapper) element).getActualTarget());
+        }
+
+        public RGB getBackground(Object element) {
+            return adapter.getBackground(((DeploymentTargetWrapper) element).getActualTarget());
+        }
+
+        public FontData getFont(Object element) {
+            return adapter.getFont(((DeploymentTargetWrapper) element).getActualTarget());
         }
     }
 
-    private final DeploymentTargetProviderDescriptor provider;
+    public class WorkbenchAdapterWrapper implements IWorkbenchAdapter {
+        private final IWorkbenchAdapter adapter;
+
+        public WorkbenchAdapterWrapper(IWorkbenchAdapter adapter) {
+            this.adapter = adapter;
+        }
+
+        public Object[] getChildren(Object o) {
+            return adapter.getChildren(((DeploymentTargetWrapper) o).getActualTarget());
+        }
+
+        public ImageDescriptor getImageDescriptor(Object object) {
+            return adapter.getImageDescriptor(((DeploymentTargetWrapper) object).getActualTarget());
+        }
+
+        public String getLabel(Object o) {
+            return adapter.getLabel(((DeploymentTargetWrapper) o).getActualTarget());
+        }
+
+        public Object getParent(Object o) {
+            return adapter.getParent(((DeploymentTargetWrapper) o).getActualTarget());
+        }
+    }
+    final DeploymentTargetTypeDescriptor type;
     private final IDeploymentTarget target;
 
-    public DeploymentTargetWrapper(IDeploymentTarget target, DeploymentTargetProviderDescriptor provider) {
+    public DeploymentTargetWrapper(IDeploymentTarget target, DeploymentTargetTypeDescriptor type) {
         this.target = target;
-        this.provider = provider;
+        this.type = type;
     }
 
     public IStatus deploy(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor)
@@ -79,15 +112,18 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
     }
 
     public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-        Object ad = target.getAdapter(adapter);
-        if (ad == null && adapter.equals(IWorkbenchAdapter.class)) {
-            return new TargetWorkbenchAdapter();
+        Object a = target.getAdapter(adapter);
+        if (IWorkbenchAdapter.class.isAssignableFrom(adapter)) {
+            return a == null ? new TargetWorkbenchAdapter(this) : new WorkbenchAdapterWrapper((IWorkbenchAdapter) a);
+        } else if (IWorkbenchAdapter2.class.isAssignableFrom(adapter)) {
+            return a == null ? new TargetWorkbenchAdapter(this) : new WorkbenchAdapter2Wrapper((IWorkbenchAdapter2) a);
+        } else {
+            return a;
         }
-        return ad;
     }
 
     public int getCategory() {
-        return provider.getPriority() * 0xFFFF + (provider.getId().hashCode() & 0xFFFF);
+        return type.getPriority() * 0xFFFF + (type.getId().hashCode() & 0xFFFF);
     }
 
     public String getId() {
@@ -99,7 +135,7 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
     }
 
     public String getProviderId() {
-        return provider.getId();
+        return type.getId();
     }
 
     @Override
@@ -118,8 +154,8 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
         target.load(child);
     }
 
-    public IDeploymentTargetProvider getProvider() {
-        return provider;
+    public IDeploymentTargetType getType() {
+        return type;
     }
 
     public IDeploymentTarget getActualTarget() {

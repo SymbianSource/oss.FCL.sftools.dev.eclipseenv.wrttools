@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="deploymentTargetsProvider" name="Provides targets for project deployments" schema="schema/deploymentTargetsProvider.exsd"/>
+   <extension-point id="deploymentTargetType" name="Provides targets for project deployments" schema="schema/deploymentTargetType.exsd"/>
 	<!-- Navigator Extensions -->
 	<extension point="org.eclipse.ui.navigator.viewer">
 	  <viewerActionBinding
@@ -134,13 +134,26 @@
     </handler>
   </extension>
   <extension
-        point="org.symbian.tools.mtw.ui.deploymentTargetsProvider">
-     <deployment-target-platform
-           class="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothProvider"
+        point="org.symbian.tools.mtw.ui.deploymentTargetType">
+     <deployment-target-type
+           class="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothTargetType"
            icon="icons/full/obj16/bluetooth.gif"
            id="org.symbian.tools.mtw.bluetooth"
            priority="10">
-     </deployment-target-platform>
+     </deployment-target-type>
+  </extension>
+  <extension
+        point="org.eclipse.core.runtime.adapters">
+     <factory
+           adaptableType="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothTarget"
+           class="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothTargetAdapterFactory">
+        <adapter
+              type="org.eclipse.ui.model.IWorkbenchAdapter">
+        </adapter>
+        <adapter
+              type="org.eclipse.ui.model.IWorkbenchAdapter2">
+        </adapter>
+     </factory>
   </extension>
 
 </plugin>

@@ -41,7 +41,7 @@ import org.symbian.tools.mtw.core.projects.IMTWProject;
 import org.symbian.tools.mtw.ui.ConsoleFactory;
 import org.symbian.tools.mtw.ui.MTWCoreUI;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
-import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetProvider;
+import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
 import com.intel.bluetooth.BlueCoveImpl;
 
@@ -52,7 +52,7 @@ import com.intel.bluetooth.BlueCoveImpl;
  * 
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
-public class BluetoothProvider implements IDeploymentTargetProvider {
+public class BluetoothTargetType implements IDeploymentTargetType {
     private final class WrtDiscoveryListener implements DiscoveryListener {
         final Object inquiryCompletedEvent;
         boolean isCanceled;
@@ -80,14 +80,14 @@ public class BluetoothProvider implements IDeploymentTargetProvider {
 
         public void deviceDiscovered(RemoteDevice btDevice, DeviceClass cod) {
             try {
-                if (btDevice.getFriendlyName(false) != null && btDevice.getFriendlyName(false).length() > 0) {
-                    final String name = btDevice.getFriendlyName(false);
-
+                final String name = btDevice.getFriendlyName(false);
+                if (name != null && name.length() > 0) {
                     final BluetoothTarget target = prevTargets.get(name);
                     if (target != null) {
                         target.setAddress(btDevice);
+                        targets.put(name, target);
                     } else {
-                        targets.put(name, new BluetoothTarget(name, btDevice, BluetoothProvider.this));
+                        targets.put(name, new BluetoothTarget(name, btDevice, BluetoothTargetType.this));
                     }
                     checkCanceled();
                 }
@@ -116,7 +116,7 @@ public class BluetoothProvider implements IDeploymentTargetProvider {
     private WrtDiscoveryListener listener;
     private Map<String, BluetoothTarget> targets = new TreeMap<String, BluetoothTarget>();
 
-    public BluetoothProvider() {
+    public BluetoothTargetType() {
         // set parameters for BlueCove
         String param = Integer.toString(65 * 1024);
         System.setProperty("bluecove.obex.mtu", param);

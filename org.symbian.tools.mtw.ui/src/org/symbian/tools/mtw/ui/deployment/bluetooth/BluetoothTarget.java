@@ -62,10 +62,10 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
     protected String[] exceptionCodes = new String[] { "OBEX_HTTP_UNSUPPORTED_TYPE", "OBEX_HTTP_FORBIDDEN" };
     private String message = "Deployment was successful. Please follow on-screen instructions to complete application deployment on your device.";
     private final String name;
-    private final BluetoothProvider provider;
+    private final BluetoothTargetType provider;
     private final Collection<IStatus> statuses = new LinkedList<IStatus>();
 
-    public BluetoothTarget(String name, RemoteDevice device, BluetoothProvider provider) {
+    public BluetoothTarget(String name, RemoteDevice device, BluetoothTargetType provider) {
         this.name = name;
         this.device = device;
         this.provider = provider;
@@ -243,7 +243,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         return name;
     }
 
-    public String getServicesFound() {
+    private String getServicesFound() {
         try {
             serviceURL = "";
             UUID serviceUUID = OBEX_OBJECT_PUSH;
@@ -309,5 +309,9 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
 
     public void setAddress(RemoteDevice device) {
         this.device = device;
+    }
+
+    public boolean isDiscovered() {
+        return device != null;
     }
 }

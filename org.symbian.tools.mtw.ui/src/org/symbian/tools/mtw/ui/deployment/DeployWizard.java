@@ -75,7 +75,7 @@ public class DeployWizard extends Wizard {
 
         private DeployJob(IMTWProject project, DeploymentTargetWrapper deploymentTarget) {
             super(String.format("Deploying %s to %s", project.getName(), deploymentTarget.getName()));
-            ISchedulingRule rule = deploymentTarget.getProvider().getSchedulingRule(deploymentTarget.getActualTarget());
+            ISchedulingRule rule = deploymentTarget.getType().getSchedulingRule(deploymentTarget.getActualTarget());
             if (rule != null) {
                 rule = MultiRule.combine(rule, project.getProject());
             } else {

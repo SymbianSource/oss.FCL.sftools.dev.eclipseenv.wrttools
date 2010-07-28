@@ -49,11 +49,11 @@ public class DeployWizardContext {
     }
 
     public DeploymentTargetWrapper[] getDeploymentTargets() {
-        final DeploymentTargetProviderDescriptor[] providers = DeploymentTargetProviderRegistry.getInstance()
+        final DeploymentTargetTypeDescriptor[] providers = DeploymentTargetTypesRegistry.getInstance()
                 .getProviders();
         Collection<DeploymentTargetWrapper> targets = new HashSet<DeploymentTargetWrapper>();
 
-        for (DeploymentTargetProviderDescriptor provider : providers) {
+        for (DeploymentTargetTypeDescriptor provider : providers) {
             if (provider.supports(project)) {
                 targets.addAll(Arrays.asList(provider.getTargets(project)));
             }
@@ -62,19 +62,19 @@ public class DeployWizardContext {
     }
 
     public void doSearch(IProgressMonitor monitor) throws CoreException {
-        final DeploymentTargetProviderDescriptor[] providers = DeploymentTargetProviderRegistry.getInstance()
+        final DeploymentTargetTypeDescriptor[] providers = DeploymentTargetTypesRegistry.getInstance()
                 .getProviders();
         monitor.beginTask("Discovering deployment targets", providers.length * 10);
-        for (DeploymentTargetProviderDescriptor descriptor : providers) {
+        for (DeploymentTargetTypeDescriptor descriptor : providers) {
             descriptor.discoverTargets(new SubProgressMonitor(monitor, 10));
         }
         monitor.done();
     }
 
     public boolean areTargetsReady() {
-        final DeploymentTargetProviderDescriptor[] providers = DeploymentTargetProviderRegistry.getInstance()
+        final DeploymentTargetTypeDescriptor[] providers = DeploymentTargetTypesRegistry.getInstance()
                 .getProviders();
-        for (DeploymentTargetProviderDescriptor descriptor : providers) {
+        for (DeploymentTargetTypeDescriptor descriptor : providers) {
             if (!descriptor.targetsDiscovered()) {
                 return false;
             }

@@ -25,6 +25,7 @@ import org.eclipse.swt.graphics.Image;
 public final class Images {
     private final String DISCOVER_ICON = "icons/full/obj16/discover.gif";
     private final String EXCLUDED_ICON = "icons/full/obj16/excluded.gif";
+    private final String BLUETOOTH_ICON = "icons/full/obj16/bluetooth.gif";
 
     private final ImageRegistry registry;
 
@@ -32,6 +33,7 @@ public final class Images {
         this.registry = registry;
         add(registry, DISCOVER_ICON);
         add(registry, EXCLUDED_ICON);
+        add(registry, BLUETOOTH_ICON);
     }
 
     private void add(final ImageRegistry registry, String icon) {
@@ -45,5 +47,9 @@ public final class Images {
 
     public ImageDescriptor getExcludedIconDescriptor() {
         return registry.getDescriptor(EXCLUDED_ICON);
+    }
+
+    public ImageDescriptor getBluetoothImageDescriptor() {
+        return registry.getDescriptor(BLUETOOTH_ICON);
     }
 }

@@ -28,7 +28,7 @@ import org.symbian.tools.mtw.core.projects.IMTWProject;
  * 
  * @author Eugene
  */
-public interface IDeploymentTargetProvider {
+public interface IDeploymentTargetType {
     /**
      * Returns list of the targets that accept provided project. Project 
      * cannot be <code>null</code>.

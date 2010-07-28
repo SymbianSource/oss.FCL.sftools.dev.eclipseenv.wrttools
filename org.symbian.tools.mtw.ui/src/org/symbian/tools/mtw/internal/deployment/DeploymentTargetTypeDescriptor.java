@@ -29,10 +29,10 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
 import org.symbian.tools.mtw.ui.MTWCoreUI;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
-import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetProvider;
+import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
-public final class DeploymentTargetProviderDescriptor implements IDeploymentTargetProvider {
-    public class NullProvider implements IDeploymentTargetProvider {
+public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetType {
+    public class NullProvider implements IDeploymentTargetType {
         public IDeploymentTarget[] getTargets(IMTWProject project) {
             return null;
         }
@@ -56,11 +56,11 @@ public final class DeploymentTargetProviderDescriptor implements IDeploymentTarg
 
     private static final DeploymentTargetWrapper[] NO_TARGETS = new DeploymentTargetWrapper[0];
     private final IConfigurationElement element;
-    private IDeploymentTargetProvider provider;
+    private IDeploymentTargetType type;
     private final Map<IDeploymentTarget, DeploymentTargetWrapper> wrappers = new WeakHashMap<IDeploymentTarget, DeploymentTargetWrapper>();
     private ImageDescriptor imageDescriptor = null;
 
-    public DeploymentTargetProviderDescriptor(IConfigurationElement element) {
+    public DeploymentTargetTypeDescriptor(IConfigurationElement element) {
         this.element = element;
     }
 
@@ -96,16 +96,16 @@ public final class DeploymentTargetProviderDescriptor implements IDeploymentTarg
         return getProvider().findTarget(project, id);
     }
 
-    private synchronized IDeploymentTargetProvider getProvider() {
-        if (provider == null) {
+    private synchronized IDeploymentTargetType getProvider() {
+        if (type == null) {
             try {
-                provider = (IDeploymentTargetProvider) element.createExecutableExtension("class");
+                type = (IDeploymentTargetType) element.createExecutableExtension("class");
             } catch (CoreException e) {
                 MTWCoreUI.log("Cannot instantiate provider " + getId(), e);
-                provider = new NullProvider();
+                type = new NullProvider();
             }
         }
-        return provider;
+        return type;
     }
 
     public String getId() {
@@ -142,7 +142,7 @@ public final class DeploymentTargetProviderDescriptor implements IDeploymentTarg
     }
 
     public ISchedulingRule getSchedulingRule(IDeploymentTarget target) {
-        return provider.getSchedulingRule(target);
+        return type.getSchedulingRule(target);
     }
 
 }
