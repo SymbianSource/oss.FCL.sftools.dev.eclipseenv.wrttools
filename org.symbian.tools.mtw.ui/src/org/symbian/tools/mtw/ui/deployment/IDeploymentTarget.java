@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.ui.IMemento;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
+import org.symbian.tools.mtw.core.runtimes.IPackager;
 
 /**
  * <p>This is particular deployment target instance. It can be a Bluetooth phone
@@ -74,7 +74,7 @@ public interface IDeploymentTarget extends IAdaptable {
      * @param runtime runtime that will be used to run packaged application
      * @param monitor progress monitor to report deployment progress
      */
-    IStatus deploy(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor) throws CoreException;
+    IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException;
 
     /**
      * Save project-specific settings to the memento. Workspace-wide settings 

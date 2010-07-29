@@ -822,7 +822,7 @@ function updateOrientation(orientation) {
    <extension
          point="org.symbian.tools.mtw.core.packagers">
       <packager
-            class="org.symbian.tools.wrttools.core.packager.WrtPackager"
+            delegate="org.symbian.tools.wrttools.core.packager.WrtPackager"
             targetRuntime="org.symbian.wrt11">
       </packager>
    </extension>

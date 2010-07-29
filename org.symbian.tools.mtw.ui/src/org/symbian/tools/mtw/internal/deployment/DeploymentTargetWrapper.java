@@ -28,7 +28,7 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.ui.model.IWorkbenchAdapter;
 import org.eclipse.ui.model.IWorkbenchAdapter2;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
+import org.symbian.tools.mtw.core.runtimes.IPackager;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
@@ -84,9 +84,9 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
         this.type = type;
     }
 
-    public IStatus deploy(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor)
+    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
             throws CoreException {
-        return target.deploy(project, runtime, monitor);
+        return target.deploy(project, packager, monitor);
     }
 
     @Override

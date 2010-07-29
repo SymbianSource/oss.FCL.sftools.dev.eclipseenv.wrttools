@@ -30,15 +30,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
-import org.symbian.tools.mtw.core.runtimes.IPackager;
+import org.symbian.tools.mtw.core.runtimes.IPackagerDelegate;
 import org.symbian.tools.mtw.core.utilities.ZipApplicationVisitor;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-public class WrtPackager implements IPackager {
-    public File packageApplication(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor)
-            throws CoreException {
+public class WrtPackager implements IPackagerDelegate {
+    public File packageApplication(IMTWProject project, IProgressMonitor monitor) throws CoreException {
         monitor.beginTask(String.format("Packaging %s", project.getName()), IProgressMonitor.UNKNOWN);
 
         IPath stateLocation = Activator.getDefault().getStateLocation();

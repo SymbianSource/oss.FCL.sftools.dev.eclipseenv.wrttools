@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.symbian.tools.mtw.core.MTWCore;
-import org.symbian.tools.mtw.core.runtimes.IPackager;
+import org.symbian.tools.mtw.core.runtimes.IPackagerDelegate;
 
 /**
  * Use this visitor to zip application if the web runtime uses zip archive as application
@@ -43,9 +43,9 @@ import org.symbian.tools.mtw.core.runtimes.IPackager;
 public class ZipApplicationVisitor implements IResourceVisitor {
     private static final int DEFAULT_BUFFER_SIZE = 65536;
     private final ZipOutputStream zipStream;
-    private final IPackager packager;
+    private final IPackagerDelegate packager;
 
-    public ZipApplicationVisitor(ZipOutputStream zipStream, IPackager packager) {
+    public ZipApplicationVisitor(ZipOutputStream zipStream, IPackagerDelegate packager) {
         this.zipStream = zipStream;
         this.packager = packager;
     }

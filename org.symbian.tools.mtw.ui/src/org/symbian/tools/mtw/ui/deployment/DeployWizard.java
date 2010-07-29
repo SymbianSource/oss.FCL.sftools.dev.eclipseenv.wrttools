@@ -26,7 +26,9 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.statushandlers.StatusManager;
+import org.symbian.tools.mtw.core.MTWCore;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
+import org.symbian.tools.mtw.core.runtimes.IPackager;
 import org.symbian.tools.mtw.internal.deployment.DeployWizardContext;
 import org.symbian.tools.mtw.internal.deployment.DeploymentTargetWizardPage;
 import org.symbian.tools.mtw.internal.deployment.DeploymentTargetWrapper;
@@ -90,7 +92,8 @@ public class DeployWizard extends Wizard {
         public IStatus run(IProgressMonitor monitor) {
             IStatus status;
             try {
-                status = target.deploy(project, project.getTargetRuntime(), monitor);
+                IPackager packager = MTWCore.getDefault().getRuntimesManager().getPackager(project);
+                status = target.deploy(project, packager, monitor);
             } catch (CoreException e) {
                 status = e.getStatus();
             }

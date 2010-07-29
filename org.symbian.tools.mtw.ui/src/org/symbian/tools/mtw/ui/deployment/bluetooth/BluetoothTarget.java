@@ -51,7 +51,6 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.ui.IMemento;
 import org.symbian.tools.mtw.core.MTWCore;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.mtw.core.runtimes.IPackager;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
 
@@ -71,16 +70,11 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         this.provider = provider;
     }
 
-    public IStatus deploy(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor)
+    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
             throws CoreException {
         monitor.beginTask(String.format("Deploying application %s to %s", project.getName(), name),
                 IProgressMonitor.UNKNOWN);
-        final IPackager packager = MTWCore.getDefault().getRuntimesManager().getPackager(project, runtime);
-        if (packager == null) {
-            return new Status(IStatus.ERROR, MTWCore.PLUGIN_ID, String.format("Project %s does not support runtime %s",
-                    project.getName(), runtime.getName()));
-        }
-        final File application = packager.packageApplication(project, runtime, new SubProgressMonitor(monitor, 100));
+        final File application = packager.packageApplication(project, new SubProgressMonitor(monitor, 100));
         try {
             deployWidget(application, packager.getFileType(project), new SubProgressMonitor(monitor, 10));
         } finally {

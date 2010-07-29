@@ -29,26 +29,27 @@ import org.symbian.tools.mtw.core.MTWCore;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
 import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.mtw.core.runtimes.IPackager;
+import org.symbian.tools.mtw.core.runtimes.IPackagerDelegate;
 
 public class LazyPackager implements IPackager {
     private final IConfigurationElement element;
-    private IPackager packager;
+    private IPackagerDelegate packager;
 
     public LazyPackager(IConfigurationElement element) {
         this.element = element;
     }
 
-    public File packageApplication(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor)
+    public File packageApplication(IMTWProject project, IProgressMonitor monitor)
             throws CoreException {
-        return getPackager().packageApplication(project, runtime, monitor);
+        return getPackager().packageApplication(project, monitor);
     }
 
-    private IPackager getPackager() {
+    private IPackagerDelegate getPackager() {
         if (packager == null) {
             try {
-                packager = (IPackager) element.createExecutableExtension("class");
+                packager = (IPackagerDelegate) element.createExecutableExtension("delegate");
             } catch (CoreException e) {
-                MTWCore.log(String.format("Cannot instantiate %s from plugin %s", element.getAttribute("class"),
+                MTWCore.log(String.format("Cannot instantiate %s from plugin %s", element.getAttribute("delegate"),
                         element.getDeclaringExtension().getNamespaceIdentifier()), e);
                 throw new RuntimeException(e);
             }
@@ -62,6 +63,21 @@ public class LazyPackager implements IPackager {
 
     public String getFileType(IMTWProject project) {
         return getPackager().getFileType(project);
+    }
+
+    public IMobileWebRuntime getTargetRuntime() {
+        String id = element.getAttribute("targetRuntime");
+        if (id != null) {
+            return MTWCore.getDefault().getRuntimesManager().getRuntime(id);
+        } else {
+            return getSourceRuntime();
+        }
+    }
+
+    public IMobileWebRuntime getSourceRuntime() {
+        IMobileWebRuntime runtime = MTWCore.getDefault().getRuntimesManager()
+                .getRuntime(element.getAttribute("sourceRuntime"));
+        return runtime;
     }
 
 }

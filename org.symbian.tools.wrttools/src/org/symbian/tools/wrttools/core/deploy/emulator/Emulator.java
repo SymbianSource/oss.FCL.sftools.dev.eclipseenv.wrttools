@@ -31,9 +31,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.IMemento;
-import org.symbian.tools.mtw.core.MTWCore;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.mtw.core.runtimes.IPackager;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.wrttools.Activator;
@@ -97,17 +95,15 @@ public class Emulator extends PlatformObject implements IDeploymentTarget {
         return path;
     }
 
-    public IStatus deploy(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor)
+    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
             throws CoreException {
-        final IPackager packager = MTWCore.getDefault().getRuntimesManager().getPackager(project, runtime);
-        File application = packager.packageApplication(project, runtime, monitor);
-
-        File outputFile = new File(path);
+        final File application = packager.packageApplication(project, monitor);
+        final File outputFile = new File(path);
         if (!outputFile.isDirectory()) {
             outputFile.mkdir();
         }
 
-        File out = new File(outputFile + "/" + application.getName()); //$NON-NLS-1$
+        final File out = new File(outputFile + "/" + application.getName()); //$NON-NLS-1$
         deployWidget(application, out);
         return new Status(
                 IStatus.OK,

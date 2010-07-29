@@ -30,7 +30,6 @@ import org.eclipse.swt.program.Program;
 import org.eclipse.ui.IMemento;
 import org.symbian.tools.mtw.core.MTWCore;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.mtw.core.runtimes.IPackager;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
@@ -40,11 +39,10 @@ public class ExternalApplicationDeploymentType extends PlatformObject implements
 
     private IMTWProject project;
 
-    public IStatus deploy(IMTWProject project, IMobileWebRuntime runtime, IProgressMonitor monitor)
+    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
             throws CoreException {
         Program app = getExternalApp(project);
-        IPackager packager = MTWCore.getDefault().getRuntimesManager().getPackager(project, runtime);
-        File file = packager.packageApplication(project, runtime, monitor);
+        File file = packager.packageApplication(project, monitor);
         if (file != null) {
             app.execute(file.toString());
             return new Status(

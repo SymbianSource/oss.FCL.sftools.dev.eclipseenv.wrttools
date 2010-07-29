@@ -49,13 +49,13 @@
 
    <element name="packager">
       <complexType>
-         <attribute name="class" type="string" use="required">
+         <attribute name="delegate" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.core.runtimes.IPackager"/>
+                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.core.runtimes.IPackagerDelegate"/>
                </appinfo>
             </annotation>
          </attribute>
