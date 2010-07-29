@@ -159,6 +159,7 @@ public class DeploymentTargetWizardPage extends WizardPage {
 
     protected void doBluetoothSearch(final Button search) {
         try {
+            final ISelection sel = list.getSelection();
             getContainer().run(true, true, new IRunnableWithProgress() {
                 public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
                     monitor.beginTask("Searching for Bluetooth devices", IProgressMonitor.UNKNOWN);
@@ -171,12 +172,17 @@ public class DeploymentTargetWizardPage extends WizardPage {
                     search.getDisplay().asyncExec(new Runnable() {
                         public void run() {
                             list.setInput(context.getDeploymentTargets());
-                            ISelection selection = list.getSelection();
-                            if (selection.isEmpty()) {
-                                selectDeploymentTarget(null);
+                            if (!sel.isEmpty()) {
+                                list.setSelection(sel);
+                                selectDeploymentTarget((DeploymentTargetWrapper) ((IStructuredSelection)sel).getFirstElement());
                             } else {
-                                selectDeploymentTarget((DeploymentTargetWrapper) ((IStructuredSelection) selection)
-                                        .getFirstElement());
+                                DeploymentTargetWrapper[] deploymentTargets = context.getDeploymentTargets();
+                                if (deploymentTargets.length == 0) {
+                                    selectDeploymentTarget(null);
+                                } else {
+                                    list.setSelection(new StructuredSelection(deploymentTargets[0]));
+                                    selectDeploymentTarget(deploymentTargets[0]);
+                                }
                             }
                         }
                     });

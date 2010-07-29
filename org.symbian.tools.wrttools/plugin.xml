@@ -826,5 +826,14 @@ function updateOrientation(orientation) {
             targetRuntime="org.symbian.wrt11">
       </packager>
    </extension>
+   <extension
+         point="org.symbian.tools.mtw.ui.deploymentTargetType">
+      <deployment-target-type
+            class="org.symbian.tools.wrttools.core.deploy.emulator.EmulatorTargetType"
+            icon="icons/deploy_settings.gif"
+            id="org.symbian.tools.wrttools.symbianemulator"
+            priority="50">
+      </deployment-target-type>
+   </extension>
  
 </plugin>

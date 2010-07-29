@@ -56,11 +56,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
@@ -78,7 +75,6 @@ import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WidgetProjectNature;
-import org.symbian.tools.wrttools.core.deploy.PreferenceConstants;
 import org.symbian.tools.wrttools.core.packager.WRTPackagerConstants;
 import org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage;
 
@@ -447,33 +443,4 @@ public class ProjectUtils {
             Activator.log(e);
         }
     }
-
-    public static boolean canPackageWithErrors(final IProject project) {
-        final boolean[] flag = new boolean[1];
-        String value = Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.PACKAGE_WITH_ERRORS);
-        if (MessageDialogWithToggle.ALWAYS.equals(value)) {
-            flag[0] = true;
-        } else if (MessageDialogWithToggle.NEVER.equals(value)) {
-            flag[0] = false;
-        } else if (MessageDialogWithToggle.PROMPT.equals(value)) {
-            Display.getDefault().syncExec(new Runnable() {
-                public void run() {
-                    flag[0] = queryUser(project);
-                }
-            });
-        }
-        return flag[0];
-    }
-
-    protected static boolean queryUser(IProject project) {
-        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-        MessageDialogWithToggle dialog = MessageDialogWithToggle.openYesNoQuestion(shell, "WRT Application Packages",
-                String
-                        .format("Project %s has errors. Are you sure you want to package the project?", project
-                                .getName()), "Remember my selection", false, Activator.getDefault()
-                        .getPreferenceStore(),
-                PreferenceConstants.PACKAGE_WITH_ERRORS);
-        return dialog.getReturnCode() == IDialogConstants.YES_ID;
-    }
-
 }

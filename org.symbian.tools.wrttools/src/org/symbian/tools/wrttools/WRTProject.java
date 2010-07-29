@@ -35,16 +35,11 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.symbian.tools.mtw.core.MTWCore;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
 import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
-import org.symbian.tools.wrttools.wizards.deploy.DeploymentTarget;
 
 public class WRTProject implements IMTWProject {
-    private static final String PROP_DEPLOYMENT_TARGET_NAME = "deployment.target.name";
-
-    private static final String PROP_DEPLOYMENT_TARGET_TYPE = "deployment.target.type";
     private static final String PROP_PREFERED_SCREEN = "preferred.screen.size";
     private static final IPath PROPERTIES_FILE = new Path(".settings").append(Activator.PLUGIN_ID + ".properties");
     public static final String WRT11_RUNTIME = "org.symbian.wrt11";
@@ -125,16 +120,6 @@ public class WRTProject implements IMTWProject {
         } catch (CoreException e) {
             Activator.log(e);
         }
-    }
-
-    public void setDeploymentTarget(DeploymentTarget target) {
-        Properties props = getProps();
-        props.setProperty(PROP_DEPLOYMENT_TARGET_NAME, target.getName());
-        props.setProperty(PROP_DEPLOYMENT_TARGET_TYPE, target.getType());
-        IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-        store.setValue(PROP_DEPLOYMENT_TARGET_NAME, target.getName());
-        store.setValue(PROP_DEPLOYMENT_TARGET_TYPE, target.getType());
-        saveProperties(props);
     }
 
     public void setPreferredScreenSize(String screenSize) {

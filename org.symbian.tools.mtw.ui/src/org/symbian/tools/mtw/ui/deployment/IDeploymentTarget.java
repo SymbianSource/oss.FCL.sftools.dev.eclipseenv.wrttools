@@ -42,6 +42,8 @@ import org.symbian.tools.mtw.core.runtimes.IMobileWebRuntime;
  * {@link org.eclipse.ui.model.IWorkbenchAdapter2} to customize target 
  * presentation in IDE user interface.</li></ul>
  * 
+ * <p>Overwriting <code>equals</code> and <code>hashCode</code> might be desirable 
+ * if new objects are created each time user does discovery process.</p>
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IDeploymentTarget extends IAdaptable {

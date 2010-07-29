@@ -142,6 +142,11 @@
            id="org.symbian.tools.mtw.bluetooth"
            priority="10">
      </deployment-target-type>
+     <deployment-target-type
+           class="org.symbian.tools.mtw.internal.deployment.externalapp.ExternalApplicationDeploymentType"
+           id="org.symbian.tools.mtw.ui.externalApp"
+           priority="1000">
+     </deployment-target-type>
   </extension>
   <extension
         point="org.eclipse.core.runtime.adapters">
@@ -153,6 +158,13 @@
         </adapter>
         <adapter
               type="org.eclipse.ui.model.IWorkbenchAdapter2">
+        </adapter>
+     </factory>
+     <factory
+           adaptableType="org.symbian.tools.mtw.internal.deployment.externalapp.ExternalApplicationDeploymentType"
+           class="org.symbian.tools.mtw.internal.deployment.externalapp.AdapterFactory">
+        <adapter
+              type="org.eclipse.ui.model.IWorkbenchAdapter">
         </adapter>
      </factory>
   </extension>

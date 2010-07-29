@@ -75,17 +75,24 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
     }
 
     private DeploymentTargetWrapper[] wrap(IDeploymentTarget[] targets) {
-        final DeploymentTargetWrapper[] w = new DeploymentTargetWrapper[targets.length];
-        for (int i = 0; i < targets.length; i++) {
-            final IDeploymentTarget target = targets[i];
-            DeploymentTargetWrapper wrapper = wrappers.get(target);
-            if (wrapper == null) {
-                wrapper = new DeploymentTargetWrapper(target, this);
-                wrappers.put(target, wrapper);
+        if (targets == null) {
+            return new DeploymentTargetWrapper[0];
+        } else {
+            final DeploymentTargetWrapper[] w = new DeploymentTargetWrapper[targets.length];
+            for (int i = 0; i < targets.length; i++) {
+                w[i] = wrap(targets[i]);
             }
-            w[i] = wrapper;
+            return w;
         }
-        return w;
+    }
+
+    private DeploymentTargetWrapper wrap(final IDeploymentTarget target) {
+        DeploymentTargetWrapper wrapper = wrappers.get(target);
+        if (wrapper == null) {
+            wrapper = new DeploymentTargetWrapper(target, this);
+            wrappers.put(target, wrapper);
+        }
+        return wrapper;
     }
 
     public void discoverTargets(IProgressMonitor monitor) throws CoreException {
@@ -93,7 +100,7 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
     }
 
     public IDeploymentTarget findTarget(IMTWProject project, String id) {
-        return getProvider().findTarget(project, id);
+        return wrap(getProvider().findTarget(project, id));
     }
 
     private synchronized IDeploymentTargetType getProvider() {

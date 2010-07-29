@@ -104,6 +104,7 @@ public class ProjectMemo {
                         if (child != null) {
                             target.load(child);
                         }
+                        return target;
                     }
                 }
             }
