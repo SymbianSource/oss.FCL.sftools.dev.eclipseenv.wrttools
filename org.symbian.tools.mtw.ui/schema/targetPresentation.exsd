@@ -17,6 +17,9 @@
          </appinfo>
       </annotation>
       <complexType>
+         <sequence>
+            <element ref="targetPresentation"/>
+         </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -46,13 +49,13 @@
 
    <element name="targetPresentation">
       <complexType>
-         <attribute name="targetId" type="string" use="required">
+         <attribute name="targetTypeId" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="identifier" basedOn="org.symbian.tools.mtw.core.runtimes/runtime/@id"/>
+                  <meta.attribute kind="identifier" basedOn="org.symbian.tools.mtw.ui.deploymentTargetType/deployment-target-type/@id"/>
                </appinfo>
             </annotation>
          </attribute>

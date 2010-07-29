@@ -76,6 +76,13 @@
                </appinfo>
             </annotation>
          </attribute>
+         <attribute name="long-running" type="boolean">
+            <annotation>
+               <documentation>
+                  Set to true if the deployment process is time-consuming and should be ran as an asynchroneous job.
+               </documentation>
+            </annotation>
+         </attribute>
          <attribute name="priority" type="string">
             <annotation>
                <documentation>

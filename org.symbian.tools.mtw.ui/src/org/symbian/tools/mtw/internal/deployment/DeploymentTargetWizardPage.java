@@ -21,7 +21,9 @@ package org.symbian.tools.mtw.internal.deployment;
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -53,19 +55,22 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.PageBook;
+import org.symbian.tools.mtw.core.MTWCore;
+import org.symbian.tools.mtw.core.runtimes.IPackager;
 import org.symbian.tools.mtw.ui.MTWCoreUI;
 import org.symbian.tools.mtw.ui.ProjectMemo;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 import org.symbian.tools.mtw.ui.deployment.ITargetDetailsPane;
 
-public class DeploymentTargetWizardPage extends WizardPage {
+public class DeploymentTargetWizardPage extends WizardPage implements ITargetDetailsPane.Context {
     private final DeployWizardContext context;
-    private TableViewer list;
-    private final IDeploymentTarget prev;
     private PageBook descriptions;
-    private final Map<IDeploymentTargetType, ITargetDetailsPane> panes = new HashMap<IDeploymentTargetType, ITargetDetailsPane>();
     private Control emptyness;
+    private final Set<IDeploymentTarget> inited = new HashSet<IDeploymentTarget>();
+    private TableViewer list;
+    private final Map<IDeploymentTargetType, ITargetDetailsPane> panes = new HashMap<IDeploymentTargetType, ITargetDetailsPane>();
+    private final IDeploymentTarget prev;
 
     public DeploymentTargetWizardPage(DeployWizardContext context, ProjectMemo memo) {
         super("TargetPage", "Select Deployment Target", null);
@@ -123,7 +128,7 @@ public class DeploymentTargetWizardPage extends WizardPage {
         data.left = new FormAttachment(0, 5);
         data.right = new FormAttachment(100, -5);
         data.bottom = new FormAttachment(100, -5);
-        data.height = 50;
+        data.height = 80;
         descriptions.setLayoutData(data);
 
         data = new FormData();
@@ -138,23 +143,13 @@ public class DeploymentTargetWizardPage extends WizardPage {
         data.right = new FormAttachment(search, -10);
 
         list.getControl().setLayoutData(data);
-
         list.setInput(context.getDeploymentTargets());
-
         setPageComplete(false);
+
         if (prev != null) {
             list.setSelection(new StructuredSelection(prev));
         }
-
-        if (!context.areTargetsReady()) {
-            setMessage("Press \"Discover\" to find more deployment targets", IStatus.WARNING);
-        }
-
         setControl(root);
-    }
-
-    protected void toggleLogging(boolean logging) {
-        context.setLogging(logging);
     }
 
     protected void doBluetoothSearch(final Button search) {
@@ -174,7 +169,8 @@ public class DeploymentTargetWizardPage extends WizardPage {
                             list.setInput(context.getDeploymentTargets());
                             if (!sel.isEmpty()) {
                                 list.setSelection(sel);
-                                selectDeploymentTarget((DeploymentTargetWrapper) ((IStructuredSelection)sel).getFirstElement());
+                                selectDeploymentTarget((DeploymentTargetWrapper) ((IStructuredSelection) sel)
+                                        .getFirstElement());
                             } else {
                                 DeploymentTargetWrapper[] deploymentTargets = context.getDeploymentTargets();
                                 if (deploymentTargets.length == 0) {
@@ -195,12 +191,18 @@ public class DeploymentTargetWizardPage extends WizardPage {
         }
     }
 
+    private IPackager getPackager() {
+        return MTWCore.getDefault().getRuntimesManager().getPackager(context.getProject());
+    }
+
     protected void selectDeploymentTarget(DeploymentTargetWrapper target) {
         if (target != null) {
+            if (!inited.contains(target)) {
+                target.init(context.getProject(), getPackager(),
+                        MTWCoreUI.getMemo(context.getProject()).getMemo(target.getType().getId(), target));
+                inited.add(target);
+            }
             context.setTarget(target);
-            setMessage(null);
-            setErrorMessage(null);
-            setPageComplete(true);
 
             IDeploymentTargetType type = target.getType();
             ITargetDetailsPane pane = panes.get(type);
@@ -217,8 +219,30 @@ public class DeploymentTargetWizardPage extends WizardPage {
             context.setTarget(null);
             setPageComplete(false);
             setMessage(null);
-            setErrorMessage("Select device or emulator to deploy the application");
         }
+        revalidate();
+    }
+
+    protected void toggleLogging(boolean logging) {
+        context.setLogging(logging);
+    }
+
+    public void revalidate() {
+        String error = null;
+        String warning = !context.areTargetsReady() ? "Press \"Discover\" to find more deployment targets" : null;
+        if (context.getTarget() == null) {
+            error = "Select device or emulator to deploy the application";
+        } else {
+            final IStatus validate = panes.get(context.getTarget().getType()).validate();
+            if (validate.getSeverity() == IStatus.ERROR) {
+                error = validate.getMessage();
+            } else if (validate.getSeverity() == IStatus.WARNING) {
+                warning = validate.getMessage();
+            }
+        }
+        setErrorMessage(error);
+        setMessage(warning, IStatus.WARNING);
+        setPageComplete(error == null);
     }
 
 }

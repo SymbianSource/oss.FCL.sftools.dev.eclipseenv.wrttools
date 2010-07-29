@@ -30,7 +30,6 @@ import org.eclipse.ui.model.IWorkbenchAdapter2;
 import org.symbian.tools.mtw.core.projects.IMTWProject;
 import org.symbian.tools.mtw.core.runtimes.IPackager;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
-import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
 public class DeploymentTargetWrapper implements IDeploymentTarget {
     public class WorkbenchAdapter2Wrapper implements IWorkbenchAdapter2 {
@@ -76,8 +75,17 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
             return adapter.getParent(((DeploymentTargetWrapper) o).getActualTarget());
         }
     }
-    final DeploymentTargetTypeDescriptor type;
+
+    private final DeploymentTargetTypeDescriptor type;
     private final IDeploymentTarget target;
+
+    public void save(IMemento memento) {
+        target.save(memento);
+    }
+
+    public void init(IMTWProject project, IPackager packager, IMemento memento) {
+        target.init(project, packager, memento);
+    }
 
     public DeploymentTargetWrapper(IDeploymentTarget target, DeploymentTargetTypeDescriptor type) {
         this.target = target;
@@ -146,15 +154,7 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
         return result;
     }
 
-    public void save(IMemento child) {
-        target.save(child);
-    }
-
-    public void load(IMemento child) {
-        target.load(child);
-    }
-
-    public IDeploymentTargetType getType() {
+    public DeploymentTargetTypeDescriptor getType() {
         return type;
     }
 

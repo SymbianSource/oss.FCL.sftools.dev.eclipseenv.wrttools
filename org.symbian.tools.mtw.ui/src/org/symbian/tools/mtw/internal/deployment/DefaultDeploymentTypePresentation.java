@@ -18,7 +18,8 @@
  */
 package org.symbian.tools.mtw.internal.deployment;
 
-import org.eclipse.jface.wizard.IWizardPage;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -29,7 +30,7 @@ import org.symbian.tools.mtw.ui.deployment.ITargetDetailsPane;
 public class DefaultDeploymentTypePresentation implements ITargetDetailsPane {
     private Text text;
 
-    public void init(IWizardPage page) {
+    public void init(Context page) {
     }
 
     public void setTarget(IDeploymentTarget target) {
@@ -42,5 +43,9 @@ public class DefaultDeploymentTypePresentation implements ITargetDetailsPane {
 
     public Control getControl() {
         return text;
+    }
+
+    public IStatus validate() {
+        return Status.OK_STATUS;
     }
 }

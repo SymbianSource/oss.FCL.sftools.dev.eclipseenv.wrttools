@@ -83,8 +83,7 @@ public interface IDeploymentTarget extends IAdaptable {
     void save(IMemento memento);
 
     /**
-     * Restore project-specific deployment settings. Target should be reset to 
-     * default state if its state cannot be restored.
+     * Initialize target for project deployment.
      */
-    void load(IMemento memento);
+    void init(IMTWProject project, IPackager packager, IMemento memento);
 }

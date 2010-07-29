@@ -36,7 +36,7 @@ import org.symbian.tools.mtw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType;
 
 public class ProjectMemo {
-    private static final String DEPLOYMENT_PROVIDER = "providerId";
+    private static final String TARGET_TYPE = "typeId";
     private static final String TARGET = "targetId";
     private static final String TARGET_CONFIGURATION = "target";
     private static final String MEMO_TYPE = "deployment";
@@ -51,9 +51,21 @@ public class ProjectMemo {
     public synchronized void setDeploymentTarget(String providerId, IDeploymentTarget target) {
         try {
             checkMemento();
-            memento.putString(DEPLOYMENT_PROVIDER, providerId);
+            memento.putString(TARGET_TYPE, providerId);
             memento.putString(TARGET, target.getId());
-            final IMemento child = memento.createChild(TARGET_CONFIGURATION);
+            IMemento child = null;
+            IMemento[] children = memento.getChildren(TARGET_CONFIGURATION);
+            for (IMemento memento : children) {
+                if (providerId.equals(memento.getString(TARGET_TYPE))
+                        && target.getId().equals(memento.getString(TARGET))) {
+                    child = memento;
+                }
+            }
+            if (child == null) {
+                child = memento.createChild(TARGET_CONFIGURATION);
+                child.putString(TARGET_TYPE, providerId);
+                child.putString(TARGET, target.getId());
+            }
             target.save(child);
             saveMemento();
         } catch (CoreException e) {
@@ -93,17 +105,13 @@ public class ProjectMemo {
     public IDeploymentTarget getPreviousDeploymentTarget() {
         try {
             checkMemento();
-            String type = memento.getString(DEPLOYMENT_PROVIDER);
+            String type = memento.getString(TARGET_TYPE);
             if (type != null) {
                 final IDeploymentTargetType provider = MTWCoreUI.getDefault().getDeploymentTypesRegistry()
                         .getType(type);
                 if (provider != null) {
                     IDeploymentTarget target = provider.findTarget(project, memento.getString(TARGET));
                     if (target != null) {
-                        IMemento child = memento.getChild(TARGET_CONFIGURATION);
-                        if (child != null) {
-                            target.load(child);
-                        }
                         return target;
                     }
                 }
@@ -112,6 +120,19 @@ public class ProjectMemo {
             MTWCoreUI.log(e);
         } catch (IOException e) {
             MTWCoreUI.log(e);
+        }
+        return null;
+    }
+
+    public IMemento getMemo(String targetType, IDeploymentTarget target) {
+        if (memento != null) {
+            IMemento[] children = memento.getChildren(TARGET_CONFIGURATION);
+            for (IMemento memento : children) {
+                if (targetType.equals(memento.getString(TARGET_TYPE))
+                        && target.getId().equals(memento.getString(TARGET))) {
+                    return memento;
+                }
+            }
         }
         return null;
     }

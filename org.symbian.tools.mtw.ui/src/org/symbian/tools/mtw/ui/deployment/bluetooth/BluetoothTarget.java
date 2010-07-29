@@ -45,6 +45,7 @@ import javax.obex.ResponseCodes;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
@@ -70,8 +71,9 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         this.provider = provider;
     }
 
-    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
-            throws CoreException {
+    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException {
+        message = "Deployment was successful. Please follow on-screen instructions to complete application deployment on your device.";
+        statuses.clear();
         monitor.beginTask(String.format("Deploying application %s to %s", project.getName(), name),
                 IProgressMonitor.UNKNOWN);
         final File application = packager.packageApplication(project, new SubProgressMonitor(monitor, 100));
@@ -81,7 +83,11 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
             application.delete();
         }
         monitor.done();
-        return new Status(IStatus.OK, MTWCore.PLUGIN_ID, message);
+        MultiStatus multiStatus = new MultiStatus(MTWCore.PLUGIN_ID, 0, message, null);
+        for (IStatus status : statuses) {
+            multiStatus.add(status);
+        }
+        return multiStatus;
     }
 
     private void deployWidget(File inputWidget, String fileType, IProgressMonitor progressMonitor) throws CoreException {
@@ -292,13 +298,12 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         return serviceURL;
     }
 
-    public void load(IMemento memento) {
+    public void init(IMTWProject project, IPackager packager, IMemento memento) {
         // nothing
     }
 
     public void save(IMemento memento) {
         // nothing
-
     }
 
     public void setAddress(RemoteDevice device) {

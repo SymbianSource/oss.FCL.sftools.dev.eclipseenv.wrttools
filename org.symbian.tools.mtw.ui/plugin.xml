@@ -140,12 +140,19 @@
            class="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothTargetType"
            icon="icons/full/obj16/bluetooth.gif"
            id="org.symbian.tools.mtw.bluetooth"
+           long-running="true"
            priority="10">
      </deployment-target-type>
      <deployment-target-type
-           class="org.symbian.tools.mtw.internal.deployment.externalapp.ExternalApplicationDeploymentType"
-           id="org.symbian.tools.mtw.ui.externalApp"
+           class="org.symbian.tools.mtw.internal.deployment.targets.ExternalApplicationDeploymentType"
+           id="org.symbian.tools.mtw.externalApp"
            priority="1000">
+     </deployment-target-type>
+     <deployment-target-type
+           class="org.symbian.tools.mtw.internal.deployment.targets.FilesystemDeploymentTarget"
+           icon="icons/full/obj16/folder.gif"
+           id="org.symbian.tools.mtw.fileSystem"
+           priority="900">
      </deployment-target-type>
   </extension>
   <extension
@@ -161,12 +168,19 @@
         </adapter>
      </factory>
      <factory
-           adaptableType="org.symbian.tools.mtw.internal.deployment.externalapp.ExternalApplicationDeploymentType"
-           class="org.symbian.tools.mtw.internal.deployment.externalapp.AdapterFactory">
+           adaptableType="org.symbian.tools.mtw.internal.deployment.targets.ExternalApplicationDeploymentType"
+           class="org.symbian.tools.mtw.internal.deployment.targets.AdapterFactory">
         <adapter
               type="org.eclipse.ui.model.IWorkbenchAdapter">
         </adapter>
      </factory>
+  </extension>
+  <extension
+        point="org.symbian.tools.mtw.ui.targetPresentation">
+     <targetPresentation
+           detailsPane="org.symbian.tools.mtw.internal.deployment.targets.LocalFileSystemPane"
+           targetTypeId="org.symbian.tools.mtw.fileSystem">
+     </targetPresentation>
   </extension>
 
 </plugin>

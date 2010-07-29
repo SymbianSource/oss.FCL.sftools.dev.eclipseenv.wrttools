@@ -42,7 +42,7 @@ public class TargetWorkbenchAdapter implements IWorkbenchAdapter, IWorkbenchAdap
     }
 
     public ImageDescriptor getImageDescriptor(Object object) {
-        return this.deploymentTargetWrapper.type.getImageDescriptor();
+        return this.deploymentTargetWrapper.getType().getImageDescriptor();
     }
 
     public RGB getForeground(Object element) {

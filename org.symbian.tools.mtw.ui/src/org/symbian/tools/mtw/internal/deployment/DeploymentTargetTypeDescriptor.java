@@ -167,6 +167,9 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
         if (obj == null) {
             return false;
         }
+        if (obj instanceof IDeploymentTargetType) {
+            return obj.equals(type);
+        }
         if (getClass() != obj.getClass()) {
             return false;
         }
@@ -181,4 +184,7 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
         return true;
     }
 
+    public boolean isLongRunning() {
+        return Boolean.valueOf(element.getAttribute("long-running"));
+    }
 }

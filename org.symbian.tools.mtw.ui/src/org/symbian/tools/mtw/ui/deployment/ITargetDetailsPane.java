@@ -18,7 +18,7 @@
  */
 package org.symbian.tools.mtw.ui.deployment;
 
-import org.eclipse.jface.wizard.IWizardPage;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
@@ -32,11 +32,12 @@ import org.eclipse.swt.widgets.Control;
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface ITargetDetailsPane {
-    void init(IWizardPage page);
-
+    interface Context {
+        void revalidate();
+    }
+    void init(Context page);
     void setTarget(IDeploymentTarget target);
-
     void createControl(Composite parent);
-
     Control getControl();
+    IStatus validate();
 }

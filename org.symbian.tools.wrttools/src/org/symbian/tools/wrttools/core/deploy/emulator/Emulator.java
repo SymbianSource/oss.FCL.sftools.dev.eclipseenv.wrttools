@@ -115,7 +115,7 @@ public class Emulator extends PlatformObject implements IDeploymentTarget {
         // Do nothing
     }
 
-    public void load(IMemento memento) {
+    public void init(IMTWProject project, IPackager packager, IMemento memento) {
         // Do nothing
     }
 

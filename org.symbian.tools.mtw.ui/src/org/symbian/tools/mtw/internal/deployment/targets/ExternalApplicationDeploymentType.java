@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.mtw.internal.deployment.externalapp;
+package org.symbian.tools.mtw.internal.deployment.targets;
 
 import java.io.File;
 
@@ -104,7 +104,7 @@ public class ExternalApplicationDeploymentType extends PlatformObject implements
         }
     }
 
-    public void load(IMemento memento) {
+    public void init(IMTWProject project, IPackager packager, IMemento memento) {
         // Do nothing
     }
 

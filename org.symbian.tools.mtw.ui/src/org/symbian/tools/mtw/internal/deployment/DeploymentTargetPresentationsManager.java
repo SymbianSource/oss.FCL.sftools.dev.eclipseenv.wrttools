@@ -34,7 +34,7 @@ public class DeploymentTargetPresentationsManager {
     public ITargetDetailsPane createDetailsPane(IDeploymentTargetType targetType) {
         readRegistry();
         final IConfigurationElement element = presentations.get(targetType);
-        if (element != null && element.getAttribute("detailsPane") == null) {
+        if (element != null && element.getAttribute("detailsPane") != null) {
             try {
                 return (ITargetDetailsPane) element.createExecutableExtension("detailsPane");
             } catch (CoreException e) {
@@ -50,7 +50,7 @@ public class DeploymentTargetPresentationsManager {
             final IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
                     MTWCoreUI.PLUGIN_ID, "targetPresentation");
             for (IConfigurationElement element : elements) {
-                final String runtimeId = element.getAttribute("targetId");
+                final String runtimeId = element.getAttribute("targetTypeId");
                 final IDeploymentTargetType targetType = MTWCoreUI.getDefault().getDeploymentTypesRegistry()
                         .getType(runtimeId);
                 if (targetType == null) {

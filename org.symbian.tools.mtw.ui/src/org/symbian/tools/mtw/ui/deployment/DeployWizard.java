@@ -18,12 +18,15 @@
  */
 package org.symbian.tools.mtw.ui.deployment;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.MultiRule;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.symbian.tools.mtw.core.MTWCore;
@@ -35,7 +38,7 @@ import org.symbian.tools.mtw.internal.deployment.DeploymentTargetWrapper;
 import org.symbian.tools.mtw.ui.MTWCoreUI;
 import org.symbian.tools.mtw.ui.ProjectMemo;
 
-public class DeployWizard extends Wizard {
+public final class DeployWizard extends Wizard {
     private final DeployWizardContext context;
     private final IMTWProject project;
 
@@ -53,7 +56,34 @@ public class DeployWizard extends Wizard {
 
     @Override
     public boolean performFinish() {
-        return deploy();
+        final DeploymentTargetWrapper target = context.getTarget();
+        if (target.getType().isLongRunning()) {
+            DeployJob job = new DeployJob(context.getProject(), target);
+            job.schedule();
+            return true;
+        } else {
+            final IStatus[] retval = new IStatus[1];
+            try {
+                getContainer().run(false, true, new IRunnableWithProgress() {
+                    public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+                        retval[0] = doDeploy(target, context.getProject(), monitor);
+                    }
+                });
+            } catch (InvocationTargetException e) {
+                MTWCoreUI.log(e);
+            } catch (InterruptedException e) {
+                MTWCoreUI.log(e);
+            }
+            switch (retval[0].getSeverity()) {
+            case IStatus.ERROR:
+                StatusManager.getManager().handle(retval[0], StatusManager.SHOW | StatusManager.BLOCK);
+                return false;
+            case IStatus.WARNING:
+                StatusManager.getManager().handle(retval[0], StatusManager.SHOW | StatusManager.BLOCK);
+            default:
+                return true;
+            }
+        }
     }
 
     @Override
@@ -61,14 +91,17 @@ public class DeployWizard extends Wizard {
         return false;
     }
 
-    /**
-     * deploys the actual widget.
-     */
-    private boolean deploy() {
-        DeploymentTargetWrapper target = context.getTarget();
-        DeployJob job = new DeployJob(context.getProject(), target);
-        job.schedule();
-        return true;
+    private IStatus doDeploy(DeploymentTargetWrapper target, IMTWProject project, IProgressMonitor monitor) {
+        IStatus status;
+        try {
+            IPackager packager = MTWCore.getDefault().getRuntimesManager().getPackager(project);
+            status = target.deploy(project, packager, monitor);
+        } catch (CoreException e) {
+            status = e.getStatus();
+        }
+        ProjectMemo memo = MTWCoreUI.getMemo(project);
+        memo.setDeploymentTarget(target.getProviderId(), target);
+        return status;
     }
 
     private final class DeployJob extends Job {
@@ -90,18 +123,10 @@ public class DeployWizard extends Wizard {
         }
 
         public IStatus run(IProgressMonitor monitor) {
-            IStatus status;
-            try {
-                IPackager packager = MTWCore.getDefault().getRuntimesManager().getPackager(project);
-                status = target.deploy(project, packager, monitor);
-            } catch (CoreException e) {
-                status = e.getStatus();
-            }
+            final IStatus status = doDeploy(target, project, monitor);
             if (status.getSeverity() != IStatus.ERROR && status.getSeverity() != IStatus.WARNING) {
                 StatusManager.getManager().handle(status, StatusManager.SHOW);
             }
-            ProjectMemo memo = MTWCoreUI.getMemo(project);
-            memo.setDeploymentTarget(target.getProviderId(), target);
             return status;
         }
 
