@@ -22,8 +22,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.eclipse.core.resources.IProject;
-import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.projects.IMTWProjectProvider;
+import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.IMTWProjectProvider;
 import org.symbian.tools.wrttools.WRTProject;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 

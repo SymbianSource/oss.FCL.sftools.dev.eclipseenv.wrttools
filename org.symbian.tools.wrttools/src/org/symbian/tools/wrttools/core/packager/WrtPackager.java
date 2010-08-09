@@ -29,9 +29,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.symbian.tools.mtw.core.projects.IMTWProject;
-import org.symbian.tools.mtw.core.runtimes.IPackagerDelegate;
-import org.symbian.tools.mtw.core.utilities.ZipApplicationVisitor;
+import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.runtimes.IPackagerDelegate;
+import org.symbian.tools.tmw.core.utilities.ZipApplicationVisitor;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 

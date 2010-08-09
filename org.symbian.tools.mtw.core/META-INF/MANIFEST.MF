@@ -1,17 +1,19 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Mobile Tools for Web Core Plug-in
-Bundle-SymbolicName: org.symbian.tools.mtw.core;singleton:=true
+Bundle-SymbolicName: org.symbian.tools.tmw.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.symbian.tools.mtw.core.MTWCore
+Bundle-Activator: org.symbian.tools.tmw.core.TMWCore
 Bundle-Vendor: Symbian Foundation
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.6.0",
- org.eclipse.core.expressions;bundle-version="3.4.200"
+ org.eclipse.core.expressions;bundle-version="3.4.200",
+ org.eclipse.wst.common.project.facet.core;bundle-version="1.4.100",
+ org.eclipse.wst.jsdt.core;bundle-version="1.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.symbian.tools.mtw.core,
- org.symbian.tools.mtw.core.projects,
- org.symbian.tools.mtw.core.runtimes,
- org.symbian.tools.mtw.core.utilities
+Export-Package: org.symbian.tools.tmw.core,
+ org.symbian.tools.tmw.core.projects,
+ org.symbian.tools.tmw.core.runtimes,
+ org.symbian.tools.tmw.core.utilities

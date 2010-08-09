@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.symbian.tools.mtw.core" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.symbian.tools.tmw.core" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.symbian.tools.mtw.core" id="projectProvider" name="Project provider"/>
+         <meta.schema plugin="org.symbian.tools.tmw.core" id="projectProvider" name="Project provider"/>
       </appinfo>
       <documentation>
          These providers enables extension providers to add support for a different project models (i.e. coming from other IDEs). MTW will not provide facilities for creating, converting and configuring non-MTW projects. MTW will only ensure that most features (like deployment and debugging) are available to those projects.
@@ -60,7 +60,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.core.projects.IMTWProjectProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.symbian.tools.tmw.core.projects.IMTWProjectProvider"/>
                </appinfo>
             </annotation>
          </attribute>

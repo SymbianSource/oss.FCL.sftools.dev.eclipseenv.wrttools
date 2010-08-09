@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.symbian.tools.mtw.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.symbian.tools.tmw.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.symbian.tools.mtw.ui" id="deploymentTargetType" name="Provides targets for project deployments"/>
+         <meta.schema plugin="org.symbian.tools.tmw.ui" id="deploymentTargetType" name="Provides targets for project deployments"/>
       </appinfo>
       <documentation>
          MTW extenders can provide deployment targets - these include bluetooth devices, device emulators etc.
@@ -62,7 +62,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.ui.deployment.IDeploymentTargetType"/>
+                  <meta.attribute kind="java" basedOn=":org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType"/>
                </appinfo>
             </annotation>
          </attribute>

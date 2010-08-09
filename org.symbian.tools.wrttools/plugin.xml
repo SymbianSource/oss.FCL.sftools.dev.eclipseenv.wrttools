@@ -28,7 +28,6 @@
 <!-- Web Runtime Preferences --> 
  <extension
     point="org.eclipse.core.runtime.preferences">
-    <initializer class="org.symbian.tools.wrttools.core.deploy.PreferenceInitializer"/>
     <initializer
           class="org.symbian.tools.wrttools.core.WrtIdeCorePreferences">
     </initializer>
@@ -420,45 +419,6 @@
     </menuContribution>
  </extension>
  <extension
-       point="org.eclipse.core.expressions.definitions">
-    <definition
-          id="org.symbian.tools.wrttools.symbianproject">
-          <or>
-             <with
-                   variable="selection">
-                <and>
-                   <count
-                         value="1">
-                   </count>
-                   <iterate>
-                      <adapt
-                            type="org.eclipse.core.resources.IResource">
-                         <test
-                               property="org.eclipse.core.resources.projectNature"
-                               value="org.symbian.tools.wrttools.WidgetProjectNature">
-                         </test>
-                      </adapt>
-                   </iterate>
-                </and>
-             </with>
-             <and>
-                <with
-                      variable="activePart">
-                   <instanceof
-                         value="org.eclipse.ui.IEditorPart">
-                   </instanceof>
-                </with>
-                <with
-                      variable="activeEditorInput">
-                   <adapt
-                         type="org.eclipse.core.resources.IResource">
-                   </adapt>
-                </with>
-             </and>
-          </or>
-    </definition>
- </extension>
- <extension
        point="org.eclipse.ui.decorators">
     <decorator
           adaptable="true"
@@ -798,7 +758,7 @@ function updateOrientation(orientation) {
     </category>
  </extension>
  <extension
-       point="org.symbian.tools.mtw.core.projectProvider">
+       point="org.symbian.tools.tmw.core.projectProvider">
     <projectProvider
           class="org.symbian.tools.wrttools.core.project.WRTIDEProjectProvider">
        <enablement>
@@ -813,27 +773,70 @@ function updateOrientation(orientation) {
     </projectProvider>
  </extension>
    <extension
-        point="org.symbian.tools.mtw.core.runtimes">
+        point="org.symbian.tools.tmw.core.runtimes">
      <runtime
-           id="org.symbian.wrt11"
+           component-id="org.symbian.tools.wrttools.wrt"
+           component-version="1.1"
            name="Symbian WRT 1.1">
+        <runtime-component
+              id="tmw.geolocation"
+              version="1.0">
+        </runtime-component>
      </runtime>
   </extension>
    <extension
-         point="org.symbian.tools.mtw.core.packagers">
+         point="org.symbian.tools.tmw.core.packagers">
       <packager
             delegate="org.symbian.tools.wrttools.core.packager.WrtPackager"
-            targetRuntime="org.symbian.wrt11">
+            target-runtime="org.symbian.tools.wrttools.wrt"
+            target-runtime-version="1.1">
       </packager>
    </extension>
    <extension
-         point="org.symbian.tools.mtw.ui.deploymentTargetType">
+         point="org.symbian.tools.tmw.ui.deploymentTargetType">
       <deployment-target-type
             class="org.symbian.tools.wrttools.core.deploy.emulator.EmulatorTargetType"
             icon="icons/deploy_settings.gif"
             id="org.symbian.tools.wrttools.symbianemulator"
             priority="50">
       </deployment-target-type>
+   </extension>
+   <extension
+         point="org.eclipse.wst.common.project.facet.core.runtimes">
+      <runtime-component-type
+            id="org.symbian.tools.wrttools.wrt">
+      </runtime-component-type>
+      <runtime-component-version
+            type="org.symbian.tools.wrttools.wrt"
+            version="1.1">
+      </runtime-component-version>
+   </extension>
+   <extension
+         point="org.eclipse.wst.common.project.facet.ui.images">
+      <image
+            path="icons/main16_prev.gif"
+            runtime-component-type="org.symbian.tools.wrttools.wrt"
+            version="1.0">
+      </image>
+   </extension>
+   <extension
+         point="org.symbian.tools.tmw.core.runtimeIncludePath">
+      <runtime-include-path
+            id="org.symbian.tools.wrttools.wrt"
+            version="1.1">
+         <include-path-entry
+               file="libraries/core/widget.js"
+               name="WRT 1.1 Widget API">
+         </include-path-entry>
+         <include-path-entry
+               file="libraries/core/services.js"
+               name="WRT 1.1 Services API">
+         </include-path-entry>
+         <include-path-entry
+               file="libraries/core/menu.js"
+               name="WRT 1.1 Menu API">
+         </include-path-entry>
+      </runtime-include-path>
    </extension>
  
 </plugin>

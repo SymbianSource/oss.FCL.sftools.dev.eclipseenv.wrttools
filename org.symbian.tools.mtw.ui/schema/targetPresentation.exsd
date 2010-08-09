@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.symbian.tools.mtw.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.symbian.tools.tmw.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.symbian.tools.mtw.ui" id="targetPresentation" name="Deployment Target Presentation"/>
+         <meta.schema plugin="org.symbian.tools.tmw.ui" id="targetPresentation" name="Deployment Target Presentation"/>
       </appinfo>
       <documentation>
          Provides UI extensions to customize deployment target presentation.
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="identifier" basedOn="org.symbian.tools.mtw.ui.deploymentTargetType/deployment-target-type/@id"/>
+                  <meta.attribute kind="identifier" basedOn="org.symbian.tools.tmw.ui.deploymentTargetType/deployment-target-type/@id"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -65,7 +65,7 @@
                   Details pane that will show information about selected deployment target. This pane is limited in height.
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.symbian.tools.mtw.ui.deployment.ITargetDetailsPane"/>
+                  <meta.attribute kind="java" basedOn=":org.symbian.tools.tmw.ui.deployment.ITargetDetailsPane"/>
                </appinfo>
             </annotation>
          </attribute>

@@ -102,7 +102,7 @@
 		     </enablement>
 		  </commonWizard>
     <actionProvider
-          class="org.symbian.tools.mtw.ui.navigator.RenameMoveActionProvider"
+          class="org.symbian.tools.tmw.ui.navigator.RenameMoveActionProvider"
           id="org.symbian.mtw.ui.navigator.MoveRename"
           overrides="org.eclipse.wst.jsdt.ui.navigator.actions.RefactorActions"
           priority="highest">
@@ -125,31 +125,31 @@
   <extension
         point="org.eclipse.ui.handlers">
     <handler
-          class="org.symbian.tools.mtw.ui.commands.DeployHandler"
+          class="org.symbian.tools.tmw.ui.commands.DeployHandler"
           commandId="org.symbian.tools.wrttools.commands.deploy">
        <enabledWhen>
           <reference
-                definitionId="org.symbian.tools.wrttools.symbianproject">
+                definitionId="org.symbian.tools.tmwprojectselected">
           </reference>
        </enabledWhen>
     </handler>
   </extension>
   <extension
-        point="org.symbian.tools.mtw.ui.deploymentTargetType">
+        point="org.symbian.tools.tmw.ui.deploymentTargetType">
      <deployment-target-type
-           class="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothTargetType"
+           class="org.symbian.tools.tmw.ui.deployment.bluetooth.BluetoothTargetType"
            icon="icons/full/obj16/bluetooth.gif"
            id="org.symbian.tools.mtw.bluetooth"
            long-running="true"
            priority="10">
      </deployment-target-type>
      <deployment-target-type
-           class="org.symbian.tools.mtw.internal.deployment.targets.ExternalApplicationDeploymentType"
+           class="org.symbian.tools.tmw.internal.deployment.targets.ExternalApplicationDeploymentType"
            id="org.symbian.tools.mtw.externalApp"
            priority="1000">
      </deployment-target-type>
      <deployment-target-type
-           class="org.symbian.tools.mtw.internal.deployment.targets.FilesystemDeploymentTarget"
+           class="org.symbian.tools.tmw.internal.deployment.targets.FilesystemDeploymentTarget"
            icon="icons/full/obj16/folder.gif"
            id="org.symbian.tools.mtw.fileSystem"
            priority="900">
@@ -158,8 +158,8 @@
   <extension
         point="org.eclipse.core.runtime.adapters">
      <factory
-           adaptableType="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothTarget"
-           class="org.symbian.tools.mtw.ui.deployment.bluetooth.BluetoothTargetAdapterFactory">
+           adaptableType="org.symbian.tools.tmw.ui.deployment.bluetooth.BluetoothTarget"
+           class="org.symbian.tools.tmw.ui.deployment.bluetooth.BluetoothTargetAdapterFactory">
         <adapter
               type="org.eclipse.ui.model.IWorkbenchAdapter">
         </adapter>
@@ -168,19 +168,74 @@
         </adapter>
      </factory>
      <factory
-           adaptableType="org.symbian.tools.mtw.internal.deployment.targets.ExternalApplicationDeploymentType"
-           class="org.symbian.tools.mtw.internal.deployment.targets.AdapterFactory">
+           adaptableType="org.symbian.tools.tmw.internal.deployment.targets.ExternalApplicationDeploymentType"
+           class="org.symbian.tools.tmw.internal.deployment.targets.AdapterFactory">
         <adapter
               type="org.eclipse.ui.model.IWorkbenchAdapter">
         </adapter>
      </factory>
   </extension>
   <extension
-        point="org.symbian.tools.mtw.ui.targetPresentation">
+        point="org.symbian.tools.tmw.ui.targetPresentation">
      <targetPresentation
-           detailsPane="org.symbian.tools.mtw.internal.deployment.targets.LocalFileSystemPane"
+           detailsPane="org.symbian.tools.tmw.internal.deployment.targets.LocalFileSystemPane"
            targetTypeId="org.symbian.tools.mtw.fileSystem">
      </targetPresentation>
   </extension>
-
+  <extension
+        point="org.eclipse.wst.jsdt.ui.JsGlobalScopeUIInitializer">
+     <JsGlobalScopeUIInitializer
+           class="org.symbian.tools.tmw.internal.libraries.MTWGlobalScopeContainerUI"
+           id="org.symbian.tools.tmw.core.mobileWebLibrary">
+     </JsGlobalScopeUIInitializer>
+  </extension>
+  <extension
+        point="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
+     <JsGlobalScopeContainerPage
+           class="org.symbian.tools.tmw.internal.libraries.TMWContainerPage"
+           id="org.symbian.tools.tmw.core.mobileWebLibrary"
+           name="Tools for Mobile Web">
+     </JsGlobalScopeContainerPage>
+  </extension>
+  <extension
+        point="org.eclipse.core.expressions.definitions">
+     <definition
+           id="org.symbian.tools.tmwprojectselected">
+           <or>
+              <with
+                    variable="selection">
+                 <and>
+                    <count
+                          value="1">
+                    </count>
+                    <iterate>
+                       <adapt
+                             type="org.eclipse.core.resources.IResource">
+                          <test
+                                property="org.symbian.tools.tmw.istmwproject">
+                          </test>
+                       </adapt>
+                    </iterate>
+                 </and>
+              </with>
+              <and>
+                 <with
+                       variable="activePart">
+                    <instanceof
+                          value="org.eclipse.ui.IEditorPart">
+                    </instanceof>
+                 </with>
+                 <with
+                       variable="activeEditorInput">
+                    <adapt
+                          type="org.eclipse.core.resources.IResource">
+                       <test
+                             property="org.symbian.tools.tmw.ismtwproject">
+                       </test>
+                    </adapt>
+                 </with>
+              </and>
+           </or>
+     </definition>
+  </extension>
 </plugin>
