@@ -816,7 +816,7 @@ function updateOrientation(orientation) {
       <image
             path="icons/main16_prev.gif"
             runtime-component-type="org.symbian.tools.wrttools.wrt"
-            version="1.0">
+            version="1.1">
       </image>
    </extension>
    <extension

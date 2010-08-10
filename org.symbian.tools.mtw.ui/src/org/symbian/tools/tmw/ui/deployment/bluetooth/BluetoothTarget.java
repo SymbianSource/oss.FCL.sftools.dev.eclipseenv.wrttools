@@ -76,6 +76,10 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         statuses.clear();
         monitor.beginTask(String.format("Deploying application %s to %s", project.getName(), name),
                 IProgressMonitor.UNKNOWN);
+        if (packager == null) {
+            return new Status(IStatus.ERROR, TMWCore.PLUGIN_ID, String.format(
+                    "No packager found for project %s with runtime %s", project.getName(), project.getTargetRuntime()));
+        }
         final File application = packager.packageApplication(project, new SubProgressMonitor(monitor, 100));
         try {
             deployWidget(application, packager.getFileType(project), new SubProgressMonitor(monitor, 10));
