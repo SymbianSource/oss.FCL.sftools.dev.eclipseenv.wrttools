@@ -110,7 +110,7 @@ public class RuntimeClasspathManager {
 
     public IIncludePathEntry[] getProjectClasspathEntries(IFacetedProject project) {
         collectProviders();
-        final IMTWProject p = TMWCore.getDefault().create(project.getProject());
+        final IMTWProject p = TMWCore.create(project.getProject());
         if (p != null) {
             final IMobileWebRuntime runtime = p.getTargetRuntime();
             final Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> facetToEntry;

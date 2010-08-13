@@ -3,6 +3,7 @@
 <plugin>
    <extension-point id="deploymentTargetType" name="Provides targets for project deployments" schema="schema/deploymentTargetType.exsd"/>
    <extension-point id="targetPresentation" name="Deployment Target Presentation" schema="schema/targetPresentation.exsd"/>
+   <extension-point id="projectTemplate" name="Mobile Application Project Templates" schema="schema/projectTemplate.exsd"/>
 	<!-- Navigator Extensions -->
 	<extension point="org.eclipse.ui.navigator.viewer">
 	  <viewerActionBinding
@@ -144,12 +145,12 @@
            priority="10">
      </deployment-target-type>
      <deployment-target-type
-           class="org.symbian.tools.tmw.internal.deployment.targets.ExternalApplicationDeploymentType"
+           class="org.symbian.tools.tmw.internal.ui.deployment.targets.ExternalApplicationDeploymentType"
            id="org.symbian.tools.mtw.externalApp"
            priority="1000">
      </deployment-target-type>
      <deployment-target-type
-           class="org.symbian.tools.tmw.internal.deployment.targets.FilesystemDeploymentTarget"
+           class="org.symbian.tools.tmw.internal.ui.deployment.targets.FilesystemDeploymentTarget"
            icon="icons/full/obj16/folder.gif"
            id="org.symbian.tools.mtw.fileSystem"
            priority="900">
@@ -168,8 +169,8 @@
         </adapter>
      </factory>
      <factory
-           adaptableType="org.symbian.tools.tmw.internal.deployment.targets.ExternalApplicationDeploymentType"
-           class="org.symbian.tools.tmw.internal.deployment.targets.AdapterFactory">
+           adaptableType="org.symbian.tools.tmw.internal.ui.deployment.targets.ExternalApplicationDeploymentType"
+           class="org.symbian.tools.tmw.internal.ui.deployment.targets.AdapterFactory">
         <adapter
               type="org.eclipse.ui.model.IWorkbenchAdapter">
         </adapter>
@@ -178,21 +179,21 @@
   <extension
         point="org.symbian.tools.tmw.ui.targetPresentation">
      <targetPresentation
-           detailsPane="org.symbian.tools.tmw.internal.deployment.targets.LocalFileSystemPane"
+           detailsPane="org.symbian.tools.tmw.internal.ui.deployment.targets.LocalFileSystemPane"
            targetTypeId="org.symbian.tools.mtw.fileSystem">
      </targetPresentation>
   </extension>
   <extension
         point="org.eclipse.wst.jsdt.ui.JsGlobalScopeUIInitializer">
      <JsGlobalScopeUIInitializer
-           class="org.symbian.tools.tmw.internal.libraries.MTWGlobalScopeContainerUI"
+           class="org.symbian.tools.tmw.internal.ui.libraries.TMWGlobalScopeContainerUI"
            id="org.symbian.tools.tmw.core.mobileWebLibrary">
      </JsGlobalScopeUIInitializer>
   </extension>
   <extension
         point="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
      <JsGlobalScopeContainerPage
-           class="org.symbian.tools.tmw.internal.libraries.TMWContainerPage"
+           class="org.symbian.tools.tmw.internal.ui.libraries.TMWContainerPage"
            id="org.symbian.tools.tmw.core.mobileWebLibrary"
            name="Tools for Mobile Web">
      </JsGlobalScopeContainerPage>
@@ -237,5 +238,22 @@
               </and>
            </or>
      </definition>
+  </extension>
+  <extension
+        point="org.eclipse.ui.newWizards">
+     <category
+           id="org.symbian.tools.tmw"
+           name="Tools for Mobile Web">
+     </category>
+     <wizard
+           canFinishEarly="false"
+           category="org.symbian.tools.tmw"
+           class="org.symbian.tools.tmw.internal.ui.wizard.NewApplicationWizard"
+           hasPages="true"
+           icon="icons/full/etool16/newproject.png"
+           id="org.symbian.tools.tmw.newproject"
+           name="New Mobile Web Application Project"
+           project="true">
+     </wizard>
   </extension>
 </plugin>

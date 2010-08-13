@@ -38,9 +38,9 @@ public class PackagingInformationDecorator implements ILightweightLabelDecorator
             resource = (IResource) ((IAdaptable) element).getAdapter(IResource.class);
         }
         if (resource != null && resource.isAccessible()) {
-            IMTWProject project = TMWCore.getDefault().create(resource.getProject());
+            IMTWProject project = TMWCore.create(resource.getProject());
             if (project != null) {
-                IPackager packager = TMWCore.getDefault().getRuntimesManager().getPackager(project);
+                IPackager packager = TMWCore.getRuntimesManager().getPackager(project);
                 if (packager.getPathInPackage(resource) != null) {
                     decoration.addOverlay(TMWCoreUI.getImages().getExcludedIconDescriptor(), IDecoration.TOP_RIGHT);
                 }

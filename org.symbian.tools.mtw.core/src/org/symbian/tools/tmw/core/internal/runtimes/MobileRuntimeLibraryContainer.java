@@ -40,7 +40,7 @@ public class MobileRuntimeLibraryContainer implements IJsGlobalScopeContainer {
     }
 
     public IIncludePathEntry[] getIncludepathEntries() {
-        final IMTWProject proj = TMWCore.getDefault().create(project.getProject());
+        final IMTWProject proj = TMWCore.create(project.getProject());
         if (proj != null) {
             try {
                 IFacetedProject facetedProject = ProjectFacetsManager.create(project.getProject(), false,
@@ -56,7 +56,7 @@ public class MobileRuntimeLibraryContainer implements IJsGlobalScopeContainer {
     }
 
     public String getDescription() {
-        final IMTWProject proj = TMWCore.getDefault().create(project.getProject());
+        final IMTWProject proj = TMWCore.create(project.getProject());
         if (proj != null) {
             final IMobileWebRuntime targetRuntime = proj.getTargetRuntime();
             if (targetRuntime != null) {

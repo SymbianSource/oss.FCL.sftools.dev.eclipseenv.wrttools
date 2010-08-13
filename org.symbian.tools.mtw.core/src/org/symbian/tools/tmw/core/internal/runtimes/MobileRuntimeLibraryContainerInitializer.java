@@ -98,7 +98,7 @@ public class MobileRuntimeLibraryContainerInitializer extends JsGlobalScopeConta
     }
 
     public void initialize(IPath containerPath, IJavaScriptProject project) throws CoreException {
-        if (!project.isOpen() || TMWCore.getDefault().create(project.getProject()) != null) {
+        if (!project.isOpen() || TMWCore.create(project.getProject()) != null) {
             JavaScriptCore.setJsGlobalScopeContainer(containerPath, new IJavaScriptProject[] { project },
                     new IJsGlobalScopeContainer[] { new MobileRuntimeLibraryContainer(project, containerPath) }, null);
         }

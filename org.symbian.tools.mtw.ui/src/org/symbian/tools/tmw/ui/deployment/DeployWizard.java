@@ -32,11 +32,11 @@ import org.eclipse.ui.statushandlers.StatusManager;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IMTWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
-import org.symbian.tools.tmw.internal.deployment.DeployWizardContext;
-import org.symbian.tools.tmw.internal.deployment.DeploymentTargetWizardPage;
-import org.symbian.tools.tmw.internal.deployment.DeploymentTargetWrapper;
-import org.symbian.tools.tmw.ui.TMWCoreUI;
+import org.symbian.tools.tmw.internal.ui.deployment.DeployWizardContext;
+import org.symbian.tools.tmw.internal.ui.deployment.DeploymentTargetWizardPage;
+import org.symbian.tools.tmw.internal.ui.deployment.DeploymentTargetWrapper;
 import org.symbian.tools.tmw.ui.ProjectMemo;
+import org.symbian.tools.tmw.ui.TMWCoreUI;
 
 public final class DeployWizard extends Wizard {
     private final DeployWizardContext context;
@@ -94,7 +94,7 @@ public final class DeployWizard extends Wizard {
     private IStatus doDeploy(DeploymentTargetWrapper target, IMTWProject project, IProgressMonitor monitor) {
         IStatus status;
         try {
-            IPackager packager = TMWCore.getDefault().getRuntimesManager().getPackager(project);
+            IPackager packager = TMWCore.getRuntimesManager().getPackager(project);
             status = target.deploy(project, packager, monitor);
         } catch (CoreException e) {
             status = e.getStatus();

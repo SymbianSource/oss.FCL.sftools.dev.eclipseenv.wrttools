@@ -5,9 +5,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.BundleContext;
+import org.symbian.tools.tmw.core.internal.facets.FProjSupportImpl;
 import org.symbian.tools.tmw.core.internal.projects.ProjectsSupportManager;
 import org.symbian.tools.tmw.core.internal.runtimes.RuntimeClasspathManager;
 import org.symbian.tools.tmw.core.internal.runtimes.RuntimesManagerImpl;
+import org.symbian.tools.tmw.core.projects.IFProjSupport;
 import org.symbian.tools.tmw.core.projects.IMTWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntimeManager;
 
@@ -22,15 +24,10 @@ public class TMWCore extends Plugin {
     // The shared instance
     private static TMWCore plugin;
 
+    private IFProjSupport fprojSupport;
     private IMobileWebRuntimeManager runtimesManager;
     private ProjectsSupportManager projectsSupport;
     private RuntimeClasspathManager classpathManager;
-
-    /**
-     * The constructor
-     */
-    public TMWCore() {
-    }
 
     /*
      * (non-Javadoc)
@@ -41,6 +38,7 @@ public class TMWCore extends Plugin {
         plugin = this;
         runtimesManager = new RuntimesManagerImpl();
         projectsSupport = new ProjectsSupportManager();
+        fprojSupport = new FProjSupportImpl();
         classpathManager = new RuntimeClasspathManager();
     }
 
@@ -53,16 +51,16 @@ public class TMWCore extends Plugin {
         super.stop(context);
     }
 
-    public IMobileWebRuntimeManager getRuntimesManager() {
-        return runtimesManager;
+    public static IMobileWebRuntimeManager getRuntimesManager() {
+        return getDefault().runtimesManager;
     }
 
     public RuntimeClasspathManager getClasspathManager() {
         return classpathManager;
     }
 
-    public IMTWProject create(IProject project) {
-        return projectsSupport.create(project);
+    public static IMTWProject create(IProject project) {
+        return getDefault().projectsSupport.create(project);
     }
 
     /**
@@ -80,5 +78,9 @@ public class TMWCore extends Plugin {
 
     public static void log(String message, Object... args) {
         log(String.format(message, args), (Exception) null);
+    }
+
+    public static IFProjSupport getFProjSupport() {
+        return getDefault().fprojSupport;
     }
 }

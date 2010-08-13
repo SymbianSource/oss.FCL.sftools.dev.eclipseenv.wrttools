@@ -825,18 +825,33 @@ function updateOrientation(orientation) {
             id="org.symbian.tools.wrttools.wrt"
             version="1.1">
          <include-path-entry
-               file="libraries/core/widget.js"
-               name="WRT 1.1 Widget API">
-         </include-path-entry>
+               file="libraries/core/widget.js"/>
          <include-path-entry
-               file="libraries/core/services.js"
-               name="WRT 1.1 Services API">
-         </include-path-entry>
+               file="libraries/core/services.js"/>
          <include-path-entry
-               file="libraries/core/menu.js"
-               name="WRT 1.1 Menu API">
-         </include-path-entry>
+               file="libraries/core/menu.js"/>
       </runtime-include-path>
+   </extension>
+   <extension
+         point="org.symbian.tools.tmw.ui.projectTemplate">
+      <template
+            icon="icons/flickr.gif"
+            name="Flickr Project"
+            weight="3">
+         <archive
+               file="projecttemplates/flickr.zip">
+         </archive>
+         <description>
+            This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.
+         </description>
+         <supported-runtime
+               id="org.symbian.tools.wrttools.wrt"
+               version="1.1">
+         </supported-runtime>
+         <archive
+               file="projecttemplates/flickr.zip">
+         </archive>
+      </template>
    </extension>
  
 </plugin>

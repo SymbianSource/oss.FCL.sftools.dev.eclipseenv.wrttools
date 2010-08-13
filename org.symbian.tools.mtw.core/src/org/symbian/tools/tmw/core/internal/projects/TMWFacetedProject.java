@@ -58,7 +58,7 @@ public class TMWFacetedProject implements IMTWProject {
                 final List<IRuntimeComponent> components = runtime.getRuntimeComponents();
                 if (!components.isEmpty()) {
                     final IRuntimeComponentVersion version = components.get(0).getRuntimeComponentVersion();
-                    return TMWCore.getDefault().getRuntimesManager()
+                    return TMWCore.getRuntimesManager()
                             .getRuntime(version.getRuntimeComponentType().getId(), version.getVersionString());
                 }
             }

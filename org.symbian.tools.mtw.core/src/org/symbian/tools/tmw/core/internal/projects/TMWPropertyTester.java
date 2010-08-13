@@ -32,7 +32,7 @@ public class TMWPropertyTester extends PropertyTester {
 
     private boolean isTMWProject(Object receiver) {
         if (receiver instanceof IResource) {
-            return TMWCore.getDefault().create(((IResource) receiver).getProject()) != null;
+            return TMWCore.create(((IResource) receiver).getProject()) != null;
         }
         return false;
     }

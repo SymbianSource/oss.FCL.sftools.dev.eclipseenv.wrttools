@@ -24,7 +24,7 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 public interface IMTWProject {
     /**
-     * @return primary target runtime of this project. Can never return null.
+     * @return primary target runtime of this project.
      */
     IMobileWebRuntime getTargetRuntime();
 

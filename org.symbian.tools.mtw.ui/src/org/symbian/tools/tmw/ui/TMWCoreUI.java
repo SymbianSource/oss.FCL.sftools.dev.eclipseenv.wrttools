@@ -10,8 +10,10 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.symbian.tools.tmw.core.projects.IMTWProject;
-import org.symbian.tools.tmw.internal.deployment.DeploymentTargetPresentationsManager;
-import org.symbian.tools.tmw.internal.deployment.DeploymentTargetTypesRegistry;
+import org.symbian.tools.tmw.internal.ui.deployment.DeploymentTargetPresentationsManager;
+import org.symbian.tools.tmw.internal.ui.deployment.DeploymentTargetTypesRegistry;
+import org.symbian.tools.tmw.internal.ui.project.ProjectTemplateManagerImpl;
+import org.symbian.tools.tmw.ui.project.IProjectTemplateManager;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -25,33 +27,21 @@ public class TMWCoreUI extends AbstractUIPlugin {
 
     // The shared instance
     private static TMWCoreUI plugin;
+    private IProjectTemplateManager projectTemplateManager;
     private Images images;
     private final DeploymentTargetPresentationsManager presentations = new DeploymentTargetPresentationsManager();
-
-    /**
-     * The constructor
-     */
-    public TMWCoreUI() {
-    }
 
     @Override
     protected void initializeImageRegistry(ImageRegistry reg) {
         super.initializeImageRegistry(reg);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-     */
     public void start(BundleContext context) throws Exception {
         super.start(context);
+        projectTemplateManager = new ProjectTemplateManagerImpl();
         plugin = this;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-     */
     public void stop(BundleContext context) throws Exception {
         plugin = null;
         super.stop(context);
@@ -104,5 +94,9 @@ public class TMWCoreUI extends AbstractUIPlugin {
 
     public DeploymentTargetPresentationsManager getPresentations() {
         return presentations;
+    }
+
+    public static IProjectTemplateManager getProjectTemplateManager() {
+        return getDefault().projectTemplateManager;
     }
 }

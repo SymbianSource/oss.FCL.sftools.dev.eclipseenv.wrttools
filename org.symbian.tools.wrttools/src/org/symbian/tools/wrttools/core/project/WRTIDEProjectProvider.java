@@ -42,5 +42,4 @@ public class WRTIDEProjectProvider implements IMTWProjectProvider {
     public boolean isSupportedProject(IProject project) {
         return ProjectUtils.hasWrtNature(project);
     }
-
 }

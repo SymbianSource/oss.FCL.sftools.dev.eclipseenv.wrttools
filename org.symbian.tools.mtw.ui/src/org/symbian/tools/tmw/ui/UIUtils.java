@@ -47,7 +47,7 @@ public class UIUtils {
         }
         if (resource != null) {
             IProject project = resource.getProject();
-            return TMWCore.getDefault().create(project);
+            return TMWCore.create(project);
         }
         return null;
     }

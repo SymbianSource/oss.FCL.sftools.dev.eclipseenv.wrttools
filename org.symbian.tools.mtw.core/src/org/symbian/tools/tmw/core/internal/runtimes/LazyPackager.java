@@ -67,7 +67,7 @@ public class LazyPackager implements IPackager {
     public IMobileWebRuntime getTargetRuntime() {
         String id = element.getAttribute("target-runtime");
         if (id != null) {
-            return TMWCore.getDefault().getRuntimesManager()
+            return TMWCore.getRuntimesManager()
                     .getRuntime(id, element.getAttribute("target-runtime-version"));
         } else {
             return getSourceRuntime();
@@ -75,7 +75,7 @@ public class LazyPackager implements IPackager {
     }
 
     public IMobileWebRuntime getSourceRuntime() {
-        IMobileWebRuntime runtime = TMWCore.getDefault().getRuntimesManager()
+        IMobileWebRuntime runtime = TMWCore.getRuntimesManager()
                 .getRuntime(element.getAttribute("source-runtime"), element.getAttribute("source-runtime-version"));
         return runtime;
     }

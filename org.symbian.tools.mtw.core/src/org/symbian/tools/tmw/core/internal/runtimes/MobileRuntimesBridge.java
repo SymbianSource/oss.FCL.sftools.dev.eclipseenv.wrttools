@@ -32,10 +32,10 @@ public class MobileRuntimesBridge implements IRuntimeBridge {
     private final Map<String, MobileRuntimeStub> stubs = new TreeMap<String, MobileRuntimeStub>();
 
     public Set<String> getExportedRuntimeNames() throws CoreException {
-        final IMobileWebRuntime[] allRuntimes = TMWCore.getDefault().getRuntimesManager().getAllRuntimes();
+        final IMobileWebRuntime[] allRuntimes = TMWCore.getRuntimesManager().getAllRuntimes();
         final Set<String> ids = new TreeSet<String>();
         for (IMobileWebRuntime runtime : allRuntimes) {
-            ids.add(runtime.getId() + ":" + runtime.getVersion());
+            ids.add(TMWCore.getFProjSupport().getRuntimeId(runtime));
         }
         return ids;
     }
@@ -46,7 +46,7 @@ public class MobileRuntimesBridge implements IRuntimeBridge {
             if (ind > 0) {
                 stubs.put(
                         name,
-                        new MobileRuntimeStub(TMWCore.getDefault().getRuntimesManager()
+                        new MobileRuntimeStub(TMWCore.getRuntimesManager()
                                 .getRuntime(name.substring(0, ind), name.substring(ind + 1))));
             }
         }

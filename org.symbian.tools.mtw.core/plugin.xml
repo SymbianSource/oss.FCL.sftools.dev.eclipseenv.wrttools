@@ -108,7 +108,7 @@
          <action
                type="install">
             <delegate
-                  class="org.symbian.tools.tmw.core.internal.facets.InstallFacetAction">
+                  class="org.symbian.tools.tmw.core.internal.facets.InstallCoreFacetAction">
             </delegate>
          </action>
       </project-facet-version>
