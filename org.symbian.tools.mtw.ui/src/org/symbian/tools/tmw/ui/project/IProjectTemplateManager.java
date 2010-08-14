@@ -18,10 +18,17 @@
  */
 package org.symbian.tools.tmw.ui.project;
 
+import java.util.Map;
+
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 public interface IProjectTemplateManager {
     IProjectTemplate[] getProjectTemplates(IMobileWebRuntime runtime);
     IProjectTemplate getDefaultTemplate(IMobileWebRuntime runtime);
     ITemplateInstaller getEmptyProjectTemplate(IMobileWebRuntime runtime);
+
+    /**
+     * Runtimes can provide default values for template parameters
+     */
+    Map<String, String> getDefaultTemplateParameterValues(IMobileWebRuntime runtime);
 }

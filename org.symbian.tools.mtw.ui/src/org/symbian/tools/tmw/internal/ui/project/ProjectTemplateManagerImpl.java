@@ -19,9 +19,11 @@
 package org.symbian.tools.tmw.internal.ui.project;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -34,6 +36,7 @@ import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
 public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
     private Map<IMobileWebRuntime, ITemplateInstaller> emptyProjects;
+    private Map<IMobileWebRuntime, Map<String, String>> runtimeTemplateParameters;
     private Map<IMobileWebRuntime, IProjectTemplate[]> templates;
 
     public IProjectTemplate getDefaultTemplate(IMobileWebRuntime runtime) {
@@ -60,6 +63,7 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
     }
 
     private Map<IMobileWebRuntime, IProjectTemplate[]> readExtensions() {
+        runtimeTemplateParameters = new HashMap<IMobileWebRuntime, Map<String, String>>();
         emptyProjects = new HashMap<IMobileWebRuntime, ITemplateInstaller>();
         final Map<IMobileWebRuntime, Collection<IProjectTemplate>> map = new HashMap<IMobileWebRuntime, Collection<IProjectTemplate>>();
         final IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor(
@@ -76,12 +80,23 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
                     }
                     tmplts.add(template);
                 }
-            } else if ("empty-project".equals(element.getName())) {
+            } else if ("runtime-template".equals(element.getName())) {
                 final String runtimeId = element.getAttribute("runtime-id");
                 final String runtimeVersion = element.getAttribute("version");
                 final IMobileWebRuntime runtime = TMWCore.getRuntimesManager().getRuntime(runtimeId, runtimeVersion);
                 if (runtime != null) {
-                    emptyProjects.put(runtime, CompoundInstaller.combine(emptyProjects.get(runtime), elements));
+                    emptyProjects.put(runtime,
+                            CompoundInstaller.combine(emptyProjects.get(runtime), element.getChildren()));
+                    Map<String, String> params = runtimeTemplateParameters.get(runtime);
+                    if (params == null) {
+                        params = new TreeMap<String, String>();
+                        runtimeTemplateParameters.put(runtime, params);
+                    }
+                    for (IConfigurationElement el : element.getChildren()) {
+                        if ("default-parameter-value".equals(el.getName())) {
+                            params.put(el.getAttribute("name"), el.getAttribute("value"));
+                        }
+                    }
                 }
             }
         }
@@ -92,5 +107,16 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
             res.put(entry.getKey(), collection.toArray(new IProjectTemplate[collection.size()]));
         }
         return res;
+    }
+
+    public Map<String, String> getDefaultTemplateParameterValues(IMobileWebRuntime runtime) {
+        if (runtimeTemplateParameters == null) {
+            readExtensions();
+        }
+        Map<String, String> params = runtimeTemplateParameters.get(runtime);
+        if (params == null) {
+            return Collections.emptyMap();
+        }
+        return params;
     }
 }

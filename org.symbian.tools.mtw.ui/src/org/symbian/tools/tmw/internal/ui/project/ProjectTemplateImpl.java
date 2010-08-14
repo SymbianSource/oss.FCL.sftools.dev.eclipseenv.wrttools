@@ -18,6 +18,9 @@
  */
 package org.symbian.tools.tmw.internal.ui.project;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -42,6 +45,7 @@ public class ProjectTemplateImpl implements IProjectTemplate {
     private IMobileWebRuntime[] runtimes;
     private IProjectFacetVersion[] facetVersions;
     private ITemplateInstaller installer;
+    private Map<String, String> parameters;
 
     public ProjectTemplateImpl(IConfigurationElement element) {
         this.element = element;
@@ -140,6 +144,18 @@ public class ProjectTemplateImpl implements IProjectTemplate {
             templateInstaller.cleanup();
         }
         monitor.done();
+    }
+
+    public Map<String, String> getDefaultParameterValues() {
+        if (parameters == null) {
+            parameters = new TreeMap<String, String>();
+            for (IConfigurationElement el : element.getChildren()) {
+                if ("default-parameter-value".equals(el.getName())) {
+                    parameters.put(el.getAttribute("name"), el.getAttribute("value"));
+                }
+            }
+        }
+        return parameters;
     }
 
 }

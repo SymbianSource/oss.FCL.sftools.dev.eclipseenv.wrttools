@@ -851,7 +851,42 @@ function updateOrientation(orientation) {
          <archive
                file="projecttemplates/flickr.zip">
          </archive>
+         <default-parameter-value
+               name="mainCss"
+               value="style">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainJs"
+               value="flickr">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainHtml"
+               value="flickr">
+         </default-parameter-value>
       </template>
+      <runtime-template
+            runtime-id="org.symbian.tools.wrttools.wrt"
+            version="1.1">
+         <archive
+               file="projecttemplates/basic.zip">
+         </archive>
+         <default-parameter-value
+               name="homeScreen"
+               value="false">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainHtml"
+               value="index">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainCss"
+               value="basic">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainJs"
+               value="basic">
+         </default-parameter-value>
+      </runtime-template>
    </extension>
  
 </plugin>

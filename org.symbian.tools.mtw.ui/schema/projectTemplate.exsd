@@ -19,6 +19,7 @@
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
             <element ref="template"/>
+            <element ref="runtime-template"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -60,6 +61,7 @@
             <element ref="description"/>
             <element ref="required-facet"/>
             <element ref="supported-runtime"/>
+            <element ref="default-parameter-value"/>
          </choice>
          <attribute name="name" type="string" use="required">
             <annotation>
@@ -183,7 +185,7 @@
       </complexType>
    </element>
 
-   <element name="empty-project">
+   <element name="runtime-template">
       <annotation>
          <documentation>
             This element describes contents that will be added to all projects for given runtime.
@@ -191,8 +193,9 @@
       </annotation>
       <complexType>
          <choice minOccurs="1" maxOccurs="unbounded">
-            <element ref="template"/>
+            <element ref="archive"/>
             <element ref="installer"/>
+            <element ref="default-parameter-value"/>
          </choice>
          <attribute name="runtime-id" type="string" use="required">
             <annotation>
@@ -209,6 +212,28 @@
                <documentation>
                   
                </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="default-parameter-value">
+      <complexType>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="value" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>

@@ -18,6 +18,8 @@
  */
 package org.symbian.tools.tmw.ui.project;
 
+import java.util.Map;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.graphics.Image;
@@ -82,4 +84,9 @@ public interface IProjectTemplate {
      * Initializes project with template contents
      */
     void init(IProject project, IProjectTemplateContext context, IProgressMonitor monitor);
+
+    /**
+     * Returns default template parameter values
+     */
+    Map<String, String> getDefaultParameterValues();
 }

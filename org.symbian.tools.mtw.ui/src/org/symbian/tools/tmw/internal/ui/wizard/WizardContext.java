@@ -243,6 +243,14 @@ public class WizardContext implements IProjectTemplateContext {
     private Map<String, String> getTemplateVars() {
         Map<String, String> vars = new TreeMap<String, String>();
 
+        if (runtime != null) {
+            vars.putAll(TMWCoreUI.getProjectTemplateManager().getDefaultTemplateParameterValues(runtime));
+        }
+        final IProjectTemplate t = getTemplate();
+        if (t != null) {
+            vars.putAll(t.getDefaultParameterValues());
+        }
+
         vars.put("widgetName", getWidgetName());
         vars.put("widgetId", getWidgetId());
         //        vars.put("mainHtml", getHtmlFileName());
