@@ -836,6 +836,7 @@ function updateOrientation(orientation) {
          point="org.symbian.tools.tmw.ui.projectTemplate">
       <template
             icon="icons/flickr.gif"
+            id="org.symbian.wrt11.flickr"
             name="Flickr Project"
             weight="3">
          <archive
@@ -863,6 +864,10 @@ function updateOrientation(orientation) {
                name="mainHtml"
                value="flickr">
          </default-parameter-value>
+         <default-parameter-value
+               name="flickrUrl"
+               value="http://flickr.com/photos/symbianfoundation">
+         </default-parameter-value>
       </template>
       <runtime-template
             runtime-id="org.symbian.tools.wrttools.wrt"
@@ -887,6 +892,13 @@ function updateOrientation(orientation) {
                value="basic">
          </default-parameter-value>
       </runtime-template>
+   </extension>
+   <extension
+         point="org.symbian.tools.tmw.ui.wizardPages">
+      <template-page
+            class="org.symbian.tools.wrttools.wizards.NewFlickrApplicationWizardPage"
+            template-id="org.symbian.wrt11.flickr">
+      </template-page>
    </extension>
  
 </plugin>

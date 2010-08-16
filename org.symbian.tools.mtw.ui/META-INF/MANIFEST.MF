@@ -25,7 +25,8 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/org.bluecove_2.1.1.jar,
  .
 Export-Package: org.symbian.tools.tmw.ui,
- org.symbian.tools.tmw.ui.deployment
+ org.symbian.tools.tmw.ui.deployment,
+ org.symbian.tools.tmw.ui.project
 Import-Package: org.apache.velocity;version="1.5.0",
  org.apache.velocity.app;version="1.5.0",
  org.apache.velocity.context;version="1.5.0"

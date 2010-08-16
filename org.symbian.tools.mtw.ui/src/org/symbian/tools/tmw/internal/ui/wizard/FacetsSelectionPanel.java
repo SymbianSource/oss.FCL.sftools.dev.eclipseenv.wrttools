@@ -49,6 +49,8 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -57,6 +59,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.common.project.facet.core.IFacetedProjectWorkingCopy;
@@ -70,14 +73,13 @@ import org.eclipse.wst.common.project.facet.core.runtime.events.IRuntimeLifecycl
 import org.eclipse.wst.common.project.facet.core.runtime.events.IRuntimeLifecycleListener;
 import org.eclipse.wst.common.project.facet.ui.IDecorationsProvider;
 import org.eclipse.wst.common.project.facet.ui.internal.FacetUiPlugin;
-import org.eclipse.wst.common.project.facet.ui.internal.util.BasicToolTip;
-import org.eclipse.wst.common.project.facet.ui.internal.util.HeaderToolTip;
 import org.symbian.tools.tmw.core.TMWCore;
 
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
+@SuppressWarnings("restriction")
 public final class FacetsSelectionPanel extends Composite implements ISelectionProvider {
     private final Composite topComposite;
     private final SashForm sform1;
@@ -91,14 +93,10 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
     private final Map<IProjectFacet, IProjectFacetVersion> selectedVersions;
     private final List<ISelectionChangedListener> selectionListeners;
     private Object selection;
-
-    /**
-     * Holds images used throughout the panel.
-     */
-
     private final ImageRegistry imageRegistry;
-
     private final IRuntimeLifecycleListener runtimeLifecycleListener;
+    private final Text description;
+    private final Composite facets;
 
     public interface IFilter {
         boolean check(IProjectFacetVersion fv);
@@ -119,22 +117,29 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
         this.imageRegistry = new ImageRegistry();
         // Layout the panel.
 
-        setLayout(glmargins(gl(1), 0, 0));
+        setLayout(glmargins(new GridLayout(1, false), 0, 0));
 
         this.topComposite = new Composite(this, SWT.NONE);
-        this.topComposite.setLayout(glmargins(gl(4), 0, 0));
+        this.topComposite.setLayout(glmargins(new GridLayout(4, false), 0, 0));
 
         this.sform1 = new SashForm(this.topComposite, SWT.VERTICAL | SWT.SMOOTH);
         this.sform1.setLayoutData(gdhspan(gdfill(), 4));
 
-        this.table = new Table(this.sform1, SWT.BORDER | SWT.CHECK);
+        facets = new Composite(sform1, SWT.NONE);
+        facets.setLayout(new GridLayout(2, false));
+        this.table = new Table(facets, SWT.BORDER | SWT.CHECK);
+        GridData gd = new GridData(GridData.FILL_VERTICAL);
+        gd.widthHint = 250;
+        table.setLayoutData(gd);
+        description = new Text(facets, SWT.MULTI | SWT.READ_ONLY | SWT.WRAP | SWT.BORDER);
+        gd = new GridData(GridData.FILL_BOTH);
+        description.setLayoutData(gd);
         this.tableViewer = new CheckboxTableViewer(this.table);
 
         this.tableViewer.setLabelProvider(new FacetColumnLabelProvider());
         this.tableViewer.setContentProvider(new ContentProvider());
         this.tableViewer.setSorter(new Sorter());
 
-        new FacetToolTip(this.table);
         this.fixedFacetToolTip = new FixedFacetToolTip(this.table);
 
         this.tableViewer.setInput(new Object());
@@ -211,7 +216,7 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
         final int prefWidthTree = getPreferredWidth(this.table);
         final int prefWidth = prefWidthTree + 80;
 
-        this.topComposite.setLayoutData(gdwhint(gdhhint(gdfill(), 500), prefWidth));
+        this.topComposite.setLayoutData(gdwhint(gdhhint(gdfill(), 200), prefWidth));
 
         this.sform1.setWeights(new int[] { 70, 30 });
 
@@ -363,6 +368,7 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
 
         if (selection != null && selection instanceof IProjectFacet) {
             selection = getSelectedVersion((IProjectFacet) selection);
+            description.setText(((IProjectFacetVersion) selection).getProjectFacet().getDescription());
         }
 
         if (selection != this.selection) {
@@ -489,7 +495,7 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
 
         if (getFilteredProblems().length == 0) {
             if (this.sform1.getMaximizedControl() == null) {
-                this.sform1.setMaximizedControl(this.tableViewer.getControl());
+                this.sform1.setMaximizedControl(facets);
             }
         } else {
             if (this.sform1.getMaximizedControl() != null) {
@@ -513,20 +519,6 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
             break;
         }
         }
-    }
-
-    private TableItem getTreeItem(final int x, final int y) {
-        return getTreeItemHelper(x, y, this.table.getItems());
-    }
-
-    private static TableItem getTreeItemHelper(final int x, final int y, final TableItem[] items) {
-        for (TableItem item : items) {
-            if (item.getBounds().contains(x, y)) {
-                return item;
-            }
-        }
-
-        return null;
     }
 
     private IStatus[] getFilteredProblems() {
@@ -649,39 +641,13 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
         }
     }
 
-    private final class FacetToolTip extends HeaderToolTip {
-        public FacetToolTip(final Control control) {
-            super(control);
-        }
+    private final class FixedFacetToolTip extends ToolTip {
+        private static final int FAKE_EVENT_TYPE = -9999;
+
+        private String message = ""; //$NON-NLS-1$
 
         @Override
-        protected final boolean shouldCreateToolTip(final Event event) {
-            if (getShowToolTips() == false) {
-                return false;
-            }
-
-            final TableItem treeItem = getTreeItem(event.x, event.y);
-            String description = null;
-
-            if (treeItem != null && treeItem.getBounds(0).contains(event.x, event.y)) {
-                final Object treeItemData = treeItem.getData();
-
-                if (treeItemData instanceof IProjectFacet) {
-                    description = ((IProjectFacet) treeItemData).getDescription();
-                }
-            }
-
-            return (description != null && description.trim().length() > 0);
-        }
-
-        @Override
-        protected String getToolTipTitle(final Event event) {
-            final IProjectFacet f = (IProjectFacet) getTreeItem(event.x, event.y).getData();
-            return getSelectedVersion(f).toString();
-        }
-
-        @Override
-        protected Composite createContentArea(final Event event, final Composite parent) {
+        protected Composite createToolTipContentArea(final Event event, final Composite parent) {
             final Display display = parent.getDisplay();
 
             final Composite composite = new Composite(parent, SWT.NONE);
@@ -689,22 +655,21 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
             composite.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
 
             final Label label = new Label(composite, SWT.WRAP);
-            label.setLayoutData(gdfill());
+            label.setLayoutData(gdwhint(gdfill(), 300));
             label.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
-
-            final IProjectFacet f = (IProjectFacet) getTreeItem(event.x, event.y).getData();
-            label.setText(f.getDescription());
+            label.setText(this.message);
 
             return composite;
         }
-    }
 
-    private final class FixedFacetToolTip extends BasicToolTip {
-        private static final int FAKE_EVENT_TYPE = -9999;
+        public void setMessage(final String message) {
+            this.message = message;
+        }
 
         public FixedFacetToolTip(final Control control) {
             super(control);
             setPopupDelay(0);
+            setShift(new Point(10, 3));
         }
 
         public void show(final Point location) {

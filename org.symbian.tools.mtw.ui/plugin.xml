@@ -4,6 +4,7 @@
    <extension-point id="deploymentTargetType" name="Provides targets for project deployments" schema="schema/deploymentTargetType.exsd"/>
    <extension-point id="targetPresentation" name="Deployment Target Presentation" schema="schema/targetPresentation.exsd"/>
    <extension-point id="projectTemplate" name="Mobile Application Project Templates" schema="schema/projectTemplate.exsd"/>
+   <extension-point id="wizardPages" name="Extensions for the New Application Wizard" schema="schema/wizardPages.exsd"/>
 	<!-- Navigator Extensions -->
 	<extension point="org.eclipse.ui.navigator.viewer">
 	  <viewerActionBinding

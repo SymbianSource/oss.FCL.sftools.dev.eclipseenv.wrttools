@@ -18,19 +18,11 @@
  */
 package org.symbian.tools.tmw.ui.project;
 
-import java.util.Map;
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.jface.wizard.IWizardPage;
 
-import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
+public interface INewApplicationWizardPage extends IWizardPage {
+    void init(IProjectTemplateContext context, DataBindingContext bindingContext);
 
-public interface IProjectTemplateManager {
-    IProjectTemplate[] getProjectTemplates(IMobileWebRuntime runtime);
-
-    IProjectTemplate getDefaultTemplate(IMobileWebRuntime runtime);
-
-    ITemplateInstaller getEmptyProjectTemplate(IMobileWebRuntime runtime);
-
-    /**
-     * Runtimes can provide default values for template parameters
-     */
-    Map<String, String> getDefaultTemplateParameterValues(IMobileWebRuntime runtime);
+    void remove();
 }

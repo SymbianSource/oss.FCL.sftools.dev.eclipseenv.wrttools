@@ -158,4 +158,7 @@ public class ProjectTemplateImpl implements IProjectTemplate {
         return parameters;
     }
 
+    public String getId() {
+        return element.getAttribute("id");
+    }
 }

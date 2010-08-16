@@ -89,4 +89,9 @@ public interface IProjectTemplate {
      * Returns default template parameter values
      */
     Map<String, String> getDefaultParameterValues();
+
+    /**
+     * @return template ID
+     */
+    String getId();
 }

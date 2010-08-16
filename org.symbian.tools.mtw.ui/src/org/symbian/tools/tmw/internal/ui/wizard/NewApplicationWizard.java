@@ -34,18 +34,21 @@ import org.eclipse.wst.common.project.facet.core.runtime.IRuntime;
 import org.eclipse.wst.common.project.facet.ui.ModifyFacetedProjectWizard;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IFProjSupport;
+import org.symbian.tools.tmw.ui.project.INewApplicationWizardPage;
+import org.symbian.tools.tmw.ui.project.IProjectTemplate;
 
 /**
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public final class NewApplicationWizard extends ModifyFacetedProjectWizard implements INewWizard {
+    private final PageContributions contributions = new PageContributions();
     private final DataBindingContext databindingContext = new DataBindingContext();
+    private NewApplicationFacetsWizardPage facetsPage;
     private NewApplicationDetailsWizardPage firstPage;
     private IStructuredSelection selection;
+    private NewApplicationTemplateWizardPage templatesPage;
     private final WizardContext wizardContext = new WizardContext();
     private IWorkbench workbench;
-    private FacetsSelectionPage facetsPage;
-    private NewApplicationTemplateWizardPage templatesPage;
 
     public NewApplicationWizard() {
         setShowFacetsSelectionPage(false);
@@ -61,7 +64,7 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         } else {
             facets = project.getProjectFacets();
         }
-        facetsPage = new FacetsSelectionPage(facets, getFacetedProjectWorkingCopy());
+        facetsPage = new NewApplicationFacetsWizardPage(facets, getFacetedProjectWorkingCopy());
         addPage(facetsPage);
         templatesPage = new NewApplicationTemplateWizardPage(wizardContext, databindingContext);
         addPage(templatesPage);
@@ -96,13 +99,37 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         return nextPage;
     }
 
+    private IProjectTemplate template = null;
+    private INewApplicationWizardPage[] templatePages = new INewApplicationWizardPage[0];
+
     public IWizardPage[] getPages() {
+        final IProjectTemplate current = wizardContext.getTemplate();
+        if (template != current) {
+            for (INewApplicationWizardPage page : templatePages) {
+                page.remove();
+                page.dispose();
+            }
+            if (current == null) {
+                template = null;
+                templatePages = new INewApplicationWizardPage[0];
+            } else {
+                template = current;
+                templatePages = contributions.createPages(template.getId());
+                for (INewApplicationWizardPage page : templatePages) {
+                    page.setWizard(this);
+                    page.init(wizardContext, databindingContext);
+                }
+            }
+        }
         final IWizardPage[] base = super.getPages();
-        final IWizardPage[] pages = new IWizardPage[base.length + 3];
+        final IWizardPage[] pages = new IWizardPage[base.length + 3 + templatePages.length];
 
         pages[0] = this.firstPage;
         pages[1] = this.templatesPage;
         pages[2] = this.facetsPage;
+        if (templatePages.length > 0) {
+            System.arraycopy(templatePages, 0, pages, 3, templatePages.length);
+        }
         System.arraycopy(base, 0, pages, 2, base.length);
 
         return pages;
@@ -122,7 +149,6 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
      * @return the selection that this wizard was launched from
      * @since 1.4
      */
-
     public IStructuredSelection getSelection() {
         return this.selection;
     }
@@ -133,7 +159,6 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
      * @return the workbench that this wizard belongs to
      * @since 1.4
      */
-
     public IWorkbench getWorkbench() {
         return this.workbench;
     }
