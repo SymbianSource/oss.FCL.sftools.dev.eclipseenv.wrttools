@@ -840,7 +840,8 @@ function updateOrientation(orientation) {
             name="Flickr Project"
             weight="3">
          <archive
-               file="projecttemplates/flickr.zip">
+               file="projecttemplates/flickr.zip"
+               open-files="${mainHtml}.html">
          </archive>
          <description>
             This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.

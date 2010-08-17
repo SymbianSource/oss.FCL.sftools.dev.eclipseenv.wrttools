@@ -21,6 +21,7 @@ package org.symbian.tools.tmw.ui.project;
 import java.io.InputStream;
 
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -64,7 +65,7 @@ public interface IProjectTemplateContext extends IProjectSetupAction {
      * @param monitor progress monitor
      * @throws CoreException
      */
-    void addFile(IProject project, IPath name, InputStream contents, IProgressMonitor monitor) throws CoreException;
+    IFile addFile(IProject project, IPath name, InputStream contents, IProgressMonitor monitor) throws CoreException;
 
     /**
      * Allows binding to parameter value from UI.

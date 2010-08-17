@@ -32,12 +32,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.context.AbstractContext;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -50,6 +52,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.symbian.tools.tmw.internal.util.OpenFilesRunnable;
+import org.symbian.tools.tmw.internal.util.Util;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.project.IProjectTemplateContext;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
@@ -65,6 +70,7 @@ public class ZipInstaller implements ITemplateInstaller {
     private IProject project;
     private IProjectTemplateContext context;
     private String[] paths;
+    private final Set<IFile> openFiles = new HashSet<IFile>();
 
     public ZipInstaller(IConfigurationElement element) {
         this.element = element;
@@ -83,6 +89,7 @@ public class ZipInstaller implements ITemplateInstaller {
     public void cleanup() {
         project = null;
         context = null;
+        openFiles.clear();
     }
 
     public IPath[] getFiles() throws CoreException {
@@ -147,6 +154,7 @@ public class ZipInstaller implements ITemplateInstaller {
     }
 
     public void copyFiles(IPath[] files, IProgressMonitor monitor) throws CoreException {
+        final String filesToOpen = Util.neverNull(element.getAttribute("open-files"));
         HashSet<IPath> fls = new HashSet<IPath>(Arrays.asList(files));
         ZipInputStream stream = null;
         try {
@@ -156,15 +164,20 @@ public class ZipInstaller implements ITemplateInstaller {
             ZipEntry entry;
             while ((entry = stream.getNextEntry()) != null && !monitor.isCanceled()) {
                 String nm = entry.getName();
+                boolean open = filesToOpen.contains(nm.endsWith(TEMPLATE_FILE_EXTENSION) ? nm.substring(0, nm.length()
+                        - TEMPLATE_FILE_EXTENSION.length()) : nm);
                 IPath name = new Path(filter(nm));
                 if (fls.contains(name)) {
-                final InputStream contents;
-                if (nm.endsWith(TEMPLATE_FILE_EXTENSION)) {
-                    contents = copyTemplate(project, name, stream, (int) entry.getSize(), ctx, monitor);
-                } else {
-                    contents = new NonClosingStream(stream);
-                }
-                    context.addFile(project, name, contents, new SubProgressMonitor(monitor, 10));
+                    final InputStream contents;
+                    if (nm.endsWith(TEMPLATE_FILE_EXTENSION)) {
+                        contents = copyTemplate(project, name, stream, (int) entry.getSize(), ctx, monitor);
+                    } else {
+                        contents = new NonClosingStream(stream);
+                    }
+                    IFile file = context.addFile(project, name, contents, new SubProgressMonitor(monitor, 10));
+                    if (open) {
+                        openFiles.add(file);
+                    }
                 }
                 stream.closeEntry();
             }
@@ -183,8 +196,7 @@ public class ZipInstaller implements ITemplateInstaller {
     }
 
     private InputStream copyTemplate(IProject project, IPath name, ZipInputStream stream, int size,
-            VelocityContext ctx,
-            IProgressMonitor monitor) throws IOException, CoreException {
+            VelocityContext ctx, IProgressMonitor monitor) throws IOException, CoreException {
         // Templates will not be more then a few megs - we can afford the memory
         ByteArrayOutputStream file = new ByteArrayOutputStream();
 
@@ -247,5 +259,12 @@ public class ZipInstaller implements ITemplateInstaller {
             return internalPut((String) key, null);
         }
 
+    }
+
+    public IRunnableWithProgress getPostCreateAction() {
+        if (openFiles.size() > 0) {
+            return new OpenFilesRunnable(openFiles);
+        }
+        return null;
     }
 }

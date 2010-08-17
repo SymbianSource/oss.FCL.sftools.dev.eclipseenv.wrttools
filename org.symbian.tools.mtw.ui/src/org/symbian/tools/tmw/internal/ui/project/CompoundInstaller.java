@@ -31,6 +31,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.symbian.tools.tmw.internal.util.DelegateRunnable;
 import org.symbian.tools.tmw.ui.project.IProjectTemplateContext;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
@@ -128,5 +130,16 @@ public class CompoundInstaller implements ITemplateInstaller {
         for (ITemplateInstaller installer : installers) {
             installer.prepare(project, context);
         }
+    }
+
+    public IRunnableWithProgress getPostCreateAction() {
+        final Collection<IRunnableWithProgress> runnables = new LinkedList<IRunnableWithProgress>();
+        for (ITemplateInstaller installer : installers) {
+            final IRunnableWithProgress action = installer.getPostCreateAction();
+            if (action != null) {
+                runnables.add(action);
+            }
+        }
+        return runnables.size() > 0 ? new DelegateRunnable(runnables) : null;
     }
 }

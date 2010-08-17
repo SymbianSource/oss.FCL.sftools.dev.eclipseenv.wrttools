@@ -46,6 +46,8 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
     private NewApplicationFacetsWizardPage facetsPage;
     private NewApplicationDetailsWizardPage firstPage;
     private IStructuredSelection selection;
+    private IProjectTemplate template = null;
+    private INewApplicationWizardPage[] templatePages = new INewApplicationWizardPage[0];
     private NewApplicationTemplateWizardPage templatesPage;
     private final WizardContext wizardContext = new WizardContext();
     private IWorkbench workbench;
@@ -79,7 +81,6 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         firstPage = new NewApplicationDetailsWizardPage(wizardContext, databindingContext);
         return firstPage;
     }
-
     @Override
     public IWizardPage getNextPage(final IWizardPage page) {
         if (page == this.firstPage) {
@@ -98,9 +99,6 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         IWizardPage nextPage = super.getNextPage(page);
         return nextPage;
     }
-
-    private IProjectTemplate template = null;
-    private INewApplicationWizardPage[] templatePages = new INewApplicationWizardPage[0];
 
     public IWizardPage[] getPages() {
         final IProjectTemplate current = wizardContext.getTemplate();
@@ -166,10 +164,5 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
     public void init(final IWorkbench workbench, final IStructuredSelection selection) {
         this.workbench = workbench;
         this.selection = selection;
-    }
-
-    public boolean performFinish() {
-        super.performFinish();
-        return true;
     }
 }

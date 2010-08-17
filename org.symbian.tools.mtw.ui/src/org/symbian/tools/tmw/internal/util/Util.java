@@ -24,4 +24,8 @@ public class Util {
         return value != null ? value.trim().replace(" ", "") : "";
     }
 
+    public static String neverNull(String string) {
+        return string == null ? "" : string.trim();
+    }
+
 }

@@ -137,6 +137,13 @@
                </appinfo>
             </annotation>
          </attribute>
+         <attribute name="open-files" type="string">
+            <annotation>
+               <documentation>
+                  Allows the template to specify files that will be opened in the editor after the project was created. This is a semicolon-separated list. This string will be expanded using Velocity so it may contain template keys.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

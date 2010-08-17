@@ -22,6 +22,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 
 public interface ITemplateInstaller {
     /**
@@ -45,4 +46,10 @@ public interface ITemplateInstaller {
      */
     void copyFiles(IPath[] files, IProgressMonitor monitor) throws CoreException;
 
+    /**
+     * These actions will be ran after the new project setup completes. They will be
+     * ran in SWT thread.
+     * @return runnable that will be ran after the project create finishes. Can be null.
+     */
+    IRunnableWithProgress getPostCreateAction();
 }

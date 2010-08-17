@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.project.IProjectTemplateContext;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
@@ -43,6 +44,10 @@ public final class LazyInstaller implements ITemplateInstaller {
 
         public void prepare(IProject project, IProjectTemplateContext context) {
             // Do nothing
+        }
+
+        public IRunnableWithProgress getPostCreateAction() {
+            return null;
         }
     }
     private final IConfigurationElement element;
@@ -78,5 +83,9 @@ public final class LazyInstaller implements ITemplateInstaller {
 
     public void prepare(IProject project, IProjectTemplateContext context) {
         getInstaller().prepare(project, context);
+    }
+
+    public IRunnableWithProgress getPostCreateAction() {
+        return getInstaller().getPostCreateAction();
     }
 }

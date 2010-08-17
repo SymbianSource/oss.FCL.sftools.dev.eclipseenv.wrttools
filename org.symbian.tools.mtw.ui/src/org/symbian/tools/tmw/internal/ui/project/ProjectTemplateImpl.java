@@ -18,6 +18,7 @@
  */
 package org.symbian.tools.tmw.internal.ui.project;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,8 +28,12 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
@@ -138,6 +143,22 @@ public class ProjectTemplateImpl implements IProjectTemplate {
             final IPath[] files = templateInstaller.getFiles();
             monitor.beginTask("Copying project files", files.length * 10);
             templateInstaller.copyFiles(files, new SubProgressMonitor(monitor, files.length * 10));
+            final IRunnableWithProgress action = templateInstaller.getPostCreateAction();
+            if (action != null) {
+                Display.getDefault().asyncExec(new Runnable() {
+                    public void run() {
+                        ProgressMonitorDialog dialog = new ProgressMonitorDialog(PlatformUI.getWorkbench()
+                                .getActiveWorkbenchWindow().getShell());
+                        try {
+                            dialog.run(false, true, action);
+                        } catch (InvocationTargetException e) {
+                            TMWCoreUI.log(e);
+                        } catch (InterruptedException e) {
+                            TMWCoreUI.log(e);
+                        }
+                    }
+                });
+            }
         } catch (CoreException e) {
             TMWCoreUI.log(e);
         } finally {

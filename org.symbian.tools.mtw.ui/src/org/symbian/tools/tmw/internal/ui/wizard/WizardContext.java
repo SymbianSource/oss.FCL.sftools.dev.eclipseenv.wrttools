@@ -66,7 +66,7 @@ public class WizardContext implements IProjectTemplateContext {
         }
     }
 
-    public void addFile(IProject project, IPath name, InputStream contents, IProgressMonitor monitor)
+    public IFile addFile(IProject project, IPath name, InputStream contents, IProgressMonitor monitor)
             throws CoreException {
         monitor.beginTask(name.toOSString(), 100);
         final IFile file = project.getFile(name);
@@ -75,6 +75,7 @@ public class WizardContext implements IProjectTemplateContext {
         }
         file.create(contents, false, new SubProgressMonitor(monitor, 100));
         monitor.done();
+        return file;
     }
 
     public void addPropertyChangeListener(PropertyChangeListener arg0) {
