@@ -110,6 +110,9 @@
             <delegate
                   class="org.symbian.tools.tmw.core.internal.facets.InstallCoreFacetAction">
             </delegate>
+            <config-factory
+                  class="org.symbian.tools.tmw.core.runtimes.ProjectCreationConfigFactory">
+            </config-factory>
          </action>
       </project-facet-version>
    </extension>

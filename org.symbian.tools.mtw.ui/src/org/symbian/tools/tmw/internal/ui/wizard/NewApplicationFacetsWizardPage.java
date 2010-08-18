@@ -46,7 +46,7 @@ public final class NewApplicationFacetsWizardPage extends WizardPage {
             public void handleEvent(final IFacetedProjectEvent event) {
                 updatePageState();
             }
-        }, IFacetedProjectEvent.Type.PROJECT_MODIFIED);
+        }, IFacetedProjectEvent.Type.PROJECT_MODIFIED, IFacetedProjectEvent.Type.PROJECT_NAME_CHANGED);
 
         final IRuntimeLifecycleListener runtimeLifecycleListener = new IRuntimeLifecycleListener() {
             public void handleEvent(final IRuntimeLifecycleEvent event) {

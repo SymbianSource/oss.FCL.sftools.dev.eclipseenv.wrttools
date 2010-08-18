@@ -172,7 +172,7 @@ public class ZipInstaller implements ITemplateInstaller {
                     if (nm.endsWith(TEMPLATE_FILE_EXTENSION)) {
                         contents = copyTemplate(project, name, stream, (int) entry.getSize(), ctx, monitor);
                     } else {
-                        contents = new NonClosingStream(stream);
+                        contents = stream;
                     }
                     IFile file = context.addFile(project, name, contents, new SubProgressMonitor(monitor, 10));
                     if (open) {

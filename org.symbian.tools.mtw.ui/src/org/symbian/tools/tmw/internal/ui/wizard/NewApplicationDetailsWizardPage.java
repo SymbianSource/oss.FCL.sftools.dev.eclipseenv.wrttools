@@ -87,10 +87,9 @@ public final class NewApplicationDetailsWizardPage extends WizardPage {
         root.setLayout(new GridLayout(2, false));
         createProjectNameGroup(root);
 
-        context.createLabel(root, "");
-        context.createLabel(root, "");
-
-        context.createLabel(root, "Mobile Runtime:");
+        createLabel(root, "");
+        createLabel(root, "");
+        createLabel(root, "Mobile Runtime:");
 
         ComboViewer viewer = new ComboViewer(root);
         viewer.setContentProvider(new ArrayContentProvider());
@@ -106,25 +105,25 @@ public final class NewApplicationDetailsWizardPage extends WizardPage {
         final IObservableValue observableValue = BeansObservables.observeValue(context, WizardContext.RUNTIME);
         bindingContext.bindValue(observeSelection, observableValue);
 
-        context.createLabel(root, "");
-        context.createLabel(root, "");
-        context.createLabel(root, "Application identifier:");
+        createLabel(root, "");
+        createLabel(root, "");
+        createLabel(root, "Application identifier:");
 
         context.createText(root, WizardContext.WIDGET_ID, "applicatoin identifier", bindingContext, null,
                 new RegexpValidator("[\\w]*(\\.\\w[\\w]*)*", "{0} is not a valid applicatoin ID", true));
-        context.createLabel(root, "");
-        context.createLabel(root, "This id should be unique for successful installation of application on the device");
+        createLabel(root, "");
+        createLabel(root, "This id should be unique for successful installation of application on the device");
 
-        context.createLabel(root, "");
-        context.createLabel(root, "");
+        createLabel(root, "");
+        createLabel(root, "");
 
-        context.createLabel(root, "Application name:");
+        createLabel(root, "Application name:");
 
         context.createText(root, WizardContext.WIDGET_NAME, "application name", bindingContext, null,
                 new RegexpValidator("[^\\w\\. ]", "Application name cannot contain {0} character", false));
 
-        context.createLabel(root, "");
-        context.createLabel(root, "This will be the application display name on the device");
+        createLabel(root, "");
+        createLabel(root, "This will be the application display name on the device");
 
         Composite composite = new Composite(root, SWT.NONE);
         GridLayout gridLayout = new GridLayout(1, false);
@@ -146,6 +145,10 @@ public final class NewApplicationDetailsWizardPage extends WizardPage {
         setMessage(null);
         setControl(root);
         Dialog.applyDialogFont(root);
+    }
+
+    private void createLabel(Composite root, String string) {
+        new Label(root, SWT.NONE).setText(string);
     }
 
     /**

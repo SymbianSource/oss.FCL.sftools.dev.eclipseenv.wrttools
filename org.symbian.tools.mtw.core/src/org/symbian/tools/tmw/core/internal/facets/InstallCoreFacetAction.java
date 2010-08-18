@@ -29,7 +29,6 @@ import org.eclipse.wst.jsdt.core.IIncludePathEntry;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.validation.ValidationFramework;
-import org.symbian.tools.tmw.core.projects.IProjectSetupAction;
 
 public class InstallCoreFacetAction implements IDelegate {
 
@@ -56,10 +55,6 @@ public class InstallCoreFacetAction implements IDelegate {
         }
         ValidationFramework.getDefault().addValidationBuilder(project);
 
-        IProjectSetupAction action = (IProjectSetupAction) config;
-        if (action != null) {
-            action.initialize(project, new SubProgressMonitor(monitor, 270));
-        }
         monitor.done();
     }
 }

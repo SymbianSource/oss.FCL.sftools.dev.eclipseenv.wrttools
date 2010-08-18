@@ -2,17 +2,19 @@ package org.symbian.tools.tmw.internal.ui.wizard;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.FilterInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.Observables;
-import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.value.AbstractObservableValue;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.ValueDiff;
@@ -31,7 +33,6 @@ import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
@@ -58,6 +59,7 @@ public class WizardContext implements IProjectTemplateContext {
     private String widgetId;
 
     private String widgetName;
+    private final Collection<String> jsIncludes = new TreeSet<String>();
 
     public WizardContext() {
         IMobileWebRuntime[] runtimes = TMWCore.getRuntimesManager().getAllRuntimes();
@@ -73,7 +75,7 @@ public class WizardContext implements IProjectTemplateContext {
         if (!file.exists()) {
             create(file.getParent());
         }
-        file.create(contents, false, new SubProgressMonitor(monitor, 100));
+        file.create(new NonClosingStream(contents), false, new SubProgressMonitor(monitor, 100));
         monitor.done();
         return file;
     }
@@ -93,11 +95,6 @@ public class WizardContext implements IProjectTemplateContext {
         }
     }
 
-    protected void createLabel(Composite root, String text) {
-        Label label = new Label(root, SWT.NONE);
-        label.setText(text);
-    }
-
     private Text createText(Composite root, IObservableValue model, String propertyName,
             DataBindingContext bindingContext, AbstractDataBindingPage page, IValidator... validators) {
         Text text = new Text(root, SWT.BORDER);
@@ -115,13 +112,6 @@ public class WizardContext implements IProjectTemplateContext {
             AbstractDataBindingPage page, IValidator... validators) {
         return createText(root, BeansObservables.observeValue(this, property), propertyName, bindingContext, page,
                 validators);
-    }
-
-    protected Text createTextForExt(Composite root, String property, String propertyName,
-            DataBindingContext bindingContext, AbstractDataBindingPage page) {
-        IObservableMap map = BeansObservables.observeMap(this, "extensions");
-        IObservableValue entry = Observables.observeMapEntry(map, property, String.class);
-        return createText(root, entry, propertyName, bindingContext, page);
     }
 
     private IProjectTemplate getDefaultTemplate(IMobileWebRuntime runtime) {
@@ -187,6 +177,7 @@ public class WizardContext implements IProjectTemplateContext {
 
         vars.put("widgetName", getWidgetName());
         vars.put("widgetId", getWidgetId());
+        vars.put("jsIncludes", jsIncludes);
         vars.putAll(extensions);
 
         return vars;
@@ -319,5 +310,21 @@ public class WizardContext implements IProjectTemplateContext {
                 }
             });
         }
+    }
+
+    private static final class NonClosingStream extends FilterInputStream {
+        private NonClosingStream(InputStream in) {
+            super(in);
+        }
+
+        @Override
+        public void close() throws IOException {
+            // Avoid closing ZIP file
+        }
+    }
+
+
+    public void addIncludedJsFile(IFile file) {
+        jsIncludes.add(file.getProjectRelativePath().makeRelative().toString());
     }
 }

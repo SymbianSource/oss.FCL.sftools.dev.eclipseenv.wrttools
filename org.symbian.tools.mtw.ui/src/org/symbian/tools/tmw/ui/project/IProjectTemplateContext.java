@@ -18,15 +18,8 @@
  */
 package org.symbian.tools.tmw.ui.project;
 
-import java.io.InputStream;
-
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.symbian.tools.tmw.core.projects.IProjectSetupAction;
+import org.symbian.tools.tmw.core.projects.IProjectSetupConfig;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 /**
@@ -34,7 +27,7 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
  * 
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
-public interface IProjectTemplateContext extends IProjectSetupAction {
+public interface IProjectTemplateContext extends IProjectSetupConfig {
     /**
      * @return runtime that the project targets
      */
@@ -53,19 +46,6 @@ public interface IProjectTemplateContext extends IProjectSetupAction {
     String[] getParameterNames();
 
     void putParameter(String key, Object value);
-
-    /**
-     * Allows the framework to reduce dependance on exact project layout. I.e. 
-     * some IDEs may want to introduce separation of the web resources and 
-     * JavaScript source files.
-     * 
-     * @param project project to add file to
-     * @param name file path relative to application root
-     * @param contents stream with file contents
-     * @param monitor progress monitor
-     * @throws CoreException
-     */
-    IFile addFile(IProject project, IPath name, InputStream contents, IProgressMonitor monitor) throws CoreException;
 
     /**
      * Allows binding to parameter value from UI.
