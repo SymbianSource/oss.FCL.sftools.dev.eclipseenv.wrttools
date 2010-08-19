@@ -28,10 +28,10 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 public class UIUtils {
-    public static IMTWProject getProjectFromCommandContext(ExecutionEvent event) {
+    public static ITMWProject getProjectFromCommandContext(ExecutionEvent event) {
         IResource resource = null;
         IWorkbenchPart activePart = HandlerUtil.getActivePart(event);
         if (activePart instanceof IEditorPart) {

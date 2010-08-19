@@ -29,7 +29,7 @@ import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.swt.program.Program;
 import org.eclipse.ui.IMemento;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
@@ -37,9 +37,9 @@ import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
 public class ExternalApplicationDeploymentType extends PlatformObject implements IDeploymentTargetType,
         IDeploymentTarget {
 
-    private IMTWProject project;
+    private ITMWProject project;
 
-    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
+    public IStatus deploy(ITMWProject project, IPackager packager, IProgressMonitor monitor)
             throws CoreException {
         Program app = getExternalApp(project);
         File file = packager.packageApplication(project, monitor);
@@ -58,7 +58,7 @@ public class ExternalApplicationDeploymentType extends PlatformObject implements
         // Do nothing
     }
 
-    public IDeploymentTarget findTarget(IMTWProject project, String id) {
+    public IDeploymentTarget findTarget(ITMWProject project, String id) {
         if (getExternalApp(project) != null) {
             return this;
         } else {
@@ -70,7 +70,7 @@ public class ExternalApplicationDeploymentType extends PlatformObject implements
         return getExternalApp(project).getName();
     }
 
-    private Program getExternalApp(IMTWProject project) {
+    private Program getExternalApp(ITMWProject project) {
         this.project = project;
         IPackager packager = TMWCore.getRuntimesManager().getPackager(project);
         if (packager != null) {
@@ -96,7 +96,7 @@ public class ExternalApplicationDeploymentType extends PlatformObject implements
         return null;
     }
 
-    public IDeploymentTarget[] getTargets(IMTWProject project) {
+    public IDeploymentTarget[] getTargets(ITMWProject project) {
         if (getExternalApp(project) != null) {
             return new IDeploymentTarget[] { this };
         } else {
@@ -104,7 +104,7 @@ public class ExternalApplicationDeploymentType extends PlatformObject implements
         }
     }
 
-    public void init(IMTWProject project, IPackager packager, IMemento memento) {
+    public void init(ITMWProject project, IPackager packager, IMemento memento) {
         // Do nothing
     }
 

@@ -51,7 +51,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.ui.IMemento;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 
@@ -71,7 +71,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         this.provider = provider;
     }
 
-    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException {
+    public IStatus deploy(ITMWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException {
         message = "Deployment was successful. Please follow on-screen instructions to complete application deployment on your device.";
         statuses.clear();
         monitor.beginTask(String.format("Deploying application %s to %s", project.getName(), name),
@@ -302,7 +302,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         return serviceURL;
     }
 
-    public void init(IMTWProject project, IPackager packager, IMemento memento) {
+    public void init(ITMWProject project, IPackager packager, IMemento memento) {
         // nothing
     }
 

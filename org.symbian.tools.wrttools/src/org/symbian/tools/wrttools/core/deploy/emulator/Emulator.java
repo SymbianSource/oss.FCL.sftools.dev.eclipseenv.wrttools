@@ -31,7 +31,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.IMemento;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.wrttools.Activator;
@@ -95,7 +95,7 @@ public class Emulator extends PlatformObject implements IDeploymentTarget {
         return path;
     }
 
-    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
+    public IStatus deploy(ITMWProject project, IPackager packager, IProgressMonitor monitor)
             throws CoreException {
         final File application = packager.packageApplication(project, monitor);
         final File outputFile = new File(path);
@@ -136,7 +136,7 @@ public class Emulator extends PlatformObject implements IDeploymentTarget {
         // Do nothing
     }
 
-    public void init(IMTWProject project, IPackager packager, IMemento memento) {
+    public void init(ITMWProject project, IPackager packager, IMemento memento) {
         // Do nothing
     }
 }

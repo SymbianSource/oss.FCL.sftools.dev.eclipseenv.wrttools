@@ -407,6 +407,9 @@ public class ProjectUtils {
     }
 
     public static boolean isExcluded(IResource resource) {
+        if (resource.getType() == IResource.PROJECT || resource.getType() == IResource.ROOT) {
+            return false;
+        }
         if (!resource.exists()) {
             return false;
         }
@@ -414,7 +417,8 @@ public class ProjectUtils {
             IMarker[] markers = resource
                     .findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
             IPath path = resource.getProjectRelativePath();
-            return markers.length != 0 || (path.segmentCount() > 1 && ".settings".equals(path.segment(0)));
+            return markers.length != 0 || (path.segmentCount() > 1 && ".settings".equals(path.segment(0)))
+                    || isExcluded(resource.getParent());
         } catch (CoreException e) {
             Activator.log(e);
             return false;

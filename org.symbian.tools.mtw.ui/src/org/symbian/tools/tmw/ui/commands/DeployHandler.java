@@ -33,7 +33,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.ui.UIUtils;
 import org.symbian.tools.tmw.ui.deployment.DeployWizard;
 
@@ -56,7 +56,7 @@ public class DeployHandler extends AbstractHandler {
     public Object execute(ExecutionEvent event) throws ExecutionException {
         final IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
-        final IMTWProject project = UIUtils.getProjectFromCommandContext(event);
+        final ITMWProject project = UIUtils.getProjectFromCommandContext(event);
         if (project != null) {
             window.getActivePage().saveAllEditors(true);
             if (validate(project, window)) {
@@ -67,7 +67,7 @@ public class DeployHandler extends AbstractHandler {
         return null;
     }
 
-    private boolean validate(final IMTWProject project, final IWorkbenchWindow window) {
+    private boolean validate(final ITMWProject project, final IWorkbenchWindow window) {
         final boolean[] retvalue = { false };
         final ProgressMonitorDialog dialog = new ProgressMonitorDialog(window.getShell());
         try {

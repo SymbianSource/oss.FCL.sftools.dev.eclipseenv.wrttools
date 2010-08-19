@@ -25,15 +25,15 @@ import org.eclipse.core.resources.IProject;
  * 
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
-public interface IMTWProjectProvider {
+public interface ITMWProjectProvider {
     /**
-     * Returns {@link IMTWProject} object that works with specified {@link IProject} object.
+     * Returns {@link ITMWProject} object that works with specified {@link IProject} object.
      * @return non-<code>null</code> object
      */
-    IMTWProject create(IProject project);
+    ITMWProject create(IProject project);
 
     /**
-     * @return <code>true</code> if the {@link IMTWProject} object can be created.
+     * @return <code>true</code> if the {@link ITMWProject} object can be created.
      */
     boolean isSupportedProject(IProject project);
 }

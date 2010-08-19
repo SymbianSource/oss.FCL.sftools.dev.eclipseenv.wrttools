@@ -85,7 +85,7 @@ public class CoreUtil {
         return null;
     }
 
-    public static String readFile(IProject project, IFile file) throws CoreException {
+    public static String readFile(IFile file) throws CoreException {
         try {
             if (file != null && file.isAccessible()) {
                 final BufferedReader reader = new BufferedReader(new InputStreamReader(file.getContents(),
@@ -95,7 +95,7 @@ public class CoreUtil {
             return null;
         } catch (IOException e) {
             throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, MessageFormat.format(
-                    "Failed to read file {0} in project {1}", file.getName(), project.getName())));
+                    "Failed to read file {0} in project {1}", file.getName(), file.getProject().getName())));
         }
     }
 
@@ -131,7 +131,7 @@ public class CoreUtil {
                 return record.fileName;
             }
         }
-        String fileName = getIndexFileName(readFile(project, file));
+        String fileName = getIndexFileName(readFile(file));
         INDEX_FILES.put(project, new IndexFileRecord(fileName, file.getModificationStamp()));
         return fileName;
     }

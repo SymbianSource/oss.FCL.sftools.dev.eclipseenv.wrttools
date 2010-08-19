@@ -318,7 +318,7 @@
        </keyword>
     </extension>
     <extension
-          point="org.symbian.tools.wrttools.previewer.commands">
+          point="org.symbian.tools.tmw.previewer.commands">
        <command
              handler="org.symbian.tools.wrttools.debug.internal.session.TerminateSession"
              name="terminateDebug">

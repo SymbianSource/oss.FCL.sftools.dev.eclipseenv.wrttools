@@ -26,7 +26,7 @@ import java.util.TreeMap;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntimeManager;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
@@ -72,11 +72,11 @@ public final class RuntimesManagerImpl implements IMobileWebRuntimeManager {
         return rts.toArray(new IMobileWebRuntime[rts.size()]);
     }
 
-    public IPackager getPackager(IMTWProject project) {
+    public IPackager getPackager(ITMWProject project) {
         return getPackager(project, project.getTargetRuntime());
     }
 
-    public IPackager getPackager(IMTWProject project, IMobileWebRuntime runtime) {
+    public IPackager getPackager(ITMWProject project, IMobileWebRuntime runtime) {
         if (packagers == null) {
             collectPackagers();
         }

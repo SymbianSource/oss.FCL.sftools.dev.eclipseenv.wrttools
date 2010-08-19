@@ -29,14 +29,14 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackagerDelegate;
 import org.symbian.tools.tmw.core.utilities.ZipApplicationVisitor;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WrtPackager implements IPackagerDelegate {
-    public File packageApplication(IMTWProject project, IProgressMonitor monitor) throws CoreException {
+    public File packageApplication(ITMWProject project, IProgressMonitor monitor) throws CoreException {
         monitor.beginTask(String.format("Packaging %s", project.getName()), IProgressMonitor.UNKNOWN);
 
         IPath stateLocation = Activator.getDefault().getStateLocation();
@@ -54,7 +54,7 @@ public class WrtPackager implements IPackagerDelegate {
         return f;
     }
 
-    public String getFileType(IMTWProject project) {
+    public String getFileType(ITMWProject project) {
         return "wgz";
     }
 

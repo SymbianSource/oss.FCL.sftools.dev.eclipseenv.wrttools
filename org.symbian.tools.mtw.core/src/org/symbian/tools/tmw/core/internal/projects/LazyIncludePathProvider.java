@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.wst.jsdt.core.IIncludePathEntry;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IFacetIncludePathProvider;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 public class LazyIncludePathProvider implements IFacetIncludePathProvider {
     private final IConfigurationElement element;
@@ -33,7 +33,7 @@ public class LazyIncludePathProvider implements IFacetIncludePathProvider {
         this.element = element;
     }
 
-    public IIncludePathEntry[] getEntries(IMTWProject project) {
+    public IIncludePathEntry[] getEntries(ITMWProject project) {
         if (provider == null) {
             try {
                 provider = (LazyIncludePathProvider) element.createExecutableExtension("class");

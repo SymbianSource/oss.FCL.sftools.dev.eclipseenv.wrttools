@@ -32,7 +32,7 @@ import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.osgi.framework.Bundle;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IFacetIncludePathProvider;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 public class StaticIncludePathProvider implements IFacetIncludePathProvider {
     private final IConfigurationElement element;
@@ -42,7 +42,7 @@ public class StaticIncludePathProvider implements IFacetIncludePathProvider {
         this.element = element;
     }
 
-    public IIncludePathEntry[] getEntries(IMTWProject project) {
+    public IIncludePathEntry[] getEntries(ITMWProject project) {
         if (entries == null) {
             final String name = element.getContributor().getName();
             final String path = element.getAttribute("file");

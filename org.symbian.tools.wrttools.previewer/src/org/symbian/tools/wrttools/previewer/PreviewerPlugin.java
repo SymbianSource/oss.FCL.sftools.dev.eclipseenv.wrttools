@@ -32,6 +32,8 @@ import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.symbian.tools.tmw.previewer.core.IPreviewerExtensionsManager;
+import org.symbian.tools.tmw.previewer.internal.PreviewerExtensionsManagerImpl;
 import org.symbian.tools.wrttools.previewer.http.HttpPreviewer;
 
 /**
@@ -40,7 +42,7 @@ import org.symbian.tools.wrttools.previewer.http.HttpPreviewer;
 public class PreviewerPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.symbian.tools.wrttools.previewer";
+    public static final String PLUGIN_ID = "org.symbian.tools.tmw.previewer";
 	public static final String PREVIEW_VIEW = "org.symbian.tools.wrttools.editing.wrtpreview";
 
 	public static final boolean DEBUG = Platform.inDebugMode()
@@ -60,6 +62,7 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static PreviewerPlugin plugin;
 
+    private final IPreviewerExtensionsManager extensionsManager = new PreviewerExtensionsManagerImpl();
     private final CommandHandlerManager handlerManager = new CommandHandlerManager();
 	private final HttpPreviewer previewer = new HttpPreviewer();
     private MessageConsole console;
@@ -145,5 +148,9 @@ public class PreviewerPlugin extends AbstractUIPlugin {
         console.activate();
         console.newMessageStream().write(
                 message);
+    }
+
+    public static IPreviewerExtensionsManager getExtensionsManager() {
+        return getDefault().extensionsManager;
     }
 }

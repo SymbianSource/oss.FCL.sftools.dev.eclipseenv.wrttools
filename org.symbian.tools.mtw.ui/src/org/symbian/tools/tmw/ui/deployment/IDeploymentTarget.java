@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.ui.IMemento;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 
 /**
@@ -72,7 +72,7 @@ public interface IDeploymentTarget extends IAdaptable {
      * @param runtime runtime that will be used to run packaged application
      * @param monitor progress monitor to report deployment progress
      */
-    IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException;
+    IStatus deploy(ITMWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException;
 
     /**
      * Save project-specific settings to the memento. Workspace-wide settings 
@@ -83,5 +83,5 @@ public interface IDeploymentTarget extends IAdaptable {
     /**
      * Initialize target for project deployment.
      */
-    void init(IMTWProject project, IPackager packager, IMemento memento);
+    void init(ITMWProject project, IPackager packager, IMemento memento);
 }

@@ -16,10 +16,23 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.tmw.core.projects;
+package org.symbian.tools.tmw.core.utilities;
 
-import org.eclipse.wst.jsdt.core.IIncludePathEntry;
+import org.eclipse.core.runtime.Platform;
 
-public interface IFacetIncludePathProvider {
-    IIncludePathEntry[] getEntries(ITMWProject project);
+/**
+ * Utilities used all over the TMW code base. Users can rely on this methods 
+ * even though they are not specific to mobile development.
+ * 
+ * @author Eugene Ostroukhov (eugeneo@symbian.org)
+ */
+public final class CoreUtil {
+
+    private CoreUtil() {
+        // Class with only static methods
+    }
+
+    public static boolean isMac() {
+        return "macosx".equals(Platform.getOS());
+    }
 }

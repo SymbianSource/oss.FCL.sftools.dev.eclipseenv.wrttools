@@ -24,7 +24,7 @@ import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 
@@ -38,7 +38,7 @@ public class PackagingInformationDecorator implements ILightweightLabelDecorator
             resource = (IResource) ((IAdaptable) element).getAdapter(IResource.class);
         }
         if (resource != null && resource.isAccessible()) {
-            IMTWProject project = TMWCore.create(resource.getProject());
+            ITMWProject project = TMWCore.create(resource.getProject());
             if (project != null) {
                 IPackager packager = TMWCore.getRuntimesManager().getPackager(project);
                 if (packager.getPathInPackage(resource) != null) {

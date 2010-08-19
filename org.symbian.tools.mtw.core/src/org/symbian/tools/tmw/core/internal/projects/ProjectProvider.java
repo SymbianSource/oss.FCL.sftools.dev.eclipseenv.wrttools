@@ -26,13 +26,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
-import org.symbian.tools.tmw.core.projects.IMTWProjectProvider;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProjectProvider;
 
-public class ProjectProvider implements IMTWProjectProvider {
+public class ProjectProvider implements ITMWProjectProvider {
     private final IConfigurationElement element;
     private final Expression expression;
-    private IMTWProjectProvider provider;
+    private ITMWProjectProvider provider;
 
     public ProjectProvider(IConfigurationElement element) throws CoreException {
         this.element = element;
@@ -49,14 +49,14 @@ public class ProjectProvider implements IMTWProjectProvider {
         }
     }
 
-    public IMTWProject create(IProject project) {
+    public ITMWProject create(IProject project) {
         return getProvider().create(project);
     }
 
-    private IMTWProjectProvider getProvider() {
+    private ITMWProjectProvider getProvider() {
         if (provider == null) {
             try {
-                provider = (IMTWProjectProvider) element.createExecutableExtension("class");
+                provider = (ITMWProjectProvider) element.createExecutableExtension("class");
             } catch (CoreException e) {
                 throw new RuntimeException(e);
             }

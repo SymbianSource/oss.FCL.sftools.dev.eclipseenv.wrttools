@@ -10,7 +10,6 @@ import java.util.Map;
 import org.chromium.debug.core.model.VmResourceId;
 import org.chromium.sdk.Script;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 /**
@@ -57,7 +56,7 @@ public class ResourceManager {
 		return getResource(script) != null;
 	}
 
-	public String translateResourceToScript(IResource resource) {
+    public String translateResourceToScript(IFile resource) {
 		return PreviewerPlugin.getDefault().getHttpPreviewer().getHttpUrl(resource);
 	}
 

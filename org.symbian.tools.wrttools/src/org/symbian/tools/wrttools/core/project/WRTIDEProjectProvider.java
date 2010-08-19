@@ -22,16 +22,16 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import org.eclipse.core.resources.IProject;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
-import org.symbian.tools.tmw.core.projects.IMTWProjectProvider;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProjectProvider;
 import org.symbian.tools.wrttools.WRTProject;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-public class WRTIDEProjectProvider implements IMTWProjectProvider {
-    private final Map<IProject, IMTWProject> projects = new WeakHashMap<IProject, IMTWProject>();
+public class WRTIDEProjectProvider implements ITMWProjectProvider {
+    private final Map<IProject, ITMWProject> projects = new WeakHashMap<IProject, ITMWProject>();
 
-    public IMTWProject create(IProject project) {
-        IMTWProject p = projects.get(project);
+    public ITMWProject create(IProject project) {
+        ITMWProject p = projects.get(project);
         if (p == null) {
             p = new WRTProject(project);
             projects.put(project, p);

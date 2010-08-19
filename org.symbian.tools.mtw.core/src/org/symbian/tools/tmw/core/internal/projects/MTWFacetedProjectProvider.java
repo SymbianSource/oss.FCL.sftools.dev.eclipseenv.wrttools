@@ -26,13 +26,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.wst.common.project.facet.core.FacetedProjectFramework;
 import org.symbian.tools.tmw.core.ITMWConstants;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
-import org.symbian.tools.tmw.core.projects.IMTWProjectProvider;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProjectProvider;
 
-public class MTWFacetedProjectProvider implements IMTWProjectProvider {
-    private final Map<IProject, IMTWProject> projects = new WeakHashMap<IProject, IMTWProject>();
+public class MTWFacetedProjectProvider implements ITMWProjectProvider {
+    private final Map<IProject, ITMWProject> projects = new WeakHashMap<IProject, ITMWProject>();
 
-    public IMTWProject create(IProject project) {
+    public ITMWProject create(IProject project) {
         if (!projects.containsKey(project)) {
             projects.put(project, new TMWFacetedProject(project));
         }

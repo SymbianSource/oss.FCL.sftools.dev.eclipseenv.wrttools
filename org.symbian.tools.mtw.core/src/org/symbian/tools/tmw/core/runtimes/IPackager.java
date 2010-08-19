@@ -24,7 +24,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 /**
  * Packager creates a runtime-specific application package that can be 
@@ -38,7 +38,7 @@ public interface IPackager {
      * 
      * @return {@link File} denoting location of the application package that can be deployed to targets
      */
-    File packageApplication(IMTWProject project, IProgressMonitor monitor)
+    File packageApplication(ITMWProject project, IProgressMonitor monitor)
             throws CoreException;
 
     /**
@@ -49,7 +49,7 @@ public interface IPackager {
     /**
      * @return file type of the application archive
      */
-    String getFileType(IMTWProject project);
+    String getFileType(ITMWProject project);
 
     /**
      * @return target runtime that this packager packages for

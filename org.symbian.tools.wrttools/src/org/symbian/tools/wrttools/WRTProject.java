@@ -36,10 +36,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
-public class WRTProject implements IMTWProject {
+public class WRTProject implements ITMWProject {
     private static final String PROP_PREFERED_SCREEN = "preferred.screen.size";
     private static final IPath PROPERTIES_FILE = new Path(".settings").append(Activator.PLUGIN_ID + ".properties");
     public static final String WRT11_RUNTIME = "org.symbian.tools.wrttools.wrt";

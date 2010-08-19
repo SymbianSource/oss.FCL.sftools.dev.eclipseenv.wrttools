@@ -31,7 +31,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.XMLMemento;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
 
@@ -41,10 +41,10 @@ public class ProjectMemo {
     private static final String TARGET_CONFIGURATION = "target";
     private static final String MEMO_TYPE = "deployment";
 
-    private final IMTWProject project;
+    private final ITMWProject project;
     private XMLMemento memento;
 
-    public ProjectMemo(IMTWProject project) {
+    public ProjectMemo(ITMWProject project) {
         this.project = project;
     }
 

@@ -41,7 +41,7 @@ import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.internal.projects.LazyIncludePathProvider;
 import org.symbian.tools.tmw.core.internal.projects.StaticIncludePathProvider;
 import org.symbian.tools.tmw.core.projects.IFacetIncludePathProvider;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 @SuppressWarnings("restriction")
@@ -110,7 +110,7 @@ public class RuntimeClasspathManager {
 
     public IIncludePathEntry[] getProjectClasspathEntries(IFacetedProject project) {
         collectProviders();
-        final IMTWProject p = TMWCore.create(project.getProject());
+        final ITMWProject p = TMWCore.create(project.getProject());
         if (p != null) {
             final IMobileWebRuntime runtime = p.getTargetRuntime();
             final Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> facetToEntry;

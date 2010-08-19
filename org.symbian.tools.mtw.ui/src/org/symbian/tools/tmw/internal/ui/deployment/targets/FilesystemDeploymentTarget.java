@@ -36,7 +36,7 @@ import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.ui.IMemento;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
@@ -46,7 +46,7 @@ public class FilesystemDeploymentTarget extends PlatformObject implements IDeplo
     private String defaultName;
     private IPath path;
 
-    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException {
+    public IStatus deploy(ITMWProject project, IPackager packager, IProgressMonitor monitor) throws CoreException {
         final File file = packager.packageApplication(project, monitor);
         try {
             final InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
@@ -74,7 +74,7 @@ public class FilesystemDeploymentTarget extends PlatformObject implements IDeplo
         // Do nothing
     }
 
-    public IDeploymentTarget findTarget(IMTWProject project, String id) {
+    public IDeploymentTarget findTarget(ITMWProject project, String id) {
         return getId().equals(id) ? this : null;
     }
 
@@ -102,11 +102,11 @@ public class FilesystemDeploymentTarget extends PlatformObject implements IDeplo
         return null;
     }
 
-    public IDeploymentTarget[] getTargets(IMTWProject project) {
+    public IDeploymentTarget[] getTargets(ITMWProject project) {
         return new IDeploymentTarget[] { this };
     }
 
-    public void init(IMTWProject project, IPackager packager, IMemento memento) {
+    public void init(ITMWProject project, IPackager packager, IMemento memento) {
         defaultName = new Path(project.getName()).addFileExtension(packager.getFileType(project)).toOSString();
         path = null;
         String string = memento != null ? memento.getString("path") : null;

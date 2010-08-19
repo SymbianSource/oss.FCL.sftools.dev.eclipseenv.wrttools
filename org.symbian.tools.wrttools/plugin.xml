@@ -819,6 +819,9 @@ function updateOrientation(orientation) {
                id="org.symbian.tools.wrttools.wrt"
                version="1.1">
          </runtime-component>
+         <facet
+               id="symbian.phonegap">
+         </facet>
       </supported>
    </extension>
    <extension
@@ -948,6 +951,31 @@ function updateOrientation(orientation) {
             </config-factory>
          </action>
       </project-facet-version>
+      <project-facet
+            id="symbian.phonegap">
+         <label>
+            PhoneGap
+         </label>
+         <description>
+            PhoneGap application
+         </description>
+      </project-facet>
+      <project-facet-version
+            facet="symbian.phonegap"
+            version="1.0">
+         <constraint>
+            <requires
+                  facet="tmw.core"
+                  ignore-problems="1.0">
+            </requires>
+         </constraint>
+         <action
+               type="install">
+            <delegate
+                  class="org.symbian.tools.wrttools.core.libraries.PhoneGapLibraryInstaller">
+            </delegate>
+         </action>
+      </project-facet-version>
    </extension>
    <extension
          point="org.eclipse.wst.common.project.facet.ui.images">
@@ -956,6 +984,14 @@ function updateOrientation(orientation) {
             path="icons/main16_prev.gif"
             version="1.0">
       </image>
+   </extension>
+   <extension
+         point="org.symbian.tools.tmw.previewer.layoutProviders">
+      <layout-provider
+            class="org.symbian.tools.wrttools.core.project.WRT11ApplicationLayout"
+            runtime-id="org.symbian.tools.wrttools.wrt"
+            runtime-version="1.1">
+      </layout-provider>
    </extension>
  
 </plugin>

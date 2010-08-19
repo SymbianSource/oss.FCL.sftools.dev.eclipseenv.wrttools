@@ -26,14 +26,14 @@ import org.eclipse.wst.common.project.facet.ui.IDecorationsProvider;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.internal.ui.IJsGlobalScopeContainerInitializerExtension;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 @SuppressWarnings("restriction")
 public class TMWGlobalScopeContainerUI implements IJsGlobalScopeContainerInitializerExtension {
 
     public ImageDescriptor getImage(IPath containerPath, String element, IJavaScriptProject project) {
-        final IMTWProject p = TMWCore.create(project.getProject());
+        final ITMWProject p = TMWCore.create(project.getProject());
         if (p != null) {
             final IMobileWebRuntime runtime = p.getTargetRuntime();
             if (runtime != null) {

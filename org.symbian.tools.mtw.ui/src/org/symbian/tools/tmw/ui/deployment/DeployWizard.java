@@ -30,7 +30,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.internal.ui.deployment.DeployWizardContext;
 import org.symbian.tools.tmw.internal.ui.deployment.DeploymentTargetWizardPage;
@@ -40,9 +40,9 @@ import org.symbian.tools.tmw.ui.TMWCoreUI;
 
 public final class DeployWizard extends Wizard {
     private final DeployWizardContext context;
-    private final IMTWProject project;
+    private final ITMWProject project;
 
-    public DeployWizard(IMTWProject project) {
+    public DeployWizard(ITMWProject project) {
         this.project = project;
         setNeedsProgressMonitor(true);
         setWindowTitle("Deploy Mobile Application");
@@ -91,7 +91,7 @@ public final class DeployWizard extends Wizard {
         return false;
     }
 
-    private IStatus doDeploy(DeploymentTargetWrapper target, IMTWProject project, IProgressMonitor monitor) {
+    private IStatus doDeploy(DeploymentTargetWrapper target, ITMWProject project, IProgressMonitor monitor) {
         IStatus status;
         try {
             IPackager packager = TMWCore.getRuntimesManager().getPackager(project);
@@ -106,9 +106,9 @@ public final class DeployWizard extends Wizard {
 
     private final class DeployJob extends Job {
         private final DeploymentTargetWrapper target;
-        private final IMTWProject project;
+        private final ITMWProject project;
 
-        private DeployJob(IMTWProject project, DeploymentTargetWrapper deploymentTarget) {
+        private DeployJob(ITMWProject project, DeploymentTargetWrapper deploymentTarget) {
             super(String.format("Deploying %s to %s", project.getName(), deploymentTarget.getName()));
             ISchedulingRule rule = deploymentTarget.getType().getSchedulingRule(deploymentTarget.getActualTarget());
             if (rule != null) {

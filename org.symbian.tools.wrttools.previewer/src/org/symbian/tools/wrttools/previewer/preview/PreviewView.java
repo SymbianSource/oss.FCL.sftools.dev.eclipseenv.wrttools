@@ -35,229 +35,212 @@ import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
 import org.symbian.tools.wrttools.previewer.IWrtEditingPreferences;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
-import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class PreviewView extends PageBookView {
-	private final IResourceChangeListener resourceListener = new IResourceChangeListener() {
-		public void resourceChanged(IResourceChangeEvent event) {
-			if (event.getDelta() != null) {
+    private final IResourceChangeListener resourceListener = new IResourceChangeListener() {
+        public void resourceChanged(IResourceChangeEvent event) {
+            if (event.getDelta() != null) {
                 new RefreshJob(event.getDelta(), PreviewView.this).schedule();
-			}
-		}
-	};
+            }
+        }
+    };
 
-	private final Map<IProject, IPreviewPage> projectToPage = new HashMap<IProject, IPreviewPage>();
-	private boolean preferencesLoaded = false;
-	private final Map<IProject, Boolean> autorefresh = new HashMap<IProject, Boolean>();
+    private final Map<IProject, IPreviewPage> projectToPage = new HashMap<IProject, IPreviewPage>();
+    private boolean preferencesLoaded = false;
+    private final Map<IProject, Boolean> autorefresh = new HashMap<IProject, Boolean>();
 
-	@Override
-	protected IPage createDefaultPage(PageBook book) {
-		MessagePage messagePage = new MessagePage();
-		messagePage.setMessage("Open an editor to preview Mobile Web App");
-		initPage(messagePage);
-		messagePage.createControl(book);
-		return messagePage;
-	}
+    @Override
+    protected IPage createDefaultPage(PageBook book) {
+        MessagePage messagePage = new MessagePage();
+        messagePage.setMessage("Open an editor to preview Mobile Web App");
+        initPage(messagePage);
+        messagePage.createControl(book);
+        return messagePage;
+    }
 
-	@Override
-	public void createPartControl(Composite parent) {
-		super.createPartControl(parent);
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(
-				resourceListener);
-	}
+    @Override
+    public void createPartControl(Composite parent) {
+        super.createPartControl(parent);
+        ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceListener);
+    }
 
-	@Override
-	public void dispose() {
-		ResourcesPlugin.getWorkspace().removeResourceChangeListener(
-				resourceListener);
-		super.dispose();
-	}
+    @Override
+    public void dispose() {
+        ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceListener);
+        super.dispose();
+    }
 
-	@Override
-	protected PageRec doCreatePage(IWorkbenchPart part) {
-		// All checks we need were done in isImportant method
-		IResource resource = (IResource) ((IEditorPart) part).getEditorInput()
-				.getAdapter(IResource.class);
+    @Override
+    protected PageRec doCreatePage(IWorkbenchPart part) {
+        // All checks we need were done in isImportant method
+        IResource resource = (IResource) ((IEditorPart) part).getEditorInput().getAdapter(IResource.class);
 
-		IProject project = resource.getProject();
-		IPreviewPage page = projectToPage.get(project);
+        IProject project = resource.getProject();
+        IPreviewPage page = projectToPage.get(project);
 
-		if (page == null || page.isDisposed()) {
-			page = createPreviewPage(project);
-			initPage(page);
-			page.createControl(getPageBook());
-			projectToPage.put(project, page);
-		}
+        if (page == null || page.isDisposed()) {
+            page = createPreviewPage(project);
+            initPage(page);
+            page.createControl(getPageBook());
+            projectToPage.put(project, page);
+        }
 
-		return new PageRec(part, page);
-	}
+        return new PageRec(part, page);
+    }
 
-	private IPreviewPage createPreviewPage(IProject project) {
-		if (Platform.getBundle(MozillaPreviewPage.XUL_RUNNER_BUNDLE) != null) {
-			return new MozillaPreviewPage(project, this);
-		} else {
-			return new SwtBrowserPreviewPage(project, this);
-		}
-	}
+    private IPreviewPage createPreviewPage(IProject project) {
+        if (Platform.getBundle(MozillaPreviewPage.XUL_RUNNER_BUNDLE) != null) {
+            return new MozillaPreviewPage(project, this);
+        } else {
+            return new SwtBrowserPreviewPage(project, this);
+        }
+    }
 
-	@Override
-	protected void doDestroyPage(IWorkbenchPart part, PageRec pageRecord) {
-		// We do not need to delete the page
-	}
+    @Override
+    protected void doDestroyPage(IWorkbenchPart part, PageRec pageRecord) {
+        // We do not need to delete the page
+    }
 
-	@Override
-	protected IWorkbenchPart getBootstrapPart() {
-		IEditorPart activeEditor = getSite().getPage().getActiveEditor();
-		if (activeEditor != null) {
-			if (isImportant(activeEditor)) {
-				return activeEditor;
-			}
-		}
-		return null;
-	}
+    @Override
+    protected IWorkbenchPart getBootstrapPart() {
+        IEditorPart activeEditor = getSite().getPage().getActiveEditor();
+        if (activeEditor != null) {
+            if (isImportant(activeEditor)) {
+                return activeEditor;
+            }
+        }
+        return null;
+    }
 
-	private boolean getDefaultAutorefresh(IProject project) {
-		IPreferenceStore preferenceStore = PreviewerPlugin.getDefault()
-				.getPreferenceStore();
-		String value = preferenceStore
-				.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
-		boolean toggle = !MessageDialogWithToggle.NEVER.equals(value);
-		if (MessageDialogWithToggle.NEVER.equals(value)
-				|| MessageDialogWithToggle.ALWAYS.equals(value)) {
-			setProjectAutorefresh(project, toggle);
-		}
-		return toggle;
-	}
+    private boolean getDefaultAutorefresh(IProject project) {
+        IPreferenceStore preferenceStore = PreviewerPlugin.getDefault().getPreferenceStore();
+        String value = preferenceStore.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
+        boolean toggle = !MessageDialogWithToggle.NEVER.equals(value);
+        if (MessageDialogWithToggle.NEVER.equals(value) || MessageDialogWithToggle.ALWAYS.equals(value)) {
+            setProjectAutorefresh(project, toggle);
+        }
+        return toggle;
+    }
 
-	private File getPreferencesFile() {
-		return PreviewerPlugin.getDefault().getStateLocation().append(
-				"autorefreshState.xml").toFile();
-	}
+    private File getPreferencesFile() {
+        return PreviewerPlugin.getDefault().getStateLocation().append("autorefreshState.xml").toFile();
+    }
 
-	public boolean getProjectAutorefresh(IProject project) {
-		synchronized (autorefresh) {
-			loadPreferences();
-			if (autorefresh.containsKey(project)) {
-				return autorefresh.get(project);
-			} else {
-				boolean value = getDefaultAutorefresh(project);
-				return value;
-			}
-		}
-	}
+    public boolean getProjectAutorefresh(IProject project) {
+        synchronized (autorefresh) {
+            loadPreferences();
+            if (autorefresh.containsKey(project)) {
+                return autorefresh.get(project);
+            } else {
+                boolean value = getDefaultAutorefresh(project);
+                return value;
+            }
+        }
+    }
 
-	@Override
-	protected boolean isImportant(IWorkbenchPart part) {
-		if (part instanceof IEditorPart) {
-			IResource resource = (IResource) ((IEditorPart) part)
-					.getEditorInput().getAdapter(IResource.class);
-			if (resource != null) {
-				return ProjectUtils.hasWrtNature(resource.getProject());
-			}
-		}
-		return false;
-	}
+    @Override
+    protected boolean isImportant(IWorkbenchPart part) {
+        if (part instanceof IEditorPart) {
+            IResource resource = (IResource) ((IEditorPart) part).getEditorInput().getAdapter(IResource.class);
+            if (resource != null) {
+                return PreviewerPlugin.getExtensionsManager().getLayoutProvider(resource.getProject()) != null;
+            }
+        }
+        return false;
+    }
 
-	private void loadPreferences() {
-		synchronized (autorefresh) {
-			if (preferencesLoaded) {
-				return;
-			}
-			preferencesLoaded = true;
-			File preferencesFile = getPreferencesFile();
-			Properties properties = new Properties();
-			if (preferencesFile.exists()) {
-				InputStream inputStream = null;
-				try {
-					inputStream = new FileInputStream(preferencesFile);
-					properties.loadFromXML(inputStream);
-				} catch (IOException e) {
-					PreviewerPlugin.log(e);
-				} finally {
-					if (inputStream != null) {
-						try {
-							inputStream.close();
-						} catch (IOException e) {
-							PreviewerPlugin.log(e);
-						}
-					}
-				}
-				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-				for (Entry<Object, Object> entry : properties.entrySet()) {
-					String projectName = entry.getKey().toString();
-					String value = entry.getValue().toString();
-					IProject project = root.getProject(projectName);
-					if (project.exists()) {
-						autorefresh.put(project, Boolean.valueOf(value));
-					}
-				}
-			}
-		}
-	}
+    private void loadPreferences() {
+        synchronized (autorefresh) {
+            if (preferencesLoaded) {
+                return;
+            }
+            preferencesLoaded = true;
+            File preferencesFile = getPreferencesFile();
+            Properties properties = new Properties();
+            if (preferencesFile.exists()) {
+                InputStream inputStream = null;
+                try {
+                    inputStream = new FileInputStream(preferencesFile);
+                    properties.loadFromXML(inputStream);
+                } catch (IOException e) {
+                    PreviewerPlugin.log(e);
+                } finally {
+                    if (inputStream != null) {
+                        try {
+                            inputStream.close();
+                        } catch (IOException e) {
+                            PreviewerPlugin.log(e);
+                        }
+                    }
+                }
+                IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+                for (Entry<Object, Object> entry : properties.entrySet()) {
+                    String projectName = entry.getKey().toString();
+                    String value = entry.getValue().toString();
+                    IProject project = root.getProject(projectName);
+                    if (project.exists()) {
+                        autorefresh.put(project, Boolean.valueOf(value));
+                    }
+                }
+            }
+        }
+    }
 
-	protected void refreshPages(Collection<IFile> files) {
-		Collection<IPreviewPage> values = projectToPage.values();
-		for (IPreviewPage page : values) {
-			page.process(files);
-		}
-	}
+    protected void refreshPages(Collection<IFile> files) {
+        Collection<IPreviewPage> values = projectToPage.values();
+        for (IPreviewPage page : values) {
+            page.process(files);
+        }
+    }
 
-	public void setProjectAutorefresh(IProject project, boolean refresh) {
-		synchronized (autorefresh) {
-			autorefresh.put(project, refresh);
-			Properties properties = new Properties();
-			for (Entry<IProject, Boolean> entry : autorefresh.entrySet()) {
-				properties.setProperty(entry.getKey().getName(), entry
-						.getValue().toString());
-			}
-			File path = getPreferencesFile();
-			OutputStream outputStream = null;
-			try {
-				outputStream = new BufferedOutputStream(new FileOutputStream(
-						path));
-				properties.storeToXML(outputStream, null);
-			} catch (IOException e) {
-				PreviewerPlugin.log(e);
-			} finally {
-				if (outputStream != null) {
-					try {
-						outputStream.close();
-					} catch (IOException e) {
-						PreviewerPlugin.log(e);
-					}
-				}
-			}
-		}
-	}
+    public void setProjectAutorefresh(IProject project, boolean refresh) {
+        synchronized (autorefresh) {
+            autorefresh.put(project, refresh);
+            Properties properties = new Properties();
+            for (Entry<IProject, Boolean> entry : autorefresh.entrySet()) {
+                properties.setProperty(entry.getKey().getName(), entry.getValue().toString());
+            }
+            File path = getPreferencesFile();
+            OutputStream outputStream = null;
+            try {
+                outputStream = new BufferedOutputStream(new FileOutputStream(path));
+                properties.storeToXML(outputStream, null);
+            } catch (IOException e) {
+                PreviewerPlugin.log(e);
+            } finally {
+                if (outputStream != null) {
+                    try {
+                        outputStream.close();
+                    } catch (IOException e) {
+                        PreviewerPlugin.log(e);
+                    }
+                }
+            }
+        }
+    }
 
-	public boolean promptUserToToggle(IProject project, boolean toggle) {
-		IPreferenceStore preferenceStore = PreviewerPlugin.getDefault()
-				.getPreferenceStore();
-		String value = preferenceStore
-				.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
-		synchronized (autorefresh) {
-			if (!autorefresh.containsKey(project)) {
-				if (value == null || value.trim().length() == 0
-						|| MessageDialogWithToggle.PROMPT.equals(value)) {
-					boolean setting = MessageDialogWithToggle
-							.open(
-									MessageDialogWithToggle.QUESTION,
-									getSite().getShell(),
-									"Preview",
-									"The preview window can refresh (reinitialize and restart) whenever a project file is saved.\n" +
-									"This setting for each project can be toggled from the preview toolbar.\n\n" +
-									"Do you want to enable automatic refresh for this project?",
-									"Keep this setting for new projects",
-									false, preferenceStore,
-									IWrtEditingPreferences.PREF_AUTO_REFRESH,
-									SWT.SHEET).getReturnCode() == IDialogConstants.YES_ID;
-					setProjectAutorefresh(project, setting);
-					return setting;
-				}
-			}
-		}
-		return toggle;
-	}
+    public boolean promptUserToToggle(IProject project, boolean toggle) {
+        IPreferenceStore preferenceStore = PreviewerPlugin.getDefault().getPreferenceStore();
+        String value = preferenceStore.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
+        synchronized (autorefresh) {
+            if (!autorefresh.containsKey(project)) {
+                if (value == null || value.trim().length() == 0 || MessageDialogWithToggle.PROMPT.equals(value)) {
+                    boolean setting = MessageDialogWithToggle.open(
+                            MessageDialogWithToggle.QUESTION,
+                            getSite().getShell(),
+                            "Preview",
+                            "The preview window can refresh (reinitialize and restart) whenever a project file is saved.\n"
+                                    + "This setting for each project can be toggled from the preview toolbar.\n\n"
+                                    + "Do you want to enable automatic refresh for this project?",
+                            "Keep this setting for new projects", false, preferenceStore,
+                            IWrtEditingPreferences.PREF_AUTO_REFRESH, SWT.SHEET).getReturnCode() == IDialogConstants.YES_ID;
+                    setProjectAutorefresh(project, setting);
+                    return setting;
+                }
+            }
+        }
+        return toggle;
+    }
 
     public synchronized void projectRenamed(IProject project, IPath newPath) {
         IPreviewPage page = projectToPage.remove(project);

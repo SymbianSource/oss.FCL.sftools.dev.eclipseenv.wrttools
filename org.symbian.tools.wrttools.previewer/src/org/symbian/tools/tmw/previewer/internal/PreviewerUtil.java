@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.wrttools.previewer;
+package org.symbian.tools.tmw.previewer.internal;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,14 +24,14 @@ import java.util.HashSet;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.symbian.tools.wrttools.util.ProjectUtils;
+import org.symbian.tools.tmw.previewer.core.IApplicationLayoutProvider;
+import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 
 public class PreviewerUtil {
     public static final class ChangedResourcesCollector implements IResourceDeltaVisitor {
@@ -41,7 +41,8 @@ public class PreviewerUtil {
 
         public boolean visit(IResourceDelta delta) throws CoreException {
             IResource resource = delta.getResource();
-            if (resource.getType() == IResource.PROJECT) {
+            switch (resource.getType()) {
+            case IResource.PROJECT:
                 if (delta.getKind() == IResourceDelta.REMOVED) {
                     if ((delta.getFlags() & IResourceDelta.MOVED_TO) != 0) {
                         renamed.put(resource.getProject(), delta.getMovedToPath());
@@ -50,24 +51,22 @@ public class PreviewerUtil {
                     }
                     return false;
                 }
-            } else if (isRelevantResource(resource)) {
-                if (delta.getKind() == IResourceDelta.ADDED | delta.getKind() == IResourceDelta.REMOVED) {
-                    if (!ProjectUtils.isExcluded(resource)) {
-                        files.add((IFile) resource);
-                    }
-                } else if ((delta.getFlags() & (IResourceDelta.CONTENT | IResourceDelta.ENCODING
-                        | IResourceDelta.LOCAL_CHANGED | IResourceDelta.REPLACED | IResourceDelta.SYNC)) != 0) {
-                    if (!ProjectUtils.isExcluded(resource)) {
-                        files.add((IFile) resource);
-                    }
-                } else if (delta.getMarkerDeltas().length != 0) {
-                    for (IMarkerDelta markerDelta : delta.getMarkerDeltas()) {
-                        if (markerDelta.getType().equals(ProjectUtils.EXCLUDE_MARKER_ID)) {
+                break;
+            case IResource.FILE:
+                IApplicationLayoutProvider layoutProvider = PreviewerPlugin.getExtensionsManager().getLayoutProvider(
+                        resource.getProject());
+                if (layoutProvider != null) {
+                    if (layoutProvider.getResourcePath((IFile) resource) != null) {
+                        final boolean kind = delta.getKind() == IResourceDelta.ADDED
+                                | delta.getKind() == IResourceDelta.REMOVED;
+                        final boolean flag = (delta.getFlags() & (IResourceDelta.CONTENT | IResourceDelta.ENCODING
+                                | IResourceDelta.LOCAL_CHANGED | IResourceDelta.REPLACED | IResourceDelta.SYNC)) != 0;
+                        if (kind || flag) {
                             files.add((IFile) resource);
-                            break;
                         }
                     }
                 }
+                break;
             }
             return true;
         }

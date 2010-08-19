@@ -140,7 +140,7 @@ public class WebAppInterface {
 
     public synchronized URI prepareDebugger(IProject project, IPreviewStartupListener listener) {
         String session = Long.toHexString(System.currentTimeMillis());
-        URI uri = WorkspaceResourcesServlet.getDebugStartingPage(project.getName(), session);
+        URI uri = WorkspaceResourcesServlet.getDebugStartingPage(project, session);
         if (listener != null) {
             debuggerJobs.put(getId(project.getName(), session), new BrowserConnectionJob(listener, uri));
         }

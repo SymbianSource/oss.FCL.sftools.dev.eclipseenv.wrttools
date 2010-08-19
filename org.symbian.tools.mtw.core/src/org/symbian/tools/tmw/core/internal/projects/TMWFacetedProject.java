@@ -32,10 +32,10 @@ import org.eclipse.wst.common.project.facet.core.runtime.IRuntime;
 import org.eclipse.wst.common.project.facet.core.runtime.IRuntimeComponent;
 import org.eclipse.wst.common.project.facet.core.runtime.IRuntimeComponentVersion;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
-public class TMWFacetedProject implements IMTWProject {
+public class TMWFacetedProject implements ITMWProject {
     private final IProject project;
 
     public TMWFacetedProject(IProject project) {
@@ -86,6 +86,10 @@ public class TMWFacetedProject implements IMTWProject {
             TMWCore.log(null, e1);
         }
         return false;
+    }
+
+    public String getPreferredScreenSize() {
+        return "240x320";
     }
 
 }

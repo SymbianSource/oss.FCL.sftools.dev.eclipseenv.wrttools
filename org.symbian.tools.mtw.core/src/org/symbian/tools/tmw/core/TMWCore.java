@@ -10,7 +10,7 @@ import org.symbian.tools.tmw.core.internal.projects.ProjectsSupportManager;
 import org.symbian.tools.tmw.core.internal.runtimes.RuntimeClasspathManager;
 import org.symbian.tools.tmw.core.internal.runtimes.RuntimesManagerImpl;
 import org.symbian.tools.tmw.core.projects.IFProjSupport;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntimeManager;
 
 /**
@@ -59,7 +59,7 @@ public class TMWCore extends Plugin {
         return classpathManager;
     }
 
-    public static IMTWProject create(IProject project) {
+    public static ITMWProject create(IProject project) {
         return getDefault().projectsSupport.create(project);
     }
 

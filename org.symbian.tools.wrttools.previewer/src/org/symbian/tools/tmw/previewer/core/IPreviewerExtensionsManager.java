@@ -16,10 +16,10 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.tmw.core.projects;
+package org.symbian.tools.tmw.previewer.core;
 
-import org.eclipse.wst.jsdt.core.IIncludePathEntry;
+import org.eclipse.core.resources.IProject;
 
-public interface IFacetIncludePathProvider {
-    IIncludePathEntry[] getEntries(ITMWProject project);
+public interface IPreviewerExtensionsManager {
+    IApplicationLayoutProvider getLayoutProvider(IProject project);
 }

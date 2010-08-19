@@ -16,42 +16,39 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.tmw.internal.ui.deployment.externalapp;
+package org.symbian.tools.wrttools.core.libraries;
 
+import java.io.InputStream;
+
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.symbian.tools.tmw.core.projects.ITMWProject;
-import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
-import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
+import org.symbian.tools.tmw.core.projects.IProjectSetupConfig;
+import org.symbian.tools.tmw.core.runtimes.LibraryInstallDelegate;
 
-public class FilesystemDeploymentTarget implements IDeploymentTargetType {
+public class PhoneGapLibraryInstaller extends LibraryInstallDelegate {
 
-    public FilesystemDeploymentTarget() {
-        // TODO Auto-generated constructor stub
+    public void execute(IProject project, IProjectFacetVersion fv, Object config, IProgressMonitor monitor)
+            throws CoreException {
+
     }
 
-    public IDeploymentTarget[] getTargets(ITMWProject project) {
+    @Override
+    protected IPath getBasePath(IProject project, IProjectSetupConfig setupConfig) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public void discoverTargets(IProgressMonitor monitor) throws CoreException {
-        // TODO Auto-generated method stub
-
-    }
-
-    public IDeploymentTarget findTarget(ITMWProject project, String id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    public boolean targetsDiscovered() {
+    @Override
+    protected boolean isIncludeFile(IPath entry) {
         // TODO Auto-generated method stub
         return false;
     }
 
-    public ISchedulingRule getSchedulingRule(IDeploymentTarget target) {
+    @Override
+    protected InputStream openInputStream() throws CoreException {
         // TODO Auto-generated method stub
         return null;
     }

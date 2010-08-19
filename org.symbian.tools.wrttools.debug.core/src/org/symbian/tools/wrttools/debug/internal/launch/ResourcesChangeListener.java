@@ -33,9 +33,9 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
+import org.symbian.tools.tmw.previewer.internal.PreviewerUtil;
 import org.symbian.tools.wrttools.debug.internal.Activator;
 import org.symbian.tools.wrttools.debug.internal.IConstants;
-import org.symbian.tools.wrttools.previewer.PreviewerUtil;
 
 public class ResourcesChangeListener implements IResourceChangeListener {
     public void resourceChanged(IResourceChangeEvent event) {

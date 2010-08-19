@@ -26,12 +26,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 public class ProjectsSupportManager {
     private Collection<ProjectProvider> providers = null;
 
-    public IMTWProject create(IProject project) {
+    public ITMWProject create(IProject project) {
         if (providers == null) {
             readProviders();
         }

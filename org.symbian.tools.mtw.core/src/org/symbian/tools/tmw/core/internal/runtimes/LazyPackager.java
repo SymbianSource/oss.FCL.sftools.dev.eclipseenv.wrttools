@@ -26,7 +26,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.core.runtimes.IPackagerDelegate;
@@ -39,7 +39,7 @@ public class LazyPackager implements IPackager {
         this.element = element;
     }
 
-    public File packageApplication(IMTWProject project, IProgressMonitor monitor) throws CoreException {
+    public File packageApplication(ITMWProject project, IProgressMonitor monitor) throws CoreException {
         return getPackager().packageApplication(project, monitor);
     }
 
@@ -60,7 +60,7 @@ public class LazyPackager implements IPackager {
         return getPackager().getPathInPackage(resource);
     }
 
-    public String getFileType(IMTWProject project) {
+    public String getFileType(ITMWProject project) {
         return getPackager().getFileType(project);
     }
 

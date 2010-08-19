@@ -26,14 +26,14 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
 
 public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetType {
     public class NullProvider implements IDeploymentTargetType {
-        public IDeploymentTarget[] getTargets(IMTWProject project) {
+        public IDeploymentTarget[] getTargets(ITMWProject project) {
             return null;
         }
 
@@ -41,7 +41,7 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
             // Do nothing
         }
 
-        public IDeploymentTarget findTarget(IMTWProject project, String id) {
+        public IDeploymentTarget findTarget(ITMWProject project, String id) {
             return null;
         }
 
@@ -64,12 +64,12 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
         this.element = element;
     }
 
-    public boolean supports(IMTWProject project) {
+    public boolean supports(ITMWProject project) {
         // We will support more declarative filtering later
         return true;
     }
 
-    public DeploymentTargetWrapper[] getTargets(IMTWProject project) {
+    public DeploymentTargetWrapper[] getTargets(ITMWProject project) {
         final DeploymentTargetWrapper[] targets = wrap(getProvider().getTargets(project));
         return targets != null ? targets : NO_TARGETS;
     }
@@ -99,7 +99,7 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
         getProvider().discoverTargets(monitor);
     }
 
-    public IDeploymentTarget findTarget(IMTWProject project, String id) {
+    public IDeploymentTarget findTarget(ITMWProject project, String id) {
         return wrap(getProvider().findTarget(project, id));
     }
 

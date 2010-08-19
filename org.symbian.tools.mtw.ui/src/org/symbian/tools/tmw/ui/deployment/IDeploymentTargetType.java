@@ -21,7 +21,7 @@ package org.symbian.tools.tmw.ui.deployment;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 /**
  * This interface is for deployment targets providers.
@@ -35,7 +35,7 @@ public interface IDeploymentTargetType {
      * @return List of the valid deployment targets. Both <code>null</code> and
      * empty array are a valid return value when there are no available targets.
      */
-    IDeploymentTarget[] getTargets(IMTWProject project);
+    IDeploymentTarget[] getTargets(ITMWProject project);
 
     /**
      * Discovers targets. This can be a long-running task and in most cases
@@ -48,7 +48,7 @@ public interface IDeploymentTargetType {
      * <code>null</code> if target with given ID cannot be found or if
      * the target does not accept project any longer.
      */
-    IDeploymentTarget findTarget(IMTWProject project, String id);
+    IDeploymentTarget findTarget(ITMWProject project, String id);
 
     /**
      * Return <code>false</code> if user needs to trigger long-running 

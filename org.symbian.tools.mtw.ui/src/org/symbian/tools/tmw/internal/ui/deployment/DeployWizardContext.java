@@ -25,15 +25,15 @@ import java.util.HashSet;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 
 public class DeployWizardContext {
     private DeploymentTargetWrapper target;
-    private final IMTWProject project;
+    private final ITMWProject project;
     private boolean logging;
 
-    public DeployWizardContext(IMTWProject project) {
+    public DeployWizardContext(ITMWProject project) {
         this.project = project;
     }
 
@@ -45,7 +45,7 @@ public class DeployWizardContext {
         return target;
     }
 
-    public IMTWProject getProject() {
+    public ITMWProject getProject() {
         return project;
     }
 

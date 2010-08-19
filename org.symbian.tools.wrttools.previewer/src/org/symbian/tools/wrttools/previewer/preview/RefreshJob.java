@@ -28,8 +28,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.symbian.tools.wrttools.previewer.PreviewerUtil;
-import org.symbian.tools.wrttools.previewer.PreviewerUtil.ChangedResourcesCollector;
+import org.symbian.tools.tmw.previewer.internal.PreviewerUtil;
+import org.symbian.tools.tmw.previewer.internal.PreviewerUtil.ChangedResourcesCollector;
 
 public class RefreshJob extends Job {
     private final IResourceDelta delta;

@@ -34,7 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
 import org.symbian.tools.wrttools.core.IWRTConstants;
@@ -54,7 +54,7 @@ public final class EmulatorTargetType implements IDeploymentTargetType {
         discoverTargets(new NullProgressMonitor());
     }
 
-    public IDeploymentTarget[] getTargets(IMTWProject project) {
+    public IDeploymentTarget[] getTargets(ITMWProject project) {
         Collection<Emulator> values = listofEmulators.values();
         return values.toArray(new Emulator[values.size()]);
     }
@@ -67,7 +67,7 @@ public final class EmulatorTargetType implements IDeploymentTargetType {
         initialize();
     }
 
-    public IDeploymentTarget findTarget(IMTWProject project, String id) {
+    public IDeploymentTarget findTarget(ITMWProject project, String id) {
         // TODO Auto-generated method stub
         return null;
     }

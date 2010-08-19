@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.internal.ui.deployment.DeploymentTargetPresentationsManager;
 import org.symbian.tools.tmw.internal.ui.deployment.DeploymentTargetTypesRegistry;
 import org.symbian.tools.tmw.internal.ui.project.ProjectTemplateManagerImpl;
@@ -68,11 +68,11 @@ public class TMWCoreUI extends AbstractUIPlugin {
         log(null, e);
     }
 
-    public static ProjectMemo getMemo(IMTWProject project) {
+    public static ProjectMemo getMemo(ITMWProject project) {
         return getDefault().getMemoForProject(project);
     }
 
-    private synchronized ProjectMemo getMemoForProject(IMTWProject project) {
+    private synchronized ProjectMemo getMemoForProject(ITMWProject project) {
         ProjectMemo memo = MEMOS.get(project.getProject());
         if (memo == null) {
             memo = new ProjectMemo(project);

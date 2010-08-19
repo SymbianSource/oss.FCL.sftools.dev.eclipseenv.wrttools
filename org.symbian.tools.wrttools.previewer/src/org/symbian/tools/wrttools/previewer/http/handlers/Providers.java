@@ -51,7 +51,6 @@ public class Providers {
         addPaths(new MasterScriptProvider());
         addPaths(new PreviewerStaticResourceProvider());
         addPaths(new PreferencesResourceProvider());
-        addPaths(new ProjectIndexResourceProvider());
         addPaths(new CommandResourceProvider());
         addPaths(new DebuggerResourceProvider());
     }

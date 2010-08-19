@@ -21,9 +21,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
+import org.symbian.tools.tmw.core.utilities.CoreUtil;
 import org.symbian.tools.wrttools.previewer.Images;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
-import org.symbian.tools.wrttools.util.CoreUtil;
 
 public abstract class AbstractPreviewPage extends Page implements IPreviewPage,
 		ISelectionProvider {

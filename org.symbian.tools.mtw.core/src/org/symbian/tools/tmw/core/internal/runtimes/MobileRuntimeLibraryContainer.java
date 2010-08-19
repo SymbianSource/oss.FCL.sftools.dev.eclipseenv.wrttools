@@ -27,7 +27,7 @@ import org.eclipse.wst.jsdt.core.IIncludePathEntry;
 import org.eclipse.wst.jsdt.core.IJavaScriptProject;
 import org.eclipse.wst.jsdt.core.IJsGlobalScopeContainer;
 import org.symbian.tools.tmw.core.TMWCore;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 public class MobileRuntimeLibraryContainer implements IJsGlobalScopeContainer {
@@ -40,7 +40,7 @@ public class MobileRuntimeLibraryContainer implements IJsGlobalScopeContainer {
     }
 
     public IIncludePathEntry[] getIncludepathEntries() {
-        final IMTWProject proj = TMWCore.create(project.getProject());
+        final ITMWProject proj = TMWCore.create(project.getProject());
         if (proj != null) {
             try {
                 IFacetedProject facetedProject = ProjectFacetsManager.create(project.getProject(), false,
@@ -56,7 +56,7 @@ public class MobileRuntimeLibraryContainer implements IJsGlobalScopeContainer {
     }
 
     public String getDescription() {
-        final IMTWProject proj = TMWCore.create(project.getProject());
+        final ITMWProject proj = TMWCore.create(project.getProject());
         if (proj != null) {
             final IMobileWebRuntime targetRuntime = proj.getTargetRuntime();
             if (targetRuntime != null) {

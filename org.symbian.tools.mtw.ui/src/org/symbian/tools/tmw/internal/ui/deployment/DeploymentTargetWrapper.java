@@ -27,7 +27,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.model.IWorkbenchAdapter;
 import org.eclipse.ui.model.IWorkbenchAdapter2;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 
@@ -83,7 +83,7 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
         target.save(memento);
     }
 
-    public void init(IMTWProject project, IPackager packager, IMemento memento) {
+    public void init(ITMWProject project, IPackager packager, IMemento memento) {
         target.init(project, packager, memento);
     }
 
@@ -92,7 +92,7 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
         this.type = type;
     }
 
-    public IStatus deploy(IMTWProject project, IPackager packager, IProgressMonitor monitor)
+    public IStatus deploy(ITMWProject project, IPackager packager, IProgressMonitor monitor)
             throws CoreException {
         return target.deploy(project, packager, monitor);
     }

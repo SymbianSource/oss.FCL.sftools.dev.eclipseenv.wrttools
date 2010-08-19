@@ -22,7 +22,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
-public interface IMTWProject {
+public interface ITMWProject {
     /**
      * @return primary target runtime of this project.
      */
@@ -44,4 +44,11 @@ public interface IMTWProject {
      * @return <code>true</code> if the project has no errors. Warnings do not count.
      */
     boolean validate(IProgressMonitor monitor);
+
+    /**
+     * Return preferred screen size for the project.
+     * 
+     * @return string like "240x320"
+     */
+    String getPreferredScreenSize();
 }

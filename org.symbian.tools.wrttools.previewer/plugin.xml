@@ -2,6 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="commands" name="Previewer Command" schema="schema/commands.exsd"/>
+   <extension-point id="layoutProviders" name="Application Layout Providers" schema="schema/layoutProviders.exsd"/>
     <extension
          point="org.eclipse.ui.views">
       <view

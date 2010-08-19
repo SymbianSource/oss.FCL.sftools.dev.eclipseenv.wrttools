@@ -18,12 +18,10 @@
  *******************************************************************************/
 package org.symbian.tools.wrttools.previewer.http;
 
-import java.io.File;
 import java.net.URI;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 
 public class HttpPreviewer {
     public static final String PREVIEW_STARTING_PAGE = "preview-frame.html";
@@ -33,7 +31,7 @@ public class HttpPreviewer {
         return WorkspaceResourcesServlet.getFileFromUrl(name);
     }
 
-    public String getHttpUrl(IResource resource) {
+    public String getHttpUrl(IFile resource) {
         return WorkspaceResourcesServlet.getHttpUrl(resource);
     }
 
@@ -44,9 +42,5 @@ public class HttpPreviewer {
         } else {
             return WebAppInterface.getInstance().prepareDebugger(project, listener);
         }
-    }
-
-    public File getLocalFile(String name) {
-        return WorkspaceResourcesServlet.getPreviewerResource(name);
     }
 }

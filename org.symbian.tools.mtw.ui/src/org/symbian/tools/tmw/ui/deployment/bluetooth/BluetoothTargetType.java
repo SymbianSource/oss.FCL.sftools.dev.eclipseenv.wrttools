@@ -37,7 +37,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.ui.ConsoleFactory;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
@@ -163,7 +163,7 @@ public class BluetoothTargetType implements IDeploymentTargetType {
         }
     }
 
-    public IDeploymentTarget findTarget(IMTWProject project, String id) {
+    public IDeploymentTarget findTarget(ITMWProject project, String id) {
         if (!isBloothToothConnected()) {
             return null;
         }
@@ -179,7 +179,7 @@ public class BluetoothTargetType implements IDeploymentTargetType {
         }
     }
 
-    public IDeploymentTarget[] getTargets(IMTWProject project) {
+    public IDeploymentTarget[] getTargets(ITMWProject project) {
         if (targets != null) {
             final Collection<BluetoothTarget> values = targets.values();
             return values.toArray(new IDeploymentTarget[values.size()]);

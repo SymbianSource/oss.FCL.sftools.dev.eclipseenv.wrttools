@@ -18,7 +18,7 @@
  */
 package org.symbian.tools.tmw.core.runtimes;
 
-import org.symbian.tools.tmw.core.projects.IMTWProject;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 /**
  * Manages mobile web runtimes.
@@ -29,7 +29,7 @@ public interface IMobileWebRuntimeManager {
     /**
      * Shorthand method to obtain packager for project default runtime.
      */
-    IPackager getPackager(IMTWProject project);
+    IPackager getPackager(ITMWProject project);
 
     /**
      * Returns packager that can create a packaged application for provided 
@@ -38,7 +38,7 @@ public interface IMobileWebRuntimeManager {
      * @return <code>null</null> if the project cannot be packaged for 
      * specified runtime
      */
-    IPackager getPackager(IMTWProject project, IMobileWebRuntime runtime);
+    IPackager getPackager(ITMWProject project, IMobileWebRuntime runtime);
 
     /**
      * Returns runtimes for the given ID. Runtime will not be null.
