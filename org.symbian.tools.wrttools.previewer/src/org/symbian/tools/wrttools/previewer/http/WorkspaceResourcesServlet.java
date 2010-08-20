@@ -18,6 +18,7 @@
  *******************************************************************************/
 package org.symbian.tools.wrttools.previewer.http;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -43,6 +44,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.json.simple.JSONObject;
@@ -52,6 +54,7 @@ import org.symbian.tools.tmw.previewer.core.IApplicationLayoutProvider;
 import org.symbian.tools.wrttools.previewer.PreviewerException;
 import org.symbian.tools.wrttools.previewer.PreviewerPlugin;
 import org.symbian.tools.wrttools.previewer.http.handlers.DebuggerResourceProvider;
+import org.symbian.tools.wrttools.previewer.http.handlers.PreviewerStaticResourceProvider;
 import org.symbian.tools.wrttools.previewer.http.handlers.Providers;
 
 public class WorkspaceResourcesServlet extends HttpServlet {
@@ -97,26 +100,37 @@ public class WorkspaceResourcesServlet extends HttpServlet {
     }
 
     public static IFile getFileFromUrl(String name) {
+        final IPath path = getResourcePath(name);
+        if (path != null) {
+            final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path.segment(0));
+            final IApplicationLayoutProvider provider = PreviewerPlugin.getExtensionsManager().getLayoutProvider(
+                    project);
+            if (provider != null) {
+                try {
+                    return provider.getWorkspaceFile(project, path.removeFirstSegments(1));
+                } catch (CoreException e) {
+                    PreviewerPlugin.log(e);
+                }
+            }
+        }
+        return null;
+    }
+
+    private static IPath getResourcePath(String name) {
+        IPath p = null;
         try {
             String root = getHttpUrl(null);
             if (name != null && name.startsWith(root)) {
                 final String fileName = URLDecoder.decode(name.substring(root.length()), "UTF-8");
                 final IPath path = new Path(fileName);
                 if (path.segmentCount() > 1) {
-                    final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path.segment(0));
-                    final IApplicationLayoutProvider provider = PreviewerPlugin.getExtensionsManager()
-                            .getLayoutProvider(project);
-                    if (provider != null) {
-                        return provider.getWorkspaceFile(project, path.removeFirstSegments(1));
-                    }
+                    p = path;
                 }
             }
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
-        } catch (CoreException e) {
-            PreviewerPlugin.log(e);
         }
-        return null;
+        return p;
     }
 
     public static String getHttpUrl(IFile file) {
@@ -142,6 +156,32 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         } else {
             return null;
         }
+    }
+
+    public static File getPreviewerResource(String name) {
+        try {
+            IPath path = getResourcePath(name);
+            if (path != null && path.segmentCount() > 1) {
+                if (path.segmentCount() == 2 && HttpPreviewer.PREVIEW_STARTING_PAGE.equals(path.segment(1))) {
+                    path = new Path(PreviewerStaticResourceProvider.PREVIEW_START);
+                } else if (path.segmentCount() > 2
+                        && PreviewerStaticResourceProvider.PREVIEW_PATH.equals(path.segment(1))) {
+                    path = path.removeFirstSegments(1);
+                } else {
+                    return null;
+                }
+                URL pluginResource = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), path, null);
+                if (pluginResource != null) {
+                    URL url = FileLocator.toFileURL(pluginResource);
+                    if (url != null) {
+                        return new File(url.getPath());
+                    }
+                }
+            }
+        } catch (IOException e) {
+            PreviewerPlugin.log(e);
+        }
+        return null;
     }
 
     public static URI getPreviewerStartingPage(String widget) {

@@ -18,6 +18,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.symbian.tools.tmw.previewer.core,
+ org.symbian.tools.tmw.previewer.internal,
  org.symbian.tools.wrttools.previewer,
  org.symbian.tools.wrttools.previewer.http
 Import-Package: javax.servlet;version="2.5.0",

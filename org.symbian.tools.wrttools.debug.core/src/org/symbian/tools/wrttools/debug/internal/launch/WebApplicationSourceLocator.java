@@ -129,7 +129,7 @@ public final class WebApplicationSourceLocator extends AbstractSourceLookupDirec
 			return resource;
 		} else {
 			File file = PreviewerPlugin.getDefault().getHttpPreviewer().getLocalFile(script.getName());
-			if (file != null) {
+            if (file != null) {
 				try {
 					return EFS.getStore(file.toURI());
 				} catch (CoreException e) {
