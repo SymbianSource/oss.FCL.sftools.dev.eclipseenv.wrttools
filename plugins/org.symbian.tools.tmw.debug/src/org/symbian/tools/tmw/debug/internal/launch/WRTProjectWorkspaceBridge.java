@@ -62,7 +62,7 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
         this.project = project;
         this.resourceManager = new ResourceManager();
         this.sourceLocator = new WebApplicationSourceLocator(resourceManager);
-        breakpointHandler = new WorkspaceBreakpointHandler(debugTargetImpl, resourceManager);
+        breakpointHandler = new WorkspaceBreakpointHandler(debugTargetImpl);
         ILaunch launch = debugTargetImpl.getLaunch();
         try {
             sourceLocator.initializeDefaults(launch.getLaunchConfiguration());
@@ -111,9 +111,7 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
                     Collection<ChromiumLineBreakpoint> breakpoints = new ArrayList<ChromiumLineBreakpoint>(
                             markers.length);
                     for (IMarker marker : markers) {
-                        // If it is not ChromiumLineBreakpoint -
-                        // something's gone horribly wrong. Better get
-                        // ClassCastException
+                        // If it is not ChromiumLineBreakpoint - something's gone horribly wrong. Better get ClassCastException
                         ChromiumLineBreakpoint breakpoint = (ChromiumLineBreakpoint) DebugPlugin.getDefault()
                                 .getBreakpointManager().getBreakpoint(marker);
                         breakpointHandler.breakpointAdded(breakpoint);

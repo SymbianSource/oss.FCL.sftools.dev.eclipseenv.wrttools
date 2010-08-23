@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.wst.sse.core;bundle-version="1.1.400",
  org.eclipse.wst.html.core;bundle-version="1.1.300",
  org.eclipse.wst.jsdt.core;bundle-version="1.0.200",
- org.symbian.tools.wrttools;bundle-version="1.0.0"
+ org.symbian.tools.tmw.core;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5,
  JavaSE-1.6
 Bundle-ActivationPolicy: lazy

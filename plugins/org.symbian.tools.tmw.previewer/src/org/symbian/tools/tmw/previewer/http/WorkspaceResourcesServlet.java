@@ -139,7 +139,10 @@ public class WorkspaceResourcesServlet extends HttpServlet {
             IApplicationLayoutProvider provider = PreviewerPlugin.getExtensionsManager().getLayoutProvider(
                     file.getProject());
             if (provider != null) {
-                p = provider.getResourcePath(file);
+                IPath path = provider.getResourcePath(file);
+                if (path != null) {
+                    p = p.append(file.getProject().getName()).append(path).makeAbsolute();
+                }
             }
         }
         String uri = getServerURIForResource(p, null).toASCIIString();

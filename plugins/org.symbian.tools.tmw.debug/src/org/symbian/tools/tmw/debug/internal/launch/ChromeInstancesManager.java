@@ -32,9 +32,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.symbian.tools.tmw.core.utilities.CoreUtil;
 import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.debug.internal.ChromeDebugUtils;
-import org.symbian.tools.wrttools.util.CoreUtil;
 
 public class ChromeInstancesManager {
     private static final String[] CHROME_ARGS = { "%s", "--remote-shell-port=%d", // Here we will set port

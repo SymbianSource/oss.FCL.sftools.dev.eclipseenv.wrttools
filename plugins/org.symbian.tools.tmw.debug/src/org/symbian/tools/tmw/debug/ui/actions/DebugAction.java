@@ -23,7 +23,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.debug.internal.ui.actions.DebugLastAction;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.symbian.tools.wrttools.util.ProjectUtils;
+import org.symbian.tools.tmw.core.TMWCore;
 
 @SuppressWarnings("restriction")
 public class DebugAction extends DebugLastAction {
@@ -32,13 +32,13 @@ public class DebugAction extends DebugLastAction {
         boolean hasWrtProjects = false;
         IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
         for (IProject project : projects) {
-            if (project.isAccessible() && ProjectUtils.hasWrtNature(project)) {
+            if (project.isAccessible() && TMWCore.create(project) != null) {
                 hasWrtProjects = true;
                 break;
             }
         }
         if (hasWrtProjects) {
-        super.run(action);
+            super.run(action);
         } else {
             MessageDialog.openInformation(getShell(), "Cannot launch debugger",
                     "There are no open projects in your workspace");

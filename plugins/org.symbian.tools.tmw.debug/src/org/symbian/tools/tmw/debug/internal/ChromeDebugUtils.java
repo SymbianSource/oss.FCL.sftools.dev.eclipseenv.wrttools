@@ -20,7 +20,7 @@ package org.symbian.tools.tmw.debug.internal;
 
 import java.io.File;
 
-import org.symbian.tools.wrttools.util.CoreUtil;
+import org.symbian.tools.tmw.core.utilities.CoreUtil;
 
 public final class ChromeDebugUtils {
 	public static String getExecutablePath(String folder) {

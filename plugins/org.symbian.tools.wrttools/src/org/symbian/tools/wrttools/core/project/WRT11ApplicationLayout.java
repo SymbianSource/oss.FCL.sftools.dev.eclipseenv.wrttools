@@ -148,7 +148,7 @@ public class WRT11ApplicationLayout implements IApplicationLayoutProvider {
                 Activator.log(e);
             }
         }
-        return file.exists() && isFileIncluded(file) ? file : null;
+        return (file != null && file.exists()) && isFileIncluded(file) ? file : null;
     }
 
 }

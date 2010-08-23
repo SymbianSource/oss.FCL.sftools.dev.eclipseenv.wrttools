@@ -19,16 +19,15 @@
 package org.symbian.tools.tmw.debug.internal.property;
 
 import org.eclipse.core.resources.IResource;
-import org.symbian.tools.wrttools.util.ProjectUtils;
+import org.symbian.tools.tmw.core.TMWCore;
 
 public class PropertyTester extends org.eclipse.core.expressions.PropertyTester {
 
-	public boolean test(Object receiver, String property, Object[] args,
-			Object expectedValue) {
-		if (property.equals("isWrtProject")) {
-			return ProjectUtils.hasWrtNature(((IResource) receiver).getProject());
-		}
-		return false;
-	}
+    public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
+        if (property.equals("isWrtProject")) {
+            return TMWCore.create(((IResource) receiver).getProject()) != null;
+        }
+        return false;
+    }
 
 }

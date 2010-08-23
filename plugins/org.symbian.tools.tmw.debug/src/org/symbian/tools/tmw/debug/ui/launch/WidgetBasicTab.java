@@ -42,11 +42,11 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.tmw.debug.internal.IConstants;
 import org.symbian.tools.tmw.debug.internal.Images;
-import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class WidgetBasicTab extends AbstractLaunchConfigurationTab {
 	private ComboViewer project;
@@ -92,7 +92,7 @@ public class WidgetBasicTab extends AbstractLaunchConfigurationTab {
 				.getProjects();
 		LinkedList<IProject> filtered = new LinkedList<IProject>();
 		for (IProject p : projects) {
-			if (ProjectUtils.hasWrtNature(p)) {
+            if (TMWCore.create(p) != null) {
 				filtered.add(p);
 			}
 		}

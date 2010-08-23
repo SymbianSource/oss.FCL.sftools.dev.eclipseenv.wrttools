@@ -22,7 +22,7 @@ import java.io.File;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.symbian.tools.wrttools.util.CoreUtil;
+import org.symbian.tools.tmw.core.utilities.CoreUtil;
 
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	private final static String DEFAULT_CHROME_LOCATION = "Local Settings/Application Data/Google/Chrome/Application";

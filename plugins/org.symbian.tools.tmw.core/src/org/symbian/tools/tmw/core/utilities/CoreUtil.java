@@ -35,4 +35,8 @@ public final class CoreUtil {
     public static boolean isMac() {
         return "macosx".equals(Platform.getOS());
     }
+
+    public static boolean isLinux() {
+        return "linux".equals(Platform.getOS());
+    }
 }

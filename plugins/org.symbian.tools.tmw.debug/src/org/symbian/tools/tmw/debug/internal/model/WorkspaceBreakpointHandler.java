@@ -26,12 +26,9 @@ import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 public final class WorkspaceBreakpointHandler implements BreakpointHandler {
 	private final BreakpointMap.InTargetMap breakpointInTargetMap = new BreakpointMap.InTargetMap();
 	private final DebugTargetImpl debugTarget;
-	private final ResourceManager resourceManager;
 	
-    public WorkspaceBreakpointHandler(DebugTargetImpl debugTarget, ResourceManager resourceManager) {
+    public WorkspaceBreakpointHandler(DebugTargetImpl debugTarget) {
 		this.debugTarget = debugTarget;
-        //		this.vm = vm;
-		this.resourceManager = resourceManager;
 	}
 
     public void breakpointAdded(IBreakpoint breakpoint) {
