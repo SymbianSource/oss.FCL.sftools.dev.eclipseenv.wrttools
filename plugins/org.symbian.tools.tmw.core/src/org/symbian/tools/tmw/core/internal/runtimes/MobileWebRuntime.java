@@ -44,4 +44,9 @@ public final class MobileWebRuntime implements IMobileWebRuntime {
         return element.getChildren("runtime-component");
     }
 
+    @Override
+    public String toString() {
+        return getId() + ":" + getVersion();
+    }
+
 }

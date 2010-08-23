@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Mobile Applications Preview Support
 Bundle-SymbolicName: org.symbian.tools.tmw.previewer;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.symbian.tools.wrttools.previewer.PreviewerPlugin
+Bundle-Activator: org.symbian.tools.tmw.previewer.PreviewerPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.5.0",

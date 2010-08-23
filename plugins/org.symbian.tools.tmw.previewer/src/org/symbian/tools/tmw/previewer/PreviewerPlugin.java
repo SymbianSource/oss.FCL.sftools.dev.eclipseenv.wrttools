@@ -43,7 +43,7 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
     public static final String PLUGIN_ID = "org.symbian.tools.tmw.previewer";
-	public static final String PREVIEW_VIEW = "org.symbian.tools.wrttools.editing.wrtpreview";
+    public static final String PREVIEW_VIEW = "org.symbian.tools.tmw.editing.wrtpreview";
 
 	public static final boolean DEBUG = Platform.inDebugMode()
 			&& Boolean.parseBoolean(Platform.getDebugOption(PLUGIN_ID + "/debug"));

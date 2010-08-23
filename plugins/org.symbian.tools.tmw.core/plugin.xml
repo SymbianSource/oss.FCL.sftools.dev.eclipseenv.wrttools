@@ -142,7 +142,7 @@
             id="org.symbian.tools.tmw.core"
             namespace="org.symbian.tools.tmw"
             properties="istmwproject"
-            type="org.eclipse.core.resources.IProject">
+            type="org.eclipse.core.resources.IResource">
       </propertyTester>
    </extension>
 

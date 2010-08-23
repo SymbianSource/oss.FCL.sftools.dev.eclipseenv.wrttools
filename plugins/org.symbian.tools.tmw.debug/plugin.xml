@@ -4,14 +4,14 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="org.symbian.tools.wrttools.debug.internal.PreferenceInitializer">
+            class="org.symbian.tools.tmw.debug.internal.PreferenceInitializer">
       </initializer>
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
             category="org.eclipse.debug.ui.DebugPreferencePage"
-            class="org.symbian.tools.wrttools.debug.ui.DebugPreferencePage"
+            class="org.symbian.tools.tmw.debug.ui.DebugPreferencePage"
             id="org.symbian.tools.wrttools.debug"
             name="Tools for Mobile Web">
          <keywordReference
@@ -25,7 +25,7 @@
    <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="org.symbian.tools.wrttools.debug.internal.launch.WidgetLaunchDelegate"
+            delegate="org.symbian.tools.tmw.debug.internal.launch.WidgetLaunchDelegate"
             id="org.symbian.tools.wrttools.debug.widget"
             modes="debug,run"
             name="Mobile Web Application"
@@ -35,7 +35,7 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchConfigurationTabGroup"
+            class="org.symbian.tools.tmw.debug.ui.launch.WidgetLaunchConfigurationTabGroup"
             description="Mobile Web Application"
             id="org.symbian.tools.wrttools.debug.wrtTabGroup"
             type="org.symbian.tools.wrttools.debug.widget">
@@ -52,7 +52,7 @@
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="org.symbian.tools.wrttools.debug.ui.launch.WidgetLaunchShortcut"
+            class="org.symbian.tools.tmw.debug.ui.launch.WidgetLaunchShortcut"
             icon="icons/main16.gif"
             id="org.symbian.tools.wrttools.debug.wrtshortcut"
             label="Mobile Web Application"
@@ -91,7 +91,7 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="org.symbian.tools.wrttools.debug.internal.property.PropertyTester"
+            class="org.symbian.tools.tmw.debug.internal.property.PropertyTester"
             id="org.symbian.tools.wrttools.debug.projectTester"
             namespace="org.symbian"
             properties="isWrtProject"
@@ -116,7 +116,7 @@
                menubarPath="debug">
          </action>
          <action
-               class="org.symbian.tools.wrttools.debug.ui.actions.JsBreakpointPropertiesRulerActionDelegate"
+               class="org.symbian.tools.tmw.debug.ui.actions.JsBreakpointPropertiesRulerActionDelegate"
                id="org.symbian.tools.wrttools.debug.core.js.JavaBreakpointPropertiesRulerActionDelegate"
                label="Breakpoint Properties..."
                menubarPath="group.properties">
@@ -138,7 +138,7 @@
                menubarPath="debug">
          </action>
          <action
-               class="org.symbian.tools.wrttools.debug.ui.actions.JsBreakpointPropertiesRulerActionDelegate"
+               class="org.symbian.tools.tmw.debug.ui.actions.JsBreakpointPropertiesRulerActionDelegate"
                id="org.symbian.tools.wrttools.debug.core.ro.JavaBreakpointPropertiesRulerActionDelegate"
                label="Breakpoint Properties..."
                menubarPath="group.properties">
@@ -181,7 +181,7 @@
             </or>
          </enablement>
          <action
-               class="org.symbian.tools.wrttools.debug.ui.actions.DebugAction"
+               class="org.symbian.tools.tmw.debug.ui.actions.DebugAction"
                enablesFor="+"
                icon="icons/debug_exc.gif"
                id="org.eclipse.debug.ui.contextualLaunch.debug.submenu"
@@ -194,7 +194,7 @@
             id="org.symbian.tools.wrttools.debug.core.watch"
             targetID="#JavaScriptEditorContext">
          <action
-               class="org.symbian.tools.wrttools.debug.ui.actions.WatchExpression"
+               class="org.symbian.tools.tmw.debug.ui.actions.WatchExpression"
                icon="icons/watch.gif"
                id="org.symbian.tools.wrttools.debug.core.watchExpression"
                label="Add to Expressions View"
@@ -206,7 +206,7 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.wst.jsdt.internal.ui.javaeditor.JavaEditor"
-            class="org.symbian.tools.wrttools.debug.internal.BreakpointAdapterFactory">
+            class="org.symbian.tools.tmw.debug.internal.BreakpointAdapterFactory">
          <adapter
                type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
          </adapter>
@@ -259,21 +259,21 @@
    <extension
          point="org.eclipse.debug.ui.debugModelPresentations">
       <debugModelPresentation
-            class="org.symbian.tools.wrttools.debug.internal.model.SymbianDebugModelPresentation"
+            class="org.symbian.tools.tmw.debug.internal.model.SymbianDebugModelPresentation"
             id="org.symbian.debug">
       </debugModelPresentation>
    </extension>
      <extension point="org.eclipse.debug.core.watchExpressionDelegates">
     <watchExpressionDelegate
         debugModel="org.symbian.debug"
-        delegateClass="org.symbian.tools.wrttools.debug.internal.model.JsWatchExpressionDelegate"/>
+        delegateClass="org.symbian.tools.tmw.debug.internal.model.JsWatchExpressionDelegate"/>
   </extension>
     <extension
           point="org.eclipse.wst.sse.ui.breakpoint">
        <breakpointContribution
              id="org.symbian.tools.wrttools.debug.htmlbreakpoints">
           <provider
-                class="org.symbian.tools.wrttools.debug.internal.HtmlBreakpointProvider"
+                class="org.symbian.tools.tmw.debug.internal.HtmlBreakpointProvider"
                 contentTypes="org.eclipse.wst.html.core.htmlsource"
                 id="org.symbian.tools.wrttools.debug.htmlbreakpoints">
           </provider>
@@ -282,12 +282,12 @@
     <extension
           point="org.eclipse.core.runtime.adapters">
      	 <factory 
-            class="org.symbian.tools.wrttools.debug.internal.property.LaunchableFactory" 
+            class="org.symbian.tools.tmw.debug.internal.property.LaunchableFactory" 
             adaptableType="org.eclipse.wst.jsdt.core.IJavaScriptElement">
             <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
          </factory>
          <factory 
-            class="org.symbian.tools.wrttools.debug.internal.property.LaunchableFactory" 
+            class="org.symbian.tools.tmw.debug.internal.property.LaunchableFactory" 
             adaptableType="org.eclipse.core.resources.IResource">
             <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
          </factory>
@@ -299,7 +299,7 @@
              id="org.symbian.tools.wrttools.debug.core.mainActions"
              label="Mobile Web Debug">
           <action
-                class="org.symbian.tools.wrttools.debug.ui.actions.DebugAction"
+                class="org.symbian.tools.tmw.debug.ui.actions.DebugAction"
                 helpContextId="debug_last_action_context"
                 icon="icons/debug_exc.gif"
                 id="org.symbian.tools.wrttools.debug.core.debug"
@@ -320,7 +320,7 @@
     <extension
           point="org.symbian.tools.tmw.previewer.commands">
        <command
-             handler="org.symbian.tools.wrttools.debug.internal.session.TerminateSession"
+             handler="org.symbian.tools.tmw.debug.internal.session.TerminateSession"
              name="terminateDebug">
        </command>
     </extension>

@@ -11,7 +11,7 @@
 	        viewerId="org.eclipse.ui.navigator.ProjectExplorer">
 	     <includes>
 	        <actionExtension
-	              pattern="org.symbian.mtw.ui.navigator.MoveRename">
+	              pattern="org.symbian.tmw.ui.navigator.MoveRename">
 	        </actionExtension>
 	     </includes>
 	  </viewerActionBinding>
@@ -105,7 +105,7 @@
 		  </commonWizard>
     <actionProvider
           class="org.symbian.tools.tmw.ui.navigator.RenameMoveActionProvider"
-          id="org.symbian.mtw.ui.navigator.MoveRename"
+          id="org.symbian.tmw.ui.navigator.MoveRename"
           overrides="org.eclipse.wst.jsdt.ui.navigator.actions.RefactorActions"
           priority="highest">
           <enablement>
@@ -120,7 +120,7 @@
   <extension
         point="org.eclipse.ui.views">
      <category
-           id="org.symbian.tools.mtw"
+           id="org.symbian.tools.tmw"
            name="Tools for Mobile Web">
      </category>
   </extension>
@@ -141,19 +141,19 @@
      <deployment-target-type
            class="org.symbian.tools.tmw.ui.deployment.bluetooth.BluetoothTargetType"
            icon="icons/full/obj16/bluetooth.gif"
-           id="org.symbian.tools.mtw.bluetooth"
+           id="org.symbian.tools.tmw.bluetooth"
            long-running="true"
            priority="10">
      </deployment-target-type>
      <deployment-target-type
            class="org.symbian.tools.tmw.internal.ui.deployment.targets.ExternalApplicationDeploymentType"
-           id="org.symbian.tools.mtw.externalApp"
+           id="org.symbian.tools.tmw.externalApp"
            priority="1000">
      </deployment-target-type>
      <deployment-target-type
            class="org.symbian.tools.tmw.internal.ui.deployment.targets.FilesystemDeploymentTarget"
            icon="icons/full/obj16/folder.gif"
-           id="org.symbian.tools.mtw.fileSystem"
+           id="org.symbian.tools.tmw.fileSystem"
            priority="900">
      </deployment-target-type>
   </extension>
@@ -181,7 +181,7 @@
         point="org.symbian.tools.tmw.ui.targetPresentation">
      <targetPresentation
            detailsPane="org.symbian.tools.tmw.internal.ui.deployment.targets.LocalFileSystemPane"
-           targetTypeId="org.symbian.tools.mtw.fileSystem">
+           targetTypeId="org.symbian.tools.tmw.fileSystem">
      </targetPresentation>
   </extension>
   <extension
@@ -232,7 +232,7 @@
                     <adapt
                           type="org.eclipse.core.resources.IResource">
                        <test
-                             property="org.symbian.tools.tmw.ismtwproject">
+                             property="org.symbian.tools.tmw.istmwproject">
                        </test>
                     </adapt>
                  </with>

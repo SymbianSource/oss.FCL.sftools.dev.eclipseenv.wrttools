@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WRT Debugger Plug-In
-Bundle-SymbolicName: org.symbian.tools.wrttools.debug.core;singleton:=true
+Bundle-SymbolicName: org.symbian.tools.tmw.debug.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.symbian.tools.wrttools.debug.internal.Activator
+Bundle-Activator: org.symbian.tools.tmw.debug.internal.Activator
 Bundle-Vendor: Symbian Foundation
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

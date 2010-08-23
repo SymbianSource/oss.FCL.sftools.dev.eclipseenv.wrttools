@@ -1,4 +1,4 @@
-org.symbian.tools.wrttools.debug.core/debug=false
-org.symbian.tools.wrttools.debug.core/debugConnection=false
-org.symbian.tools.wrttools.debug.core/debugResources=false
-org.symbian.tools.wrttools.debug.core/debugBreakpoints=false
+org.symbian.tools.tmw.debug.core/debug=false
+org.symbian.tools.tmw.debug.core/debugConnection=false
+org.symbian.tools.tmw.debug.core/debugResources=false
+org.symbian.tools.tmw.debug.core/debugBreakpoints=false
