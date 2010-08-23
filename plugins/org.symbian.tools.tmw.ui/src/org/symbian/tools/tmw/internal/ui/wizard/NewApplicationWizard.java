@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -214,9 +215,13 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
 
     @Override
     protected void performFinish(IProgressMonitor monitor) throws CoreException {
-        monitor.beginTask("Preparing project", 100);
+        monitor.beginTask("Preparing project", 300);
         super.performFinish(new SubProgressMonitor(monitor, 20));
         wizardContext.initialize(getFacetedProject().getProject(), new SubProgressMonitor(monitor, 80));
+        getFacetedProject().getProject().build(IncrementalProjectBuilder.CLEAN_BUILD,
+                new SubProgressMonitor(monitor, 100));
+        getFacetedProject().getProject().build(IncrementalProjectBuilder.FULL_BUILD,
+                new SubProgressMonitor(monitor, 100));
         monitor.done();
     }
 }

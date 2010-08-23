@@ -161,20 +161,6 @@
          <requires-library>phonegap</requires-library>
       </projectTemplate>
 
-      <projectTemplate
-            archive="projecttemplates/flickr.zip"
-            default-css-name="Flickr"
-            default-html-name="index"
-            default-js-name="Flickr"
-            icon="icons/flickr.gif"
-            name="Flickr Project"
-            order="3"
-            wizard-page-factory="org.symbian.tools.wrttools.wizards.FlickrProjectDetailsWizardPage$Factory">
-         <description>
-            This wizard generates an Flickr project with a minimal Info.plist, html,css and js and WRTKit.
-         </description>
-         <requires-library>org.symbian.wrtkit</requires-library>
-      </projectTemplate>
 
       <projectTemplate
             archive="projecttemplates/rssreader.zip"
@@ -972,8 +958,11 @@ function updateOrientation(orientation) {
          <action
                type="install">
             <delegate
-                  class="org.symbian.tools.wrttools.core.libraries.PhoneGapLibraryInstaller">
+                  class="org.symbian.tools.wrttools.core.libraries.InstallPhoneGapDelegate">
             </delegate>
+            <config-factory
+                  class="org.symbian.tools.tmw.core.runtimes.ProjectCreationConfigFactory">
+            </config-factory>
          </action>
       </project-facet-version>
    </extension>
@@ -982,6 +971,11 @@ function updateOrientation(orientation) {
       <image
             facet="symbian.wrtkit"
             path="icons/main16_prev.gif"
+            version="1.0">
+      </image>
+      <image
+            facet="symbian.phonegap"
+            path="icons/phonegap.png"
             version="1.0">
       </image>
    </extension>

@@ -27,7 +27,7 @@ import org.eclipse.wst.jsdt.core.infer.InferEngine;
 import org.eclipse.wst.jsdt.core.infer.InferrenceProvider;
 import org.eclipse.wst.jsdt.core.infer.RefactoringSupport;
 import org.eclipse.wst.jsdt.core.infer.ResolutionConfiguration;
-import org.symbian.tools.wrttools.util.ProjectUtils;
+import org.symbian.tools.tmw.core.TMWCore;
 
 public class PlatformServicesTypeProvider implements InferrenceProvider {
     public static final String ID = "org.symbian.tools.wrttools.platformservices";
@@ -40,7 +40,7 @@ public class PlatformServicesTypeProvider implements InferrenceProvider {
                 IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
                 if (file.exists()) {
                     IProject project = file.getProject();
-                    if (ProjectUtils.hasWrtNature(project)) {
+                    if (TMWCore.create(project) != null) {
                         return InferrenceProvider.MAYBE_THIS;
                     }
                 }
