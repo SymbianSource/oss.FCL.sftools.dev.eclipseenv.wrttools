@@ -39,4 +39,8 @@ public final class CoreUtil {
     public static boolean isLinux() {
         return "linux".equals(Platform.getOS());
     }
+
+    public static String notNull(final String string) {
+        return string == null ? "" : string.trim();
+    }
 }

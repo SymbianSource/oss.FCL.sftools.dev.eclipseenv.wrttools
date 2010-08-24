@@ -57,4 +57,8 @@ public interface IFProjSupport {
      */
     IProjectFacet getTMWFacet();
 
+    /**
+     * @return mobile web runtime that corresponds to FProj runtime
+     */
+    IMobileWebRuntime getTMWRuntime(IRuntime runtime);
 }

@@ -18,6 +18,8 @@
  */
 package org.symbian.tools.tmw.core.runtimes;
 
+import java.util.Map;
+
 /**
  * Represents mobile web runtimes supported by the IDE
  * 
@@ -38,4 +40,9 @@ public interface IMobileWebRuntime {
      * @return user-readable runtime name
      */
     String getName();
+
+    /**
+     * @return fixed facets (that are always enabled for the runtime) as id-version pairs
+     */
+    Map<String, String> getFixedFacets();
 }

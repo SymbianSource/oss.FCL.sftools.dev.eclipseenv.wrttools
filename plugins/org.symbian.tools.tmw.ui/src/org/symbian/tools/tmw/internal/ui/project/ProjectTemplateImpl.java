@@ -164,4 +164,9 @@ public class ProjectTemplateImpl implements IProjectTemplate {
     public String getId() {
         return element.getAttribute("id");
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

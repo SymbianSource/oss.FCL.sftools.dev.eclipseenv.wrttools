@@ -18,8 +18,12 @@
  */
 package org.symbian.tools.tmw.core.internal.runtimes;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
+import org.symbian.tools.tmw.core.utilities.CoreUtil;
 
 public final class MobileWebRuntime implements IMobileWebRuntime {
     private final IConfigurationElement element;
@@ -47,6 +51,15 @@ public final class MobileWebRuntime implements IMobileWebRuntime {
     @Override
     public String toString() {
         return getId() + ":" + getVersion();
+    }
+
+    public Map<String, String> getFixedFacets() {
+        final Map<String, String> facets = new TreeMap<String, String>();
+        final IConfigurationElement[] children = element.getChildren("fixed-facet");
+        for (IConfigurationElement element : children) {
+            facets.put(CoreUtil.notNull(element.getAttribute("id")), element.getAttribute("version"));
+        }
+        return facets;
     }
 
 }

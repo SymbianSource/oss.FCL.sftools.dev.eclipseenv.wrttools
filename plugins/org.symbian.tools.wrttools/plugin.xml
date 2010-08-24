@@ -676,9 +676,14 @@ function updateOrientation(orientation) {
            component-version="1.1"
            name="Symbian WRT 1.1">
         <runtime-component
+              alwayson="true"
               id="tmw.geolocation"
               version="1.0">
         </runtime-component>
+        <fixed-facet
+              id="tmw.geolocation"
+              version="1.0">
+        </fixed-facet>
      </runtime>
   </extension>
    <extension

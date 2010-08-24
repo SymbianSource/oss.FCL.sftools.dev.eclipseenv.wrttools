@@ -19,6 +19,9 @@
 package org.symbian.tools.tmw.core.internal.facets;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -27,7 +30,10 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 import org.eclipse.wst.common.project.facet.core.VersionFormatException;
 import org.eclipse.wst.common.project.facet.core.runtime.IRuntime;
+import org.eclipse.wst.common.project.facet.core.runtime.IRuntimeComponent;
+import org.eclipse.wst.common.project.facet.core.runtime.IRuntimeComponentVersion;
 import org.eclipse.wst.common.project.facet.core.runtime.RuntimeManager;
+import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IFProjSupport;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
@@ -46,6 +52,10 @@ public final class FProjSupportImpl implements IFProjSupport {
 
     private IProjectFacetVersion getFacet(String id, String version) {
         final IProjectFacet projectFacet = ProjectFacetsManager.getProjectFacet(id);
+        if (projectFacet == null) {
+            TMWCore.log("Facet %s version %s was not found", id, version);
+            return null;
+        }
         try {
             return version != null ? projectFacet.getVersion(version) : projectFacet.getLatestVersion();
         } catch (VersionFormatException e) {
@@ -63,11 +73,29 @@ public final class FProjSupportImpl implements IFProjSupport {
         final Set<IProjectFacetVersion> facets = new HashSet<IProjectFacetVersion>();
         facets.add(getFacet("wst.jsdt.web", null));
         facets.add(getFacet("tmw.core", null));
-        //        facets.add(getFacet("wst.jsdt.web", "1.0"));
+        final Map<String, String> fixedFacets = runtime.getFixedFacets();
+        for (Entry<String, String> entry : fixedFacets.entrySet()) {
+            final IProjectFacetVersion facet = getFacet(entry.getKey(), entry.getValue());
+            if (facet != null) {
+                facets.add(facet);
+            }
+        }
         return facets;
     }
 
     public IProjectFacet getTMWFacet() {
         return getFacet("tmw.core", null).getProjectFacet();
+    }
+
+    public IMobileWebRuntime getTMWRuntime(IRuntime runtime) {
+        if (runtime != null) {
+            final List<IRuntimeComponent> components = runtime.getRuntimeComponents();
+            if (!components.isEmpty()) {
+                final IRuntimeComponentVersion version = components.get(0).getRuntimeComponentVersion();
+                return TMWCore.getRuntimesManager().getRuntime(version.getRuntimeComponentType().getId(),
+                        version.getVersionString());
+            }
+        }
+        return null;
     }
 }

@@ -18,8 +18,6 @@
  */
 package org.symbian.tools.tmw.core.internal.projects;
 
-import java.util.List;
-
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -28,9 +26,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
-import org.eclipse.wst.common.project.facet.core.runtime.IRuntime;
-import org.eclipse.wst.common.project.facet.core.runtime.IRuntimeComponent;
-import org.eclipse.wst.common.project.facet.core.runtime.IRuntimeComponentVersion;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
@@ -53,15 +48,7 @@ public class TMWFacetedProject implements ITMWProject {
     public IMobileWebRuntime getTargetRuntime() {
         try {
             final IFacetedProject fproj = ProjectFacetsManager.create(project);
-            final IRuntime runtime = fproj.getPrimaryRuntime();
-            if (runtime != null) {
-                final List<IRuntimeComponent> components = runtime.getRuntimeComponents();
-                if (!components.isEmpty()) {
-                    final IRuntimeComponentVersion version = components.get(0).getRuntimeComponentVersion();
-                    return TMWCore.getRuntimesManager()
-                            .getRuntime(version.getRuntimeComponentType().getId(), version.getVersionString());
-                }
-            }
+            return TMWCore.getFProjSupport().getTMWRuntime(fproj.getPrimaryRuntime());
         } catch (CoreException e) {
             TMWCore.log(null, e);
         }

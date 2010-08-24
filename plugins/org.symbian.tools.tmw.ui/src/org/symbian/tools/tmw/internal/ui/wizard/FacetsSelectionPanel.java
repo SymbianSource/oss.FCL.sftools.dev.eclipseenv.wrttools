@@ -40,6 +40,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.window.ToolTip;
 import org.eclipse.swt.SWT;
@@ -138,7 +139,7 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
         this.fixedFacetToolTip = new FixedFacetToolTip(this.table);
 
         this.tableViewer.setInput(new Object());
-
+        this.tableViewer.setFilters(new ViewerFilter[] { new RuntimeFacetsFilter(fpjwc) });
         this.tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
             public void selectionChanged(final SelectionChangedEvent e) {
                 FacetsSelectionPanel.this.handleSelectionChangedEvent();

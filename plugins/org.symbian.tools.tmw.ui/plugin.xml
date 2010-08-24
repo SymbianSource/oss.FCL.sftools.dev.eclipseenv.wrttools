@@ -257,4 +257,22 @@
            project="true">
      </wizard>
   </extension>
+  <extension
+        point="org.eclipse.wst.common.project.facet.ui.images">
+     <image
+           facet="tmw.core"
+           path="icons/full/obj16/phone.gif"
+           version="1.0">
+     </image>
+     <image
+           facet="wst.jsdt.web"
+           path="icons/full/obj16/javascript.gif"
+           version="1.0">
+     </image>
+     <image
+           facet="tmw.geolocation"
+           path="icons/full/obj16/earth.gif"
+           version="1.0">
+     </image>
+  </extension>
 </plugin>
