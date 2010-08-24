@@ -10,7 +10,7 @@
             category="org.symbian.tools.tmw"
             class="org.symbian.tools.tmw.previewer.preview.PreviewView"
             icon="icons/obj16/preview_view.gif"
-            id="org.symbian.tools.wrttools.editing.wrtpreview"
+            id="org.symbian.tools.tmw.preview"
             name="Preview"
             restorable="true">
       </view>

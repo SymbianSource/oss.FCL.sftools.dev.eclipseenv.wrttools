@@ -56,7 +56,7 @@
             name="Web">
       </category>
       <primaryWizard
-            id="org.symbian.tools.wrttools.core.wrtwidgetwizard">
+            id="org.symbian.tools.tmw.newproject">
       </primaryWizard>
       <primaryWizard
             id="org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard">
@@ -248,13 +248,13 @@
       <perspectiveExtension
             targetID="org.symbian.tools.wrttools.mainPerspective">
          <showInPart
-               id="org.symbian.tools.wrttools.wrtnavigator">
+               id="org.eclipse.ui.navigator.ProjectExplorer">
          </showInPart>
       </perspectiveExtension>
       <perspectiveExtension
             targetID="org.eclipse.debug.ui.DebugPerspective">
          <showInPart
-               id="org.symbian.tools.wrttools.wrtnavigator">
+               id="org.eclipse.ui.navigator.ProjectExplorer">
          </showInPart>
          <perspectiveShortcut
                id="org.symbian.tools.wrttools.mainPerspective">

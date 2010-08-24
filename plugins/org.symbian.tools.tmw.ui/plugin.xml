@@ -37,7 +37,7 @@
              associatedExtensionId="org.eclipse.wst.jsdt.java.ui.javaContent"
              menuGroupId="group.new.z"
              type="new"
-             wizardId="org.symbian.tools.wrttools.core.wrtwidgetwizard">
+             wizardId="org.symbian.tools.tmw.newproject">
           <enablement>
              <or>
                 <adapt
@@ -249,7 +249,7 @@
      <wizard
            canFinishEarly="false"
            category="org.symbian.tools.tmw"
-           class="org.symbian.tools.tmw.internal.ui.wizard.NewApplicationWizard"
+           class="org.symbian.tools.tmw.ui.project.NewApplicationWizard"
            hasPages="true"
            icon="icons/full/etool16/newproject.png"
            id="org.symbian.tools.tmw.newproject"

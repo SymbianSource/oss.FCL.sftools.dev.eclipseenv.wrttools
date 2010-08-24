@@ -67,7 +67,7 @@ public class NewWrtAppTemplatePage extends AbstractNewApplicationWizardPage {
         createLabel(root, "");
 
         IObservableValue view = SWTObservables.observeSelection(homeScreen);
-        IObservableValue model = context.getParameterObservable(WizardContext.HOME_SCREEN);
+        IObservableValue model = context.getParameterObservable("homeScreen");
         bindingContext.bindValue(view, model);
 
         addTemplateControls(root);

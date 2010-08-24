@@ -8,7 +8,7 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.wst.jsdt.ui.actions.AbstractOpenWizardAction;
-import org.symbian.tools.wrttools.wizards.WrtWidgetWizard;
+import org.symbian.tools.tmw.ui.project.NewApplicationWizard;
 
 public class NewWRTProjectAction extends AbstractOpenWizardAction implements
 		IWorkbenchWindowActionDelegate {
@@ -29,7 +29,7 @@ public class NewWRTProjectAction extends AbstractOpenWizardAction implements
 
 	@Override
 	protected INewWizard createWizard() throws CoreException {
-		return new WrtWidgetWizard();
+        return new NewApplicationWizard();
 	}
 
 	public void dispose() {

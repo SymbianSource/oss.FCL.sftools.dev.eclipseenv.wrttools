@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.tmw.internal.ui.wizard;
+package org.symbian.tools.tmw.ui.project;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,13 +44,17 @@ import org.eclipse.wst.common.project.facet.ui.ModifyFacetedProjectWizard;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IFProjSupport;
 import org.symbian.tools.tmw.core.runtimes.ProjectCreationConfigFactory;
-import org.symbian.tools.tmw.ui.project.INewApplicationWizardPage;
-import org.symbian.tools.tmw.ui.project.IProjectTemplate;
+import org.symbian.tools.tmw.internal.ui.wizard.NewApplicationDetailsWizardPage;
+import org.symbian.tools.tmw.internal.ui.wizard.NewApplicationFacetsWizardPage;
+import org.symbian.tools.tmw.internal.ui.wizard.NewApplicationTemplateWizardPage;
+import org.symbian.tools.tmw.internal.ui.wizard.PageContributions;
+import org.symbian.tools.tmw.internal.ui.wizard.WizardContext;
 
 /**
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public final class NewApplicationWizard extends ModifyFacetedProjectWizard implements INewWizard {
+    public static final String ID = "org.symbian.tools.tmw.newproject";
     private final PageContributions contributions = new PageContributions();
     private final DataBindingContext databindingContext = new DataBindingContext();
     private NewApplicationFacetsWizardPage facetsPage;

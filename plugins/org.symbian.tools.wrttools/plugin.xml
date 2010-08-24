@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="projectTemplates" name="WRT Project Templates" schema="schema/projectTemplates.exsd"/>
    <extension-point id="jsLibraries" name="JavaScript Libraries" schema="schema/jsLibraries.exsd"/>
 
 <!-- Generic Project Builder and Project Natures  -->		
@@ -100,41 +99,8 @@
 		</validator>
 	</extension>
 	 
-	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.symbian.tools.wrttools.core.category" name="Mobile Web Tools">
-		</category>
-		<wizard category="org.symbian.tools.wrttools.core.category"
-			class="org.symbian.tools.wrttools.wizards.WrtWidgetWizard"
-			finalPerspective="org.symbian.tools.wrttools.mainPerspective"
-			hasPages="true" icon="icons/WRT_main_16.png"
-			id="org.symbian.tools.wrttools.core.wrtwidgetwizard" name="Mobile Web Application Project"
-			project="true">
-			<description>
-				Creates a new Symbian WRT application project using one of the provided
-				templates
-         </description>
-		</wizard>
-	</extension>
 	
 <!-- WRT Project Templates -->
-	<extension point="org.symbian.tools.wrttools.projectTemplates">
-
-      <projectTemplate
-            archive="projecttemplates/basic.zip"
-            default-css-name="basic"
-            default-html-name="index"
-            default-js-name="basic"
-            icon="icons/main16.gif"
-            name="Minimal Project"
-            order="10">
-			<description>
-				This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
-         </description>
-	  </projectTemplate> 
-
-
-
-	</extension>
 	
 <!-- Import Wizard -->
 	<extension point="org.eclipse.ui.importWizards">

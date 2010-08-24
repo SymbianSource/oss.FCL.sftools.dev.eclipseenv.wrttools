@@ -103,7 +103,8 @@ public class WRTProject implements ITMWProject {
     }
 
     public IMobileWebRuntime getTargetRuntime() {
-        return TMWCore.getDefault().getRuntimesManager().getRuntime(WRT11_RUNTIME, WRT11_VERSION);
+        TMWCore.getDefault();
+        return TMWCore.getRuntimesManager().getRuntime(WRT11_RUNTIME, WRT11_VERSION);
     }
 
     private void saveProperties(Properties props) {

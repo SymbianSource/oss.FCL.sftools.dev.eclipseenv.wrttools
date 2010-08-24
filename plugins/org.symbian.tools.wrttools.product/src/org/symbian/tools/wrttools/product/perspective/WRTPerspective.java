@@ -9,6 +9,7 @@ import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
+import org.symbian.tools.tmw.ui.project.NewApplicationWizard;
 
 public class WRTPerspective implements IPerspectiveFactory {
 
@@ -44,7 +45,6 @@ public class WRTPerspective implements IPerspectiveFactory {
         layout.addShowViewShortcut(IPageLayout.ID_PROJECT_EXPLORER);
 		layout.addShowViewShortcut(JavaScriptUI.ID_SOURCE_VIEW);
 		layout.addShowViewShortcut(JavaScriptUI.ID_JAVADOC_VIEW);
-		layout.addShowViewShortcut("org.symbian.tools.wrttools.wrtnavigator");
 
 		layout.addPerspectiveShortcut(IDebugUIConstants.ID_DEBUG_PERSPECTIVE);
 		
@@ -59,7 +59,7 @@ public class WRTPerspective implements IPerspectiveFactory {
         layout.addShowViewShortcut("org.eclipse.wst.common.snippets.internal.ui.SnippetsView");
 				
 		// new actions - Java project creation wizard
-		layout.addNewWizardShortcut("org.symbian.tools.wrttools.core.wrtwidgetwizard"); //$NON-NLS-1$
+        layout.addNewWizardShortcut(NewApplicationWizard.ID);
 		layout.addNewWizardShortcut("org.eclipse.wst.jsdt.ui.NewJSWizard"); //$NON-NLS-1$
 		layout.addNewWizardShortcut("org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard"); //$NON-NLS-1$
 		layout.addNewWizardShortcut("org.eclipse.wst.css.ui.internal.wizard.NewCSSWizard"); //$NON-NLS-1$
