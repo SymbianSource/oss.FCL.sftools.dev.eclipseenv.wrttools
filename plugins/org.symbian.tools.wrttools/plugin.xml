@@ -1024,7 +1024,7 @@ function updateOrientation(orientation) {
             PhoneGap
          </label>
          <description>
-            PhoneGap application
+            PhoneGap is an open source development framework for building cross-platform mobile apps. It provides a cross-platform JavaScript APIs for accessing services on the mobile devices.
          </description>
       </project-facet>
       <project-facet-version

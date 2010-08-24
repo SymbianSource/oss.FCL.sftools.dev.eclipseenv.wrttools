@@ -78,7 +78,6 @@ import org.symbian.tools.tmw.core.TMWCore;
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
-
 @SuppressWarnings("restriction")
 public final class FacetsSelectionPanel extends Composite implements ISelectionProvider {
     private final Composite topComposite;
@@ -97,10 +96,6 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
     private final IRuntimeLifecycleListener runtimeLifecycleListener;
     private final Text description;
     private final Composite facets;
-
-    public interface IFilter {
-        boolean check(IProjectFacetVersion fv);
-    }
 
     public FacetsSelectionPanel(final Composite parent, final IFacetedProjectWorkingCopy fpjwc) {
         super(parent, SWT.NONE);
@@ -719,13 +714,11 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
         public Image getColumnImage(final Object element, final int column) {
             final ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
             final String imageType;
-
             if (((IStatus) element).getSeverity() == IStatus.ERROR) {
                 imageType = ISharedImages.IMG_OBJS_ERROR_TSK;
             } else {
                 imageType = ISharedImages.IMG_OBJS_WARN_TSK;
             }
-
             return sharedImages.getImage(imageType);
         }
 
