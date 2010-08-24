@@ -20,16 +20,19 @@ package org.symbian.tools.wrttools.wizards;
 
 import org.eclipse.swt.widgets.Composite;
 
-public class NewFlickrApplicationWizardPage extends NewWrtAppTemplatePage {
-    public NewFlickrApplicationWizardPage() {
-        super("FlickrFiles", "Application Files", "Specify application file names");
+public class NewRSSReaderApplicationWizardPage extends NewWrtAppTemplatePage {
+
+    public NewRSSReaderApplicationWizardPage() {
+        super("RssFiles", "RSS Application Settings", "Customize your RSS reader application project");
     }
 
+    @Override
     protected void addTemplateControls(Composite root) {
-        createLabel(root, "Flickr URL:");
-        createText(root, "flickrUrl", "Flickr URL", bindingContext);
+        createLabel(root, "Feed URL:");
+        createText(root, "feedUrl", "feed URL", bindingContext);
+        createLabel(root, "Feed Name:");
+        createText(root, "feedName", "feed name", bindingContext);
         createLabel(root, "");
         createLabel(root, "");
     }
-
 }

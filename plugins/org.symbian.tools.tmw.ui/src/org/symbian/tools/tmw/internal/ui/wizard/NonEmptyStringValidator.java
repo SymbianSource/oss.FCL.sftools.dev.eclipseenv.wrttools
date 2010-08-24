@@ -26,22 +26,17 @@ import org.eclipse.core.runtime.Status;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 
 public class NonEmptyStringValidator implements IValidator {
-	private final String propertyName;
-    private final AbstractDataBindingPage page;
+    private final String propertyName;
 
-	public NonEmptyStringValidator(String propertyName, AbstractDataBindingPage page) {
-		this.propertyName = propertyName;
-        this.page = page;
-	}
+    public NonEmptyStringValidator(String propertyName) {
+        this.propertyName = propertyName;
+    }
 
-	public IStatus validate(Object value) {
-        if (page != null && page.isActive()) {
-			if (value == null || value.toString().trim().length() == 0) {
-                return new Status(IStatus.ERROR, TMWCoreUI.PLUGIN_ID,
-						MessageFormat.format("Field {0} is empty",
-								propertyName));
-			}
-		}
-		return Status.OK_STATUS;
-	}
+    public IStatus validate(Object value) {
+        if (value == null || value.toString().trim().length() == 0) {
+            return new Status(IStatus.ERROR, TMWCoreUI.PLUGIN_ID, MessageFormat.format("Field {0} is empty",
+                    propertyName));
+        }
+        return Status.OK_STATUS;
+    }
 }

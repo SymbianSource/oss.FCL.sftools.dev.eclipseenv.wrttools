@@ -132,63 +132,8 @@
          </description>
 	  </projectTemplate> 
 
-      <projectTemplate
-            archive="projecttemplates/helloWithWRTKit.zip"
-            default-css-name="HelloWithWRTKit"
-            default-html-name="index"
-            default-js-name="HelloWithWRTKit"
-            icon="icons/WRT_main_16.png"
-            name="Hello World Project"
-            order="1"
-            wizard-page-factory="org.symbian.tools.wrttools.wizards.HelloWithWRTKitProjectDetailsWizardPage$Factory">
-         <description>
-            This wizard generates a basic Hello project with a minimal Info.plist, html,css and js along with WRTKit.
-         </description>
-         <requires-library>org.symbian.wrtkit</requires-library>
-      </projectTemplate>
-      <projectTemplate
-            archive="projecttemplates/phonegap.zip"
-            default-css-name="css"
-            default-html-name="index"
-            default-js-name="main"
-            icon="icons/phonegap.png"
-            name="PhoneGap Application"
-            order="2"
-            screen-size="360x640">
-         <description>
-            This wizard generates a project based on the PhoneGap library that showcases PhoneGap API usage. PhoneGap applications require WRT 1.1 or newer.
-         </description>
-         <requires-library>phonegap</requires-library>
-      </projectTemplate>
 
 
-      <projectTemplate
-            archive="projecttemplates/rssreader.zip"
-            default-css-name="RSSReader"
-            default-html-name="index"
-            default-js-name="RSSReader"
-            icon="icons/rss.gif"
-            name="RSS Reader Project"
-            order="4"
-            wizard-page-factory="org.symbian.tools.wrttools.wizards.RssReaderProjectDetailsWizardPage$Factory">
-         <description>
-            This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.
-         </description>
-         <requires-library>org.symbian.wrtkit</requires-library>
-      </projectTemplate>
-      <projectTemplate
-            archive="projecttemplates/uitemplate.zip"
-            default-css-name="basic"
-            default-html-name="index"
-            default-js-name="basic"
-            icon="icons/main16.gif"
-            name="Various UI Templates"
-            order="5"
-            screen-size="360x640">
-         <description>
-            Includes templates for high-end devices from Forum.Nokia.
-         </description>
-      </projectTemplate>
 	</extension>
 	
 <!-- Import Wizard -->
@@ -849,9 +794,6 @@ function updateOrientation(orientation) {
                id="org.symbian.tools.wrttools.wrt"
                version="1.1">
          </supported-runtime>
-         <archive
-               file="projecttemplates/flickr.zip">
-         </archive>
          <default-parameter-value
                name="mainCss"
                value="style">
@@ -872,6 +814,159 @@ function updateOrientation(orientation) {
                id="symbian.wrtkit"
                version="1.0">
          </required-facet>
+      </template>
+      <template
+            icon="icons/rss.gif"
+            id="org.symbian.wrt11.rssreader"
+            name="RSS Reader Project"
+            weight="3">
+         <archive
+               file="projecttemplates/rssreader.zip"
+               open-files="${mainHtml}.html">
+         </archive>
+         <required-facet
+               id="symbian.wrtkit"
+               version="1.0">
+         </required-facet>
+         <supported-runtime
+               id="org.symbian.tools.wrttools.wrt"
+               version="1.1">
+         </supported-runtime>
+         <description>
+            This wizard generates an RSS Reader project with a minimal Info.plist, html,css and js and WRTKit.
+         </description>
+         <default-parameter-value
+               name="mainCss"
+               value="style">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainJs"
+               value="rssreader">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainHtml"
+               value="rssreader">
+         </default-parameter-value>
+         <default-parameter-value
+               name="feedUrl"
+               value="http://twitter.com/statuses/user_timeline/21138778.rss">
+         </default-parameter-value>
+         <default-parameter-value
+               name="feedName"
+               value="Symbian Twitter">
+         </default-parameter-value>
+      </template>
+      <template
+            icon="icons/WRT_main_16.png"
+            id="org.symbian.wrt11.basic"
+            name="Hello World Project"
+            weight="1">
+         <archive
+               file="projecttemplates/helloWithWRTKit.zip"
+               open-files="${mainJs}.js">
+         </archive>
+         <description>
+            This wizard generates a basic Hello project with a minimal Info.plist, html,css and js along with WRTKit.
+         </description>
+         <required-facet
+               id="symbian.wrtkit"
+               version="1.0">
+         </required-facet>
+         <supported-runtime
+               id="org.symbian.tools.wrttools.wrt"
+               version="1.1">
+         </supported-runtime>
+         <default-parameter-value
+               name="mainCss"
+               value="style">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainJs"
+               value="main">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainHtml"
+               value="index">
+         </default-parameter-value>
+      </template>
+      <template
+            icon="icons/phonegap.png"
+            id="org.symbian.wrt11.phonegap"
+            name="PhoneGap"
+            weight="2">
+         <archive
+               file="projecttemplates/phonegap.zip"
+               open-files="${mainHtml}.html">
+         </archive>
+         <description>
+            This wizard generates a project based on the PhoneGap library that showcases PhoneGap API usage. PhoneGap applications require WRT 1.1 or newer.
+         </description>
+         <required-facet
+               id="symbian.phonegap"
+               version="1.0">
+         </required-facet>
+         <supported-runtime
+               id="org.symbian.tools.wrttools.wrt"
+               version="1.1">
+         </supported-runtime>
+         <default-parameter-value
+               name="mainCss"
+               value="style">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainJs"
+               value="main">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainHtml"
+               value="index">
+         </default-parameter-value>
+      </template>
+      <template
+            icon="icons/main16.gif"
+            id="org.symbian.wrt11.advanced"
+            name="Various UI Templates"
+            weight="2">
+         <archive
+               file="projecttemplates/uitemplate.zip"
+               open-files="${mainHtml}.html">
+         </archive>
+         <description>
+            Includes templates for high-end devices from Forum.Nokia.
+         </description>
+         <supported-runtime
+               id="org.symbian.tools.wrttools.wrt"
+               version="1.1">
+         </supported-runtime>
+         <default-parameter-value
+               name="mainCss"
+               value="style">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainJs"
+               value="main">
+         </default-parameter-value>
+         <default-parameter-value
+               name="mainHtml"
+               value="index">
+         </default-parameter-value>
+      </template>
+      <template
+            icon="icons/main16_prev.gif"
+            id="org.symbian.wrt11.empty"
+            name="Minimal Project"
+            weight="4">
+         <description>
+            This wizard generates an empty widget project with a minimal Info.plist, html,css and js.
+         </description>
+         <supported-runtime
+               id="org.symbian.tools.wrttools.wrt"
+               version="1.1">
+         </supported-runtime>
+         <archive
+               file="projecttemplates/basic.zip"
+               open-files="${mainHtml}.html">
+         </archive>
       </template>
       <runtime-template
             runtime-id="org.symbian.tools.wrttools.wrt"
@@ -902,6 +997,26 @@ function updateOrientation(orientation) {
       <template-page
             class="org.symbian.tools.wrttools.wizards.NewFlickrApplicationWizardPage"
             template-id="org.symbian.wrt11.flickr">
+      </template-page>
+      <template-page
+            class="org.symbian.tools.wrttools.wizards.NewRSSReaderApplicationWizardPage"
+            template-id="org.symbian.wrt11.rssreader">
+      </template-page>
+      <template-page
+            class="org.symbian.tools.wrttools.wizards.NewWrtAppTemplatePage"
+            template-id="org.symbian.wrt11.basic">
+      </template-page>
+      <template-page
+            class="org.symbian.tools.wrttools.wizards.NewWrtAppTemplatePage"
+            template-id="org.symbian.wrt11.phonegap">
+      </template-page>
+      <template-page
+            class="org.symbian.tools.wrttools.wizards.NewWrtAppTemplatePage"
+            template-id="org.symbian.wrt11.advanced">
+      </template-page>
+      <template-page
+            class="org.symbian.tools.wrttools.wizards.NewWrtAppTemplatePage"
+            template-id="org.symbian.wrt11.empty">
       </template-page>
    </extension>
    <extension

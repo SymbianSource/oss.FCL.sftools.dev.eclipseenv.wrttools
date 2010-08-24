@@ -101,7 +101,7 @@ public class WizardContext implements IProjectTemplateContext {
         text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         ISWTObservableValue view = SWTObservables.observeText(text, SWT.Modify);
         UpdateValueStrategy strategy = new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE);
-        NonEmptyStringValidator validator = new NonEmptyStringValidator(propertyName, page);
+        NonEmptyStringValidator validator = new NonEmptyStringValidator(propertyName);
         strategy.setBeforeSetValidator(validators.length == 0 ? validator
                 : new CompoundValidator(validator, validators));
         bindingContext.bindValue(view, model, strategy, null);
@@ -322,7 +322,6 @@ public class WizardContext implements IProjectTemplateContext {
             // Avoid closing ZIP file
         }
     }
-
 
     public void addIncludedJsFile(IFile file) {
         jsIncludes.add(file.getProjectRelativePath().makeRelative().toString());
