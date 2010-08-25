@@ -55,9 +55,7 @@ public class WizardContext implements IProjectTemplateContext {
     private final PropertyChangeSupport propertySupport = new PropertyChangeSupport(this);
     private IMobileWebRuntime runtime;
     private IProjectTemplate template = null;
-
     private String widgetId;
-
     private String widgetName;
     private final Collection<String> jsIncludes = new TreeSet<String>();
 

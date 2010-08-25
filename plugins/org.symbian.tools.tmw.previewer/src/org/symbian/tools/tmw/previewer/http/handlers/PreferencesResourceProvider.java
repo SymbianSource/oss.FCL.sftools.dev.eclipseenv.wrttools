@@ -33,6 +33,7 @@ import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 import org.symbian.tools.tmw.previewer.preview.ProjectPreferencesManager;
+import org.symbian.tools.tmw.ui.ProjectMemo;
 
 public class PreferencesResourceProvider implements IResourceProvider {
     public String[] getPaths() {
@@ -40,16 +41,16 @@ public class PreferencesResourceProvider implements IResourceProvider {
     }
 
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
-            String sessionId)
-            throws IOException, CoreException {
+            String sessionId) throws IOException, CoreException {
         Properties projectPreferences = ProjectPreferencesManager.getProjectProperties(project);
         if (!projectPreferences.containsKey("__SYM_NOKIA_EMULATOR_DEVICE")) {
             final ITMWProject p = TMWCore.create(project);
             if (p != null) {
-                String resolution = p.getPreferredScreenSize();
-            if (resolution != null) {
-                projectPreferences.put("__SYM_NOKIA_EMULATOR_DEVICE", resolution);
-            }
+                ProjectMemo memo = new ProjectMemo(p);
+                String resolution = memo.getAttribute("resolution");
+                if (resolution != null) {
+                    projectPreferences.put("__SYM_NOKIA_EMULATOR_DEVICE", resolution);
+                }
             }
         }
         String js = getJS(projectPreferences);
@@ -71,8 +72,7 @@ public class PreferencesResourceProvider implements IResourceProvider {
     }
 
     public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
-            String sessionId)
-            throws IOException, CoreException {
+            String sessionId) throws IOException, CoreException {
         String key = (String) object.get("key");
         Object value = object.get("value");
         if (value != null) {

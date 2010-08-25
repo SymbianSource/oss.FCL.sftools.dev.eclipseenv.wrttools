@@ -44,11 +44,4 @@ public interface ITMWProject {
      * @return <code>true</code> if the project has no errors. Warnings do not count.
      */
     boolean validate(IProgressMonitor monitor);
-
-    /**
-     * Return preferred screen size for the project.
-     * 
-     * @return string like "240x320"
-     */
-    String getPreferredScreenSize();
 }

@@ -20,10 +20,11 @@ package org.symbian.tools.tmw.internal.ui.project;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -35,6 +36,22 @@ import org.symbian.tools.tmw.ui.project.IProjectTemplateManager;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
 public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
+    public class TemplateComparator implements Comparator<IProjectTemplate> {
+        public int compare(IProjectTemplate o1, IProjectTemplate o2) {
+            if (o1 == o2) {
+                return 0;
+            } else if (o1 == null) {
+                return -1;
+            } else if (o2 == null) {
+                return 1;
+            }
+            if (o1.getWeight() == o2.getWeight()) {
+                return o1.getName().compareTo(o2.getName());
+            } else {
+                return o1.getWeight() > o2.getWeight() ? 1 : -1;
+            }
+        }
+    }
     private Map<IMobileWebRuntime, ITemplateInstaller> emptyProjects;
     private Map<IMobileWebRuntime, Map<String, String>> runtimeTemplateParameters;
     private Map<IMobileWebRuntime, IProjectTemplate[]> templates;
@@ -75,7 +92,7 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
                 for (IMobileWebRuntime runtime : supportedRuntimes) {
                     Collection<IProjectTemplate> tmplts = map.get(runtime);
                     if (tmplts == null) {
-                        tmplts = new HashSet<IProjectTemplate>();
+                        tmplts = new TreeSet<IProjectTemplate>(new TemplateComparator());
                         map.put(runtime, tmplts);
                     }
                     tmplts.add(template);
