@@ -53,4 +53,5 @@ public interface IMobileWebRuntimeManager {
      * @return list of all runtimes known to an IDE
      */
     IMobileWebRuntime[] getAllRuntimes();
+
 }

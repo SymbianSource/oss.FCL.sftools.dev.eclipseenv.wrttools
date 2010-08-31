@@ -100,12 +100,9 @@ public class ProjectUtils {
             try {
                 final Collection<IFile> files = new HashSet<IFile>(projects.length);
                 for (IProject project : projects) {
-                    String file = CoreUtil.getIndexFile(project);
-                    if (file != null) {
-                        IFile index = project.getFile(file);
-                        if (index.isAccessible()) {
-                            files.add(index);
-                        }
+                    IFile index = CoreUtil.getIndexFile(project);
+                    if (index != null && index.isAccessible()) {
+                        files.add(index);
                     }
                 }
                 final IFile[] filesArray = files.toArray(new IFile[files.size()]);
@@ -414,8 +411,7 @@ public class ProjectUtils {
             return false;
         }
         try {
-            IMarker[] markers = resource
-                    .findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
+            IMarker[] markers = resource.findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
             IPath path = resource.getProjectRelativePath();
             return markers.length != 0 || (path.segmentCount() > 1 && ".settings".equals(path.segment(0)))
                     || isExcluded(resource.getParent());
@@ -437,8 +433,7 @@ public class ProjectUtils {
 
     public static void include(IResource resource) {
         try {
-            IMarker[] markers = resource
-                    .findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
+            IMarker[] markers = resource.findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
             resource.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, null);
             for (IMarker marker : markers) {
                 marker.delete();

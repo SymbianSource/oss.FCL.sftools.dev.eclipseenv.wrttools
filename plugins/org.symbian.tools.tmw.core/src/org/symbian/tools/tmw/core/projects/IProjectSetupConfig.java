@@ -57,5 +57,5 @@ public interface IProjectSetupConfig {
      * @param file workspace file. Framework is responsible to create proper 
      * application root-relative path
      */
-    void addIncludedJsFile(IFile file);
+    void addIncludedJsFile(IProject project, IFile file);
 }

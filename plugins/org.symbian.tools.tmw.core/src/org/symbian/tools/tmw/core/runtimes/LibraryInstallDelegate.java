@@ -52,7 +52,7 @@ public abstract class LibraryInstallDelegate implements IDelegate {
                         final IFile f = setupConfig.addFile(project, basePath.append(entry), stream,
                                 new NullProgressMonitor());
                         if (isIncludeFile(entry)) {
-                            setupConfig.addIncludedJsFile(f);
+                            setupConfig.addIncludedJsFile(project, f);
                         }
 
                     }

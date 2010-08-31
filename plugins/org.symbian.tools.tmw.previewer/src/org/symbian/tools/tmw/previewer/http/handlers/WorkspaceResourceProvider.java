@@ -26,7 +26,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.json.simple.JSONObject;
-import org.symbian.tools.tmw.previewer.PreviewerPlugin;
+import org.symbian.tools.tmw.core.TMWCore;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
+import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 public class WorkspaceResourceProvider implements IResourceProvider {
     public String[] getPaths() {
@@ -35,7 +37,14 @@ public class WorkspaceResourceProvider implements IResourceProvider {
 
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
             String sessionId) throws CoreException {
-        return PreviewerPlugin.getExtensionsManager().getLayoutProvider(project).getResourceFromPath(project, resource);
+        final ITMWProject p = TMWCore.create(project);
+        if (p != null) {
+            final IMobileWebRuntime targetRuntime = p.getTargetRuntime();
+            if (targetRuntime != null) {
+                return targetRuntime.getLayoutProvider().getResourceFromPath(project, resource);
+            }
+        }
+        return null;
     }
 
     public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,

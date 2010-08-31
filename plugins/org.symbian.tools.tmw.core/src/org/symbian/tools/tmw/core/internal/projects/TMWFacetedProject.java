@@ -18,6 +18,7 @@
  */
 package org.symbian.tools.tmw.core.internal.projects;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -77,6 +78,10 @@ public class TMWFacetedProject implements ITMWProject {
 
     public String getPreferredScreenSize() {
         return "240x320";
+    }
+
+    public IFile getMainHtmlPage() {
+        return null;
     }
 
 }

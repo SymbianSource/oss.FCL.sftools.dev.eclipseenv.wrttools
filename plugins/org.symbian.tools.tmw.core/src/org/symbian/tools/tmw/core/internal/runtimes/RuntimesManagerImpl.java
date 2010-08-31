@@ -18,15 +18,21 @@
  */
 package org.symbian.tools.tmw.core.internal.runtimes;
 
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
+import org.symbian.tools.tmw.core.runtimes.IApplicationLayoutProvider;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntimeManager;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
@@ -102,4 +108,57 @@ public final class RuntimesManagerImpl implements IMobileWebRuntimeManager {
         return id + ":" + version;
     }
 
+    public static final class LazyProvider implements IApplicationLayoutProvider {
+        private final IConfigurationElement element;
+        private IApplicationLayoutProvider instance;
+
+        public LazyProvider(IConfigurationElement element) {
+            this.element = element;
+        }
+
+        public IPath getResourcePath(IFile file) {
+            return getDelegate().getResourcePath(file);
+        }
+
+        private IApplicationLayoutProvider getDelegate() {
+            if (instance == null) {
+                try {
+                    instance = (IApplicationLayoutProvider) element.createExecutableExtension("class");
+                } catch (CoreException e) {
+                    TMWCore.log(null, e);
+                    instance = new IApplicationLayoutProvider() {
+
+                        public IPath getResourcePath(IFile file) {
+                            return null;
+                        }
+
+                        public InputStream getResourceFromPath(IProject project, IPath path) {
+                            return null;
+                        }
+
+                        public IFile getWorkspaceFile(IProject project, IPath applicationPath) {
+                            return null;
+                        }
+
+                        public IFile getIndexPage(IProject project) {
+                            return null;
+                        }
+                    };
+                }
+            }
+            return instance;
+        }
+
+        public InputStream getResourceFromPath(IProject project, IPath path) throws CoreException {
+            return getDelegate().getResourceFromPath(project, path);
+        }
+
+        public IFile getWorkspaceFile(IProject project, IPath applicationPath) throws CoreException {
+            return getDelegate().getWorkspaceFile(project, applicationPath);
+        }
+
+        public IFile getIndexPage(IProject project) {
+            return getDelegate().getIndexPage(project);
+        }
+    }
 }

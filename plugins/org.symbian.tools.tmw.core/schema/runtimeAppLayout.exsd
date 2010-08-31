@@ -3,7 +3,7 @@
 <schema targetNamespace="org.symbian.tools.tmw.previewer" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.symbian.tools.tmw.previewer" id="layoutProviders" name="Application Layout Providers"/>
+         <meta.schema plugin="org.symbian.tools.tmw.previewer" id="runtimeAppLayout" name="Runtime Application Layout"/>
       </appInfo>
       <documentation>
          [Enter description of this extension point.]
@@ -72,7 +72,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.symbian.tools.tmw.previewer.core.IApplicationLayoutProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.symbian.tools.tmw.core.runtimes.IApplicationLayoutProvider"/>
                </appInfo>
             </annotation>
          </attribute>

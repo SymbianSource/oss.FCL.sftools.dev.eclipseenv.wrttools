@@ -32,9 +32,7 @@ import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.symbian.tools.tmw.previewer.core.IPreviewerExtensionsManager;
 import org.symbian.tools.tmw.previewer.http.HttpPreviewer;
-import org.symbian.tools.tmw.previewer.internal.PreviewerExtensionsManagerImpl;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -62,7 +60,6 @@ public class PreviewerPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static PreviewerPlugin plugin;
 
-    private final IPreviewerExtensionsManager extensionsManager = new PreviewerExtensionsManagerImpl();
     private final CommandHandlerManager handlerManager = new CommandHandlerManager();
 	private final HttpPreviewer previewer = new HttpPreviewer();
     private MessageConsole console;
@@ -148,9 +145,5 @@ public class PreviewerPlugin extends AbstractUIPlugin {
         console.activate();
         console.newMessageStream().write(
                 message);
-    }
-
-    public static IPreviewerExtensionsManager getExtensionsManager() {
-        return getDefault().extensionsManager;
     }
 }

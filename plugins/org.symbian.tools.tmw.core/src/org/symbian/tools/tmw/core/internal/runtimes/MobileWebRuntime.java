@@ -22,35 +22,43 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
+import org.symbian.tools.tmw.core.TMWCore;
+import org.symbian.tools.tmw.core.internal.runtimes.RuntimesManagerImpl.LazyProvider;
+import org.symbian.tools.tmw.core.runtimes.IApplicationLayoutProvider;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 import org.symbian.tools.tmw.core.utilities.CoreUtil;
 
 public final class MobileWebRuntime implements IMobileWebRuntime {
     private final IConfigurationElement element;
+    private IApplicationLayoutProvider layout;
 
     public MobileWebRuntime(IConfigurationElement element) {
         this.element = element;
+        checkRegistry();
     }
 
-    public String getId() {
-        return element.getAttribute("component-id");
-    }
-
-    public String getVersion() {
-        return element.getAttribute("component-version");
-    }
-
-    public String getName() {
-        return element.getAttribute("name");
+    private synchronized void checkRegistry() {
+        if (layout == null) {
+            final IConfigurationElement[] configuration = Platform.getExtensionRegistry().getConfigurationElementsFor(
+                    TMWCore.PLUGIN_ID, "runtimeAppLayout");
+            for (IConfigurationElement element : configuration) {
+                final String runtimeId = element.getAttribute("runtime-id");
+                final String version = element.getAttribute("runtime-version");
+                if (getId().endsWith(runtimeId) && getVersion().endsWith(version)) {
+                    layout = new LazyProvider(element);
+                    break;
+                }
+            }
+            if (layout == null) {
+                TMWCore.log("No layout provider for runtime %s:%s (from plugin %s)", getId(), getVersion(), element
+                        .getContributor().getName());
+            }
+        }
     }
 
     public IConfigurationElement[] getComponentElements() {
         return element.getChildren("runtime-component");
-    }
-
-    @Override
-    public String toString() {
-        return getId() + ":" + getVersion();
     }
 
     public Map<String, String> getFixedFacets() {
@@ -60,6 +68,27 @@ public final class MobileWebRuntime implements IMobileWebRuntime {
             facets.put(CoreUtil.notNull(element.getAttribute("id")), element.getAttribute("version"));
         }
         return facets;
+    }
+
+    public String getId() {
+        return element.getAttribute("component-id");
+    }
+
+    public IApplicationLayoutProvider getLayoutProvider() {
+        return layout;
+    }
+
+    public String getName() {
+        return element.getAttribute("name");
+    }
+
+    public String getVersion() {
+        return element.getAttribute("component-version");
+    }
+
+    @Override
+    public String toString() {
+        return getId() + ":" + getVersion();
     }
 
 }

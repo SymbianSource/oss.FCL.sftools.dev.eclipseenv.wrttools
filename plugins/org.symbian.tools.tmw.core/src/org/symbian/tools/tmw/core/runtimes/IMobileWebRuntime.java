@@ -45,4 +45,10 @@ public interface IMobileWebRuntime {
      * @return fixed facets (that are always enabled for the runtime) as id-version pairs
      */
     Map<String, String> getFixedFacets();
+
+    /**
+     * @return layout provider that bridges application runtime structure and 
+     * workspace project structure
+     */
+    IApplicationLayoutProvider getLayoutProvider();
 }

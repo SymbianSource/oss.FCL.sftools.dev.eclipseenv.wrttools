@@ -321,7 +321,7 @@ public class WizardContext implements IProjectTemplateContext {
         }
     }
 
-    public void addIncludedJsFile(IFile file) {
+    public void addIncludedJsFile(IProject project, IFile file) {
         jsIncludes.add(file.getProjectRelativePath().makeRelative().toString());
     }
 }

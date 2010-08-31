@@ -35,7 +35,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.symbian.tools.tmw.previewer.core.IApplicationLayoutProvider;
+import org.symbian.tools.tmw.core.runtimes.IApplicationLayoutProvider;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
@@ -54,16 +54,11 @@ public class WRT11ApplicationLayout implements IApplicationLayoutProvider {
     private IFile getProjectIndexPage(String projectName) throws IOException, CoreException {
         IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
         if (project.isAccessible()) {
-            String indexFileName = CoreUtil.getIndexFile(project);
-            if (indexFileName != null) {
-                final IFile file = CoreUtil.getFile(project, indexFileName);
-                if (!ProjectUtils.isExcluded(file)) {
-                    return file;
-                }
+            final IFile file = CoreUtil.getIndexFile(project);
+            if (file != null && !ProjectUtils.isExcluded(file)) {
+                return file;
             }
-            Activator.log(
-                    String.format("Can not find main page (%s) in project %s.\n", indexFileName, project.getName()),
-                    null);
+            Activator.log(String.format("Can not find main page in project %s.\n", project.getName()), null);
         }
         return null;
     }
@@ -149,6 +144,15 @@ public class WRT11ApplicationLayout implements IApplicationLayoutProvider {
             }
         }
         return (file != null && file.exists()) && isFileIncluded(file) ? file : null;
+    }
+
+    public IFile getIndexPage(IProject project) {
+        try {
+            return CoreUtil.getIndexFile(project);
+        } catch (CoreException e) {
+            Activator.log(e);
+            return null;
+        }
     }
 
 }

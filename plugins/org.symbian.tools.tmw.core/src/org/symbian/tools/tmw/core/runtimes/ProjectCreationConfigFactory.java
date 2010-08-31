@@ -24,7 +24,7 @@ import org.eclipse.wst.common.project.facet.core.IActionConfigFactory;
 public class ProjectCreationConfigFactory implements IActionConfigFactory {
     // Basically this is an ugly hack. Our project wizard will replace this config
     // object with WizardContext
-    public static final Object CONFIG_STANDIN = "standing_config";
+    public static final Object CONFIG_STANDIN = "standin_config";
 
     public Object create() throws CoreException {
         return CONFIG_STANDIN;

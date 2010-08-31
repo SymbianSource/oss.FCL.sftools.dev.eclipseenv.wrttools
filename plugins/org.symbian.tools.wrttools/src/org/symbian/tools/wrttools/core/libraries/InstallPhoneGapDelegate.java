@@ -56,7 +56,7 @@ public final class InstallPhoneGapDelegate implements IDelegate {
                     file = url.openStream();
                     final IFile f = setupConfig.addFile(project, basePath.append(PHONEGAP_JS), file,
                             new NullProgressMonitor());
-                    setupConfig.addIncludedJsFile(f);
+                    setupConfig.addIncludedJsFile(project, f);
                 }
             } catch (IOException e) {
                 Activator.log(e);

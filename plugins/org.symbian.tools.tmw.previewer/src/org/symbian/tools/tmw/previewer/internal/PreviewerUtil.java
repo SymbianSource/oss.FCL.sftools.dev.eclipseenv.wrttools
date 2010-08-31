@@ -30,8 +30,10 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.symbian.tools.tmw.core.TMWCore;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
+import org.symbian.tools.tmw.core.runtimes.IApplicationLayoutProvider;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
-import org.symbian.tools.tmw.previewer.core.IApplicationLayoutProvider;
 
 public class PreviewerUtil {
     public static final class ChangedResourcesCollector implements IResourceDeltaVisitor {
@@ -53,16 +55,18 @@ public class PreviewerUtil {
                 }
                 break;
             case IResource.FILE:
-                IApplicationLayoutProvider layoutProvider = PreviewerPlugin.getExtensionsManager().getLayoutProvider(
-                        resource.getProject());
-                if (layoutProvider != null) {
-                    if (layoutProvider.getResourcePath((IFile) resource) != null) {
-                        final boolean kind = delta.getKind() == IResourceDelta.ADDED
-                                | delta.getKind() == IResourceDelta.REMOVED;
-                        final boolean flag = (delta.getFlags() & (IResourceDelta.CONTENT | IResourceDelta.ENCODING
-                                | IResourceDelta.LOCAL_CHANGED | IResourceDelta.REPLACED | IResourceDelta.SYNC)) != 0;
-                        if (kind || flag) {
-                            files.add((IFile) resource);
+                final ITMWProject p = TMWCore.create(resource.getProject());
+                if (p != null && p.getTargetRuntime() != null) {
+                    IApplicationLayoutProvider layoutProvider = p.getTargetRuntime().getLayoutProvider();
+                    if (layoutProvider != null) {
+                        if (layoutProvider.getResourcePath((IFile) resource) != null) {
+                            final boolean kind = delta.getKind() == IResourceDelta.ADDED
+                                    | delta.getKind() == IResourceDelta.REMOVED;
+                            final boolean flag = (delta.getFlags() & (IResourceDelta.CONTENT | IResourceDelta.ENCODING
+                                    | IResourceDelta.LOCAL_CHANGED | IResourceDelta.REPLACED | IResourceDelta.SYNC)) != 0;
+                            if (kind || flag) {
+                                files.add((IFile) resource);
+                            }
                         }
                     }
                 }

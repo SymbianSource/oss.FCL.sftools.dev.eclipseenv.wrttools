@@ -48,27 +48,24 @@ public class LibrariesUtils {
             return;
         }
         IModelManager modelManager = StructuredModelManager.getModelManager();
-        String indexFile = CoreUtil.getIndexFile(project);
-        if (indexFile != null) {
-            IFile file = project.getFile(indexFile);
-            if (file != null & file.exists()) {
-                IStructuredModel model = modelManager.getModelForEdit(file);
-                try {
-                    if (model instanceof IDOMModel) {
-                        ((IDOMModel) model).beginRecording(js, label);
-                        boolean needsSave = false;
-                        for (String jsLib : js) {
-                            needsSave |= change(((IDOMModel) model).getDocument(), jsLib);
-                        }
-                        model.endRecording(js);
-                        if (needsSave) {
-                            model.save();
-                        }
+        IFile file = CoreUtil.getIndexFile(project);
+        if (file != null & file.exists()) {
+            IStructuredModel model = modelManager.getModelForEdit(file);
+            try {
+                if (model instanceof IDOMModel) {
+                    ((IDOMModel) model).beginRecording(js, label);
+                    boolean needsSave = false;
+                    for (String jsLib : js) {
+                        needsSave |= change(((IDOMModel) model).getDocument(), jsLib);
                     }
-                } finally {
-                    if (model != null) {
-                        model.releaseFromEdit();
+                    model.endRecording(js);
+                    if (needsSave) {
+                        model.save();
                     }
+                }
+            } finally {
+                if (model != null) {
+                    model.releaseFromEdit();
                 }
             }
         }

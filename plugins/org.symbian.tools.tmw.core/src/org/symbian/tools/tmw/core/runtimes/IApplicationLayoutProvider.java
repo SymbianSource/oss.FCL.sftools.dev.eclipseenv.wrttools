@@ -16,7 +16,7 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.tmw.previewer.core;
+package org.symbian.tools.tmw.core.runtimes;
 
 import java.io.InputStream;
 
@@ -51,4 +51,9 @@ public interface IApplicationLayoutProvider {
      * <code>null</code> if none
      */
     IFile getWorkspaceFile(IProject project, IPath applicationPath) throws CoreException;
+
+    /**
+     * @return main HTML page (application entry point)
+     */
+    IFile getIndexPage(IProject project);
 }

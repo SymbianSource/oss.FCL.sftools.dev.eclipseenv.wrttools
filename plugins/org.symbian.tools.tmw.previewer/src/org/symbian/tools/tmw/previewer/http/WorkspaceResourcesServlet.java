@@ -50,16 +50,17 @@ import org.eclipse.core.runtime.Path;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.symbian.tools.tmw.core.TMWCore;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
+import org.symbian.tools.tmw.core.runtimes.IApplicationLayoutProvider;
 import org.symbian.tools.tmw.previewer.PreviewerException;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
-import org.symbian.tools.tmw.previewer.core.IApplicationLayoutProvider;
 import org.symbian.tools.tmw.previewer.http.handlers.DebuggerResourceProvider;
 import org.symbian.tools.tmw.previewer.http.handlers.PreviewerStaticResourceProvider;
 import org.symbian.tools.tmw.previewer.http.handlers.Providers;
 
 public class WorkspaceResourcesServlet extends HttpServlet {
     private static final Map<String, String> EXTENSION_CONTENT_TYPE = new TreeMap<String, String>();
-
     private static final long serialVersionUID = -3217197074249607950L;
 
     static {
@@ -99,49 +100,41 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         }
     }
 
+    public static URI getDebugStartingPage(IProject project, String session) {
+        return getServerURIForResource(project.getFullPath().append(HttpPreviewer.DEBUG_STARTING_PAGE).makeAbsolute(),
+                session);
+    }
+
     public static IFile getFileFromUrl(String name) {
         final IPath path = getResourcePath(name);
         if (path != null) {
             final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(path.segment(0));
-            final IApplicationLayoutProvider provider = PreviewerPlugin.getExtensionsManager().getLayoutProvider(
-                    project);
-            if (provider != null) {
-                try {
-                    return provider.getWorkspaceFile(project, path.removeFirstSegments(1));
-                } catch (CoreException e) {
-                    PreviewerPlugin.log(e);
+            final ITMWProject p = TMWCore.create(project);
+            if (p != null && p.getTargetRuntime() != null) {
+                final IApplicationLayoutProvider provider = p.getTargetRuntime().getLayoutProvider();
+                if (provider != null) {
+                    try {
+                        return provider.getWorkspaceFile(project, path.removeFirstSegments(1));
+                    } catch (CoreException e) {
+                        PreviewerPlugin.log(e);
+                    }
                 }
             }
         }
         return null;
     }
 
-    private static IPath getResourcePath(String name) {
-        IPath p = null;
-        try {
-            String root = getHttpUrl(null);
-            if (name != null && name.startsWith(root)) {
-                final String fileName = URLDecoder.decode(name.substring(root.length()), "UTF-8");
-                final IPath path = new Path(fileName);
-                if (path.segmentCount() > 1) {
-                    p = path;
-                }
-            }
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-        return p;
-    }
-
     public static String getHttpUrl(IFile file) {
         IPath p = new Path("/");
         if (file != null) {
-            IApplicationLayoutProvider provider = PreviewerPlugin.getExtensionsManager().getLayoutProvider(
-                    file.getProject());
-            if (provider != null) {
-                IPath path = provider.getResourcePath(file);
-                if (path != null) {
-                    p = p.append(file.getProject().getName()).append(path).makeAbsolute();
+            final ITMWProject project = TMWCore.create(file.getProject());
+            if (project != null && project.getTargetRuntime() != null) {
+                final IApplicationLayoutProvider provider = project.getTargetRuntime().getLayoutProvider();
+                if (provider != null) {
+                    IPath path = provider.getResourcePath(file);
+                    if (path != null) {
+                        p = p.append(file.getProject().getName()).append(path).makeAbsolute();
+                    }
                 }
             }
         }
@@ -190,6 +183,23 @@ public class WorkspaceResourcesServlet extends HttpServlet {
     public static URI getPreviewerStartingPage(String widget) {
         return getServerURIForResource(new Path(widget).append(HttpPreviewer.PREVIEW_STARTING_PAGE).makeAbsolute(),
                 null);
+    }
+
+    private static IPath getResourcePath(String name) {
+        IPath p = null;
+        try {
+            String root = getHttpUrl(null);
+            if (name != null && name.startsWith(root)) {
+                final String fileName = URLDecoder.decode(name.substring(root.length()), "UTF-8");
+                final IPath path = new Path(fileName);
+                if (path.segmentCount() > 1) {
+                    p = path;
+                }
+            }
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+        return p;
     }
 
     private static URI getServerURIForResource(IPath resourcePath, String debugSessionId) {
@@ -272,10 +282,5 @@ public class WorkspaceResourcesServlet extends HttpServlet {
             throw new ServletException(e);
         }
         resp.setStatus(HttpServletResponse.SC_OK);
-    }
-
-    public static URI getDebugStartingPage(IProject project, String session) {
-        return getServerURIForResource(project.getFullPath().append(HttpPreviewer.DEBUG_STARTING_PAGE).makeAbsolute(),
-                session);
     }
 }

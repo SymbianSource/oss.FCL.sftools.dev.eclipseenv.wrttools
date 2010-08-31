@@ -33,6 +33,8 @@ import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.MessagePage;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
+import org.symbian.tools.tmw.core.TMWCore;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.previewer.IWrtEditingPreferences;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
@@ -143,7 +145,10 @@ public class PreviewView extends PageBookView {
         if (part instanceof IEditorPart) {
             IResource resource = (IResource) ((IEditorPart) part).getEditorInput().getAdapter(IResource.class);
             if (resource != null) {
-                return PreviewerPlugin.getExtensionsManager().getLayoutProvider(resource.getProject()) != null;
+                final ITMWProject project = TMWCore.create(resource.getProject());
+                if (project != null && project.getTargetRuntime() != null) {
+                    return project.getTargetRuntime().getLayoutProvider() != null;
+                }
             }
         }
         return false;

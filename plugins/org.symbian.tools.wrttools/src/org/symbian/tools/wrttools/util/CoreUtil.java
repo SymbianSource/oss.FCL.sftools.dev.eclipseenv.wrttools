@@ -115,7 +115,7 @@ public class CoreUtil {
 
     private static final Map<IProject, IndexFileRecord> INDEX_FILES = new HashMap<IProject, IndexFileRecord>();
 
-    public static synchronized String getIndexFile(IProject project) throws CoreException {
+    public static synchronized IFile getIndexFile(IProject project) throws CoreException {
         // There will really be a lot of calls to this method. We need to cache values.
         IFile file = getFile(project, METADATA_FILE);
         if (file == null) {
@@ -132,15 +132,19 @@ public class CoreUtil {
             }
         }
         String fileName = getIndexFileName(readFile(file));
-        INDEX_FILES.put(project, new IndexFileRecord(fileName, file.getModificationStamp()));
-        return fileName;
+        if (fileName != null) {
+            IFile f = getFile(project, fileName);
+            INDEX_FILES.put(project, new IndexFileRecord(f, file.getModificationStamp()));
+            return f;
+        }
+        return null;
     }
 
     private static class IndexFileRecord {
-        public final String fileName;
+        public final IFile fileName;
         public final long timeStamp;
 
-        public IndexFileRecord(String fileName, long timeStamp) {
+        public IndexFileRecord(IFile fileName, long timeStamp) {
             this.fileName = fileName;
             this.timeStamp = timeStamp;
         }
