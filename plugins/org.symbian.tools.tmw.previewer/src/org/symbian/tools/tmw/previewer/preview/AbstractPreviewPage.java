@@ -25,206 +25,193 @@ import org.symbian.tools.tmw.core.utilities.CoreUtil;
 import org.symbian.tools.tmw.previewer.Images;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
-public abstract class AbstractPreviewPage extends Page implements IPreviewPage,
-		ISelectionProvider {
-	private final IAction refreshAction = new Action("Refresh") {
-		public void run() {
-			refresh(true);
-		};
-	};
-	private final IAction toggleRefresh = new Action("Toggle Refresh",
-			IAction.AS_RADIO_BUTTON) {
-		public void run() {
-			toggleRefresh();
-		};
-	};
+public abstract class AbstractPreviewPage extends Page implements IPreviewPage, ISelectionProvider {
+    private final IAction refreshAction = new Action("Refresh") {
+        public void run() {
+            refresh(true);
+        };
+    };
+    private final IAction toggleRefresh = new Action("Toggle Refresh", IAction.AS_RADIO_BUTTON) {
+        public void run() {
+            toggleRefresh();
+        };
+    };
 
-	protected IProject project;
-	private Browser browser;
-	private boolean toggleState = true;
-	private final PreviewView previewView;
-	private boolean needsRefresh = false;
+    protected IProject project;
+    private Browser browser;
+    private boolean toggleState = true;
+    private final PreviewView previewView;
+    private boolean needsRefresh = false;
 
-	public AbstractPreviewPage(IProject project, PreviewView previewView) {
-		this.project = project;
-		this.previewView = previewView;
-	}
+    public AbstractPreviewPage(IProject project, PreviewView previewView) {
+        this.project = project;
+        this.previewView = previewView;
+    }
 
-	protected void toggleRefresh() {
-		toggleState = !toggleState;
-		toggleRefresh.setChecked(toggleState);
-		previewView.setProjectAutorefresh(project, toggleState);
-		toggleRefresh.setToolTipText(getToggleActionTooltip());
-		if (toggleState && needsRefresh) {
-			refresh(true);
-		}
-	}
+    protected void toggleRefresh() {
+        toggleState = !toggleState;
+        toggleRefresh.setChecked(toggleState);
+        previewView.setProjectAutorefresh(project, toggleState);
+        toggleRefresh.setToolTipText(getToggleActionTooltip());
+        if (toggleState && needsRefresh) {
+            refresh(true);
+        }
+    }
 
-	@Override
-	public void createControl(Composite parent) {
-		browser = createBrowser(parent);
-		browser.setLayoutData(new GridData(GridData.FILL_BOTH));
-		browser.setUrl(getURI().toASCIIString());
-	}
+    @Override
+    public void createControl(Composite parent) {
+        browser = createBrowser(parent);
+        browser.setLayoutData(new GridData(GridData.FILL_BOTH));
+        browser.setUrl(getURI().toASCIIString());
+    }
 
-	protected abstract Browser createBrowser(Composite parent);
+    protected abstract Browser createBrowser(Composite parent);
 
-	private URI getURI() {
-		return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(
-				project, null);
-	}
+    private URI getURI() {
+        return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project, null);
+    }
 
-	@Override
-	public Control getControl() {
-		return browser;
-	}
+    @Override
+    public Control getControl() {
+        return browser;
+    }
 
-	@Override
-	public void setFocus() {
-		if (browser != null && !browser.isDisposed()) {
-			browser.setFocus();
-		}
-	}
+    @Override
+    public void setFocus() {
+        if (browser != null && !browser.isDisposed()) {
+            browser.setFocus();
+        }
+    }
 
-	private boolean refreshScheduled = false;
+    private boolean refreshScheduled = false;
 
-	public synchronized void process(Collection<IFile> files) {
-		if (!isDisposed() && !refreshScheduled && needsRefresh(files)) {
-			asyncExec(new Runnable() {
-				public void run() {
-					refreshBrowser();
-				}
-			});
-			refreshScheduled = true;
-		}
-	}
+    public synchronized void process(Collection<IFile> files) {
+        if (!isDisposed() && !refreshScheduled && needsRefresh(files)) {
+            asyncExec(new Runnable() {
+                public void run() {
+                    refreshBrowser();
+                }
+            });
+            refreshScheduled = true;
+        }
+    }
 
-	protected void promptIfNeeded() {
-		if (toggleState) {
-			toggleState = previewView.promptUserToToggle(project, toggleState);
-			toggleRefresh.setChecked(toggleState);
-		}
-	}
+    protected void promptIfNeeded() {
+        if (toggleState) {
+            toggleState = previewView.promptUserToToggle(project, toggleState);
+            toggleRefresh.setChecked(toggleState);
+        }
+    }
 
-	private void asyncExec(Runnable runnable) {
-		getControl().getDisplay().asyncExec(runnable);
-	}
+    private void asyncExec(Runnable runnable) {
+        getControl().getDisplay().asyncExec(runnable);
+    }
 
-	private boolean needsRefresh(Collection<IFile> files) {
-		for (IFile iFile : files) {
-			if (iFile.getProject().equals(project)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    private boolean needsRefresh(Collection<IFile> files) {
+        for (IFile iFile : files) {
+            if (iFile.getProject().equals(project)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	protected synchronized void refresh(final boolean manual) {
-		try {
-			if (!isDisposed()) {
-				final Control focusControl = browser.getDisplay()
-						.getFocusControl();
-				if (manual && CoreUtil.isMac()) {
-					browser.getParent().forceFocus();
-				}
-				browser.setUrl(getURI().toASCIIString());
-				refreshAction.setImageDescriptor(PreviewerPlugin
-						.getImageDescriptor(Images.GREEN_SYNC));
-				asyncExec(new Runnable() {
-					public void run() {
-						if (!manual && focusControl != null) {
-							focusControl.setFocus();
-						} else if (manual) {
-							browser.forceFocus();
-						}
-					}
-				});
-				refreshAction.setToolTipText("Refresh the preview browser");
-			}
-			needsRefresh = false;
-		} finally {
-			refreshScheduled = false;
-		}
-	}
+    protected synchronized void refresh(final boolean manual) {
+        try {
+            if (!isDisposed()) {
+                final Control focusControl = browser.getDisplay().getFocusControl();
+                if (manual && CoreUtil.isMac()) {
+                    browser.getParent().forceFocus();
+                }
+                browser.setUrl(getURI().toASCIIString());
+                refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.GREEN_SYNC));
+                asyncExec(new Runnable() {
+                    public void run() {
+                        if (!manual && focusControl != null && !focusControl.isDisposed()) {
+                            focusControl.setFocus();
+                        } else if (manual) {
+                            browser.forceFocus();
+                        }
+                    }
+                });
+                refreshAction.setToolTipText("Refresh the preview browser");
+            }
+            needsRefresh = false;
+        } finally {
+            refreshScheduled = false;
+        }
+    }
 
-	@Override
-	public void init(IPageSite pageSite) {
-		super.init(pageSite);
-		IToolBarManager toolBar = pageSite.getActionBars().getToolBarManager();
+    @Override
+    public void init(IPageSite pageSite) {
+        super.init(pageSite);
+        IToolBarManager toolBar = pageSite.getActionBars().getToolBarManager();
 
-		contributeToToolbar(toolBar);
+        contributeToToolbar(toolBar);
 
-		refreshAction.setImageDescriptor(PreviewerPlugin
-				.getImageDescriptor(Images.GREEN_SYNC));
-		refreshAction.setToolTipText("Refresh the preview browser");
-		toolBar.add(refreshAction);
+        refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.GREEN_SYNC));
+        refreshAction.setToolTipText("Refresh the preview browser");
+        toolBar.add(refreshAction);
 
-		toggleState = previewView.getProjectAutorefresh(project);
+        toggleState = previewView.getProjectAutorefresh(project);
 
-		toggleRefresh.setImageDescriptor(PreviewerPlugin
-				.getImageDescriptor(Images.YELLOW_SYNC));
-		toggleRefresh.setToolTipText(getToggleActionTooltip());
-		toggleRefresh.setChecked(toggleState);
-		toolBar.add(toggleRefresh);
+        toggleRefresh.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.YELLOW_SYNC));
+        toggleRefresh.setToolTipText(getToggleActionTooltip());
+        toggleRefresh.setChecked(toggleState);
+        toolBar.add(toggleRefresh);
 
-		pageSite.getActionBars().setGlobalActionHandler(
-				ActionFactory.REFRESH.getId(), refreshAction);
-		getSite().setSelectionProvider(this);
-	}
+        pageSite.getActionBars().setGlobalActionHandler(ActionFactory.REFRESH.getId(), refreshAction);
+        getSite().setSelectionProvider(this);
+    }
 
-	protected void contributeToToolbar(IToolBarManager toolBar) {
-		// Do nothing here
-	}
+    protected void contributeToToolbar(IToolBarManager toolBar) {
+        // Do nothing here
+    }
 
-	private String getToggleActionTooltip() {
-		return toggleState ? "Disable preview autorefresh"
-				: "Enable preview autorefresh";
-	}
+    private String getToggleActionTooltip() {
+        return toggleState ? "Disable preview autorefresh" : "Enable preview autorefresh";
+    }
 
-	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		// Do nothing
-	}
+    public void addSelectionChangedListener(ISelectionChangedListener listener) {
+        // Do nothing
+    }
 
-	public ISelection getSelection() {
-		return new StructuredSelection(project);
-	}
+    public ISelection getSelection() {
+        return new StructuredSelection(project);
+    }
 
-	public void removeSelectionChangedListener(
-			ISelectionChangedListener listener) {
-		// Do nothing
-	}
+    public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+        // Do nothing
+    }
 
-	public void setSelection(ISelection selection) {
-		// Do nothing
-	}
+    public void setSelection(ISelection selection) {
+        // Do nothing
+    }
 
-	public boolean isDisposed() {
-		return browser != null && browser.isDisposed();
-	}
+    public boolean isDisposed() {
+        return browser != null && browser.isDisposed();
+    }
 
-	private synchronized void refreshBrowser() {
-		if (toggleState) {
-			promptIfNeeded();
-		}
-		if (toggleState) {
-			refresh(false);
-		} else {
-			needsRefresh = true;
-			refreshAction.setImageDescriptor(PreviewerPlugin
-					.getImageDescriptor(Images.RED_SYNC));
-			refreshAction
-					.setToolTipText("Refresh the preview browser (there are updated files)");
-		}
-	}
+    private synchronized void refreshBrowser() {
+        if (toggleState) {
+            promptIfNeeded();
+        }
+        if (toggleState) {
+            refresh(false);
+        } else {
+            needsRefresh = true;
+            refreshAction.setImageDescriptor(PreviewerPlugin.getImageDescriptor(Images.RED_SYNC));
+            refreshAction.setToolTipText("Refresh the preview browser (there are updated files)");
+        }
+    }
 
-	public IProject getProject() {
-		return project;
-	}
+    public IProject getProject() {
+        return project;
+    }
 
-	public synchronized void projectRenamed(IPath newPath) {
-		if (!isDisposed()) {
-			project = ResourcesPlugin.getWorkspace().getRoot().getProject(
-					newPath.lastSegment());
-		}
-	}
+    public synchronized void projectRenamed(IPath newPath) {
+        if (!isDisposed()) {
+            project = ResourcesPlugin.getWorkspace().getRoot().getProject(newPath.lastSegment());
+        }
+    }
 }

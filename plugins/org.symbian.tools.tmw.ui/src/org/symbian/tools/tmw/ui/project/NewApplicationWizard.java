@@ -43,7 +43,7 @@ import org.eclipse.wst.common.project.facet.core.runtime.IRuntime;
 import org.eclipse.wst.common.project.facet.ui.ModifyFacetedProjectWizard;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IFProjSupport;
-import org.symbian.tools.tmw.core.runtimes.ProjectCreationConfigFactory;
+import org.symbian.tools.tmw.core.projects.IProjectSetupConfig;
 import org.symbian.tools.tmw.internal.ui.wizard.NewApplicationDetailsWizardPage;
 import org.symbian.tools.tmw.internal.ui.wizard.NewApplicationFacetsWizardPage;
 import org.symbian.tools.tmw.internal.ui.wizard.NewApplicationTemplateWizardPage;
@@ -110,7 +110,7 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         final Collection<Action> actions = fpjwc.getProjectFacetActions();
         final Collection<Action> toReplace = new HashSet<IFacetedProject.Action>();
         for (Action action : actions) {
-            if (action.getConfig() == ProjectCreationConfigFactory.CONFIG_STANDIN) {
+            if (action.getConfig() instanceof IProjectSetupConfig) {
                 toReplace.add(action);
             }
         }

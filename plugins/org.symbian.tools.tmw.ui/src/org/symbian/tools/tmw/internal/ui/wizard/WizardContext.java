@@ -2,8 +2,6 @@ package org.symbian.tools.tmw.internal.ui.wizard;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.FilterInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Collection;
@@ -36,6 +34,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
+import org.symbian.tools.tmw.core.utilities.NonClosingStream;
 import org.symbian.tools.tmw.internal.util.Util;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.project.IProjectTemplate;
@@ -307,17 +306,6 @@ public class WizardContext implements IProjectTemplateContext {
                     return value;
                 }
             });
-        }
-    }
-
-    private static final class NonClosingStream extends FilterInputStream {
-        private NonClosingStream(InputStream in) {
-            super(in);
-        }
-
-        @Override
-        public void close() throws IOException {
-            // Avoid closing ZIP file
         }
     }
 

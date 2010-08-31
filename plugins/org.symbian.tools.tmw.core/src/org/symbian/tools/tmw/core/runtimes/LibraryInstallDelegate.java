@@ -34,6 +34,7 @@ import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.IProjectSetupConfig;
+import org.symbian.tools.tmw.core.utilities.NonClosingStream;
 
 public abstract class LibraryInstallDelegate implements IDelegate {
 
@@ -49,8 +50,8 @@ public abstract class LibraryInstallDelegate implements IDelegate {
                 while (en != null) {
                     if (!en.isDirectory()) {
                         final IPath entry = new Path(en.getName());
-                        final IFile f = setupConfig.addFile(project, basePath.append(entry), stream,
-                                new NullProgressMonitor());
+                        final IFile f = setupConfig.addFile(project, basePath.append(entry), new NonClosingStream(
+                                stream), new NullProgressMonitor());
                         if (isIncludeFile(entry)) {
                             setupConfig.addIncludedJsFile(project, f);
                         }

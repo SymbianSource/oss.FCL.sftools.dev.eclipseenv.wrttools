@@ -332,12 +332,6 @@
  <extension
        point="org.symbian.tools.wrttools.jsLibraries">
     <library
-          icon="icons/main16_prev.gif"
-          id="org.symbian.wrtkit"
-          installer="org.symbian.tools.wrttools.core.libraries.WRTKitInstaller"
-          name="WRTKit">
-    </library>
-    <library
           icon="icons/phonegap.png"
           id="phonegap"
           installer="org.symbian.tools.wrttools.core.libraries.PhoneGapInstaller"
@@ -360,7 +354,6 @@
          <adapt
                type="org.eclipse.core.resources.IProject">
          </adapt>
-        
       </with>
     </enablement>
           
@@ -1029,7 +1022,7 @@ function updateOrientation(orientation) {
          <constraint>
             <requires
                   facet="tmw.core"
-                  ignore-problems="1.0">
+                  version="[1.0">
             </requires>
          </constraint>
          <action

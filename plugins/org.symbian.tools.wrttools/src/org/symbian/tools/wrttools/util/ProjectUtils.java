@@ -19,11 +19,7 @@
 package org.symbian.tools.wrttools.util;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -31,12 +27,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import javax.swing.filechooser.FileSystemView;
 
 import org.eclipse.core.resources.ICommand;
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
@@ -220,19 +214,6 @@ public class ProjectUtils {
         }
     }
 
-    private static void checkParent(IContainer parent) throws CoreException {
-        if (parent.getType() == IResource.FOLDER && !parent.exists()) {
-            checkParent(parent.getParent());
-            ((IFolder) parent).create(false, true, new NullProgressMonitor());
-        }
-    }
-
-    public static void copyFile(IProject project, String name, ZipInputStream stream, long size,
-            IProgressMonitor monitor) throws CoreException, IOException {
-        IFile file = project.getFile(name);
-        file.create(new NonClosingStream(stream), true, new SubProgressMonitor(monitor, 1));
-    }
-
     public static IProject createWrtProject(String name, URI uri, IProgressMonitor monitor) throws CoreException {
         uri = isDefaultProjectLocation(uri) ? null : uri;
         monitor.beginTask("Create project resources", 30);
@@ -358,49 +339,6 @@ public class ProjectUtils {
 
     private static boolean isValidProjectFile(String fileName) {
         return !EXCLUDED.contains(fileName);
-    }
-
-    public static void unzip(String archiveFile, IContainer location, int trimSegments, IProgressMonitor progressMonitor)
-            throws IOException, CoreException {
-        unzip(new FileInputStream(archiveFile), location, trimSegments, archiveFile, progressMonitor);
-    }
-
-    public static void unzip(InputStream in, IContainer location, int trimSegments, String label,
-            IProgressMonitor progressMonitor) throws IOException, CoreException {
-        progressMonitor.beginTask(MessageFormat.format("Unpacking {0}", label), IProgressMonitor.UNKNOWN);
-        ZipInputStream stream = new ZipInputStream(in);
-        try {
-            ZipEntry nextEntry;
-            int count = 0;
-            while ((nextEntry = stream.getNextEntry()) != null) {
-                count++;
-                IPath p = new Path(nextEntry.getName()).removeFirstSegments(trimSegments);
-                if (!isIgnored(p) && !nextEntry.isDirectory()) {
-                    IFile file = location.getFile(p);
-                    checkParent(file.getParent());
-                    if (file.exists()) {
-                        file.setContents(new NonClosingStream(stream), false, true, new SubProgressMonitor(
-                                progressMonitor, 1));
-                    } else {
-                        file.create(new NonClosingStream(stream), true, new SubProgressMonitor(progressMonitor, 1));
-                    }
-                }
-            }
-            if (count == 0) {
-                throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-                        "Selected archive file does not contain application files"));
-            }
-        } finally {
-            stream.close();
-        }
-        progressMonitor.done();
-    }
-
-    private static boolean isIgnored(IPath p) {
-        if (p.segmentCount() == 1) {
-            return IProjectDescription.DESCRIPTION_FILE_NAME.equals(p.lastSegment());
-        }
-        return false;
     }
 
     public static boolean isExcluded(IResource resource) {

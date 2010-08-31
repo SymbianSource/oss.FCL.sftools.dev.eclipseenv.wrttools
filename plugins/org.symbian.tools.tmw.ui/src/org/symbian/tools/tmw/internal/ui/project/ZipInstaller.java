@@ -20,7 +20,6 @@ package org.symbian.tools.tmw.internal.ui.project;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,6 +52,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.symbian.tools.tmw.core.utilities.NonClosingStream;
 import org.symbian.tools.tmw.internal.util.OpenFilesRunnable;
 import org.symbian.tools.tmw.internal.util.Util;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
@@ -209,17 +209,6 @@ public class ZipInstaller implements ITemplateInstaller {
         writer.close();
 
         return new ByteArrayInputStream(file.toByteArray());
-    }
-
-    private static final class NonClosingStream extends FilterInputStream {
-        private NonClosingStream(InputStream in) {
-            super(in);
-        }
-
-        @Override
-        public void close() throws IOException {
-            // Avoid closing ZIP file
-        }
     }
 
     private static final class TemplateContext extends AbstractContext {

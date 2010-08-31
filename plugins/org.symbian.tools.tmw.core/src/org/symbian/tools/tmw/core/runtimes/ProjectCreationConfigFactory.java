@@ -20,14 +20,10 @@ package org.symbian.tools.tmw.core.runtimes;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.wst.common.project.facet.core.IActionConfigFactory;
+import org.symbian.tools.tmw.core.internal.projects.LibraryAdditionConfigObject;
 
 public class ProjectCreationConfigFactory implements IActionConfigFactory {
-    // Basically this is an ugly hack. Our project wizard will replace this config
-    // object with WizardContext
-    public static final Object CONFIG_STANDIN = "standin_config";
-
     public Object create() throws CoreException {
-        return CONFIG_STANDIN;
+        return new LibraryAdditionConfigObject();
     }
-
 }

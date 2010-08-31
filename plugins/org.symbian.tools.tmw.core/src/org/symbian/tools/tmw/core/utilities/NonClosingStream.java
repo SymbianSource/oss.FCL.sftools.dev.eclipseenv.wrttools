@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2009 Symbian Foundation and/or its subsidiary(-ies).
+ * Copyright (c) 2010 Symbian Foundation and/or its subsidiary(-ies).
  * All rights reserved.
  * This component and the accompanying materials are made available
  * under the terms of the License "Eclipse Public License v1.0"
@@ -16,23 +16,19 @@
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
  */
-package org.symbian.tools.wrttools.util;
+package org.symbian.tools.tmw.core.utilities;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * This allows blocking the IP clients from closing the stream. This
- * class is needed when creating workbench files from the Zip archives.
- */
 public final class NonClosingStream extends FilterInputStream {
-	public NonClosingStream(InputStream in) {
-		super(in);
-	}
+    public NonClosingStream(InputStream in) {
+        super(in);
+    }
 
-	@Override
-	public void close() throws IOException {
-		// We do not need Eclipse closing the Zip stream
-	}
+    @Override
+    public void close() throws IOException {
+        // Avoid closing ZIP file
+    }
 }
