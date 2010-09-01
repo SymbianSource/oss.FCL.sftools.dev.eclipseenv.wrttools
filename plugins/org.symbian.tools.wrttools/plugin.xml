@@ -104,9 +104,7 @@
 	
 <!-- Import Wizard -->
 	<extension point="org.eclipse.ui.importWizards">
-		<category id="org.symbian.tools.wrttools.import" name="Mobile Web Tools">
-		</category>
-		<wizard category="org.symbian.tools.wrttools.import"
+		<wizard category="org.symbian.tools.tmw.import"
 			class="org.symbian.tools.wrttools.wizards.projectimport.WrtProjectsImportWizard"
 			icon="icons/import_aptana_project.gif" id="org.symbian.tools.wrttools.import.projectImport"
 			name="Existing Mobile Web Projects into Workspace">
@@ -114,18 +112,7 @@
         Import WRT project created in Aptana, Adobe Dreamweaver or WRT IDE
      </description>
 		</wizard>
-		
-		<wizard
-          category="org.symbian.tools.wrttools.import"
-          class="org.symbian.tools.wrttools.wizards.WgzImportWizard"
-          icon="icons/import_16x16px.png"
-          id="org.symbian.tools.wrttools.importwgz"
-          name="Application Archive (WGZ)">
-        <description>
-          Create WRT project from deployable WGZ application archive
-        </description>
-      </wizard>
-		
+	
     </extension>
 	
 <!-- WRT Content Descriptor (.plist) file -->
@@ -657,7 +644,6 @@ function updateOrientation(orientation) {
            component-version="1.1"
            name="Symbian WRT 1.1">
         <runtime-component
-              alwayson="true"
               id="tmw.geolocation"
               version="1.0">
         </runtime-component>
@@ -1056,6 +1042,21 @@ function updateOrientation(orientation) {
             runtime-id="org.symbian.tools.wrttools.wrt"
             runtime-version="1.1">
       </layout-provider>
+   </extension>
+   <extension
+         point="org.symbian.tools.tmw.ui.applicationImporter">
+      <importer
+            class="org.symbian.tools.wrttools.core.project.WgzImporter">
+      </importer>
+   </extension>
+   <extension
+         point="org.eclipse.wst.common.project.facet.core.detectors">
+      <detector
+            class="org.symbian.tools.wrttools.core.libraries.WrtKitFacetDetector">
+      </detector>
+      <detector
+            class="org.symbian.tools.wrttools.core.libraries.PhoneGapFacetDetector">
+      </detector>
    </extension>
  
 </plugin>

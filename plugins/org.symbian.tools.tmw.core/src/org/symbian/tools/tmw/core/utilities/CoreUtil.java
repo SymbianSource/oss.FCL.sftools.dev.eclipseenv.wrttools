@@ -18,7 +18,12 @@
  */
 package org.symbian.tools.tmw.core.utilities;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
+import org.eclipse.wst.jsdt.core.IType;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 
 /**
  * Utilities used all over the TMW code base. Users can rely on this methods 
@@ -42,5 +47,30 @@ public final class CoreUtil {
 
     public static String notNull(final String string) {
         return string == null ? "" : string.trim();
+    }
+
+    public final static boolean hasTypes(IProject p, String... typeNames) throws JavaScriptModelException {
+        final IJavaScriptProject project = JavaScriptCore.create(p);
+        if (project != null && project.exists()) {
+            for (String typeName : typeNames) {
+                if (!hasType(project, typeName)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // See https://bugs.eclipse.org/bugs/show_bug.cgi?id=318656
+    private static boolean hasType(IJavaScriptProject project, String name) throws JavaScriptModelException {
+        final IType[] types = project.findTypes(name);
+        if (types != null) {
+            for (IType type : types) {
+                if (type.getJavaScriptProject().equals(project)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -5,6 +5,7 @@
    <extension-point id="targetPresentation" name="Deployment Target Presentation" schema="schema/targetPresentation.exsd"/>
    <extension-point id="projectTemplate" name="Mobile Application Project Templates" schema="schema/projectTemplate.exsd"/>
    <extension-point id="wizardPages" name="Extensions for the New Application Wizard" schema="schema/wizardPages.exsd"/>
+   <extension-point id="applicationImporter" name="Application Importers" schema="schema/applicationImporter.exsd"/>
 	<!-- Navigator Extensions -->
 	<extension point="org.eclipse.ui.navigator.viewer">
 	  <viewerActionBinding
@@ -21,7 +22,7 @@
        <commonWizard
              associatedExtensionId="org.eclipse.wst.jsdt.java.ui.javaContent"
              type="import"
-             wizardId="org.symbian.tools.wrttools.importwgz">
+             wizardId="org.symbian.tools.tmw.importapplication">
           <enablement>
              <or>
                 <adapt
@@ -275,4 +276,20 @@
            version="1.0">
      </image>
   </extension>
+  	<extension point="org.eclipse.ui.importWizards">
+		<category id="org.symbian.tools.tmw.import" name="Tools for Mobile Web">
+		</category>
+		<wizard
+          category="org.symbian.tools.tmw.import"
+          class="org.symbian.tools.tmw.internal.ui.importwizard.ApplicationImportWizard"
+          icon="icons/full/etool16/importapplication.png"
+          id="org.symbian.tools.tmw.importapplication"
+          name="Mobile Web Application">
+        <description>
+          Create project from application archive
+        </description>
+      </wizard>
+		
+    </extension>
+  
 </plugin>
