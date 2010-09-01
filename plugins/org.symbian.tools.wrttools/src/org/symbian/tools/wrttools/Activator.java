@@ -31,9 +31,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.wst.jsdt.web.core.javascript.search.JsIndexManager;
 import org.osgi.framework.BundleContext;
 import org.symbian.tools.wrttools.core.WRTImages;
-import org.symbian.tools.wrttools.core.libraries.JSLibrary;
-import org.symbian.tools.wrttools.core.libraries.LibraryManager;
-import org.symbian.tools.wrttools.sdt.utils.Logging;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 /**
@@ -47,8 +44,6 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 	
-    private final LibraryManager manager = new LibraryManager();
-
 	/**
 	 * The constructor
 	 */
@@ -99,15 +94,6 @@ public class Activator extends AbstractUIPlugin {
 		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, message, e));
 	}
 	
-	public static void log(int severity, String message, Throwable x) {
-		IStatus status = new Status(severity, PLUGIN_ID, 0, message, x);
-		Logging.log(getDefault(), status);
-	}
-
-    public static JSLibrary[] getJSLibraries() {
-        return getDefault().manager.getLibraries();
-    }
-
     public static IProject[] getWrtProjects() {
         IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
         Collection<IProject> prjs = new TreeSet<IProject>(new Comparator<IProject>() {

@@ -28,7 +28,6 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -60,7 +59,7 @@ public class ExcludeFileAction implements IObjectActionDelegate {
 				excludeFolder( folder);
 			}
 			catch (CoreException x) {
-				Activator.log(IStatus.ERROR, "error setting exclude property on folder: "+folder.getName(), x);
+                Activator.log("error setting exclude property on folder: " + folder.getName(), x);
 			}
 		}
 		/*Refresh project tree when property is changed */ 

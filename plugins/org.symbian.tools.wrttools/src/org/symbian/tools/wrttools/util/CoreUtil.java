@@ -15,30 +15,14 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
-import org.eclipse.wst.jsdt.core.IJavaScriptProject;
-import org.eclipse.wst.jsdt.core.IType;
-import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.symbian.tools.wrttools.Activator;
 
 public class CoreUtil {
     public static final String METADATA_FILE = "Info.plist";
     public static final String PROPERTY_PATTERN = "<key>\\s*{0}\\s*</key>\\s*<string>\\s*(.*)\\s*</string>";
-
-    public static boolean isWindows() {
-        return "windows".equals(Platform.getOS());
-    }
-
-    public static boolean isMac() {
-        return "macosx".equals(Platform.getOS());
-    }
-
-    public static boolean isLinux() {
-        return "linux".equals(Platform.getOS());
-    }
 
     public static String getIndexFileName(String buffer) {
         if (buffer != null) {
@@ -148,21 +132,5 @@ public class CoreUtil {
             this.fileName = fileName;
             this.timeStamp = timeStamp;
         }
-    }
-
-    public static boolean hasType(IJavaScriptProject project, String name) {
-        try {
-            final IType[] types = project.findTypes(name);
-            if (types != null) {
-                for (IType type : types) {
-                    if (type.getJavaScriptProject().equals(project)) {
-                        return true;
-                    }
-                }
-            }
-        } catch (JavaScriptModelException e) {
-            Activator.log(e);
-        }
-        return false;
     }
 }

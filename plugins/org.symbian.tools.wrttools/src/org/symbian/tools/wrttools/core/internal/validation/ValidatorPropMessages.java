@@ -17,29 +17,28 @@
  * Failures and causes:
  */
 
-package org.symbian.tools.wrttools.sdt.utils.noexport;
+package org.symbian.tools.wrttools.core.internal.validation;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-/**
- * @author eswartz
- *
- */
-public class Messages {
-    private static final String BUNDLE_NAME = "org.symbian.tools.wrttools.sdt.utils.noexport.messages";//$NON-NLS-1$
+import org.symbian.tools.wrttools.Activator;
 
-    private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
-            .getBundle(BUNDLE_NAME);
+public class ValidatorPropMessages {
+    private static final String BUNDLE_NAME = "org.symbian.tools.wrttools.core.internal.validation.messages"; //$NON-NLS-1$
 
-    private Messages() {
-    }
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
+			.getBundle(BUNDLE_NAME);
 
-    public static String getString(String key) {
-        try {
-            return RESOURCE_BUNDLE.getString(key);
-        } catch (MissingResourceException e) {
-            return '!' + key + '!';
-        }
-    }
+	private ValidatorPropMessages() {
+	}
+
+	public static String getString(String key) {
+		try {
+			return RESOURCE_BUNDLE.getString(key);
+		} catch (MissingResourceException e) {
+            Activator.log(e);
+			return '!' + key + '!';
+		}
+	}
 }

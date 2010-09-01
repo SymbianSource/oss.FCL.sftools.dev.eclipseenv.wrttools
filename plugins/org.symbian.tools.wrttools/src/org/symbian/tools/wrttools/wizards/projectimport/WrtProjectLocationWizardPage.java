@@ -95,7 +95,7 @@ import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-@SuppressWarnings({"restriction", "unchecked"})
+@SuppressWarnings({ "restriction", "unchecked", "rawtypes" })
 public class WrtProjectLocationWizardPage extends WizardPage implements
 		IOverwriteQuery {
 
@@ -147,7 +147,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements
 
 	private Button browseDirectoriesButton;
 
-	List createdProjects;
+    List createdProjects;
 
 	private IStructuredSelection currentSelection;
 

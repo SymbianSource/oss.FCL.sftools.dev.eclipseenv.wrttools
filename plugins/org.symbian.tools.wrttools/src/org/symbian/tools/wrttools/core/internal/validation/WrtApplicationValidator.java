@@ -27,8 +27,6 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.symbian.tools.wrttools.Activator;
-import org.symbian.tools.wrttools.core.validator.ValidatorPropMessages;
-import org.symbian.tools.wrttools.core.validator.PlistValidator.plistElements;
 import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 import org.symbian.tools.wrttools.util.Util;
@@ -92,12 +90,16 @@ public class WrtApplicationValidator extends AbstractValidator {
 		return result;
 	}
 
-	private void validateElement(IDOMElement element, ValidationResult result,
+    public enum plistElements {
+        plist, array, data, date, dict, real, integer, string, FALSE, TRUE, key, xml
+    };
+
+    private void validateElement(IDOMElement element, ValidationResult result,
 			IResource resource) {
 		// showData("");
-		plistElements[] values = plistElements.values();
+        plistElements[] values = plistElements.values();
 		boolean isValidElement = false;
-		for (plistElements validElement : values) {
+        for (plistElements validElement : values) {
 			if (validElement.toString().equalsIgnoreCase(
 					element.getNodeName().trim())) {
 				isValidElement = true;
