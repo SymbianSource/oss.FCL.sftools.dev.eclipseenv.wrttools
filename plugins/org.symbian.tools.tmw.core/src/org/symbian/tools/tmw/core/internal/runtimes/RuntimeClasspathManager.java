@@ -46,9 +46,62 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 @SuppressWarnings("restriction")
 public class RuntimeClasspathManager {
+    private static final class Version implements IVersion {
+        private final String version;
+
+        public Version(String version) {
+            this.version = version;
+        }
+
+        public int compareTo(Object o) {
+            return version.compareTo(((IVersion) o).getVersionString());
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof IVersion)) {
+                return false;
+            }
+            IVersion other = (IVersion) obj;
+            if (version == null) {
+                return false;
+            } else if (!version.equals(other.toString())) {
+                return false;
+            }
+            return true;
+        }
+
+        public String getVersionString() {
+            return version;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + ((version == null) ? 0 : version.hashCode());
+            return result;
+        }
+    }
+
+    private static final class VersionableObject extends Versionable<Version> {
+        @Override
+        public String createVersionNotFoundErrMsg(String verstr) {
+            return "Version not found";
+        }
+
+        @Override
+        public String getPluginId() {
+            return TMWCore.PLUGIN_ID;
+        }
+    }
+
     private static final class VersionedEntry<T> {
-        protected final IVersionExpr versionExpression;
         protected final T entry;
+        protected final IVersionExpr versionExpression;
 
         public VersionedEntry(String versionExpression, T entry) {
             if (versionExpression == null) {
@@ -77,63 +130,27 @@ public class RuntimeClasspathManager {
         }
     }
 
-    private static final class VersionableObject extends Versionable<Version> {
-        @Override
-        public String getPluginId() {
-            return TMWCore.PLUGIN_ID;
-        }
-
-        @Override
-        public String createVersionNotFoundErrMsg(String verstr) {
-            return "Version not found";
-        }
-    }
-
-    private static final class Version implements IVersion {
-        private final String version;
-
-        public Version(String version) {
-            this.version = version;
-        }
-
-        public int compareTo(Object o) {
-            return version.compareTo(((IVersion) o).getVersionString());
-        }
-
-        public String getVersionString() {
-            return version;
-        }
-    }
-
     private final Map<String, Collection<VersionedEntry<Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>>>>> providers = new HashMap<String, Collection<VersionedEntry<Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>>>>>();
-    private final boolean ready = false;
+    private boolean ready = false;
 
-    public IIncludePathEntry[] getProjectClasspathEntries(IFacetedProject project) {
-        collectProviders();
-        final ITMWProject p = TMWCore.create(project.getProject());
-        if (p != null) {
-            final IMobileWebRuntime runtime = p.getTargetRuntime();
-            final Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> facetToEntry;
-            if (runtime != null) {
-                facetToEntry = join(getMatchingEntries(runtime.getId(), runtime.getVersion(), providers));
-            } else {
-                facetToEntry = join(getMatchingEntries(null, null, providers));
-            }
-            final Collection<IFacetIncludePathProvider[]> entries = getMatchingEntries(null, null, facetToEntry);
-            final Set<IProjectFacetVersion> facets = project.getProjectFacets();
-            for (IProjectFacetVersion facet : facets) {
-                entries.addAll(getMatchingEntries(facet.getProjectFacet().getId(), facet.getVersionString(),
-                        facetToEntry));
-            }
-            final Collection<IIncludePathEntry> pathEntries = new HashSet<IIncludePathEntry>();
-            for (IFacetIncludePathProvider[] providers : entries) {
-                for (IFacetIncludePathProvider provider : providers) {
-                    pathEntries.addAll(Arrays.asList(provider.getEntries(p)));
+    public Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> collectFaceletEntries(
+            IConfigurationElement[] elements) {
+        final Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> faceletsToProviders = new HashMap<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>>();
+        for (IConfigurationElement element : elements) {
+            if ("facet-include-path".equals(element.getName())) {
+                final IFacetIncludePathProvider[] providers = collectProviders(element.getChildren());
+                final VersionedEntry<IFacetIncludePathProvider[]> versionedEntry = new VersionedEntry<IFacetIncludePathProvider[]>(
+                        element.getAttribute("version"), providers);
+                final String id = element.getAttribute("facelet-id");
+                Collection<VersionedEntry<IFacetIncludePathProvider[]>> provs = faceletsToProviders.get(id);
+                if (provs == null) {
+                    provs = new LinkedList<RuntimeClasspathManager.VersionedEntry<IFacetIncludePathProvider[]>>();
+                    faceletsToProviders.put(id, provs);
                 }
+                provs.add(versionedEntry);
             }
-            return pathEntries.toArray(new IIncludePathEntry[pathEntries.size()]);
         }
-        return new IIncludePathEntry[0];
+        return faceletsToProviders;
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -164,6 +181,7 @@ public class RuntimeClasspathManager {
                     versions.add(ver);
                 }
             }
+            ready = true;
         }
     }
 
@@ -177,40 +195,6 @@ public class RuntimeClasspathManager {
             }
         }
         return providers.toArray(new IFacetIncludePathProvider[providers.size()]);
-    }
-
-    public Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> collectFaceletEntries(
-            IConfigurationElement[] elements) {
-        final Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> faceletsToProviders = new HashMap<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>>();
-        for (IConfigurationElement element : elements) {
-            if ("facet-include-path".equals(element.getName())) {
-                final IFacetIncludePathProvider[] providers = collectProviders(element.getChildren());
-                final VersionedEntry<IFacetIncludePathProvider[]> versionedEntry = new VersionedEntry<IFacetIncludePathProvider[]>(
-                        element.getAttribute("version"), providers);
-                final String id = element.getAttribute("facelet-id");
-                Collection<VersionedEntry<IFacetIncludePathProvider[]>> provs = faceletsToProviders.get(id);
-                if (provs == null) {
-                    provs = new LinkedList<RuntimeClasspathManager.VersionedEntry<IFacetIncludePathProvider[]>>();
-                    faceletsToProviders.put(id, provs);
-                }
-                provs.add(versionedEntry);
-            }
-        }
-        return faceletsToProviders;
-    }
-
-    private <T, V> Map<T, Collection<V>> join(Collection<Map<T, Collection<V>>> maps) {
-        final Map<T, Collection<V>> res = new HashMap<T, Collection<V>>();
-        for (Map<T, Collection<V>> map : maps) {
-            for (Map.Entry<T, Collection<V>> entry : map.entrySet()) {
-                if (res.containsKey(entry.getKey())) {
-                    res.get(entry.getKey()).addAll(entry.getValue());
-                } else {
-                    res.put(entry.getKey(), new LinkedList<V>(entry.getValue()));
-                }
-            }
-        }
-        return res;
     }
 
     private <T> Collection<T> getMatchingEntries(String id, String version,
@@ -230,6 +214,48 @@ public class RuntimeClasspathManager {
         for (VersionedEntry<T> versionedEntry : entries) {
             if (versionedEntry.matches(version)) {
                 res.add(versionedEntry.entry);
+            }
+        }
+        return res;
+    }
+
+    public IIncludePathEntry[] getProjectClasspathEntries(IFacetedProject project) {
+        collectProviders();
+        final ITMWProject p = TMWCore.create(project.getProject());
+        if (p != null) {
+            final IMobileWebRuntime runtime = p.getTargetRuntime();
+            final Map<String, Collection<VersionedEntry<IFacetIncludePathProvider[]>>> facetToEntry;
+            if (runtime != null) {
+                facetToEntry = join(getMatchingEntries(runtime.getId(), runtime.getVersion(), providers));
+            } else {
+                facetToEntry = join(getMatchingEntries(null, null, providers));
+            }
+            final Collection<IFacetIncludePathProvider[]> entries = getMatchingEntries(null, null, facetToEntry);
+            final Set<IProjectFacetVersion> facets = project.getProjectFacets();
+            for (IProjectFacetVersion facet : facets) {
+                entries.addAll(getMatchingEntries(facet.getProjectFacet().getId(), facet.getVersionString(),
+                        facetToEntry));
+            }
+            final Collection<IIncludePathEntry> pathEntries = new HashSet<IIncludePathEntry>();
+            for (IFacetIncludePathProvider[] providers : entries) {
+                for (IFacetIncludePathProvider provider : providers) {
+                    pathEntries.addAll(Arrays.asList(provider.getEntries(p)));
+                }
+            }
+            return pathEntries.toArray(new IIncludePathEntry[pathEntries.size()]);
+        }
+        return new IIncludePathEntry[0];
+    }
+
+    private <T, V> Map<T, Collection<V>> join(Collection<Map<T, Collection<V>>> maps) {
+        final Map<T, Collection<V>> res = new HashMap<T, Collection<V>>();
+        for (Map<T, Collection<V>> map : maps) {
+            for (Map.Entry<T, Collection<V>> entry : map.entrySet()) {
+                if (res.containsKey(entry.getKey())) {
+                    res.get(entry.getKey()).addAll(entry.getValue());
+                } else {
+                    res.put(entry.getKey(), new LinkedList<V>(entry.getValue()));
+                }
             }
         }
         return res;

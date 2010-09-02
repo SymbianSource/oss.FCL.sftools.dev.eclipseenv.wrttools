@@ -91,7 +91,7 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="org.symbian.tools.tmw.debug.internal.property.PropertyTester"
+            class="org.symbian.tools.tmw.debug.internal.property.DebuggerPropertyTester"
             id="org.symbian.tools.wrttools.debug.projectTester"
             namespace="org.symbian"
             properties="isWrtProject"

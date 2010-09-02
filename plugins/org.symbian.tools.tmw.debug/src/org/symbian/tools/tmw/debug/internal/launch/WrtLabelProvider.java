@@ -28,8 +28,7 @@ public class WrtLabelProvider implements JsLabelProvider {
             IFile resource = (IFile) element;
             int line = script.getStartLine() + stackFrame.getLineNumber();
             if (line != -1) {
-                String resourcePath = resource != null ? resource.getProjectRelativePath().toString() : script
-                        .getName();
+                final String resourcePath = resource.getProjectRelativePath().toString();
                 name = NLS.bind("{0} [{1}:{2}]", new Object[] { name, resourcePath, line });
             }
         } else if (element instanceof IFileStore) {

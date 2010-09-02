@@ -65,7 +65,9 @@ public class FilesystemDeploymentTarget extends PlatformObject implements IDeplo
             throw new CoreException(
                     new Status(IStatus.ERROR, TMWCoreUI.PLUGIN_ID, "Failed to copy application file", e));
         } finally {
-            file.delete();
+            if (!file.delete()) {
+                TMWCoreUI.log("Can't delete %s", file);
+            }
         }
         return Status.OK_STATUS;
     }

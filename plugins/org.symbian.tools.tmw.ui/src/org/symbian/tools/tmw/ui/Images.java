@@ -23,9 +23,9 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 
 public final class Images {
-    private final String DISCOVER_ICON = "icons/full/obj16/discover.gif";
-    private final String EXCLUDED_ICON = "icons/full/obj16/excluded.gif";
-    private final String BLUETOOTH_ICON = "icons/full/obj16/bluetooth.gif";
+    private static final String DISCOVER_ICON = "icons/full/obj16/discover.gif";
+    private static final String EXCLUDED_ICON = "icons/full/obj16/excluded.gif";
+    private static final String BLUETOOTH_ICON = "icons/full/obj16/bluetooth.gif";
 
     private final ImageRegistry registry;
 

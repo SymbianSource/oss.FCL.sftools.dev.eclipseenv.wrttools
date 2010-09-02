@@ -90,16 +90,16 @@ public class WrtApplicationValidator extends AbstractValidator {
 		return result;
 	}
 
-    public enum plistElements {
+    private static enum PListElements {
         plist, array, data, date, dict, real, integer, string, FALSE, TRUE, key, xml
     };
 
     private void validateElement(IDOMElement element, ValidationResult result,
 			IResource resource) {
 		// showData("");
-        plistElements[] values = plistElements.values();
+        PListElements[] values = PListElements.values();
 		boolean isValidElement = false;
-        for (plistElements validElement : values) {
+        for (PListElements validElement : values) {
 			if (validElement.toString().equalsIgnoreCase(
 					element.getNodeName().trim())) {
 				isValidElement = true;

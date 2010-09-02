@@ -18,82 +18,11 @@
  */
 package org.symbian.tools.wrttools.util;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Util {
 
     public static String removeSpaces(String widgetName) {
         return widgetName != null ? widgetName.replace(" ", "") : "";
-    }
-
-    public static String removeNonAlphaNum(String projectName) {
-        return projectName != null ? projectName
-                .replaceAll("[^a-zA-Z0-9 ]", "") : null;
-    }
-
-    public static void logEvent(Logger log, Level level, Throwable throwable) {
-        if (level == Level.SEVERE) {
-            log.severe(throwable.getLocalizedMessage());
-            if (throwable.getCause() != null) {
-                log.severe(throwable.getCause().toString());
-            }
-            log.severe(throwable.getStackTrace().toString());
-        }
-        if (level == Level.WARNING) {
-            log.warning(throwable.getLocalizedMessage());
-            if (throwable.getCause() != null) {
-                log.warning(throwable.getCause().toString());
-            }
-            log.warning(throwable.getStackTrace().toString());
-        }
-        if (level == Level.INFO) {
-            log.info(throwable.getLocalizedMessage());
-            if (throwable.getCause() != null) {
-                log.info(throwable.getCause().toString());
-            }
-            log.info(throwable.getStackTrace().toString());
-        }
-
-    }
-
-    public static String replaceChar(String input, char asciiOutChar,
-            char asciiInChar) {
-        char x;
-        int ascii;
-        String outString = "";
-        int outCharAscii = (asciiOutChar > 127) ? '?'
-                : (char) (asciiOutChar & 0x7F);
-
-        for (int i = 0; i < input.length(); i++) {
-            x = input.charAt(i);
-            ascii = (x > 127) ? '?' : (char) (x & 0x7F);
-
-            if (ascii == outCharAscii) {
-                outString = outString + asciiInChar;
-            } else {
-                outString = outString + x;
-            }
-
-        }
-        return outString;
-    }
-
-    public static void showData(String s) {
-        System.out.println(s);
-    }
-
-    public static void showData(List<String> listString, String header) {
-
-        if (listString != null && listString.size() > 0) {
-            System.out.println("--------" + header + "------");
-            for (String s : listString) {
-                System.out.println(s);
-            }
-        } else {
-            System.out.println("--------Empty/Null " + header + "------");
-        }
     }
 
     /* Validation tests for both Windows & Mac OS */
@@ -126,8 +55,7 @@ public class Util {
         }
         final char lastChar = widgetName.charAt(widgetName.length() - 1);
         // trailing or beginning space is not valid in filenames for Widget name
-        if ((Character.isWhitespace(widgetName.charAt(0)) || Character
-                .isWhitespace(lastChar))) {
+        if ((Character.isWhitespace(widgetName.charAt(0)) || Character.isWhitespace(lastChar))) {
             return ("Invalid Widget name. Beginning or trailing spaces are not allowed");
         }
 
@@ -167,20 +95,5 @@ public class Util {
         }
 
         return null;
-    }
-
-    public static String toProjectName(String widgetId) {
-        if (widgetId == null || widgetId.trim().length() == 0) {
-            return "";
-        }
-        StringBuilder builder = new StringBuilder();
-        for (char c : widgetId.trim().toCharArray()) {
-            if (Character.isJavaIdentifierPart(c)) {
-                builder.append(c);
-            } else {
-                builder.append("_");
-            }
-        }
-        return builder.toString();
     }
 }

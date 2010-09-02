@@ -48,7 +48,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
         this.previewView = previewView;
     }
 
-    protected void toggleRefresh() {
+    protected synchronized void toggleRefresh() {
         toggleState = !toggleState;
         toggleRefresh.setChecked(toggleState);
         previewView.setProjectAutorefresh(project, toggleState);

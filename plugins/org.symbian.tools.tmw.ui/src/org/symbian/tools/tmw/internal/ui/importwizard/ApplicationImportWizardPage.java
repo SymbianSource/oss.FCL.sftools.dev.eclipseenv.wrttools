@@ -51,7 +51,7 @@ import org.symbian.tools.tmw.ui.project.IApplicationImporter;
 
 @SuppressWarnings("restriction")
 public class ApplicationImportWizardPage extends WizardPage {
-    public class MapContentProvider implements IStructuredContentProvider {
+    private static final class MapContentProvider implements IStructuredContentProvider {
 
         public void dispose() {
             // Do nothing

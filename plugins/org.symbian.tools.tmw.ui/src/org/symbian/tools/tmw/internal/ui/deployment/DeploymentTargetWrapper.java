@@ -32,7 +32,7 @@ import org.symbian.tools.tmw.core.runtimes.IPackager;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 
 public class DeploymentTargetWrapper implements IDeploymentTarget {
-    public class WorkbenchAdapter2Wrapper implements IWorkbenchAdapter2 {
+    public static final class WorkbenchAdapter2Wrapper implements IWorkbenchAdapter2 {
         private final IWorkbenchAdapter2 adapter;
 
         public WorkbenchAdapter2Wrapper(IWorkbenchAdapter2 adapter) {
@@ -52,7 +52,7 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
         }
     }
 
-    public class WorkbenchAdapterWrapper implements IWorkbenchAdapter {
+    public static final class WorkbenchAdapterWrapper implements IWorkbenchAdapter {
         private final IWorkbenchAdapter adapter;
 
         public WorkbenchAdapterWrapper(IWorkbenchAdapter adapter) {

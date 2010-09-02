@@ -637,7 +637,7 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
         }
     }
 
-    private final class FixedFacetToolTip extends ToolTip {
+    private static final class FixedFacetToolTip extends ToolTip {
         private static final int FAKE_EVENT_TYPE = -9999;
 
         private String message = ""; //$NON-NLS-1$
@@ -707,7 +707,7 @@ public final class FacetsSelectionPanel extends Composite implements ISelectionP
         }
     }
 
-    private final class ProblemsLabelProvider implements ITableLabelProvider {
+    private static final class ProblemsLabelProvider implements ITableLabelProvider {
         public String getColumnText(final Object element, final int column) {
             return ((IStatus) element).getMessage();
         }

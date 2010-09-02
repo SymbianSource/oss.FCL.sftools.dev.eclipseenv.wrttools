@@ -217,7 +217,7 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         return null;
     }
 
-    private final Providers providers = new Providers();
+    private transient final Providers providers = new Providers();
 
     private void copyData(InputStream contents, OutputStream ouput) throws IOException {
         byte[] buf = new byte[4048];

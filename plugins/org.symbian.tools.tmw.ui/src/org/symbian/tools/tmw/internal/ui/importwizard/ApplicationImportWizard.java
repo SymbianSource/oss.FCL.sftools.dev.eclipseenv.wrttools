@@ -175,7 +175,7 @@ public class ApplicationImportWizard extends Wizard implements IImportWizard, IN
 
     public void init(IWorkbench workbench, IStructuredSelection selection) {
         file = null;
-        if (selection instanceof IStructuredSelection && !selection.isEmpty()) {
+        if (!selection.isEmpty()) {
             Object element = (selection).getFirstElement();
             if (element instanceof IAdaptable) {
                 IResource resource = (IResource) ((IAdaptable) element).getAdapter(IResource.class);

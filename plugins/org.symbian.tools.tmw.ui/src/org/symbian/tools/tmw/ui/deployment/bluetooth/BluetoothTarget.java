@@ -53,10 +53,12 @@ import org.eclipse.ui.IMemento;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.runtimes.IPackager;
+import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 
 public class BluetoothTarget extends PlatformObject implements IDeploymentTarget {
     private static final UUID OBEX_OBJECT_PUSH = new UUID(0x1105);
+    public static final long BLUETOOTH_TIMEOUT = 5 * 60 * 1000; // 5 min
     private String serviceURL;
     private RemoteDevice device;
     protected String[] exceptionCodes = new String[] { "OBEX_HTTP_UNSUPPORTED_TYPE", "OBEX_HTTP_FORBIDDEN" };
@@ -84,7 +86,9 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
         try {
             deployWidget(application, packager.getFileType(project), new SubProgressMonitor(monitor, 10));
         } finally {
-            application.delete();
+            if (!application.delete()) {
+                TMWCoreUI.log("Can't delete %s", application);
+            }
         }
         monitor.done();
         MultiStatus multiStatus = new MultiStatus(TMWCore.PLUGIN_ID, 0, message, null);
@@ -151,7 +155,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
             hsOperation.setHeader(HeaderSet.TYPE, fileType);
             int size = (int) inputWidget.length();
             byte file[] = new byte[size];
-            hsOperation.setHeader(HeaderSet.LENGTH, new Long(file.length));
+            hsOperation.setHeader(HeaderSet.LENGTH, Long.valueOf(file.length));
 
             // Create PUT Operation
             putOperation = clientSession.put(hsOperation);
@@ -291,7 +295,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
             synchronized (serviceSearchCompletedEvent) {
                 LocalDevice.getLocalDevice().getDiscoveryAgent()
                         .searchServices(attrIDs, searchUuidSet, device, listener);
-                serviceSearchCompletedEvent.wait();
+                serviceSearchCompletedEvent.wait(BLUETOOTH_TIMEOUT);
             }
 
         } catch (IOException e) {

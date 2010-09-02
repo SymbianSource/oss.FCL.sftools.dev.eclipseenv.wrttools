@@ -40,7 +40,7 @@ public class PrepareProjectJob extends Job {
     private final IRunnableWithProgress action;
 
     public PrepareProjectJob(IProject project, IRunnableWithProgress action) {
-        super(String.format("Preparing project", project.getName()));
+        super(String.format("Preparing project %s", project.getName()));
         this.project = project;
         this.action = action;
         setUser(false);

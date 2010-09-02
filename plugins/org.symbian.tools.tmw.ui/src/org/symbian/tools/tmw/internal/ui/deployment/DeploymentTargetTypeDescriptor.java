@@ -32,7 +32,7 @@ import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
 
 public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetType {
-    public class NullProvider implements IDeploymentTargetType {
+    public static class NullProvider implements IDeploymentTargetType {
         public IDeploymentTarget[] getTargets(ITMWProject project) {
             return null;
         }

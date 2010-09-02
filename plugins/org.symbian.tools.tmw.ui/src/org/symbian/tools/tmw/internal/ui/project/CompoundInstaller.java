@@ -37,7 +37,7 @@ import org.symbian.tools.tmw.ui.project.IProjectTemplateContext;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
 public class CompoundInstaller implements ITemplateInstaller {
-    private final class InstallerFiles {
+    private static final class InstallerFiles {
         private final ITemplateInstaller installer;
         private final Collection<IPath> paths;
 

@@ -42,7 +42,7 @@ import org.symbian.tools.tmw.debug.internal.Activator;
 
 @SuppressWarnings("restriction")
 public class WatchExpression extends ActionDelegate implements IEditorActionDelegate {
-    private final class FindNode extends ASTVisitor {
+    private static final class FindNode extends ASTVisitor {
         private final int offset;
         private final int length;
 

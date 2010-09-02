@@ -19,7 +19,6 @@
 package org.symbian.tools.tmw.ui.deployment.bluetooth;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
@@ -38,7 +37,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
-import org.symbian.tools.tmw.ui.ConsoleFactory;
 import org.symbian.tools.tmw.ui.TMWCoreUI;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTarget;
 import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
@@ -111,7 +109,6 @@ public class BluetoothTargetType implements IDeploymentTargetType {
         }
     }
 
-    private static PrintStream savedSysOut;
     private boolean discovered = false;
     private TargetDiscoveryListener listener;
     private Map<String, BluetoothTarget> targets = new TreeMap<String, BluetoothTarget>();
@@ -139,7 +136,7 @@ public class BluetoothTargetType implements IDeploymentTargetType {
             try {
                 started = LocalDevice.getLocalDevice().getDiscoveryAgent().startInquiry(DiscoveryAgent.GIAC, listener);
                 if (started) {
-                    inquiryCompletedEvent.wait();
+                    inquiryCompletedEvent.wait(BluetoothTarget.BLUETOOTH_TIMEOUT);
                     discovered = true;
                 }
             } catch (BluetoothStateException e) {
@@ -149,18 +146,6 @@ public class BluetoothTargetType implements IDeploymentTargetType {
             }
         }
         monitor.done();
-    }
-
-    /** Toggle BlueCove logging
-     */
-    public void enableBlueCoveDiagnostics(boolean enable) {
-        System.setProperty("bluecove.debug", Boolean.valueOf(enable).toString());
-        BlueCoveImpl.instance().enableNativeDebug(enable);
-        if (enable) {
-            System.setOut(new PrintStream(ConsoleFactory.createStream()));
-        } else {
-            System.setOut(savedSysOut);
-        }
     }
 
     public IDeploymentTarget findTarget(ITMWProject project, String id) {

@@ -53,7 +53,7 @@ public class WebappManager {
     public static void start(String webappName) throws Exception {
 		Dictionary d = new Hashtable();
 		
-		d.put("http.port", new Integer(getPortParameter())); //$NON-NLS-1$
+        d.put("http.port", Integer.valueOf(getPortParameter())); //$NON-NLS-1$
 
 		// set the base URL
 		d.put("other.info", "org.symbian.wst.debugger"); //$NON-NLS-1$ //$NON-NLS-2$

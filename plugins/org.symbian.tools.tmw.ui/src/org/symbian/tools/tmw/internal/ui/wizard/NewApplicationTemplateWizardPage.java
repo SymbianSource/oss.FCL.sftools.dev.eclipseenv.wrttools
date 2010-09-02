@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Text;
 import org.symbian.tools.tmw.ui.project.IProjectTemplate;
 
 public class NewApplicationTemplateWizardPage extends WizardPage {
-    public class ProjectTemplateLabelProvider extends LabelProvider {
+    private static final class ProjectTemplateLabelProvider extends LabelProvider {
 
         @Override
         public Image getImage(Object element) {

@@ -240,7 +240,7 @@ public class WizardContext implements IProjectTemplateContext {
         this.runtime = runtime;
         propertySupport.firePropertyChange(RUNTIME, prev, runtime);
         propertySupport.firePropertyChange(TEMPLATES, prevTemplates, getTemplates());
-        if (prevTemplate == null) {
+        if (template == null) {
             propertySupport.firePropertyChange(TEMPLATE, prevTemplate, getTemplate());
         }
     }
@@ -263,7 +263,7 @@ public class WizardContext implements IProjectTemplateContext {
     public void setWidgetName(String widgetName) {
         String prevId = getWidgetId();
         String prev = getWidgetName();
-        if (widgetName == getProjectName()) {
+        if (widgetName == null || widgetName.equals(getProjectName())) {
             this.widgetName = null;
         } else {
             this.widgetName = widgetName;

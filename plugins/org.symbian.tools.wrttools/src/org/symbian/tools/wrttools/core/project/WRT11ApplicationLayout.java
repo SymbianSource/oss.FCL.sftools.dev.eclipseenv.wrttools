@@ -93,7 +93,7 @@ public class WRT11ApplicationLayout implements IApplicationLayoutProvider {
 
     public IPath getResourcePath(IFile file) {
         try {
-            if (file != null && file.getProjectRelativePath().equals(CoreUtil.getIndexFile(file.getProject()))) {
+            if (file != null && file.equals(CoreUtil.getIndexFile(file.getProject()))) {
                 return new Path(INDEX);
             }
         } catch (CoreException e) {

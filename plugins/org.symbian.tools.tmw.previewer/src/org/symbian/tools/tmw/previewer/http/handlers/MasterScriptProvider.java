@@ -44,16 +44,15 @@ public class MasterScriptProvider implements IResourceProvider {
     private static final String[] FILES_SERVICES_DATA = { "appManager_data.js", "calendar_data.js", "contact_data.js",
             "landmarks_data.js", "location_data.js", "logging_data.js", "mediaManagement_data.js", "messaging_data.js",
             "sensor_data.js", "sysInfo_data.js" };
-    private String WRT10;
-    private String WRT11_SERVICES;
+    private static String WRT10;
+    private static String WRT11_SERVICES;
 
     public String[] getPaths() {
         return new String[] { PATH_LOADER_JS, PATH_DEVICE_JS };
     }
 
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
-            String sessionId)
-            throws IOException, CoreException {
+            String sessionId) throws IOException, CoreException {
         synchronized (this) {
             if (WRT10 == null || PreviewerPlugin.DONT_CACHE_SCRIPT) {
                 loadCoreAPI();
@@ -67,16 +66,21 @@ public class MasterScriptProvider implements IResourceProvider {
         final IPath path = new Path(base).append(jsfile);
         InputStream stream = FileLocator.openStream(PreviewerPlugin.getDefault().getBundle(), path, false);
         if (stream != null) {
+            BufferedReader reader = null;
             try {
                 builder.append(String.format("// Start \"%s\"\n", path.toOSString()));
-                BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "utf8"));
+                reader = new BufferedReader(new InputStreamReader(stream, "utf8"));
                 String sz;
                 while ((sz = reader.readLine()) != null) {
                     builder.append(sz).append('\n');
                 }
                 builder.append(String.format("// End \"%s\"\n", path.toOSString()));
             } finally {
-                stream.close();
+                if (reader == null) {
+                    stream.close();
+                } else {
+                    reader.close();
+                }
             }
         } else {
             PreviewerPlugin.log("Missing JS file " + path.toOSString(), null);
@@ -113,8 +117,7 @@ public class MasterScriptProvider implements IResourceProvider {
     }
 
     public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,
-            String sessionId)
-            throws IOException, CoreException {
+            String sessionId) throws IOException, CoreException {
         // Nothing to do
     }
 

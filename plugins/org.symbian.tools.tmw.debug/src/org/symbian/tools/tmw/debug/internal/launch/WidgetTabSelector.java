@@ -43,7 +43,7 @@ public class WidgetTabSelector implements TabSelector {
 			for (TabConnector tabConnector : tabs) {
 				String url = tabConnector.getUrl();
 				try {
-					if (uri.toURL().equals(new URL(url))) {
+                    if (uri.toURL().toExternalForm().equals(new URL(url).toExternalForm())) {
 						connector = tabConnector;
 						return tabConnector;
 					}

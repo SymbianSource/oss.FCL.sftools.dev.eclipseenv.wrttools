@@ -29,7 +29,7 @@ import org.symbian.tools.tmw.ui.project.IProjectTemplateContext;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
 public final class LazyInstaller implements ITemplateInstaller {
-    private final class NullInstaller implements ITemplateInstaller {
+    private static final class NullInstaller implements ITemplateInstaller {
         public void cleanup() {
             // Do nothing
         }

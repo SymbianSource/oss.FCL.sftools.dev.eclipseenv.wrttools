@@ -18,6 +18,7 @@
  */
 package org.symbian.tools.tmw.internal.ui.project;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,7 +37,9 @@ import org.symbian.tools.tmw.ui.project.IProjectTemplateManager;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
 public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
-    public class TemplateComparator implements Comparator<IProjectTemplate> {
+    private static final class TemplateComparator implements Comparator<IProjectTemplate>, Serializable {
+        private static final long serialVersionUID = -6418798170300850625L;
+
         public int compare(IProjectTemplate o1, IProjectTemplate o2) {
             if (o1 == o2) {
                 return 0;
@@ -52,6 +55,7 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
             }
         }
     }
+
     private Map<IMobileWebRuntime, ITemplateInstaller> emptyProjects;
     private Map<IMobileWebRuntime, Map<String, String>> runtimeTemplateParameters;
     private Map<IMobileWebRuntime, IProjectTemplate[]> templates;

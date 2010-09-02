@@ -24,19 +24,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.List;
-import java.util.zip.ZipEntry;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.internal.wizards.datatransfer.DataTransferMessages;
 import org.eclipse.ui.internal.wizards.datatransfer.ILeveledImportStructureProvider;
-import org.eclipse.ui.internal.wizards.datatransfer.TarEntry;
 import org.eclipse.ui.wizards.datatransfer.ImportOperation;
 import org.symbian.tools.wrttools.util.CoreUtil;
 import org.symbian.tools.wrttools.util.ProjectUtils;
@@ -102,15 +98,7 @@ public class ArchivedProject implements ProjectRecord {
                 }
             } else {
                 InputStream stream = provider.getContents(infoPlist);
-                if (stream == null) {
-                    if (dotProject instanceof ZipEntry) {
-                        IPath path = new Path(((ZipEntry) dotProject).getName());
-                        projectName = path.segment(path.segmentCount() - 2);
-                    } else if (dotProject instanceof TarEntry) {
-                        IPath path = new Path(((TarEntry) dotProject).getName());
-                        projectName = path.segment(path.segmentCount() - 2);
-                    }
-                } else {
+                if (stream != null) {
                     String manifest = CoreUtil.read(new BufferedReader(new InputStreamReader(stream)));
                     projectName = CoreUtil.getApplicationName(manifest);
                 }
