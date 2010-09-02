@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ * Description:
+ * Overview:
+ * Details:
+ * Platforms/Drives/Compatibility:
+ * Assumptions/Requirement/Pre-requisites:
+ * Failures and causes:
+ *******************************************************************************/
 package org.symbian.tools.tmw.previewer.preview;
 
 import java.io.BufferedOutputStream;
@@ -35,7 +53,7 @@ import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.PageBookView;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
-import org.symbian.tools.tmw.previewer.IWrtEditingPreferences;
+import org.symbian.tools.tmw.previewer.IEditingPreferences;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
 public class PreviewView extends PageBookView {
@@ -116,7 +134,7 @@ public class PreviewView extends PageBookView {
 
     private boolean getDefaultAutorefresh(IProject project) {
         IPreferenceStore preferenceStore = PreviewerPlugin.getDefault().getPreferenceStore();
-        String value = preferenceStore.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
+        String value = preferenceStore.getString(IEditingPreferences.PREF_AUTO_REFRESH);
         boolean toggle = !MessageDialogWithToggle.NEVER.equals(value);
         if (MessageDialogWithToggle.NEVER.equals(value) || MessageDialogWithToggle.ALWAYS.equals(value)) {
             setProjectAutorefresh(project, toggle);
@@ -226,7 +244,7 @@ public class PreviewView extends PageBookView {
 
     public boolean promptUserToToggle(IProject project, boolean toggle) {
         IPreferenceStore preferenceStore = PreviewerPlugin.getDefault().getPreferenceStore();
-        String value = preferenceStore.getString(IWrtEditingPreferences.PREF_AUTO_REFRESH);
+        String value = preferenceStore.getString(IEditingPreferences.PREF_AUTO_REFRESH);
         synchronized (autorefresh) {
             if (!autorefresh.containsKey(project)) {
                 if (value == null || value.trim().length() == 0 || MessageDialogWithToggle.PROMPT.equals(value)) {
@@ -238,7 +256,7 @@ public class PreviewView extends PageBookView {
                                     + "This setting for each project can be toggled from the preview toolbar.\n\n"
                                     + "Do you want to enable automatic refresh for this project?",
                             "Keep this setting for new projects", false, preferenceStore,
-                            IWrtEditingPreferences.PREF_AUTO_REFRESH, SWT.SHEET).getReturnCode() == IDialogConstants.YES_ID;
+                            IEditingPreferences.PREF_AUTO_REFRESH, SWT.SHEET).getReturnCode() == IDialogConstants.YES_ID;
                     setProjectAutorefresh(project, setting);
                     return setting;
                 }

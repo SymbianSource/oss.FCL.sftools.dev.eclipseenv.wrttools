@@ -92,7 +92,7 @@ public abstract class AbstractZippedApplicationImporter implements IApplicationI
     }
 
     /**
-     * This base calss assumes application files are in the application
+     * This base class assumes application files are in the application
      * package root. Symbian WRT has files in the subfolder so it will need
      * to override this method.
      */

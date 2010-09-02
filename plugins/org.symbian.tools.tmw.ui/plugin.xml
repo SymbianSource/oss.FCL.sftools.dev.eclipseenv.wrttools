@@ -75,7 +75,7 @@
        <commonWizard
              associatedExtensionId="org.eclipse.wst.jsdt.java.ui.javaContent"
              type="import"
-             wizardId="org.symbian.tools.wrttools.import.projectImport">
+             wizardId="org.symbian.tools.tmwtools.import.projectImport">
           <enablement>
              <or>
                 <adapt
@@ -125,11 +125,24 @@
            name="Tools for Mobile Web">
      </category>
   </extension>
+ <extension
+       point="org.eclipse.ui.commands">
+    <category
+          id="org.symbian.tools.tmw.commands.maincategory"
+          name="Tools for Mobile Web">
+    </category>
+    <command
+          categoryId="org.symbian.tools.tmw.commands.maincategory"
+          description="Deploys an application to phone or emulator"
+          id="org.symbian.tools.tmw.commands.deploy"
+          name="Deploy Application">
+    </command>
+ </extension>
   <extension
         point="org.eclipse.ui.handlers">
     <handler
           class="org.symbian.tools.tmw.ui.commands.DeployHandler"
-          commandId="org.symbian.tools.wrttools.commands.deploy">
+          commandId="org.symbian.tools.tmw.commands.deploy">
        <enabledWhen>
           <reference
                 definitionId="org.symbian.tools.tmwprojectselected">

@@ -35,7 +35,7 @@ import org.symbian.tools.tmw.debug.internal.launch.ChromeInstancesManager;
 public class Activator extends AbstractUIPlugin {
 
     // The plug-in ID
-    public static final String PLUGIN_ID = "org.symbian.tools.wrttools.debug.core";
+    public static final String PLUGIN_ID = "org.symbian.tools.tmw.debug.core";
 
     public static final boolean DEBUG = Platform.inDebugMode()
             && Boolean.valueOf(Platform.getDebugOption(PLUGIN_ID + "/debug"));

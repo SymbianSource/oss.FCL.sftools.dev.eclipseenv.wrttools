@@ -172,26 +172,13 @@
     </inferenceProvider>
  </extension>
  <extension
-       point="org.eclipse.ui.commands">
-    <category
-          id="org.symbian.tools.wrttools.commands.maincategory"
-          name="Tools for Mobile Web">
-    </category>
-    <command
-          categoryId="org.symbian.tools.wrttools.commands.maincategory"
-          description="Deploys an application to phone or emulator"
-          id="org.symbian.tools.wrttools.commands.deploy"
-          name="Deploy Application">
-    </command>
- </extension>
- <extension
        point="org.eclipse.ui.menus">
     <menuContribution
           locationURI="toolbar:org.eclipse.ui.main.toolbar">
        <toolbar
              id="org.symbian.tools.wrttools">
           <command
-                commandId="org.symbian.tools.wrttools.commands.deploy"
+                commandId="org.symbian.tools.tmw.commands.deploy"
                 icon="icons/deploy_widget.gif"
                 id="org.symbian.tools.wrttools.toolbars.deploy">
           </command>
@@ -208,7 +195,7 @@
              visible="true">
        </separator>
        <command
-             commandId="org.symbian.tools.wrttools.commands.deploy"
+             commandId="org.symbian.tools.tmw.commands.deploy"
              icon="icons/deploy_widget.gif"
              id="org.symbian.tools.wrttools.toolbars.deploy">
        </command>
@@ -224,7 +211,7 @@
              visible="true">
        </separator>
        <command
-             commandId="org.symbian.tools.wrttools.commands.deploy"
+             commandId="org.symbian.tools.tmw.commands.deploy"
              icon="icons/deploy_widget.gif"
              id="org.symbian.tools.wrttools.toolbars.deploy">
           <visibleWhen>

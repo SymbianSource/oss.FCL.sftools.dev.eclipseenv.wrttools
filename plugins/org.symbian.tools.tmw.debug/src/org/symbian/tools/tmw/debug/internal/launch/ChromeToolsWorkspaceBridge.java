@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ * Description:
+ * Overview:
+ * Details:
+ * Platforms/Drives/Compatibility:
+ * Assumptions/Requirement/Pre-requisites:
+ * Failures and causes:
+ *******************************************************************************/
 package org.symbian.tools.tmw.debug.internal.launch;
 
 import java.util.ArrayList;
@@ -29,7 +47,7 @@ import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.debug.internal.model.ResourceManager;
 import org.symbian.tools.tmw.debug.internal.model.WorkspaceBreakpointHandler;
 
-public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
+public class ChromeToolsWorkspaceBridge implements WorkspaceBridge {
     public static final class Factory implements WorkspaceBridge.Factory {
         private final IProject project;
 
@@ -38,7 +56,7 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
         }
 
         public WorkspaceBridge attachedToVm(DebugTargetImpl debugTargetImpl, JavascriptVm javascriptVm) {
-            return new WRTProjectWorkspaceBridge(debugTargetImpl, javascriptVm, project);
+            return new ChromeToolsWorkspaceBridge(debugTargetImpl, javascriptVm, project);
         }
 
         public String getDebugModelIdentifier() {
@@ -46,7 +64,7 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
         }
 
         public JsLabelProvider getLabelProvider() {
-            return new WrtLabelProvider();
+            return new TmwLabelProvider();
         }
     }
 
@@ -57,7 +75,7 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
     private final IProject project;
     private final ResourceManager resourceManager;
 
-    public WRTProjectWorkspaceBridge(DebugTargetImpl debugTargetImpl, JavascriptVm vm, IProject workspaceProject) {
+    public ChromeToolsWorkspaceBridge(DebugTargetImpl debugTargetImpl, JavascriptVm vm, IProject workspaceProject) {
         this.javascriptVm = vm;
         this.project = workspaceProject;
         this.resourceManager = new ResourceManager();

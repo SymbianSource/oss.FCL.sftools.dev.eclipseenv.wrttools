@@ -43,7 +43,7 @@ public class ResourcesChangeListener implements IResourceChangeListener {
                 && !MessageDialogWithToggle.ALWAYS.equals(Activator.getDefault().getPreferenceStore().getString(
                         IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR))) {
             IFile[] changes = PreviewerUtil.getWebChanges(event.getDelta());
-            if (changes.length > 0 && isWrtResourceChanges(changes)) {
+            if (changes.length > 0 && isMobileApplicationResourceChanges(changes)) {
                 Display.getDefault().asyncExec(new Runnable() {
                     public void run() {
                         String message = "Debug browser is not updated when the files are updated. You may notice discrepancies between your workspace contents and debug session. You should either refresh the browser or restart debugging session to see the latest changes made to the workspace.";
@@ -58,7 +58,7 @@ public class ResourcesChangeListener implements IResourceChangeListener {
         }
     }
 
-    private boolean isWrtResourceChanges(IFile[] changes) {
+    private boolean isMobileApplicationResourceChanges(IFile[] changes) {
         Collection<IProject> projects = new HashSet<IProject>();
         ILaunch[] launches = DebugPlugin.getDefault().getLaunchManager().getLaunches();
         for (ILaunch launch : launches) {

@@ -87,7 +87,7 @@ public class DebugConnectionJob implements IPreviewStartupListener {
             }
             destructingGuard.addValue(lauchDestructor);
 
-            WorkspaceBridge.Factory bridgeFactory = new WRTProjectWorkspaceBridge.Factory(project);
+            WorkspaceBridge.Factory bridgeFactory = new ChromeToolsWorkspaceBridge.Factory(project);
             final DebugTargetImpl target = new DebugTargetImpl(launch, bridgeFactory);
             if (Activator.DEBUG_CONNECTION) {
                 System.out.println("Setting up 2@" + hashCode());

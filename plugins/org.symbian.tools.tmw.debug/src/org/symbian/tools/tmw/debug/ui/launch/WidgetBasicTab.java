@@ -66,7 +66,7 @@ public class WidgetBasicTab extends AbstractLaunchConfigurationTab {
         root.setLayout(layout);
 
         Label label = new Label(root, SWT.NONE);
-        label.setText("WRT Widget Project:");
+        label.setText("Mobile Application Project:");
 
         project = new ComboViewer(root, SWT.READ_ONLY);
         project.setContentProvider(new ArrayContentProvider());
@@ -99,7 +99,7 @@ public class WidgetBasicTab extends AbstractLaunchConfigurationTab {
     }
 
     public String getName() {
-        return "WRT Widget";
+        return "Mobile Web Application";
     }
 
     public void initializeFrom(ILaunchConfiguration configuration) {
@@ -132,9 +132,9 @@ public class WidgetBasicTab extends AbstractLaunchConfigurationTab {
     private void validate() {
         String error = null;
         if (getWidgetProjects().length == 0) {
-            error = "No WRT widget projects found in the workspace";
+            error = "No TMW projects found in the workspace";
         } else if (project.getSelection().isEmpty()) {
-            error = "Select WRT widget project to debug";
+            error = "Select mobile web application project to debug";
         } else if (ChromeDebugUtils.getChromeExecutible() == null) {
             error = "No Chrome browser configured in the preferences";
         }

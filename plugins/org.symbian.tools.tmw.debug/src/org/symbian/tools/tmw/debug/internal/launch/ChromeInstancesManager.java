@@ -171,7 +171,7 @@ public class ChromeInstancesManager {
     private String getChromeSpecialDir(String subdir) {
         IPath location = ResourcesPlugin.getWorkspace().getRoot().getLocation();
         if (CoreUtil.isLinux() && location.toString().length() > 50) {
-            location = new Path(System.getProperty("user.home")).append(".wrtdebug");
+            location = new Path(System.getProperty("user.home")).append(".tmwdebug");
         }
         return location.append(subdir).toOSString();
     }

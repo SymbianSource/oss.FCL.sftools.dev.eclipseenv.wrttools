@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ * Description:
+ * Overview:
+ * Details:
+ * Platforms/Drives/Compatibility:
+ * Assumptions/Requirement/Pre-requisites:
+ * Failures and causes:
+ *******************************************************************************/
 package org.symbian.tools.tmw.debug.internal.model;
 
 import java.util.Collection;
@@ -17,7 +35,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.model.IBreakpoint;
-import org.symbian.tools.tmw.debug.internal.launch.WRTProjectWorkspaceBridge;
+import org.symbian.tools.tmw.debug.internal.launch.ChromeToolsWorkspaceBridge;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
 public final class WorkspaceBreakpointHandler implements BreakpointHandler {
@@ -170,7 +188,7 @@ public final class WorkspaceBreakpointHandler implements BreakpointHandler {
     }
 
     public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-        return (WRTProjectWorkspaceBridge.DEBUG_MODEL_ID.equals(breakpoint.getModelIdentifier()) || VProjectWorkspaceBridge.DEBUG_MODEL_ID
+        return (ChromeToolsWorkspaceBridge.DEBUG_MODEL_ID.equals(breakpoint.getModelIdentifier()) || VProjectWorkspaceBridge.DEBUG_MODEL_ID
                 .equals(breakpoint.getModelIdentifier())) && !debugTarget.isDisconnected();
     }
 

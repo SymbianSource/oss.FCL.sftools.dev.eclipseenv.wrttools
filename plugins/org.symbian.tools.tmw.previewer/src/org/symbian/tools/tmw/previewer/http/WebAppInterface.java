@@ -91,7 +91,7 @@ public final class WebAppInterface {
 
     private WebAppInterface() {
         try {
-            WebappManager.start("wrtbrowser");
+            WebappManager.start("tmwbrowser");
         } catch (Exception e) {
             PreviewerPlugin.log(e);
         }
@@ -119,7 +119,7 @@ public final class WebAppInterface {
     }
 
     private URI createUri(String page, String project, String session) throws URISyntaxException {
-        URI uri = new URI("http", null, WebappManager.getHost(), WebappManager.getPort(), "/wrtdebugger/" + page,
+        URI uri = new URI("http", null, WebappManager.getHost(), WebappManager.getPort(), "/tmwdebugger/" + page,
                 "widget=" + encode(project) + "&session=" + session, null);
         return uri;
     }

@@ -29,15 +29,15 @@ import org.symbian.tools.tmw.core.TMWCore;
 public class DebugAction extends DebugLastAction {
     @Override
     public void run(IAction action) {
-        boolean hasWrtProjects = false;
+        boolean hasTmwProjects = false;
         IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
         for (IProject project : projects) {
             if (project.isAccessible() && TMWCore.create(project) != null) {
-                hasWrtProjects = true;
+                hasTmwProjects = true;
                 break;
             }
         }
-        if (hasWrtProjects) {
+        if (hasTmwProjects) {
             super.run(action);
         } else {
             MessageDialog.openInformation(getShell(), "Cannot launch debugger",

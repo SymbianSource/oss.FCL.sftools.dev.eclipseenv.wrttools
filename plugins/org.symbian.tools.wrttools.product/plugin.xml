@@ -259,6 +259,16 @@
          <perspectiveShortcut
                id="org.symbian.tools.wrttools.mainPerspective">
          </perspectiveShortcut>
+         <actionSet
+               id="org.eclipse.debug.ui.breakpointActionSet">
+         </actionSet>
+         <actionSet
+               id="org.eclipse.debug.ui.debugActionSet">
+         </actionSet>
+         <actionSet
+               id="org.symbian.tools.tmwtools.debug.core.mainActions">
+         </actionSet>
       </perspectiveExtension>
+
    </extension>
 </plugin>

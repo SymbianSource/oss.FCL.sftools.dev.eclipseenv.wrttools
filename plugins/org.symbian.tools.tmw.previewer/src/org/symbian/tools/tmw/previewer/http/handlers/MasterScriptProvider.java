@@ -44,8 +44,8 @@ public class MasterScriptProvider implements IResourceProvider {
     private static final String[] FILES_SERVICES_DATA = { "appManager_data.js", "calendar_data.js", "contact_data.js",
             "landmarks_data.js", "location_data.js", "logging_data.js", "mediaManagement_data.js", "messaging_data.js",
             "sensor_data.js", "sysInfo_data.js" };
-    private static String WRT10;
-    private static String WRT11_SERVICES;
+    private static String core_library;
+    private static String services_library;
 
     public String[] getPaths() {
         return new String[] { PATH_LOADER_JS, PATH_DEVICE_JS };
@@ -54,12 +54,12 @@ public class MasterScriptProvider implements IResourceProvider {
     public InputStream getResourceStream(IProject project, IPath resource, Map<String, String[]> parameters,
             String sessionId) throws IOException, CoreException {
         synchronized (this) {
-            if (WRT10 == null || PreviewerPlugin.DONT_CACHE_SCRIPT) {
+            if (core_library == null || PreviewerPlugin.DONT_CACHE_SCRIPT) {
                 loadCoreAPI();
-                loadWRT11Services();
+                loadServicesLibrary();
             }
         }
-        return new ByteArrayInputStream((WRT10 + WRT11_SERVICES).getBytes("utf8"));
+        return new ByteArrayInputStream((core_library + services_library).getBytes("utf8"));
     }
 
     private void load(String base, String jsfile, StringBuilder builder) throws IOException {
@@ -97,10 +97,10 @@ public class MasterScriptProvider implements IResourceProvider {
         } catch (IOException e) {
             PreviewerPlugin.log(e);
         }
-        WRT10 = builder.toString();
+        core_library = builder.toString();
     }
 
-    private void loadWRT11Services() {
+    private void loadServicesLibrary() {
         final StringBuilder builder = new StringBuilder();
         try {
             load("/preview/script/lib/", "device.js", builder);
@@ -113,7 +113,7 @@ public class MasterScriptProvider implements IResourceProvider {
         } catch (IOException e) {
             PreviewerPlugin.log(e);
         }
-        WRT11_SERVICES = builder.toString();
+        services_library = builder.toString();
     }
 
     public void post(IProject project, IPath resource, Map<String, String[]> parameterMap, JSONObject object,

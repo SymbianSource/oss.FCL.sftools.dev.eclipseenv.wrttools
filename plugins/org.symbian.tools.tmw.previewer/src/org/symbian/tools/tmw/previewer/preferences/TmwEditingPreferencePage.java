@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ * Description:
+ * Overview:
+ * Details:
+ * Platforms/Drives/Compatibility:
+ * Assumptions/Requirement/Pre-requisites:
+ * Failures and causes:
+ *******************************************************************************/
 package org.symbian.tools.tmw.previewer.preferences;
 
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
@@ -8,7 +26,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.symbian.tools.tmw.previewer.IWrtEditingPreferences;
+import org.symbian.tools.tmw.previewer.IEditingPreferences;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
 /**
@@ -25,11 +43,11 @@ import org.symbian.tools.tmw.previewer.PreviewerPlugin;
  * be accessed directly via the preference store.
  */
 
-public class WrtEditingPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+public class TmwEditingPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
     private RadioGroupFieldEditor enableAutorefresh;
 
-    public WrtEditingPreferencePage() {
+    public TmwEditingPreferencePage() {
         super(GRID);
         setPreferenceStore(PreviewerPlugin.getDefault().getPreferenceStore());
     }
@@ -47,7 +65,7 @@ public class WrtEditingPreferencePage extends FieldEditorPreferencePage implemen
 
         String[][] namesAndValues = { { "Enabled", MessageDialogWithToggle.ALWAYS },
                 { "Disabled", MessageDialogWithToggle.NEVER }, { "Prompt", MessageDialogWithToggle.PROMPT } };
-        enableAutorefresh = new RadioGroupFieldEditor(IWrtEditingPreferences.PREF_AUTO_REFRESH,
+        enableAutorefresh = new RadioGroupFieldEditor(IEditingPreferences.PREF_AUTO_REFRESH,
                 "Initial auto-refresh setting for Mobile Web Preview window", namesAndValues.length, namesAndValues,
                 projectComposite, true);
         enableAutorefresh.setPreferenceStore(getPreferenceStore());

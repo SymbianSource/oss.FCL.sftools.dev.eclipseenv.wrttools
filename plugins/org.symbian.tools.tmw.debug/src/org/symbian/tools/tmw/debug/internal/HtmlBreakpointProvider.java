@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Symbian Foundation and/or its subsidiary(-ies).
+ * All rights reserved.
+ * This component and the accompanying materials are made available
+ * under the terms of the License "Eclipse Public License v1.0"
+ * which accompanies this distribution, and is available
+ * at the URL "http://www.eclipse.org/legal/epl-v10.html".
+ *
+ * Initial Contributors:
+ * Symbian Foundation - initial contribution.
+ * Contributors:
+ * Description:
+ * Overview:
+ * Details:
+ * Platforms/Drives/Compatibility:
+ * Assumptions/Requirement/Pre-requisites:
+ * Failures and causes:
+ *******************************************************************************/
 package org.symbian.tools.tmw.debug.internal;
 
 import org.chromium.debug.core.model.ChromiumLineBreakpoint;
@@ -14,7 +32,7 @@ import org.eclipse.wst.html.core.text.IHTMLPartitions;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingTextTools;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.breakpoint.IBreakpointProvider;
-import org.symbian.tools.tmw.debug.internal.launch.WRTProjectWorkspaceBridge;
+import org.symbian.tools.tmw.debug.internal.launch.ChromeToolsWorkspaceBridge;
 
 @SuppressWarnings("restriction")
 public class HtmlBreakpointProvider implements IBreakpointProvider {
@@ -25,7 +43,7 @@ public class HtmlBreakpointProvider implements IBreakpointProvider {
 
         if (hasScript) {
             ChromiumLineBreakpoint breakpoint = new ChromiumLineBreakpoint(getResource(input), lineNumber,
-                    WRTProjectWorkspaceBridge.DEBUG_MODEL_ID);
+                    ChromeToolsWorkspaceBridge.DEBUG_MODEL_ID);
             DebugPlugin.getDefault().getBreakpointManager().addBreakpoint(breakpoint);
         }
         return Status.OK_STATUS;

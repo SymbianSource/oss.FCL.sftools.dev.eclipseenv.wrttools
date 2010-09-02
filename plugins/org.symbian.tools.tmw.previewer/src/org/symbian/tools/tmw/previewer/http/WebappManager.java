@@ -42,7 +42,7 @@ import org.symbian.tools.tmw.previewer.PreviewerPlugin;
  */
 public final class WebappManager {
     public static final String WORKSPACE_RESOURCES_CONTEXT = "/preview";
-    public static final String STATIC_RESOURCES_CONTEXT = "/wrtdebugger";
+    public static final String STATIC_RESOURCES_CONTEXT = "/tmwdebugger";
     public static final String WEB_CONTENT_ROOT = "/http-content";
 
     private static String host;

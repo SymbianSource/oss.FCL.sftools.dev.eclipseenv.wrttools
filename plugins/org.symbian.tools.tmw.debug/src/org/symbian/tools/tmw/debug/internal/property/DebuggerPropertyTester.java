@@ -24,7 +24,7 @@ import org.symbian.tools.tmw.core.TMWCore;
 public class DebuggerPropertyTester extends org.eclipse.core.expressions.PropertyTester {
 
     public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-        if (property.equals("isWrtProject")) {
+        if (property.equals("isTmwProject")) {
             return TMWCore.create(((IResource) receiver).getProject()) != null;
         }
         return false;

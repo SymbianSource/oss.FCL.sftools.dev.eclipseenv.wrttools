@@ -56,7 +56,7 @@ public class DebuggerResourceProvider implements IResourceProvider {
                     WebAppInterface.connectDebugger(project.getName(), sessionId[0], sId);
                 }
                 URL url = FileLocator.find(PreviewerPlugin.getDefault().getBundle(), new Path(
-                        "http-content/wrtdebugger/debugger.htm"), null);
+                        "http-content/tmwdebugger/debugger.htm"), null);
                 if (url != null) {
                     return url.openStream();
                 }

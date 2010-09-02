@@ -36,7 +36,7 @@ import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
 public class WidgetLaunchDelegate implements ILaunchConfigurationDelegate {
-    public static final String ID = "org.symbian.tools.wrttools.debug.widget";
+    public static final String ID = "org.symbian.tools.tmwtools.debug.widget";
 
     public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor)
             throws CoreException {

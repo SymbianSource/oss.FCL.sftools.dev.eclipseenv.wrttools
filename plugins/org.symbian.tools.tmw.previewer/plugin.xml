@@ -17,11 +17,11 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="org.symbian.tools.tmw.previewer.preferences.WrtEditingPreferencePage"
-            id="org.symbian.tools.wrttools.editing.preferences.WrtEditingPreferencePage"
+            class="org.symbian.tools.tmw.previewer.preferences.TmwEditingPreferencePage"
+            id="org.symbian.tools.tmwtools.editing.preferences.EditingPreferencePage"
             name="Tools for Mobile Web">
          <keywordReference
-               id="org.symbian.tools.wrttools.wrtwords">
+               id="org.symbian.tools.tmwtools.tmwwords">
          </keywordReference>
       </page>
    </extension>
