@@ -22,7 +22,7 @@ import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 /**
  * Manages mobile web runtimes.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IMobileWebRuntimeManager {
@@ -32,19 +32,19 @@ public interface IMobileWebRuntimeManager {
     IPackager getPackager(ITMWProject project);
 
     /**
-     * Returns packager that can create a packaged application for provided 
+     * Returns packager that can create a packaged application for provided
      * runtime from the given project.
-     * 
-     * @return <code>null</null> if the project cannot be packaged for 
+     *
+     * @return <code>null</code> if the project cannot be packaged for
      * specified runtime
      */
     IPackager getPackager(ITMWProject project, IMobileWebRuntime runtime);
 
     /**
      * Returns runtimes for the given ID. Runtime will not be null.
-     * 
-     * @throws IllegalArgumentException if there is no runtime with the 
-     * provided ID. It is assumed that this can only be caused by a broken 
+     *
+     * @throws IllegalArgumentException if there is no runtime with the
+     * provided ID. It is assumed that this can only be caused by a broken
      * install or coding error on IDE provider side.
      */
     IMobileWebRuntime getRuntime(String id, String version);

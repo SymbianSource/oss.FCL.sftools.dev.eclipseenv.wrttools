@@ -157,7 +157,7 @@ public final class NewApplicationDetailsWizardPage extends WizardPage {
      * @param parent
      *            the parent composite
      */
-    private final void createProjectNameGroup(Composite parent) {
+    private void createProjectNameGroup(Composite parent) {
         // new project label
         Label projectLabel = new Label(parent, SWT.NONE);
         projectLabel.setText(IDEWorkbenchMessages.WizardNewProjectCreationPage_nameLabel);

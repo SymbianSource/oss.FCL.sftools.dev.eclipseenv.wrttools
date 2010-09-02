@@ -18,9 +18,7 @@
  */
 package org.symbian.tools.wrttools.util;
 
-
-public class Util {
-
+public final class Util {
     public static String removeSpaces(String widgetName) {
         return widgetName != null ? widgetName.replace(" ", "") : "";
     }
@@ -95,5 +93,9 @@ public class Util {
         }
 
         return null;
+    }
+
+    private Util() {
+        // Do not instantiate
     }
 }

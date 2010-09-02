@@ -37,48 +37,43 @@ import org.eclipse.ui.texteditor.IUpdate;
 /**
  * Action to bring up the breakpoint properties dialog.
  */
-public class JsBreakpointPropertiesRulerAction extends RulerBreakpointAction
-		implements IUpdate {
-	private IBreakpoint breakpoint;
+public class JsBreakpointPropertiesRulerAction extends RulerBreakpointAction implements IUpdate {
+    private IBreakpoint breakpoint;
 
-	public JsBreakpointPropertiesRulerAction(ITextEditor editor,
-			IVerticalRulerInfo rulerInfo) {
-		super(editor, rulerInfo);
-		setText("Breakpoint Properties...");
-	}
+    public JsBreakpointPropertiesRulerAction(ITextEditor editor, IVerticalRulerInfo rulerInfo) {
+        super(editor, rulerInfo);
+        setText("Breakpoint Properties...");
+    }
 
-	@Override
-	public void run() {
-		if (getBreakpoint() != null) {
-			PropertyDialogAction action = new PropertyDialogAction(getEditor()
-					.getEditorSite(), new ISelectionProvider() {
-				public void addSelectionChangedListener(
-						ISelectionChangedListener listener) {
-				}
+    @Override
+    public void run() {
+        if (getBreakpoint() != null) {
+            PropertyDialogAction action = new PropertyDialogAction(getEditor().getEditorSite(),
+                    new ISelectionProvider() {
+                        public void addSelectionChangedListener(ISelectionChangedListener listener) {
+                        }
 
-				public ISelection getSelection() {
-					return new StructuredSelection(getBreakpoint());
-				}
+                        public ISelection getSelection() {
+                            return new StructuredSelection(getBreakpoint());
+                        }
 
-				public void removeSelectionChangedListener(
-						ISelectionChangedListener listener) {
-				}
+                        public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+                        }
 
-				public void setSelection(ISelection selection) {
-				}
-			});
-			action.run();
-		}
-	}
+                        public void setSelection(ISelection selection) {
+                        }
+                    });
+            action.run();
+        }
+    }
 
-	public void update() {
-		breakpoint = null;
-		IBreakpoint activeBreakpoint = getBreakpoint();
-		if (activeBreakpoint != null
-				&& activeBreakpoint instanceof ChromiumLineBreakpoint) {
-			breakpoint = activeBreakpoint;
-		}
-		setEnabled(breakpoint != null);
-	}
+    public void update() {
+        breakpoint = null;
+        IBreakpoint activeBreakpoint = getBreakpoint();
+        if (activeBreakpoint != null && activeBreakpoint instanceof ChromiumLineBreakpoint) {
+            breakpoint = activeBreakpoint;
+        }
+        setEnabled(breakpoint != null);
+    }
 
 }

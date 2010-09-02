@@ -39,19 +39,17 @@ import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class IncludeFileAction implements IObjectActionDelegate {
-
     private final List<IFile> selectedFiles = new ArrayList<IFile>();
     private final List<IFolder> selectedFolders = new ArrayList<IFolder>();
 
-
-	public IncludeFileAction() {
+    public IncludeFileAction() {
         super();
     }
 
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+    public void setActivePart(IAction action, IWorkbenchPart targetPart) {
     }
 
-	public void run(IAction action) {
+    public void run(IAction action) {
         for (IFile file : selectedFiles) {
             ProjectUtils.include(file);
         }
@@ -91,12 +89,6 @@ public class IncludeFileAction implements IObjectActionDelegate {
             }
         }
     }
-
-    /**
-     * 
-     * @param folder
-     * @throws CoreException
-     */
 
     private void includeFolder(IFolder folder) throws CoreException {
         folder.accept(new IResourceVisitor() {

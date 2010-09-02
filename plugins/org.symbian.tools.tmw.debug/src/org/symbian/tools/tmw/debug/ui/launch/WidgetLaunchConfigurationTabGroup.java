@@ -23,11 +23,10 @@ import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
-public class WidgetLaunchConfigurationTabGroup extends
-		AbstractLaunchConfigurationTabGroup {
+public class WidgetLaunchConfigurationTabGroup extends AbstractLaunchConfigurationTabGroup {
 
-	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
-		setTabs(new ILaunchConfigurationTab[] {new WidgetBasicTab(), new CommonTab()});
-	}
+    public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
+        setTabs(new ILaunchConfigurationTab[] { new WidgetBasicTab(), new CommonTab() });
+    }
 
 }

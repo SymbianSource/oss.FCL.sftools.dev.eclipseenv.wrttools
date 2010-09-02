@@ -33,8 +33,8 @@ public final class MobileWebRuntime implements IMobileWebRuntime {
     private final IConfigurationElement element;
     private IApplicationLayoutProvider layout;
 
-    public MobileWebRuntime(IConfigurationElement element) {
-        this.element = element;
+    public MobileWebRuntime(IConfigurationElement configurationElement) {
+        this.element = configurationElement;
         checkRegistry();
     }
 
@@ -42,11 +42,11 @@ public final class MobileWebRuntime implements IMobileWebRuntime {
         if (layout == null) {
             final IConfigurationElement[] configuration = Platform.getExtensionRegistry().getConfigurationElementsFor(
                     TMWCore.PLUGIN_ID, "runtimeAppLayout");
-            for (IConfigurationElement element : configuration) {
-                final String runtimeId = element.getAttribute("runtime-id");
-                final String version = element.getAttribute("runtime-version");
+            for (IConfigurationElement configurationElement : configuration) {
+                final String runtimeId = configurationElement.getAttribute("runtime-id");
+                final String version = configurationElement.getAttribute("runtime-version");
                 if (getId().endsWith(runtimeId) && getVersion().endsWith(version)) {
-                    layout = new LazyProvider(element);
+                    layout = new LazyProvider(configurationElement);
                     break;
                 }
             }
@@ -64,8 +64,9 @@ public final class MobileWebRuntime implements IMobileWebRuntime {
     public Map<String, String> getFixedFacets() {
         final Map<String, String> facets = new TreeMap<String, String>();
         final IConfigurationElement[] children = element.getChildren("fixed-facet");
-        for (IConfigurationElement element : children) {
-            facets.put(CoreUtil.notNull(element.getAttribute("id")), element.getAttribute("version"));
+        for (IConfigurationElement configurationElement : children) {
+            facets.put(CoreUtil.notNull(configurationElement.getAttribute("id")),
+                    configurationElement.getAttribute("version"));
         }
         return facets;
     }

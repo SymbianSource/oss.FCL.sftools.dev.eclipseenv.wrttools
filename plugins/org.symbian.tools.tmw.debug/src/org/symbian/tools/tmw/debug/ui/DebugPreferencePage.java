@@ -33,22 +33,20 @@ import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.debug.internal.ChromeDebugUtils;
 import org.symbian.tools.tmw.debug.internal.IConstants;
 
-public class DebugPreferencePage extends FieldEditorPreferencePage implements
-		IWorkbenchPreferencePage {
+public class DebugPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
     private Button check;
 
     public DebugPreferencePage() {
-		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Mobile Web debugger settings");
-	}
+        super(GRID);
+        setPreferenceStore(Activator.getDefault().getPreferenceStore());
+        setDescription("Mobile Web debugger settings");
+    }
 
-	@Override
-	protected void createFieldEditors() {
+    @Override
+    protected void createFieldEditors() {
         DirectoryFieldEditor editor = new DirectoryFieldEditor(IConstants.PREF_NAME_CHROME_LOCATION,
-                "Chrome Install Location:",
-                getFieldEditorParent()) {
+                "Chrome Install Location:", getFieldEditorParent()) {
             @Override
             protected boolean doCheckState() {
                 if (super.doCheckState()) {
@@ -62,7 +60,7 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
         };
         editor.setValidateStrategy(StringFieldEditor.VALIDATE_ON_KEY_STROKE);
         editor.setEmptyStringAllowed(false);
-		addField(editor);
+        addField(editor);
 
         check = new Button(getFieldEditorParent(), SWT.CHECK);
         check.setText("Show warning dialog when resources in the debugged project were changed");
@@ -70,8 +68,7 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
 
         check.setSelection(!MessageDialogWithToggle.ALWAYS.equals(getPreferenceStore().getString(
                 IConstants.PREF_SHOW_RESOURCE_CHANGE_ERROR)));
-	}
-
+    }
 
     protected String validate(String newValue) {
         String error = null;
@@ -101,7 +98,7 @@ public class DebugPreferencePage extends FieldEditorPreferencePage implements
         return super.performOk();
     }
 
-	public void init(IWorkbench workbench) {
-		// Do nothing
-	}
+    public void init(IWorkbench workbench) {
+        // Do nothing
+    }
 }

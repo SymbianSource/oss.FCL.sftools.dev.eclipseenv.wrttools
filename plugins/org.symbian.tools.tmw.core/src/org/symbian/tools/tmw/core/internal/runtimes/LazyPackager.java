@@ -35,8 +35,8 @@ public class LazyPackager implements IPackager {
     private final IConfigurationElement element;
     private IPackagerDelegate packager;
 
-    public LazyPackager(IConfigurationElement element) {
-        this.element = element;
+    public LazyPackager(IConfigurationElement configurationElement) {
+        this.element = configurationElement;
     }
 
     public File packageApplication(ITMWProject project, IProgressMonitor monitor) throws CoreException {

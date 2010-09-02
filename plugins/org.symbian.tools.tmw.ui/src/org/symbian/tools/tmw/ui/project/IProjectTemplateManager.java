@@ -25,7 +25,7 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 public interface IProjectTemplateManager {
     /**
      * Returns project templates that support mobile web runtime.
-     * 
+     *
      * @return sorted array of the templates. Templates are sorted based on weight and name.
      */
     IProjectTemplate[] getProjectTemplates(IMobileWebRuntime runtime);

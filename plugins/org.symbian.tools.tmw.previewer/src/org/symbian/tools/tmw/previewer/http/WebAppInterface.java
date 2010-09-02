@@ -29,8 +29,8 @@ import java.util.TreeMap;
 import org.eclipse.core.resources.IProject;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
-public class WebAppInterface {
-    private static WebAppInterface INSTANCE;
+public final class WebAppInterface {
+    private static WebAppInterface instance;
 
     public static void connectDebugger(String widget, String id, String sId) {
         if (PreviewerPlugin.TRACE_WEBAPP) {
@@ -62,11 +62,11 @@ public class WebAppInterface {
         return getInstance().createAjaxUri(widget, id).toASCIIString();
     }
 
-    public synchronized static WebAppInterface getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new WebAppInterface();
+    public static synchronized WebAppInterface getInstance() {
+        if (instance == null) {
+            instance = new WebAppInterface();
         }
-        return INSTANCE;
+        return instance;
     }
 
     public static String getUrl(String widget, String id) {

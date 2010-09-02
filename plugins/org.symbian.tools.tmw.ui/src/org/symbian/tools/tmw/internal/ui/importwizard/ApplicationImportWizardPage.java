@@ -153,11 +153,11 @@ public class ApplicationImportWizardPage extends WizardPage {
 
     /**
      * Creates the project name specification controls.
-     * 
+     *
      * @param parent
      *            the parent composite
      */
-    private final void createProjectNameGroup(Composite parent) {
+    private void createProjectNameGroup(Composite parent) {
         // project specification group
         Composite projectGroup = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
@@ -244,18 +244,11 @@ public class ApplicationImportWizardPage extends WizardPage {
 
     /**
      * Get an error reporter for the receiver.
-     * 
+     *
      * @return IErrorMessageReporter
      */
     private IErrorMessageReporter getErrorReporter() {
         return new IErrorMessageReporter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea
-             * .IErrorMessageReporter#reportError(java.lang.String)
-             */
             public void reportError(String errorMessage, boolean infoOnly) {
                 if (infoOnly) {
                     setMessage(errorMessage, IStatus.INFO);
@@ -277,7 +270,7 @@ public class ApplicationImportWizardPage extends WizardPage {
      * Returns the current project location path as entered by the user, or its
      * anticipated initial value. Note that if the default has been returned the
      * path in a project description used to create a project should not be set.
-     * 
+     *
      * @return the project location path or its anticipated initial value.
      */
     public IPath getLocationPath() {
@@ -287,7 +280,7 @@ public class ApplicationImportWizardPage extends WizardPage {
     /**
      * /** Returns the current project location URI as entered by the user, or
      * <code>null</code> if a valid project location has not been entered.
-     * 
+     *
      * @return the project location URI, or <code>null</code>
      * @since 3.2
      */
@@ -303,7 +296,7 @@ public class ApplicationImportWizardPage extends WizardPage {
      * responsibility of <code>IProject::create</code> invoked by the new
      * project resource wizard.
      * </p>
-     * 
+     *
      * @return the new project resource handle
      */
     public IProject getProjectHandle() {
@@ -313,7 +306,7 @@ public class ApplicationImportWizardPage extends WizardPage {
     /**
      * Returns the current project name as entered by the user, or its
      * anticipated initial value.
-     * 
+     *
      * @return the project name, its anticipated initial value, or
      *         <code>null</code> if no project name is known
      */
@@ -328,7 +321,7 @@ public class ApplicationImportWizardPage extends WizardPage {
     /**
      * Returns the value of the project name field with leading and trailing
      * spaces removed.
-     * 
+     *
      * @return the project name in the field
      */
     private String getProjectNameFieldValue() {
@@ -346,12 +339,12 @@ public class ApplicationImportWizardPage extends WizardPage {
      * the name of an existing project will not necessarily cause the wizard to
      * warn the user. Callers of this method should first check if the project
      * name passed already exists in the workspace.
-     * 
+     *
      * @param name
      *            initial project name for this page
-     * 
+     *
      * @see IWorkspace#validateName(String, int)
-     * 
+     *
      */
     public void setInitialProjectName(String name) {
         if (name == null) {
@@ -382,7 +375,7 @@ public class ApplicationImportWizardPage extends WizardPage {
 
     /**
      * Returns the useDefaults.
-     * 
+     *
      * @return boolean
      */
     public boolean useDefaults() {
@@ -393,7 +386,7 @@ public class ApplicationImportWizardPage extends WizardPage {
 
     /**
      * Returns whether this page's controls currently all contain valid values.
-     * 
+     *
      * @return <code>true</code> if all controls are valid, and
      *         <code>false</code> if at least one is invalid
      */

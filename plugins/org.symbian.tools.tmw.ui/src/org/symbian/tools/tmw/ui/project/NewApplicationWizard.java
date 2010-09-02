@@ -52,7 +52,7 @@ import org.symbian.tools.tmw.internal.ui.wizard.WizardContext;
 
 /**
  * This is the wizard that guides through new mobile application project creation.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public final class NewApplicationWizard extends ModifyFacetedProjectWizard implements INewWizard {
@@ -84,10 +84,7 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         addPage(facetsPage);
         final IWizardPage templatesPage = new NewApplicationTemplateWizardPage(wizardContext, databindingContext);
         addPage(templatesPage);
-        staticPages = new IWizardPage[3];
-        staticPages[0] = firstPage;
-        staticPages[1] = templatesPage;
-        staticPages[2] = facetsPage;
+        staticPages = new IWizardPage[] { firstPage, templatesPage, facetsPage };
         super.addPages();
     }
 
@@ -186,9 +183,9 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         }
         final IWizardPage[] base = super.getPages();
         final IWizardPage[] pages = new IWizardPage[staticPages.length + templatePages.length];
-        System.arraycopy(staticPages, 0, pages, 0, 3);
+        System.arraycopy(staticPages, 0, pages, 0, staticPages.length);
         if (templatePages.length > 0) {
-            System.arraycopy(templatePages, 0, pages, 3, templatePages.length);
+            System.arraycopy(templatePages, 0, pages, staticPages.length, templatePages.length);
         }
         System.arraycopy(base, 0, pages, 2, base.length);
 

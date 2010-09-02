@@ -24,21 +24,20 @@ import java.util.ResourceBundle;
 
 import org.symbian.tools.wrttools.Activator;
 
-public class ValidatorPropMessages {
+public final class ValidatorPropMessages {
     private static final String BUNDLE_NAME = "org.symbian.tools.wrttools.core.internal.validation.messages"; //$NON-NLS-1$
 
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
-			.getBundle(BUNDLE_NAME);
+    private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
-	private ValidatorPropMessages() {
-	}
+    private ValidatorPropMessages() {
+    }
 
-	public static String getString(String key) {
-		try {
-			return RESOURCE_BUNDLE.getString(key);
-		} catch (MissingResourceException e) {
+    public static String getString(String key) {
+        try {
+            return RESOURCE_BUNDLE.getString(key);
+        } catch (MissingResourceException e) {
             Activator.log(e);
-			return '!' + key + '!';
-		}
-	}
+            return '!' + key + '!';
+        }
+    }
 }

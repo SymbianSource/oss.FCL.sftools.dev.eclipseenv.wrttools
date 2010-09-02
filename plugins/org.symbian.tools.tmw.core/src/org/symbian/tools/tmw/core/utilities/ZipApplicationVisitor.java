@@ -37,7 +37,7 @@ import org.symbian.tools.tmw.core.runtimes.IPackagerDelegate;
 /**
  * Use this visitor to zip application if the web runtime uses zip archive as application
  * distribution format.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public class ZipApplicationVisitor implements IResourceVisitor {
@@ -45,9 +45,9 @@ public class ZipApplicationVisitor implements IResourceVisitor {
     private final ZipOutputStream zipStream;
     private final IPackagerDelegate packager;
 
-    public ZipApplicationVisitor(ZipOutputStream zipStream, IPackagerDelegate packager) {
-        this.zipStream = zipStream;
-        this.packager = packager;
+    public ZipApplicationVisitor(ZipOutputStream zip, IPackagerDelegate delegate) {
+        this.zipStream = zip;
+        this.packager = delegate;
     }
 
     public boolean visit(IResource resource) throws CoreException {

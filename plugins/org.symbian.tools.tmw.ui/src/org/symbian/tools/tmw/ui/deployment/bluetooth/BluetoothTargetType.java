@@ -44,18 +44,18 @@ import org.symbian.tools.tmw.ui.deployment.IDeploymentTargetType;
 import com.intel.bluetooth.BlueCoveImpl;
 
 /**
- * Discovers Bluetooth-enabled devices. This code is generic and will not 
- * perform any checks if the discovered device can run application being 
+ * Discovers Bluetooth-enabled devices. This code is generic and will not
+ * perform any checks if the discovered device can run application being
  * deployed.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public class BluetoothTargetType implements IDeploymentTargetType {
     private final class TargetDiscoveryListener implements DiscoveryListener {
-        final Object inquiryCompletedEvent;
-        boolean isCanceled;
-        final Map<String, BluetoothTarget> prevTargets;
-        final IProgressMonitor progressMonitor;
+        private final Object inquiryCompletedEvent;
+        private boolean isCanceled;
+        private final Map<String, BluetoothTarget> prevTargets;
+        private final IProgressMonitor progressMonitor;
 
         private TargetDiscoveryListener(Map<String, BluetoothTarget> previousTargets, Object inquiryCompletedEvent,
                 IProgressMonitor progressMonitor) {
@@ -175,7 +175,7 @@ public class BluetoothTargetType implements IDeploymentTargetType {
 
     /**
      * Check whether the bluetooth is on or not.
-     * 
+     *
      * @return whether the device is on.
      */
     public boolean isBloothToothConnected() {

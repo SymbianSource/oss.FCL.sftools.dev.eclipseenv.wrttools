@@ -26,7 +26,7 @@ import org.eclipse.ui.model.IWorkbenchAdapter2;
 
 public class TargetWorkbenchAdapter implements IWorkbenchAdapter, IWorkbenchAdapter2 {
     /**
-     * 
+     *
      */
     private final DeploymentTargetWrapper deploymentTargetWrapper;
 

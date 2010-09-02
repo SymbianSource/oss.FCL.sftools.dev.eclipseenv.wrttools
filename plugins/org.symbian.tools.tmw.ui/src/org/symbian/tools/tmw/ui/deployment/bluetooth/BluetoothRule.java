@@ -2,7 +2,7 @@ package org.symbian.tools.tmw.ui.deployment.bluetooth;
 
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 
-public class BluetoothRule implements ISchedulingRule {
+public final class BluetoothRule implements ISchedulingRule {
     public static final ISchedulingRule INSTANCE = new BluetoothRule();
 
     private BluetoothRule() {

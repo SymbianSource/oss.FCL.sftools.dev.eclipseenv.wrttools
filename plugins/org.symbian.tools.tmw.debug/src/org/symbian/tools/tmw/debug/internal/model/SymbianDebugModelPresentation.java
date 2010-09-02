@@ -27,24 +27,23 @@ import org.eclipse.wst.jsdt.internal.ui.javaeditor.JarEntryEditorInput;
 import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 
 @SuppressWarnings("restriction")
-public class SymbianDebugModelPresentation extends LabelProvider implements
-		IDebugModelPresentation {
+public class SymbianDebugModelPresentation extends LabelProvider implements IDebugModelPresentation {
     private static final int DETAILS_DEPTH = 2;
 
-	public void setAttribute(String attribute, Object value) {
-	}
+    public void setAttribute(String attribute, Object value) {
+    }
 
-	@Override
-	public Image getImage(Object element) {
-		// use default image
-		return null;
-	}
+    @Override
+    public Image getImage(Object element) {
+        // use default image
+        return null;
+    }
 
-	@Override
-	public String getText(Object element) {
-		// use default label text
-		return null;
-	}
+    @Override
+    public String getText(Object element) {
+        // use default label text
+        return null;
+    }
 
     public void computeDetail(IValue value, IValueDetailListener listener) {
         String detail = ""; //$NON-NLS-1$
@@ -108,65 +107,64 @@ public class SymbianDebugModelPresentation extends LabelProvider implements
     }
 
     public IEditorInput getEditorInput(Object element) {
-		return toEditorInput(element);
-	}
+        return toEditorInput(element);
+    }
 
     public static IEditorInput toEditorInput(Object element) {
-		if (element instanceof IFile) {
-			return new FileEditorInput((IFile) element);
-		}
-		if (element instanceof IFileStore) {
-			return new FileStoreEditorInput((IFileStore) element);
-		}
+        if (element instanceof IFile) {
+            return new FileEditorInput((IFile) element);
+        }
+        if (element instanceof IFileStore) {
+            return new FileStoreEditorInput((IFileStore) element);
+        }
         if (element instanceof IStorage) {
             return new JarEntryEditorInput((IStorage) element);
         }
 
-		if (element instanceof ILineBreakpoint) {
-			return new FileEditorInput((IFile) ((ILineBreakpoint) element)
-					.getMarker().getResource());
-		}
+        if (element instanceof ILineBreakpoint) {
+            return new FileEditorInput((IFile) ((ILineBreakpoint) element).getMarker().getResource());
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	public String getEditorId(IEditorInput input, Object element) {
-		if (input instanceof IFileEditorInput) {
-			IFile file;
-			if (element instanceof IFile) {
-				file = (IFile) element;
-			} else if (element instanceof IBreakpoint) {
-				IBreakpoint breakpoint = (IBreakpoint) element;
-				IResource resource = breakpoint.getMarker().getResource();
-				// Can the breakpoint resource be folder or project? Better
-				// check for it.
-				if (resource instanceof IFile == false) {
-					return null;
-				}
-				file = (IFile) resource;
-			} else {
-				return null;
-			}
+    public String getEditorId(IEditorInput input, Object element) {
+        if (input instanceof IFileEditorInput) {
+            IFile file;
+            if (element instanceof IFile) {
+                file = (IFile) element;
+            } else if (element instanceof IBreakpoint) {
+                IBreakpoint breakpoint = (IBreakpoint) element;
+                IResource resource = breakpoint.getMarker().getResource();
+                // Can the breakpoint resource be folder or project? Better
+                // check for it.
+                if (!(resource instanceof IFile)) {
+                    return null;
+                }
+                file = (IFile) resource;
+            } else {
+                return null;
+            }
 
-			// Pick the editor based on the file extension, taking user
-			// preferences into account.
-			try {
-				return IDE.getEditorDescriptor(file).getId();
-			} catch (PartInitException e) {
-				// TODO(peter.rybin): should it really be the default case?
-				// There might be no virtual project.
-				return null;
-			}
-		} else {
+            // Pick the editor based on the file extension, taking user
+            // preferences into account.
+            try {
+                return IDE.getEditorDescriptor(file).getId();
+            } catch (PartInitException e) {
+                // TODO(peter.rybin): should it really be the default case?
+                // There might be no virtual project.
+                return null;
+            }
+        } else {
             if (element instanceof IStorage) {
                 IStorage store = (IStorage) element;
                 if (JavaScriptCore.isJavaScriptLikeFileName(store.getName())) {
                     return JavaScriptUI.ID_CU_EDITOR;
-				} else {
-					return "org.eclipse.wst.html.core.htmlsource.source";
-				}
-			}
-		}
-		return null;
-	}
+                } else {
+                    return "org.eclipse.wst.html.core.htmlsource.source";
+                }
+            }
+        }
+        return null;
+    }
 }

@@ -15,7 +15,7 @@
  * Platforms/Drives/Compatibility:
  * Assumptions/Requirement/Pre-requisites:
  * Failures and causes:
- */ 
+ */
 package org.symbian.tools.tmw.ui;
 
 import org.eclipse.ui.console.ConsolePlugin;
@@ -26,31 +26,30 @@ import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 
 public class ConsoleFactory implements IConsoleFactory {
-	
-	private static MessageConsole console;
 
-	public void openConsole() {
-		getConsole();
-		console.activate();
-	}
-	
-	public static MessageConsoleStream createStream() {
-		getConsole();
-		return console.newMessageStream();
-	}
-	
-	public static void activateConsole() {
-		getConsole();
-		console.activate();
-	}
-	
-	private synchronized static MessageConsole getConsole() {
-		if (console == null) {
-			console = new MessageConsole("Mobile Web Console", null, true);
-			IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
-			consoleManager.addConsoles(new IConsole[]{console});
-		}
-		return console;
-	}
+    private static MessageConsole console;
 
+    public void openConsole() {
+        getConsole();
+        console.activate();
+    }
+
+    public static MessageConsoleStream createStream() {
+        getConsole();
+        return console.newMessageStream();
+    }
+
+    public static void activateConsole() {
+        getConsole();
+        console.activate();
+    }
+
+    private static synchronized MessageConsole getConsole() {
+        if (console == null) {
+            console = new MessageConsole("Mobile Web Console", null, true);
+            IConsoleManager consoleManager = ConsolePlugin.getDefault().getConsoleManager();
+            consoleManager.addConsoles(new IConsole[] { console });
+        }
+        return console;
+    }
 }

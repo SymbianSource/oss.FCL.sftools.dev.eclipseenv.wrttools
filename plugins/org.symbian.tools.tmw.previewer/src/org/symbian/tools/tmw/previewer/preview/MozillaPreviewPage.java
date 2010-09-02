@@ -76,12 +76,12 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
             }
         } catch (Exception x) {
             PreviewerPlugin.log(x);
-            // known to throw NullPointException on Mac OS when you're not using 
+            // known to throw NullPointException on Mac OS when you're not using
             // Mozilla. We don't want to pollute the error log with this
             return;
         }
         try {
-            Properties properties = ProjectPreferencesManager.getProjectProperties(project);
+            Properties properties = ProjectPreferencesManager.getProjectProperties(getProject());
             for (Iterator<Map.Entry<Object, Object>> i = properties.entrySet().iterator(); i.hasNext();) {
                 Map.Entry<Object, Object> entry = i.next();
                 if (entry.getKey() == null || !entry.getKey().toString().startsWith("__SYM_")) {
@@ -90,7 +90,7 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
                 }
             }
             if (needsRefresh) {
-                ProjectPreferencesManager.setProjectProperties(project, properties);
+                ProjectPreferencesManager.setProjectProperties(getProject(), properties);
             }
         } catch (IOException e) {
             PreviewerPlugin.log(e);
@@ -164,7 +164,7 @@ public class MozillaPreviewPage extends AbstractPreviewPage {
                 }
             } catch (Exception x) {
                 PreviewerPlugin.log(x);
-                // known to throw NullPointException on Mac OS when you're not using 
+                // known to throw NullPointException on Mac OS when you're not using
                 // Mozilla. We don't want to pollute the error log with this
                 return;
             }

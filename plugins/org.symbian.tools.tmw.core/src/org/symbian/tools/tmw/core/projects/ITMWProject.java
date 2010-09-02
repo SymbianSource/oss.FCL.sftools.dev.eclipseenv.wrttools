@@ -40,7 +40,7 @@ public interface ITMWProject {
 
     /**
      * Validate project configuration and contents.
-     * 
+     *
      * @return <code>true</code> if the project has no errors. Warnings do not count.
      */
     boolean validate(IProgressMonitor monitor);

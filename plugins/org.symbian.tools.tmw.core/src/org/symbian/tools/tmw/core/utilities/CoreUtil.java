@@ -26,9 +26,9 @@ import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 
 /**
- * Utilities used all over the TMW code base. Users can rely on this methods 
+ * Utilities used all over the TMW code base. Users can rely on this methods
  * even though they are not specific to mobile development.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public final class CoreUtil {
@@ -46,10 +46,14 @@ public final class CoreUtil {
     }
 
     public static String notNull(final String string) {
-        return string == null ? "" : string.trim();
+        if (string == null) {
+            return "";
+        } else {
+            return string.trim();
+        }
     }
 
-    public final static boolean hasTypes(IProject p, String... typeNames) throws JavaScriptModelException {
+    public static boolean hasTypes(IProject p, String... typeNames) throws JavaScriptModelException {
         final IJavaScriptProject project = JavaScriptCore.create(p);
         if (project != null && project.exists()) {
             for (String typeName : typeNames) {

@@ -22,7 +22,7 @@ import org.eclipse.core.resources.IProject;
 
 /**
  * Bridges between project models.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface ITMWProjectProvider {

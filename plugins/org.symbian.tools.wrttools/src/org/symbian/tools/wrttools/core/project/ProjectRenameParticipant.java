@@ -26,7 +26,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -69,13 +68,12 @@ public class ProjectRenameParticipant extends RenameParticipant {
     }
 
     @Override
-    public RefactoringStatus checkConditions(IProgressMonitor pm, CheckConditionsContext context)
-            throws OperationCanceledException {
+    public RefactoringStatus checkConditions(IProgressMonitor pm, CheckConditionsContext context) {
         return null;
     }
 
     @Override
-    public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
+    public Change createChange(IProgressMonitor pm) throws CoreException {
         final IFile file = project.getFile(CoreUtil.METADATA_FILE);
         if (file.isAccessible()) {
             IStructuredModel model = null;

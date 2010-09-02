@@ -19,7 +19,7 @@
 package org.symbian.tools.tmw.debug.internal;
 
 public interface IConstants {
-	String PREF_NAME_CHROME_LOCATION="chrome.location";
-	String PROP_PROJECT_NAME = "projectName";
+    String PREF_NAME_CHROME_LOCATION = "chrome.location";
+    String PROP_PROJECT_NAME = "projectName";
     String PREF_SHOW_RESOURCE_CHANGE_ERROR = "show.resourceChange.warning";
 }

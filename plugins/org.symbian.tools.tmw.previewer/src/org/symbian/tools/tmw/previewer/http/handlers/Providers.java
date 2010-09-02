@@ -33,18 +33,18 @@ import org.symbian.tools.tmw.previewer.PreviewerException;
 
 /**
  * Path is usually in the form /preview/{project name}/{path}
- * 
+ *
  * There are following spacial cases:
  * - Static previewer resource from plugin is returned when {path} begins with
  *   "preview" or is "preview-frame.html"
  * - Preferences resource is "preview/preferences.js"
  * - Index page (main HTML page of the WRT application) is always wrt_preview_main.html
  * - Debugger commands are submitted to URL __sym_command
- * 
+ *
  * All other URLs return workspace resources.
  */
 public class Providers {
-    private final Map<String, IResourceProvider> HANDLERS = new TreeMap<String, IResourceProvider>();
+    private final Map<String, IResourceProvider> handlers = new TreeMap<String, IResourceProvider>();
     private final IResourceProvider defaultHandler = new WorkspaceResourceProvider();
 
     public Providers() {
@@ -57,7 +57,7 @@ public class Providers {
 
     private void addPaths(IResourceProvider handler) {
         for (String path : handler.getPaths()) {
-            HANDLERS.put(path, handler);
+            handlers.put(path, handler);
         }
     }
 
@@ -78,7 +78,7 @@ public class Providers {
         IResourceProvider provider = null;
         IPath mapping = resource;
         while (mapping.segmentCount() > 0) {
-            provider = HANDLERS.get(mapping.toString());
+            provider = handlers.get(mapping.toString());
             if (provider != null) {
                 break;
             }

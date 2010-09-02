@@ -34,7 +34,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
-import org.symbian.tools.tmw.ui.UIUtils;
+import org.symbian.tools.tmw.internal.util.Util;
 import org.symbian.tools.tmw.ui.deployment.DeployWizard;
 
 /**
@@ -56,7 +56,7 @@ public class DeployHandler extends AbstractHandler {
     public Object execute(ExecutionEvent event) throws ExecutionException {
         final IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
-        final ITMWProject project = UIUtils.getProjectFromCommandContext(event);
+        final ITMWProject project = Util.getProjectFromCommandContext(event);
         if (project != null) {
             window.getActivePage().saveAllEditors(true);
             if (validate(project, window)) {

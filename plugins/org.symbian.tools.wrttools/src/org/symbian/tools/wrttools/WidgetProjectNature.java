@@ -24,22 +24,22 @@ import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 
 public class WidgetProjectNature implements IProjectNature {
-	public static final String ID = Activator.PLUGIN_ID + ".WidgetProjectNature";
-	
-	private IProject project;
+    public static final String ID = Activator.PLUGIN_ID + ".WidgetProjectNature";
 
-	public void configure() throws CoreException {
-	}
+    private IProject project;
 
-	public void deconfigure() throws CoreException {
-	}
+    public void configure() throws CoreException {
+    }
 
-	public IProject getProject() {
-		return project;
-	}
+    public void deconfigure() throws CoreException {
+    }
 
-	public void setProject(IProject project) {
-		this.project = project;
-	}
+    public IProject getProject() {
+        return project;
+    }
+
+    public void setProject(IProject project) {
+        this.project = project;
+    }
 
 }

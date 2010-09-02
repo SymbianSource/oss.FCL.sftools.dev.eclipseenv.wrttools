@@ -71,7 +71,11 @@ public final class DeploymentTargetTypeDescriptor implements IDeploymentTargetTy
 
     public DeploymentTargetWrapper[] getTargets(ITMWProject project) {
         final DeploymentTargetWrapper[] targets = wrap(getProvider().getTargets(project));
-        return targets != null ? targets : NO_TARGETS;
+        if (targets != null) {
+            return targets;
+        } else {
+            return NO_TARGETS;
+        }
     }
 
     private DeploymentTargetWrapper[] wrap(IDeploymentTarget[] targets) {

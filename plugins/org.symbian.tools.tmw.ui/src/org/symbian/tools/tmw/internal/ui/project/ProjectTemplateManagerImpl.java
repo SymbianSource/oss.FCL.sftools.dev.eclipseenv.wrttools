@@ -51,7 +51,11 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
             if (o1.getWeight() == o2.getWeight()) {
                 return o1.getName().compareTo(o2.getName());
             } else {
-                return o1.getWeight() > o2.getWeight() ? 1 : -1;
+                if (o1.getWeight() > o2.getWeight()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
             }
         }
     }
@@ -62,7 +66,11 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
 
     public IProjectTemplate getDefaultTemplate(IMobileWebRuntime runtime) {
         final IProjectTemplate[] projectTemplates = getProjectTemplates(runtime);
-        return projectTemplates != null && projectTemplates.length > 0 ? projectTemplates[0] : null;
+        if (projectTemplates != null && projectTemplates.length > 0) {
+            return projectTemplates[0];
+        } else {
+            return null;
+        }
     }
 
     public ITemplateInstaller getEmptyProjectTemplate(IMobileWebRuntime runtime) {
@@ -80,7 +88,11 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
             templates = readExtensions();
         }
         final IProjectTemplate[] runtimeTemplates = templates.get(runtime);
-        return runtimeTemplates == null ? new IProjectTemplate[0] : runtimeTemplates;
+        if (runtimeTemplates == null) {
+            return new IProjectTemplate[0];
+        } else {
+            return runtimeTemplates;
+        }
     }
 
     private Map<IMobileWebRuntime, IProjectTemplate[]> readExtensions() {

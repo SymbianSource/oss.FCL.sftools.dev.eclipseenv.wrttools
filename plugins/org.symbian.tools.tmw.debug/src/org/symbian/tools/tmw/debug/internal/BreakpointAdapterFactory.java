@@ -26,19 +26,19 @@ import org.eclipse.ui.IEditorPart;
 @SuppressWarnings("rawtypes")
 public class BreakpointAdapterFactory implements IAdapterFactory {
 
-	public Object getAdapter(Object adaptableObject, Class adapterType) {
-		if (adaptableObject instanceof IEditorPart) {
-			IResource resource = (IResource) ((IEditorPart) adaptableObject)
-					.getEditorInput().getAdapter(IResource.class);
-			if (resource != null) {
-				return new WorkspaceLineBreakpointAdapter();
-			}
-		}
-		return null;
-	}
+    public Object getAdapter(Object adaptableObject, Class adapterType) {
+        if (adaptableObject instanceof IEditorPart) {
+            IResource resource = (IResource) ((IEditorPart) adaptableObject).getEditorInput().getAdapter(
+                    IResource.class);
+            if (resource != null) {
+                return new WorkspaceLineBreakpointAdapter();
+            }
+        }
+        return null;
+    }
 
     public Class[] getAdapterList() {
-		return new Class[] { IToggleBreakpointsTarget.class };
-	}
+        return new Class[] { IToggleBreakpointsTarget.class };
+    }
 
 }

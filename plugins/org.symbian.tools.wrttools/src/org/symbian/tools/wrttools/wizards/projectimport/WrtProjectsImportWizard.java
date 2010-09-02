@@ -33,48 +33,47 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.symbian.tools.wrttools.core.WRTImages;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
-public class WrtProjectsImportWizard extends Wizard implements
-		IImportWizard, INewWizard, IExecutableExtension {
+public class WrtProjectsImportWizard extends Wizard implements IImportWizard, INewWizard, IExecutableExtension {
 
     private WrtProjectLocationWizardPage mainPage;
-	private IConfigurationElement config;
+    private IConfigurationElement config;
 
     public WrtProjectsImportWizard() {
         setWindowTitle("Import WRT Project");
-		setNeedsProgressMonitor(true);
+        setNeedsProgressMonitor(true);
         setDefaultPageImageDescriptor(WRTImages.importWizardBanner());
     }
 
-	@Override
-	public boolean performCancel() {
-		mainPage.performCancel();
-		return true;
-	}
+    @Override
+    public boolean performCancel() {
+        mainPage.performCancel();
+        return true;
+    }
 
-	@Override
-	public boolean performFinish() {
-		if (mainPage.createProjects()) {
-			BasicNewProjectResourceWizard.updatePerspective(config);
-			List<IProject> projects = mainPage.getCreatedProjects();
-				ProjectUtils.focusOn(projects.toArray(new IProject[projects.size()]));
-			return true;
-		} else {
-			return false;
-		}
-	}
+    @Override
+    public boolean performFinish() {
+        if (mainPage.createProjects()) {
+            BasicNewProjectResourceWizard.updatePerspective(config);
+            List<IProject> projects = mainPage.getCreatedProjects();
+            ProjectUtils.focusOn(projects.toArray(new IProject[projects.size()]));
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	@Override
-	public void addPages() {
+    @Override
+    public void addPages() {
         mainPage = new WrtProjectLocationWizardPage();
-		addPage(mainPage);
-	}
+        addPage(mainPage);
+    }
 
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		// Do nothing
-	}
+    public void init(IWorkbench workbench, IStructuredSelection selection) {
+        // Do nothing
+    }
 
-	public void setInitializationData(IConfigurationElement config,
-			String propertyName, Object data) throws CoreException {
-		this.config = config;
-	}
+    public void setInitializationData(IConfigurationElement config, String propertyName, Object data)
+            throws CoreException {
+        this.config = config;
+    }
 }

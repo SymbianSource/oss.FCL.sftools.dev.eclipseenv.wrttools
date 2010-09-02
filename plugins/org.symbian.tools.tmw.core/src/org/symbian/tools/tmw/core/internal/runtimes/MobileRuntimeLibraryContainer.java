@@ -34,9 +34,9 @@ public class MobileRuntimeLibraryContainer implements IJsGlobalScopeContainer {
     private final IPath containerPath;
     private final IJavaScriptProject project;
 
-    public MobileRuntimeLibraryContainer(IJavaScriptProject project, IPath containerPath) {
-        this.project = project;
-        this.containerPath = containerPath;
+    public MobileRuntimeLibraryContainer(IJavaScriptProject jsProject, IPath runtimeContainerPath) {
+        this.project = jsProject;
+        this.containerPath = runtimeContainerPath;
     }
 
     public IIncludePathEntry[] getIncludepathEntries() {

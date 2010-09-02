@@ -29,8 +29,8 @@ public class LazyIncludePathProvider implements IFacetIncludePathProvider {
     private final IConfigurationElement element;
     private LazyIncludePathProvider provider;
 
-    public LazyIncludePathProvider(IConfigurationElement element) {
-        this.element = element;
+    public LazyIncludePathProvider(IConfigurationElement configurationElement) {
+        this.element = configurationElement;
     }
 
     public IIncludePathEntry[] getEntries(ITMWProject project) {

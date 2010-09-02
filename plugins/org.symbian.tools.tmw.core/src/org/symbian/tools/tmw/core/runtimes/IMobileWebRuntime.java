@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * Represents mobile web runtimes supported by the IDE
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IMobileWebRuntime {
@@ -47,7 +47,7 @@ public interface IMobileWebRuntime {
     Map<String, String> getFixedFacets();
 
     /**
-     * @return layout provider that bridges application runtime structure and 
+     * @return layout provider that bridges application runtime structure and
      * workspace project structure
      */
     IApplicationLayoutProvider getLayoutProvider();

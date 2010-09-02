@@ -112,8 +112,8 @@ public final class RuntimesManagerImpl implements IMobileWebRuntimeManager {
         private final IConfigurationElement element;
         private IApplicationLayoutProvider instance;
 
-        public LazyProvider(IConfigurationElement element) {
-            this.element = element;
+        public LazyProvider(IConfigurationElement configurationElement) {
+            this.element = configurationElement;
         }
 
         public IPath getResourcePath(IFile file) {

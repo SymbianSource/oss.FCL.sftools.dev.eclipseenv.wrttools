@@ -43,9 +43,9 @@ public class ChromeInstancesManager {
             "--disable-web-security", // Widgets can use network now
             "--disable-extenions", // Use standard UI, should also improve speed and stability
             "--activate-on-launch", // Bring to front on Mac
-            "--disable-geolocation", // Use our own Geolocation (needed to emulate Geolocation in phonegap) 
-            "--disable-local-storage", // Disable local storage (needed to emulate Geolocation in phonegap) 
-            "--disable-session-storage", // Disable local storage (needed to emulate Geolocation in phonegap) 
+            "--disable-geolocation", // Use our own Geolocation (needed to emulate Geolocation in phonegap)
+            "--disable-local-storage", // Disable local storage (needed to emulate Geolocation in phonegap)
+            "--disable-session-storage", // Disable local storage (needed to emulate Geolocation in phonegap)
             "--no-default-browser-check", // Our users don't need this nagging
             "--disable-hang-monitor", // Fix for Bug 2682 - The debugger should disable "unresponsive" error message from chrome
             "--no-first-run", // We don't care
@@ -74,7 +74,7 @@ public class ChromeInstancesManager {
         commandline[USER_DATA_INDEX] = String.format(CHROME_ARGS[USER_DATA_INDEX], getChromeProfilePath());
         commandline[CACHE_INDEX] = String.format(CHROME_ARGS[CACHE_INDEX], getChromeCachePath());
         commandline[URL_INDEX] = String.format(CHROME_ARGS[URL_INDEX], url);
-        
+
         // 2. Start Chrome
         try {
             Process process = Runtime.getRuntime().exec(commandline);

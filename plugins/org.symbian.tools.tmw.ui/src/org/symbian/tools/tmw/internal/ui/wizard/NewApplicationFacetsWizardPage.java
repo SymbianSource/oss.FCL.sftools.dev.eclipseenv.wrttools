@@ -24,7 +24,7 @@ import org.eclipse.wst.common.project.facet.ui.internal.FacetedProjectFrameworkI
 
 @SuppressWarnings("restriction")
 public final class NewApplicationFacetsWizardPage extends WizardPage {
-    public FacetsSelectionPanel panel;
+    private FacetsSelectionPanel panel;
     private final IFacetedProjectWorkingCopy fpjwc;
 
     public NewApplicationFacetsWizardPage(final Set<IProjectFacetVersion> base, final IFacetedProjectWorkingCopy fpjwc) {

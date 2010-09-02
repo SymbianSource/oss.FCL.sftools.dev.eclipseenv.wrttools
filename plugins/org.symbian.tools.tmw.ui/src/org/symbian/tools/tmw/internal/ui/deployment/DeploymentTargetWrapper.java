@@ -122,9 +122,17 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
     public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
         Object a = target.getAdapter(adapter);
         if (IWorkbenchAdapter.class.isAssignableFrom(adapter)) {
-            return a == null ? new TargetWorkbenchAdapter(this) : new WorkbenchAdapterWrapper((IWorkbenchAdapter) a);
+            if (a == null) {
+                return new TargetWorkbenchAdapter(this);
+            } else {
+                return new WorkbenchAdapterWrapper((IWorkbenchAdapter) a);
+            }
         } else if (IWorkbenchAdapter2.class.isAssignableFrom(adapter)) {
-            return a == null ? new TargetWorkbenchAdapter(this) : new WorkbenchAdapter2Wrapper((IWorkbenchAdapter2) a);
+            if (a == null) {
+                return new TargetWorkbenchAdapter(this);
+            } else {
+                return new WorkbenchAdapter2Wrapper((IWorkbenchAdapter2) a);
+            }
         } else {
             return a;
         }
@@ -149,9 +157,7 @@ public class DeploymentTargetWrapper implements IDeploymentTarget {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = 1;
-        result = prime * result + ((target == null) ? 0 : target.hashCode());
-        return result;
+        return prime + ((target != null) ? target.hashCode() : 0);
     }
 
     public DeploymentTargetTypeDescriptor getType() {

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.symbian.tools.tmw.debug.internal.model;
 
 import java.util.Collection;
@@ -24,12 +21,12 @@ import org.symbian.tools.tmw.debug.internal.launch.WRTProjectWorkspaceBridge;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
 public final class WorkspaceBreakpointHandler implements BreakpointHandler {
-	private final BreakpointMap.InTargetMap breakpointInTargetMap = new BreakpointMap.InTargetMap();
-	private final DebugTargetImpl debugTarget;
-	
+    private final BreakpointMap.InTargetMap breakpointInTargetMap = new BreakpointMap.InTargetMap();
+    private final DebugTargetImpl debugTarget;
+
     public WorkspaceBreakpointHandler(DebugTargetImpl debugTarget) {
-		this.debugTarget = debugTarget;
-	}
+        this.debugTarget = debugTarget;
+    }
 
     public void breakpointAdded(IBreakpoint breakpoint) {
         ChromiumLineBreakpoint lineBreakpoint = tryCastBreakpoint(breakpoint);
@@ -95,7 +92,7 @@ public final class WorkspaceBreakpointHandler implements BreakpointHandler {
 
         try {
             if (!breakpoint.isEnabled()) {
-            return;
+                return;
             }
         } catch (CoreException e) {
             ChromiumDebugPlugin.log(e);
@@ -168,25 +165,22 @@ public final class WorkspaceBreakpointHandler implements BreakpointHandler {
         try {
             return debugTarget.getLaunch().getLaunchConfiguration().getName();
         } catch (RuntimeException e) {
-          return "<unknown>"; //$NON-NLS-1$
+            return "<unknown>"; //$NON-NLS-1$
         }
     }
 
     public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-		return (WRTProjectWorkspaceBridge.DEBUG_MODEL_ID.equals(breakpoint
-				.getModelIdentifier()) || VProjectWorkspaceBridge.DEBUG_MODEL_ID
-				.equals(breakpoint.getModelIdentifier()))
-				&& !debugTarget.isDisconnected();
-	}
+        return (WRTProjectWorkspaceBridge.DEBUG_MODEL_ID.equals(breakpoint.getModelIdentifier()) || VProjectWorkspaceBridge.DEBUG_MODEL_ID
+                .equals(breakpoint.getModelIdentifier())) && !debugTarget.isDisconnected();
+    }
 
     public ChromiumLineBreakpoint tryCastBreakpoint(IBreakpoint breakpoint) {
         if (!supportsBreakpoint(breakpoint)) {
             return null;
         }
-        if (breakpoint instanceof ChromiumLineBreakpoint == false) {
+        if (!(breakpoint instanceof ChromiumLineBreakpoint)) {
             return null;
         }
         return (ChromiumLineBreakpoint) breakpoint;
     }
-
 }

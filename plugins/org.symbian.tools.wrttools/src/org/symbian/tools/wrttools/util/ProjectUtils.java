@@ -69,11 +69,10 @@ import org.eclipse.wst.jsdt.internal.ui.wizards.buildpaths.BuildPathsBlock;
 import org.eclipse.wst.validation.ValidationFramework;
 import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.WidgetProjectNature;
-import org.symbian.tools.wrttools.core.packager.WRTPackagerConstants;
 import org.symbian.tools.wrttools.wizards.WrtLibraryWizardPage;
 
 @SuppressWarnings("restriction")
-public class ProjectUtils {
+public final class ProjectUtils {
     public static final String EXCLUDE_MARKER_ID = "org.symbian.tools.wrttools.excluded";
 
     private static final class FocusOnProjectJob extends Job {
@@ -363,7 +362,6 @@ public class ProjectUtils {
     public static void exclude(IResource resource) {
         try {
             resource.createMarker(EXCLUDE_MARKER_ID);
-            resource.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, Boolean.TRUE.toString());
         } catch (CoreException e) {
             Activator.log(e);
         }
@@ -372,12 +370,15 @@ public class ProjectUtils {
     public static void include(IResource resource) {
         try {
             IMarker[] markers = resource.findMarkers(EXCLUDE_MARKER_ID, false, IResource.DEPTH_ZERO);
-            resource.setPersistentProperty(WRTPackagerConstants.EXCLUDE_PROPERTY, null);
             for (IMarker marker : markers) {
                 marker.delete();
             }
         } catch (CoreException e) {
             Activator.log(e);
         }
+    }
+
+    private ProjectUtils() {
+        // Do not instantiate
     }
 }

@@ -29,33 +29,33 @@ import org.chromium.sdk.Browser.TabConnector;
 import org.chromium.sdk.Browser.TabFetcher;
 
 public class WidgetTabSelector implements TabSelector {
-	private final URI uri;
-	private TabConnector connector;
+    private final URI uri;
+    private TabConnector connector;
 
-	public WidgetTabSelector(URI uri) {
-		this.uri = uri;
-	}
-	
-	public TabConnector selectTab(TabFetcher tabFetcher) throws IOException {
-		// Give it time to start the process/tab. 5 retries, 500 ms inbetween.
-		for (int i = 0; i < 5; i++) {
-			List<? extends TabConnector> tabs = tabFetcher.getTabs();
-			for (TabConnector tabConnector : tabs) {
-				String url = tabConnector.getUrl();
-				try {
+    public WidgetTabSelector(URI tabUri) {
+        this.uri = tabUri;
+    }
+
+    public TabConnector selectTab(TabFetcher tabFetcher) throws IOException {
+        // Give it time to start the process/tab. 5 retries, 500 ms inbetween.
+        for (int i = 0; i < 5; i++) {
+            List<? extends TabConnector> tabs = tabFetcher.getTabs();
+            for (TabConnector tabConnector : tabs) {
+                String url = tabConnector.getUrl();
+                try {
                     if (uri.toURL().toExternalForm().equals(new URL(url).toExternalForm())) {
-						connector = tabConnector;
-						return tabConnector;
-					}
-				} catch (MalformedURLException e) {
-					// Ignore - fails because of "chrome" protocol, we should ignore these tabs anyways
-				}
-			}
-		}
-		return null;
-	}
-	
-	public TabConnector getConnector() {
-		return connector;
-	}
+                        connector = tabConnector;
+                        return tabConnector;
+                    }
+                } catch (MalformedURLException e) {
+                    // Ignore - fails because of "chrome" protocol, we should ignore these tabs anyways
+                }
+            }
+        }
+        return null;
+    }
+
+    public TabConnector getConnector() {
+        return connector;
+    }
 }

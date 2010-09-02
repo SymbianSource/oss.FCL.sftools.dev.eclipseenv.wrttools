@@ -36,10 +36,10 @@ import org.symbian.tools.tmw.internal.util.DelegateRunnable;
 import org.symbian.tools.tmw.ui.project.IProjectTemplateContext;
 import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
-public class CompoundInstaller implements ITemplateInstaller {
+public final class CompoundInstaller implements ITemplateInstaller {
     private static final class InstallerFiles {
-        private final ITemplateInstaller installer;
-        private final Collection<IPath> paths;
+        protected final ITemplateInstaller installer;
+        protected final Collection<IPath> paths;
 
         public InstallerFiles(Collection<IPath> paths, ITemplateInstaller installer) {
             this.paths = paths;

@@ -18,8 +18,19 @@
  */
 package org.symbian.tools.tmw.internal.util;
 
-public class Util {
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.symbian.tools.tmw.core.TMWCore;
+import org.symbian.tools.tmw.core.projects.ITMWProject;
 
+public final class Util {
     public static String removeSpaces(String value) {
         return value != null ? value.trim().replace(" ", "") : "";
     }
@@ -28,4 +39,28 @@ public class Util {
         return string == null ? "" : string.trim();
     }
 
+    private Util() {
+        // No instantiation
+    }
+
+    public static ITMWProject getProjectFromCommandContext(ExecutionEvent event) {
+        IResource resource = null;
+        IWorkbenchPart activePart = HandlerUtil.getActivePart(event);
+        if (activePart instanceof IEditorPart) {
+            resource = (IResource) ((IEditorPart) activePart).getEditorInput().getAdapter(IResource.class);
+        } else {
+            ISelection selection = HandlerUtil.getCurrentSelection(event);
+            if (!selection.isEmpty() && selection instanceof IStructuredSelection) {
+                Object[] array = ((IStructuredSelection) selection).toArray();
+                if (array.length == 1 && array[0] instanceof IAdaptable) {
+                    resource = (IResource) ((IAdaptable) array[0]).getAdapter(IResource.class);
+                }
+            }
+        }
+        if (resource != null) {
+            IProject project = resource.getProject();
+            return TMWCore.create(project);
+        }
+        return null;
+    }
 }

@@ -20,19 +20,19 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.symbian.tools.wrttools.Activator;
 
-public class CoreUtil {
+public final class CoreUtil {
+    private static class IndexFileRecord {
+        public final IFile fileName;
+        public final long timeStamp;
+
+        public IndexFileRecord(IFile fileName, long timeStamp) {
+            this.fileName = fileName;
+            this.timeStamp = timeStamp;
+        }
+    }
+    private static final Map<IProject, IndexFileRecord> INDEX_FILES = new HashMap<IProject, IndexFileRecord>();
     public static final String METADATA_FILE = "Info.plist";
     public static final String PROPERTY_PATTERN = "<key>\\s*{0}\\s*</key>\\s*<string>\\s*(.*)\\s*</string>";
-
-    public static String getIndexFileName(String buffer) {
-        if (buffer != null) {
-            Matcher matcher = getPropertyLookupPattern("MainHTML").matcher(buffer);
-            if (matcher.find()) {
-                return matcher.group(1);
-            }
-        }
-        return null;
-    }
 
     public static String getApplicationName(String buffer) {
         if (buffer != null) {
@@ -40,19 +40,6 @@ public class CoreUtil {
             if (matcher.find()) {
                 return matcher.group(1);
             }
-        }
-        return null;
-    }
-
-    public static Pattern getPropertyLookupPattern(String propertyName) {
-        return Pattern.compile(MessageFormat.format(PROPERTY_PATTERN, propertyName), Pattern.CASE_INSENSITIVE);
-    }
-
-    public static IRegion getIndexFileNameRegion(String string) {
-        Matcher matcher = getPropertyLookupPattern("MainHTML").matcher(string);
-        if (matcher.find()) {
-            int start = matcher.start(1);
-            return new Region(start, matcher.end(1) - start);
         }
         return null;
     }
@@ -68,36 +55,6 @@ public class CoreUtil {
         }
         return null;
     }
-
-    public static String readFile(IFile file) throws CoreException {
-        try {
-            if (file != null && file.isAccessible()) {
-                final BufferedReader reader = new BufferedReader(new InputStreamReader(file.getContents(),
-                        file.getCharset()));
-                return read(reader);
-            }
-            return null;
-        } catch (IOException e) {
-            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, MessageFormat.format(
-                    "Failed to read file {0} in project {1}", file.getName(), file.getProject().getName())));
-        }
-    }
-
-    public static String read(final Reader reader) throws IOException {
-        StringBuffer buffer = new StringBuffer();
-        try {
-            int c = 0;
-            char[] buf = new char[4096];
-            while ((c = reader.read(buf)) > 0) {
-                buffer.append(buf, 0, c);
-            }
-            return buffer.toString();
-        } finally {
-            reader.close();
-        }
-    }
-
-    private static final Map<IProject, IndexFileRecord> INDEX_FILES = new HashMap<IProject, IndexFileRecord>();
 
     public static synchronized IFile getIndexFile(IProject project) throws CoreException {
         // There will really be a lot of calls to this method. We need to cache values.
@@ -124,13 +81,58 @@ public class CoreUtil {
         return null;
     }
 
-    private static class IndexFileRecord {
-        public final IFile fileName;
-        public final long timeStamp;
-
-        public IndexFileRecord(IFile fileName, long timeStamp) {
-            this.fileName = fileName;
-            this.timeStamp = timeStamp;
+    public static String getIndexFileName(String buffer) {
+        if (buffer != null) {
+            Matcher matcher = getPropertyLookupPattern("MainHTML").matcher(buffer);
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
         }
+        return null;
+    }
+
+    public static IRegion getIndexFileNameRegion(String string) {
+        Matcher matcher = getPropertyLookupPattern("MainHTML").matcher(string);
+        if (matcher.find()) {
+            int start = matcher.start(1);
+            return new Region(start, matcher.end(1) - start);
+        }
+        return null;
+    }
+
+    public static Pattern getPropertyLookupPattern(String propertyName) {
+        return Pattern.compile(MessageFormat.format(PROPERTY_PATTERN, propertyName), Pattern.CASE_INSENSITIVE);
+    }
+
+    public static String read(final Reader reader) throws IOException {
+        StringBuffer buffer = new StringBuffer();
+        try {
+            int c = 0;
+            char[] buf = new char[4096];
+            while ((c = reader.read(buf)) > 0) {
+                buffer.append(buf, 0, c);
+            }
+            return buffer.toString();
+        } finally {
+            reader.close();
+        }
+    }
+
+    public static String readFile(IFile file) throws CoreException {
+        try {
+            if (file != null && file.isAccessible()) {
+                final BufferedReader reader = new BufferedReader(new InputStreamReader(file.getContents(),
+                        file.getCharset()));
+                return read(reader);
+            }
+            return null;
+        } catch (IOException e) {
+            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, MessageFormat.format(
+                    "Failed to read file {0} in project {1}", file.getName(), file.getProject().getName())));
+        }
+    }
+
+    private CoreUtil() {
+        // Do not instantiate
     }
 }

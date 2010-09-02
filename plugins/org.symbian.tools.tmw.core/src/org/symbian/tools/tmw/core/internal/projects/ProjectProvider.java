@@ -34,17 +34,16 @@ public class ProjectProvider implements ITMWProjectProvider {
     private final Expression expression;
     private ITMWProjectProvider provider;
 
-    public ProjectProvider(IConfigurationElement element) throws CoreException {
-        this.element = element;
-        IConfigurationElement[] children = element.getChildren("enablement");
+    public ProjectProvider(IConfigurationElement configurationElement) throws CoreException {
+        this.element = configurationElement;
+        IConfigurationElement[] children = configurationElement.getChildren("enablement");
         if (children.length == 1) {
             expression = ExpressionConverter.getDefault().perform(children[0]);
         } else {
             expression = null;
             if (children.length > 1) {
-                TMWCore.log(
-                        "Project extension in plugin %s has several <enablement> elements. All expressions will be ignored.",
-                        element.getNamespaceIdentifier());
+                TMWCore.log("Project extension in plugin %s has several <enablement> elements. "
+                        + "All expressions will be ignored.", configurationElement.getNamespaceIdentifier());
             }
         }
     }

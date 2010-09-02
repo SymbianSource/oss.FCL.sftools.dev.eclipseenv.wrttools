@@ -38,7 +38,7 @@ import org.symbian.tools.tmw.internal.ui.wizard.NonEmptyStringValidator;
 
 /**
  * Boilerplate code to make it easier creating such wizard pages.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public abstract class AbstractNewApplicationWizardPage extends WizardPage implements INewApplicationWizardPage {

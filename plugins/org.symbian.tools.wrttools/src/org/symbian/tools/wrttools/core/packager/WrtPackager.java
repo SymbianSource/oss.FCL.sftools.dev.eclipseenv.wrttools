@@ -59,7 +59,11 @@ public class WrtPackager implements IPackagerDelegate {
     }
 
     public IPath getPathInPackage(IResource resource) {
-        return ProjectUtils.isExcluded(resource) ? null : resource.getFullPath().makeRelative();
+        if (ProjectUtils.isExcluded(resource)) {
+            return null;
+        } else {
+            return resource.getFullPath().makeRelative();
+        }
     }
 
 }

@@ -32,9 +32,9 @@ import org.eclipse.ui.texteditor.ITextEditor;
  */
 public class JsBreakpointPropertiesRulerActionDelegate extends AbstractRulerActionDelegate {
 
-  @Override
-  protected IAction createAction(ITextEditor editor, IVerticalRulerInfo rulerInfo) {
-    return new JsBreakpointPropertiesRulerAction(editor, rulerInfo);
-  }
+    @Override
+    protected IAction createAction(ITextEditor editor, IVerticalRulerInfo rulerInfo) {
+        return new JsBreakpointPropertiesRulerAction(editor, rulerInfo);
+    }
 
 }

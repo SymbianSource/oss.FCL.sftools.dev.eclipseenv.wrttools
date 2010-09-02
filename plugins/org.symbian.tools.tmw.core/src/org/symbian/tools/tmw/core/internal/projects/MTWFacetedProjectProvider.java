@@ -24,7 +24,6 @@ import java.util.WeakHashMap;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.wst.common.project.facet.core.FacetedProjectFramework;
-import org.symbian.tools.tmw.core.ITMWConstants;
 import org.symbian.tools.tmw.core.TMWCore;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
 import org.symbian.tools.tmw.core.projects.ITMWProjectProvider;
@@ -41,7 +40,7 @@ public class MTWFacetedProjectProvider implements ITMWProjectProvider {
 
     public boolean isSupportedProject(IProject project) {
         try {
-            return FacetedProjectFramework.hasProjectFacet(project, ITMWConstants.CORE_FACET);
+            return FacetedProjectFramework.hasProjectFacet(project, TMWCore.CORE_FACET);
         } catch (CoreException e) {
             TMWCore.log(null, e);
             return false;

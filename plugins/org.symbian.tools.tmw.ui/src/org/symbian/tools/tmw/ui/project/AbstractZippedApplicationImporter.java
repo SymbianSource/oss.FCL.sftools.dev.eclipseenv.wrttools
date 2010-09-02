@@ -46,7 +46,7 @@ import org.symbian.tools.tmw.ui.TMWCoreUI;
  * This is base class for importers that work with zip-based application
  * packages. W3C specification mandates using Zip as archive format and
  * it looks like all mobile web runtime use Zip as their format.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public abstract class AbstractZippedApplicationImporter implements IApplicationImporter {

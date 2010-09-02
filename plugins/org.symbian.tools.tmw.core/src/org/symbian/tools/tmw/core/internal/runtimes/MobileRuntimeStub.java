@@ -34,7 +34,7 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 /**
  * Integrates mobile web runtime with the faceted project runtime framework.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 @SuppressWarnings("unchecked")
@@ -42,9 +42,9 @@ public class MobileRuntimeStub implements IRuntimeBridge.IStub {
     private final IMobileWebRuntime runtime;
     private final Map<String, String> properties = new TreeMap<String, String>();
 
-    public MobileRuntimeStub(IMobileWebRuntime runtime) {
-        this.runtime = runtime;
-        properties.put("localized-name", runtime.getName());
+    public MobileRuntimeStub(IMobileWebRuntime mobileRuntime) {
+        this.runtime = mobileRuntime;
+        properties.put("localized-name", mobileRuntime.getName());
     }
 
     private IRuntimeComponent getComponent(String string, String version) {

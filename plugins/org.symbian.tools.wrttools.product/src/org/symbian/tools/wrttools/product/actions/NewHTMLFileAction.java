@@ -10,31 +10,30 @@ import org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard;
 import org.eclipse.wst.jsdt.ui.actions.AbstractOpenWizardAction;
 
 @SuppressWarnings("restriction")
-public class NewHTMLFileAction extends AbstractOpenWizardAction implements
-		IWorkbenchWindowActionDelegate {
+public class NewHTMLFileAction extends AbstractOpenWizardAction implements IWorkbenchWindowActionDelegate {
 
-	@Override
-	protected INewWizard createWizard() throws CoreException {
-		return new NewHTMLWizard();
-	}
+    @Override
+    protected INewWizard createWizard() throws CoreException {
+        return new NewHTMLWizard();
+    }
 
-	public void dispose() {
-		// TODO Auto-generated method stub
+    public void dispose() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	public void init(IWorkbenchWindow window) {
-		// TODO Auto-generated method stub
+    public void init(IWorkbenchWindow window) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	public void run(IAction action) {
-		run();
-	}
+    public void run(IAction action) {
+        run();
+    }
 
-	public void selectionChanged(IAction action, ISelection selection) {
-		// TODO Auto-generated method stub
+    public void selectionChanged(IAction action, ISelection selection) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

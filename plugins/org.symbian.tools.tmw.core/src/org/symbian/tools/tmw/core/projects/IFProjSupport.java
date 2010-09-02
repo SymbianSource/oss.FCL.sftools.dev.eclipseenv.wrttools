@@ -27,7 +27,7 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 /**
  * This is a bridge between Faceted Project framework and TMW project frameworks.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IFProjSupport {

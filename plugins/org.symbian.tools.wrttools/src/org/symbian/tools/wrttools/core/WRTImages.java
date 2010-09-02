@@ -23,7 +23,7 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.symbian.tools.wrttools.Activator;
 
-public class WRTImages {
+public final class WRTImages {
     private static final String IMAGE_IMPORT_WIZARD_BANNER = "import_wizard_banner.png";
     private static final String IMAGE_IMPORT_WGZ_BANNER = "import_w_banner.png";
     private static final String IMAGE_NEW_WIZARD_BANNER = "WRT_wizard_banner.png";
@@ -76,5 +76,9 @@ public class WRTImages {
 
     public static Image getWrtKitIcon() {
         return Activator.getDefault().getImageRegistry().get(IMAGE_WRTKIT);
+    }
+
+    private WRTImages() {
+        // No instantiation
     }
 }

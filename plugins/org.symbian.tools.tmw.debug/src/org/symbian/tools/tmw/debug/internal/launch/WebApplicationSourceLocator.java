@@ -51,10 +51,10 @@ public final class WebApplicationSourceLocator extends AbstractSourceLookupDirec
         private final ResourceManager resourceManager;
         private final WebApplicationSourceLocator locator;
 
-        public WebApplicationSourceLookupParticipant(WebApplicationSourceLocator locator,
-                ResourceManager resourceManager) {
-            this.locator = locator;
-            this.resourceManager = resourceManager;
+        public WebApplicationSourceLookupParticipant(WebApplicationSourceLocator sourceLocator,
+                ResourceManager resourcesManager) {
+            this.locator = sourceLocator;
+            this.resourceManager = resourcesManager;
         }
 
         public String getSourceName(Object object) throws CoreException {
@@ -80,8 +80,8 @@ public final class WebApplicationSourceLocator extends AbstractSourceLookupDirec
 
     private final ResourceManager resourceManager;
 
-    public WebApplicationSourceLocator(ResourceManager resourceManager) {
-        this.resourceManager = resourceManager;
+    public WebApplicationSourceLocator(ResourceManager resourcesManager) {
+        this.resourceManager = resourcesManager;
     }
 
     public String fileUrl(Script script) throws CoreException {
@@ -114,31 +114,31 @@ public final class WebApplicationSourceLocator extends AbstractSourceLookupDirec
     }
 
     public Object getSourceElement(IStackFrame stackFrame) {
-		if (stackFrame instanceof StackFrame == false) {
-			return null;
-		}
-		StackFrame jsStackFrame = (StackFrame) stackFrame;
+        if (!(stackFrame instanceof StackFrame)) {
+            return null;
+        }
+        StackFrame jsStackFrame = (StackFrame) stackFrame;
 
-		Script script = jsStackFrame.getCallFrame().getScript();
-		if (script == null) {
-			return null;
-		}
+        Script script = jsStackFrame.getCallFrame().getScript();
+        if (script == null) {
+            return null;
+        }
 
-		IFile resource = resourceManager.getResource(script);
-		if (resource != null) {
-			return resource;
-		} else {
-			File file = PreviewerPlugin.getDefault().getHttpPreviewer().getLocalFile(script.getName());
+        IFile resource = resourceManager.getResource(script);
+        if (resource != null) {
+            return resource;
+        } else {
+            File file = PreviewerPlugin.getDefault().getHttpPreviewer().getLocalFile(script.getName());
             if (file != null) {
-				try {
-					return EFS.getStore(file.toURI());
-				} catch (CoreException e) {
-					Activator.log(e);
-				}
-			}
-		}
-		return null;
-	}
+                try {
+                    return EFS.getStore(file.toURI());
+                } catch (CoreException e) {
+                    Activator.log(e);
+                }
+            }
+        }
+        return null;
+    }
 
     public void initializeParticipants() {
         addParticipants(new ISourceLookupParticipant[] { new WebApplicationSourceLookupParticipant(this,

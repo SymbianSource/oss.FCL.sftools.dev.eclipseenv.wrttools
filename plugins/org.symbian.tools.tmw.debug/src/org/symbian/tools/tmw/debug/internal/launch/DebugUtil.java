@@ -31,7 +31,7 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.debug.internal.IConstants;
 
-public class DebugUtil {
+public final class DebugUtil {
     public static CoreException createCoreException(String message, Throwable exeption) {
         return new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, exeption));
     }
@@ -86,4 +86,7 @@ public class DebugUtil {
         return false;
     }
 
+    private DebugUtil() {
+        // Can't be instantiated
+    }
 }

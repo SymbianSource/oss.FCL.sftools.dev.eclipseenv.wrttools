@@ -117,18 +117,33 @@ public class Emulator extends PlatformObject implements IDeploymentTarget {
      * @param outputFile the path of the emulator where the widget will be deoplyed.
      */
     private void deployWidget(File inputFile, File outputFile) throws CoreException {
+        InputStream in = null;
+        OutputStream out = null;
         try {
-            InputStream in = new FileInputStream(inputFile);
-            OutputStream out = new FileOutputStream(outputFile);
+            in = new FileInputStream(inputFile);
+            out = new FileOutputStream(outputFile);
             int c;
 
             while ((c = in.read()) != -1) {
                 out.write(c);
             }
-            in.close();
-            out.close();
         } catch (IOException e) {
             throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Application deployment failed", e));
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    Activator.log(e);
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    Activator.log(e);
+                }
+            }
         }
     }
 

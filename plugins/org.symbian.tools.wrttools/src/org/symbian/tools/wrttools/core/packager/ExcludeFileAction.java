@@ -38,77 +38,68 @@ import org.symbian.tools.wrttools.Activator;
 import org.symbian.tools.wrttools.util.ProjectUtils;
 
 public class ExcludeFileAction implements IObjectActionDelegate {
-	
-	private final List<IFile> selectedFiles = new ArrayList<IFile>();
-	private final List<IFolder> selectedFolders = new ArrayList<IFolder>();
-	public ExcludeFileAction() {
-		super();
-	}
 
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
+    private final List<IFile> selectedFiles = new ArrayList<IFile>();
+    private final List<IFolder> selectedFolders = new ArrayList<IFolder>();
 
-	public void run(IAction action) {
-		for (IFile file : selectedFiles) {
+    public ExcludeFileAction() {
+        super();
+    }
+
+    public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+    }
+
+    public void run(IAction action) {
+        for (IFile file : selectedFiles) {
             ProjectUtils.exclude(file);
-		}
-		
-		for(IFolder folder : selectedFolders){
-			try{
+        }
+        for (IFolder folder : selectedFolders) {
+            try {
                 ProjectUtils.exclude(folder);
-				excludeFolder( folder);
-			}
-			catch (CoreException x) {
+                excludeFolder(folder);
+            } catch (CoreException x) {
                 Activator.log("error setting exclude property on folder: " + folder.getName(), x);
-			}
-		}
-		/*Refresh project tree when property is changed */ 
-		PlatformUI.getWorkbench().getDecoratorManager().update("org.symbian.tools.wrttools.decorator"); 
-	}
-	
+            }
+        }
+        /*Refresh project tree when property is changed */
+        PlatformUI.getWorkbench().getDecoratorManager().update("org.symbian.tools.wrttools.decorator");
+    }
+
     @SuppressWarnings("rawtypes")
     public void selectionChanged(IAction action, ISelection selection) {
-		selectedFiles.clear();
-		selectedFolders.clear();
-		if (selection instanceof IStructuredSelection) {
-			IStructuredSelection ss = (IStructuredSelection) selection;
-			for (Iterator iter = ss.iterator(); iter.hasNext();) {
-				Object obj = iter.next();
-				if (obj instanceof IFile) {
-					
-					IFile file = (IFile) obj;
-					selectedFiles.add(file);
-					
-				}
-				
-				if(obj instanceof IFolder){
-					IFolder folder = (IFolder) obj;
-					selectedFolders.add(folder);
-				}
-			}
-		}
-	}
-	
-	
-	/**
-	 * 
-	 * @param folder
-	 * @throws CoreException
-	 */
+        selectedFiles.clear();
+        selectedFolders.clear();
+        if (selection instanceof IStructuredSelection) {
+            IStructuredSelection ss = (IStructuredSelection) selection;
+            for (Iterator iter = ss.iterator(); iter.hasNext();) {
+                Object obj = iter.next();
+                if (obj instanceof IFile) {
 
-	private void excludeFolder(IFolder folder) throws CoreException{
-		folder.accept(new IResourceVisitor() {
-			public boolean visit(IResource resource)throws CoreException {
-				if (resource instanceof IFile) {
-					IFile file = (IFile) resource;
+                    IFile file = (IFile) obj;
+                    selectedFiles.add(file);
+
+                }
+
+                if (obj instanceof IFolder) {
+                    IFolder folder = (IFolder) obj;
+                    selectedFolders.add(folder);
+                }
+            }
+        }
+    }
+
+    private void excludeFolder(IFolder folder) throws CoreException {
+        folder.accept(new IResourceVisitor() {
+            public boolean visit(IResource resource) throws CoreException {
+                if (resource instanceof IFile) {
+                    IFile file = (IFile) resource;
                     ProjectUtils.exclude(file);
-				}
-				else if (resource instanceof IFolder) {
-					IFolder folder = (IFolder) resource;
+                } else if (resource instanceof IFolder) {
+                    IFolder folder = (IFolder) resource;
                     ProjectUtils.exclude(folder);
-				}
-				return true;
-			}
-		});
-	}	
+                }
+                return true;
+            }
+        });
+    }
 }

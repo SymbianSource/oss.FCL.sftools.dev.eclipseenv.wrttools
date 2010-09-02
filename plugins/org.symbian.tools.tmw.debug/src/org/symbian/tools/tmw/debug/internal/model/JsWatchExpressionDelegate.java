@@ -23,148 +23,143 @@ import org.symbian.tools.tmw.debug.internal.Activator;
  */
 public class JsWatchExpressionDelegate implements IWatchExpressionDelegate {
 
-  private static final String[] EMPTY_STRINGS = new String[0];
+    private static final String[] EMPTY_STRINGS = new String[0];
 
-  private static final class GoodWatchExpressionResult implements IWatchExpressionResult {
+    private static final class GoodWatchExpressionResult implements IWatchExpressionResult {
 
-    private final Variable variable;
+        private final Variable variable;
 
-    private final String expression;
+        private final String expression;
 
-    private IValue value;
+        private IValue value;
 
-    private DebugException exception;
+        private DebugException exception;
 
-    private GoodWatchExpressionResult(Variable variable, String expression) {
-      this.variable = variable;
-      this.expression = expression;
-    }
-
-    public String[] getErrorMessages() {
-      return exception == null
-          ? EMPTY_STRINGS
-          : new String[] { exception.getStatus().getMessage() };
-    }
-
-    public DebugException getException() {
-      getValue();
-      return exception;
-    }
-
-    public String getExpressionText() {
-      return expression;
-    }
-
-    public synchronized IValue getValue() {
-      if (value == null && exception == null) {
-        try {
-          value = variable.getValue();
-        } catch (DebugException e) {
-          this.exception = e;
+        private GoodWatchExpressionResult(Variable variable, String expression) {
+            this.variable = variable;
+            this.expression = expression;
         }
-      }
-      return value;
-    }
-
-    public boolean hasErrors() {
-      getValue();
-      return exception != null;
-    }
-  }
-
-  private static final class BadWatchExpressionResult implements IWatchExpressionResult {
-
-    private final DebugException exception;
-
-    private final String expressionText;
-
-    private BadWatchExpressionResult(DebugException exception, String expressionText) {
-      this.exception = exception;
-      this.expressionText = expressionText;
-    }
-
-    public String[] getErrorMessages() {
-      return new String[] { exception.getStatus().getMessage() };
-    }
-
-    public DebugException getException() {
-      return exception;
-    }
-
-    public String getExpressionText() {
-      return expressionText;
-    }
-
-    public IValue getValue() {
-      return null;
-    }
-
-    public boolean hasErrors() {
-      return true;
-    }
-  }
-
-  public void evaluateExpression(final String expression, final IDebugElement context,
-      final IWatchExpressionListener listener) {
-    final DebugElementImpl contextImpl = (DebugElementImpl) context;
-    if (!contextImpl.getDebugTarget().isSuspended()) {
-      // can only evaluate while suspended. Notify empty result.
-      listener.watchEvaluationFinished(new IWatchExpressionResult() {
 
         public String[] getErrorMessages() {
-          return EMPTY_STRINGS;
+            if (exception == null) {
+                return EMPTY_STRINGS;
+            } else {
+                return new String[] { exception.getStatus().getMessage() };
+            }
         }
 
         public DebugException getException() {
-          return null;
+            getValue();
+            return exception;
         }
 
         public String getExpressionText() {
-          return expression;
+            return expression;
         }
 
-        public IValue getValue() {
-          return null;
+        public synchronized IValue getValue() {
+            if (value == null && exception == null) {
+                try {
+                    value = variable.getValue();
+                } catch (DebugException e) {
+                    this.exception = e;
+                }
+            }
+            return value;
         }
 
         public boolean hasErrors() {
-          return false;
+            getValue();
+            return exception != null;
         }
-      });
-      return;
     }
 
-    final EvaluateContext evaluateContext =
-        (EvaluateContext) contextImpl.getAdapter(EvaluateContext.class);
-    if (evaluateContext == null) {
-      listener.watchEvaluationFinished(new BadWatchExpressionResult(
-          new DebugException(
-              new Status(Status.ERROR, Activator.PLUGIN_ID, "Bad debug context")), //$NON-NLS-1$
-          expression));
-      return;
+    private static final class BadWatchExpressionResult implements IWatchExpressionResult {
+
+        private final DebugException exception;
+
+        private final String expressionText;
+
+        private BadWatchExpressionResult(DebugException exception, String expressionText) {
+            this.exception = exception;
+            this.expressionText = expressionText;
+        }
+
+        public String[] getErrorMessages() {
+            return new String[] { exception.getStatus().getMessage() };
+        }
+
+        public DebugException getException() {
+            return exception;
+        }
+
+        public String getExpressionText() {
+            return expressionText;
+        }
+
+        public IValue getValue() {
+            return null;
+        }
+
+        public boolean hasErrors() {
+            return true;
+        }
     }
 
-    evaluateContext.getJsEvaluateContext().evaluateAsync(
-        expression,
-        new JsEvaluateContext.EvaluateCallback() {
-          public void success(JsVariable variable) {
-            final Variable var = new Variable(contextImpl.getDebugTarget(), variable, false);
-            listener.watchEvaluationFinished(new GoodWatchExpressionResult(var, expression));
-          }
+    public void evaluateExpression(final String expression, final IDebugElement context,
+            final IWatchExpressionListener listener) {
+        final DebugElementImpl contextImpl = (DebugElementImpl) context;
+        if (!contextImpl.getDebugTarget().isSuspended()) {
+            // can only evaluate while suspended. Notify empty result.
+            listener.watchEvaluationFinished(new IWatchExpressionResult() {
 
-          public void failure(String message) {
-            listener.watchEvaluationFinished(new BadWatchExpressionResult(new DebugException(
-                createErrorStatus(message == null
-                    ? "Error evaluating expression"
-                    : message, null)), expression));
+                public String[] getErrorMessages() {
+                    return EMPTY_STRINGS;
+                }
+
+                public DebugException getException() {
+                    return null;
+                }
+
+                public String getExpressionText() {
+                    return expression;
+                }
+
+                public IValue getValue() {
+                    return null;
+                }
+
+                public boolean hasErrors() {
+                    return false;
+                }
+            });
             return;
-          }
-        },
-        null);
-  }
+        }
 
-  private static Status createErrorStatus(String message, Exception e) {
-    return new Status(Status.ERROR, Activator.PLUGIN_ID, message, e);
-  }
+        final EvaluateContext evaluateContext = (EvaluateContext) contextImpl.getAdapter(EvaluateContext.class);
+        if (evaluateContext == null) {
+            listener.watchEvaluationFinished(new BadWatchExpressionResult(new DebugException(new Status(Status.ERROR,
+                    Activator.PLUGIN_ID, "Bad debug context")), //$NON-NLS-1$
+                    expression));
+            return;
+        }
+
+        evaluateContext.getJsEvaluateContext().evaluateAsync(expression, new JsEvaluateContext.EvaluateCallback() {
+            public void success(JsVariable variable) {
+                final Variable var = new Variable(contextImpl.getDebugTarget(), variable, false);
+                listener.watchEvaluationFinished(new GoodWatchExpressionResult(var, expression));
+            }
+
+            public void failure(String message) {
+                listener.watchEvaluationFinished(new BadWatchExpressionResult(new DebugException(createErrorStatus(
+                        message == null ? "Error evaluating expression" : message, null)), expression));
+                return;
+            }
+        }, null);
+    }
+
+    private static Status createErrorStatus(String message, Exception e) {
+        return new Status(Status.ERROR, Activator.PLUGIN_ID, message, e);
+    }
 
 }

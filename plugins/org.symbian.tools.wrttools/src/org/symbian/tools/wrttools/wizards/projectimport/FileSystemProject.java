@@ -49,7 +49,7 @@ public class FileSystemProject implements ProjectRecord {
 
     /**
      * Create a record for a project based on the info in the file.
-     * 
+     *
      * @param file
      */
     public FileSystemProject(File location) {
@@ -77,9 +77,8 @@ public class FileSystemProject implements ProjectRecord {
     }
 
     /**
-     * Gets the label to be used when rendering this project record in the
-     * UI.
-     * 
+     * Gets the label to be used when rendering this project record in the UI.
+     *
      * @return String the label
      * @since 3.4
      */
@@ -99,7 +98,7 @@ public class FileSystemProject implements ProjectRecord {
     /**
      * Returns whether the given project description file path is in the
      * default location for a project
-     * 
+     *
      * @param path
      *            The path to examine
      * @return Whether the given path is the default location for a project

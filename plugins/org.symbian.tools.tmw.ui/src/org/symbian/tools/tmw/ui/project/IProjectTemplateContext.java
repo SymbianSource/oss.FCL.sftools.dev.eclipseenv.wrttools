@@ -24,7 +24,7 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 
 /**
  * Provides template values.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IProjectTemplateContext extends IProjectSetupConfig {
@@ -35,7 +35,7 @@ public interface IProjectTemplateContext extends IProjectSetupConfig {
 
     /**
      * @param parameter name of the parameter
-     * @return parameter value. In most cases parameters will be string values 
+     * @return parameter value. In most cases parameters will be string values
      * but template developers can use any types
      */
     Object getParameter(String parameter);
@@ -49,7 +49,7 @@ public interface IProjectTemplateContext extends IProjectSetupConfig {
 
     /**
      * Allows binding to parameter value from UI.
-     * 
+     *
      * @param name parameter value
      * @return observable that may be used to bind value
      */

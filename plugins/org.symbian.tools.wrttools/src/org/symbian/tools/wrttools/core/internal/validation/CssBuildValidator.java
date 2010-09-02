@@ -36,93 +36,81 @@ import org.w3c.css.util.ApplContext;
 import org.w3c.css.util.Warning;
 
 public class CssBuildValidator extends AbstractValidator {
+    @Override
+    public ValidationResult validate(IResource resource, int kind, ValidationState state, IProgressMonitor monitor) {
+        return main(resource.getLocationURI().toString(), resource);
+    }
 
-	@Override
-	public ValidationResult validate(IResource resource, int kind,
-			ValidationState state, IProgressMonitor monitor) {
-		return main(resource.getLocationURI().toString(), resource);
-	}
+    public ValidationResult main(String uri, IResource resource) {
+        String language = "en";
+        String profile = "css3"; // css2, css21 (default), css3, svg, svgbasic,
+        // svgtiny, atsc-tv, mobile, tv
+        String medium = ""; // (default), aural, braille, embossed,
+        // handheld, print, projection, screen,
+        // tty, tv, presentation
+        int warningLevel = 2; // -1 (no warning), 0, 1, 2 (default, all the
+        // warnings)
 
-	public ValidationResult main(String uri, IResource resource) {
-		String language = "en";
-		String profile = "css3"; // css2, css21 (default), css3, svg, svgbasic,
-		// svgtiny, atsc-tv, mobile, tv
-		String medium = ""; // (default), aural, braille, embossed,
-		// handheld, print, projection, screen,
-		// tty, tv, presentation
-		int warningLevel = 2; // -1 (no warning), 0, 1, 2 (default, all the
-		// warnings)
+        // first, we get the parameters and create an application context
+        ApplContext ac = new ApplContext(language);
 
-		// first, we get the parameters and create an application context
-		ApplContext ac = new ApplContext(language);
+        if (profile != null && !"none".equals(profile)) {
+            if ("css1".equals(profile) || "css2".equals(profile) || "css21".equals(profile) || "css3".equals(profile)
+                    || "svg".equals(profile) || "svgbasic".equals(profile) || "svgtiny".equals(profile)) {
+                ac.setCssVersion(profile);
+            } else {
+                ac.setProfile(profile);
+                ac.setCssVersion(PropertiesLoader.config.getProperty("defaultProfile"));
+            }
+        } else {
+            ac.setProfile(profile);
+            ac.setCssVersion(PropertiesLoader.config.getProperty("defaultProfile"));
+        }
 
-		if (profile != null && !"none".equals(profile)) {
-			if ("css1".equals(profile) || "css2".equals(profile)
-					|| "css21".equals(profile) || "css3".equals(profile)
-					|| "svg".equals(profile) || "svgbasic".equals(profile)
-					|| "svgtiny".equals(profile)) {
-				ac.setCssVersion(profile);
-			} else {
-				ac.setProfile(profile);
-				ac.setCssVersion(PropertiesLoader.config
-						.getProperty("defaultProfile"));
-			}
-		} else {
-			ac.setProfile(profile);
-			ac.setCssVersion(PropertiesLoader.config
-					.getProperty("defaultProfile"));
-		}
+        // medium to use
+        ac.setMedium(medium);
 
-		// medium to use
-		ac.setMedium(medium);
+        // HTML document
+        try {
+            DocumentParser urlParser = new DocumentParser(ac, uri);
 
-		// HTML document
-		try {
-			DocumentParser URLparser = new DocumentParser(ac, uri);
+            return handleRequest(ac, uri, urlParser.getStyleSheet(), warningLevel, true, resource);
+        } catch (Exception e) {
+            Activator.log(e);
+        }
+        return null;
+    }
 
-			return handleRequest(ac, uri, URLparser.getStyleSheet(),
-					warningLevel, true, resource);
-		} catch (Exception e) {
-			Activator.log(e);
-		}
-		return null;
-	}
+    private ValidationResult handleRequest(ApplContext ac, String title, StyleSheet styleSheet, int warningLevel,
+            boolean errorReport, IResource resource) throws Exception {
 
-	private ValidationResult handleRequest(ApplContext ac, String title,
-			StyleSheet styleSheet, int warningLevel,
-			boolean errorReport, IResource resource) throws Exception {
+        if (styleSheet == null) {
+            throw new IOException(ac.getMsg().getServletString("process") + " " + title);
+        }
 
-		if (styleSheet == null) {
-			throw new IOException(ac.getMsg().getServletString("process") + " "
-					+ title);
-		}
+        styleSheet.findConflicts(ac);
+        ValidationResult result = new ValidationResult();
+        CssError[] errors = styleSheet.getErrors().getErrors();
+        for (CssError cssError : errors) {
+            String msg = cssError.getException().getLocalizedMessage();
+            if (msg != null && msg.trim().length() > 0) {
+                ValidatorMessage message = createMessage(resource, cssError.getLine(), msg, IMarker.SEVERITY_WARNING);
+                result.add(message);
+            }
+        }
+        Warning[] warnings = styleSheet.getWarnings().getWarnings();
+        for (Warning warning : warnings) {
+            ValidatorMessage message = createMessage(resource, warning.getLine(), warning.getWarningMessage(),
+                    IMarker.SEVERITY_WARNING);
+            result.add(message);
+        }
+        return result;
+    }
 
-		styleSheet.findConflicts(ac);
-		ValidationResult result = new ValidationResult();
-		CssError[] errors = styleSheet.getErrors().getErrors();
-		for (CssError cssError : errors) {
-			String msg = cssError.getException().getLocalizedMessage();
-			if (msg != null && msg.trim().length() > 0) {
-				ValidatorMessage message = createMessage(resource, cssError
-						.getLine(), msg, IMarker.SEVERITY_WARNING);
-				result.add(message);
-			}
-		}
-		Warning[] warnings = styleSheet.getWarnings().getWarnings();
-		for (Warning warning : warnings) {
-			ValidatorMessage message = createMessage(resource, warning
-					.getLine(), warning.getWarningMessage(),
-					IMarker.SEVERITY_WARNING);
-			result.add(message);
-		}
-		return result;
-	}
-
-	private ValidatorMessage createMessage(IResource resource, int line,
-			String msg, int severity) {
-		ValidatorMessage message = ValidatorMessage.create(msg, resource);
-		message.setAttribute(IMarker.LINE_NUMBER, line);
-		message.setAttribute(IMarker.SEVERITY, severity);
-		return message;
-	}
+    private ValidatorMessage createMessage(IResource resource, int line, String msg, int severity) {
+        ValidatorMessage message = ValidatorMessage.create(msg, resource);
+        message.setAttribute(IMarker.LINE_NUMBER, line);
+        message.setAttribute(IMarker.SEVERITY, severity);
+        return message;
+    }
 }

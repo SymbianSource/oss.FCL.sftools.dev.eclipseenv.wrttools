@@ -26,17 +26,17 @@ import org.eclipse.wst.jsdt.internal.ui.javaeditor.JavaEditor;
 
 @SuppressWarnings("restriction")
 public class WorkspaceLineBreakpointAdapter extends LineBreakpointAdapter {
-	@Override
-	protected ITextEditor getEditor(IWorkbenchPart part) {
-		if (part instanceof JavaEditor) {
-			return (ITextEditor) part;
-		} else {
-			return null;
-		}
-	}
+    @Override
+    protected ITextEditor getEditor(IWorkbenchPart part) {
+        if (part instanceof JavaEditor) {
+            return (ITextEditor) part;
+        } else {
+            return null;
+        }
+    }
 
     @Override
     protected String getDebugModelId() {
-      return VProjectWorkspaceBridge.DEBUG_MODEL_ID;
+        return VProjectWorkspaceBridge.DEBUG_MODEL_ID;
     }
 }

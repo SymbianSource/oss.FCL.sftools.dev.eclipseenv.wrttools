@@ -92,13 +92,7 @@ import org.symbian.tools.wrttools.util.ProjectUtils;
 
 @SuppressWarnings({ "restriction", "unchecked", "rawtypes" })
 public class WrtProjectLocationWizardPage extends WizardPage implements IOverwriteQuery {
-
-    /**
-     * @since 3.5
-     * 
-     */
     private final class ProjectLabelProvider extends LabelProvider implements IColorProvider {
-
         public Color getBackground(Object element) {
             return null;
         }
@@ -132,16 +126,12 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
     // the wizard was invoked.
     private static String previouslyBrowsedDirectory = ""; //$NON-NLS-1$
 
-    private final static String STORE_ARCHIVE_SELECTED = "WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"; //$NON-NLS-1$
+    private static final String STORE_ARCHIVE_SELECTED = "WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"; //$NON-NLS-1$
 
     private Text archivePathField;
-
     private Button browseArchivesButton;
-
     private Button browseDirectoriesButton;
-
-    List createdProjects;
-
+    private List createdProjects;
     private Text directoryPathField;
 
     // The last time that the file or folder at the selected path was modified
@@ -160,7 +150,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * The import structure provider.
-     * 
+     *
      * @since 3.4
      */
     private ILeveledImportStructureProvider structureProvider;
@@ -189,7 +179,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Collect the list of .project files that are under directory into files.
-     * 
+     *
      * @param files
      * @param directory
      * @param directoriesVisited
@@ -253,7 +243,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Collect the list of .project files that are under directory into files.
-     * 
+     *
      * @param files
      * @param monitor
      *            The monitor to report to
@@ -292,13 +282,6 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
-     * .Composite)
-     */
     public void createControl(Composite parent) {
 
         initializeDialogUnits(parent);
@@ -319,7 +302,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Create the project described in record. If it is successful return true.
-     * 
+     *
      * @param record
      * @return boolean <code>true</code> if successful
      * @throws InterruptedException
@@ -348,7 +331,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Create the selected projects
-     * 
+     *
      * @return boolean <code>true</code> if all project creations were
      *         successful.
      */
@@ -397,7 +380,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Create the checkbox list for the found projects.
-     * 
+     *
      * @param workArea
      */
     private void createProjectsList(Composite workArea) {
@@ -421,67 +404,24 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         gridData.heightHint = new PixelConverter(projectsList.getControl()).convertHeightInCharsToPixels(10);
         projectsList.getControl().setLayoutData(gridData);
         projectsList.setContentProvider(new ITreeContentProvider() {
-
-            /*
-             * (non-Javadoc)
-             * 
-             * @see org.eclipse.jface.viewers.IContentProvider#dispose()
-             */
             public void dispose() {
-
             }
-
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java
-             * .lang.Object)
-             */
             public Object[] getChildren(Object parentElement) {
                 return null;
             }
 
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.jface.viewers.IStructuredContentProvider#getElements
-             * (java.lang.Object)
-             */
             public Object[] getElements(Object inputElement) {
                 return getProjectRecords();
             }
 
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.jface.viewers.ITreeContentProvider#getParent(java
-             * .lang.Object)
-             */
             public Object getParent(Object element) {
                 return null;
             }
 
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java
-             * .lang.Object)
-             */
             public boolean hasChildren(Object element) {
                 return false;
             }
 
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse
-             * .jface.viewers.Viewer, java.lang.Object, java.lang.Object)
-             */
             public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
             }
 
@@ -490,13 +430,6 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         projectsList.setLabelProvider(new ProjectLabelProvider());
 
         projectsList.addCheckStateListener(new ICheckStateListener() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.jface.viewers.ICheckStateListener#checkStateChanged
-             * (org.eclipse.jface.viewers.CheckStateChangedEvent)
-             */
             public void checkStateChanged(CheckStateChangedEvent event) {
                 ProjectRecord element = (ProjectRecord) event.getElement();
                 if (element.hasConflicts()) {
@@ -513,7 +446,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Create the area where you select the root directory for the projects.
-     * 
+     *
      * @param workArea
      *            Composite
      */
@@ -565,12 +498,6 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         browseArchivesButton.setEnabled(false);
 
         browseDirectoriesButton.addSelectionListener(new SelectionAdapter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see org.eclipse.swt.events.SelectionAdapter#widgetS
-             * elected(org.eclipse.swt.events.SelectionEvent)
-             */
             public void widgetSelected(SelectionEvent e) {
                 handleLocationDirectoryButtonPressed();
             }
@@ -578,13 +505,6 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         });
 
         browseArchivesButton.addSelectionListener(new SelectionAdapter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
-             * .swt.events.SelectionEvent)
-             */
             public void widgetSelected(SelectionEvent e) {
                 handleLocationArchiveButtonPressed();
             }
@@ -592,32 +512,15 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         });
 
         directoryPathField.addTraverseListener(new TraverseListener() {
-
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.TraverseListener#keyTraversed(org.eclipse
-             * .swt.events.TraverseEvent)
-             */
             public void keyTraversed(TraverseEvent e) {
                 if (e.detail == SWT.TRAVERSE_RETURN) {
                     e.doit = false;
                     updateProjectsList(directoryPathField.getText().trim());
                 }
             }
-
         });
 
         directoryPathField.addFocusListener(new FocusAdapter() {
-
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.FocusListener#focusLost(org.eclipse.swt
-             * .events.FocusEvent)
-             */
             public void focusLost(org.eclipse.swt.events.FocusEvent e) {
                 updateProjectsList(directoryPathField.getText().trim());
             }
@@ -625,14 +528,6 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         });
 
         archivePathField.addTraverseListener(new TraverseListener() {
-
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.TraverseListener#keyTraversed(org.eclipse
-             * .swt.events.TraverseEvent)
-             */
             public void keyTraversed(TraverseEvent e) {
                 if (e.detail == SWT.TRAVERSE_RETURN) {
                     e.doit = false;
@@ -643,39 +538,18 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         });
 
         archivePathField.addFocusListener(new FocusAdapter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.FocusListener#focusLost(org.eclipse.swt
-             * .events.FocusEvent)
-             */
             public void focusLost(org.eclipse.swt.events.FocusEvent e) {
                 updateProjectsList(archivePathField.getText().trim());
             }
         });
 
         projectFromDirectoryRadio.addSelectionListener(new SelectionAdapter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse
-             * .swt.events.SelectionEvent)
-             */
             public void widgetSelected(SelectionEvent e) {
                 directoryRadioSelected();
             }
         });
 
         projectFromArchiveRadio.addSelectionListener(new SelectionAdapter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse
-             * .swt.events.SelectionEvent)
-             */
             public void widgetSelected(SelectionEvent e) {
                 archiveRadioSelected();
             }
@@ -684,7 +558,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Create the selection buttons in the listComposite.
-     * 
+     *
      * @param listComposite
      */
     private void createSelectionButtons(Composite listComposite) {
@@ -716,15 +590,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         Button deselectAll = new Button(buttonsComposite, SWT.PUSH);
         deselectAll.setText(DataTransferMessages.DataTransfer_deselectAll);
         deselectAll.addSelectionListener(new SelectionAdapter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
-             * .swt.events.SelectionEvent)
-             */
             public void widgetSelected(SelectionEvent e) {
-
                 projectsList.setCheckedElements(new Object[0]);
                 setPageComplete(false);
             }
@@ -735,13 +601,6 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         Button refresh = new Button(buttonsComposite, SWT.PUSH);
         refresh.setText(DataTransferMessages.DataTransfer_refresh);
         refresh.addSelectionListener(new SelectionAdapter() {
-            /*
-             * (non-Javadoc)
-             * 
-             * @see
-             * org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse
-             * .swt.events.SelectionEvent)
-             */
             public void widgetSelected(SelectionEvent e) {
                 if (projectFromDirectoryRadio.getSelection()) {
                     updateProjectsList(directoryPathField.getText().trim());
@@ -767,7 +626,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Display an error dialog with the specified message.
-     * 
+     *
      * @param message
      *            the error message
      */
@@ -784,7 +643,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Method used for test suite.
-     * 
+     *
      * @return Button the Import from Directory RadioButton
      */
     public Button getProjectFromDirectoryRadio() {
@@ -796,9 +655,9 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
      * workspace or archive, selected by the user. If a project with the same
      * name exists in both the source workspace and the current workspace, then
      * the hasConflicts flag would be set on that project record.
-     * 
+     *
      * Method declared public for test suite.
-     * 
+     *
      * @return ProjectRecord[] array of projects that can be imported into the
      *         workspace
      */
@@ -815,7 +674,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Retrieve all the projects in the current workspace.
-     * 
+     *
      * @return IProject[] array of IProject in the current workspace
      */
     private IProject[] getProjectsInWorkspace() {
@@ -827,7 +686,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Method used for test suite.
-     * 
+     *
      * @return CheckboxTreeViewer the viewer containing all the projects found
      */
     public CheckboxTreeViewer getProjectsList() {
@@ -941,7 +800,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
 
     /**
      * Determine if the project with the given name is in the current workspace.
-     * 
+     *
      * @param projectName
      *            String the project name to check
      * @return boolean true if the project with the given name is in this
@@ -971,7 +830,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
      * The <code>WizardDataTransfer</code> implementation of this
      * <code>IOverwriteQuery</code> method asks the user whether the existing
      * resource at the given path should be overwritten.
-     * 
+     *
      * @param pathString
      * @return the user's reply: one of <code>"YES"</code>, <code>"NO"</code>,
      *         <code>"ALL"</code>, or <code>"CANCEL"</code>
@@ -1017,7 +876,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
      * Use the dialog store to restore widget values to the values that they
      * held last time this wizard was used to completion, or alternatively, if
      * an initial path is specified, use it to select values.
-     * 
+     *
      * Method declared public only for use of tests.
      */
     public void restoreWidgetValues() {
@@ -1046,7 +905,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
     /**
      * Since Finish was pressed, write widget values to the dialog store so that
      * they will persist into the next invocation of this wizard page.
-     * 
+     *
      * Method declared public only for use of tests.
      */
     public void saveWidgetValues() {
@@ -1073,7 +932,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
     /**
      * Update the list of projects based on path. Method declared public only
      * for test suite.
-     * 
+     *
      * @param path
      */
     public void updateProjectsList(final String path) {
@@ -1104,14 +963,6 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
         final boolean dirSelected = this.projectFromDirectoryRadio.getSelection();
         try {
             getContainer().run(true, true, new IRunnableWithProgress() {
-
-                /*
-                 * (non-Javadoc)
-                 * 
-                 * @see
-                 * org.eclipse.jface.operation.IRunnableWithProgress#run(org
-                 * .eclipse.core.runtime.IProgressMonitor)
-                 */
                 public void run(IProgressMonitor monitor) {
 
                     monitor.beginTask(DataTransferMessages.WizardProjectsImportPage_SearchingMessage, 100);
@@ -1157,10 +1008,7 @@ public class WrtProjectLocationWizardPage extends WizardPage implements IOverwri
                         while (filesIterator.hasNext()) {
                             selectedProjects[index++] = (ProjectRecord) filesIterator.next();
                         }
-                    }
-
-                    else if (dirSelected && directory.isDirectory()) {
-
+                    } else if (dirSelected && directory.isDirectory()) {
                         if (!collectProjectFilesFromDirectory(files, directory, null, monitor)) {
                             return;
                         }

@@ -217,10 +217,10 @@ public class WorkspaceResourcesServlet extends HttpServlet {
         return null;
     }
 
-    private transient final Providers providers = new Providers();
+    private final transient Providers providers = new Providers();
 
     private void copyData(InputStream contents, OutputStream ouput) throws IOException {
-        byte[] buf = new byte[4048];
+        byte[] buf = new byte[4096];
         int i;
         while ((i = contents.read(buf)) >= 0) {
             ouput.write(buf, 0, i);

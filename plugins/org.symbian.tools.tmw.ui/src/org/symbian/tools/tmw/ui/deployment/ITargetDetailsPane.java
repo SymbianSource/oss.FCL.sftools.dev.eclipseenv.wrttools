@@ -24,11 +24,11 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Objects of this class provide UI for the users to visualize or configure
- * their deployment targets. This object will not be reused between wizard 
+ * their deployment targets. This object will not be reused between wizard
  * deployment wizard restarts.
- * There will be one instance for the target type. This object will not be 
+ * There will be one instance for the target type. This object will not be
  * instantiated for each target.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface ITargetDetailsPane {

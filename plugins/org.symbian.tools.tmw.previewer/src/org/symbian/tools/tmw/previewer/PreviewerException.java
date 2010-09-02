@@ -28,7 +28,7 @@ public class PreviewerException extends CoreException {
     public PreviewerException(String message) {
         this(message, null);
     }
-    
+
     public PreviewerException(String message, Exception exception) {
         super(new Status(IStatus.ERROR, PreviewerPlugin.PLUGIN_ID, message, exception));
     }

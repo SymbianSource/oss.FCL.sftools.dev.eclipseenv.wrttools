@@ -25,12 +25,12 @@ import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 /**
  * This interface is for deployment targets providers.
- * 
+ *
  * @author Eugene
  */
 public interface IDeploymentTargetType {
     /**
-     * Returns list of the targets that accept provided project. Project 
+     * Returns list of the targets that accept provided project. Project
      * cannot be <code>null</code>.
      * @return List of the valid deployment targets. Both <code>null</code> and
      * empty array are a valid return value when there are no available targets.
@@ -44,21 +44,21 @@ public interface IDeploymentTargetType {
     void discoverTargets(IProgressMonitor monitor) throws CoreException;
 
     /**
-     * Find target based on project and target ID. This method returns 
+     * Find target based on project and target ID. This method returns
      * <code>null</code> if target with given ID cannot be found or if
      * the target does not accept project any longer.
      */
     IDeploymentTarget findTarget(ITMWProject project, String id);
 
     /**
-     * Return <code>false</code> if user needs to trigger long-running 
+     * Return <code>false</code> if user needs to trigger long-running
      * discovery to see all potential deployment targets.
      */
     boolean targetsDiscovered();
 
     /**
      * @param target that will be used by a {@link org.eclipse.core.runtime.jobs.Job}
-     * @return scheduling rule that will be used to properly schedule jobs to 
+     * @return scheduling rule that will be used to properly schedule jobs to
      * avoid resource access conflicts. Can be <code>null</code>
      */
     ISchedulingRule getSchedulingRule(IDeploymentTarget target);

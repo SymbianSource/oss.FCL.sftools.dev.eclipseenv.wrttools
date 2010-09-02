@@ -24,49 +24,33 @@ import java.net.ServerSocket;
 import org.symbian.tools.tmw.debug.internal.Activator;
 
 public abstract class PortPolicy {
-    //	private static class ReuseSamePort extends PortPolicy {
-    //		private int port = -1;
-    //
-    //		@Override
-    //		protected int getPort() {
-    //			if (port < 0) {
-    //				port = getOpenPort();
-    //			}
-    //			return port;
-    //		}
-    //	}
+    private static class NewPortEachTime extends PortPolicy {
+        @Override
+        protected int getPort() {
+            return getOpenPort();
+        }
+    }
 
-	private static class NewPortEachTime extends PortPolicy {
-		@Override
-		protected int getPort() {
-			return getOpenPort();
-		}
-	}
+    public static final PortPolicy INSTANCE;
+    static {
+        INSTANCE = new NewPortEachTime();
+    }
 
-	public static final PortPolicy INSTANCE;
-	static {
-        //		if (CoreUtil.isMac()) {
-			INSTANCE = new NewPortEachTime();
-        //		} else {
-        //			INSTANCE = new ReuseSamePort();
-        //		}
-	}
+    public static synchronized int getPortNumber() {
+        return INSTANCE.getPort();
+    }
 
-	public static synchronized int getPortNumber() {
-		return INSTANCE.getPort();
-	}
+    public int getOpenPort() {
+        try {
+            final ServerSocket socket = new ServerSocket(0);
+            int port = socket.getLocalPort();
+            socket.close();
+            return port;
+        } catch (IOException e) {
+            Activator.log(e);
+            return 7222;
+        }
+    }
 
-	public int getOpenPort() {
-		try {
-			final ServerSocket socket = new ServerSocket(0);
-			int port = socket.getLocalPort();
-			socket.close();
-			return port;
-		} catch (IOException e) {
-			Activator.log(e);
-			return 7222;
-		}
-	}
-
-	protected abstract int getPort();
+    protected abstract int getPort();
 }

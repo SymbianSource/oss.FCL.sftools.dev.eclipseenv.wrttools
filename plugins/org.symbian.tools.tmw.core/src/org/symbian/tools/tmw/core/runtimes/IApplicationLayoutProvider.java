@@ -26,10 +26,10 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 
 /**
- * This interface provides application structure as it will be used in web 
+ * This interface provides application structure as it will be used in web
  * runtime. Note that project layout may not directly correspond to application
  * layout.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IApplicationLayoutProvider {
@@ -42,12 +42,12 @@ public interface IApplicationLayoutProvider {
     /**
      * @param path path relative to application root
      * @return workspace resource
-     * @throws CoreException if cannot access resource contents 
+     * @throws CoreException if cannot access resource contents
      */
     InputStream getResourceFromPath(IProject project, IPath path) throws CoreException;
 
     /**
-     * @return workspace file that corresponds to applicationPath or 
+     * @return workspace file that corresponds to applicationPath or
      * <code>null</code> if none
      */
     IFile getWorkspaceFile(IProject project, IPath applicationPath) throws CoreException;

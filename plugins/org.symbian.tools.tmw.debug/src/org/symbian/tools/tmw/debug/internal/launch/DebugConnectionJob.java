@@ -39,99 +39,92 @@ import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.previewer.http.IPreviewStartupListener;
 
 public class DebugConnectionJob implements IPreviewStartupListener {
-	static final NamedConnectionLoggerFactory NO_CONNECTION_LOGGER_FACTORY = new NamedConnectionLoggerFactory() {
-		public ConnectionLogger createLogger(String title) {
-			return null;
-		}
-	};
-	private final int port;
-	private final ILaunch launch;
-	private final IProject project;
+    static final NamedConnectionLoggerFactory NO_CONNECTION_LOGGER_FACTORY = new NamedConnectionLoggerFactory() {
+        public ConnectionLogger createLogger(String title) {
+            return null;
+        }
+    };
+    private final int port;
+    private final ILaunch launch;
+    private final IProject project;
 
-	public DebugConnectionJob(IProject project, final int port,
-			final ILaunch launch) {
-		if (Activator.DEBUG_CONNECTION) {
-			System.out.println("Debugging " + project.getName() + " on port "
-					+ port + ", launch: " + launch.getLaunchConfiguration());
-		}
-		this.project = project;
-		this.port = port;
-		this.launch = launch;
-	}
+    public DebugConnectionJob(IProject project, final int port, final ILaunch launch) {
+        if (Activator.DEBUG_CONNECTION) {
+            System.out.println("Debugging " + project.getName() + " on port " + port + ", launch: "
+                    + launch.getLaunchConfiguration());
+        }
+        this.project = project;
+        this.port = port;
+        this.launch = launch;
+    }
 
-	protected ConnectionToRemote createConnectionToRemote(int port,
-			ILaunch launch, URI uri) throws CoreException {
-		return JavascriptVmEmbedderFactory.connectToChromeDevTools(port,
-				NO_CONNECTION_LOGGER_FACTORY, new WidgetTabSelector(uri));
-	}
+    protected ConnectionToRemote createConnectionToRemote(int port, ILaunch launch, URI uri) throws CoreException {
+        return JavascriptVmEmbedderFactory.connectToChromeDevTools(port, NO_CONNECTION_LOGGER_FACTORY,
+                new WidgetTabSelector(uri));
+    }
 
-	private static void terminateTarget(DebugTargetImpl target) {
-		target.setDisconnected(true);
-		target.fireTerminateEvent();
-	}
+    private static void terminateTarget(DebugTargetImpl target) {
+        target.setDisconnected(true);
+        target.fireTerminateEvent();
+    }
 
     public boolean browserRunning(URI uri, String sId) throws CoreException {
-		if (Activator.DEBUG_CONNECTION) {
-			System.out.println("Browser running, connecting @" + hashCode());
-		}
-		DestructingGuard destructingGuard = new DestructingGuard();
-		try {
-			JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(
-					port, launch, uri);
-			Destructable lauchDestructor = new Destructable() {
-				public void destruct() {
-					if (!launch.hasChildren()) {
-						DebugPlugin.getDefault().getLaunchManager()
-								.removeLaunch(launch);
-					}
-				}
-			};
-			if (Activator.DEBUG_CONNECTION) {
-				System.out.println("Setting up 1@" + hashCode());
-			}
-			destructingGuard.addValue(lauchDestructor);
+        if (Activator.DEBUG_CONNECTION) {
+            System.out.println("Browser running, connecting @" + hashCode());
+        }
+        DestructingGuard destructingGuard = new DestructingGuard();
+        try {
+            JavascriptVmEmbedder.ConnectionToRemote remoteServer = createConnectionToRemote(port, launch, uri);
+            Destructable lauchDestructor = new Destructable() {
+                public void destruct() {
+                    if (!launch.hasChildren()) {
+                        DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
+                    }
+                }
+            };
+            if (Activator.DEBUG_CONNECTION) {
+                System.out.println("Setting up 1@" + hashCode());
+            }
+            destructingGuard.addValue(lauchDestructor);
 
-			WorkspaceBridge.Factory bridgeFactory = new WRTProjectWorkspaceBridge.Factory(
-					project);
-			final DebugTargetImpl target = new DebugTargetImpl(launch,
-					bridgeFactory);
-			if (Activator.DEBUG_CONNECTION) {
-				System.out.println("Setting up 2@" + hashCode());
-			}
+            WorkspaceBridge.Factory bridgeFactory = new WRTProjectWorkspaceBridge.Factory(project);
+            final DebugTargetImpl target = new DebugTargetImpl(launch, bridgeFactory);
+            if (Activator.DEBUG_CONNECTION) {
+                System.out.println("Setting up 2@" + hashCode());
+            }
 
-			Destructable targetDestructor = new Destructable() {
-				public void destruct() {
-					terminateTarget(target);
-				}
-			};
-			destructingGuard.addValue(targetDestructor);
+            Destructable targetDestructor = new Destructable() {
+                public void destruct() {
+                    terminateTarget(target);
+                }
+            };
+            destructingGuard.addValue(targetDestructor);
 
-			if (Activator.DEBUG_CONNECTION) {
-				System.out.println("Setting up 3@" + hashCode());
-			}
-			boolean attached = target.attach(remoteServer, destructingGuard,
-					null, new NullProgressMonitor());
-			if (Activator.DEBUG_CONNECTION) {
-				System.out.printf("Is attached: %b, @%d\n", attached, hashCode());
-			}
-			if (!attached) {
-				// Error
-				return false;
-			}
+            if (Activator.DEBUG_CONNECTION) {
+                System.out.println("Setting up 3@" + hashCode());
+            }
+            boolean attached = target.attach(remoteServer, destructingGuard, null, new NullProgressMonitor());
+            if (Activator.DEBUG_CONNECTION) {
+                System.out.printf("Is attached: %b, @%d\n", attached, hashCode());
+            }
+            if (!attached) {
+                // Error
+                return false;
+            }
 
-			launch.addDebugTarget(target);
+            launch.addDebugTarget(target);
             launch.setAttribute("http.service.id", sId);
-			// All OK
-			destructingGuard.discharge();
+            // All OK
+            destructingGuard.discharge();
             addResourceListenerIfNotInstalled();
-		} catch (CoreException e) {
-			DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
-			throw e;
-		} finally {
-			destructingGuard.doFinally();
-		}
-		return true;
-	}
+        } catch (CoreException e) {
+            DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
+            throw e;
+        } finally {
+            destructingGuard.doFinally();
+        }
+        return true;
+    }
 
     private static boolean listenerAdded = false;
 

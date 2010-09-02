@@ -27,22 +27,23 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.symbian.tools.tmw.core.projects.ITMWProject;
 
 /**
- * Packager creates a runtime-specific application package that can be 
+ * Packager creates a runtime-specific application package that can be
  * deployed to compatible targets.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IPackager {
     /**
      * Synchronously packages application for the specified runtime.
-     * 
+     *
      * @return {@link File} denoting location of the application package that can be deployed to targets
      */
     File packageApplication(ITMWProject project, IProgressMonitor monitor)
             throws CoreException;
 
     /**
-     * @return application package root-relative path where the workspace resource will be packaged. Can be <code>null</code>.
+     * @return application package root-relative path where the workspace resource will be packaged.
+     * Can be <code>null</code>.
      */
     IPath getPathInPackage(IResource resource);
 

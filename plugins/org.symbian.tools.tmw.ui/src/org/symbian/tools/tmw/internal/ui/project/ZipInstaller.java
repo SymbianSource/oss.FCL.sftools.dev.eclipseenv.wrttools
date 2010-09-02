@@ -61,7 +61,7 @@ import org.symbian.tools.tmw.ui.project.ITemplateInstaller;
 
 /**
  * Initializes project with zip archive contents
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public class ZipInstaller implements ITemplateInstaller {

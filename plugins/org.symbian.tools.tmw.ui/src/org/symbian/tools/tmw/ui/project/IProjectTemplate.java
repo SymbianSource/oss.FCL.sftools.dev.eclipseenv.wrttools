@@ -29,12 +29,12 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 /**
  * This interface will allow extending new mobile web application wizard
  * with "smart" templates that have complex logic.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IProjectTemplate {
     /**
-     * Attributes that are common for different templates for different 
+     * Attributes that are common for different templates for different
      * runtimes. They are included here to improve compatibility and reuse.
      */
     public interface CommonKeys {
@@ -47,9 +47,9 @@ public interface IProjectTemplate {
     }
 
     /**
-     * @return template "weight" that determines how high the template will 
+     * @return template "weight" that determines how high the template will
      * be in a templates list. This is purely for visualization as IDE vendors
-     * might want more basic templates higher in the list to improve the 
+     * might want more basic templates higher in the list to improve the
      * learning curve.
      */
     int getWeight();

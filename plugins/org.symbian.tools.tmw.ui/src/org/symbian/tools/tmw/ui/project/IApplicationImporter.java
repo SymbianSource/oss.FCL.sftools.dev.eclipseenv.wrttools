@@ -31,22 +31,22 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 /**
  * Classes implementing this interface help create projects from application
  * archives.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public interface IApplicationImporter {
     /**
-     * Importer can support only one runtime (i.e. several extensions need to 
-     * be contributed for several runtimes). 
-     * 
-     * @param file application package 
+     * Importer can support only one runtime (i.e. several extensions need to
+     * be contributed for several runtimes).
+     *
+     * @param file application package
      * @return runtime that created project should target. <code>null</code> if
      * this importer can't import the file.
      */
     IMobileWebRuntime getApplicationRuntime(File file);
 
     /**
-     * @return filters that users can use to navigate filesystem. They are 
+     * @return filters that users can use to navigate filesystem. They are
      * returned as "file extension-description" pairs
      * @see org.eclipse.swt.widgets.FileDialog#setFilterExtensions(String[])
      * @see org.eclipse.swt.widgets.FileDialog#setFilterNames(String[])
@@ -62,7 +62,7 @@ public interface IApplicationImporter {
 
     /**
      * Extracts files from application archive to workspace project
-     * 
+     *
      * @param file mobile web application archive
      * @param runtime mobile web runtime
      * @param project workspace project

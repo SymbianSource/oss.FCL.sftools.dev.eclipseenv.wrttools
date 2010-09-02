@@ -39,10 +39,10 @@ import org.symbian.tools.wrttools.util.ProjectUtils;
 
 @SuppressWarnings("restriction")
 public class ArchivedProject implements ProjectRecord {
-    public boolean hasConflicts;
-    public int level;
-    public Object parent;
-    public Object dotProject;
+    private boolean hasConflicts;
+    private final int level;
+    private final Object parent;
+    private final Object dotProject;
     private String projectName;
     private final ILeveledImportStructureProvider provider;
     private IProjectDescription description;
@@ -68,7 +68,7 @@ public class ArchivedProject implements ProjectRecord {
 
     /**
      * Get the name of the project
-     * 
+     *
      * @return String
      */
     public String getProjectName() {

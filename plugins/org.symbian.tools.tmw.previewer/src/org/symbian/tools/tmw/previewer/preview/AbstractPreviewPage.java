@@ -36,8 +36,7 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
             toggleRefresh();
         };
     };
-
-    protected IProject project;
+    private IProject project;
     private Browser browser;
     private boolean toggleState = true;
     private final PreviewView previewView;
@@ -169,7 +168,11 @@ public abstract class AbstractPreviewPage extends Page implements IPreviewPage, 
     }
 
     private String getToggleActionTooltip() {
-        return toggleState ? "Disable preview autorefresh" : "Enable preview autorefresh";
+        if (toggleState) {
+            return "Disable preview autorefresh";
+        } else {
+            return "Enable preview autorefresh";
+        }
     }
 
     public void addSelectionChangedListener(ISelectionChangedListener listener) {

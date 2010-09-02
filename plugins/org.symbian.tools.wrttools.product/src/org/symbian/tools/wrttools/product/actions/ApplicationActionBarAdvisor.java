@@ -11,25 +11,24 @@ import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
 public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
-    
+
     public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
-		super(configurer);
-		// TODO Auto-generated constructor stub
-	}
-	private IWorkbenchAction aboutAction;
-    protected void makeActions(final IWorkbenchWindow window) {
-        
-	aboutAction = ActionFactory.ABOUT.create(window);
-	register(aboutAction);
-        
+        super(configurer);
     }
+
+    private IWorkbenchAction aboutAction;
+
+    protected void makeActions(final IWorkbenchWindow window) {
+        aboutAction = ActionFactory.ABOUT.create(window);
+        register(aboutAction);
+    }
+
     protected void fillMenuBar(IMenuManager menuBar) {
-	//Help
-	MenuManager helpMenu = new MenuManager("&Help",IWorkbenchActionConstants.M_HELP);
-	menuBar.add(helpMenu);
-	// About > Help
-	helpMenu.add(new Separator());
-	helpMenu.add(aboutAction);
-        
+        //Help
+        MenuManager helpMenu = new MenuManager("&Help", IWorkbenchActionConstants.M_HELP);
+        menuBar.add(helpMenu);
+        // About > Help
+        helpMenu.add(new Separator());
+        helpMenu.add(aboutAction);
     }
 }

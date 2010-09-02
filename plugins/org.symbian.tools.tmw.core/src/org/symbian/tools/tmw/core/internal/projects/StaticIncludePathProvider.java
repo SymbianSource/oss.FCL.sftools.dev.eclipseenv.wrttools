@@ -38,8 +38,8 @@ public class StaticIncludePathProvider implements IFacetIncludePathProvider {
     private final IConfigurationElement element;
     private IIncludePathEntry[] entries;
 
-    public StaticIncludePathProvider(IConfigurationElement element) {
-        this.element = element;
+    public StaticIncludePathProvider(IConfigurationElement configurationElement) {
+        this.element = configurationElement;
     }
 
     public IIncludePathEntry[] getEntries(ITMWProject project) {

@@ -49,8 +49,8 @@ public class RuntimeClasspathManager {
     private static final class Version implements IVersion {
         private final String version;
 
-        public Version(String version) {
-            this.version = version;
+        public Version(String versionString) {
+            this.version = versionString;
         }
 
         public int compareTo(Object o) {
@@ -81,8 +81,7 @@ public class RuntimeClasspathManager {
         @Override
         public int hashCode() {
             final int prime = 31;
-            int result = 1;
-            result = prime * result + ((version == null) ? 0 : version.hashCode());
+            int result = prime + ((version == null) ? 0 : version.hashCode());
             return result;
         }
     }
@@ -100,23 +99,23 @@ public class RuntimeClasspathManager {
     }
 
     private static final class VersionedEntry<T> {
-        protected final T entry;
-        protected final IVersionExpr versionExpression;
+        private final T entry;
+        private final IVersionExpr versionExpression;
 
-        public VersionedEntry(String versionExpression, T entry) {
-            if (versionExpression == null) {
+        public VersionedEntry(String expression, T ent) {
+            if (expression == null) {
                 this.versionExpression = null;
             } else {
                 IVersionExpr expr;
                 try {
-                    expr = new VersionExpr<Version>(new VersionableObject(), versionExpression, null);
+                    expr = new VersionExpr<Version>(new VersionableObject(), expression, null);
                 } catch (CoreException e) {
                     expr = null;
                     TMWCore.log(null, e);
                 }
                 this.versionExpression = expr;
             }
-            this.entry = entry;
+            this.entry = ent;
         }
 
         public boolean matches(String version) {
@@ -186,15 +185,15 @@ public class RuntimeClasspathManager {
     }
 
     private IFacetIncludePathProvider[] collectProviders(IConfigurationElement[] children) {
-        final Collection<IFacetIncludePathProvider> providers = new LinkedList<IFacetIncludePathProvider>();
+        final Collection<IFacetIncludePathProvider> providerCollection = new LinkedList<IFacetIncludePathProvider>();
         for (IConfigurationElement element : children) {
             if ("include-path-entry".equals(element.getName())) {
-                providers.add(new StaticIncludePathProvider(element));
+                providerCollection.add(new StaticIncludePathProvider(element));
             } else if ("include-path-provider".equals(element.getName())) {
-                providers.add(new LazyIncludePathProvider(element));
+                providerCollection.add(new LazyIncludePathProvider(element));
             }
         }
-        return providers.toArray(new IFacetIncludePathProvider[providers.size()]);
+        return providerCollection.toArray(new IFacetIncludePathProvider[providerCollection.size()]);
     }
 
     private <T> Collection<T> getMatchingEntries(String id, String version,
@@ -237,8 +236,8 @@ public class RuntimeClasspathManager {
                         facetToEntry));
             }
             final Collection<IIncludePathEntry> pathEntries = new HashSet<IIncludePathEntry>();
-            for (IFacetIncludePathProvider[] providers : entries) {
-                for (IFacetIncludePathProvider provider : providers) {
+            for (IFacetIncludePathProvider[] providerArray : entries) {
+                for (IFacetIncludePathProvider provider : providerArray) {
                     pathEntries.addAll(Arrays.asList(provider.getEntries(p)));
                 }
             }

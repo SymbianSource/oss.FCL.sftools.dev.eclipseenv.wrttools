@@ -10,35 +10,27 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.wst.jsdt.ui.actions.AbstractOpenWizardAction;
 import org.symbian.tools.tmw.ui.project.NewApplicationWizard;
 
-public class NewWRTProjectAction extends AbstractOpenWizardAction implements
-		IWorkbenchWindowActionDelegate {
+public class NewWRTProjectAction extends AbstractOpenWizardAction implements IWorkbenchWindowActionDelegate {
+    public void init(IWorkbenchWindow window) {
+    }
 
-	public void init(IWorkbenchWindow window) {
-		// TODO Auto-generated method stub
+    public void run(IAction action) {
+        run();
+    }
 
-	}
+    public void selectionChanged(IAction action, ISelection selection) {
+    }
 
-	public void run(IAction action) {
-		run();
-	}
-
-	public void selectionChanged(IAction action, ISelection selection) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected INewWizard createWizard() throws CoreException {
+    @Override
+    protected INewWizard createWizard() throws CoreException {
         return new NewApplicationWizard();
-	}
+    }
 
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void dispose() {
+    }
 
-	@Override
-	protected boolean doCreateProjectFirstOnEmptyWorkspace(Shell shell) {
-		return true;
-	}
+    @Override
+    protected boolean doCreateProjectFirstOnEmptyWorkspace(Shell shell) {
+        return true;
+    }
 }

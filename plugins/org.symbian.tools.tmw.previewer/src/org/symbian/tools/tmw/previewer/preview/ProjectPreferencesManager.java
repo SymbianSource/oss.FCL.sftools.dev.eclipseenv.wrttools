@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
-public class ProjectPreferencesManager {
+public final class ProjectPreferencesManager {
     private static IFile getPreferencesXml(IProject project) {
         return project.getFile(new Path(".settings").append(PreviewerPlugin.PLUGIN_ID).addFileExtension("xml"));
     }
@@ -70,5 +70,9 @@ public class ProjectPreferencesManager {
             xml.create(inputStream, false, new NullProgressMonitor());
         }
         inputStream.close();
+    }
+
+    private ProjectPreferencesManager() {
+        // No instantiation
     }
 }

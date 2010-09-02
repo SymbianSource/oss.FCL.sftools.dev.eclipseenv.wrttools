@@ -84,7 +84,7 @@ public class TMWCoreUI extends AbstractUIPlugin {
 
     private Images images;
     private IApplicationImporter[] importers;
-    private final Map<IProject, ProjectMemo> MEMOS = new WeakHashMap<IProject, ProjectMemo>();
+    private final Map<IProject, ProjectMemo> memos = new WeakHashMap<IProject, ProjectMemo>();
     private final DeploymentTargetPresentationsManager presentations = new DeploymentTargetPresentationsManager();
     private IProjectTemplateManager projectTemplateManager;
     private final DeploymentTargetTypesRegistry typesRegistry = new DeploymentTargetTypesRegistry();
@@ -94,10 +94,10 @@ public class TMWCoreUI extends AbstractUIPlugin {
     }
 
     private synchronized ProjectMemo getMemoForProject(ITMWProject project) {
-        ProjectMemo memo = MEMOS.get(project.getProject());
+        ProjectMemo memo = memos.get(project.getProject());
         if (memo == null) {
             memo = new ProjectMemo(project);
-            MEMOS.put(project.getProject(), memo);
+            memos.put(project.getProject(), memo);
         }
         return memo;
     }

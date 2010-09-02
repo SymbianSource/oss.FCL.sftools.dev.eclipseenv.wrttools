@@ -22,31 +22,35 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 
-public class Images {
-	private static final String WRT16 = "main16.gif";
-	
-	public static void initImageRegistry(ImageRegistry registry) {
-		setImage(registry, WRT16);
-	}
+public final class Images {
+    private static final String WRT16 = "main16.gif";
 
-	private static void setImage(ImageRegistry registry, String image) {
-		ImageDescriptor img = Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/" + image);
-		registry.put(image, img);
-	}
-	
-	public static ImageDescriptor getWrtIcon() {
-		return getImageDescriptor(WRT16);
-	}
+    public static void initImageRegistry(ImageRegistry registry) {
+        setImage(registry, WRT16);
+    }
 
-	private static ImageDescriptor getImageDescriptor(String image) {
-		return Activator.getDefault().getImageRegistry().getDescriptor(image);
-	}
+    private static void setImage(ImageRegistry registry, String image) {
+        ImageDescriptor img = Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/" + image);
+        registry.put(image, img);
+    }
 
-	public static Image getWrtIconImage() {
-		return getImage(WRT16);
-	}
+    public static ImageDescriptor getWrtIcon() {
+        return getImageDescriptor(WRT16);
+    }
 
-	private static Image getImage(String image) {
-		return Activator.getDefault().getImageRegistry().get(image);
-	}
+    private static ImageDescriptor getImageDescriptor(String image) {
+        return Activator.getDefault().getImageRegistry().getDescriptor(image);
+    }
+
+    public static Image getWrtIconImage() {
+        return getImage(WRT16);
+    }
+
+    private static Image getImage(String image) {
+        return Activator.getDefault().getImageRegistry().get(image);
+    }
+
+    private Images() {
+        // No instantiation
+    }
 }

@@ -28,7 +28,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
     private static final String DEFAULT_CHROME_PATH_WINXP = "C:/Program Files/Google/Chrome/Application/";
     private static final String DEFAULT_CHROME_PATH_LINUX = "/opt/google/chrome";
     private static final String DEFAULT_CHROME_PATH_MAC = "/Applications";
-    private final static String DEFAULT_CHROME_PATH_VISTA = "Local Settings/Application Data/Google/Chrome/Application";
+    private static final String DEFAULT_CHROME_PATH_VISTA = "Local Settings/Application Data/Google/Chrome/Application";
 
     @Override
     public void initializeDefaultPreferences() {

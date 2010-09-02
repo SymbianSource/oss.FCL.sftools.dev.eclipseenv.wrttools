@@ -33,8 +33,8 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
     public static final class Factory implements WorkspaceBridge.Factory {
         private final IProject project;
 
-        public Factory(IProject project) {
-            this.project = project;
+        public Factory(IProject workspaceProject) {
+            this.project = workspaceProject;
         }
 
         public WorkspaceBridge attachedToVm(DebugTargetImpl debugTargetImpl, JavascriptVm javascriptVm) {
@@ -50,23 +50,24 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
         }
     }
 
-    public final static String DEBUG_MODEL_ID = "org.symbian.debug";
+    public static final String DEBUG_MODEL_ID = "org.symbian.debug";
 
     private final BreakpointHandler breakpointHandler;
     private final JavascriptVm javascriptVm;
     private final IProject project;
     private final ResourceManager resourceManager;
 
-    public WRTProjectWorkspaceBridge(DebugTargetImpl debugTargetImpl, JavascriptVm javascriptVm, IProject project) {
-        this.javascriptVm = javascriptVm;
-        this.project = project;
+    public WRTProjectWorkspaceBridge(DebugTargetImpl debugTargetImpl, JavascriptVm vm, IProject workspaceProject) {
+        this.javascriptVm = vm;
+        this.project = workspaceProject;
         this.resourceManager = new ResourceManager();
         this.sourceLocator = new WebApplicationSourceLocator(resourceManager);
         breakpointHandler = new WorkspaceBreakpointHandler(debugTargetImpl);
         ILaunch launch = debugTargetImpl.getLaunch();
         try {
             sourceLocator.initializeDefaults(launch.getLaunchConfiguration());
-            sourceLocator.setSourceContainers(new ISourceContainer[] { new ProjectSourceContainer(project, false),
+            sourceLocator.setSourceContainers(new ISourceContainer[] {
+                    new ProjectSourceContainer(workspaceProject, false),
                     new DirectorySourceContainer(Activator.getDefault().getStateLocation(), true) });
         } catch (CoreException e) {
             throw new RuntimeException(e);
@@ -149,11 +150,11 @@ public class WRTProjectWorkspaceBridge implements WorkspaceBridge {
         private final Script script;
         private final VmResourceId id;
 
-        public VmResourceImpl(VmResourceId id, Script script, String name) {
+        public VmResourceImpl(VmResourceId resourceId, Script browserScript, String resourceName) {
             super();
-            this.id = id;
-            this.script = script;
-            this.name = name;
+            this.id = resourceId;
+            this.script = browserScript;
+            this.name = resourceName;
         }
 
         public VmResourceId getId() {

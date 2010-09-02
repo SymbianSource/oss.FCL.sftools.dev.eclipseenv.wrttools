@@ -36,12 +36,12 @@ import org.symbian.tools.tmw.debug.internal.Activator;
 import org.symbian.tools.tmw.previewer.PreviewerPlugin;
 
 public class WidgetLaunchDelegate implements ILaunchConfigurationDelegate {
-	public static final String ID = "org.symbian.tools.wrttools.debug.widget";
+    public static final String ID = "org.symbian.tools.wrttools.debug.widget";
 
-	public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor)
-			throws CoreException {
-		monitor.beginTask("Preparing Mobile Web Debugger", IProgressMonitor.UNKNOWN);
-		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
+    public void launch(ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor)
+            throws CoreException {
+        monitor.beginTask("Preparing Mobile Web Debugger", IProgressMonitor.UNKNOWN);
+        ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
         final IWorkbench workbench = PlatformUI.getWorkbench();
         final IWorkbenchWindow window = workbench.getWorkbenchWindows()[0];
         final boolean[] retvalue = new boolean[1];
@@ -54,34 +54,34 @@ public class WidgetLaunchDelegate implements ILaunchConfigurationDelegate {
             launchManager.removeLaunch(launch);
             return;
         }
-		boolean debug = mode.equals(ILaunchManager.DEBUG_MODE);
-		try {
-			// 1. Load all parameters
-			IProject project = DebugUtil.getProject(configuration);
+        boolean debug = mode.equals(ILaunchManager.DEBUG_MODE);
+        try {
+            // 1. Load all parameters
+            IProject project = DebugUtil.getProject(configuration);
             if (DebugUtil.isProjectDebugged(project, launchManager, launch)) {
-                throw DebugUtil.createCoreException(MessageFormat.format("Project {0} is already running.", project.getName()),
-                        null);
+                throw DebugUtil.createCoreException(
+                        MessageFormat.format("Project {0} is already running.", project.getName()), null);
             }
 
-			int port = PortPolicy.getPortNumber();
-			final URI uri = prepareDebugger(project, debug, launch, port);
+            int port = PortPolicy.getPortNumber();
+            final URI uri = prepareDebugger(project, debug, launch, port);
 
-			Activator.getDefault().getChromeInstancesManager().startChrome(launch, port, uri.toASCIIString());
-		} catch (CoreException e) {
-			launchManager.removeLaunch(launch);
-			throw e;
-		}
-		if (!debug) {
-			launchManager.removeLaunch(launch);
-		}
-		monitor.done();
-	}
+            Activator.getDefault().getChromeInstancesManager().startChrome(launch, port, uri.toASCIIString());
+        } catch (CoreException e) {
+            launchManager.removeLaunch(launch);
+            throw e;
+        }
+        if (!debug) {
+            launchManager.removeLaunch(launch);
+        }
+        monitor.done();
+    }
 
     private URI prepareDebugger(IProject project, boolean debug, final ILaunch launch, final int port) {
         DebugConnectionJob job = null;
-		if (debug) {
+        if (debug) {
             job = new DebugConnectionJob(project, port, launch);
-		}
+        }
         return PreviewerPlugin.getDefault().getHttpPreviewer().previewProject(project, job);
-	}
+    }
 }

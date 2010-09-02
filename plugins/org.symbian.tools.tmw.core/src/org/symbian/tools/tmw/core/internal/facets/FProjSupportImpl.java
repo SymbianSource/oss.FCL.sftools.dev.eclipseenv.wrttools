@@ -57,7 +57,11 @@ public final class FProjSupportImpl implements IFProjSupport {
             return null;
         }
         try {
-            return version != null ? projectFacet.getVersion(version) : projectFacet.getLatestVersion();
+            if (version != null) {
+                return projectFacet.getVersion(version);
+            } else {
+                return projectFacet.getLatestVersion();
+            }
         } catch (VersionFormatException e) {
             throw new RuntimeException(e);
         } catch (CoreException e) {
@@ -66,7 +70,11 @@ public final class FProjSupportImpl implements IFProjSupport {
     }
 
     public String getRuntimeId(IMobileWebRuntime runtime) {
-        return runtime != null ? runtime.getId() + ":" + runtime.getVersion() : null;
+        if (runtime != null) {
+            return runtime.getId() + ":" + runtime.getVersion();
+        } else {
+            return null;
+        }
     }
 
     public Set<IProjectFacetVersion> getFixedFacetsVersions(IMobileWebRuntime runtime) {

@@ -41,7 +41,7 @@ public interface ITemplateInstaller {
     IPath[] getFiles() throws CoreException;
 
     /**
-     * Installer should only copy files specified. Keep in mind that some 
+     * Installer should only copy files specified. Keep in mind that some
      * files may be overridden by other installers.
      */
     void copyFiles(IPath[] files, IProgressMonitor monitor) throws CoreException;

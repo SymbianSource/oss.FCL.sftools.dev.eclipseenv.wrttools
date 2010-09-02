@@ -42,60 +42,62 @@ import org.eclipse.wst.jsdt.ui.actions.RenameAction;
 import org.eclipse.wst.jsdt.ui.actions.SelectionDispatchAction;
 
 public class RenameMoveActionProvider extends CommonActionProvider {
- 	private SelectionDispatchAction fMoveAction;
-	private SelectionDispatchAction fRenameAction;
-	
-	private final Collection<IAction> fActions = new HashSet<IAction>();
+    private SelectionDispatchAction fMoveAction;
+    private SelectionDispatchAction fRenameAction;
 
-	public void fillActionBars(IActionBars actionBars) {
-		if (fActions.size() > 0) {
-			actionBars.setGlobalActionHandler(JdtActionConstants.RENAME, fRenameAction);
-			actionBars.setGlobalActionHandler(ActionFactory.RENAME.getId(), fRenameAction);
+    private final Collection<IAction> fActions = new HashSet<IAction>();
 
-			actionBars.setGlobalActionHandler(JdtActionConstants.MOVE, fMoveAction);
-			actionBars.setGlobalActionHandler(ActionFactory.MOVE.getId(), fMoveAction);
-		}
-	}
+    public void fillActionBars(IActionBars actionBars) {
+        if (fActions.size() > 0) {
+            actionBars.setGlobalActionHandler(JdtActionConstants.RENAME, fRenameAction);
+            actionBars.setGlobalActionHandler(ActionFactory.RENAME.getId(), fRenameAction);
 
-	public void fillContextMenu(IMenuManager menu) {
-		menu.appendToGroup(IContextMenuConstants.GROUP_REORGANIZE, new Separator());
-		for (IAction action : fActions) {
-			menu.appendToGroup(IContextMenuConstants.GROUP_REORGANIZE, action);
-		}
-	}
+            actionBars.setGlobalActionHandler(JdtActionConstants.MOVE, fMoveAction);
+            actionBars.setGlobalActionHandler(ActionFactory.MOVE.getId(), fMoveAction);
+        }
+    }
 
-	public void init(ICommonActionExtensionSite site) {
-		ICommonViewerWorkbenchSite workbenchSite= null;
-		if (site.getViewSite() instanceof ICommonViewerWorkbenchSite) {
-            workbenchSite= (ICommonViewerWorkbenchSite) site.getViewSite();
+    public void fillContextMenu(IMenuManager menu) {
+        menu.appendToGroup(IContextMenuConstants.GROUP_REORGANIZE, new Separator());
+        for (IAction action : fActions) {
+            menu.appendToGroup(IContextMenuConstants.GROUP_REORGANIZE, action);
+        }
+    }
+
+    public void init(ICommonActionExtensionSite site) {
+        ICommonViewerWorkbenchSite workbenchSite = null;
+        if (site.getViewSite() instanceof ICommonViewerWorkbenchSite) {
+            workbenchSite = (ICommonViewerWorkbenchSite) site.getViewSite();
         }
 
-		// we only initialize the refactor group when in a view part 
-		// (required for the constructor)
-		if (workbenchSite != null) {
-			if (workbenchSite.getPart() != null && workbenchSite.getPart() instanceof IViewPart) {
-				IViewPart viewPart= (IViewPart) workbenchSite.getPart();
-				IWorkbenchPartSite s = viewPart.getSite();
+        // we only initialize the refactor group when in a view part
+        // (required for the constructor)
+        if (workbenchSite != null) {
+            if (workbenchSite.getPart() != null && workbenchSite.getPart() instanceof IViewPart) {
+                IViewPart viewPart = (IViewPart) workbenchSite.getPart();
+                IWorkbenchPartSite s = viewPart.getSite();
 
-				fRenameAction= new RenameAction(s);
-				initUpdatingAction(fRenameAction, workbenchSite.getSelectionProvider(), workbenchSite.getSelectionProvider().getSelection(), IJavaEditorActionDefinitionIds.RENAME_ELEMENT);
-				fMoveAction= new MoveAction(s);
-				initUpdatingAction(fMoveAction, workbenchSite.getSelectionProvider(), workbenchSite.getSelectionProvider().getSelection(), IJavaEditorActionDefinitionIds.RENAME_ELEMENT);
-			}
-		}
-	}
+                fRenameAction = new RenameAction(s);
+                initUpdatingAction(fRenameAction, workbenchSite.getSelectionProvider(), workbenchSite
+                        .getSelectionProvider().getSelection(), IJavaEditorActionDefinitionIds.RENAME_ELEMENT);
+                fMoveAction = new MoveAction(s);
+                initUpdatingAction(fMoveAction, workbenchSite.getSelectionProvider(), workbenchSite
+                        .getSelectionProvider().getSelection(), IJavaEditorActionDefinitionIds.RENAME_ELEMENT);
+            }
+        }
+    }
 
-	private void initUpdatingAction(SelectionDispatchAction action, ISelectionProvider provider, ISelection selection, String actionDefinitionId){
-		action.setActionDefinitionId(actionDefinitionId);
-		action.update(selection);
-		if (provider != null) {
+    private void initUpdatingAction(SelectionDispatchAction action, ISelectionProvider provider, ISelection selection,
+            String actionDefinitionId) {
+        action.setActionDefinitionId(actionDefinitionId);
+        action.update(selection);
+        if (provider != null) {
             provider.addSelectionChangedListener(action);
         }
-		fActions.add(action);
-	}
+        fActions.add(action);
+    }
 
-	
-	public void setContext(ActionContext context) {
-		// Do nothing
-	}
+    public void setContext(ActionContext context) {
+        // Do nothing
+    }
 }

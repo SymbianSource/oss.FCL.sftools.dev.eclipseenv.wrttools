@@ -61,7 +61,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
     public static final long BLUETOOTH_TIMEOUT = 5 * 60 * 1000; // 5 min
     private String serviceURL;
     private RemoteDevice device;
-    protected String[] exceptionCodes = new String[] { "OBEX_HTTP_UNSUPPORTED_TYPE", "OBEX_HTTP_FORBIDDEN" };
+    private final String[] exceptionCodes = new String[] { "OBEX_HTTP_UNSUPPORTED_TYPE", "OBEX_HTTP_FORBIDDEN" };
     private String message = "Deployment was successful. Please follow on-screen instructions to complete application deployment on your device.";
     private final String name;
     private final BluetoothTargetType provider;
@@ -154,7 +154,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
             hsOperation.setHeader(HeaderSet.NAME, inputWidget.getName());
             hsOperation.setHeader(HeaderSet.TYPE, fileType);
             int size = (int) inputWidget.length();
-            byte file[] = new byte[size];
+            byte[] file = new byte[size];
             hsOperation.setHeader(HeaderSet.LENGTH, Long.valueOf(file.length));
 
             // Create PUT Operation
@@ -209,7 +209,7 @@ public class BluetoothTarget extends PlatformObject implements IDeploymentTarget
                     clientSession.close();
                 }
             } catch (EOFException eof) {
-                // EOFException is now caught 
+                // EOFException is now caught
                 // Ignore the error since deployment has already completed
                 //Activator.log(IStatus.ERROR, "EOF encountered while cleaning up Bluetooth deployment", eof);
             } catch (IOException x) {

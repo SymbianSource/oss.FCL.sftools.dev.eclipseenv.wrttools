@@ -8,8 +8,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.ui.part.IPageBookViewPage;
 
 public interface IPreviewPage extends IPageBookViewPage {
-	void process(Collection<IFile> files);
-	boolean isDisposed();
+    void process(Collection<IFile> files);
+    boolean isDisposed();
     void projectRenamed(IPath newPath);
     IProject getProject();
 }

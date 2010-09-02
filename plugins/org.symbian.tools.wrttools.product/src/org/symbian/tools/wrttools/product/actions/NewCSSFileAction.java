@@ -10,31 +10,30 @@ import org.eclipse.wst.css.ui.internal.wizard.NewCSSWizard;
 import org.eclipse.wst.jsdt.ui.actions.AbstractOpenWizardAction;
 
 @SuppressWarnings("restriction")
-public class NewCSSFileAction extends AbstractOpenWizardAction implements
-		IWorkbenchWindowActionDelegate {
+public class NewCSSFileAction extends AbstractOpenWizardAction implements IWorkbenchWindowActionDelegate {
 
-	@Override
-	protected INewWizard createWizard() throws CoreException {
-		return new NewCSSWizard();
-	}
+    @Override
+    protected INewWizard createWizard() throws CoreException {
+        return new NewCSSWizard();
+    }
 
-	public void dispose() {
-		// TODO Auto-generated method stub
+    public void dispose() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	public void init(IWorkbenchWindow window) {
-		// TODO Auto-generated method stub
+    public void init(IWorkbenchWindow window) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	public void run(IAction action) {
-		run();
-	}
+    public void run(IAction action) {
+        run();
+    }
 
-	public void selectionChanged(IAction action, ISelection selection) {
-		// TODO Auto-generated method stub
+    public void selectionChanged(IAction action, ISelection selection) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

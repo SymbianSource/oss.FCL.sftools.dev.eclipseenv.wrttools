@@ -19,46 +19,44 @@ import org.symbian.tools.tmw.debug.internal.launch.WRTProjectWorkspaceBridge;
 @SuppressWarnings("restriction")
 public class HtmlBreakpointProvider implements IBreakpointProvider {
 
-	public IStatus addBreakpoint(IDocument document, IEditorInput input,
-			int lineNumber, int offset) throws CoreException {
-		boolean hasScript = hasJavaScript(document, lineNumber);
+    public IStatus addBreakpoint(IDocument document, IEditorInput input, int lineNumber, int offset)
+            throws CoreException {
+        boolean hasScript = hasJavaScript(document, lineNumber);
 
-		if (hasScript) {
+        if (hasScript) {
             ChromiumLineBreakpoint breakpoint = new ChromiumLineBreakpoint(getResource(input), lineNumber,
                     WRTProjectWorkspaceBridge.DEBUG_MODEL_ID);
-			DebugPlugin.getDefault().getBreakpointManager().addBreakpoint(breakpoint);
-		}
-		return Status.OK_STATUS;
-	}
+            DebugPlugin.getDefault().getBreakpointManager().addBreakpoint(breakpoint);
+        }
+        return Status.OK_STATUS;
+    }
 
-	private boolean hasJavaScript(IDocument document, int lineNumber) {
-		try {
-			if (document instanceof IStructuredDocument) {
-				IStructuredDocument doc = (IStructuredDocument) document;
-				int lineOffset = doc.getLineOffset(lineNumber - 1);
-				int lineLength = doc.getLineLength(lineNumber - 1);
-				ITypedRegion[] computePartitioning = doc.computePartitioning(
-						lineOffset, lineLength);
-				for (ITypedRegion region : computePartitioning) {
-					if (IHTMLPartitions.SCRIPT.equals(region.getType())
-							|| IHTMLPartitions.SCRIPT_EVENTHANDLER
-									.equals(region.getType())) {
-						return true;
-					}
-				}
-			}
-		} catch (BadLocationException e) {
-			Activator.log(e);
-		}
-		return false;
-	}
+    private boolean hasJavaScript(IDocument document, int lineNumber) {
+        try {
+            if (document instanceof IStructuredDocument) {
+                IStructuredDocument doc = (IStructuredDocument) document;
+                int lineOffset = doc.getLineOffset(lineNumber - 1);
+                int lineLength = doc.getLineLength(lineNumber - 1);
+                ITypedRegion[] computePartitioning = doc.computePartitioning(lineOffset, lineLength);
+                for (ITypedRegion region : computePartitioning) {
+                    if (IHTMLPartitions.SCRIPT.equals(region.getType())
+                            || IHTMLPartitions.SCRIPT_EVENTHANDLER.equals(region.getType())) {
+                        return true;
+                    }
+                }
+            }
+        } catch (BadLocationException e) {
+            Activator.log(e);
+        }
+        return false;
+    }
 
-	public IResource getResource(IEditorInput input) {
-		return (IResource) input.getAdapter(IResource.class);
-	}
+    public IResource getResource(IEditorInput input) {
+        return (IResource) input.getAdapter(IResource.class);
+    }
 
-	public void setSourceEditingTextTools(ISourceEditingTextTools tools) {
-		// Do nothing
-	}
+    public void setSourceEditingTextTools(ISourceEditingTextTools tools) {
+        // Do nothing
+    }
 
 }

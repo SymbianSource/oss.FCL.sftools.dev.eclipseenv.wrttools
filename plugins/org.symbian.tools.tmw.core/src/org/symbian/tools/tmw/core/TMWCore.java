@@ -29,6 +29,8 @@ public class TMWCore extends Plugin {
     private ProjectsSupportManager projectsSupport;
     private RuntimeClasspathManager classpathManager;
 
+    public static final String CORE_FACET = "tmw.core";
+
     /*
      * (non-Javadoc)
      * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)

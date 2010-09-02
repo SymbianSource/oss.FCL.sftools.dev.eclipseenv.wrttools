@@ -161,7 +161,7 @@ public final class EmulatorTargetType implements IDeploymentTargetType {
 
     /**
      * Adds the devices to the list to be displayed.
-     * @param deviceNode the device node 
+     * @param deviceNode the device node
      * @param epocNode the epoc root node.
      */
     private void addProject(Node epocNode, Node deviceNode) {

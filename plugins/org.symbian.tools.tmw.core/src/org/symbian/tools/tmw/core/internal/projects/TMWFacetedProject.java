@@ -34,8 +34,8 @@ import org.symbian.tools.tmw.core.runtimes.IMobileWebRuntime;
 public class TMWFacetedProject implements ITMWProject {
     private final IProject project;
 
-    public TMWFacetedProject(IProject project) {
-        this.project = project;
+    public TMWFacetedProject(IProject rawProject) {
+        this.project = rawProject;
     }
 
     public String getName() {

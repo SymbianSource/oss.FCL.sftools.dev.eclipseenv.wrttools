@@ -23,40 +23,41 @@ import java.io.File;
 import org.symbian.tools.tmw.core.utilities.CoreUtil;
 
 public final class ChromeDebugUtils {
-	public static String getExecutablePath(String folder) {
-		File file = new File(folder);
-		if (file.isDirectory()) {
-			File chromeExecutable = new File(file, getExecutable());
-			if (chromeExecutable.isFile()) {
-				return chromeExecutable.getAbsolutePath();
+    public static String getExecutablePath(String folder) {
+        File file = new File(folder);
+        if (file.isDirectory()) {
+            File chromeExecutable = new File(file, getExecutable());
+            if (chromeExecutable.isFile()) {
+                return chromeExecutable.getAbsolutePath();
             } else if (CoreUtil.isMac() && file.getName().equals("Google Chrome.app")) {
                 return getExecutablePath(file.getParent());
-			}
+            }
         } else if (file.isFile()) {
             if (file.getName().equalsIgnoreCase(getExecutable())) {
                 return file.getAbsolutePath();
             }
-		}
-		return null;
-	}
+        }
+        return null;
+    }
 
-	private static String getExecutable() {
-		// Add more ifs as we add support for new platforms
-		if (CoreUtil.isMac()) {
-			return "Google Chrome.app/Contents/MacOS/Google Chrome";
-		} else if (CoreUtil.isLinux()) {
-			return "chrome";
-		} else {
-			return "chrome.exe";
-		}
-	}
-	
-	private ChromeDebugUtils() {
-		// No instantiating
-	}
+    private static String getExecutable() {
+        // Add more ifs as we add support for new platforms
+        if (CoreUtil.isMac()) {
+            return "Google Chrome.app/Contents/MacOS/Google Chrome";
+        } else if (CoreUtil.isLinux()) {
+            return "chrome";
+        } else {
+            return "chrome.exe";
+        }
+    }
 
-	public static String getChromeExecutible() {
-		return getExecutablePath(Activator.getDefault().getPreferenceStore().getString(IConstants.PREF_NAME_CHROME_LOCATION));
-	}
+    private ChromeDebugUtils() {
+        // No instantiating
+    }
+
+    public static String getChromeExecutible() {
+        return getExecutablePath(Activator.getDefault().getPreferenceStore()
+                .getString(IConstants.PREF_NAME_CHROME_LOCATION));
+    }
 
 }

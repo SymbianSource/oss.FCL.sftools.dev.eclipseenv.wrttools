@@ -30,7 +30,7 @@ import org.symbian.tools.tmw.ui.project.IProjectTemplate;
 
 /**
  * Entry for the basic template parameters.
- * 
+ *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
 public class NewWrtAppTemplatePage extends AbstractNewApplicationWizardPage {
