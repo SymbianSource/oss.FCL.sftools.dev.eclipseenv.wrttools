@@ -15,7 +15,7 @@
             id="org.symbian.tools.tmwtools.debug"
             name="Tools for Mobile Web">
          <keywordReference
-               id="org.symbian.tools.tmwtools.tmwwords">
+               id="org.symbian.tools.wrttools.wrtwords">
          </keywordReference>
          <keywordReference
                id="org.symbian.tools.tmwtools.debug.page">
@@ -144,52 +144,6 @@
                menubarPath="group.properties">
          </action>
       </viewerContribution>
-      <objectContribution
-            id="org.symbian.tools.tmwtools.debug.core.context"
-            objectClass="java.lang.Object">
-         <enablement>
-            <or>
-               <and>
-                  <not>
-                     <with
-                           variable="org.eclipse.core.runtime.Platform">
-                        <test
-                              args="org.eclipse.debug.core"
-                              property="org.eclipse.core.runtime.bundleState"
-                              value="ACTIVE">
-                        </test>
-                     </with>
-                  </not>
-                  <adapt
-                        type="org.eclipse.core.resources.IResource">
-                  </adapt>
-               </and>
-               <and>
-                  <with
-                        variable="org.eclipse.core.runtime.Platform">
-                     <test
-                           args="org.eclipse.debug.core"
-                           property="org.eclipse.core.runtime.bundleState"
-                           value="ACTIVE">
-                     </test>
-                  </with>
-                  <test
-                        property="org.eclipse.debug.core.launchable"
-                        value="debug">
-                  </test>
-               </and>
-            </or>
-         </enablement>
-         <action
-               class="org.symbian.tools.tmw.debug.ui.actions.DebugAction"
-               enablesFor="+"
-               icon="icons/debug_exc.gif"
-               id="org.eclipse.debug.ui.contextualLaunch.debug.submenu"
-               label="Debug"
-               menubarPath="additions"
-               style="push">
-         </action>
-      </objectContribution>
       <viewerContribution
             id="org.symbian.tools.tmwtools.debug.core.watch"
             targetID="#JavaScriptEditorContext">
@@ -236,15 +190,6 @@
       </editorContribution>
    </extension>
    <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="org.eclipse.debug.ui.DebugPerspective">
-         <actionSet
-               id="org.symbian.tools.tmwtools.debug.core.mainActions">
-         </actionSet>
-      </perspectiveExtension>
-   </extension>
-   <extension
          point="org.eclipse.debug.ui.debugModelPresentations">
       <debugModelPresentation
             class="org.symbian.tools.tmw.debug.internal.model.SymbianDebugModelPresentation"
@@ -280,24 +225,7 @@
             <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
          </factory>
     </extension>
-    <extension
-          point="org.eclipse.ui.actionSets">
-       <actionSet
-             description="Actions for Mobile Web debugging"
-             id="org.symbian.tools.tmwtools.debug.core.mainActions"
-             label="Mobile Web Debug">
-          <action
-                class="org.symbian.tools.tmw.debug.ui.actions.DebugAction"
-                helpContextId="debug_last_action_context"
-                icon="icons/debug_exc.gif"
-                id="org.symbian.tools.tmwtools.debug.core.debug"
-                label="Debug"
-                menubarPath="org.eclipse.ui.run/relaunchGroup"
-                style="push"
-                toolbarPath="debug">
-          </action>
-       </actionSet>
-    </extension>
+
     <extension
           point="org.eclipse.ui.keywords">
        <keyword
