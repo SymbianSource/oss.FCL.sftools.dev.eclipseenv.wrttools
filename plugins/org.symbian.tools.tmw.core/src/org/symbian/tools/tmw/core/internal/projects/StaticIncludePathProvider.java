@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -50,13 +51,11 @@ public class StaticIncludePathProvider implements IFacetIncludePathProvider {
             final URL url = FileLocator.find(bundle, new Path(path), null);
             try {
                 final URL fileURL = FileLocator.toFileURL(url);
-                final File file = new File(fileURL.toURI());
+                final File file = new File(fileURL.getPath());
                 final IIncludePathEntry entry = JavaScriptCore.newLibraryEntry(new Path(file.getAbsolutePath()), null,
                         null);
                 entries = new IIncludePathEntry[] { entry };
             } catch (IOException e) {
-                TMWCore.log(String.format("Can't find file %s in plugin %s", path, name), e);
-            } catch (URISyntaxException e) {
                 TMWCore.log(String.format("Can't find file %s in plugin %s", path, name), e);
             }
         }
