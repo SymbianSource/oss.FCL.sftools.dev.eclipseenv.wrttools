@@ -81,7 +81,7 @@ public final class Util {
         }
 
         /* test invalid characters, allows only alphanumeric and '.' for UID */
-        String alphnum = ".0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alphnum = "._0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < widgetID.length(); i++) {
             if (alphnum.indexOf(widgetID.charAt(i), 0) == -1) {
                 return ("Invalid Widget identifier. Only alphanumeric or '.' is allowed");

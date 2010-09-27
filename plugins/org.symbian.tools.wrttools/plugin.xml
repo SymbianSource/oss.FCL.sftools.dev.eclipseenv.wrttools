@@ -152,6 +152,9 @@
              <projectNature
                    id="org.symbian.tools.wrttools.WidgetProjectNature">
              </projectNature>
+             <facet
+                   id="tmw.core">
+             </facet>
           </rules>
        </include>
     </validator>
