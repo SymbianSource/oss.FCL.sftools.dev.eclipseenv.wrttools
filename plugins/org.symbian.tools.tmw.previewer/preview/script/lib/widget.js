@@ -177,7 +177,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	widget.setDisplayLandscape = function(){
 		try {
 			if (this.isrotationsupported && _BRIDGE_REF.nokia.emulator.orientationSupports()) {
-				_BRIDGE_REF.nokia.emulator.setMode('landscape');
+				_BRIDGE_REF.nokia.emulator.setMode('landscape', true);
 			}
 		} 
 		catch (e) {
@@ -198,7 +198,7 @@ if (typeof window.widget == "undefined" || !window.widget) {
 	widget.setDisplayPortrait = function(){
 		try {
 			if (this.isrotationsupported && _BRIDGE_REF.nokia.emulator.orientationSupports()) {
-				_BRIDGE_REF.nokia.emulator.setMode('portrait');
+				_BRIDGE_REF.nokia.emulator.setMode('portrait', true);
 			}
 		} 
 		catch (e) {

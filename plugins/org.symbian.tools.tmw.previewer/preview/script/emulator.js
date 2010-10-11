@@ -229,9 +229,9 @@ Emulator.prototype.render = function() {
 	$("#DeviceDisplayLayout").css("-webkit-transform", val);
 };
 
-Emulator.prototype.setMode = function(mode) {
+Emulator.prototype.setMode = function(mode, fixed) {
 	NOKIA.mode = mode;
-
+	NOKIA.emulator.modeForced = fixed ? true : false; // Note - fixed may be undefined
 	// SAVE the device DATA
 	NOKIA.helper.setPreference('__SYM_NOKIA_EMULATOR_DEVICE_MODE', NOKIA.mode);
 
