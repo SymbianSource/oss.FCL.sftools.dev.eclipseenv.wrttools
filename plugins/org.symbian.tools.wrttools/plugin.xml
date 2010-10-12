@@ -871,6 +871,26 @@ function updateOrientation(orientation) {
                value="basic">
          </default-parameter-value>
       </runtime-template>
+      <template
+            icon="icons/cow copy.png"
+            id="org.symbian.wrt11.orientation"
+            name="Orientation Demo Project"
+            weight="2">
+         <archive
+               file="projecttemplates/orientationsample.zip"
+               open-files="${mainHtml}.html">
+         </archive>
+         <description>
+            Uses phone orientation sensor to select what wallpaper to show
+         </description>
+         <supported-runtime
+               id="org.symbian.tools.wrttools.wrt"
+               version="1.1">
+         </supported-runtime>
+         <installer
+               class="org.symbian.tools.wrttools.core.project.SetResolution">
+         </installer>
+      </template>
    </extension>
    <extension
          point="org.symbian.tools.tmw.ui.wizardPages">
@@ -885,6 +905,10 @@ function updateOrientation(orientation) {
       <template-page
             class="org.symbian.tools.wrttools.wizards.NewWrtAppTemplatePage"
             template-id="org.symbian.wrt11.basic">
+      </template-page>
+      <template-page
+            class="org.symbian.tools.wrttools.wizards.NewWrtAppTemplatePage"
+            template-id="org.symbian.wrt11.orientation">
       </template-page>
       <template-page
             class="org.symbian.tools.wrttools.wizards.NewWrtAppTemplatePage"
