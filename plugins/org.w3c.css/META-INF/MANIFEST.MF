@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: W3C CSS Validator
-Bundle-SymbolicName: org.w3c.css
+Bundle-SymbolicName: org.w3c.css;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: World Wide Web Consortium (W3C)
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -35,3 +35,7 @@ Export-Package: org.ccil.cowan.tagsoup,
  org.w3c.www.mime
 Import-Package: org.apache.velocity.io;version="1.5.0",
  org.apache.xerces.parsers;version="2.9.0"
+Require-Bundle: org.eclipse.wst.validation;bundle-version="1.2.200",
+ org.eclipse.core.resources;bundle-version="3.6.0",
+ org.eclipse.core.runtime;bundle-version="3.6.0"
+Bundle-ActivationPolicy: lazy

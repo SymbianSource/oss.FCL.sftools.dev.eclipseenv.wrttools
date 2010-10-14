@@ -23,11 +23,13 @@ import java.io.IOException;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.wst.validation.AbstractValidator;
 import org.eclipse.wst.validation.ValidationResult;
 import org.eclipse.wst.validation.ValidationState;
 import org.eclipse.wst.validation.ValidatorMessage;
-import org.symbian.tools.wrttools.Activator;
 import org.w3c.css.css.DocumentParser;
 import org.w3c.css.css.StyleSheet;
 import org.w3c.css.parser.CssError;
@@ -76,7 +78,7 @@ public class CssBuildValidator extends AbstractValidator {
 
             return handleRequest(ac, uri, urlParser.getStyleSheet(), warningLevel, true, resource);
         } catch (Exception e) {
-            Activator.log(e);
+            Platform.getLog(Platform.getBundle("org.w3c.css")).log(new Status(IStatus.ERROR, "org.w3c.css", null, e));
         }
         return null;
     }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<!-- CSS Validator -->
+	<extension id="org.symbian.tools.wrttools.core.cssvalidator"
+		name="CSS Validator" point="org.eclipse.wst.validation.validatorV2">
+		<validator build="true"
+			class="org.symbian.tools.wrttools.core.internal.validation.CssBuildValidator"
+			manual="true" markerId="org.symbian.tools.wrttools.core.cssValidationMarker"
+			version="0.0.1">
+			<include>
+				<rules>
+					<contentType exactMatch="false"
+						id="org.eclipse.wst.css.core.csssource">
+					</contentType>
+				</rules>
+			</include>
+		</validator>
+	</extension>
+</plugin>
