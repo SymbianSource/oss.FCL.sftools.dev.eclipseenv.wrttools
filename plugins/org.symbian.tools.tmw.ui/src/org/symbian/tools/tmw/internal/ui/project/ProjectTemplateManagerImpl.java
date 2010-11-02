@@ -59,7 +59,8 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
             }
         }
     }
-
+    private static final IProjectTemplate[] EMPTY = new IProjectTemplate[0];
+    
     private Map<IMobileWebRuntime, ITemplateInstaller> emptyProjects;
     private Map<IMobileWebRuntime, Map<String, String>> runtimeTemplateParameters;
     private Map<IMobileWebRuntime, IProjectTemplate[]> templates;
@@ -82,14 +83,14 @@ public class ProjectTemplateManagerImpl implements IProjectTemplateManager {
 
     public IProjectTemplate[] getProjectTemplates(IMobileWebRuntime runtime) {
         if (runtime == null) {
-            return new IProjectTemplate[0];
+            return EMPTY;
         }
         if (templates == null) {
             templates = readExtensions();
         }
         final IProjectTemplate[] runtimeTemplates = templates.get(runtime);
         if (runtimeTemplates == null) {
-            return new IProjectTemplate[0];
+            return EMPTY;
         } else {
             return runtimeTemplates;
         }

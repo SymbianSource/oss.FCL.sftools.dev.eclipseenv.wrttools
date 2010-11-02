@@ -27,13 +27,17 @@ import java.util.Set;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.IWizardPage;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
 import org.eclipse.wst.common.project.facet.core.IFacetedProjectWorkingCopy;
@@ -55,7 +59,7 @@ import org.symbian.tools.tmw.internal.ui.wizard.WizardContext;
  *
  * @author Eugene Ostroukhov (eugeneo@symbian.org)
  */
-public final class NewApplicationWizard extends ModifyFacetedProjectWizard implements INewWizard {
+public final class NewApplicationWizard extends ModifyFacetedProjectWizard implements INewWizard, IExecutableExtension {
     public static final String ID = "org.symbian.tools.tmw.newproject";
 
     private final PageContributions contributions = new PageContributions();
@@ -142,6 +146,7 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
 
     private boolean reentry = false;
     private final Collection<IProjectFacetVersion> currentFacets = new HashSet<IProjectFacetVersion>();
+	private IConfigurationElement configElement;
 
     private Set<IProjectFacet> getCurrentFixedFacets() {
         final Set<IProjectFacetVersion> fixedFacets = getCurrentFixedFacetVersions();
@@ -214,5 +219,15 @@ public final class NewApplicationWizard extends ModifyFacetedProjectWizard imple
         getFacetedProject().getProject().build(IncrementalProjectBuilder.FULL_BUILD,
                 new SubProgressMonitor(monitor, 100));
         monitor.done();
+        Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				BasicNewProjectResourceWizard.updatePerspective(configElement);
+			}
+		});
     }
+
+	public void setInitializationData(IConfigurationElement config,
+			String propertyName, Object data) throws CoreException {
+		configElement = config;
+	}
 }
